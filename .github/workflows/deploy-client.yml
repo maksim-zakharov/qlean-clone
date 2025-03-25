@@ -5,28 +5,76 @@ on:
     branches: [main]
     paths:
       - 'client/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Node.js version
+        id: node-version
+        run: echo "node_version=$(node -v | cut -d'v' -f2)" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}-${{ steps.node-version.outputs.node_version }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-node-
+
+  build:
+    needs: [prepare]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Restore node_modules
+        uses: actions/cache@v4
         with:
-          node-version: 20.x
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}-${{ needs.prepare.outputs.node_version }}
 
-      - name: Install client dependencies
-        working-directory: client
+      - name: Install dependencies (if cache missed)
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Build client
-        working-directory: client
-        run: npm run build
+      - name: Build project
+        run: npm run build:ci
 
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: client/dist
+        id: deployment
+        uses: actions/deploy-pages@v4
