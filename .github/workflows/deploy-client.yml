@@ -64,6 +64,11 @@ jobs:
         run: npm run build:ci
         working-directory: client
 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: client/dist
+
   deploy:
     needs: build
     permissions:
