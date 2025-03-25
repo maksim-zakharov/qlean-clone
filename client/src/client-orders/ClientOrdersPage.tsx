@@ -2,6 +2,7 @@ import { User, Home, ClipboardList, Gift, Shirt, Grid2x2, Sofa, Footprints, Spar
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
+import "./ClientOrdersPage.css"
 
 // Типы для Telegram WebApp
 declare global {
@@ -114,9 +115,9 @@ const ClientOrdersPage = () => {
   ]
 
   return (
-    <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-secondary-bg-color">
+    <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-bg-color">
       {/* Header */}
-      <div className="sticky top-0 bg-tg-theme-bg-color p-4 z-10">
+      <div className="sticky top-0 bg-tg-theme-bg-color p-4 pt-4 z-10">
         <div className="flex items-center justify-between">
           <Avatar name={userData?.firstName} userId={userData?.id} />
           <div className="flex-1 text-center">
@@ -128,7 +129,7 @@ const ClientOrdersPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-4">
+      <div className="flex-1 overflow-y-auto px-4 bg-tg-theme-secondary-bg-color">
         {/* Cleaning Services */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Химчистка</h2>
@@ -151,8 +152,8 @@ const ClientOrdersPage = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="sticky bottom-0 bg-tg-theme-bg-color py-2 pb-[env(safe-area-inset-bottom,0.5rem)]">
-        <div className="flex justify-around items-center">
+      <div className="sticky bottom-0 bg-tg-theme-bg-color">
+        <div className="flex justify-around items-center py-2">
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
             <Home className="h-5 w-5 text-tg-theme-hint-color" />
             <span className="text-xs text-tg-theme-hint-color">Главная</span>
@@ -170,6 +171,7 @@ const ClientOrdersPage = () => {
             <span className="text-xs text-tg-theme-hint-color">Профиль</span>
           </Button>
         </div>
+        <div className="h-[env(safe-area-inset-bottom,0px)] bg-tg-theme-bg-color" />
       </div>
     </div>
   )

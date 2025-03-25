@@ -1,0 +1,3 @@
+.pt-safe {
+  padding-top: max(16px, env(safe-area-inset-top, 16px));
+} 
