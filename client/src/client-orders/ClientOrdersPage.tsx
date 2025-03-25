@@ -128,7 +128,7 @@ const ClientOrdersPage = () => {
   ]
 
   return (
-    <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-bg-color">
+    <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-bg-color overscroll-none">
       {/* Header */}
       <div className={`sticky top-0 bg-tg-theme-bg-color p-4 ${isWebApp ? 'pt-[env(safe-area-inset-top)]' : 'pt-4'} z-10`}>
         <div className="flex items-center justify-between">
@@ -142,9 +142,9 @@ const ClientOrdersPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-4 bg-tg-theme-secondary-bg-color">
+      <div className="flex-1 overflow-y-auto overscroll-none px-4 bg-tg-theme-secondary-bg-color">
         {/* Cleaning Services */}
-        <section className="mb-8">
+        <section className="my-8">
           <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Химчистка</h2>
           <div className="grid grid-cols-2 gap-4">
             {cleaningServices.map((service, index) => (
