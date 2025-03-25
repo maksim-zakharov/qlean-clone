@@ -38,8 +38,8 @@ export const Layout = () => {
           <div className="flex items-center justify-between">
             <Avatar name={userData?.firstName} userId={userData?.id} />
             <div className="flex-1 text-center">
-              <Button variant="ghost" className="text-tg-theme-text-color text-base">
-                Оружейный переулок <span className="ml-1 opacity-50">›</span>
+              <Button variant="ghost" className="text-tg-theme-text-color text-[17px] font-medium">
+                Оружейный переулок <span className="ml-1 opacity-60">›</span>
               </Button>
             </div>
           </div>
@@ -60,32 +60,32 @@ export const Layout = () => {
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/')}
             >
-              <Home className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
-              <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Главная</span>
+              <Home className="h-5 w-5 text-[#3390ec] dark:text-[#8ab4f8]" />
+              <span className="text-xs font-medium text-[#3390ec] dark:text-[#8ab4f8]">Главная</span>
             </Button>
             <Button 
               variant="ghost" 
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/orders')}
             >
-              <ClipboardList className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
-              <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Заказы</span>
+              <ClipboardList className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
+              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Заказы</span>
             </Button>
             <Button 
               variant="ghost" 
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/bonuses')}
             >
-              <Gift className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
-              <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Бонусы</span>
+              <Gift className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
+              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Бонусы</span>
             </Button>
             <Button 
               variant="ghost" 
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/profile')}
             >
-              <User className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
-              <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Профиль</span>
+              <User className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
+              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Профиль</span>
             </Button>
           </div>
           {isWebApp && <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-bg-color" />}
