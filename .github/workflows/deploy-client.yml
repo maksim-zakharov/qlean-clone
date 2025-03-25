@@ -45,7 +45,6 @@ jobs:
   build:
     needs: [prepare]
     runs-on: ubuntu-latest
-    working-directory: client
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,17 +52,17 @@ jobs:
       - name: Restore node_modules
         uses: actions/cache@v4
         with:
-          path: |
-            node_modules
-            **/node_modules
+          path: client/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}-${{ needs.prepare.outputs.node_version }}
 
       - name: Install dependencies (if cache missed)
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+        working-directory: client
 
       - name: Build project
         run: npm run build:ci
+        working-directory: client
 
   deploy:
     needs: build
