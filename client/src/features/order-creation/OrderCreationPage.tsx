@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ChevronLeft, Info, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS, type ServiceOption } from './types'
 
 export const OrderCreationPage = () => {
@@ -66,32 +67,28 @@ export const OrderCreationPage = () => {
         </div>
 
         {/* Tabs */}
-        <div className="bg-tg-theme-section-bg-color border-b border-tg-theme-section-separator-color">
-          <div className="flex px-2">
-            {tabs.map(tab => (
-              <Button
-                key={tab.id}
-                variant="ghost"
-                className={`group relative min-h-0 px-3 py-2 text-[13px] leading-none font-medium whitespace-nowrap hover:bg-transparent ${
-                  tab.id === currentTab?.id
-                    ? 'text-tg-theme-button-color'
-                    : 'text-tg-theme-hint-color'
-                }`}
-                onClick={() => {
-                  if (tab.services.length > 0) {
-                    navigate(`/order/${tab.services[0].id}`)
-                  }
-                }}
-              >
-                <span className="relative">
-                  {tab.name}
-                  {tab.id === currentTab?.id && (
-                    <span className="absolute left-0 right-0 bottom-[-8px] h-0.5 bg-current" />
-                  )}
-                </span>
-              </Button>
-            ))}
-          </div>
+        <div className="bg-tg-theme-section-bg-color overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="w-full">
+            <TabsList className="min-w-fit h-auto p-0 bg-transparent border-b border-tg-theme-section-separator-color flex">
+              {tabs.map(tab => (
+                <TabsTrigger
+                  key={tab.id}
+                  value={tab.id}
+                  className="group px-6 py-3 text-[17px] font-medium text-tg-theme-hint-color data-[state=active]:text-tg-theme-button-color data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                  onClick={() => {
+                    if (tab.services.length > 0) {
+                      navigate(`/order/${tab.services[0].id}`)
+                    }
+                  }}
+                >
+                  <span className="relative inline-block whitespace-nowrap">
+                    {tab.name}
+                    <span className="absolute left-0 right-0 bottom-[-8px] h-[2px] bg-current opacity-0 group-data-[state=active]:opacity-100" />
+                  </span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
         </div>
 
         {/* Service Options */}
