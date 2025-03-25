@@ -13,8 +13,8 @@ export const Layout = () => {
     // Получаем данные пользователя из Telegram WebApp
     const webApp = window.Telegram?.WebApp
     if (webApp) {
-      setIsWebApp(true)
       if (webApp.initDataUnsafe?.user) {
+        setIsWebApp(true)
         setUserData({
           firstName: webApp.initDataUnsafe.user.first_name,
           id: webApp.initDataUnsafe.user.id
@@ -34,26 +34,26 @@ export const Layout = () => {
     <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
       <div className="absolute inset-x-0 mx-auto max-w-[420px] h-full flex flex-col">
         {/* Header */}
-        <div className={`flex-none bg-tg-theme-bg-color p-4 ${isWebApp ? 'pt-[env(safe-area-inset-top)]' : 'pt-4'} z-10`}>
+        <div className={`flex-none bg-tg-theme-section-bg-color px-4 pb-4 ${isWebApp ? 'pt-[env(safe-area-inset-top,16px)]' : 'pt-4'} z-10 border-b border-tg-theme-section-separator-color`}>
           <div className="flex items-center justify-between">
             <Avatar name={userData?.firstName} userId={userData?.id} />
             <div className="flex-1 text-center">
               <Button variant="ghost" className="text-tg-theme-text-color text-[17px] font-medium">
-                Оружейный переулок <span className="ml-1 opacity-60">›</span>
+                Оружейный переулок <span className="ml-1 text-tg-theme-subtitle-text-color">›</span>
               </Button>
             </div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 min-h-0 relative bg-tg-theme-secondary-bg-color">
+        <div className="flex-1 min-h-0 relative bg-tg-theme-bg-color">
           <div className="absolute inset-0 overflow-y-auto overscroll-none">
             <Outlet />
           </div>
         </div>
 
         {/* Bottom Navigation */}
-        <div className="flex-none bg-tg-theme-bg-color">
+        <div className="flex-none bg-tg-theme-section-bg-color border-t border-tg-theme-section-separator-color">
           <div className="flex justify-around items-center py-2">
             <Button 
               variant="ghost" 
@@ -68,27 +68,27 @@ export const Layout = () => {
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/orders')}
             >
-              <ClipboardList className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
-              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Заказы</span>
+              <ClipboardList className="h-5 w-5 text-tg-theme-subtitle-text-color" />
+              <span className="text-xs font-medium text-tg-theme-subtitle-text-color">Заказы</span>
             </Button>
             <Button 
               variant="ghost" 
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/bonuses')}
             >
-              <Gift className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
-              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Бонусы</span>
+              <Gift className="h-5 w-5 text-tg-theme-subtitle-text-color" />
+              <span className="text-xs font-medium text-tg-theme-subtitle-text-color">Бонусы</span>
             </Button>
             <Button 
               variant="ghost" 
               className="flex flex-col items-center gap-1 h-auto py-2"
               onClick={() => navigate('/profile')}
             >
-              <User className="h-5 w-5 text-[#8c8e91] dark:text-[#aaaaaa]" />
-              <span className="text-xs font-medium text-[#8c8e91] dark:text-[#aaaaaa]">Профиль</span>
+              <User className="h-5 w-5 text-tg-theme-subtitle-text-color" />
+              <span className="text-xs font-medium text-tg-theme-subtitle-text-color">Профиль</span>
             </Button>
           </div>
-          {isWebApp && <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-bg-color" />}
+          {isWebApp && <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-section-bg-color" />}
         </div>
       </div>
     </div>

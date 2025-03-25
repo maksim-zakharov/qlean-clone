@@ -60,6 +60,9 @@
   --tg-theme-button-color: #2481cc;
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #f4f4f5;
+  --tg-theme-subtitle-text-color: #999999;
+  --tg-theme-section-bg-color: #ffffff;
+  --tg-theme-section-separator-color: #f4f4f5;
 }
 
 a {
@@ -156,6 +159,9 @@ button:focus-visible {
   --tg-theme-button-color: #8774e1;
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #0f0f0f;
+  --tg-theme-subtitle-text-color: #aaaaaa;
+  --tg-theme-section-bg-color: #1c1c1c;
+  --tg-theme-section-separator-color: #292929;
 }
 
 @theme inline {
@@ -212,11 +218,17 @@ button:focus-visible {
   .bg-tg-theme-secondary-bg-color {
     background-color: var(--tg-theme-secondary-bg-color);
   }
+  .bg-tg-theme-section-bg-color {
+    background-color: var(--tg-theme-section-bg-color);
+  }
   .text-tg-theme-text-color {
     color: var(--tg-theme-text-color);
   }
   .text-tg-theme-hint-color {
     color: var(--tg-theme-hint-color);
+  }
+  .text-tg-theme-subtitle-text-color {
+    color: var(--tg-theme-subtitle-text-color);
   }
   .text-tg-theme-link-color {
     color: var(--tg-theme-link-color);
@@ -226,5 +238,8 @@ button:focus-visible {
   }
   .text-tg-theme-button-text-color {
     color: var(--tg-theme-button-text-color);
+  }
+  .border-tg-theme-section-separator-color {
+    border-color: var(--tg-theme-section-separator-color);
   }
 }
