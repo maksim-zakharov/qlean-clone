@@ -17,6 +17,8 @@ declare global {
             username?: string;
           };
         };
+        colorScheme?: 'light' | 'dark';
+        platform?: string;
       };
     };
   }
@@ -66,15 +68,26 @@ const ServiceCard = ({ title, backgroundColor = "bg-slate-50", icon }: ServiceCa
 
 const ClientOrdersPage = () => {
   const [userData, setUserData] = useState<{ firstName: string; id: number } | null>(null)
+  const [isWebApp, setIsWebApp] = useState(false)
 
   useEffect(() => {
     // Получаем данные пользователя из Telegram WebApp
     const webApp = window.Telegram?.WebApp
-    if (webApp?.initDataUnsafe?.user) {
-      setUserData({
-        firstName: webApp.initDataUnsafe.user.first_name,
-        id: webApp.initDataUnsafe.user.id
-      })
+    if (webApp) {
+      setIsWebApp(true)
+      if (webApp.initDataUnsafe?.user) {
+        setUserData({
+          firstName: webApp.initDataUnsafe.user.first_name,
+          id: webApp.initDataUnsafe.user.id
+        })
+      }
+      
+      // Устанавливаем тему в соответствии с Telegram
+      if (webApp.colorScheme === 'dark') {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
     }
   }, [])
 
@@ -117,7 +130,7 @@ const ClientOrdersPage = () => {
   return (
     <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-bg-color">
       {/* Header */}
-      <div className="sticky top-0 bg-tg-theme-bg-color p-4 pt-4 z-10">
+      <div className={`sticky top-0 bg-tg-theme-bg-color p-4 ${isWebApp ? 'pt-[env(safe-area-inset-top)]' : 'pt-4'} z-10`}>
         <div className="flex items-center justify-between">
           <Avatar name={userData?.firstName} userId={userData?.id} />
           <div className="flex-1 text-center">
@@ -155,20 +168,20 @@ const ClientOrdersPage = () => {
       <div className="sticky bottom-0 bg-tg-theme-bg-color">
         <div className="flex justify-around items-center py-2">
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Home className="h-5 w-5 text-tg-theme-hint-color" />
-            <span className="text-xs text-tg-theme-hint-color">Главная</span>
+            <Home className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
+            <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Главная</span>
           </Button>
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <ClipboardList className="h-5 w-5 text-tg-theme-hint-color" />
-            <span className="text-xs text-tg-theme-hint-color">Заказы</span>
+            <ClipboardList className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
+            <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Заказы</span>
           </Button>
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <Gift className="h-5 w-5 text-tg-theme-hint-color" />
-            <span className="text-xs text-tg-theme-hint-color">Бонусы</span>
+            <Gift className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
+            <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Бонусы</span>
           </Button>
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
-            <User className="h-5 w-5 text-tg-theme-hint-color" />
-            <span className="text-xs text-tg-theme-hint-color">Профиль</span>
+            <User className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
+            <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Профиль</span>
           </Button>
         </div>
         <div className="h-[env(safe-area-inset-bottom,0px)] bg-tg-theme-bg-color" />
