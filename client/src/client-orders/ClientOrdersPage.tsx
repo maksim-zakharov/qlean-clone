@@ -128,9 +128,9 @@ const ClientOrdersPage = () => {
   ]
 
   return (
-    <div className="flex flex-col h-[100dvh] max-w-[420px] mx-auto bg-tg-theme-bg-color overscroll-none">
+    <div className="fixed inset-0 flex flex-col max-w-[420px] mx-auto bg-tg-theme-bg-color">
       {/* Header */}
-      <div className={`sticky top-0 bg-tg-theme-bg-color p-4 ${isWebApp ? 'pt-[env(safe-area-inset-top)]' : 'pt-4'} z-10`}>
+      <div className={`flex-none bg-tg-theme-bg-color p-4 ${isWebApp ? 'pt-[env(safe-area-inset-top)]' : 'pt-4'} z-10`}>
         <div className="flex items-center justify-between">
           <Avatar name={userData?.firstName} userId={userData?.id} />
           <div className="flex-1 text-center">
@@ -142,30 +142,32 @@ const ClientOrdersPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto overscroll-none px-4 bg-tg-theme-secondary-bg-color">
-        {/* Cleaning Services */}
-        <section className="my-8">
-          <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Химчистка</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {cleaningServices.map((service, index) => (
-              <ServiceCard key={index} {...service} />
-            ))}
-          </div>
-        </section>
+      <div className="flex-1 overflow-y-auto bg-tg-theme-secondary-bg-color">
+        <div className="px-4 min-h-full">
+          {/* Cleaning Services */}
+          <section className="my-8">
+            <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Химчистка</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {cleaningServices.map((service, index) => (
+                <ServiceCard key={index} {...service} />
+              ))}
+            </div>
+          </section>
 
-        {/* Housekeeping Services */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Уборка</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {housekeepingServices.map((service, index) => (
-              <ServiceCard key={index} {...service} />
-            ))}
-          </div>
-        </section>
+          {/* Housekeeping Services */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-tg-theme-text-color text-left">Уборка</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {housekeepingServices.map((service, index) => (
+                <ServiceCard key={index} {...service} />
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
 
       {/* Bottom Navigation */}
-      <div className="sticky bottom-0 bg-tg-theme-bg-color">
+      <div className="flex-none bg-tg-theme-bg-color">
         <div className="flex justify-around items-center py-2">
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
             <Home className={`h-5 w-5 ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`} />
