@@ -44,6 +44,7 @@ jobs:
   build:
     needs: [prepare]
     runs-on: ubuntu-latest
+    working-directory: client
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -78,3 +79,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: client/dist
