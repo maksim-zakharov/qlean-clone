@@ -22,22 +22,22 @@ const ClientOrdersPage = () => {
   const cleaningServices = [
     {
       title: "Химчистка и стирка одежды",
-      backgroundColor: "bg-slate-50",
+      backgroundColor: "bg-slate-50 dark:bg-slate-800",
       icon: <Shirt className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     },
     {
       title: "Чистка ковров",
-      backgroundColor: "bg-orange-50",
+      backgroundColor: "bg-orange-50 dark:bg-orange-950",
       icon: <Grid2x2 className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     },
     {
       title: "Химчистка мебели",
-      backgroundColor: "bg-purple-50",
+      backgroundColor: "bg-purple-50 dark:bg-purple-950",
       icon: <Sofa className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     },
     {
       title: "Чистка и ремонт обуви",
-      backgroundColor: "bg-red-50",
+      backgroundColor: "bg-red-50 dark:bg-red-950",
       icon: <Footprints className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     }
   ]
@@ -45,12 +45,12 @@ const ClientOrdersPage = () => {
   const housekeepingServices = [
     {
       title: "Регулярная",
-      backgroundColor: "bg-green-50",
+      backgroundColor: "bg-green-50 dark:bg-green-950",
       icon: <Sparkles className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     },
     {
       title: "Генеральная",
-      backgroundColor: "bg-slate-100",
+      backgroundColor: "bg-slate-100 dark:bg-slate-900",
       icon: <Brush className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     }
   ]
