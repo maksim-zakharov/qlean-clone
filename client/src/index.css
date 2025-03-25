@@ -53,16 +53,16 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* Telegram WebApp theme variables */
-  --tg-theme-bg-color: #ffffff;
+  --tg-theme-bg-color: #F1F1F1;
   --tg-theme-text-color: #000000;
-  --tg-theme-hint-color: #999999;
-  --tg-theme-link-color: #2481cc;
-  --tg-theme-button-color: #2481cc;
-  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-hint-color: #707579;
+  --tg-theme-link-color: #3390EC;
+  --tg-theme-button-color: #3390EC;
+  --tg-theme-button-text-color: #FFFFFF;
   --tg-theme-secondary-bg-color: #f4f4f5;
-  --tg-theme-subtitle-text-color: #999999;
-  --tg-theme-section-bg-color: #ffffff;
-  --tg-theme-section-separator-color: #f4f4f5;
+  --tg-theme-subtitle-text-color: #707579;
+  --tg-theme-section-bg-color: #FFFFFF;
+  --tg-theme-section-separator-color: #EFEFF3;
 }
 
 a {
@@ -152,16 +152,16 @@ button:focus-visible {
   --sidebar-ring: oklch(0.556 0 0);
 
   /* Telegram WebApp theme variables */
-  --tg-theme-bg-color: #212121;
-  --tg-theme-text-color: #ffffff;
-  --tg-theme-hint-color: #aaaaaa;
-  --tg-theme-link-color: #8774e1;
-  --tg-theme-button-color: #8774e1;
-  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-bg-color: #0F0F0F;
+  --tg-theme-text-color: #FFFFFF;
+  --tg-theme-hint-color: #AAB2BA;
+  --tg-theme-link-color: #8AB4F8;
+  --tg-theme-button-color: #8AB4F8;
+  --tg-theme-button-text-color: #FFFFFF;
   --tg-theme-secondary-bg-color: #0f0f0f;
-  --tg-theme-subtitle-text-color: #aaaaaa;
-  --tg-theme-section-bg-color: #1c1c1c;
-  --tg-theme-section-separator-color: #292929;
+  --tg-theme-subtitle-text-color: #AAB2BA;
+  --tg-theme-section-bg-color: #1C1C1D;
+  --tg-theme-section-separator-color: #2C2C2E;
 }
 
 @theme inline {
