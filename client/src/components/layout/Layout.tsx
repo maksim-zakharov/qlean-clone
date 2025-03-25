@@ -46,8 +46,10 @@ export const Layout = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto bg-tg-theme-secondary-bg-color">
-          <Outlet />
+        <div className="flex-1 min-h-0 relative bg-tg-theme-secondary-bg-color">
+          <div className="absolute inset-0 overflow-y-auto overscroll-none">
+            <Outlet />
+          </div>
         </div>
 
         {/* Bottom Navigation */}
@@ -86,7 +88,7 @@ export const Layout = () => {
               <span className={`text-xs ${isWebApp ? 'text-tg-theme-hint-color' : 'text-gray-500'}`}>Профиль</span>
             </Button>
           </div>
-          <div className="h-[env(safe-area-inset-bottom,0px)] bg-tg-theme-bg-color" />
+          {isWebApp && <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-bg-color" />}
         </div>
       </div>
     </div>
