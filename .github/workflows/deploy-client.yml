@@ -23,9 +23,7 @@ jobs:
 
       - name: Build client
         working-directory: client
-        run: |
-          npm run build
-          touch build/.nojekyll
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
