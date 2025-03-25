@@ -1,6 +1,5 @@
 import {Route, Routes} from "react-router-dom";
 import React from "react";
-import './App.css'
 import ClientOrdersPage from "./client-orders/ClientOrdersPage.tsx";
 
 function App() {

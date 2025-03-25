@@ -8,7 +8,7 @@ declare global {
   interface Window {
     Telegram?: {
       WebApp?: {
-        initDataUnsafe?: {
+        initDataUnsafe: {
           user?: {
             id: number;
             first_name: string;
@@ -102,7 +102,7 @@ const ClientOrdersPage = () => {
 
   const housekeepingServices = [
     {
-      title: "Поддерживающая",
+      title: "Регулярная",
       backgroundColor: "bg-green-50",
       icon: <Sparkles className="w-12 h-12 text-tg-theme-text-color" strokeWidth={1.5} />
     },
@@ -151,7 +151,7 @@ const ClientOrdersPage = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="sticky bottom-0 bg-tg-theme-bg-color pb-[env(safe-area-inset-bottom,0.5rem)]">
+      <div className="sticky bottom-0 bg-tg-theme-bg-color py-2 pb-[env(safe-area-inset-bottom,0.5rem)]">
         <div className="flex justify-around items-center">
           <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto py-2">
             <Home className="h-5 w-5 text-tg-theme-hint-color" />
