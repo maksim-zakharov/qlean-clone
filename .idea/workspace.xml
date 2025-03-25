@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/client-orders/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/client-orders/ClientOrdersPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742910415904</updated>
       <workItem from="1742910417056" duration="1968000" />
-      <workItem from="1742912434585" duration="10896000" />
+      <workItem from="1742912434585" duration="11475000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -280,7 +280,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742927073861</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="vite">
+      <option name="closed" value="true" />
+      <created>1742927846724</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1742927846724</updated>
+    </task>
+    <task id="LOCAL-00025" summary="vite">
+      <option name="closed" value="true" />
+      <created>1742928321186</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1742928321186</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
