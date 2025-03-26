@@ -89,14 +89,14 @@ export const OrderCreationPage = () => {
         {/* Bottom Button */}
         <div className="bg-tg-theme-secondary-bg-color flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
           <Button
-            className="w-full h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
+            className="w-full px-8 h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
             onClick={() => {
               // TODO: Implement order creation
               console.log('Creating order with options:', selectedOptions)
             }}
           >
             <span className="flex-1 text-left">Далее</span>
-            <span>{totalPrice} ₽</span>
+            <span className="font-bold">{totalPrice} ₽</span>
           </Button>
         </div>
       </div>

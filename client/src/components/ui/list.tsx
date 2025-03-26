@@ -44,7 +44,7 @@ export const List: FC<Props> = ({items, handleOptionToggle, selectedOptions}) =>
                     }`}
                     onClick={() => handleOptionToggle(option.id)}
                 >
-                    <Plus className="w-[18px] h-[18px]"/>
+                    <Plus className={`w-[18px] h-[18px] ${selectedOptions.includes(option.id) ? 'rotate-45' : ''} transition-transform`}/>
                 </Button>
             </div>
         </div>
