@@ -25,6 +25,8 @@ export const Avatar = ({ name, userId }: AvatarProps) => {
   return (
     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-medium ${getAvatarColor(userId)}`}>
       {isWebApp && initials ? initials : <User className="w-5 h-5" />}
+
+      <img src="https://t.me/i/userpic/320/cm409T17pD0hEWX5m_tmMBGNTbHnhP0b6tZG6o887b0.svg"/>
     </div>
   )
 } 

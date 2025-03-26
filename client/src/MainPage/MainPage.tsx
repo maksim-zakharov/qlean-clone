@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card"
 import { useNavigate } from "react-router-dom"
 import { SERVICES_DATA } from "@/features/order-creation/types"
 import {useEffect} from "react";
+import {hideBackButton} from "@telegram-apps/sdk";
 
 const ICONS: Record<string, LucideIcon> = {
   Shirt,
@@ -43,7 +44,7 @@ const ServiceCard = ({ title, backgroundColor = "bg-slate-50", icon, serviceId }
 
 const MainPage = () => {
   useEffect(() => {
-    Telegram.WebApp?.BackButton?.hidden?.();
+    hideBackButton();
   }, []);
 
   return (
