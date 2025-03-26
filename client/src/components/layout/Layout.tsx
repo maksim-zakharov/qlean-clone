@@ -55,14 +55,13 @@ export const Layout = () => {
                     id: webApp.initDataUnsafe.user.id
                 })
             }
+            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-section-bg-color').trim());
 
             // Устанавливаем тему в соответствии с Telegram
             if (webApp.colorScheme === 'dark') {
                 document.documentElement.classList.add('dark')
-                Telegram.WebApp.setHeaderColor('#212121');
             } else {
                 document.documentElement.classList.remove('dark')
-                Telegram.WebApp.setHeaderColor('#ffffff');
             }
         }
     }, [])
