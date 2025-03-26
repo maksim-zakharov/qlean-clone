@@ -118,8 +118,8 @@
     --tg-theme-bg-color: #0F0F0F;
     --tg-theme-text-color: #FFFFFF;
     --tg-theme-hint-color: #AAB2BA;
-    --tg-theme-link-color: #8AB4F8;
-    --tg-theme-button-color: #8AB4F8;
+    --tg-theme-link-color: rgb(135, 116, 225);
+    --tg-theme-button-color: rgb(135, 116, 225);
     --tg-theme-button-text-color: #FFFFFF;
     --tg-theme-secondary-bg-color: #0f0f0f;
     --tg-theme-subtitle-text-color: #AAB2BA;
@@ -226,6 +226,6 @@
     }
 
     .pb-safe-area-inset-bottom{
-        padding-bottom: calc(64px + env(safe-area-inset-bottom));
+        padding-bottom: calc(62px + env(safe-area-inset-bottom));
     }
 }

@@ -14,7 +14,7 @@ export const OrderCreationPage = () => {
   // Определяем тип сервиса и находим текущую услугу
   const isCleaningService = CLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId)
   const isDryCleaningService = DRYCLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId)
-  
+
   const tabs = isCleaningService ? CLEANING_TABS : DRYCLEANING_TABS
   const serviceType = isCleaningService ? 'cleaning' : 'drycleaning'
 
@@ -28,7 +28,7 @@ export const OrderCreationPage = () => {
   }
 
   // Находим таб, в котором находится услуга
-  const currentTab = tabs.find(tab => 
+  const currentTab = tabs.find(tab =>
     tab.services.some(service => service.id === serviceId)
   )
 
@@ -42,7 +42,7 @@ export const OrderCreationPage = () => {
   }, currentService.basePrice)
 
   const handleOptionToggle = (optionId: string) => {
-    setSelectedOptions(prev => 
+    setSelectedOptions(prev =>
       prev.includes(optionId)
         ? prev.filter(id => id !== optionId)
         : [...prev, optionId]
@@ -61,20 +61,20 @@ export const OrderCreationPage = () => {
           <div className="w-[40px]" /> {/* Для центрирования заголовка */}
         </div>
 
-        {/* Tabs */}
         <Tabs defaultValue={currentTab?.id} value={currentTab?.id}>
           <TabsList>
             {tabs.map(tab => (
                 <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    name={tab.name}
                     onClick={() => {
                       if (tab.services.length > 0) {
                         navigate(`/order/${tab.services[0].id}`)
                       }
                     }}
-                />
+                >
+                  {tab.name}
+                </TabsTrigger>
             ))}
           </TabsList>
         </Tabs>
