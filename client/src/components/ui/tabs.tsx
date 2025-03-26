@@ -10,7 +10,7 @@ function Tabs({
   return (
       <TabsPrimitive.Root
           data-slot="tabs"
-          className={cn("flex flex-col gap-2 bg-tg-theme-section-bg-color overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full", className)}
+          className={cn("flex flex-col gap-2 bg-tg-theme-section-bg-color overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] no-scrollbar w-full", className)}
           {...props}
       />
   )

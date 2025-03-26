@@ -252,4 +252,9 @@ button {
     .border-tg-theme-section-separator-color {
         border-color: var(--tg-theme-section-separator-color);
     }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 }

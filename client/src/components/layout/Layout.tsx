@@ -71,7 +71,7 @@ export const Layout = () => {
 
     return (
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
-            <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
+            <div className="absolute inset-x-0 mx-auto h-full flex flex-col overflow-hidden">
                 <Header isWebApp={isWebApp}><Spacer>
                     <Avatar/>
                     <div className="flex-1 text-center">
@@ -111,7 +111,7 @@ export const Layout = () => {
                             </Button>
                         ))}
                     </div>
-                    {isWebApp && <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-section-bg-color"/>}
+                    <div className="h-[env(safe-area-inset-bottom)] bg-tg-theme-section-bg-color"/>
                 </div>
             </div>
         </div>
