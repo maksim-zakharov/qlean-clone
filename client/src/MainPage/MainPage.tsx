@@ -43,7 +43,7 @@ const ServiceCard = ({ title, backgroundColor = "bg-slate-50", icon, serviceId }
 
 const MainPage = () => {
   useEffect(() => {
-    Telegram.WebApp?.BackButton?.hidden();
+    Telegram.WebApp?.BackButton?.hidden?.();
   }, []);
 
   return (
