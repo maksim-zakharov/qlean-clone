@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<script>
+    sessionStorage.redirect = location.href.split('/').pop();
+    location.replace('/' + (location.host.includes('github.io') ? 'qlean-clone/' : ''));
+</script>
