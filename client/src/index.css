@@ -64,6 +64,7 @@
     --tg-theme-subtitle-text-color: #707579;
     --tg-theme-section-bg-color: #FFFFFF;
     --tg-theme-section-separator-color: #EFEFF3;
+    --tg-theme-accent-text-color: #3390ec;
 }
 
 @media (prefers-color-scheme: light) {
@@ -125,6 +126,7 @@
     --tg-theme-subtitle-text-color: #AAB2BA;
     --tg-theme-section-bg-color: #1C1C1D;
     --tg-theme-section-separator-color: #2C2C2E;
+    --tg-theme-accent-text-color: rgb(135, 116, 225);
 }
 
 @theme inline {
@@ -221,11 +223,16 @@
     }
 
     .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 
-    .pb-safe-area-inset-bottom{
+    .pb-safe-area-inset-bottom {
         padding-bottom: calc(62px + env(safe-area-inset-bottom));
+    }
+
+    .badge-primary {
+        background-color: var(--tg-theme-accent-text-color);
+        color: var(--tg-theme-button-text-color);
     }
 }

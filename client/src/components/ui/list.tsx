@@ -20,7 +20,7 @@ export const List: FC<Props> = ({items, handleOptionToggle, selectedOptions}) =>
                     <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
                         {option.isPopular && (
-                            <span className="px-1.5 py-0.5 text-[12px] font-medium text-white bg-[#4CAF50] rounded-sm">
+                            <span className="px-1.5 py-0.5 text-[12px] font-medium badge-primary rounded-sm">
                 ПОПУЛЯРНО
               </span>
                         )}

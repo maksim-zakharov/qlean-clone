@@ -87,7 +87,7 @@ export const OrderCreationPage = () => {
         </div>
 
         {/* Bottom Button */}
-        <div className="flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+        <div className="bg-tg-theme-secondary-bg-color flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
           <Button
             className="w-full h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
             onClick={() => {
