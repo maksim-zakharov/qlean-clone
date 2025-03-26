@@ -70,7 +70,7 @@ export function useTelegram() {
     return {
         isLoading,
         error,
-        Telegram.WebApp?,
+        tg: Telegram.WebApp?,
         isOpenKeyboard,
         bottomOffset,
         photoUrl,

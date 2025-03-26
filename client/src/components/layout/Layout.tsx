@@ -5,6 +5,7 @@ import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {Spacer} from "../ui/Spacer.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 type MenuItem = {
     icon: LucideIcon
@@ -41,6 +42,8 @@ export const Layout = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
+    const {isLoading} = useTelegram();
+
     useEffect(() => {
         // Получаем данные пользователя из Telegram WebApp
         const webApp = window.Telegram?.WebApp
@@ -61,6 +64,10 @@ export const Layout = () => {
             }
         }
     }, [])
+
+    if(isLoading){
+        return null;
+    }
 
     return (
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
