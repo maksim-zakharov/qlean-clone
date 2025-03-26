@@ -82,8 +82,8 @@ export const Layout = () => {
 
         {/* Main Content */}
         <main className="overflow-y-auto pt-[calc(4rem + env(safe-area-inset-top))]
-              pb-[calc(4rem + env(safe-area-inset-bottom))] bg-tg-theme-bg-color">
-            <div className="absolute inset-0 overflow-y-auto overscroll-none bg-tg-theme-bg-color pt-14 pb-16">
+              pb-[calc(4rem + env(safe-area-inset-bottom))] bg-inherit">
+            <div className="absolute inset-0 overflow-y-auto overscroll-none pt-14 pb-16 bg-inherit">
                 <Outlet/>
             </div>
         </main>
@@ -112,7 +112,7 @@ export const Layout = () => {
     </>
 
     return (
-        <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
+        <div className="fixed inset-0 flex flex-col">
             <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
                 <Header isWebApp={isWebApp}><Spacer>
                     <Avatar/>
@@ -125,8 +125,8 @@ export const Layout = () => {
                 </Header>
 
                 {/* Main Content */}
-                <div className="flex-1 min-h-0 relative bg-tg-theme-bg-color">
-                    <div className="absolute inset-0 overflow-y-auto overscroll-none bg-tg-theme-bg-color">
+                <div className="flex-1 min-h-0 relative">
+                    <div className="absolute inset-0 overflow-y-auto overscroll-none">
                         <Outlet/>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ export const OrderCreationPage = () => {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
+    <div className="fixed inset-0 flex flex-col">
       <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
         {/* Header */}
         <div className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-section-bg-color border-b border-tg-theme-section-separator-color">
@@ -87,7 +87,7 @@ export const OrderCreationPage = () => {
         </div>
 
         {/* Bottom Button */}
-        <div className="flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)] bg-tg-theme-bg-color">
+        <div className="flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
           <Button
             className="w-full h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
             onClick={() => {
