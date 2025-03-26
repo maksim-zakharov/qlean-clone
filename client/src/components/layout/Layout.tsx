@@ -91,7 +91,7 @@ export const Layout = () => {
 
                 {/* Bottom Navigation */}
                 <div
-                    className="fixed bot-0 right-0 left-0 right-0 left-0 bg-tg-theme-section-bg-color border-t border-tg-theme-section-separator-color">
+                    className="fixed bot-0 right-0 left-0 bg-tg-theme-section-bg-color border-t border-tg-theme-section-separator-color">
                     <div className="flex justify-around items-center">
                         {menuItems.map(({icon: Icon, label, path}) => (
                             <Button
