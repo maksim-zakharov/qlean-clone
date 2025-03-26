@@ -115,7 +115,7 @@
     --sidebar-ring: oklch(0.556 0 0);
 
     /* Telegram WebApp theme variables */
-    --tg-theme-bg-color: #0F0F0F;
+    --tg-theme-bg-color: #212121;
     --tg-theme-text-color: #FFFFFF;
     --tg-theme-hint-color: #AAB2BA;
     --tg-theme-link-color: rgb(135, 116, 225);
