@@ -70,7 +70,7 @@ export const Layout = () => {
     }
 
     return (
-        <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
+        <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color overflow-hidden">
             <div className="absolute inset-x-0 mx-auto h-full flex flex-col overflow-hidden">
                 <Header isWebApp={isWebApp}><Spacer>
                     <Avatar/>
