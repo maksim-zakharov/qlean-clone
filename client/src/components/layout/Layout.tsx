@@ -64,7 +64,7 @@ export const Layout = () => {
 
     return (
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
-            <div className="absolute inset-x-0 mx-auto max-w-[420px] h-full flex flex-col">
+            <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
                 <Header isWebApp={isWebApp}><Spacer>
                     <Avatar name={userData?.firstName} userId={userData?.id}/>
                     <div className="flex-1 text-center">

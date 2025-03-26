@@ -6,7 +6,7 @@ export const safeTgHeight =
     Telegram.WebApp?.contentSafeAreaInset.top;
 
 
-Telegram.WebApp.ready();
+Telegram.WebApp?.ready();
 
 export function useTelegram() {
     const [isLoading, setLoading] = useState(true);

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS } from './types'
 import {List} from "../../components/ui/list.tsx";
+import {BackButton} from "../../components/BackButton.tsx";
 
 export const OrderCreationPage = () => {
   const navigate = useNavigate()
@@ -51,16 +52,10 @@ export const OrderCreationPage = () => {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
-      <div className="absolute inset-x-0 mx-auto max-w-[420px] h-full flex flex-col">
+      <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
         {/* Header */}
         <div className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-section-bg-color border-b border-tg-theme-section-separator-color">
-          <Button
-            variant="ghost"
-            className="p-2 -ml-2 text-tg-theme-button-color hover:bg-transparent"
-            onClick={() => navigate('/')}
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
+          <BackButton/>
           <div className="flex-1 flex justify-center">
             <span className="text-base font-medium text-tg-theme-text-color">{isCleaningService ? 'Уборка' : 'Химчистка'}</span>
           </div>

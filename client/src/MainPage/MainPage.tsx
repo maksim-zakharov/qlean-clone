@@ -2,6 +2,7 @@ import { Shirt, Grid2x2, Sofa, Footprints, Sparkles, Brush, Hammer, Home, Buildi
 import { Card } from "@/components/ui/card"
 import { useNavigate } from "react-router-dom"
 import { SERVICES_DATA } from "@/features/order-creation/types"
+import {useEffect} from "react";
 
 const ICONS: Record<string, LucideIcon> = {
   Shirt,
@@ -40,7 +41,11 @@ const ServiceCard = ({ title, backgroundColor = "bg-slate-50", icon, serviceId }
   )
 }
 
-const ClientOrdersPage = () => {
+const MainPage = () => {
+  useEffect(() => {
+    Telegram.WebApp?.BackButton?.hidden();
+  }, []);
+
   return (
     <div className="px-3">
       {SERVICES_DATA.map(category => (
@@ -68,4 +73,4 @@ const ClientOrdersPage = () => {
   )
 }
 
-export default ClientOrdersPage
+export default MainPage
