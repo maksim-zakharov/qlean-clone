@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,22 +107,6 @@
       <updated>1742910415904</updated>
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
-    </task>
-    <task id="LOCAL-00007" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742913389861</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1742913389861</updated>
-    </task>
-    <task id="LOCAL-00008" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742913447973</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1742913447973</updated>
     </task>
     <task id="LOCAL-00009" summary="vite">
       <option name="closed" value="true" />
@@ -502,7 +484,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743013223576</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743013460214</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1743013460214</updated>
+    </task>
+    <task id="LOCAL-00057" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743013631968</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1743013631968</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
