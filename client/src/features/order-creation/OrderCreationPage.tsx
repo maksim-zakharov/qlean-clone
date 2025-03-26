@@ -4,6 +4,7 @@ import { ChevronLeft, Info, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS, type ServiceOption } from './types'
+import {List} from "../../components/ui/list.tsx";
 
 export const OrderCreationPage = () => {
   const navigate = useNavigate()
@@ -94,17 +95,7 @@ export const OrderCreationPage = () => {
         {/* Service Options */}
         <div className="flex-1 overflow-y-auto overscroll-none">
           <div className="p-2">
-            <div className="bg-tg-theme-section-bg-color rounded-2xl overflow-hidden">
-              {availableOptions.map((option: ServiceOption, index) => (
-                <ServiceOptionCard
-                  key={option.id}
-                  option={option}
-                  isSelected={selectedOptions.includes(option.id)}
-                  onToggle={() => handleOptionToggle(option.id)}
-                  isLast={index === availableOptions.length - 1}
-                />
-              ))}
-            </div>
+            <List items={availableOptions} handleOptionToggle={handleOptionToggle} selectedOptions={selectedOptions}/>
           </div>
         </div>
 
@@ -125,49 +116,3 @@ export const OrderCreationPage = () => {
     </div>
   )
 }
-
-type ServiceOptionCardProps = {
-  option: ServiceOption
-  isSelected: boolean
-  onToggle: () => void
-  isLast: boolean
-}
-
-const ServiceOptionCard = ({ option, isSelected, onToggle, isLast }: ServiceOptionCardProps) => {
-  return (
-    <div className={`flex items-center px-4 py-3 ${!isLast && 'border-b border-tg-theme-section-separator-color'}`}>
-      <div className="flex items-start gap-3 flex-1 min-w-0">
-        <Info className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color" />
-        <div className="min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
-            {option.isPopular && (
-              <span className="px-1.5 py-0.5 text-[12px] font-medium text-white bg-[#4CAF50] rounded-sm">
-                ПОПУЛЯРНО
-              </span>
-            )}
-          </div>
-          {option.description && (
-            <p className="mt-0.5 text-[13px] text-tg-theme-subtitle-text-color line-clamp-2">
-              {option.description}
-            </p>
-          )}
-        </div>
-      </div>
-      <div className="flex items-center gap-3 ml-3">
-        <span className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{option.price} ₽</span>
-        <Button
-          variant="ghost"
-          className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent ${
-            isSelected
-              ? 'bg-tg-theme-button-color text-tg-theme-button-text-color'
-              : 'border border-tg-theme-button-color text-tg-theme-button-color'
-          }`}
-          onClick={onToggle}
-        >
-          <Plus className="w-[18px] h-[18px]" />
-        </Button>
-      </div>
-    </div>
-  )
-} 
