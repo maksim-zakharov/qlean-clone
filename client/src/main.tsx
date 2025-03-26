@@ -9,7 +9,7 @@ import {store} from "./store.ts";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Provider store={store}>
                 <App/>
             </Provider>
