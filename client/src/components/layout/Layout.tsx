@@ -89,7 +89,7 @@ export const Layout = () => {
         </main>
 
         {/* Bottom Navigation */}
-        <footer className="fixed flex justify-around items-center bottom-0 left-0 right-0 h-16 bg-white border-t shadow-lg
+        <footer className="fixed flex justify-around items-center bottom-0 left-0 right-0 bg-white border-t shadow-lg
               pb-[env(safe-area-inset-bottom)]">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
