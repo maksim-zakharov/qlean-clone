@@ -13,7 +13,7 @@ export const BackButton: FC<{ onBack: () => void }> = ({onBack}) => {
             Telegram.WebApp.onEvent('backButtonClicked', onBack);
             Telegram.WebApp?.BackButton?.show?.();
         }
-    }, [showTgBackButton]);
+    }, [showTgBackButton, onBack]);
 
     if (showTgBackButton) {
         return;
