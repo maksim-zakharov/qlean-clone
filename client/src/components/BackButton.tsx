@@ -1,16 +1,21 @@
 import {ChevronLeft} from "lucide-react";
 import {Button} from "./ui/button.tsx";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 
-export const BackButton = () => {
+export const BackButton: FC<{ onBack: () => void }> = ({onBack}) => {
     const navigate = useNavigate()
 
-    useEffect(() => {
-        Telegram.WebApp?.BackButton?.show?.();
-    }, []);
+    const showTgBackButton = Boolean(Telegram.WebApp?.isVersionAtLeast?.('6.1') && Telegram.WebApp?.isExpanded);
 
-    if (Telegram.WebApp?.BackButton) {
+    useEffect(() => {
+        if (showTgBackButton) {
+            Telegram.WebApp.onEvent('backButtonClicked', onBack);
+            Telegram.WebApp?.BackButton?.show?.();
+        }
+    }, [showTgBackButton]);
+
+    if (showTgBackButton) {
         return;
     }
 
