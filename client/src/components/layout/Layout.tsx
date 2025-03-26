@@ -55,7 +55,7 @@ export const Layout = () => {
                     id: webApp.initDataUnsafe.user.id
                 })
             }
-            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-section-bg-color').trim());
+            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
 
             // Устанавливаем тему в соответствии с Telegram
             if (webApp.colorScheme === 'dark') {
