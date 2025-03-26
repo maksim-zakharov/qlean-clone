@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ChevronLeft, Info, Plus } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS, type ServiceOption } from './types'
+import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS } from './types'
 import {List} from "../../components/ui/list.tsx";
 
 export const OrderCreationPage = () => {
@@ -68,29 +68,22 @@ export const OrderCreationPage = () => {
         </div>
 
         {/* Tabs */}
-        <div className="bg-tg-theme-section-bg-color overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="w-full">
-            <TabsList className="min-w-fit h-auto p-0 bg-transparent border-b border-tg-theme-section-separator-color flex">
-              {tabs.map(tab => (
+        <Tabs defaultValue={currentTab?.id} value={currentTab?.id}>
+          <TabsList>
+            {tabs.map(tab => (
                 <TabsTrigger
-                  key={tab.id}
-                  value={tab.id}
-                  className="group px-6 py-3 text-[17px] font-medium text-tg-theme-hint-color data-[state=active]:text-tg-theme-button-color data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-                  onClick={() => {
-                    if (tab.services.length > 0) {
-                      navigate(`/order/${tab.services[0].id}`)
-                    }
-                  }}
-                >
-                  <span className="relative inline-block whitespace-nowrap">
-                    {tab.name}
-                    <span className="absolute left-0 right-0 bottom-[-8px] h-[2px] bg-current opacity-0 group-data-[state=active]:opacity-100" />
-                  </span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-        </div>
+                    key={tab.id}
+                    value={tab.id}
+                    name={tab.name}
+                    onClick={() => {
+                      if (tab.services.length > 0) {
+                        navigate(`/order/${tab.services[0].id}`)
+                      }
+                    }}
+                />
+            ))}
+          </TabsList>
+        </Tabs>
 
         {/* Service Options */}
         <div className="flex-1 overflow-y-auto overscroll-none">
