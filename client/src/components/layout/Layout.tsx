@@ -73,7 +73,7 @@ export const Layout = () => {
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
             <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
                 <Header isWebApp={isWebApp}><Spacer>
-                    <Avatar name={userData?.firstName} userId={userData?.id}/>
+                    <Avatar/>
                     <div className="flex-1 text-center">
                         <Button variant="ghost" className="text-tg-theme-text-color text-[17px] font-medium">
                             Оружейный переулок <span className="ml-1 text-tg-theme-subtitle-text-color">›</span>

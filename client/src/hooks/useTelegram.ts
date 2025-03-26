@@ -38,7 +38,7 @@ export function useTelegram() {
     useEffect(() => {
         const check = () => {
             tryies++;
-            if (Telegram.WebApp? && Telegram.WebApp?.themeParams && Telegram.WebApp?.themeParams.bg_color) {
+            if (Telegram.WebApp && Telegram.WebApp?.themeParams && Telegram.WebApp?.themeParams.bg_color) {
                 setLoading(false);
                 // localStorage.setItem('Telegram.WebApp?', JSON.stringify(Telegram.WebApp?));
                 return;
@@ -70,13 +70,13 @@ export function useTelegram() {
     return {
         isLoading,
         error,
-        tg: Telegram.WebApp?,
+        tg: Telegram.WebApp,
         isOpenKeyboard,
         bottomOffset,
         photoUrl,
         vibro,
-        backButton: Telegram.WebApp? ? (Telegram.WebApp?.BackButton as BackButton) : null,
-        user: Telegram.WebApp? ? Telegram.WebApp?.initDataUnsafe?.user : null,
+        backButton: Telegram.WebApp ? (Telegram.WebApp?.BackButton as BackButton) : null,
+        user: Telegram.WebApp ? Telegram.WebApp?.initDataUnsafe?.user : null,
         userId,
     };
 }
