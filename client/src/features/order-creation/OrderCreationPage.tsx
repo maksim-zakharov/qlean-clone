@@ -86,14 +86,14 @@ export const OrderCreationPage = () => {
         </Tabs>
 
         {/* Service Options */}
-        <div className="flex-1 overflow-y-auto overscroll-none">
+        <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
           <div className="p-2">
             <List items={availableOptions} handleOptionToggle={handleOptionToggle} selectedOptions={selectedOptions}/>
           </div>
         </div>
 
         {/* Bottom Button */}
-        <div className="flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+        <div className="flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)] bg-tg-theme-bg-color">
           <Button
             className="w-full h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
             onClick={() => {

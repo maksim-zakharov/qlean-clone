@@ -77,7 +77,7 @@ export const Layout = () => {
 
                 {/* Main Content */}
                 <div className="flex-1 min-h-0 relative bg-tg-theme-bg-color">
-                    <div className="absolute inset-0 overflow-y-auto overscroll-none">
+                    <div className="absolute inset-0 overflow-y-auto overscroll-none bg-tg-theme-bg-color">
                         <Outlet/>
                     </div>
                 </div>
@@ -94,10 +94,10 @@ export const Layout = () => {
                                 onClick={() => navigate(path)}
                             >
                                 <Icon
-                                    className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-[#3390ec] dark:text-[#8ab4f8]' : 'text-tg-theme-subtitle-text-color'}`}
+                                    className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
                                 />
                                 <span
-                                    className={`text-[13px] font-medium ${location.pathname === path ? 'text-[#3390ec] dark:text-[#8ab4f8]' : 'text-tg-theme-subtitle-text-color'}`}
+                                    className={`text-[13px] font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
                                 >
                   {label}
                 </span>

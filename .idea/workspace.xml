@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change afterPath="$PROJECT_DIR$/client/src/components/ui/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742971417383</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="vite">
+      <option name="closed" value="true" />
+      <created>1742972316245</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1742972316245</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
