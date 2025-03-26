@@ -10,7 +10,7 @@ function Tabs({
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cn("w-full bg-tg-theme-section-bg-color border-b no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
+      className={cn("w-full bg-tg-theme-secondary-bg-color border-b no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
       {...props}
     />
   )
