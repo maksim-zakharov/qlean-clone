@@ -57,7 +57,7 @@ export function useTelegram() {
         return () => {
             tryies = 0; // Сбросить количество попыток при размонтировании
         };
-    }, []);
+    }, [Telegram.WebApp]);
 
     useEffect(() => {
         Telegram.WebApp.onEvent('viewportChanged', onKeyboard);
