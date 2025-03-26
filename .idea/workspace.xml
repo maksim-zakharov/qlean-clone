@@ -391,7 +391,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742994266973</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="vite">
+      <option name="closed" value="true" />
+      <created>1742994682191</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1742994682191</updated>
+    </task>
+    <task id="LOCAL-00039" summary="vite">
+      <option name="closed" value="true" />
+      <created>1742994714986</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1742994714986</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

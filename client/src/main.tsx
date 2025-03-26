@@ -7,6 +7,8 @@ import {HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store.ts";
 
+Telegram.WebApp?.ready?.();
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <HashRouter>
