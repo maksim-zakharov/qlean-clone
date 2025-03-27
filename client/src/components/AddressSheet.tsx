@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from "./ui/button"
 import React from "react";
+import {useTelegram} from "../hooks/useTelegram.ts";
 
 interface Address {
   id: string
@@ -20,15 +21,13 @@ interface AddressSheetProps {
   onAddAddress: () => void
 }
 
-export function AddressSheet({ 
-  addresses, 
-  selectedAddress, 
-  onAddressSelect,
+export function AddressSheet({
   onAddAddress,
   children 
 }: React.PropsWithChildren<AddressSheetProps>) {
+  const {vibro} = useTelegram();
   return (
-    <Sheet>
+    <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>

@@ -1,6 +1,7 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import React from "react";
 import {CardItem} from "./CardItem.tsx";
+import {useTelegram} from "../hooks/useTelegram.ts";
 
 interface ScheduleSheetProps {
     onSelectDate: (date: number) => void;
@@ -10,6 +11,7 @@ export function ScheduleSheet({
                                   children,
                                   onSelectDate
                               }: React.PropsWithChildren<ScheduleSheetProps>) {
+    const {vibro} = useTelegram();
     const schedule = [
         {title: '123', timestamp: 123},
         {title: '123', timestamp: 123},
@@ -21,7 +23,7 @@ export function ScheduleSheet({
     ]
 
     return (
-        <Sheet>
+        <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
