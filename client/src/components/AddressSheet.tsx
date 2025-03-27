@@ -35,7 +35,7 @@ export function AddressSheet({
         <SheetHeader>
           <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col flex-1 p-4">
+        <div className="flex flex-col flex-1">
           <Button
               className="w-full px-8 h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
               onClick={onAddAddress}
