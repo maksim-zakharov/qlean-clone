@@ -6,6 +6,7 @@ import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS } from './types'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
+import { Clock } from 'lucide-react'
 
 export const OrderCreationPage = () => {
   const {vibro} = useTelegram();
@@ -43,6 +44,26 @@ export const OrderCreationPage = () => {
     return sum + (option?.price || 0)
   }, currentService.basePrice)
 
+  // Считаем общее время
+  const totalDuration = selectedOptions.reduce((sum, optionId) => {
+    const option = availableOptions.find(opt => opt.id === optionId)
+    return sum + (option?.duration || 0)
+  }, currentService.duration)
+
+  // Форматируем время в часы и минуты
+  const formatDuration = (minutes: number) => {
+    const hours = Math.floor(minutes / 60)
+    const remainingMinutes = minutes % 60
+    
+    if (hours === 0) {
+      return `${remainingMinutes} минут`
+    } else if (remainingMinutes === 0) {
+      return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'}`
+    } else {
+      return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'} ${remainingMinutes} минут`
+    }
+  }
+
   const handleOptionToggle = (optionId: string) => {
     vibro('light');
     setSelectedOptions(prev =>
@@ -57,13 +78,15 @@ export const OrderCreationPage = () => {
       .filter(option => selectedOptions.includes(option.id))
       .map(option => ({
         name: option.name,
-        price: option.price
+        price: option.price,
+        duration: option.duration
       }));
 
     const services = [
       {
         name: currentService.name,
-        price: currentService.basePrice
+        price: currentService.basePrice,
+        duration: currentService.duration
       },
       ...selectedServiceOptions
     ];
@@ -108,10 +131,17 @@ export const OrderCreationPage = () => {
           <div className="p-2">
             <List items={availableOptions} handleOptionToggle={handleOptionToggle} selectedOptions={selectedOptions}/>
           </div>
+          {/* Estimated Time */}
+          <div className="flex items-center justify-center gap-2 mt-4 text-tg-theme-button-color text-base">
+            <Clock className="w-5 h-5" />
+            <span>Время уборки примерно {formatDuration(totalDuration)}</span>
+          </div>
         </div>
 
-        {/* Bottom Button */}
-        <div className="bg-tg-theme-secondary-bg-color flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+        {/* Bottom Section */}
+        <div className="bg-tg-theme-secondary-bg-color flex-none px-2 py-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+
+          {/* Next Button */}
           <Button
             className="w-full px-8 h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
             onClick={handleNext}

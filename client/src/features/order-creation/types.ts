@@ -4,6 +4,7 @@ export type Service = {
   id: string
   name: string
   basePrice: number
+  duration: number // в минутах
   backgroundColor?: string
   icon?: string
   type?: ServiceType
@@ -13,6 +14,7 @@ export type ServiceOption = {
   id: string
   name: string
   price: number
+  duration: number // в минутах
   description?: string
   isPopular?: boolean
 }
@@ -32,7 +34,8 @@ export const CLEANING_TABS: ServiceTab[] = [
         id: 'regular-cleaning',
         type: 'cleaning',
         name: 'Поддерживающая',
-        basePrice: 3000
+        basePrice: 3000,
+        duration: 120 // 2 часа
       }
     ]
   },
@@ -44,7 +47,8 @@ export const CLEANING_TABS: ServiceTab[] = [
         id: 'general-cleaning',
         type: 'cleaning',
         name: 'Генеральная',
-        basePrice: 5000
+        basePrice: 5000,
+        duration: 240 // 4 часа
       }
     ]
   },
@@ -56,7 +60,8 @@ export const CLEANING_TABS: ServiceTab[] = [
         id: 'after-repair',
         type: 'cleaning',
         name: 'После ремонта',
-        basePrice: 6000
+        basePrice: 6000,
+        duration: 300 // 5 часов
       }
     ]
   },
@@ -68,7 +73,8 @@ export const CLEANING_TABS: ServiceTab[] = [
         id: 'cottage',
         type: 'cleaning',
         name: 'Уборка коттеджей',
-        basePrice: 8000
+        basePrice: 8000,
+        duration: 180 // 3 часа
       }
     ]
   },
@@ -80,7 +86,8 @@ export const CLEANING_TABS: ServiceTab[] = [
         id: 'commercial',
         type: 'cleaning',
         name: 'Коммерческие помещения',
-        basePrice: 10000
+        basePrice: 10000,
+        duration: 240 // 4 часа
       }
     ]
   }
@@ -95,7 +102,8 @@ export const DRYCLEANING_TABS: ServiceTab[] = [
         id: 'clothes-cleaning',
         type: 'drycleaning',
         name: 'Химчистка и стирка одежды',
-        basePrice: 2000
+        basePrice: 2000,
+        duration: 120 // 2 часа
       }
     ]
   },
@@ -107,7 +115,8 @@ export const DRYCLEANING_TABS: ServiceTab[] = [
         id: 'furniture-cleaning',
         type: 'drycleaning',
         name: 'Химчистка мебели',
-        basePrice: 3500
+        basePrice: 3500,
+        duration: 90 // 1.5 часа
       }
     ]
   },
@@ -119,7 +128,8 @@ export const DRYCLEANING_TABS: ServiceTab[] = [
         id: 'carpet-cleaning',
         type: 'drycleaning',
         name: 'Чистка ковров',
-        basePrice: 2500
+        basePrice: 2500,
+        duration: 60 // 1 час
       }
     ]
   },
@@ -131,7 +141,8 @@ export const DRYCLEANING_TABS: ServiceTab[] = [
         id: 'shoe-cleaning',
         type: 'drycleaning',
         name: 'Чистка и ремонт обуви',
-        basePrice: 1500
+        basePrice: 1500,
+        duration: 45 // 45 минут
       }
     ]
   }
@@ -143,39 +154,46 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'windows',
       name: 'Мытье окон',
       price: 500,
+      duration: 30,
       isPopular: true
     },
     {
       id: 'ironing',
       name: 'Глажка белья',
       price: 700,
+      duration: 45,
       isPopular: true
     },
     {
       id: 'fridge',
       name: 'Уборка холодильника',
-      price: 300
+      price: 300,
+      duration: 15
     },
     {
       id: 'cat-litter',
       name: 'Уборка кошачьего лотка',
-      price: 200
+      price: 200,
+      duration: 15
     },
     {
       id: 'balcony',
       name: 'Уборка балкона',
-      price: 800
+      price: 800,
+      duration: 45
     },
     {
       id: 'dust-removal',
       name: 'Удаление пыли',
       price: 1000,
+      duration: 30,
       isPopular: true
     },
     {
       id: 'territory',
       name: 'Уборка территории',
       price: 1500,
+      duration: 60,
       isPopular: true
     }
   ],
@@ -184,6 +202,7 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'express',
       name: 'Срочная чистка',
       price: 500,
+      duration: 30,
       isPopular: true,
       description: 'Выполнение заказа в течение 24 часов'
     },
@@ -191,6 +210,7 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'stains',
       name: 'Выведение пятен',
       price: 300,
+      duration: 20,
       isPopular: true,
       description: 'Удаление сложных загрязнений'
     },
@@ -198,12 +218,14 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'deodorization',
       name: 'Дезодорация',
       price: 400,
+      duration: 15,
       description: 'Устранение неприятных запахов'
     },
     {
       id: 'stain-protection',
       name: 'Защитное покрытие',
       price: 600,
+      duration: 25,
       isPopular: true,
       description: 'Нанесение защиты от загрязнений'
     },
@@ -211,6 +233,7 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'deep-cleaning',
       name: 'Глубокая чистка',
       price: 800,
+      duration: 45,
       isPopular: true,
       description: 'Тщательная очистка всех слоев'
     },
@@ -218,18 +241,21 @@ export const SERVICE_OPTIONS: Record<ServiceType, ServiceOption[]> = {
       id: 'allergen-removal',
       name: 'Удаление аллергенов',
       price: 500,
+      duration: 30,
       description: 'Специальная обработка против аллергенов'
     },
     {
       id: 'sole-repair',
       name: 'Ремонт подошвы',
       price: 600,
+      duration: 45,
       description: 'Замена или ремонт подошвы обуви'
     },
     {
       id: 'polishing',
       name: 'Полировка',
       price: 300,
+      duration: 30,
       description: 'Восстановление внешнего вида'
     }
   ]
@@ -251,6 +277,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'regular-cleaning',
         name: 'Поддерживающая',
         basePrice: 3000,
+        duration: 120,
         backgroundColor: 'bg-green-50 dark:bg-green-900/30',
         icon: 'Sparkles'
       },
@@ -258,6 +285,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'general-cleaning',
         name: 'Генеральная',
         basePrice: 5000,
+        duration: 240,
         backgroundColor: 'bg-slate-100 dark:bg-slate-800/60',
         icon: 'Brush'
       },
@@ -265,6 +293,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'after-repair',
         name: 'После ремонта',
         basePrice: 6000,
+        duration: 300,
         backgroundColor: 'bg-orange-50 dark:bg-orange-900/30',
         icon: 'Hammer'
       },
@@ -272,6 +301,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'cottage',
         name: 'Уборка коттеджей',
         basePrice: 8000,
+        duration: 180,
         backgroundColor: 'bg-blue-50 dark:bg-blue-900/30',
         icon: 'Home'
       },
@@ -279,6 +309,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'commercial',
         name: 'Коммерческие помещения',
         basePrice: 10000,
+        duration: 240,
         backgroundColor: 'bg-purple-50 dark:bg-purple-900/30',
         icon: 'Building2'
       }
@@ -288,28 +319,33 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'windows',
         name: 'Мытье окон',
         price: 500,
+        duration: 30,
         isPopular: true
       },
       {
         id: 'ironing',
         name: 'Глажка белья',
         price: 700,
+        duration: 45,
         isPopular: true
       },
       {
         id: 'fridge',
         name: 'Уборка холодильника',
-        price: 300
+        price: 300,
+        duration: 15
       },
       {
         id: 'cat-litter',
         name: 'Уборка кошачьего лотка',
-        price: 200
+        price: 200,
+        duration: 15
       },
       {
         id: 'balcony',
         name: 'Уборка балкона',
-        price: 800
+        price: 800,
+        duration: 45
       }
     ]
   },
@@ -321,6 +357,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'clothes-cleaning',
         name: 'Химчистка и стирка одежды',
         basePrice: 2000,
+        duration: 120,
         backgroundColor: 'bg-slate-50 dark:bg-slate-800/60',
         icon: 'Shirt'
       },
@@ -328,6 +365,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'carpet-cleaning',
         name: 'Чистка ковров',
         basePrice: 2500,
+        duration: 60,
         backgroundColor: 'bg-orange-50 dark:bg-orange-900/30',
         icon: 'Grid2x2'
       },
@@ -335,6 +373,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'furniture-cleaning',
         name: 'Химчистка мебели',
         basePrice: 3500,
+        duration: 90,
         backgroundColor: 'bg-purple-50 dark:bg-purple-900/30',
         icon: 'Sofa'
       },
@@ -342,6 +381,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'shoe-cleaning',
         name: 'Чистка и ремонт обуви',
         basePrice: 1500,
+        duration: 45,
         backgroundColor: 'bg-red-50 dark:bg-red-900/30',
         icon: 'Footprints'
       }
@@ -351,6 +391,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'express',
         name: 'Срочная чистка',
         price: 500,
+        duration: 30,
         isPopular: true,
         description: 'Выполнение заказа в течение 24 часов'
       },
@@ -358,6 +399,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'stains',
         name: 'Выведение пятен',
         price: 300,
+        duration: 20,
         isPopular: true,
         description: 'Удаление сложных загрязнений'
       },
@@ -365,12 +407,14 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'deodorization',
         name: 'Дезодорация',
         price: 400,
+        duration: 15,
         description: 'Устранение неприятных запахов'
       },
       {
         id: 'stain-protection',
         name: 'Защитное покрытие',
         price: 600,
+        duration: 25,
         isPopular: true,
         description: 'Нанесение защиты от загрязнений'
       },
@@ -378,6 +422,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'deep-cleaning',
         name: 'Глубокая чистка',
         price: 800,
+        duration: 45,
         isPopular: true,
         description: 'Тщательная очистка всех слоев'
       },
@@ -385,6 +430,7 @@ export const SERVICES_DATA: ServiceCategory[] = [
         id: 'allergen-removal',
         name: 'Удаление аллергенов',
         price: 500,
+        duration: 30,
         description: 'Специальная обработка против аллергенов'
       }
     ]
