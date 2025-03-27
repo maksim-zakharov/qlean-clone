@@ -58,7 +58,7 @@ export const OrderCheckoutPage = () => {
             <List>
 
               {/* Date and Time */}
-              <ScheduleSheet
+              <ScheduleSheet onSelectDate={console.log}
               >
                 <Button
                     variant="ghost"
@@ -109,7 +109,7 @@ export const OrderCheckoutPage = () => {
               onValueChange={() => vibro()}
             >
               <AccordionItem value="services">
-                <AccordionTrigger className="px-4 py-3 hover:no-underline">
+                <AccordionTrigger disabled={!selectedServices.length} className="px-4 py-3 hover:no-underline">
                   <div className="flex justify-between w-full">
                     <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
                     <div className="flex items-center gap-1 pr-2">

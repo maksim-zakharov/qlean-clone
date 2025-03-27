@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button"
 import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
-import {Spacer} from "../ui/Spacer.tsx";
+import {Spacer} from "../Spacer.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import { useState } from "react";
 import { AddressSheet } from "../AddressSheet";
