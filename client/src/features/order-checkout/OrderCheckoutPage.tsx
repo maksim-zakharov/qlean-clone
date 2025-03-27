@@ -8,6 +8,7 @@ import React, {useEffect, useMemo} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
 import {List} from "../../components/ui/list.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 import {
   Accordion,
   AccordionContent,
@@ -18,6 +19,7 @@ import {
 
 export const OrderCheckoutPage = () => {
   const location = useLocation()
+  const {vibro} = useTelegram();
   const currentService = location.state?.currentService as Service;
   const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
   const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
@@ -99,7 +101,13 @@ export const OrderCheckoutPage = () => {
             </List>
 
             {/* Order Summary */}
-            <Accordion type="single" collapsible defaultValue="services" className="mt-4 overflow-hidden bg-tg-theme-bg-color rounded-2xl">
+            <Accordion 
+              type="single" 
+              collapsible 
+              defaultValue="services" 
+              className="mt-4 overflow-hidden bg-tg-theme-bg-color rounded-2xl"
+              onValueChange={() => vibro()}
+            >
               <AccordionItem value="services" className="border-0">
                 <AccordionTrigger className="px-4 py-3 hover:no-underline">
                   <div className="flex justify-between w-full">
