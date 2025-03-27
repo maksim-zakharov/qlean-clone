@@ -47,9 +47,10 @@ export const Layout = () => {
     return <>
         <Header isWebApp={Boolean(user)}><Spacer>
             <Avatar/>
-            <div className="flex-1 text-center">
-                <Button variant="ghost" className="text-tg-theme-text-color text-[17px] font-medium">
-                    Оружейный переулок <span className="ml-1 text-tg-theme-subtitle-text-color">›</span>
+            <div className="flex-1 flex flex-col items-center">
+                <span className="text-xs text-tg-theme-hint-color mb-0.5">Адрес</span>
+                <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+                    Оружейный переулок <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                 </Button>
             </div>
         </Spacer>
