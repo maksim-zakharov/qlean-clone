@@ -40,14 +40,14 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "group px-6 py-3 text-[17px] font-medium text-tg-theme-hint-color data-[state=active]:text-tg-theme-button-color data-[state=active]:bg-transparent data-[state=active]:shadow-none",
+        "group px-6 py-3 text-[15px] font-medium text-tg-theme-hint-color data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-tg-theme-button-color",
         className
       )}
       {...props}
     >
       <span className="relative inline-block whitespace-nowrap">
         {props.children}
-        <span className="absolute left-0 right-0 bottom-[-8px] h-[2px] bg-current opacity-0 group-data-[state=active]:opacity-100" />
+        <span className="absolute left-0 right-0 bottom-[-12px] h-[2px] bg-current opacity-0 group-data-[state=active]:opacity-100" />
       </span>
     </TabsPrimitive.Trigger>
   )
