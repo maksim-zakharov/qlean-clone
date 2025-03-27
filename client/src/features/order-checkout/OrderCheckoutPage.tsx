@@ -105,10 +105,10 @@ export const OrderCheckoutPage = () => {
               type="single" 
               collapsible 
               defaultValue="services" 
-              className="mt-4 overflow-hidden bg-tg-theme-section-bg-color rounded-2xl"
+              className="mt-4 overflow-hidden rounded-2xl"
               onValueChange={() => vibro()}
             >
-              <AccordionItem value="services" className="border-0">
+              <AccordionItem value="services" className="border-0 bg-tg-theme-section-bg-color">
                 <AccordionTrigger className="px-4 py-3 hover:no-underline">
                   <div className="flex justify-between w-full">
                     <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
