@@ -108,7 +108,7 @@ export const OrderCheckoutPage = () => {
               className="mt-4 overflow-hidden rounded-2xl"
               onValueChange={() => vibro()}
             >
-              <AccordionItem value="services" className="border-0 bg-tg-theme-section-bg-color">
+              <AccordionItem value="services">
                 <AccordionTrigger className="px-4 py-3 hover:no-underline">
                   <div className="flex justify-between w-full">
                     <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
@@ -118,7 +118,7 @@ export const OrderCheckoutPage = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="px-4 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     {selectedServices.map((service, index) => (
                         <div key={index} className="flex justify-between">
                           <span className="text-tg-theme-text-color">{service.name}</span>
