@@ -5,8 +5,10 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS } from './types'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 export const OrderCreationPage = () => {
+  const {vibro} = useTelegram();
   const navigate = useNavigate()
   const { serviceId = '' } = useParams<{ serviceId: string }>()
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
@@ -42,6 +44,7 @@ export const OrderCreationPage = () => {
   }, currentService.basePrice)
 
   const handleOptionToggle = (optionId: string) => {
+    vibro('light');
     setSelectedOptions(prev =>
       prev.includes(optionId)
         ? prev.filter(id => id !== optionId)

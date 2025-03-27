@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
