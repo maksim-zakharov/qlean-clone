@@ -52,6 +52,27 @@ export const OrderCreationPage = () => {
     )
   }
 
+  const handleNext = () => {
+    const selectedServiceOptions = availableOptions
+      .filter(option => selectedOptions.includes(option.id))
+      .map(option => ({
+        name: option.name,
+        price: option.price
+      }));
+
+    const services = [
+      {
+        name: currentService.name,
+        price: currentService.basePrice
+      },
+      ...selectedServiceOptions
+    ];
+
+    navigate(`/order/${serviceId}/checkout`, {
+      state: { selectedServices: services }
+    });
+  }
+
   return (
     <div className="fixed inset-0 flex flex-col">
       <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
@@ -93,10 +114,7 @@ export const OrderCreationPage = () => {
         <div className="bg-tg-theme-secondary-bg-color flex-none px-2 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
           <Button
             className="w-full px-8 h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
-            onClick={() => {
-              // TODO: Implement order creation
-              console.log('Creating order with options:', selectedOptions)
-            }}
+            onClick={handleNext}
           >
             <span className="flex-1 text-left">Далее</span>
             <span className="font-bold">{totalPrice} ₽</span>
