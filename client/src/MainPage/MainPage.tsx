@@ -24,12 +24,12 @@ interface ServiceCardProps {
   serviceId: string
 }
 
-const ServiceCard = ({ title, backgroundColor = "bg-slate-50", icon, serviceId }: ServiceCardProps) => {
+const ServiceCard = ({ title, icon, serviceId }: ServiceCardProps) => {
   const navigate = useNavigate()
   
   return (
     <Card 
-      className={`${backgroundColor} p-4 rounded-[20px] cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative`}
+      className={`bg-tg-theme-section-bg-color p-4 cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative`}
       onClick={() => navigate(`/order/${serviceId}`)}
     >
       <div className="flex flex-col h-full">
@@ -52,21 +52,20 @@ const MainPage = () => {
   }, [backButton, isLoading, error]);
 
   return (
-    <div className="px-3">
+    <div className="px-2">
       {SERVICES_DATA.map(category => (
         <section key={category.id} className="my-6">
           <h2 className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">
             {category.name}
           </h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2">
             {category.services.map(service => {
               const Icon = ICONS[service.icon]
               return (
                 <ServiceCard
                   key={service.id}
                   title={service.name}
-                  backgroundColor={service.backgroundColor}
-                  icon={<Icon className="w-10 h-10 text-tg-theme-text-color" strokeWidth={1.5} />}
+                  icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5} />}
                   serviceId={service.id}
                 />
               )

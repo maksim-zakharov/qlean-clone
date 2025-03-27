@@ -271,7 +271,7 @@ export type ServiceCategory = {
 export const SERVICES_DATA: ServiceCategory[] = [
   {
     id: 'cleaning',
-    name: 'Уборка1',
+    name: 'Уборка',
     services: [
       {
         id: 'regular-cleaning',

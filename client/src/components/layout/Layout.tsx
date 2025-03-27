@@ -58,7 +58,7 @@ export const Layout = () => {
         {/* Main Content */}
         <main className="overflow-y-auto bg-inherit">
             <div
-                className="absolute inset-0 overflow-y-auto overscroll-none pt-14 pb-safe-area-inset-bottom bg-inherit ">
+                className="absolute no-scrollbar inset-0 overflow-y-auto overscroll-none pt-14 pb-safe-area-inset-bottom bg-inherit ">
                 <Outlet/>
             </div>
         </main>

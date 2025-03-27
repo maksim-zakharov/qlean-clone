@@ -115,7 +115,7 @@ export const OrderCreationPage = () => {
 
                 {/* Service Options */}
                 <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
-                    <div className="p-2">
+                    <div className="px-2 pt-4">
                         <List items={availableOptions} handleOptionToggle={handleOptionToggle}
                               selectedOptions={selectedOptions}/>
                     </div>
