@@ -4,7 +4,7 @@ import { Calendar, ChevronRight, CreditCard, MessageSquare } from "lucide-react"
 import { useLocation } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import {ServiceOption, Service} from "../order-creation/types.ts";
-import React, {useEffect, useMemo} from "react";
+import React, {useMemo} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
 import {List} from "../../components/ui/list.tsx";
@@ -16,7 +16,6 @@ import {
   AccordionTrigger,
 } from "../../components/ui/accordion"
 import {Header} from "../../components/ui/Header.tsx";
-import {AddressSheet} from "../../components/AddressSheet.tsx";
 
 
 export const OrderCheckoutPage = () => {
