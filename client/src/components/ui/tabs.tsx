@@ -10,7 +10,7 @@ function Tabs({
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cn("w-full bg-tg-theme-secondary-bg-color border-b no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
+      className={cn("w-full bg-tg-theme-secondary-bg-color separator-shadow-bottom no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
       {...props}
     />
   )
@@ -24,7 +24,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "min-w-fit h-auto p-0 bg-transparent border-tg-theme-section-separator-color flex",
+        "min-w-fit h-auto p-0 bg-transparent flex",
         className
       )}
       {...props}
