@@ -93,6 +93,7 @@ export const OrderCreationPage = () => {
     }
 
     useEffect(() => {
+        Telegram.WebApp.MainButton.onClick(handleNext)
         Telegram.WebApp.MainButton.setParams({
             is_visible: true,
             position: 'left',

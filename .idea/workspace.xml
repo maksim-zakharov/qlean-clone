@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,14 +107,6 @@
       <updated>1742910415904</updated>
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
-    </task>
-    <task id="LOCAL-00023" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742927073861</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1742927073861</updated>
     </task>
     <task id="LOCAL-00024" summary="vite">
       <option name="closed" value="true" />
@@ -502,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743087372215</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743087977564</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1743087977564</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

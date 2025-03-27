@@ -47,6 +47,7 @@ const MainPage = () => {
   useEffect(() => {
     if(!isLoading && !error){
       backButton?.hide();
+      Telegram.WebApp.MainButton?.hide();
     }
   }, [backButton, isLoading, error]);
 
