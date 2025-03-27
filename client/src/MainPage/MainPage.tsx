@@ -21,16 +21,14 @@ interface ServiceCardProps {
   title: string
   backgroundColor?: string
   icon: React.ReactNode
-  serviceId: string
+  onClick?: () => void
 }
 
-const ServiceCard = ({ title, icon, serviceId }: ServiceCardProps) => {
-  const navigate = useNavigate()
-  
+const ServiceCard = ({ title, icon, onClick }: ServiceCardProps) => {
   return (
     <Card 
       className={`bg-tg-theme-section-bg-color p-4 cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative`}
-      onClick={() => navigate(`/order/${serviceId}`)}
+      onClick={onClick}
     >
       <div className="flex flex-col h-full">
         <h3 className="text-base font-medium text-tg-theme-text-color max-w-[60%] text-left">{title}</h3>
@@ -43,6 +41,8 @@ const ServiceCard = ({ title, icon, serviceId }: ServiceCardProps) => {
 }
 
 const MainPage = () => {
+  const navigate = useNavigate()
+
   const {backButton, isLoading, error} = useTelegram();
   useEffect(() => {
     if(!isLoading && !error){
@@ -66,7 +66,7 @@ const MainPage = () => {
                   key={service.id}
                   title={service.name}
                   icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5} />}
-                  serviceId={service.id}
+                  onClick={() => navigate(`/order/${service.id}`)}
                 />
               )
             })}

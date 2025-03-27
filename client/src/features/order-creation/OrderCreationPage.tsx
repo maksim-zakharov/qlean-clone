@@ -6,7 +6,7 @@ import {CLEANING_TABS, DRYCLEANING_TABS, Service, SERVICE_OPTIONS} from './types
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {Clock} from 'lucide-react'
+import {Info, Plus} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 
 export const OrderCreationPage = () => {
@@ -116,8 +116,47 @@ export const OrderCreationPage = () => {
                 {/* Service Options */}
                 <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
                     <div className="px-2 pt-4">
-                        <List items={availableOptions} handleOptionToggle={handleOptionToggle}
-                              selectedOptions={selectedOptions}/>
+                        <List>
+                            {availableOptions.map((option) => <>
+                                <div className="flex items-start gap-3 flex-1 min-w-0">
+                                    <Info
+                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
+                                    <div className="min-w-0">
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                        <span
+                                            className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
+                                            {option.isPopular && (
+                                                <span
+                                                    className="px-1.5 py-0.5 text-[12px] font-medium badge-primary rounded-sm">
+                ПОПУЛЯРНО
+              </span>
+                                            )}
+                                        </div>
+                                        {option.description && (
+                                            <p className="mt-0.5 text-[13px] text-tg-theme-subtitle-text-color line-clamp-2">
+                                                {option.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3 ml-3">
+                <span
+                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{option.price} ₽</span>
+                                    <Button
+                                        variant="ghost"
+                                        className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent ${
+                                            selectedOptions.includes(option.id)
+                                                ? 'bg-tg-theme-button-color text-tg-theme-button-text-color'
+                                                : 'border border-tg-theme-button-color text-tg-theme-button-color'
+                                        }`}
+                                        onClick={() => handleOptionToggle(option.id)}
+                                    >
+                                        <Plus
+                                            className={`w-[18px] h-[18px] ${selectedOptions.includes(option.id) ? 'rotate-45' : ''} transition-transform`}/>
+                                    </Button>
+                                </div>
+                            </>)}
+                        </List>
                     </div>
                     <EstimatedTime totalDuration={totalDuration}/>
                 </div>

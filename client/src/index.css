@@ -16,6 +16,7 @@
     color: rgba(255, 255, 255, 0.87);
     background-color: var(--tg-theme-bg-color);
 
+    --quaternary-fill-background: rgba(122, 122, 122, 0.18);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -259,5 +260,9 @@
 
     html body[data-scroll-locked]{
         position: initial !important;
+    }
+
+    .quaternary-fill-background{
+        background-color: var(--quaternary-fill-background);
     }
 }
