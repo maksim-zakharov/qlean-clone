@@ -5,6 +5,8 @@ import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {Spacer} from "../ui/Spacer.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
+import { useState } from "react";
+import { AddressSheet } from "../AddressSheet";
 
 type MenuItem = {
     icon: LucideIcon
@@ -39,6 +41,21 @@ export const Layout = () => {
     const {user, isLoading} = useTelegram();
     const navigate = useNavigate()
     const location = useLocation();
+    const [addresses] = useState<Array<{ id: string; address: string }>>([
+        { id: '1', address: 'Оружейный переулок' },
+        { id: '2', address: 'ул. Тверская, 1' },
+        { id: '3', address: 'Ленинградский проспект, 15' },
+    ]);
+    const [selectedAddress, setSelectedAddress] = useState(addresses[0]?.address || '');
+
+    const handleAddressSelect = (address: string) => {
+        setSelectedAddress(address);
+    };
+
+    const handleAddAddress = () => {
+        // TODO: Implement address addition logic
+        console.log('Add address clicked');
+    };
 
     if (isLoading) {
         return null;
@@ -49,12 +66,18 @@ export const Layout = () => {
             <Avatar/>
             <div className="flex-1 flex flex-col items-center">
                 <span className="text-xs text-tg-theme-hint-color mb-0.5">Адрес</span>
-                <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
-                    Оружейный переулок <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
-                </Button>
+                <AddressSheet
+                    addresses={addresses}
+                    selectedAddress={selectedAddress}
+                    onAddressSelect={handleAddressSelect}
+                    onAddAddress={handleAddAddress}
+                >
+                    <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+                        {selectedAddress} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                    </Button>
+                </AddressSheet>
             </div>
-        </Spacer>
-        </Header>
+        </Spacer></Header>
 
         {/* Main Content */}
         <main className="overflow-y-auto bg-inherit">

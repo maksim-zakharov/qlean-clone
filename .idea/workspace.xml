@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/MainPage/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/MainPage/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Avatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,22 +113,6 @@
       <updated>1742910415904</updated>
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
-    </task>
-    <task id="LOCAL-00029" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742930309970</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1742930309970</updated>
-    </task>
-    <task id="LOCAL-00030" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742931148151</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1742931148151</updated>
     </task>
     <task id="LOCAL-00031" summary="vite">
       <option name="closed" value="true" />
@@ -508,7 +490,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743092058617</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743093658015</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1743093658015</updated>
+    </task>
+    <task id="LOCAL-00079" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743094085191</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1743094085191</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

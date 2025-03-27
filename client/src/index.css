@@ -256,4 +256,8 @@
         --separator-height: -1px;
         box-shadow: inset 0 var(--separator-height) 0 var(--tg-theme-section-separator-color)
     }
+
+    html body[data-scroll-locked]{
+        position: initial !important;
+    }
 }
