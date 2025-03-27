@@ -1,14 +1,19 @@
 import { BackButton } from "@/components/BackButton"
 import { Button } from "@/components/ui/button"
-import { Calendar, ChevronRight, Clock, CreditCard, MessageSquare } from "lucide-react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Calendar, ChevronRight, CreditCard, MessageSquare } from "lucide-react"
+import { useLocation } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import {ServiceOption, Service} from "../order-creation/types.ts";
 import React, {useEffect, useMemo} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
-import {AddressSheet} from "../../components/AddressSheet.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
 import {List} from "../../components/ui/list.tsx";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../components/ui/accordion"
 
 
 export const OrderCheckoutPage = () => {
@@ -94,26 +99,30 @@ export const OrderCheckoutPage = () => {
             </List>
 
             {/* Order Summary */}
-            <div className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
-                <div className="flex items-center gap-1">
-                  <span className="text-lg font-medium text-tg-theme-text-color">{totalPrice}₽</span>
-                  <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
-                </div>
-              </div>
-
-              <List className="quaternary-fill-background">
-                {selectedServices.map((service, index: number) => (
-                    <div key={index} className="flex justify-between">
-                      <span className="text-tg-theme-text-color">{service.name}</span>
-                      <span className="text-tg-theme-text-color">{service.price}₽</span>
+            <Accordion type="single" collapsible defaultValue="services" className="mt-4 overflow-hidden bg-tg-theme-bg-color rounded-2xl">
+              <AccordionItem value="services" className="border-0">
+                <AccordionTrigger className="px-4 py-3 hover:no-underline">
+                  <div className="flex justify-between w-full">
+                    <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
+                    <div className="flex items-center gap-1 pr-2">
+                      <span className="text-lg font-medium text-tg-theme-text-color">{totalPrice}₽</span>
                     </div>
-                ))}
-              </List>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="px-4 flex flex-col gap-2">
+                    {selectedServices.map((service, index) => (
+                        <div key={index} className="flex justify-between">
+                          <span className="text-tg-theme-text-color">{service.name}</span>
+                          <span className="text-tg-theme-text-color">{service.price}₽</span>
+                        </div>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-              <EstimatedTime totalDuration={totalDuration}/>
-            </div>
+            <EstimatedTime totalDuration={totalDuration}/>
 
             {/* Promo Code */}
             {/*<Button*/}

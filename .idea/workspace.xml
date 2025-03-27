@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/MainPage/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/MainPage/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/EstimatedTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/EstimatedTime.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/order-checkout/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-checkout/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,14 +117,6 @@
       <updated>1742910415904</updated>
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
-    </task>
-    <task id="LOCAL-00033" summary="vite">
-      <option name="closed" value="true" />
-      <created>1742971417383</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1742971417383</updated>
     </task>
     <task id="LOCAL-00034" summary="vite">
       <option name="closed" value="true" />
@@ -515,7 +502,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743095834480</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743100968421</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1743100968421</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
