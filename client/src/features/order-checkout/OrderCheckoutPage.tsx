@@ -4,6 +4,7 @@ import { Calendar, ChevronRight, Clock, CreditCard, MessageSquare } from "lucide
 import { useLocation, useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import {ServiceOption, Service} from "../order-creation/types.ts";
+import {useEffect} from "react";
 
 
 export const OrderCheckoutPage = () => {
@@ -12,6 +13,18 @@ export const OrderCheckoutPage = () => {
   const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
   const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
   const estimatedTime = "4 часа" // TODO: Расчет времени на основе выбранных услуг
+
+  const handleOnSubmit = () => {
+
+  }
+
+  useEffect(() => {
+    Telegram.WebApp.MainButton.onClick(handleOnSubmit)
+    Telegram.WebApp.MainButton.setParams({
+      is_visible: true,
+      text: `Оформить заказ`,
+    })
+  }, [totalPrice])
 
   return (
     <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
@@ -111,14 +124,14 @@ export const OrderCheckoutPage = () => {
       </div>
 
       {/* Submit Button */}
-      <div className="p-4 pb-[calc(env(safe-area-inset-bottom,0px)+16px)] bg-tg-theme-bg-color">
+      {Telegram.WebApp.platform === 'unknown' && <div className="p-4 pb-[calc(env(safe-area-inset-bottom,0px)+16px)] bg-tg-theme-bg-color">
         <Button
           className="w-full h-12 text-base font-medium"
-          onClick={() => {/* TODO: Submit order */}}
+          onClick={handleOnSubmit}
         >
           Оформить заказ
         </Button>
-      </div>
+      </div>}
     </div>
   )
 } 

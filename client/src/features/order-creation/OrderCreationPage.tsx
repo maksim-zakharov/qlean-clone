@@ -27,7 +27,7 @@ export const OrderCreationPage = () => {
         setcurrentService(tabs
             .flatMap(tab => tab.services)
             .find(service => service.id === serviceId))
-    }, [serviceId]);
+    }, [serviceId, tabs]);
 
     // Находим таб, в котором находится услуга
     const currentTab = useMemo(() => tabs.find(tab =>
@@ -85,10 +85,8 @@ export const OrderCreationPage = () => {
         Telegram.WebApp.MainButton.onClick(handleNext)
         Telegram.WebApp.MainButton.setParams({
             is_visible: true,
-            position: 'left',
             text: `Далее ${totalPrice} ₽`,
         })
-        // Telegram.WebApp.MainButton.show()
     }, [totalPrice])
 
     if (!currentService) {
