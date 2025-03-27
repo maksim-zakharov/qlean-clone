@@ -15,6 +15,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../components/ui/accordion"
+import {Header} from "../../components/ui/Header.tsx";
+import {AddressSheet} from "../../components/AddressSheet.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -33,7 +35,17 @@ export const OrderCheckoutPage = () => {
 
   return (
       <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
-        {/* Header */}
+        <Header>
+          <div className="grid grid-cols-[40px_auto_40px]">
+            <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>
+            <div className="flex-1 flex flex-col items-center">
+              <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+                Оформление заказа
+              </Button>
+              <span className="text-xs text-tg-theme-hint-color">Оружейный переулок, 41</span>
+            </div>
+          </div>
+        </Header>
         <div
             className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
           <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>

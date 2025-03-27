@@ -8,6 +8,7 @@ import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Info, Plus} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
+import {Header} from "../../components/ui/Header.tsx";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -75,17 +76,14 @@ export const OrderCreationPage = () => {
     return (
         <div className="fixed inset-0 flex flex-col">
             <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
-                {/* Header */}
-                <div
-                    className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
-                    <BackButton/>
-                    <div className="flex-1 flex justify-center">
-                        <span
-                            className="text-base font-medium text-tg-theme-text-color">{isCleaningService ? 'Уборка' : 'Химчистка'}</span>
+                <Header>
+                    <div className="grid grid-cols-[40px_auto_40px]">
+                        <BackButton/>
+                        <div className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
+                            {isCleaningService ? 'Уборка' : 'Химчистка'}
+                        </div>
                     </div>
-                    <div className="w-[40px]"/>
-                    {/* Для центрирования заголовка */}
-                </div>
+                </Header>
 
                 <Tabs defaultValue={currentTab?.id} value={currentTab?.id}>
                     <TabsList>

@@ -3,10 +3,9 @@ import {Button} from "@/components/ui/button"
 import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
-import {Spacer} from "../Spacer.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import { useState } from "react";
-import { AddressSheet } from "../AddressSheet";
+import {useState} from "react";
+import {AddressSheet} from "../AddressSheet";
 
 type MenuItem = {
     icon: LucideIcon
@@ -38,13 +37,13 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const {user, isLoading} = useTelegram();
+    const {isLoading} = useTelegram();
     const navigate = useNavigate()
     const location = useLocation();
     const [addresses] = useState<Array<{ id: string; address: string }>>([
-        { id: '1', address: 'Оружейный переулок' },
-        { id: '2', address: 'ул. Тверская, 1' },
-        { id: '3', address: 'Ленинградский проспект, 15' },
+        {id: '1', address: 'Оружейный переулок'},
+        {id: '2', address: 'ул. Тверская, 1'},
+        {id: '3', address: 'Ленинградский проспект, 15'},
     ]);
     const [selectedAddress, setSelectedAddress] = useState(addresses[0]?.address || '');
 
@@ -62,22 +61,24 @@ export const Layout = () => {
     }
 
     return <>
-        <Header isWebApp={Boolean(user)}><Spacer>
-            <Avatar/>
-            <div className="flex-1 flex flex-col items-center">
-                <span className="text-xs text-tg-theme-hint-color mb-0.5">Адрес</span>
-                <AddressSheet
-                    addresses={addresses}
-                    selectedAddress={selectedAddress}
-                    onAddressSelect={handleAddressSelect}
-                    onAddAddress={handleAddAddress}
-                >
-                    <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
-                        {selectedAddress} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
-                    </Button>
-                </AddressSheet>
+        <Header>
+            <div className="grid grid-cols-[40px_auto_40px]">
+                <Avatar/>
+                <div className="flex-1 flex flex-col items-center">
+                    <span className="text-xs text-tg-theme-hint-color">Адрес</span>
+                    <AddressSheet
+                        addresses={addresses}
+                        selectedAddress={selectedAddress}
+                        onAddressSelect={handleAddressSelect}
+                        onAddAddress={handleAddAddress}
+                    >
+                        <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+                            {selectedAddress} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                        </Button>
+                    </AddressSheet>
+                </div>
             </div>
-        </Spacer></Header>
+        </Header>
 
         {/* Main Content */}
         <main className="overflow-y-auto bg-inherit">
