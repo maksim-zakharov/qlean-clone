@@ -79,13 +79,13 @@ export const OrderCreationPage = () => {
                 <Header>
                     <div className="grid grid-cols-[40px_auto_40px]">
                         <BackButton/>
-                        <div className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
+                        <div
+                            className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
                             {isCleaningService ? 'Уборка' : 'Химчистка'}
                         </div>
                     </div>
                 </Header>
-
-                <Tabs defaultValue={currentTab?.id} value={currentTab?.id}>
+                <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="pt-[calc(56px+env(safe-area-inset-top))]">
                     <TabsList>
                         {tabs.map(tab => (
                             <TabsTrigger
