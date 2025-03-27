@@ -68,14 +68,6 @@ export const OrderCreationPage = () => {
         });
     }
 
-    useEffect(() => {
-        Telegram.WebApp.MainButton.onClick(handleNext)
-        Telegram.WebApp.MainButton.setParams({
-            is_visible: true,
-            text: `Далее ${totalPrice} ₽`,
-        })
-    }, [totalPrice])
-
     if (!currentService) {
         return null
     }
@@ -162,7 +154,7 @@ export const OrderCreationPage = () => {
                 </div>
 
                 {/* Bottom Section */}
-                {Telegram.WebApp.platform === 'unknown' && <div
+                <div
                     className="bg-tg-theme-secondary-bg-color flex-none p-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
 
                     {/* Next Button */}
@@ -173,7 +165,7 @@ export const OrderCreationPage = () => {
                         <span className="flex-1 text-left">Далее</span>
                         <span className="font-bold">{totalPrice} ₽</span>
                     </Button>
-                </div>}
+                </div>
             </div>
         </div>
     )

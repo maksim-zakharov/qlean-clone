@@ -31,14 +31,6 @@ export const OrderCheckoutPage = () => {
 
   }
 
-  useEffect(() => {
-    Telegram.WebApp.MainButton.onClick(handleOnSubmit)
-    Telegram.WebApp.MainButton.setParams({
-      is_visible: true,
-      text: `Оформить заказ`,
-    })
-  }, [totalPrice])
-
   return (
       <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
         {/* Header */}
@@ -152,15 +144,14 @@ export const OrderCheckoutPage = () => {
         </div>
 
         {/* Submit Button */}
-        {Telegram.WebApp.platform === 'unknown' &&
-            <div className="p-4 pb-[calc(env(safe-area-inset-bottom,0px)+16px)] bg-tg-theme-bg-color">
-              <Button
-                  className="w-full h-12 text-base font-medium"
-                  onClick={handleOnSubmit}
-              >
-                Оформить заказ
-              </Button>
-            </div>}
+        <div className="p-4 pb-[calc(env(safe-area-inset-bottom,0px)+16px)] bg-tg-theme-bg-color">
+          <Button
+              className="w-full h-12 text-base font-medium"
+              onClick={handleOnSubmit}
+          >
+            Оформить заказ
+          </Button>
+        </div>
       </div>
   )
 } 
