@@ -3,24 +3,21 @@ import { Button } from "@/components/ui/button"
 import { Calendar, ChevronRight, Clock, CreditCard, MessageSquare } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
+import {ServiceOption, Service} from "../order-creation/types.ts";
 
-interface Service {
-  name: string
-  price: number
-}
 
 export const OrderCheckoutPage = () => {
-  const navigate = useNavigate()
   const location = useLocation()
-  const selectedServices = (location.state?.selectedServices || []) as Service[]
-  const totalPrice = selectedServices.reduce((sum: number, service: Service) => sum + service.price, 0)
+  const currentService = location.state?.currentService as Service;
+  const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
+  const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
   const estimatedTime = "4 часа" // TODO: Расчет времени на основе выбранных услуг
 
   return (
     <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
       {/* Header */}
       <div className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
-        <BackButton />
+        <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}} />
         <div className="flex-1 flex flex-col items-center">
           <span className="text-base font-medium text-tg-theme-text-color">Оформление заказа</span>
           <span className="text-sm text-tg-theme-hint-color">Оружейный переулок, 41</span>
@@ -80,7 +77,7 @@ export const OrderCheckoutPage = () => {
             </div>
 
             {/* Services List */}
-            {selectedServices.map((service: Service, index: number) => (
+            {selectedServices.map((service, index: number) => (
               <div key={index} className="flex justify-between">
                 <span className="text-tg-theme-text-color">{service.name}</span>
                 <span className="text-tg-theme-text-color">{service.price}₽</span>

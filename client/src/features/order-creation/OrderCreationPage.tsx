@@ -1,50 +1,53 @@
-import {useEffect, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useEffect, useMemo, useState} from 'react'
+import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
-import {CLEANING_TABS, DRYCLEANING_TABS, SERVICE_OPTIONS} from './types'
+import {CLEANING_TABS, DRYCLEANING_TABS, Service, SERVICE_OPTIONS} from './types'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Clock} from 'lucide-react'
 
 export const OrderCreationPage = () => {
+    const location = useLocation()
+    const selectedServices = (location.state?.selectedServices || []) as Service[]
     const {vibro} = useTelegram();
     const navigate = useNavigate()
     const {serviceId = ''} = useParams<{ serviceId: string }>()
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+    const [currentService, setcurrentService] = useState<Service | undefined>(location.state?.currentService);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(selectedServices.map(s => s.id));
 
     // Определяем тип сервиса и находим текущую услугу
-    const isCleaningService = CLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId)
-    const isDryCleaningService = DRYCLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId)
+    const isCleaningService = useMemo(() => CLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId), [serviceId]);
 
     const tabs = isCleaningService ? CLEANING_TABS : DRYCLEANING_TABS
     const serviceType = isCleaningService ? 'cleaning' : 'drycleaning'
 
-    // Находим текущую услугу
-    const currentService = tabs
-        .flatMap(tab => tab.services)
-        .find(service => service.id === serviceId)
+    useEffect(() => {
+        setcurrentService(tabs
+            .flatMap(tab => tab.services)
+            .find(service => service.id === serviceId))
+    }, [serviceId]);
 
     // Находим таб, в котором находится услуга
-    const currentTab = tabs.find(tab =>
+    const currentTab = useMemo(() => tabs.find(tab =>
         tab.services.some(service => service.id === serviceId)
-    )
+    ), [serviceId, tabs]);
 
     // Получаем доступные опции для типа услуги
     const availableOptions = SERVICE_OPTIONS[serviceType] || []
 
     // Считаем общую сумму
-    const totalPrice = selectedOptions.reduce((sum, optionId) => {
+    const totalPrice = useMemo(() => selectedOptions.reduce((sum, optionId) => {
         const option = availableOptions.find(opt => opt.id === optionId)
         return sum + (option?.price || 0)
-    }, currentService.basePrice)
+    }, currentService?.basePrice || 0), [currentService, selectedOptions, availableOptions]);
 
     // Считаем общее время
-    const totalDuration = selectedOptions.reduce((sum, optionId) => {
+    const totalDuration = useMemo(() => selectedOptions.reduce((sum, optionId) => {
         const option = availableOptions.find(opt => opt.id === optionId)
         return sum + (option?.duration || 0)
-    }, currentService.duration)
+    }, currentService?.duration || 0), [currentService, selectedOptions, availableOptions]);
 
     // Форматируем время в часы и минуты
     const formatDuration = (minutes: number) => {
@@ -71,24 +74,10 @@ export const OrderCreationPage = () => {
 
     const handleNext = () => {
         const selectedServiceOptions = availableOptions
-            .filter(option => selectedOptions.includes(option.id))
-            .map(option => ({
-                name: option.name,
-                price: option.price,
-                duration: option.duration
-            }));
-
-        const services = [
-            {
-                name: currentService.name,
-                price: currentService.basePrice,
-                duration: currentService.duration
-            },
-            ...selectedServiceOptions
-        ];
+            .filter(option => selectedOptions.includes(option.id));
 
         navigate(`/order/${serviceId}/checkout`, {
-            state: {selectedServices: services}
+            state: {selectedServices: selectedServiceOptions, currentService}
         });
     }
 
@@ -154,7 +143,7 @@ export const OrderCreationPage = () => {
 
                 {/* Bottom Section */}
                 {Telegram.WebApp.platform === 'unknown' && <div
-                    className="bg-tg-theme-secondary-bg-color flex-none px-2 py-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+                    className="bg-tg-theme-secondary-bg-color flex-none p-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
 
                     {/* Next Button */}
                     <Button

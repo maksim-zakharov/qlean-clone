@@ -4,13 +4,15 @@ import {useNavigate} from "react-router-dom";
 import {FC, useEffect} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 
-export const BackButton: FC<any> = () => {
+export const BackButton: FC<{ url?: string, state?: any }> = ({url, state}) => {
     const navigate = useNavigate()
     const {backButton, isLoading, error} = useTelegram();
 
     const showTgBackButton = Boolean(backButton && !isLoading && !error);
 
-    const onBack = () => navigate('/')
+    const onBack = () => {
+        navigate(url || '/', state ? {state} : undefined);
+    }
 
     useEffect(() => {
         if (backButton && showTgBackButton) {
