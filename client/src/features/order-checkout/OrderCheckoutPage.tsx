@@ -62,7 +62,7 @@ export const OrderCheckoutPage = () => {
               >
                 <Button
                     variant="ghost"
-                    className="w-full p-0 bg-tg-theme-bg-color rounded-2xl h-auto flex items-center justify-between"
+                    className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <Calendar className="w-6 h-6 text-tg-theme-hint-color"/>
@@ -75,7 +75,7 @@ export const OrderCheckoutPage = () => {
               {/* Comments */}
               <Button
                   variant="ghost"
-                  className="w-full p-0 bg-tg-theme-bg-color rounded-2xl h-auto flex items-center justify-between"
+                  className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
                   onClick={() => {/* TODO: Open comments modal */
                   }}
               >
@@ -89,7 +89,7 @@ export const OrderCheckoutPage = () => {
               {/* Payment Method */}
               <Button
                   variant="ghost"
-                  className="w-full p-0 bg-tg-theme-bg-color rounded-2xl h-auto flex items-center justify-between"
+                  className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
                   onClick={() => {/* TODO: Open payment selection */
                   }}
               >
@@ -105,7 +105,7 @@ export const OrderCheckoutPage = () => {
               type="single" 
               collapsible 
               defaultValue="services" 
-              className="mt-4 overflow-hidden bg-tg-theme-bg-color rounded-2xl"
+              className="mt-4 overflow-hidden bg-tg-theme-section-bg-color rounded-2xl"
               onValueChange={() => vibro()}
             >
               <AccordionItem value="services" className="border-0">
