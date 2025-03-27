@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export const safeTgHeight =
     window.innerHeight -
@@ -14,6 +14,32 @@ export function useTelegram() {
     const [isOpenKeyboard, setOpenKeyboard] = useState(false);
     const [bottomOffset, setBottomOffset] = useState(0);
 
+    const isReady = !isLoading && !Boolean(error);
+
+    useEffect(() => {
+        if (!isReady) {
+            return;
+        }
+
+        Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
+
+        Telegram.WebApp.onEvent('themeChanged', () => {
+            // Устанавливаем тему в соответствии с Telegram
+            if (colorScheme === 'dark') {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        })
+
+        // Устанавливаем тему в соответствии с Telegram
+        if (colorScheme === 'dark') {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    }, [isReady]);
+
     const vibro = (
         style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft' = 'medium'
     ) => {
@@ -22,6 +48,7 @@ export function useTelegram() {
 
     const userId = Telegram.WebApp?.initDataUnsafe?.user?.id.toString();
     const photoUrl = Telegram.WebApp?.initDataUnsafe?.user?.photo_url;
+    const colorScheme = Telegram.WebApp?.colorScheme;
 
     function onKeyboard() {
         // Вычисляем величину сдвига нижней границы
@@ -75,6 +102,7 @@ export function useTelegram() {
         bottomOffset,
         photoUrl,
         vibro,
+        colorScheme,
         backButton: Telegram.WebApp ? (Telegram.WebApp?.BackButton as BackButton) : null,
         user: Telegram.WebApp ? Telegram.WebApp?.initDataUnsafe?.user : null,
         userId,
@@ -87,17 +115,4 @@ interface BackButton {
     offClick: (callback: () => void) => BackButton;
     show: () => BackButton;
     hide: () => BackButton;
-}
-
-export interface TelegramUser {
-    id: number;
-    is_bot?: boolean;
-    first_name: string;
-    last_name?: string;
-    username?: string;
-    language_code?: string;
-    is_premium?: true;
-    added_to_attachment_menu?: true;
-    allows_write_to_pm?: true;
-    photo_url?: string;
 }

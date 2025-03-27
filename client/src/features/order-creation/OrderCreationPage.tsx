@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -25,6 +25,10 @@ export const OrderCreationPage = () => {
   const currentService = tabs
     .flatMap(tab => tab.services)
     .find(service => service.id === serviceId)
+
+  useEffect(() => {
+    Telegram.WebApp.MainButton.show()
+  }, [])
 
   if (!currentService) {
     return null

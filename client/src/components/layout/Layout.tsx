@@ -1,6 +1,5 @@
 import {ClipboardList, Gift, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
-import {useEffect, useState} from "react"
 import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
@@ -37,41 +36,16 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const [userData, setUserData] = useState<{ firstName: string; id: number } | null>(null)
-    const [isWebApp, setIsWebApp] = useState(false)
+    const {user, isLoading} = useTelegram();
     const navigate = useNavigate()
-    const location = useLocation()
+    const location = useLocation();
 
-    const {isLoading} = useTelegram();
-
-    useEffect(() => {
-        // Получаем данные пользователя из Telegram WebApp
-        const webApp = window.Telegram?.WebApp
-        if (webApp) {
-            if (webApp.initDataUnsafe?.user) {
-                setIsWebApp(true)
-                setUserData({
-                    firstName: webApp.initDataUnsafe.user.first_name,
-                    id: webApp.initDataUnsafe.user.id
-                })
-            }
-            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
-
-            // Устанавливаем тему в соответствии с Telegram
-            if (webApp.colorScheme === 'dark') {
-                document.documentElement.classList.add('dark')
-            } else {
-                document.documentElement.classList.remove('dark')
-            }
-        }
-    }, [])
-
-    if(isLoading){
+    if (isLoading) {
         return null;
     }
 
     return <>
-        <Header isWebApp={isWebApp}><Spacer>
+        <Header isWebApp={Boolean(user)}><Spacer>
             <Avatar/>
             <div className="flex-1 text-center">
                 <Button variant="ghost" className="text-tg-theme-text-color text-[17px] font-medium">
@@ -83,13 +57,15 @@ export const Layout = () => {
 
         {/* Main Content */}
         <main className="overflow-y-auto bg-inherit">
-            <div className="absolute inset-0 overflow-y-auto overscroll-none pt-14 pb-safe-area-inset-bottom bg-inherit ">
+            <div
+                className="absolute inset-0 overflow-y-auto overscroll-none pt-14 pb-safe-area-inset-bottom bg-inherit ">
                 <Outlet/>
             </div>
         </main>
 
         {/* Bottom Navigation */}
-        <footer className="separator-shadow-top fixed flex justify-around items-center bottom-0 left-0 right-0 bg-tg-theme-secondary-bg-color pb-[env(safe-area-inset-bottom)]">
+        <footer
+            className="separator-shadow-top fixed flex justify-around items-center bottom-0 left-0 right-0 bg-tg-theme-secondary-bg-color pb-[env(safe-area-inset-bottom)]">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
                     key={path}
