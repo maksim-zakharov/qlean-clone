@@ -16,28 +16,24 @@ export function useTelegram() {
 
     const isReady = !isLoading && !Boolean(error);
 
-    useEffect(() => {
-        if (!isReady) {
-            return;
-        }
-
+    const onThemeChangedHandler = () => {
         Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
-
-        Telegram.WebApp.onEvent('themeChanged', () => {
-            // Устанавливаем тему в соответствии с Telegram
-            if (colorScheme === 'dark') {
-                document.documentElement.classList.add('dark')
-            } else {
-                document.documentElement.classList.remove('dark')
-            }
-        })
-
         // Устанавливаем тему в соответствии с Telegram
         if (colorScheme === 'dark') {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
         }
+    }
+
+    useEffect(() => {
+        if (!isReady) {
+            return;
+        }
+
+        Telegram.WebApp.onEvent('themeChanged', onThemeChangedHandler)
+
+        onThemeChangedHandler();
     }, [isReady]);
 
     const vibro = (
@@ -47,7 +43,7 @@ export function useTelegram() {
     };
 
     const userId = Telegram.WebApp?.initDataUnsafe?.user?.id.toString();
-    const photoUrl = Telegram.WebApp?.initDataUnsafe?.user?.photo_url;
+    const photoUrl = Telegram.WebApp?.initDataUnsafe?.user?.photo_url || 'https://t.me/i/userpic/320/cm409T17pD0hEWX5m_tmMBGNTbHnhP0b6tZG6o887b0.svg';
     const colorScheme = Telegram.WebApp?.colorScheme;
 
     function onKeyboard() {

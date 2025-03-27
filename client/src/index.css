@@ -53,7 +53,8 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
 
-    /* Telegram WebApp theme variables */    --tg-color-scheme: light;
+    /* Telegram WebApp theme variables */
+    --tg-color-scheme: light;
     --tg-theme-bg-color: #ffffff;
     --tg-theme-text-color: #000000;
     --tg-theme-hint-color: #707579;
@@ -227,6 +228,10 @@
 
     .border-tg-theme-section-separator-color {
         border-color: var(--tg-theme-section-separator-color);
+    }
+
+    .text-theme-section-header-text-color {
+        color: var(--tg-theme-section-header-text-color);
     }
 
     .no-scrollbar {

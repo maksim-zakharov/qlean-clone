@@ -52,7 +52,7 @@ const MainPage = () => {
   }, [backButton, isLoading, error]);
 
   return (
-    <div className="px-2">
+    <div className="px-4">
       {SERVICES_DATA.map(category => (
         <section key={category.id} className="my-6">
           <h2 className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">

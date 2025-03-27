@@ -1,4 +1,4 @@
-import {ClipboardList, Gift, Home, LucideIcon, User} from "lucide-react"
+import {ClipboardList, Gift, Home, LucideIcon} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
@@ -28,11 +28,11 @@ const menuItems: MenuItem[] = [
         label: 'Бонусы',
         path: '/bonuses'
     },
-    {
-        icon: User,
-        label: 'Профиль',
-        path: '/profile'
-    }
+    // {
+    //     icon: User,
+    //     label: 'Профиль',
+    //     path: '/profile'
+    // }
 ]
 
 export const Layout = () => {
