@@ -4,7 +4,8 @@ import { Calendar, ChevronRight, Clock, CreditCard, MessageSquare } from "lucide
 import { useLocation, useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import {ServiceOption, Service} from "../order-creation/types.ts";
-import {useEffect} from "react";
+import React, {useEffect, useMemo} from "react";
+import EstimatedTime from "../../components/EstimatedTime.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -12,7 +13,9 @@ export const OrderCheckoutPage = () => {
   const currentService = location.state?.currentService as Service;
   const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
   const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
-  const estimatedTime = "4 часа" // TODO: Расчет времени на основе выбранных услуг
+
+  // Считаем общее время
+  const totalDuration = useMemo(() => selectedServices.reduce((sum, option) => sum + (option?.duration || 0), currentService?.duration || 0), [currentService]);
 
   const handleOnSubmit = () => {
 
@@ -97,24 +100,20 @@ export const OrderCheckoutPage = () => {
               </div>
             ))}
 
-            {/* Estimated Time */}
-            <div className="flex items-center gap-2 text-tg-theme-button-color">
-              <Clock className="w-4 h-4" />
-              <span>Время уборки примерно {estimatedTime}</span>
-            </div>
+            <EstimatedTime totalDuration={totalDuration}/>
           </div>
 
           {/* Promo Code */}
-          <Button
-            variant="ghost"
-            className="w-full bg-tg-theme-bg-color rounded-2xl h-auto py-4 px-4 flex items-center justify-center"
-            onClick={() => {/* TODO: Open promo code input */}}
-          >
-            <span className="text-tg-theme-text-color">У меня есть промокод</span>
-          </Button>
+          {/*<Button*/}
+          {/*  variant="ghost"*/}
+          {/*  className="w-full bg-tg-theme-bg-color rounded-2xl h-auto py-4 px-4 flex items-center justify-center"*/}
+          {/*  onClick={() => /!* TODO: Open promo code input *!/}*/}
+          {/*>*/}
+          {/*  <span className="text-tg-theme-text-color">У меня есть промокод</span>*/}
+          {/*</Button>*/}
 
           {/* Terms Checkbox */}
-          <div className="flex items-start gap-2 mt-4">
+          <div className="flex items-start gap-2 mt-8">
             <Checkbox id="terms" className="mt-1" />
             <label htmlFor="terms" className="text-sm text-tg-theme-text-color">
               Принимаю <span className="text-tg-theme-button-color">условия оказания услуги</span>

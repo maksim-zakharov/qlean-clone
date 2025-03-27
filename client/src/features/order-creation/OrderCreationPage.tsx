@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
@@ -7,6 +7,7 @@ import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Clock} from 'lucide-react'
+import EstimatedTime from "../../components/EstimatedTime.tsx";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -48,20 +49,6 @@ export const OrderCreationPage = () => {
         const option = availableOptions.find(opt => opt.id === optionId)
         return sum + (option?.duration || 0)
     }, currentService?.duration || 0), [currentService, selectedOptions, availableOptions]);
-
-    // Форматируем время в часы и минуты
-    const formatDuration = (minutes: number) => {
-        const hours = Math.floor(minutes / 60)
-        const remainingMinutes = minutes % 60
-
-        if (hours === 0) {
-            return `${remainingMinutes} минут`
-        } else if (remainingMinutes === 0) {
-            return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'}`
-        } else {
-            return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'} ${remainingMinutes} минут`
-        }
-    }
 
     const handleOptionToggle = (optionId: string) => {
         vibro('light');
@@ -132,11 +119,7 @@ export const OrderCreationPage = () => {
                         <List items={availableOptions} handleOptionToggle={handleOptionToggle}
                               selectedOptions={selectedOptions}/>
                     </div>
-                    {/* Estimated Time */}
-                    <div className="flex items-center justify-center gap-2 mt-4 text-tg-theme-button-color text-base">
-                        <Clock className="w-5 h-5"/>
-                        <span>Время уборки примерно {formatDuration(totalDuration)}</span>
-                    </div>
+                    <EstimatedTime totalDuration={totalDuration}/>
                 </div>
 
                 {/* Bottom Section */}
