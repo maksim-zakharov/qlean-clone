@@ -9,6 +9,7 @@ import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Info, Plus} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";
+import {BottomActions} from "../../components/BottomActions.tsx";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -151,19 +152,15 @@ export const OrderCreationPage = () => {
                     <EstimatedTime totalDuration={totalDuration}/>
                 </div>
 
-                {/* Bottom Section */}
-                <div
-                    className="bg-tg-theme-section-bg-color flex-none p-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
-
-                    {/* Next Button */}
+                <BottomActions>
                     <Button
-                        className="w-full px-8 h-[48px] text-[15px] font-medium bg-tg-theme-button-color text-tg-theme-button-text-color hover:bg-tg-theme-button-color/90"
+                        className="w-full h-12 text-base font-medium"
                         onClick={handleNext}
                     >
                         <span className="flex-1 text-left">Далее</span>
                         <span className="font-bold">{totalPrice} ₽</span>
                     </Button>
-                </div>
+                </BottomActions>
             </div>
         </div>
     )

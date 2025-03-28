@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "../../components/ui/accordion"
 import {Header} from "../../components/ui/Header.tsx";
+import { BottomActions } from "@/components/BottomActions.tsx"
 
 
 export const OrderCheckoutPage = () => {
@@ -155,14 +156,14 @@ export const OrderCheckoutPage = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="p-4 pb-[calc(env(safe-area-inset-bottom,0px)+16px)] bg-tg-theme-bg-color">
+        <BottomActions>
           <Button
               className="w-full h-12 text-base font-medium"
               onClick={handleOnSubmit}
           >
             Оформить заказ
           </Button>
-        </div>
+        </BottomActions>
       </div>
   )
 } 
