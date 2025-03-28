@@ -237,7 +237,7 @@
 
     .no-scrollbar {
         -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: none !important; /* Firefox */
     }
 
     .pb-safe-area-inset-bottom {
