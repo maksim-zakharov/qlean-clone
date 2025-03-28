@@ -47,7 +47,7 @@ function TabsTrigger({
     >
       <span className="relative inline-block whitespace-nowrap">
         {props.children}
-        <span className="absolute left-0 right-0 bottom-[-12px] h-[2px] bg-current opacity-0 group-data-[state=active]:opacity-100" />
+        <span className="absolute left-0 right-0 bottom-[-12px] h-[2px] bg-tg-theme-button-color opacity-0 group-data-[state=active]:opacity-100" />
       </span>
     </TabsPrimitive.Trigger>
   )
