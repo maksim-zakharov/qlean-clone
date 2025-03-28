@@ -153,7 +153,7 @@ export const OrderCreationPage = () => {
 
                 {/* Bottom Section */}
                 <div
-                    className="bg-tg-theme-secondary-bg-color flex-none p-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+                    className="bg-tg-theme-section-bg-color flex-none p-4 pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
 
                     {/* Next Button */}
                     <Button
