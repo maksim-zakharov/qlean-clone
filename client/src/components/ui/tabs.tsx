@@ -10,7 +10,7 @@ function Tabs({
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cn("w-full bg-tg-theme-secondary-bg-color separator-shadow-bottom no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
+      className={cn("w-full h-[50px] content-center bg-tg-theme-secondary-bg-color separator-shadow-bottom no-scrollbar overflow-x-auto [&::-webkit-scrollbar]:hidden", className)}
       {...props}
     />
   )
@@ -24,7 +24,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "min-w-fit h-auto p-0 bg-transparent flex",
+        "min-w-fit p-0 bg-transparent flex h-full",
         className
       )}
       {...props}
@@ -40,14 +40,14 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "group px-6 py-3 text-[15px] font-medium text-tg-theme-hint-color data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-tg-theme-button-color",
+        "group px-4 text-[15px] [line-height:18px] font-medium text-tg-theme-hint-color data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-tg-theme-button-color",
         className
       )}
       {...props}
     >
       <span className="relative inline-block whitespace-nowrap">
         {props.children}
-        <span className="absolute left-0 right-0 bottom-[-12px] h-[2px] bg-tg-theme-button-color opacity-0 group-data-[state=active]:opacity-100" />
+        <span className="absolute left-0 right-0 bottom-[-16px] h-[2px] bg-tg-theme-button-color opacity-0 group-data-[state=active]:opacity-100" />
       </span>
     </TabsPrimitive.Trigger>
   )
