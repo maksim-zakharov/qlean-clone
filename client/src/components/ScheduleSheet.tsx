@@ -66,7 +66,7 @@ export function ScheduleSheet({
                         </TabsTrigger>)}
                     </TabsList>
                 </Tabs>
-                <div className="grid grid-cols-2 gap-2 mt-2 overflow-x-auto no-scrollbar">
+                <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar">
                     {result[0].slots.map(service =>
                         <CardItem
                             className="min-h-[80px]"
