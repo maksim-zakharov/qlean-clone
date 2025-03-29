@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
+      <change afterPath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BottomActions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BottomActions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/order-checkout/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-checkout/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,22 +123,6 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-    </task>
-    <task id="LOCAL-00051" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743003526427</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1743003526427</updated>
-    </task>
-    <task id="LOCAL-00052" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743003561267</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1743003561267</updated>
     </task>
     <task id="LOCAL-00053" summary="vite">
       <option name="closed" value="true" />
@@ -511,7 +500,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743162769049</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743163953696</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1743163953696</updated>
+    </task>
+    <task id="LOCAL-00101" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743164086077</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1743164086077</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

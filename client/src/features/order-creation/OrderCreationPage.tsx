@@ -154,7 +154,7 @@ export const OrderCreationPage = () => {
 
                 <BottomActions>
                     <Button
-                        className="w-full h-12 text-base font-medium"
+                        className="w-full h-10 text-base font-medium"
                         onClick={handleNext}
                     >
                         <span className="flex-1 text-left">Далее</span>

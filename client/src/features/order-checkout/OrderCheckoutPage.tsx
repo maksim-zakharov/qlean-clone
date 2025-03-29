@@ -158,7 +158,7 @@ export const OrderCheckoutPage = () => {
         {/* Submit Button */}
         <BottomActions>
           <Button
-              className="w-full h-12 text-base font-medium"
+              className="w-full h-10 text-base font-medium"
               onClick={handleOnSubmit}
           >
             Оформить заказ
