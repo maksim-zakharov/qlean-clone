@@ -7,8 +7,6 @@
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/order-creation/OrderCreationPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,30 +119,6 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-    </task>
-    <task id="LOCAL-00060" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743017929464</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1743017929464</updated>
-    </task>
-    <task id="LOCAL-00061" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743018273427</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1743018273427</updated>
-    </task>
-    <task id="LOCAL-00062" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743018875218</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1743018875218</updated>
     </task>
     <task id="LOCAL-00063" summary="vite">
       <option name="closed" value="true" />
@@ -514,7 +488,31 @@
       <option name="project" value="LOCAL" />
       <updated>1743257953413</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743261039691</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1743261039691</updated>
+    </task>
+    <task id="LOCAL-00110" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743261248341</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1743261248341</updated>
+    </task>
+    <task id="LOCAL-00111" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743277057457</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1743277057457</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

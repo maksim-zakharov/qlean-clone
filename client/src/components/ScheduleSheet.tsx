@@ -34,7 +34,7 @@ export function ScheduleSheet({
             current = slotEnd;
         }
 
-        return slots;
+        return slots.filter(s => s.timestamp >= Date.now());
     }
 
     const result = useMemo(() => Array.from({length: 7}, (_, i) => {
@@ -44,7 +44,7 @@ export function ScheduleSheet({
             timestamp: date.valueOf(),
             slots: generateTimeSlots(date)
         };
-    }), []);
+    }).filter(s => s.slots.length > 0), []);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
