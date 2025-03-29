@@ -90,12 +90,12 @@ export const Layout = () => {
 
         {/* Bottom Navigation */}
         <footer
-            className="separator-shadow-top fixed flex justify-around h-[60px] items-center bottom-0 left-0 right-0 bg-tg-theme-section-bg-color pb-[env(safe-area-inset-bottom)]">
+            className="separator-shadow-top fixed flex justify-around items-center bottom-0 left-0 right-0 bg-tg-theme-section-bg-color pb-[env(safe-area-inset-bottom)]">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
                     key={path}
                     variant="ghost"
-                    className="flex flex-col items-center h-full gap-1 py-2 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
+                    className="flex flex-col items-center gap-1 h-auto py-2 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
                     onClick={() => navigate(path)}
                 >
                     <Icon
