@@ -87,7 +87,7 @@ export const OrderCreationPage = () => {
                     </div>
                 </Header>
                 <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
-                    <TabsList>
+                    <TabsList className="mt-[calc(56px+env(safe-area-inset-top))]">
                         {tabs.map(tab => (
                             <TabsTrigger
                                 key={tab.id}
