@@ -24,7 +24,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "p-0 bg-transparent flex h-[50px] overflow-x-auto no-scrollbar bg-tg-theme-secondary-bg-color",
+        "p-0 gap-8 bg-transparent flex h-[50px] overflow-x-auto no-scrollbar bg-tg-theme-secondary-bg-color",
         className
       )}
       {...props}
@@ -40,7 +40,7 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "group px-4 text-[15px] [line-height:18px] font-medium text-tg-theme-hint-color data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-tg-theme-button-color",
+        "group text-[15px] [line-height:18px] font-medium text-tg-theme-hint-color data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-tg-theme-button-color",
         className
       )}
       {...props}
