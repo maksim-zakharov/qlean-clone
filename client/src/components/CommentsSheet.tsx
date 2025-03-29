@@ -8,6 +8,7 @@ import {
 import { Button } from "./ui/button"
 import React from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
+import {Textarea} from "./ui/textarea.tsx";
 
 interface CommentsSheetProps {
 
@@ -27,6 +28,7 @@ export function CommentsSheet({
           <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Пожелание к заказу</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col flex-1">
+          <Textarea className="mt-2 mb-2 rounded-md resize-none text-[16px]" rows={4}/>
           <Button
               className="w-full h-10 text-sm font-medium"
               onClick={console.log}
