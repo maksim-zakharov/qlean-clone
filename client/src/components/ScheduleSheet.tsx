@@ -51,22 +51,22 @@ export function ScheduleSheet({
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-[80vh]">
+            <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Выбор
+                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Выбор
                         времени</SheetTitle>
+                    <Tabs defaultValue="active" className="mt-[calc(env(safe-area-inset-top))]">
+                        <TabsList>
+                            {result.map(r => <TabsTrigger
+                                key={r.timestamp}
+                                value={r.date}
+                            >
+                                {r.date}
+                            </TabsTrigger>)}
+                        </TabsList>
+                    </Tabs>
                 </SheetHeader>
-                <Tabs defaultValue="active" className="mt-[calc(env(safe-area-inset-top))]">
-                    <TabsList>
-                        {result.map(r => <TabsTrigger
-                            key={r.timestamp}
-                            value={r.date}
-                        >
-                            {r.date}
-                        </TabsTrigger>)}
-                    </TabsList>
-                </Tabs>
-                <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar">
+                <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
                     {result[0].slots.map(service =>
                         <CardItem
                             className="min-h-[80px]"

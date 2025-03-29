@@ -24,7 +24,7 @@ export function CommentsSheet({
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Пожелание к заказу</SheetTitle>
+          <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Пожелание к заказу</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col flex-1">
           <Button

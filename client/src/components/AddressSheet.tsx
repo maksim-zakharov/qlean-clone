@@ -33,7 +33,7 @@ export function AddressSheet({
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
+          <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col flex-1">
           <Button
