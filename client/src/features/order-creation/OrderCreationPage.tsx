@@ -85,27 +85,27 @@ export const OrderCreationPage = () => {
                     </div>
                 </div>
             </Header>
-            <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
-                <TabsList>
-                    {tabs.map(tab => (
-                        <TabsTrigger
-                            key={tab.id}
-                            value={tab.id}
-                            onClick={() => {
-                                if (tab.services.length > 0) {
-                                    navigate(`/order/${tab.services[0].id}`)
-                                }
-                            }}
-                        >
-                            {tab.name}
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
-            </Tabs>
 
             {/* Service Options */}
-            <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
-                <div className="px-2 pt-4">
+            <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4">
+                <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
+                    <TabsList>
+                        {tabs.map(tab => (
+                            <TabsTrigger
+                                key={tab.id}
+                                value={tab.id}
+                                onClick={() => {
+                                    if (tab.services.length > 0) {
+                                        navigate(`/order/${tab.services[0].id}`)
+                                    }
+                                }}
+                            >
+                                {tab.name}
+                            </TabsTrigger>
+                        ))}
+                    </TabsList>
+                </Tabs>
+                <div className="pt-2">
                     <List>
                         {availableOptions.map((option) => <>
                             <div className="flex items-start gap-3 flex-1 min-w-0">
