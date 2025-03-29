@@ -154,11 +154,11 @@ export const OrderCreationPage = () => {
 
                 <BottomActions>
                     <Button
-                        className="w-full h-10 text-base font-medium"
+                        className="w-full h-10 text-sm font-medium"
                         onClick={handleNext}
                     >
                         <span className="flex-1 text-left">Далее</span>
-                        <span className="font-bold">{totalPrice} ₽</span>
+                        <span>{totalPrice} ₽</span>
                     </Button>
                 </BottomActions>
             </div>

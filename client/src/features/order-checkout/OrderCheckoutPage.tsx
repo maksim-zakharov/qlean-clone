@@ -123,6 +123,10 @@ export const OrderCheckoutPage = () => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="flex flex-col gap-2">
+                    <div key={currentService.id} className="flex justify-between">
+                      <span className="text-tg-theme-text-color">{currentService.name}</span>
+                      <span className="text-tg-theme-text-color">{currentService.basePrice}₽</span>
+                    </div>
                     {selectedServices.map((service, index) => (
                         <div key={index} className="flex justify-between">
                           <span className="text-tg-theme-text-color">{service.name}</span>
@@ -158,7 +162,7 @@ export const OrderCheckoutPage = () => {
         {/* Submit Button */}
         <BottomActions>
           <Button
-              className="w-full h-10 text-base font-medium"
+              className="w-full h-10 text-sm font-medium"
               onClick={handleOnSubmit}
           >
             Оформить заказ
