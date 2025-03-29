@@ -9,22 +9,13 @@ import { Button } from "./ui/button"
 import React from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 
-interface Address {
-  id: string
-  address: string
+interface CommentsSheetProps {
+
 }
 
-interface AddressSheetProps {
-  addresses: Address[]
-  selectedAddress: string
-  onAddressSelect: (address: string) => void
-  onAddAddress: () => void
-}
-
-export function AddressSheet({
-  onAddAddress,
+export function CommentsSheet({
   children 
-}: React.PropsWithChildren<AddressSheetProps>) {
+}: React.PropsWithChildren<CommentsSheetProps>) {
   const {vibro} = useTelegram();
   return (
     <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
@@ -33,14 +24,14 @@ export function AddressSheet({
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
+          <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Пожелание к заказу</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col flex-1">
           <Button
               className="w-full h-10 text-sm font-medium"
-              onClick={onAddAddress}
+              onClick={console.log}
           >
-            Добавить адрес
+            Сохранить
           </Button>
         </div>
       </SheetContent>

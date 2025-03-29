@@ -17,6 +17,7 @@ import {
 } from "../../components/ui/accordion"
 import {Header} from "../../components/ui/Header.tsx";
 import { BottomActions } from "@/components/BottomActions.tsx"
+import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -77,18 +78,18 @@ export const OrderCheckoutPage = () => {
               </ScheduleSheet>
 
               {/* Comments */}
-              <Button
-                  variant="ghost"
-                  className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
-                  onClick={() => {/* TODO: Open comments modal */
-                  }}
-              >
-                <div className="flex items-center gap-3">
-                  <MessageSquare className="w-6 h-6 text-tg-theme-hint-color"/>
-                  <span className="text-tg-theme-text-color">Пожелание к заказу</span>
-                </div>
-                <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
-              </Button>
+              <CommentsSheet>
+                <Button
+                    variant="ghost"
+                    className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="w-6 h-6 text-tg-theme-hint-color"/>
+                    <span className="text-tg-theme-text-color">Пожелание к заказу</span>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
+                </Button>
+              </CommentsSheet>
 
               {/* Payment Method */}
               <Button
