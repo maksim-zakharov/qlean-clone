@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 export const safeTgHeight =
     window.innerHeight -
@@ -9,6 +10,7 @@ export const safeTgHeight =
 Telegram.WebApp?.ready();
 
 export function useTelegram() {
+    const navigate = useNavigate()
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string>();
     const [isOpenKeyboard, setOpenKeyboard] = useState(false);
@@ -34,6 +36,9 @@ export function useTelegram() {
         Telegram.WebApp.onEvent('themeChanged', onThemeChangedHandler)
 
         onThemeChangedHandler();
+
+        Telegram.WebApp.SettingsButton.onClick(() => navigate('/profile'))
+        Telegram.WebApp.SettingsButton.show();
     }, [isReady]);
 
     const vibro = (
