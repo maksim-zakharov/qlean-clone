@@ -32,7 +32,7 @@ const MainPage = () => {
   return (
     <div className="px-4">
       {SERVICES_DATA.map(category => (
-        <section key={category.id} className="my-6">
+        <section key={category.id} className="mb-6 mt-4">
           <h2 className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">
             {category.name}
           </h2>
