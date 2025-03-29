@@ -215,6 +215,10 @@
         color: var(--tg-theme-link-color);
     }
 
+    .border-tg-theme-button-color{
+        border-color: var(--tg-theme-button-color);
+    }
+
     .bg-tg-theme-button-color {
         background-color: var(--tg-theme-button-color);
     }
