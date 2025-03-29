@@ -37,7 +37,7 @@ export function AddressSheet({
         </SheetHeader>
         <div className="flex flex-col flex-1">
           <Button
-              className="w-full h-10 text-sm font-medium"
+              className="w-full"
               onClick={onAddAddress}
           >
             Добавить адрес

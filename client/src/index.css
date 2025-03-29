@@ -223,6 +223,10 @@
         background-color: var(--tg-theme-button-color);
     }
 
+    .bg-tg-theme-button-color-transparent {
+        background-color: rgb(from var(--tg-theme-button-color) r g b / 20%);
+    }
+
     .text-tg-theme-button-color {
         color: var(--tg-theme-button-color);
     }

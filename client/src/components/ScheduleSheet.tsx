@@ -1,16 +1,18 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import dayjs from "dayjs";
 import {Tabs, TabsList, TabsTrigger} from "./ui/tabs.tsx";
 
 interface ScheduleSheetProps {
+    selectedTimestamp?: number;
     onSelectDate: (date: number) => void;
 }
 
 export function ScheduleSheet({
                                   children,
+                                  selectedTimestamp,
                                   onSelectDate
                               }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {vibro} = useTelegram();
@@ -46,6 +48,10 @@ export function ScheduleSheet({
         };
     }).filter(s => s.slots.length > 0), []);
 
+    const [tab, setTab] = useState<string>();
+
+    const filteredSlots = useMemo(() => result.find(r => r.timestamp.toString() === tab)?.slots || [], [tab]);
+
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
             <SheetTrigger asChild>
@@ -53,13 +59,13 @@ export function ScheduleSheet({
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Выбор
-                        времени</SheetTitle>
-                    <Tabs defaultValue="active" className="mt-[calc(env(safe-area-inset-top))]">
+                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">
+                        Выбор времени</SheetTitle>
+                    <Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">
                         <TabsList>
                             {result.map(r => <TabsTrigger
                                 key={r.timestamp}
-                                value={r.date}
+                                value={r.timestamp.toString()}
                             >
                                 {r.date}
                             </TabsTrigger>)}
@@ -67,9 +73,9 @@ export function ScheduleSheet({
                     </Tabs>
                 </SheetHeader>
                 <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
-                    {result[0].slots.map(service =>
+                    {filteredSlots.map(service =>
                         <CardItem
-                            className="min-h-[80px]"
+                            className={`min-h-[80px] border-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
                             key={service.timestamp}
                             title={service.time}
                             onClick={() => onSelectDate(service.timestamp)}

@@ -72,7 +72,7 @@ export const Layout = () => {
                         onAddressSelect={handleAddressSelect}
                         onAddAddress={handleAddAddress}
                     >
-                        <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+                        <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
                             {selectedAddress} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                         </Button>
                     </AddressSheet>

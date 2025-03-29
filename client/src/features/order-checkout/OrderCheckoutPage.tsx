@@ -4,7 +4,7 @@ import { Calendar, ChevronRight, CreditCard, MessageSquare } from "lucide-react"
 import { useLocation } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import {ServiceOption, Service} from "../order-creation/types.ts";
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
 import {List} from "../../components/ui/list.tsx";
@@ -18,10 +18,13 @@ import {
 import {Header} from "../../components/ui/Header.tsx";
 import { BottomActions } from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
+import dayjs from "dayjs";
 
 
 export const OrderCheckoutPage = () => {
   const location = useLocation()
+  const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
+  const [comment, setComment] = useState<string | undefined>();
   const {vibro} = useTelegram();
   const currentService = location.state?.currentService as Service;
   const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
@@ -29,6 +32,14 @@ export const OrderCheckoutPage = () => {
 
   // Считаем общее время
   const totalDuration = useMemo(() => selectedServices.reduce((sum, option) => sum + (option?.duration || 0), currentService?.duration || 0), [currentService]);
+
+  const dateTitle = useMemo(() => {
+    if(!selectedTimestamp){
+      return 'Дата и время уборки';
+    }
+
+    return dayjs(selectedTimestamp).format('dddd, D MMMM HH:mm');
+  }, [selectedTimestamp]);
 
   const handleOnSubmit = () => {
 
@@ -40,9 +51,9 @@ export const OrderCheckoutPage = () => {
           <div className="grid grid-cols-[40px_auto_40px]">
             <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>
             <div className="flex-1 flex flex-col items-center">
-              <Button variant="ghost" className="text-tg-theme-text-color text-base font-medium">
+              <div className="text-tg-theme-text-color text-base font-medium">
                 Оформление заказа
-              </Button>
+              </div>
               <span className="text-xs text-tg-theme-hint-color">Оружейный переулок, 41</span>
             </div>
           </div>
@@ -63,25 +74,25 @@ export const OrderCheckoutPage = () => {
             <List>
 
               {/* Date and Time */}
-              <ScheduleSheet onSelectDate={console.log}
+              <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={setSelectedTimestamp}
               >
                 <Button
                     variant="ghost"
-                    className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
+                    className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <Calendar className="w-6 h-6 text-tg-theme-hint-color"/>
-                    <span className="text-tg-theme-text-color">Дата и время уборки</span>
+                    <span className="text-tg-theme-text-color">{dateTitle}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
                 </Button>
               </ScheduleSheet>
 
               {/* Comments */}
-              <CommentsSheet>
+              <CommentsSheet onChangeText={setComment} text={comment}>
                 <Button
                     variant="ghost"
-                    className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
+                    className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <MessageSquare className="w-6 h-6 text-tg-theme-hint-color"/>
@@ -94,7 +105,7 @@ export const OrderCheckoutPage = () => {
               {/* Payment Method */}
               <Button
                   variant="ghost"
-                  className="w-full p-0 rounded-2xl h-auto flex items-center justify-between"
+                  className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
                   onClick={() => {/* TODO: Open payment selection */
                   }}
               >
@@ -163,7 +174,7 @@ export const OrderCheckoutPage = () => {
         {/* Submit Button */}
         <BottomActions>
           <Button
-              className="w-full h-10 text-sm font-medium"
+              className="w-full"
               onClick={handleOnSubmit}
           >
             Оформить заказ
