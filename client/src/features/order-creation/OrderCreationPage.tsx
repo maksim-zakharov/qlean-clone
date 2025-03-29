@@ -76,92 +76,90 @@ export const OrderCreationPage = () => {
 
     return (
         <div className="fixed inset-0 flex flex-col">
-            <div className="absolute inset-x-0 mx-auto h-full flex flex-col">
-                <Header>
-                    <div className="grid grid-cols-[40px_auto_40px]">
-                        <BackButton/>
-                        <div
-                            className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
-                            {isCleaningService ? 'Уборка' : 'Химчистка'}
-                        </div>
+            <Header>
+                <div className="grid grid-cols-[40px_auto_40px]">
+                    <BackButton/>
+                    <div
+                        className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
+                        {isCleaningService ? 'Уборка' : 'Химчистка'}
                     </div>
-                </Header>
-                <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
-                    <TabsList className="mt-[calc(56px+env(safe-area-inset-top))]">
-                        {tabs.map(tab => (
-                            <TabsTrigger
-                                key={tab.id}
-                                value={tab.id}
-                                onClick={() => {
-                                    if (tab.services.length > 0) {
-                                        navigate(`/order/${tab.services[0].id}`)
-                                    }
-                                }}
-                            >
-                                {tab.name}
-                            </TabsTrigger>
-                        ))}
-                    </TabsList>
-                </Tabs>
+                </div>
+            </Header>
+            <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
+                <TabsList>
+                    {tabs.map(tab => (
+                        <TabsTrigger
+                            key={tab.id}
+                            value={tab.id}
+                            onClick={() => {
+                                if (tab.services.length > 0) {
+                                    navigate(`/order/${tab.services[0].id}`)
+                                }
+                            }}
+                        >
+                            {tab.name}
+                        </TabsTrigger>
+                    ))}
+                </TabsList>
+            </Tabs>
 
-                {/* Service Options */}
-                <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
-                    <div className="px-2 pt-4">
-                        <List>
-                            {availableOptions.map((option) => <>
-                                <div className="flex items-start gap-3 flex-1 min-w-0">
-                                    <Info
-                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
-                                    <div className="min-w-0">
-                                        <div className="flex items-center gap-2 flex-wrap">
+            {/* Service Options */}
+            <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
+                <div className="px-2 pt-4">
+                    <List>
+                        {availableOptions.map((option) => <>
+                            <div className="flex items-start gap-3 flex-1 min-w-0">
+                                <Info
+                                    className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
+                                <div className="min-w-0">
+                                    <div className="flex items-center gap-2 flex-wrap">
                                         <span
                                             className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
-                                            {option.isPopular && (
-                                                <span
-                                                    className="px-1.5 py-0.5 text-[12px] font-medium badge-primary rounded-sm">
+                                        {option.isPopular && (
+                                            <span
+                                                className="px-1.5 py-0.5 text-[12px] font-medium badge-primary rounded-sm">
                 ПОПУЛЯРНО
               </span>
-                                            )}
-                                        </div>
-                                        {option.description && (
-                                            <p className="mt-0.5 text-[13px] text-tg-theme-subtitle-text-color line-clamp-2">
-                                                {option.description}
-                                            </p>
                                         )}
                                     </div>
+                                    {option.description && (
+                                        <p className="mt-0.5 text-[13px] text-tg-theme-subtitle-text-color line-clamp-2">
+                                            {option.description}
+                                        </p>
+                                    )}
                                 </div>
-                                <div className="flex items-center gap-3 ml-3">
+                            </div>
+                            <div className="flex items-center gap-3 ml-3">
                 <span
                     className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{option.price} ₽</span>
-                                    <Button
-                                        variant="ghost"
-                                        className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent ${
-                                            selectedOptions.includes(option.id)
-                                                ? 'bg-tg-theme-button-color text-tg-theme-button-text-color'
-                                                : 'border border-tg-theme-button-color text-tg-theme-button-color'
-                                        }`}
-                                        onClick={() => handleOptionToggle(option.id)}
-                                    >
-                                        <Plus
-                                            className={`w-[18px] h-[18px] ${selectedOptions.includes(option.id) ? 'rotate-45' : ''} transition-transform`}/>
-                                    </Button>
-                                </div>
-                            </>)}
-                        </List>
-                    </div>
-                    <EstimatedTime totalDuration={totalDuration}/>
+                                <Button
+                                    variant="ghost"
+                                    className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent ${
+                                        selectedOptions.includes(option.id)
+                                            ? 'bg-tg-theme-button-color text-tg-theme-button-text-color'
+                                            : 'border border-tg-theme-button-color text-tg-theme-button-color'
+                                    }`}
+                                    onClick={() => handleOptionToggle(option.id)}
+                                >
+                                    <Plus
+                                        className={`w-[18px] h-[18px] ${selectedOptions.includes(option.id) ? 'rotate-45' : ''} transition-transform`}/>
+                                </Button>
+                            </div>
+                        </>)}
+                    </List>
                 </div>
-
-                <BottomActions>
-                    <Button
-                        className="w-full h-10 text-sm font-medium"
-                        onClick={handleNext}
-                    >
-                        <span className="flex-1 text-left">Далее</span>
-                        <span>{totalPrice} ₽</span>
-                    </Button>
-                </BottomActions>
+                <EstimatedTime totalDuration={totalDuration}/>
             </div>
+
+            <BottomActions>
+                <Button
+                    className="w-full h-10 text-sm font-medium"
+                    onClick={handleNext}
+                >
+                    <span className="flex-1 text-left">Далее</span>
+                    <span>{totalPrice} ₽</span>
+                </Button>
+            </BottomActions>
         </div>
     )
 }

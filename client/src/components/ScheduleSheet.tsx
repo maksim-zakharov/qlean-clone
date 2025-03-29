@@ -51,7 +51,7 @@ export function ScheduleSheet({
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-[90vh]">
+            <SheetContent side="bottom" className="h-[80vh]">
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold mb-3 text-tg-theme-text-color text-left">Выбор
                         времени</SheetTitle>
@@ -66,7 +66,7 @@ export function ScheduleSheet({
                         </TabsTrigger>)}
                     </TabsList>
                 </Tabs>
-                <div className="grid grid-cols-2 gap-2 mt-2">
+                <div className="grid grid-cols-2 gap-2 mt-2 overflow-x-auto no-scrollbar">
                     {result[0].slots.map(service =>
                         <CardItem
                             className="min-h-[80px]"
