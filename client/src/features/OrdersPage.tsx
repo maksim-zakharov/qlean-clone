@@ -1,30 +1,38 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {Typography} from "../components/ui/Typography.tsx";
 import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
+import {useGetOrdersQuery} from "../api.ts";
+import dayjs from "dayjs";
 
 
 export const OrdersPage = () => {
+    const {data: orders = []} = useGetOrdersQuery(undefined, {
+        refetchOnMountOrArgChange: true
+    });
 
-    return <div className="px-4">
-        <div className="mb-6 mt-4">
+    const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)), [orders]);
+    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)), [orders]);
+
+    return <div className="px-4 mb-2">
+        {activeOrders.length > 0 && <div className="mb-6 mt-4">
             <Typography.H2>
                 Активные
             </Typography.H2>
-            <Card className="p-0 gap-0">
+            {activeOrders.map(ao => <Card className="p-0 gap-0 mt-2">
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
-                        <Typography.Title>Доставка</Typography.Title>
-                        <Typography.Title>1246Р</Typography.Title>
+                        <Typography.Title>{ao.serviceName}</Typography.Title>
+                        <Typography.Title>{ao.totalPrice} ₽</Typography.Title>
                     </div>
                     <div className="flex justify-between">
-                        <Typography.Description>Москва, Ходынский бульвар, 2</Typography.Description>
-                        <Typography.Description>30 марта, 16:30 - 19:30</Typography.Description>
+                        <Typography.Description>{ao.fullAddress}</Typography.Description>
+                        <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
                 <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between">
-                        <Typography.Title>№12313123</Typography.Title>
+                        <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>Оформлен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
@@ -32,25 +40,25 @@ export const OrdersPage = () => {
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>
-            </Card>
-        </div>
+            </Card>)}
+        </div>}
         <Typography.H2 className="mt-4">
             Все заявки
         </Typography.H2>
-        <Card className="p-0 gap-0">
+        {completedOrders.map(co => <Card className="p-0 gap-0 mt-2">
             <div className="p-4 separator-shadow-bottom">
                 <div className="flex justify-between">
-                    <Typography.Title>Доставка</Typography.Title>
-                    <Typography.Title>1246Р</Typography.Title>
+                    <Typography.Title>{co.serviceName}</Typography.Title>
+                    <Typography.Title>{co.totalPrice} ₽</Typography.Title>
                 </div>
                 <div className="flex justify-between">
-                    <Typography.Description>Москва, Ходынский бульвар, 2</Typography.Description>
-                    <Typography.Description>30 марта, 16:30 - 19:30</Typography.Description>
+                    <Typography.Description>{co.fullAddress}</Typography.Description>
+                    <Typography.Description>{dayjs(co.date).format('D MMMM, HH:mm')}</Typography.Description>
                 </div>
             </div>
             <div className="p-4 flex gap-2 flex-col">
                 <div className="flex justify-between">
-                    <Typography.Title>№12313123</Typography.Title>
+                    <Typography.Title>№{co.id}</Typography.Title>
                     <Typography.Title>Завершен</Typography.Title>
                 </div>
                 <div className="flex justify-between align-bottom items-baseline">
@@ -58,6 +66,6 @@ export const OrdersPage = () => {
                     <Typography.Description>Поддержка</Typography.Description>
                 </div>
             </div>
-        </Card>
+        </Card>)}
     </div>
 }

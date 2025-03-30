@@ -1,10 +1,10 @@
 import {Brush, Building2, Footprints, Grid2x2, Hammer, Home, LucideIcon, Shirt, Sofa, Sparkles} from "lucide-react"
 import {useNavigate} from "react-router-dom"
-import {SERVICES_DATA} from "@/features/order-creation/types"
 import {useEffect} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {CardItem} from "../components/CardItem.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
+import {useGetServicesQuery} from "../api.ts";
 
 const ICONS: Record<string, LucideIcon> = {
     Shirt,
@@ -20,6 +20,7 @@ const ICONS: Record<string, LucideIcon> = {
 
 const MainPage = () => {
     const navigate = useNavigate()
+    const {data: services = []} = useGetServicesQuery();
 
     const {backButton, isLoading, error} = useTelegram();
     useEffect(() => {
@@ -31,7 +32,7 @@ const MainPage = () => {
 
     return (
         <div className="px-4">
-            {SERVICES_DATA.map(category => (
+            {services.map(category => (
                 <section key={category.id} className="mb-6 mt-4">
                     <Typography.H2>
                         {category.name}

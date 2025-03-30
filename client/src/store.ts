@@ -1,8 +1,9 @@
 
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import {api} from "./api.ts";
 
 export const reducers = {
-    // [api.reducerPath]: api.reducer,
+    [api.reducerPath]: api.reducer,
 };
 
 const reducer = combineReducers(reducers);
@@ -13,5 +14,5 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     })
-        // .concat(api.middleware) as any,
+        .concat(api.middleware) as any,
 });
