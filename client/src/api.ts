@@ -22,10 +22,18 @@ export const api = createApi({
         params
       })
     }),
+    addOrder: builder.mutation<any, any>({
+      query: (params) => ({
+        url: "/orders",
+        method: 'POST',
+        body: params,
+      })
+    }),
   })
 });
 
 export const {
   useGetServicesQuery,
-    useGetOrdersQuery
+    useGetOrdersQuery,
+    useAddOrderMutation
 } = api;

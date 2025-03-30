@@ -12,8 +12,8 @@ export const OrdersPage = () => {
         refetchOnMountOrArgChange: true
     });
 
-    const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)), [orders]);
-    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)), [orders]);
+    const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
+    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
 
     return <div className="px-4 mb-2">
         {activeOrders.length > 0 && <div className="mb-6 mt-4">

@@ -15,9 +15,11 @@ import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
+import {useAddOrderMutation} from "../../api.ts";
 
 
 export const OrderCheckoutPage = () => {
+    const [addOrder] = useAddOrderMutation();
     const navigate = useNavigate()
     const location = useLocation()
     const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
@@ -38,7 +40,17 @@ export const OrderCheckoutPage = () => {
         return dayjs(selectedTimestamp).format('dddd, D MMMM HH:mm');
     }, [selectedTimestamp]);
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = async () => {
+        await addOrder(
+            {
+                serviceName: currentService?.name,
+                service: currentService,
+                totalPrice: totalPrice,
+                fullAddress: 'Москва, Ходынский бульвар, 2',
+                options: selectedServices,
+                date: selectedTimestamp,
+                comment
+            }).unwrap();
         navigate('/orders')
     }
 

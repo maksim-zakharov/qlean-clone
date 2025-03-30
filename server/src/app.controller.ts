@@ -1,4 +1,4 @@
-import {Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import {AppService} from './app.service';
 
 export type ServiceType = 'cleaning' | 'drycleaning'
@@ -104,6 +104,18 @@ export class AppController {
     @Get('/orders')
     getOrders() {
         return this._orders;
+    }
+
+    @Post('/orders')
+    addOrder(@Body() body) {
+
+        this._orders.push({
+            ...body,
+            id: Date.now(),
+            status: 'active',
+        })
+
+        return body;
     }
 
     @Get('/services')
