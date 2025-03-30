@@ -18,6 +18,7 @@ services:
       dockerfile: Dockerfile.frontend
     networks:
       - tw-network
+    image: frontend
 
   nginx:
     build:
