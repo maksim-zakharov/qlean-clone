@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Post, Query} from '@nestjs/common';
 import {AppService} from './app.service';
 
 export type ServiceType = 'cleaning' | 'drycleaning'
@@ -32,7 +32,7 @@ export type ServiceCategory = {
 @Controller()
 export class AppController {
 
-    private readonly _orders = [
+    private readonly _orders: any[] = [
         {
             id: Date.now(),
             status: 'active',
@@ -102,8 +102,11 @@ export class AppController {
     }
 
     @Get('/orders')
-    getOrders() {
-        return this._orders;
+    getOrders(@Query() {userId}: {userId?: number}) {
+        if(!userId){
+            return this._orders;
+        }
+        return this._orders.filter(o => o.userId === userId);
     }
 
     @Post('/orders')

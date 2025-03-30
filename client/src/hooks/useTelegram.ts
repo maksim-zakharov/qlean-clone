@@ -47,7 +47,7 @@ export function useTelegram() {
         Telegram.WebApp.HapticFeedback?.impactOccurred(style);
     };
 
-    const userId = Telegram.WebApp?.initDataUnsafe?.user?.id.toString();
+    const userId = Telegram.WebApp?.initDataUnsafe?.user?.id;
     const photoUrl = Telegram.WebApp?.initDataUnsafe?.user?.photo_url; //  || 'https://t.me/i/userpic/320/cm409T17pD0hEWX5m_tmMBGNTbHnhP0b6tZG6o887b0.svg';
     const colorScheme = Telegram.WebApp?.colorScheme;
 

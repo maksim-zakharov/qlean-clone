@@ -24,7 +24,7 @@ export const OrderCheckoutPage = () => {
     const location = useLocation()
     const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string | undefined>();
-    const {vibro} = useTelegram();
+    const {vibro, userId} = useTelegram();
     const currentService = location.state?.currentService as Service;
     const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
     const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
@@ -49,7 +49,8 @@ export const OrderCheckoutPage = () => {
                 fullAddress: 'Москва, Ходынский бульвар, 2',
                 options: selectedServices,
                 date: selectedTimestamp,
-                comment
+                comment,
+                userId
             }).unwrap();
         navigate('/orders')
     }

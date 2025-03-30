@@ -4,11 +4,13 @@ import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
-import { RotateCw } from "lucide-react";
+import {RotateCw} from "lucide-react";
+import {useTelegram} from "../hooks/useTelegram.ts";
 
 
 export const OrdersPage = () => {
-    const {data: orders = []} = useGetOrdersQuery(undefined, {
+    const {userId} = useTelegram();
+    const {data: orders = []} = useGetOrdersQuery({userId}, {
         refetchOnMountOrArgChange: true
     });
 
@@ -63,7 +65,7 @@ export const OrdersPage = () => {
                     <Typography.Title>Завершен</Typography.Title>
                 </div>
                 <div className="flex justify-between align-bottom items-baseline">
-                    <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2" />Повторить</Button>
+                    <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2"/>Повторить</Button>
                     <Typography.Description>Поддержка</Typography.Description>
                 </div>
             </div>
