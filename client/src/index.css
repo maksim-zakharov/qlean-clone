@@ -70,6 +70,12 @@
     --tg-theme-subtitle-text-color: #707579;
     --tg-theme-destructive-text-color: #e53935;
     --tg-theme-section-separator-color: #EFEFF3;
+
+    --tg-accent-green: #2ccb54;
+    --tg-accent-blue: #0b7def;
+    --tg-accent-red: #ff463a;
+    --tg-accent-orange: #fa9b03;
+    --tg-accent-violet: #af53d8;
 }
 
 @media (prefers-color-scheme: light) {

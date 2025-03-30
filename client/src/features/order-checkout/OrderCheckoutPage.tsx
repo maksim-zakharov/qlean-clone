@@ -80,7 +80,7 @@ export const OrderCheckoutPage = () => {
             {/* Content */}
             <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color">
                 <div className="p-4">
-                    <List>
+                    <List itemClassName="py-2">
 
                         {/* Date and Time */}
                         <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={setSelectedTimestamp}
@@ -90,7 +90,10 @@ export const OrderCheckoutPage = () => {
                                 className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
                             >
                                 <div className="flex items-center gap-3">
-                                    <Calendar className="w-6 h-6 text-tg-theme-hint-color"/>
+                                    <div
+                                        className="[background-color:var(--tg-accent-blue)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
+                                        <Calendar className="w-5 h-5 text-tg-theme-text-color"/>
+                                    </div>
                                     <span className="text-tg-theme-text-color">{dateTitle}</span>
                                 </div>
                                 <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
@@ -104,7 +107,10 @@ export const OrderCheckoutPage = () => {
                                 className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
                             >
                                 <div className="flex items-center gap-3">
-                                    <MessageSquare className="w-6 h-6 text-tg-theme-hint-color"/>
+                                    <div
+                                        className="[background-color:var(--tg-accent-orange)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
+                                        <MessageSquare className="w-5 h-5 text-tg-theme-text-colo"/>
+                                    </div>
                                     <span className="text-tg-theme-text-color">Пожелание к заказу</span>
                                 </div>
                                 <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
@@ -119,7 +125,10 @@ export const OrderCheckoutPage = () => {
                             }}
                         >
                             <div className="flex items-center gap-3">
-                                <CreditCard className="w-6 h-6 text-tg-theme-hint-color"/>
+                                <div
+                                    className="[background-color:var(--tg-accent-green)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
+                                    <CreditCard className="w-5 h-5 text-tg-theme-text-colo"/>
+                                </div>
                                 <span className="text-tg-theme-text-color">Мир *5987</span>
                             </div>
                         </Button>
