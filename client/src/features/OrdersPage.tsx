@@ -22,7 +22,7 @@ export const OrdersPage = () => {
                         <Typography.Description>30 марта</Typography.Description>
                     </div>
                 </div>
-                <div className="p-4 separator-shadow-bottom flex gap-2 flex-col">
+                <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№12313123</Typography.Title>
                         <Typography.Title>Оформлен</Typography.Title>
@@ -48,7 +48,7 @@ export const OrdersPage = () => {
                     <Typography.Description>30 марта</Typography.Description>
                 </div>
             </div>
-            <div className="p-4 separator-shadow-bottom flex gap-2 flex-col">
+            <div className="p-4 flex gap-2 flex-col">
                 <div className="flex justify-between">
                     <Typography.Title>№12313123</Typography.Title>
                     <Typography.Title>Завершен</Typography.Title>
