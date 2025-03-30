@@ -106,7 +106,7 @@ export class AppController {
         if(!userId){
             return this._orders;
         }
-        return this._orders.filter(o => o.userId === userId);
+        return this._orders.filter(o => o.userId?.toString() === userId?.toString());
     }
 
     @Post('/orders')
