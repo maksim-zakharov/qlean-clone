@@ -21,6 +21,9 @@ export const OrderCreationPage = () => {
     const [currentService, setcurrentService] = useState<Service | undefined>(location.state?.currentService);
     const [selectedOptions, setSelectedOptions] = useState<string[]>(selectedServices.map(s => s.id));
 
+    // Если создаем - true, если редактируем - false;
+    const isDraft = true;
+
     // Определяем тип сервиса и находим текущую услугу
     const isCleaningService = useMemo(() => CLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId), [serviceId]);
 
@@ -152,8 +155,8 @@ export const OrderCreationPage = () => {
                     wide
                     onClick={handleNext}
                 >
-                    <span className="flex-1 text-left">Далее</span>
-                    <span>{totalPrice} ₽</span>
+                    {isDraft ? <><span className="flex-1 text-left">Далее</span>
+                        <span>{totalPrice} ₽</span></> : 'Сохранить'}
                 </Button>
             </BottomActions>
         </div>
