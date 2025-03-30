@@ -24,7 +24,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     {
                         "hover:bg-transparent focus-visible:outline-none focus-visible:ring-0 active:bg-transparent": variant === 'ghost',
                         "bg-tg-theme-button-color text-tg-theme-button-text-color hover:opacity-90": variant === 'primary',
-                        "bg-tg-theme-button-color-transparent text-tg-theme-button-color hover:opacity-90": variant === 'default',
+                        "border border-tg-theme-button-color text-tg-theme-button-color hover:opacity-90": variant === 'default',
                     },
                     className
                 )}

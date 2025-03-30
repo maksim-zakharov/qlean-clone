@@ -133,12 +133,8 @@ export const OrderCreationPage = () => {
                 <span
                     className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{option.price} ₽</span>
                                 <Button
-                                    variant="ghost"
-                                    className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent ${
-                                        selectedOptions.includes(option.id)
-                                            ? 'bg-tg-theme-button-color text-tg-theme-button-text-color'
-                                            : 'border border-tg-theme-button-color text-tg-theme-button-color'
-                                    }`}
+                                    variant={selectedOptions.includes(option.id) ? 'primary' : 'default'}
+                                    className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
                                     onClick={() => handleOptionToggle(option.id)}
                                 >
                                     <Plus
