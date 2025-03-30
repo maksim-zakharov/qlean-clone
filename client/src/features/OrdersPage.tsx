@@ -7,7 +7,7 @@ import {Button} from "../components/ui/button.tsx";
 export const OrdersPage = () => {
 
     return <div className="px-4">
-        <div className="mb-6">
+        <div className="mb-6 mt-4">
             <Typography.H2>
                 Активные
             </Typography.H2>
@@ -34,7 +34,7 @@ export const OrdersPage = () => {
                 </div>
             </Card>
         </div>
-        <Typography.H2>
+        <Typography.H2 className="mt-4">
             Все заявки
         </Typography.H2>
         <Card className="p-0 gap-0">
