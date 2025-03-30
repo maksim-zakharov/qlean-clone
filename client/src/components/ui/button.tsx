@@ -5,10 +5,11 @@ import {cn} from "@/lib/utils"
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'default' | 'ghost' | 'primary',
     size?: 'small' | 'medium' | 'large',
+    wide?: boolean
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({className, variant = 'primary', size = 'medium', ...props}, ref) => {
+    ({className, wide, variant = 'primary', size = 'medium', ...props}, ref) => {
         return (
             <button
                 className={cn(
@@ -16,6 +17,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     {
                         "h-9 text-sm px-4": size === 'small',
                         "h-11 text-base px-4": size === 'medium',
+                    },
+                    {
+                        "w-full": wide,
                     },
                     {
                         "hover:bg-transparent focus-visible:outline-none focus-visible:ring-0 active:bg-transparent": variant === 'ghost',
