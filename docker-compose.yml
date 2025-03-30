@@ -18,11 +18,15 @@ services:
       - backend
 
   nginx:
-    image: nginx:alpine
-    networks:
-      - app-network
+    build: ./nginx
     ports:
       - "80:80"
+    networks:
+      - app-network
     depends_on:
       - backend
       - frontend
+
+networks:
+  app-network:
+    driver: bridge
