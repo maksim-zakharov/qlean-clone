@@ -10,6 +10,7 @@ import {Info, Plus} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
+import {Typography} from "../../components/ui/Typography.tsx";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -79,16 +80,15 @@ export const OrderCreationPage = () => {
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <BackButton/>
-                    <div
-                        className="items-center flex justify-center text-base font-medium text-tg-theme-text-color">
-                        {isCleaningService ? 'Уборка' : 'Химчистка'}
-                    </div>
+                    <Typography.Title
+                        className="items-center flex justify-center">{isCleaningService ? 'Уборка' : 'Химчистка'}</Typography.Title>
                 </div>
             </Header>
 
             {/* Service Options */}
             <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4">
-                <Tabs defaultValue={currentTab?.id} value={currentTab?.id} className="mt-[calc(56px+env(safe-area-inset-top))]">
+                <Tabs defaultValue={currentTab?.id} value={currentTab?.id}
+                      className="mt-[calc(56px+env(safe-area-inset-top))]">
                     <TabsList>
                         {tabs.map(tab => (
                             <TabsTrigger

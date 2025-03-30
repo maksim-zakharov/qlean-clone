@@ -10,7 +10,7 @@ interface CardItemProps {
 }
 
 export const CardItem = ({title, icon, onClick, className}: CardItemProps) => <Card
-    className={cn(`bg-tg-theme-section-bg-color p-4 cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative`, className)}
+    className={cn(`p-4 cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative`, className)}
     onClick={onClick}
 >
     <div className="flex flex-col h-full">

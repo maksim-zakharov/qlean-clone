@@ -19,6 +19,7 @@ import {Header} from "../../components/ui/Header.tsx";
 import { BottomActions } from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
+import {Typography} from "../../components/ui/Typography.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -62,8 +63,8 @@ export const OrderCheckoutPage = () => {
             className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
           <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>
           <div className="flex-1 flex flex-col items-center">
-            <span className="text-base font-medium text-tg-theme-text-color">Оформление заказа</span>
-            <span className="text-sm text-tg-theme-hint-color">Оружейный переулок, 41</span>
+            <Typography.Title>Оформление заказа</Typography.Title>
+            <Typography.Description>Оружейный переулок, 41</Typography.Description>
           </div>
           <div className="w-[40px]"/>
         </div>

@@ -6,6 +6,7 @@ import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {useState} from "react";
 import {AddressSheet} from "../AddressSheet";
+import {Typography} from "../ui/Typography.tsx";
 
 type MenuItem = {
     icon: LucideIcon
@@ -65,7 +66,7 @@ export const Layout = () => {
             <div className="grid grid-cols-[40px_auto_40px]">
                 <Avatar/>
                 <div className="flex-1 flex flex-col items-center">
-                    <span className="text-xs text-tg-theme-hint-color">Адрес</span>
+                    <Typography.Description>Адрес</Typography.Description>
                     <AddressSheet
                         addresses={addresses}
                         selectedAddress={selectedAddress}
