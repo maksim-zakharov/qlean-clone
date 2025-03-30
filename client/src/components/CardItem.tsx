@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 import {Card} from "./ui/card.tsx";
 import {cn} from "../lib/utils.ts";
+import {Typography} from "./ui/Typography.tsx";
 
 interface CardItemProps {
     title: string
@@ -14,7 +15,7 @@ export const CardItem = ({title, icon, onClick, className}: CardItemProps) => <C
     onClick={onClick}
 >
     <div className="flex flex-col h-full">
-        <h3 className="text-base font-medium text-tg-theme-text-color max-w-[60%] text-left">{title}</h3>
+        <Typography.Title className="max-w-[60%]">{title}</Typography.Title>
         {icon && <div className="absolute bottom-4 right-4">
             {icon}
         </div>}
