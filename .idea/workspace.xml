@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/button.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,22 +119,6 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-    </task>
-    <task id="LOCAL-00091" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743105114723</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1743105114723</updated>
-    </task>
-    <task id="LOCAL-00092" summary="vite">
-      <option name="closed" value="true" />
-      <created>1743105411663</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1743105411663</updated>
     </task>
     <task id="LOCAL-00093" summary="vite">
       <option name="closed" value="true" />
@@ -513,7 +496,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743339486869</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743340018318</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1743340018318</updated>
+    </task>
+    <task id="LOCAL-00141" summary="vite">
+      <option name="closed" value="true" />
+      <created>1743340167033</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1743340167033</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
