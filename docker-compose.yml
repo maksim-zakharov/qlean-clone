@@ -5,30 +5,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    image: myapp-backend
-    networks:
-      - app-network
-    expose:
-      - 3000
+    restart: always
+    env_file: .env
 
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    image: myapp-frontend
-    networks:
-      - app-network
+    restart: always
 
   nginx:
     build: ./nginx
     ports:
-      - "80"
-    networks:
-      - app-network
+      - "80:80"
     depends_on:
       - backend
       - frontend
-
-networks:
-  app-network:
-    driver: bridge
+    restart: always
