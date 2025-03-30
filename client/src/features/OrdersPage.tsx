@@ -4,6 +4,7 @@ import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
+import { RotateCw } from "lucide-react";
 
 
 export const OrdersPage = () => {
@@ -62,7 +63,7 @@ export const OrdersPage = () => {
                     <Typography.Title>Завершен</Typography.Title>
                 </div>
                 <div className="flex justify-between align-bottom items-baseline">
-                    <Button variant="default" size="small">Повторить</Button>
+                    <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2" />Повторить</Button>
                     <Typography.Description>Поддержка</Typography.Description>
                 </div>
             </div>
