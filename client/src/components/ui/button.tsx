@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     "font-normal inline-flex items-center justify-center transition-colors disabled:pointer-events-none disabled:opacity-50",
                     {
                         "h-9 text-sm px-4 rounded-sm": size === 'small',
-                        "h-11 text-base px-4 rounded-md": size === 'medium',
+                        "h-[48px] text-[15px] [line-height:18px] [font-weight:500] px-4 rounded-md": size === 'medium',
                     },
                     {
                         "w-full": wide,
