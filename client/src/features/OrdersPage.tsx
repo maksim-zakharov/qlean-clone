@@ -19,7 +19,7 @@ export const OrdersPage = () => {
                     </div>
                     <div className="flex justify-between">
                         <Typography.Description>Москва, Ходынский бульвар, 2</Typography.Description>
-                        <Typography.Description>30 марта</Typography.Description>
+                        <Typography.Description>30 марта, 16:30 - 19:30</Typography.Description>
                     </div>
                 </div>
                 <div className="p-4 flex gap-2 flex-col">
@@ -45,7 +45,7 @@ export const OrdersPage = () => {
                 </div>
                 <div className="flex justify-between">
                     <Typography.Description>Москва, Ходынский бульвар, 2</Typography.Description>
-                    <Typography.Description>30 марта</Typography.Description>
+                    <Typography.Description>30 марта, 16:30 - 19:30</Typography.Description>
                 </div>
             </div>
             <div className="p-4 flex gap-2 flex-col">
