@@ -5,13 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    expose:
-      - 3000
     networks:
       - tw-network
     environment:
       - NODE_ENV=production
       - PORT=3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   frontend:
     build:
