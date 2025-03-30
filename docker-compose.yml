@@ -12,9 +12,13 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     restart: always
+    image: frontend # Явное имя образа
 
   nginx:
-    build: ./nginx
+    build:
+      context: ./nginx
+      args:
+        FRONTEND_IMAGE: frontend
     ports:
       - "80:80"
     depends_on:
