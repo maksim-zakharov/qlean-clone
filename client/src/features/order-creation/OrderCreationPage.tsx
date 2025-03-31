@@ -6,7 +6,7 @@ import {CLEANING_TABS, DRYCLEANING_TABS, Service, SERVICE_OPTIONS} from './types
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {Info, Plus} from 'lucide-react'
+import {Info, Plus, Star} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
@@ -111,29 +111,22 @@ export const OrderCreationPage = () => {
                     </TabsList>
                 </Tabs>
                 <div className="pt-2">
-                    <List>
+                    <List itemClassName="flex-col gap-2">
                         {availableOptions.map((option) => <>
-                            <div className="flex items-start gap-3 flex-1 min-w-0">
-                                <Info
-                                    className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
-                                <div className="min-w-0">
-                                    <div className="flex items-center gap-1.5 flex-wrap">
-                                        <span
-                                            className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
-                                        {option.isPopular && (
-                                            <Badge>ПОПУЛЯРНО</Badge>
-                                        )}
-                                    </div>
-                                    {option.description && (
-                                        <p className="mt-0.5 text-[13px] text-tg-theme-subtitle-text-color line-clamp-2">
-                                            {option.description}
-                                        </p>
-                                    )}
+                            <div className="flex items-center gap-3 ml-3 w-full justify-between">
+                                <div className="flex items-start gap-3 flex-1 min-w-0">
+                                    <Info
+                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
+                                    <span
+                                        className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
                                 </div>
+                                <span
+                                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
                             </div>
-                            <div className="flex items-center gap-3 ml-3">
-                <span
-                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
+                            <div className="flex items-center gap-3 ml-3 w-full justify-between">
+                                {option.isPopular ? (
+                                    <Badge className="flex gap-1 items-center"><Star className="w-3 h-3" />ПОПУЛЯРНО</Badge>
+                                ) : <div/>}
                                 <Button
                                     variant={selectedOptions.includes(option.id) ? 'primary' : 'default'}
                                     className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
