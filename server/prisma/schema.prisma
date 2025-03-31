@@ -15,3 +15,19 @@ model Address {
   fullAddress  String
   comments  String?
 }
+
+enum OrderStatus {
+  active
+  completed
+  canceled
+}
+
+model Order {
+  id    Int     @default(autoincrement()) @id
+  status OrderStatus @default(active)
+  serviceName String
+  totalPrice Int
+  fullAddress String
+  date Int
+  userId Int?
+}

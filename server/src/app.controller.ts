@@ -1,5 +1,6 @@
-import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {AddressesService} from "./address.service";
+import {OrdersService} from "./orders/orders.service";
 
 export type ServiceType = 'cleaning' | 'drycleaning'
 
@@ -31,103 +32,7 @@ export type ServiceCategory = {
 
 @Controller()
 export class AppController {
-
-    private _addresses: any[] = [
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'ул. Тверская, 1'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Ленинградский проспект, 15'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        },
-        {
-            id: Date.now(),
-            name: 'Название1',
-            fullAddress: 'Оружейный переулок, 8'
-        }
-    ];
-
-    private readonly _orders: any[] = [
-        {
-            id: Date.now(),
-            status: 'active',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        },
-        {
-            id: Date.now(),
-            status: 'completed',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        },
-        {
-            id: Date.now(),
-            status: 'completed',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        },
-        {
-            id: Date.now(),
-            status: 'completed',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        },
-        {
-            id: Date.now(),
-            status: 'completed',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        },
-        {
-            id: Date.now(),
-            status: 'completed',
-            serviceName: 'Доставка',
-            totalPrice: 1250,
-            fullAddress: 'Москва, Ходынский бульвар, 2',
-            date: Date.now()
-        }
-    ];
-
-
-    constructor(private readonly addressesService: AddressesService) {
+    constructor(private readonly addressesService: AddressesService, private readonly ordersService: OrdersService) {
     }
 
     @Get('version')
@@ -161,43 +66,22 @@ export class AppController {
 
     @Get('/orders')
     getOrders(@Query() {userId}: { userId?: number }) {
-        if (!userId) {
-            return this._orders;
-        }
-        return this._orders.filter(o => o.userId?.toString() === userId?.toString());
+        return this.ordersService.getAll(userId);
     }
 
     @Get('/orders/:id')
     getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
-        const existOrder = this._orders.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === userId?.toString());
-        if (!existOrder) {
-            return new NotFoundException();
-        }
-
-        return existOrder;
+        return this.ordersService.getById(id, userId);
     }
 
     @Put('/orders/:id')
     editOrder(@Param('id') id: number, @Body() body: any): any {
-        const existOrder = this._orders.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === body?.userId?.toString());
-        if (!existOrder) {
-            return new NotFoundException();
-        }
-        Object.assign(existOrder, body);
-
-        return existOrder;
+        return this.ordersService.update(body);
     }
 
     @Post('/orders')
     addOrder(@Body() body) {
-
-        this._orders.push({
-            ...body,
-            id: Date.now(),
-            status: 'active',
-        })
-
-        return body;
+        return this.ordersService.create(body);
     }
 
     @Get('/services')
