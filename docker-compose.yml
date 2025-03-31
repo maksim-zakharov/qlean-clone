@@ -15,9 +15,6 @@ services:
       - PORT=3000
       - DATABASE_URL=${DATABASE_URL}
       - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
-    # Добавить вольюмы для node_modules
-    volumes:
-      - backend-node_modules:/app/node_modules  # Путь должен совпадать с WORKDIR в Dockerfile
 
   frontend:
     build:
@@ -26,9 +23,6 @@ services:
     networks:
       - tw-network
     image: frontend
-    # Добавить вольюмы для node_modules
-    volumes:
-      - frontend-node_modules:/app/node_modules  # Путь должен совпадать с WORKDIR в Dockerfile
 
   nginx:
     build:
@@ -46,8 +40,3 @@ services:
 networks:
   tw-network:
     driver: bridge
-
-# Добавить секцию volumes в конец файла
-volumes:
-  backend-node_modules:
-  frontend-node_modules:
