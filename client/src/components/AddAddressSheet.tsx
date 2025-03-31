@@ -25,17 +25,19 @@ export function AddAddressSheet({
         comments: '',
     });
 
+    const clearAddress = () => setAddress({
+        id: -1,
+        name: '',
+        fullAddress: '',
+        comments: '',
+    })
+
     useEffect(() => {
         if (address) {
             setAddress(address);
             setOpened(true);
         } else {
-            setAddress({
-                id: -1,
-                name: '',
-                fullAddress: '',
-                comments: '',
-            });
+            clearAddress();
         }
     }, [address]);
 
@@ -48,13 +50,16 @@ export function AddAddressSheet({
     }
 
     const handleOnSubmit = async () => {
-        await addAddress({name, fullAddress, comments, userId}).unwrap();
+        const func = !address ? addAddress : editAddress;
+        await func({id, name, fullAddress, comments, userId}).unwrap();
         setOpened(false)
+        clearAddress();
     }
 
     const handleOnDelete = async () => {
         await deleteAddress({id}).unwrap();
         setOpened(false)
+        clearAddress();
     }
 
     return (

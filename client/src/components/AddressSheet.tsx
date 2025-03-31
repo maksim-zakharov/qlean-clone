@@ -24,9 +24,12 @@ export function AddressSheet({
     const [_opened, setOpened] = React.useState(false);
     const [editedAddress, setEditedAddress] = React.useState(undefined);
 
+    const clearAddress = () => setEditedAddress(undefined)
+
     const handleSelectAddress = (address: any) => {
         onAddressSelect(address)
         setOpened(false);
+        clearAddress();
     }
 
     const handleOnEditAddress = (e: React.MouseEvent<HTMLButtonElement>, address: any) => {
@@ -37,6 +40,8 @@ export function AddressSheet({
     const handleOpenChange = (opened: boolean) => {
         opened ? vibro() : null;
         setOpened(opened)
+        if (!opened)
+            clearAddress();
     }
 
     return (
@@ -49,13 +54,15 @@ export function AddressSheet({
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
                 </SheetHeader>
                 <List className="mt-2 mb-2 overflow-y-auto no-scrollbar">
-                    {addresses.map(adr => <div className="flex w-full justify-between" key={adr.id} onClick={() => handleSelectAddress(adr)}>
+                    {addresses.map(adr => <div className="flex w-full justify-between" key={adr.id}
+                                               onClick={() => handleSelectAddress(adr)}>
                         <div className="flex flex-col">
                             <Typography.Title>{adr.name}</Typography.Title>
                             <Typography.Description>{adr.fullAddress}</Typography.Description>
                         </div>
-                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color" onClick={(e) => handleOnEditAddress(e, adr)}>
-                            <Pencil />
+                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color"
+                                onClick={(e) => handleOnEditAddress(e, adr)}>
+                            <Pencil/>
                         </Button>
                     </div>)}
                 </List>
