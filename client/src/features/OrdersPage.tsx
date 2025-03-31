@@ -46,30 +46,32 @@ export const OrdersPage = () => {
                 </div>
             </Card>)}
         </div>}
-        <Typography.H2 className="mt-4">
-            Все заявки
-        </Typography.H2>
-        {completedOrders.map(co => <Card className="p-0 gap-0 mt-2">
-            <div className="p-4 separator-shadow-bottom">
-                <div className="flex justify-between">
-                    <Typography.Title>{co.serviceName}</Typography.Title>
-                    <Typography.Title>{moneyFormat(co.totalPrice)}</Typography.Title>
+        {completedOrders.length > 0 && <>
+            <Typography.H2 className="mt-4">
+                Все заявки
+            </Typography.H2>
+            {completedOrders.map(co => <Card className="p-0 gap-0 mt-2">
+                <div className="p-4 separator-shadow-bottom">
+                    <div className="flex justify-between">
+                        <Typography.Title>{co.serviceName}</Typography.Title>
+                        <Typography.Title>{moneyFormat(co.totalPrice)}</Typography.Title>
+                    </div>
+                    <div className="flex justify-between">
+                        <Typography.Description>{co.fullAddress}</Typography.Description>
+                        <Typography.Description>{dayjs(co.date).format('D MMMM, HH:mm')}</Typography.Description>
+                    </div>
                 </div>
-                <div className="flex justify-between">
-                    <Typography.Description>{co.fullAddress}</Typography.Description>
-                    <Typography.Description>{dayjs(co.date).format('D MMMM, HH:mm')}</Typography.Description>
+                <div className="p-4 flex gap-2 flex-col">
+                    <div className="flex justify-between">
+                        <Typography.Title>№{co.id}</Typography.Title>
+                        <Typography.Title>Завершен</Typography.Title>
+                    </div>
+                    <div className="flex justify-between align-bottom items-baseline">
+                        <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2"/>Повторить</Button>
+                        <Typography.Description>Поддержка</Typography.Description>
+                    </div>
                 </div>
-            </div>
-            <div className="p-4 flex gap-2 flex-col">
-                <div className="flex justify-between">
-                    <Typography.Title>№{co.id}</Typography.Title>
-                    <Typography.Title>Завершен</Typography.Title>
-                </div>
-                <div className="flex justify-between align-bottom items-baseline">
-                    <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2"/>Повторить</Button>
-                    <Typography.Description>Поддержка</Typography.Description>
-                </div>
-            </div>
-        </Card>)}
+            </Card>)}
+        </>}
     </div>
 }

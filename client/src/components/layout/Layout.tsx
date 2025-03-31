@@ -26,11 +26,11 @@ const menuItems: MenuItem[] = [
         label: 'Заказы',
         path: '/orders'
     },
-    {
-        icon: Gift,
-        label: 'Бонусы',
-        path: '/bonuses'
-    },
+    // {
+    //     icon: Gift,
+    //     label: 'Бонусы',
+    //     path: '/bonuses'
+    // },
     // {
     //     icon: User,
     //     label: 'Профиль',

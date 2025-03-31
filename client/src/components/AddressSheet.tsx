@@ -69,6 +69,7 @@ export function AddressSheet({
                 <div className="flex flex-col flex-1">
                     <AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
+                            className="pb-[env(safe-area-inset-bottom)]"
                             wide
                             onClick={onAddAddress}
                         >
