@@ -31,6 +31,12 @@ RUN npm install --only=production
 # Очистка кэша
 RUN npm cache clean --force
 
+# Declare build arguments for database URLs and set environment variables
+ARG DATABASE_URL
+ARG SHADOW_DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+ENV SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+
 RUN npx prisma generate
 
 ARG NODE_ENV=production
