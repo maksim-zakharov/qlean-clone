@@ -15,7 +15,7 @@ RUN npm run build:ci
 FROM node:20-alpine as production
 WORKDIR /app
 
-RUN npm install pm2 -g;
+RUN #npm install pm2 -g;
 
 ENV TZ=Europe/Moscow
 RUN apk add --no-cache tzdata
@@ -49,6 +49,7 @@ ENV PORT=${PORT}
 ENV PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
 ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
 
-CMD ["pm2-runtime", "dist/main.js"]
+#CMD ["pm2-runtime", "dist/main.js"]
+CMD ["node", "dist/main.js"]
 
 EXPOSE $PORT
