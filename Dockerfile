@@ -22,6 +22,11 @@ RUN npm ci --production
 # Копируем зависимости, Pr-клиент и билд
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
+COPY entrypoint.sh .
+
+# Делаем скрипт исполняемым
+RUN chmod +x ./entrypoint.sh
+
 # Копируем схему Prisma
 COPY --from=builder /app/prisma ./prisma
 
@@ -29,4 +34,4 @@ COPY --from=builder /app/prisma ./prisma
 RUN npx prisma generate
 
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+ENTRYPOINT ["./entrypoint.sh"]
