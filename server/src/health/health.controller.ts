@@ -1,19 +1,21 @@
 
 import { Controller, Get } from '@nestjs/common';
-import { HealthCheckService, HttpHealthIndicator, HealthCheck } from '@nestjs/terminus';
+import {HealthCheckService, HealthCheck} from '@nestjs/terminus';
+import {PrismaHealthIndicator} from "./prisma.health";
 
 @Controller('health')
 export class HealthController {
     constructor(
         private health: HealthCheckService,
-        private http: HttpHealthIndicator,
+        private prismaHealth: PrismaHealthIndicator,
     ) {}
 
     @Get()
     @HealthCheck()
     check() {
         return this.health.check([
-            () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
+            // Проверка подключения к PostgreSQL через Prisma
+            () => this.prismaHealth.isHealthy('database'),
         ]);
     }
 }
