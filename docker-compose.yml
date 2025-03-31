@@ -5,11 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+        - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
     networks:
       - tw-network
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
 
   frontend:
     build:
