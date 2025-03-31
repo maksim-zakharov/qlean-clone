@@ -35,7 +35,6 @@ ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
 ENV DATABASE_URL=${DATABASE_URL}
 ENV SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
 
-# Генерируем Prisma Client для продакшена
 RUN npx prisma generate
 
 CMD ["pm2-runtime", "dist/main.js"]
