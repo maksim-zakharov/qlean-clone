@@ -16,6 +16,7 @@ import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {useAddOrderMutation} from "../../api.ts";
+import {moneyFormat} from "../../lib/utils.ts";
 
 
 export const OrderCheckoutPage = () => {
@@ -150,7 +151,7 @@ export const OrderCheckoutPage = () => {
                                     <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
                                     <div className="flex items-center gap-1 pr-2">
                                         <span
-                                            className="text-lg font-medium text-tg-theme-text-color">{totalPrice}₽</span>
+                                            className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
                                     </div>
                                 </div>
                             </AccordionTrigger>
@@ -158,12 +159,12 @@ export const OrderCheckoutPage = () => {
                                 <div className="flex flex-col gap-2">
                                     <div key={currentService.id} className="flex justify-between">
                                         <span className="text-tg-theme-text-color">{currentService.name}</span>
-                                        <span className="text-tg-theme-text-color">{currentService.basePrice}₽</span>
+                                        <span className="text-tg-theme-text-color">{moneyFormat(currentService.basePrice)}</span>
                                     </div>
                                     {selectedServices.map((service, index) => (
                                         <div key={index} className="flex justify-between">
                                             <span className="text-tg-theme-text-color">{service.name}</span>
-                                            <span className="text-tg-theme-text-color">{service.price}₽</span>
+                                            <span className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
                                         </div>
                                     ))}
                                 </div>

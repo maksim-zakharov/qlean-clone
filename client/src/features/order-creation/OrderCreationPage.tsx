@@ -12,6 +12,7 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
+import {moneyFormat} from "../../lib/utils.ts";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -116,9 +117,9 @@ export const OrderCreationPage = () => {
                                 <Info
                                     className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
                                 <div className="min-w-0">
-                                    <div className="flex items-center gap-2 flex-wrap">
+                                    <div className="flex items-center gap-1.5 flex-wrap">
                                         <span
-                                            className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
+                                            className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
                                         {option.isPopular && (
                                             <Badge>ПОПУЛЯРНО</Badge>
                                         )}
@@ -132,7 +133,7 @@ export const OrderCreationPage = () => {
                             </div>
                             <div className="flex items-center gap-3 ml-3">
                 <span
-                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{option.price} ₽</span>
+                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
                                 <Button
                                     variant={selectedOptions.includes(option.id) ? 'primary' : 'default'}
                                     className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
@@ -154,7 +155,7 @@ export const OrderCreationPage = () => {
                     onClick={handleNext}
                 >
                     {isDraft ? <><span className="flex-1 text-left">Далее</span>
-                        <span>{totalPrice} ₽</span></> : 'Сохранить'}
+                        <span>{moneyFormat(totalPrice)}</span></> : 'Сохранить'}
                 </Button>
             </BottomActions>
         </div>

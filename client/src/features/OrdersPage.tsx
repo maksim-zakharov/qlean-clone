@@ -6,6 +6,7 @@ import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
 import {RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
+import {moneyFormat} from "../lib/utils.ts";
 
 
 export const OrdersPage = () => {
@@ -26,7 +27,7 @@ export const OrdersPage = () => {
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.serviceName}</Typography.Title>
-                        <Typography.Title>{ao.totalPrice} ₽</Typography.Title>
+                        <Typography.Title>{moneyFormat(ao.totalPrice)}</Typography.Title>
                     </div>
                     <div className="flex justify-between">
                         <Typography.Description>{ao.fullAddress}</Typography.Description>
@@ -52,7 +53,7 @@ export const OrdersPage = () => {
             <div className="p-4 separator-shadow-bottom">
                 <div className="flex justify-between">
                     <Typography.Title>{co.serviceName}</Typography.Title>
-                    <Typography.Title>{co.totalPrice} ₽</Typography.Title>
+                    <Typography.Title>{moneyFormat(co.totalPrice)}</Typography.Title>
                 </div>
                 <div className="flex justify-between">
                     <Typography.Description>{co.fullAddress}</Typography.Description>
