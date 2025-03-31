@@ -11,6 +11,7 @@ import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
+import {Badge} from "../../components/ui/badge.tsx";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
@@ -119,10 +120,7 @@ export const OrderCreationPage = () => {
                                         <span
                                             className="text-[15px] font-normal text-tg-theme-text-color truncate">{option.name}</span>
                                         {option.isPopular && (
-                                            <span
-                                                className="px-1.5 py-0.5 text-[12px] font-medium badge-primary rounded-sm">
-                ПОПУЛЯРНО
-              </span>
+                                            <Badge>ПОПУЛЯРНО</Badge>
                                         )}
                                     </div>
                                     {option.description && (
