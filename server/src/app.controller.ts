@@ -1,6 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {AddressesService} from "./address.service";
 import {OrdersService} from "./orders/orders.service";
+import {Address, Order} from "@prisma/client";
 
 export type ServiceType = 'cleaning' | 'drycleaning'
 
@@ -46,11 +47,11 @@ export class AppController {
 
     @Get('/addresses')
     getAddresses(@Query() {userId}: { userId?: number }) {
-        return this.addressesService.getAll(userId);
+        return this.addressesService.getAll(Number(userId));
     }
 
     @Post('/addresses')
-    addAddress(@Body() body: any): any {
+    addAddress(@Body() {id, ...body}: Address): any {
         return this.addressesService.create(body);
     }
 
@@ -61,26 +62,26 @@ export class AppController {
 
     @Delete('/addresses/:id')
     deleteAddress(@Param('id') id: number): any {
-        return this.addressesService.delete(id);
+        return this.addressesService.delete(Number(id));
     }
 
     @Get('/orders')
     getOrders(@Query() {userId}: { userId?: number }) {
-        return this.ordersService.getAll(userId);
+        return this.ordersService.getAll(Number(userId));
     }
 
     @Get('/orders/:id')
     getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
-        return this.ordersService.getById(id, userId);
+        return this.ordersService.getById(Number(id), Number(userId));
     }
 
     @Put('/orders/:id')
-    editOrder(@Param('id') id: number, @Body() body: any): any {
+    editOrder(@Param('id') id: number, @Body() body: Order): any {
         return this.ordersService.update(body);
     }
 
     @Post('/orders')
-    addOrder(@Body() body) {
+    addOrder(@Body() {id, ...body}: Order) {
         return this.ordersService.create(body);
     }
 
