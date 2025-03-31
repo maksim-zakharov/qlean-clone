@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query} from '@nestjs/common';
 import {AppService} from './app.service';
 
 export type ServiceType = 'cleaning' | 'drycleaning'
@@ -31,6 +31,8 @@ export type ServiceCategory = {
 
 @Controller()
 export class AppController {
+
+    private _addresses: any[] = [];
 
     private readonly _orders: any[] = [
         {
@@ -101,12 +103,67 @@ export class AppController {
         return this.appService.getHello();
     }
 
+    @Get('/addresses')
+    getAddresses(@Query() {userId}: { userId?: number }) {
+        if (!userId) {
+            return this._addresses;
+        }
+        return this._addresses.filter(o => o.userId?.toString() === userId?.toString());
+    }
+
+    @Post('/addresses')
+    addAddress(@Body() body: any): any {
+        this._addresses.push({
+            ...body,
+            id: Date.now()
+        })
+
+        return body;
+    }
+
+    @Put('/addresses/:id')
+    editAddress(@Param('id') id: number, @Body() body: any): any {
+        const existAddress = this._addresses.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === body?.userId?.toString());
+        if (!existAddress) {
+            return new NotFoundException();
+        }
+        Object.assign(existAddress, body);
+
+        return existAddress;
+    }
+
+    @Delete('/addresses/:id')
+    deleteAddress(@Param('id') id: number): any {
+        this._addresses = this._addresses.filter(o => o.id?.toString() !== id?.toString())
+    }
+
     @Get('/orders')
-    getOrders(@Query() {userId}: {userId?: number}) {
-        if(!userId){
+    getOrders(@Query() {userId}: { userId?: number }) {
+        if (!userId) {
             return this._orders;
         }
         return this._orders.filter(o => o.userId?.toString() === userId?.toString());
+    }
+
+    @Get('/orders/:id')
+    getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
+        const existOrder = this._orders.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === userId?.toString());
+        if (!existOrder) {
+            return new NotFoundException();
+        }
+
+        return existOrder;
+    }
+
+    @Put('/orders/:id')
+    editOrder(@Param('id') id: number, @Body() body: any): any {
+        const existOrder = this._orders.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === body?.userId?.toString());
+        if (!existOrder) {
+            return new NotFoundException();
+        }
+        Object.assign(existOrder, body);
+
+        return existOrder;
     }
 
     @Post('/orders')
