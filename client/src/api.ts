@@ -29,11 +29,18 @@ export const api = createApi({
                 body: params,
             })
         }),
+        getAddresses: builder.query<any[], { userId?: number }>({
+            query: (params) => ({
+                url: "/addresses",
+                params
+            })
+        }),
     })
 });
 
 export const {
     useGetServicesQuery,
     useGetOrdersQuery,
-    useAddOrderMutation
+    useAddOrderMutation,
+    useGetAddressesQuery
 } = api;

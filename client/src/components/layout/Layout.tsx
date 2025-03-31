@@ -4,9 +4,10 @@ import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
+import {useGetAddressesQuery} from "../../api.ts";
 
 type MenuItem = {
     icon: LucideIcon
@@ -38,19 +39,11 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const {isLoading} = useTelegram();
+    const {isLoading, userId} = useTelegram();
+    const {data: addresses = []} = useGetAddressesQuery({userId});
     const navigate = useNavigate()
     const location = useLocation();
-    const [addresses] = useState<Array<{ id: string; address: string }>>([
-        {id: '1', address: 'Оружейный переулок'},
-        {id: '2', address: 'ул. Тверская, 1'},
-        {id: '3', address: 'Ленинградский проспект, 15'},
-    ]);
-    const [selectedAddress, setSelectedAddress] = useState(addresses[0]?.address || '');
-
-    const handleAddressSelect = (address: string) => {
-        setSelectedAddress(address);
-    };
+    const [selectedAddress, setSelectedAddress] = useState<any>();
 
     const handleAddAddress = () => {
         // TODO: Implement address addition logic
@@ -69,12 +62,11 @@ export const Layout = () => {
                     <Typography.Description>Адрес</Typography.Description>
                     <AddressSheet
                         addresses={addresses}
-                        selectedAddress={selectedAddress}
-                        onAddressSelect={handleAddressSelect}
+                        onAddressSelect={setSelectedAddress}
                         onAddAddress={handleAddAddress}
                     >
                         <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                            {selectedAddress} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                            {selectedAddress?.fullAddress || 'Выберите адрес'} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                         </Button>
                     </AddressSheet>
                 </div>

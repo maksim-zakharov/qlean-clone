@@ -32,7 +32,48 @@ export type ServiceCategory = {
 @Controller()
 export class AppController {
 
-    private _addresses: any[] = [];
+    private _addresses: any[] = [
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'ул. Тверская, 1'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Ленинградский проспект, 15'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        },
+        {
+            id: Date.now(),
+            name: 'Название1',
+            fullAddress: 'Оружейный переулок, 8'
+        }
+    ];
 
     private readonly _orders: any[] = [
         {
