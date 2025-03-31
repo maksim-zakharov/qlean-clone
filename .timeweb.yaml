@@ -1,0 +1,11 @@
+version: "2"
+services:
+  main:
+    build: .
+    command: docker-compose up -d
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - VIRTUAL_HOST=your-domain.com
+      - LETSENCRYPT_HOST=your-domain.com
