@@ -8,6 +8,8 @@ services:
       args:
         - DATABASE_URL=${DATABASE_URL}
         - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+        - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+        - PM2_SECRET_KEY=${PM2_SECRET_KEY}
     networks:
       - tw-network
     environment:
@@ -15,6 +17,8 @@ services:
       - PORT=3000
       - DATABASE_URL=${DATABASE_URL}
       - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+      - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+      - PM2_SECRET_KEY=${PM2_SECRET_KEY}
 
   frontend:
     build:
