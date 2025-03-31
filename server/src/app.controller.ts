@@ -1,5 +1,5 @@
 import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query} from '@nestjs/common';
-import {AppService} from './app.service';
+import {AddressesService} from "./address.service";
 
 export type ServiceType = 'cleaning' | 'drycleaning'
 
@@ -127,7 +127,7 @@ export class AppController {
     ];
 
 
-    constructor(private readonly appService: AppService) {
+    constructor(private readonly addressesService: AddressesService) {
     }
 
     @Get('version')
@@ -139,43 +139,24 @@ export class AppController {
         };
     }
 
-    @Get()
-    getHello(): string {
-        return this.appService.getHello();
-    }
-
     @Get('/addresses')
     getAddresses(@Query() {userId}: { userId?: number }) {
-        if (!userId) {
-            return this._addresses;
-        }
-        return this._addresses.filter(o => o.userId?.toString() === userId?.toString());
+        return this.addressesService.getAll(userId);
     }
 
     @Post('/addresses')
     addAddress(@Body() body: any): any {
-        this._addresses.push({
-            ...body,
-            id: Date.now()
-        })
-
-        return body;
+        return this.addressesService.create(body);
     }
 
     @Put('/addresses/:id')
     editAddress(@Param('id') id: number, @Body() body: any): any {
-        const existAddress = this._addresses.find(o => o.id?.toString() === id?.toString() && o.userId?.toString() === body?.userId?.toString());
-        if (!existAddress) {
-            return new NotFoundException();
-        }
-        Object.assign(existAddress, body);
-
-        return existAddress;
+        return this.addressesService.update(body);
     }
 
     @Delete('/addresses/:id')
     deleteAddress(@Param('id') id: number): any {
-        this._addresses = this._addresses.filter(o => o.id?.toString() !== id?.toString())
+        return this.addressesService.delete(id);
     }
 
     @Get('/orders')
