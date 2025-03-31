@@ -13,8 +13,8 @@ FROM node:18-alpine
 WORKDIR /app
 
 ENV NODE_ENV production
-ENV DATABASE_URL=""
-ENV SHADOW_DATABASE_URL=""
+ENV DATABASE_URL=$DATABASE_URL
+ENV SHADOW_DATABASE_URL=$SHADOW_DATABASE_URL
 
 COPY --from=builder /app/package*.json ./
 RUN npm ci --production
