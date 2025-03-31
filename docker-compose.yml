@@ -3,8 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile.backend
+      context: ./server
       args:
         - DATABASE_URL=${DATABASE_URL}
         - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
@@ -22,8 +21,7 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.frontend
+      context: ./client
     networks:
       - tw-network
     image: frontend
