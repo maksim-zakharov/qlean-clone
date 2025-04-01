@@ -1,7 +1,8 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, Res} from '@nestjs/common';
 import {AddressesService} from "./address.service";
 import {OrdersService} from "./orders/orders.service";
 import {Address, Order} from "@prisma/client";
+import axios from "axios";
 
 export type ServiceType = 'cleaning' | 'drycleaning'
 
@@ -34,6 +35,60 @@ export type ServiceCategory = {
 @Controller()
 export class AppController {
     constructor(private readonly addressesService: AddressesService, private readonly ordersService: OrdersService) {
+    }
+
+
+    @Get('/')
+    async getStatic(@Res() res) {
+        const response = await axios.get(
+            'https://maksim-zakharov.github.io/qlean-clone/',
+            {
+                responseType: 'stream',
+            },
+        );
+
+        res.set('content-type', response.headers['content-type']);
+        res.set('cache-control', response.headers['cache-control']);
+        response.data.pipe(res);
+    }
+
+    @Get('/qlean-clone/:path')
+    async getAsset(@Param('path') path: string, @Res() res) {
+        const response = await axios.get(
+            `https://maksim-zakharov.github.io/qlean-clone/${path}`,
+            {
+                responseType: 'stream',
+            },
+        );
+        res.set('content-type', response.headers['content-type']);
+        res.set('cache-control', response.headers['cache-control']);
+        response.data.pipe(res);
+    }
+
+    @Get('/qlean-clone/public/:path')
+    async getPublic(@Param('path') path: string, @Res() res) {
+        const response = await axios.get(
+            `https://maksim-zakharov.github.io/qlean-clone/public/${path}`,
+            {
+                responseType: 'stream',
+            },
+        );
+        res.set('content-type', response.headers['content-type']);
+        res.set('cache-control', response.headers['cache-control']);
+        response.data.pipe(res);
+    }
+
+    @Get('/qlean-clone/assets/:path')
+    async getCSS(@Param('path') path: string, @Res() res) {
+        const response = await axios.get(
+            `https://maksim-zakharov.github.io/qlean-clone/assets/${path}`,
+            {
+                responseType: 'stream',
+            },
+        );
+        res.set('content-type', response.headers['content-type']);
+        res.set('cache-control', response.headers['cache-control']);
+        response.data.pipe(res);
     }
 
     @Get('env')
