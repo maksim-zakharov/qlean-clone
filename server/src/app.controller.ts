@@ -96,15 +96,6 @@ export class AppController {
         return process.env;
     }
 
-    @Get('version')
-    getVersion() {
-        return {
-            version: process.env.npm_package_version,
-            commit: process.env.COMMIT_HASH,
-            buildDate: process.env.BUILD_DATE
-        };
-    }
-
     @Get('/api/addresses')
     getAddresses(@Query() {userId}: { userId?: number }) {
         return this.addressesService.getAll(Number(userId));
