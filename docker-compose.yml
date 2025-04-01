@@ -2,20 +2,22 @@ version: '3.8'
 
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - DATABASE_URL=${DATABASE_URL}
-        - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
-        - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
-        - PM2_SECRET_KEY=${PM2_SECRET_KEY}
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
-      - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
-      - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
-      - PM2_SECRET_KEY=${PM2_SECRET_KEY}
+    env_file: ".env"
+    build: .
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        - DATABASE_URL=${DATABASE_URL}
+#        - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+#        - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+#        - PM2_SECRET_KEY=${PM2_SECRET_KEY}
+#    environment:
+#      - NODE_ENV=development
+#      - DATABASE_URL=${DATABASE_URL}
+#      - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+#      - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+#      - PM2_SECRET_KEY=${PM2_SECRET_KEY}
     networks:
       - tw-network
     healthcheck:
