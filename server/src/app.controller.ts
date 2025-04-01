@@ -65,10 +65,10 @@ export class AppController {
         response.data.pipe(res);
     }
 
-    @Get('/api/env')
-    getEnv() {
-        return process.env;
-    }
+    // @Get('/api/env')
+    // getEnv() {
+    //     return process.env;
+    // }
 
     @Get('/api/addresses')
     getAddresses(@Query() {userId}: { userId?: number }) {
