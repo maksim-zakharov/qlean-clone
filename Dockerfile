@@ -11,7 +11,6 @@ WORKDIR /app
 
 # Копируем зависимости, Pr-клиент и билд
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/ecosystem.config.js ./
 COPY --from=builder /app/dist ./dist
 # Копируем схему Prisma
 COPY --from=builder /app/prisma ./prisma
