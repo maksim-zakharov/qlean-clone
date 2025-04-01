@@ -15,27 +15,27 @@ COPY --from=builder /app/dist ./dist
 # Копируем схему Prisma
 COPY --from=builder /app/prisma ./prisma
 
+# Аргументы сборки (передаются через --build-arg)
 ARG DATABASE_URL
 ARG SHADOW_DATABASE_URL
 ARG PM2_PUBLIC_KEY
 ARG PM2_SECRET_KEY
 
-ENV NODE_ENV production
-ENV DATABASE_URL={$DATABASE_URL}
-ENV SHADOW_DATABASE_URL={$SHADOW_DATABASE_URL}
-ENV PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
-ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
+#ENV NODE_ENV production
+#ENV DATABASE_URL={$DATABASE_URL}
+#ENV SHADOW_DATABASE_URL={$SHADOW_DATABASE_URL}
+#ENV PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+#ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
 
-# Создаем .env файл с переменными
-RUN printf "DATABASE_URL=%s\nSHADOW_DATABASE_URL=%s\nPM2_PUBLIC_KEY=%s\nPM2_SECRET_KEY=%s\nNODE_ENV=production\n" \
-    "$DATABASE_URL" \
-    "$SHADOW_DATABASE_URL" \
-    "$PM2_PUBLIC_KEY" \
-    "$PM2_SECRET_KEY" > .env
+# Создаем .env файл из аргументов сборки
+RUN echo "DATABASE_URL=$DATABASE_URL" > .env && \
+    echo "SHADOW_DATABASE_URL=$SHADOW_DATABASE_URL" >> .env && \
+    echo "PM2_PUBLIC_KEY=$PM2_PUBLIC_KEY" >> .env && \
+    echo "PM2_SECRET_KEY=$PM2_SECRET_KEY" >> .env && \
+    echo "NODE_ENV=production" >> .env
 
+# Устанавливаем зависимости и генерируем Prisma Client
 RUN npm ci --production
-
-# Генерируем Prisma Client для продакшена
 RUN npx prisma generate
 
 EXPOSE 3000
