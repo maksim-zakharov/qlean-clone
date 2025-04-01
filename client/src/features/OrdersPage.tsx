@@ -26,8 +26,8 @@ export const OrdersPage = () => {
             {activeOrders.map(ao => <Card className="p-0 gap-0 mt-2">
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
-                        <Typography.Title>{ao.serviceName}</Typography.Title>
-                        <Typography.Title>{moneyFormat(ao.totalPrice)}</Typography.Title>
+                        <Typography.Title>{ao.baseService?.name}</Typography.Title>
+                        <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
                     </div>
                     <div className="flex justify-between">
                         <Typography.Description>{ao.fullAddress}</Typography.Description>

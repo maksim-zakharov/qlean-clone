@@ -38,14 +38,14 @@ const MainPage = () => {
                         {category.name}
                     </Typography.H2>
                     <div className="grid grid-cols-2 gap-2">
-                        {category.services.map(service => {
-                            const Icon = ICONS[service.icon]
+                        {category.variants.map(service => {
+                            // const Icon = ICONS[service.icon]
                             return (
                                 <CardItem
                                     key={service.id}
                                     title={service.name}
-                                    icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
-                                    onClick={() => navigate(`/order/${service.id}`)}
+                                    // icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
+                                    onClick={() => navigate(`/order/${category.id}?variantId=${service.id}`)}
                                 />
                             )
                         })}

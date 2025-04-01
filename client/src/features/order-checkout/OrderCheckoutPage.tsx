@@ -26,12 +26,13 @@ export const OrderCheckoutPage = () => {
     const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string | undefined>();
     const {vibro, userId} = useTelegram();
-    const currentService = location.state?.currentService as Service;
-    const selectedServices = (location.state?.selectedServices || []) as ServiceOption[]
-    const totalPrice = selectedServices.reduce((sum: number, service: ServiceOption) => sum + service.price, currentService.basePrice)
+    console.log(location.state)
+    const baseService = location.state?.baseService;
+    const options = (location.state?.options || [])
+    const totalPrice = options.reduce((sum: number, service: ServiceOption) => sum + service.price, baseService.basePrice)
 
     // Считаем общее время
-    const totalDuration = useMemo(() => selectedServices.reduce((sum, option) => sum + (option?.duration || 0), currentService?.duration || 0), [currentService]);
+    const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), baseService?.duration || 0), [baseService]);
 
     const dateTitle = useMemo(() => {
         if (!selectedTimestamp) {
@@ -44,11 +45,10 @@ export const OrderCheckoutPage = () => {
     const handleOnSubmit = async () => {
         await addOrder(
             {
-                serviceName: currentService?.name,
-                service: currentService,
-                totalPrice: totalPrice,
+                baseService,
+                serviceVariant: location.state?.serviceVariant,
                 fullAddress: 'Москва, Ходынский бульвар, 2',
-                options: selectedServices,
+                options,
                 date: selectedTimestamp,
                 comment,
                 userId
@@ -60,7 +60,7 @@ export const OrderCheckoutPage = () => {
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>
+                    <BackButton url={`/order/${baseService?.id}`} state={{selectedServices: options, currentService: baseService}}/>
                     <div className="flex-1 flex flex-col items-center">
                         <div className="text-tg-theme-text-color text-base font-medium">
                             Оформление заказа
@@ -71,7 +71,7 @@ export const OrderCheckoutPage = () => {
             </Header>
             <div
                 className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
-                <BackButton url={`/order/${currentService?.id}`} state={{selectedServices, currentService}}/>
+                <BackButton url={`/order/${baseService?.id}`} state={{selectedServices: options, currentService: baseService}}/>
                 <div className="flex-1 flex flex-col items-center">
                     <Typography.Title>Оформление заказа</Typography.Title>
                     <Typography.Description>Оружейный переулок, 41</Typography.Description>
@@ -145,7 +145,7 @@ export const OrderCheckoutPage = () => {
                         onValueChange={() => vibro()}
                     >
                         <AccordionItem value="services">
-                            <AccordionTrigger disabled={!selectedServices.length}
+                            <AccordionTrigger disabled={!options.length}
                                               className="px-4 py-3 hover:no-underline">
                                 <div className="flex justify-between w-full">
                                     <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
@@ -157,11 +157,11 @@ export const OrderCheckoutPage = () => {
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div className="flex flex-col gap-2">
-                                    <div key={currentService.id} className="flex justify-between">
-                                        <span className="text-tg-theme-text-color">{currentService.name}</span>
-                                        <span className="text-tg-theme-text-color">{moneyFormat(currentService.basePrice)}</span>
+                                    <div key={baseService.id} className="flex justify-between">
+                                        <span className="text-tg-theme-text-color">{baseService.name}</span>
+                                        <span className="text-tg-theme-text-color">{moneyFormat(baseService.basePrice)}</span>
                                     </div>
-                                    {selectedServices.map((service, index) => (
+                                    {options.map((service, index) => (
                                         <div key={index} className="flex justify-between">
                                             <span className="text-tg-theme-text-color">{service.name}</span>
                                             <span className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>

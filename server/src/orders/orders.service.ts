@@ -15,13 +15,25 @@ export class OrdersService {
 
     getAll(userId: Order['userId']) {
         return this.prisma.order.findMany({
-            where: {userId}
+            where: {userId},
+            include: {
+                baseService: true,
+                options: true,
+                serviceVariant: true,
+            }
         })
     }
 
-    async create(data: Omit<Order, 'id'>): Promise<Order> {
+    async create(data: any): Promise<Order> {
         return this.prisma.order.create({
-            data,
+            data: {
+                baseServiceId: data.baseService.id,
+                userId: data.userId,
+                date: new Date(data.date),
+                fullAddress: data.fullAddress,
+                serviceVariantId: data.serviceVariant.id,
+                optionIds: data.options.map(o => o.id)
+            },
         });
     }
 

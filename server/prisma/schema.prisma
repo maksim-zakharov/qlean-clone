@@ -23,11 +23,52 @@ enum OrderStatus {
 }
 
 model Order {
-  id    Int     @default(autoincrement()) @id
-  status OrderStatus @default(active)
-  serviceName String
-  totalPrice Int
+  id               Int              @id @default(autoincrement())
+  baseService      BaseService      @relation(fields: [baseServiceId], references: [id])
+  baseServiceId    Int
+  serviceVariant   ServiceVariant   @relation(fields: [serviceVariantId], references: [id])
+  serviceVariantId Int
+  options          OrderServiceOption[]  @relation("OrderToServiceOption")
+  optionIds        Int[]
   fullAddress String
-  date Int
+  date DateTime @db.Timestamp(6)
   userId Int?
+}
+
+model BaseService {
+  id          Int              @id @default(autoincrement())
+  name        String
+  variants    ServiceVariant[]
+  options     ServiceOption[]
+  orders      Order[]
+}
+
+model ServiceVariant {
+  id            Int          @id @default(autoincrement())
+  name          String
+  basePrice     Int
+  duration      Int
+  baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
+  baseServiceId Int
+  orders        Order[]
+}
+
+model ServiceOption {
+  id            Int          @id @default(autoincrement())
+  name          String
+  price         Int
+  duration      Int
+  isPopular     Boolean      @default(false)
+  baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
+  baseServiceId Int
+  orders        OrderServiceOption[]  @relation("OrderToServiceOption")
+}
+
+model OrderServiceOption {
+  orderId          Int
+  serviceOptionId  Int
+  order            Order          @relation(fields: [orderId], references: [id], name: "OrderToServiceOption")
+  serviceOption    ServiceOption  @relation(fields: [serviceOptionId], references: [id], name: "OrderToServiceOption")
+
+  @@id([orderId, serviceOptionId])
 }

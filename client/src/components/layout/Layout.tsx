@@ -1,13 +1,13 @@
-import {ClipboardList, Gift, Home, LucideIcon} from "lucide-react"
+import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
-import {Avatar} from "./Avatar"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {useEffect, useState} from "react";
+import {useMemo, useState} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
+import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 
 type MenuItem = {
     icon: LucideIcon
@@ -39,7 +39,7 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const {isLoading, userId} = useTelegram();
+    const {isLoading, userId, photoUrl} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
     const navigate = useNavigate()
     const location = useLocation();
@@ -57,7 +57,10 @@ export const Layout = () => {
     return <>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
-                <Avatar/>
+                <Avatar>
+                    <AvatarImage src={photoUrl}/>
+                    <AvatarFallback><User /></AvatarFallback>
+                </Avatar>
                 <div className="flex-1 flex flex-col items-center">
                     <Typography.Description>Адрес</Typography.Description>
                     <AddressSheet
@@ -66,7 +69,8 @@ export const Layout = () => {
                         onAddAddress={handleAddAddress}
                     >
                         <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                            {selectedAddress?.fullAddress || 'Выберите адрес'} <span className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                            {selectedAddress?.fullAddress || 'Выберите адрес'} <span
+                            className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                         </Button>
                     </AddressSheet>
                 </div>

@@ -1,8 +1,8 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {useLocation, useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
-import {CLEANING_TABS, DRYCLEANING_TABS, Service, SERVICE_OPTIONS} from './types'
+import {Service, SERVICE_OPTIONS} from './types'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
@@ -13,38 +13,30 @@ import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
+import {useGetServicesQuery} from "../../api.ts";
 
 export const OrderCreationPage = () => {
     const location = useLocation()
-    const selectedServices = (location.state?.selectedServices || []) as Service[]
+    const {data: services = []} = useGetServicesQuery();
+    const selectedServices = (location.state?.selectedServices || [])
     const {vibro} = useTelegram();
     const navigate = useNavigate()
     const {serviceId = ''} = useParams<{ serviceId: string }>()
-    const [currentService, setcurrentService] = useState<Service | undefined>(location.state?.currentService);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(selectedServices.map(s => s.id));
+    const [searchParams] = useSearchParams()
+
+    const [selectedOptions, setSelectedOptions] = useState<number[]>(selectedServices.map(s => s.id));
 
     // Если создаем - true, если редактируем - false;
     const isDraft = true;
 
-    // Определяем тип сервиса и находим текущую услугу
-    const isCleaningService = useMemo(() => CLEANING_TABS.flatMap(tab => tab.services).some(service => service.id === serviceId), [serviceId]);
-
-    const tabs = isCleaningService ? CLEANING_TABS : DRYCLEANING_TABS
-    const serviceType = isCleaningService ? 'cleaning' : 'drycleaning'
-
-    useEffect(() => {
-        setcurrentService(tabs
-            .flatMap(tab => tab.services)
-            .find(service => service.id === serviceId))
-    }, [serviceId, tabs]);
-
     // Находим таб, в котором находится услуга
-    const currentTab = useMemo(() => tabs.find(tab =>
-        tab.services.some(service => service.id === serviceId)
-    ), [serviceId, tabs]);
+    const currentService = useMemo(() => services.find(service => service.id === Number(serviceId)), [serviceId, services]);
 
+    const variantId = Number(searchParams.get('variantId')) || currentService?.variants[0]?.id;
+    // Находим варианты услуг по базовой услуге
+    const variants = currentService?.variants || [];
     // Получаем доступные опции для типа услуги
-    const availableOptions = SERVICE_OPTIONS[serviceType] || []
+    const availableOptions = currentService?.options || [];
 
     // Считаем общую сумму
     const totalPrice = useMemo(() => selectedOptions.reduce((sum, optionId) => {
@@ -58,7 +50,7 @@ export const OrderCreationPage = () => {
         return sum + (option?.duration || 0)
     }, currentService?.duration || 0), [currentService, selectedOptions, availableOptions]);
 
-    const handleOptionToggle = (optionId: string) => {
+    const handleOptionToggle = (optionId: number) => {
         vibro('light');
         setSelectedOptions(prev =>
             prev.includes(optionId)
@@ -68,11 +60,11 @@ export const OrderCreationPage = () => {
     }
 
     const handleNext = () => {
-        const selectedServiceOptions = availableOptions
-            .filter(option => selectedOptions.includes(option.id));
+        const serviceVariant = currentService?.variants.find(v => v.id === variantId);
+        const options = currentService?.options.filter(v => selectedOptions.includes(v.id));
 
         navigate(`/order/${serviceId}/checkout`, {
-            state: {selectedServices: selectedServiceOptions, currentService}
+            state: {baseService: currentService, serviceVariant, options}
         });
     }
 
@@ -86,24 +78,20 @@ export const OrderCreationPage = () => {
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <BackButton/>
                     <Typography.Title
-                        className="items-center flex justify-center">{isCleaningService ? 'Уборка' : 'Химчистка'}</Typography.Title>
+                        className="items-center flex justify-center">{currentService?.name}</Typography.Title>
                 </div>
             </Header>
 
             {/* Service Options */}
             <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4">
-                <Tabs defaultValue={currentTab?.id} value={currentTab?.id}
+                <Tabs defaultValue={variantId} value={variantId}
                       className="mt-[calc(56px+env(safe-area-inset-top))]">
                     <TabsList>
-                        {tabs.map(tab => (
+                        {variants.map(tab => (
                             <TabsTrigger
                                 key={tab.id}
                                 value={tab.id}
-                                onClick={() => {
-                                    if (tab.services.length > 0) {
-                                        navigate(`/order/${tab.services[0].id}`)
-                                    }
-                                }}
+                                onClick={() => navigate(`/order/${serviceId}?variantId=${tab.id}`)}
                             >
                                 {tab.name}
                             </TabsTrigger>
