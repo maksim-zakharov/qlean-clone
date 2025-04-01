@@ -33,8 +33,8 @@ RUN npm ci --production
 # Генерируем Prisma Client для продакшена
 RUN npx prisma generate
 
-CMD ["pm2-runtime", "dist/main.js"]
-EXPOSE $PORT
+#CMD ["pm2-runtime", "dist/main.js"]
+#EXPOSE $PORT
 
-#EXPOSE 3000
-#CMD ["node", "dist/main.js"]
+EXPOSE 3000
+CMD ["node", "dist/main.js"]
