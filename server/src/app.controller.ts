@@ -36,6 +36,11 @@ export class AppController {
     constructor(private readonly addressesService: AddressesService, private readonly ordersService: OrdersService) {
     }
 
+    @Get('env')
+    getEnv() {
+        return process.env;
+    }
+
     @Get('version')
     getVersion() {
         return {
