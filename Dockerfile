@@ -9,8 +9,6 @@ RUN npm run build:ci
 FROM node:18-alpine
 WORKDIR /app
 
-RUN #npm install pm2 -g
-
 # Копируем зависимости, Pr-клиент и билд
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/ecosystem.config.js ./
@@ -40,9 +38,6 @@ RUN npm ci --production
 
 # Генерируем Prisma Client для продакшена
 RUN npx prisma generate
-
-#CMD ["pm2-runtime", "ecosystem.config.js"]
-#EXPOSE $PORT
 
 EXPOSE 3000
 CMD ["node", "dist/main.js"]
