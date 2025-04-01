@@ -61,7 +61,7 @@ jobs:
         working-directory: client
 
       - name: Build project
-        run: npm run build
+        run: npm run build:ci
         working-directory: client
 
       - name: Upload artifact

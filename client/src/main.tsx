@@ -25,7 +25,7 @@ dayjs.updateLocale('ru', {
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <BrowserRouter>
             <Provider store={store}>
                 <App/>
             </Provider>
