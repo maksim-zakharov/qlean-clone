@@ -52,19 +52,6 @@ export class AppController {
         response.data.pipe(res);
     }
 
-    @Get('/:path')
-    async getAsset(@Param('path') path: string, @Res() res) {
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
-    }
-
     // Нужно для локального фронта
     @Get('/qlean-clone/public/:path')
     async getPublic(@Param('path') path: string, @Res() res) {
