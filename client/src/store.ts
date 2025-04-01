@@ -1,9 +1,11 @@
 
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {api} from "./api.ts";
+import createOrderSlice from "./slices/createOrderSlice.ts";
 
 export const reducers = {
     [api.reducerPath]: api.reducer,
+    [createOrderSlice.reducerPath]: createOrderSlice.reducer,
 };
 
 const reducer = combineReducers(reducers);

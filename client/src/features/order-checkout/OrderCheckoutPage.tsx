@@ -17,22 +17,34 @@ import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {useAddOrderMutation} from "../../api.ts";
 import {moneyFormat} from "../../lib/utils.ts";
+import {useSelector} from "react-redux";
 
 
 export const OrderCheckoutPage = () => {
     const [addOrder] = useAddOrderMutation();
+
+    const baseService = useSelector(state => state.createOrder.baseService)
+    const options = useSelector(state => state.createOrder.options)
+    const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
+    const fullAddress = useSelector(state => state.createOrder.fullAddress?.fullAddress)
+
     const navigate = useNavigate()
-    const location = useLocation()
     const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string | undefined>();
     const {vibro, userId} = useTelegram();
-    console.log(location.state)
-    const baseService = location.state?.baseService;
-    const options = (location.state?.options || [])
-    const totalPrice = options.reduce((sum: number, service: ServiceOption) => sum + service.price, baseService.basePrice)
+    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
 
     // Считаем общее время
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), baseService?.duration || 0), [baseService]);
+
+    const backUrl = useMemo(() => {
+        const url = new URL(`${window.origin}/order/${baseService?.id}`);
+        url.searchParams.set('variantId', serviceVariant.id);
+        options.forEach((option) => url.searchParams.append('optionId', option.id));
+
+        return url.toString().replace(window.origin, '');
+
+    }, [serviceVariant, options, baseService]);
 
     const dateTitle = useMemo(() => {
         if (!selectedTimestamp) {
@@ -46,8 +58,8 @@ export const OrderCheckoutPage = () => {
         await addOrder(
             {
                 baseService,
-                serviceVariant: location.state?.serviceVariant,
-                fullAddress: 'Москва, Ходынский бульвар, 2',
+                serviceVariant,
+                fullAddress,
                 options,
                 date: selectedTimestamp,
                 comment,
@@ -58,23 +70,12 @@ export const OrderCheckoutPage = () => {
 
     return (
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
-            <Header>
-                <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton url={`/order/${baseService?.id}`} state={{selectedServices: options, currentService: baseService}}/>
-                    <div className="flex-1 flex flex-col items-center">
-                        <div className="text-tg-theme-text-color text-base font-medium">
-                            Оформление заказа
-                        </div>
-                        <span className="text-xs text-tg-theme-hint-color">Оружейный переулок, 41</span>
-                    </div>
-                </div>
-            </Header>
             <div
                 className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
                 <BackButton url={`/order/${baseService?.id}`} state={{selectedServices: options, currentService: baseService}}/>
                 <div className="flex-1 flex flex-col items-center">
                     <Typography.Title>Оформление заказа</Typography.Title>
-                    <Typography.Description>Оружейный переулок, 41</Typography.Description>
+                    <Typography.Description>{fullAddress}</Typography.Description>
                 </div>
                 <div className="w-[40px]"/>
             </div>
@@ -159,7 +160,7 @@ export const OrderCheckoutPage = () => {
                                 <div className="flex flex-col gap-2">
                                     <div key={baseService.id} className="flex justify-between">
                                         <span className="text-tg-theme-text-color">{baseService.name}</span>
-                                        <span className="text-tg-theme-text-color">{moneyFormat(baseService.basePrice)}</span>
+                                        <span className="text-tg-theme-text-color">{moneyFormat(serviceVariant.basePrice)}</span>
                                     </div>
                                     {options.map((service, index) => (
                                         <div key={index} className="flex justify-between">

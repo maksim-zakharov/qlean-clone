@@ -8,6 +8,8 @@ import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
+import {selectFullAddress} from "../../slices/createOrderSlice.ts";
+import {useDispatch, useSelector} from "react-redux";
 
 type MenuItem = {
     icon: LucideIcon
@@ -41,9 +43,14 @@ const menuItems: MenuItem[] = [
 export const Layout = () => {
     const {isLoading, userId, photoUrl} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
+    const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
     const location = useLocation();
-    const [selectedAddress, setSelectedAddress] = useState<any>();
+    const dispatch = useDispatch();
+
+    const handleSelectAddress = (address: any) => {
+        dispatch(selectFullAddress(address))
+    }
 
     const handleAddAddress = () => {
         // TODO: Implement address addition logic
@@ -65,11 +72,11 @@ export const Layout = () => {
                     <Typography.Description>Адрес</Typography.Description>
                     <AddressSheet
                         addresses={addresses}
-                        onAddressSelect={setSelectedAddress}
+                        onAddressSelect={handleSelectAddress}
                         onAddAddress={handleAddAddress}
                     >
                         <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                            {selectedAddress?.fullAddress || 'Выберите адрес'} <span
+                            {fullAddress?.fullAddress || 'Выберите адрес'} <span
                             className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                         </Button>
                     </AddressSheet>

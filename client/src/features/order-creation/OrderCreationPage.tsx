@@ -1,8 +1,7 @@
-import React, {useEffect, useMemo, useState} from 'react'
-import {useLocation, useNavigate, useParams, useSearchParams} from 'react-router-dom'
+import React, {useMemo} from 'react'
+import {useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
-import {Service, SERVICE_OPTIONS} from './types'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
@@ -14,17 +13,17 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useGetServicesQuery} from "../../api.ts";
+import {useDispatch} from "react-redux";
+import {selectBaseService} from "../../slices/createOrderSlice.ts";
 
 export const OrderCreationPage = () => {
-    const location = useLocation()
     const {data: services = []} = useGetServicesQuery();
-    const selectedServices = (location.state?.selectedServices || [])
     const {vibro} = useTelegram();
     const navigate = useNavigate()
     const {serviceId = ''} = useParams<{ serviceId: string }>()
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const [selectedOptions, setSelectedOptions] = useState<number[]>(selectedServices.map(s => s.id));
+    const dispatch = useDispatch();
 
     // Если создаем - true, если редактируем - false;
     const isDraft = true;
@@ -33,6 +32,7 @@ export const OrderCreationPage = () => {
     const currentService = useMemo(() => services.find(service => service.id === Number(serviceId)), [serviceId, services]);
 
     const variantId = Number(searchParams.get('variantId')) || currentService?.variants[0]?.id;
+    const selectedOptions = searchParams.getAll('optionId') || [];
     // Находим варианты услуг по базовой услуге
     const variants = currentService?.variants || [];
     // Получаем доступные опции для типа услуги
@@ -40,7 +40,7 @@ export const OrderCreationPage = () => {
 
     // Считаем общую сумму
     const totalPrice = useMemo(() => selectedOptions.reduce((sum, optionId) => {
-        const option = availableOptions.find(opt => opt.id === optionId)
+        const option = availableOptions.find(opt => opt.id === Number(optionId))
         return sum + (option?.price || 0)
     }, currentService?.basePrice || 0), [currentService, selectedOptions, availableOptions]);
 
@@ -52,20 +52,22 @@ export const OrderCreationPage = () => {
 
     const handleOptionToggle = (optionId: number) => {
         vibro('light');
-        setSelectedOptions(prev =>
-            prev.includes(optionId)
-                ? prev.filter(id => id !== optionId)
-                : [...prev, optionId]
-        )
+        if (searchParams.has('optionId', optionId?.toString())) {
+            searchParams.delete('optionId', optionId?.toString())
+        } else {
+            searchParams.append('optionId', optionId?.toString())
+        }
+
+        setSearchParams(searchParams)
     }
 
     const handleNext = () => {
         const serviceVariant = currentService?.variants.find(v => v.id === variantId);
         const options = currentService?.options.filter(v => selectedOptions.includes(v.id));
 
-        navigate(`/order/${serviceId}/checkout`, {
-            state: {baseService: currentService, serviceVariant, options}
-        });
+        dispatch(selectBaseService({baseService: currentService, serviceVariant, options}))
+
+        navigate(`/order/${serviceId}/checkout`);
     }
 
     if (!currentService) {
@@ -113,10 +115,11 @@ export const OrderCreationPage = () => {
                             </div>
                             <div className="flex items-center gap-3 ml-3 w-full justify-between">
                                 {option.isPopular ? (
-                                    <Badge className="flex gap-1 items-center"><Star className="w-3 h-3" />ПОПУЛЯРНО</Badge>
+                                    <Badge className="flex gap-1 items-center"><Star
+                                        className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
                                 ) : <div/>}
                                 <Button
-                                    variant={selectedOptions.includes(option.id) ? 'primary' : 'default'}
+                                    variant={selectedOptions.includes(option.id.toString()) ? 'primary' : 'default'}
                                     className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
                                     onClick={() => handleOptionToggle(option.id)}
                                 >
