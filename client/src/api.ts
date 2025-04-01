@@ -7,7 +7,7 @@ export const api = createApi({
         "Service", "Order", 'Address'
     ],
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NODE_ENV !== 'production' ? "http://localhost:3000" : ''
+        baseUrl: process.env.NODE_ENV !== 'production' ? "http://localhost:3000" : '/api'
     }),
     endpoints: (builder) => ({
         getServices: builder.query<ServiceCategory[], void>({
