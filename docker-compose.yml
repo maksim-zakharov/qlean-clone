@@ -8,13 +8,19 @@ services:
       args:
         - DATABASE_URL=${DATABASE_URL}
         - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
-    networks:
-      - tw-network
     environment:
       - NODE_ENV=production
-      - PORT=3000
       - DATABASE_URL=${DATABASE_URL}
       - SHADOW_DATABASE_URL=${SHADOW_DATABASE_URL}
+      - PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
+      - PM2_SECRET_KEY=${PM2_SECRET_KEY}
+    networks:
+      - tw-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
     build:
