@@ -91,7 +91,7 @@ export class AppController {
         response.data.pipe(res);
     }
 
-    @Get('env')
+    @Get('/api/env')
     getEnv() {
         return process.env;
     }
@@ -105,47 +105,47 @@ export class AppController {
         };
     }
 
-    @Get('/addresses')
+    @Get('/api/addresses')
     getAddresses(@Query() {userId}: { userId?: number }) {
         return this.addressesService.getAll(Number(userId));
     }
 
-    @Post('/addresses')
+    @Post('/api/addresses')
     addAddress(@Body() {id, ...body}: Address): any {
         return this.addressesService.create(body);
     }
 
-    @Put('/addresses/:id')
+    @Put('/api/addresses/:id')
     editAddress(@Param('id') id: number, @Body() body: any): any {
         return this.addressesService.update(body);
     }
 
-    @Delete('/addresses/:id')
+    @Delete('/api/addresses/:id')
     deleteAddress(@Param('id') id: number): any {
         return this.addressesService.delete(Number(id));
     }
 
-    @Get('/orders')
+    @Get('/api/orders')
     getOrders(@Query() {userId}: { userId?: number }) {
         return this.ordersService.getAll(Number(userId));
     }
 
-    @Get('/orders/:id')
+    @Get('/api/orders/:id')
     getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
         return this.ordersService.getById(Number(id), Number(userId));
     }
 
-    @Put('/orders/:id')
+    @Put('/api/orders/:id')
     editOrder(@Param('id') id: number, @Body() body: Order): any {
         return this.ordersService.update(body);
     }
 
-    @Post('/orders')
+    @Post('/api/orders')
     addOrder(@Body() {id, ...body}: Order) {
         return this.ordersService.create(body);
     }
 
-    @Get('/services')
+    @Get('/api/services')
     getServices() {
         const SERVICES_DATA: ServiceCategory[] = [
             {
