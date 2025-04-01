@@ -52,11 +52,6 @@ export const Layout = () => {
         dispatch(selectFullAddress(address))
     }
 
-    const handleAddAddress = () => {
-        // TODO: Implement address addition logic
-        console.log('Add address clicked');
-    };
-
     if (isLoading) {
         return null;
     }
@@ -73,7 +68,6 @@ export const Layout = () => {
                     <AddressSheet
                         addresses={addresses}
                         onAddressSelect={handleSelectAddress}
-                        onAddAddress={handleAddAddress}
                     >
                         <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
                             {fullAddress?.fullAddress || 'Выберите адрес'} <span

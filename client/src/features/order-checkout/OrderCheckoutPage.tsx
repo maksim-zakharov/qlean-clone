@@ -15,9 +15,11 @@ import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
-import {useAddOrderMutation} from "../../api.ts";
+import {useAddOrderMutation, useGetAddressesQuery} from "../../api.ts";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {AddressSheet} from "../../components/AddressSheet.tsx";
+import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 
 
 export const OrderCheckoutPage = () => {
@@ -27,15 +29,17 @@ export const OrderCheckoutPage = () => {
     const options = useSelector(state => state.createOrder.options)
     const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
     const fullAddress = useSelector(state => state.createOrder.fullAddress?.fullAddress)
+    const dispatch = useDispatch();
 
     const navigate = useNavigate()
     const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string | undefined>();
     const {vibro, userId} = useTelegram();
+    const {data: addresses = []} = useGetAddressesQuery({userId});
     const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
 
     // Считаем общее время
-    const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), baseService?.duration || 0), [baseService]);
+    const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
 
     const backUrl = useMemo(() => {
         const url = new URL(`${window.origin}/order/${baseService?.id}`);
@@ -54,7 +58,12 @@ export const OrderCheckoutPage = () => {
         return dayjs(selectedTimestamp).format('dddd, D MMMM HH:mm');
     }, [selectedTimestamp]);
 
+    const handleSelectAddress = (address: any) => {
+        dispatch(selectFullAddress(address))
+    }
+
     const handleOnSubmit = async () => {
+        debugger
         await addOrder(
             {
                 baseService,
@@ -72,11 +81,16 @@ export const OrderCheckoutPage = () => {
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
             <div
                 className="flex items-center h-[48px] px-2 pt-[env(safe-area-inset-top,0px)] bg-tg-theme-secondary-bg-color border-b border-tg-theme-section-separator-color">
-                <BackButton url={`/order/${baseService?.id}`} state={{selectedServices: options, currentService: baseService}}/>
-                <div className="flex-1 flex flex-col items-center">
-                    <Typography.Title>Оформление заказа</Typography.Title>
-                    <Typography.Description>{fullAddress}</Typography.Description>
-                </div>
+                <BackButton url={backUrl} state={{selectedServices: options, currentService: baseService}}/>
+                <AddressSheet
+                    addresses={addresses}
+                    onAddressSelect={handleSelectAddress}
+                >
+                    <Button variant="ghost" className="flex-1 flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                        <Typography.Title>Оформление заказа</Typography.Title>
+                        <Typography.Description>{fullAddress}</Typography.Description>
+                    </Button>
+                </AddressSheet>
                 <div className="w-[40px]"/>
             </div>
 

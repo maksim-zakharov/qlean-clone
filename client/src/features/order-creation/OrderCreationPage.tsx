@@ -32,9 +32,11 @@ export const OrderCreationPage = () => {
     const currentService = useMemo(() => services.find(service => service.id === Number(serviceId)), [serviceId, services]);
 
     const variantId = Number(searchParams.get('variantId')) || currentService?.variants[0]?.id;
+
     const selectedOptions = searchParams.getAll('optionId') || [];
     // Находим варианты услуг по базовой услуге
     const variants = currentService?.variants || [];
+    const serviceVariant = useMemo(() => currentService?.variants.find(v => v.id === variantId), [variantId, services]);
     // Получаем доступные опции для типа услуги
     const availableOptions = currentService?.options || [];
 
@@ -42,13 +44,13 @@ export const OrderCreationPage = () => {
     const totalPrice = useMemo(() => selectedOptions.reduce((sum, optionId) => {
         const option = availableOptions.find(opt => opt.id === Number(optionId))
         return sum + (option?.price || 0)
-    }, currentService?.basePrice || 0), [currentService, selectedOptions, availableOptions]);
+    }, serviceVariant?.basePrice || 0), [serviceVariant, selectedOptions, availableOptions]);
 
     // Считаем общее время
     const totalDuration = useMemo(() => selectedOptions.reduce((sum, optionId) => {
-        const option = availableOptions.find(opt => opt.id === optionId)
+        const option = availableOptions.find(opt => opt.id === Number(optionId))
         return sum + (option?.duration || 0)
-    }, currentService?.duration || 0), [currentService, selectedOptions, availableOptions]);
+    }, serviceVariant?.duration || 0), [serviceVariant, selectedOptions, availableOptions]);
 
     const handleOptionToggle = (optionId: number) => {
         vibro('light');
@@ -62,8 +64,7 @@ export const OrderCreationPage = () => {
     }
 
     const handleNext = () => {
-        const serviceVariant = currentService?.variants.find(v => v.id === variantId);
-        const options = currentService?.options.filter(v => selectedOptions.includes(v.id));
+        const options = currentService?.options.filter(v => selectedOptions.includes(v.id.toString()));
 
         dispatch(selectBaseService({baseService: currentService, serviceVariant, options}))
 

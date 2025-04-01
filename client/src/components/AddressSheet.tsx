@@ -11,12 +11,10 @@ import {Pencil} from "lucide-react";
 interface AddressSheetProps {
     addresses: any[]
     onAddressSelect: (address: any) => void
-    onAddAddress: () => void
 }
 
 export function AddressSheet({
                                  addresses,
-                                 onAddAddress,
                                  onAddressSelect,
                                  children
                              }: React.PropsWithChildren<AddressSheetProps>) {
@@ -71,7 +69,6 @@ export function AddressSheet({
                         <Button
                             className="pb-[env(safe-area-inset-bottom)]"
                             wide
-                            onClick={onAddAddress}
                         >
                             Добавить адрес
                         </Button>
