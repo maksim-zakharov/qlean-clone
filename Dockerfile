@@ -23,8 +23,8 @@ ARG PM2_PUBLIC_KEY
 ARG PM2_SECRET_KEY
 
 ENV NODE_ENV production
-ENV DATABASE_URL=$DATABASE_URL
-ENV SHADOW_DATABASE_URL=$SHADOW_DATABASE_URL
+ENV DATABASE_URL={$DATABASE_URL}
+ENV SHADOW_DATABASE_URL={$SHADOW_DATABASE_URL}
 ENV PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
 ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
 
@@ -33,8 +33,8 @@ RUN npm ci --production
 # Генерируем Prisma Client для продакшена
 RUN npx prisma generate
 
-#CMD ["pm2-runtime", "dist/main.js"]
+CMD ["pm2-runtime", "dist/main.js"]
 #EXPOSE $PORT
 
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+#CMD ["node", "dist/main.js"]
