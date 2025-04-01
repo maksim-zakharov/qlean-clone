@@ -9,7 +9,7 @@ RUN npm run build:ci
 FROM node:18-alpine
 WORKDIR /app
 
-RUN npm install pm2 -g;
+RUN #npm install pm2 -g
 
 # Копируем зависимости, Pr-клиент и билд
 COPY --from=builder /app/package*.json ./
@@ -29,13 +29,20 @@ ENV SHADOW_DATABASE_URL={$SHADOW_DATABASE_URL}
 ENV PM2_PUBLIC_KEY=${PM2_PUBLIC_KEY}
 ENV PM2_SECRET_KEY=${PM2_SECRET_KEY}
 
+# Создаем .env файл с переменными
+RUN printf "DATABASE_URL=%s\nSHADOW_DATABASE_URL=%s\nPM2_PUBLIC_KEY=%s\nPM2_SECRET_KEY=%s\nNODE_ENV=production\n" \
+    "$DATABASE_URL" \
+    "$SHADOW_DATABASE_URL" \
+    "$PM2_PUBLIC_KEY" \
+    "$PM2_SECRET_KEY" > .env
+
 RUN npm ci --production
 
 # Генерируем Prisma Client для продакшена
 RUN npx prisma generate
 
-CMD ["pm2-runtime", "ecosystem.config.js"]
+#CMD ["pm2-runtime", "ecosystem.config.js"]
 #EXPOSE $PORT
 
 EXPOSE 3000
-#CMD ["node", "dist/main.js"]
+CMD ["node", "dist/main.js"]
