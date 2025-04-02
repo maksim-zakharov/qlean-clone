@@ -19,8 +19,8 @@ function App() {
                 <Route path="/profile" element={<div className="p-4">Профиль</div>}/>
             </Route>
             <Route path="/order" element={<OrderCreationPage/>}/>
+            <Route path="/order/checkout" element={<OrderCheckoutPage/>}/>
             <Route path="/order/:id" element={<OrderDetailsPage/>}/>
-            <Route path="/order/:serviceId/checkout" element={<OrderCheckoutPage/>}/>
         </Routes>
     )
 }

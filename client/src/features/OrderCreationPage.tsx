@@ -74,7 +74,7 @@ export const OrderCreationPage = () => {
         if (isDraft) {
             dispatch(selectBaseService({baseService, serviceVariant, options}))
 
-            navigate(`/order/${serviceId}/checkout`);
+            navigate(`/order/checkout`);
         } else {
             await patchOrder({id: orderId, serviceVariant, options}).unwrap();
             navigate(`/orders`);

@@ -53,7 +53,7 @@ export const OrderDetailsPage = () => {
         </Header>
 
         <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4 mt-[56px]">
-            <Card className="p-0 gap-0">
+            <Card className="p-0 gap-0 mt-2">
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>
