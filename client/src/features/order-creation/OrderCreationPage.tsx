@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import {useNavigate, useParams, useSearchParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {List} from "../../components/ui/list.tsx";
@@ -12,13 +12,13 @@ import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useGetServicesQuery, usePatchOrderMutation} from "../../api.ts";
+import {usePatchOrderMutation} from "../../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
 
 export const OrderCreationPage = () => {
-    const {data: services = []} = useGetServicesQuery();
     const [patchOrder] = usePatchOrderMutation();
+    const services = useSelector(state => state.createOrder.services);
     const orderId = useSelector(state => state.createOrder.id)
     const baseService = useSelector(state => state.createOrder.baseService)
     const options = useSelector(state => state.createOrder.options)
@@ -27,7 +27,6 @@ export const OrderCreationPage = () => {
     const {vibro} = useTelegram();
     const navigate = useNavigate()
     const {serviceId = ''} = useParams<{ serviceId: string }>()
-    const [searchParams, setSearchParams] = useSearchParams();
 
     const dispatch = useDispatch();
 

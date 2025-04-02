@@ -5,6 +5,8 @@ import {useTelegram} from "../hooks/useTelegram.ts";
 import {CardItem} from "../components/CardItem.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../api.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {startOrderFlow} from "../slices/createOrderSlice.ts";
 
 const ICONS: Record<string, LucideIcon> = {
     Shirt,
@@ -20,7 +22,8 @@ const ICONS: Record<string, LucideIcon> = {
 
 const MainPage = () => {
     const navigate = useNavigate()
-    const {data: services = []} = useGetServicesQuery();
+    const services = useSelector(state => state.createOrder.services);
+    const dispatch = useDispatch();
 
     const {backButton, isLoading, error} = useTelegram();
     useEffect(() => {
@@ -29,6 +32,11 @@ const MainPage = () => {
             Telegram.WebApp.MainButton?.hide();
         }
     }, [backButton, isLoading, error]);
+
+    const handleCardOnClick = (baseService, serviceVariant) => {
+        dispatch(startOrderFlow({baseService, serviceVariant}))
+        navigate(`/order/${baseService.id}`)
+    }
 
     return (
         <div className="px-4">
@@ -45,7 +53,7 @@ const MainPage = () => {
                                     key={service.id}
                                     title={service.name}
                                     // icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
-                                    onClick={() => navigate(`/order/${category.id}?variantId=${service.id}`)}
+                                    onClick={() => handleCardOnClick(category, service)}
                                 />
                             )
                         })}

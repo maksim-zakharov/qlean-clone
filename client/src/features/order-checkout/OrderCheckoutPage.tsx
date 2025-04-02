@@ -17,12 +17,13 @@ import {useAddOrderMutation, useGetAddressesQuery} from "../../api.ts";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {AddressSheet} from "../../components/AddressSheet.tsx";
-import {selectFullAddress} from "../../slices/createOrderSlice.ts";
+import {selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
 
 
 export const OrderCheckoutPage = () => {
     const [addOrder] = useAddOrderMutation();
 
+    const selectedTimestamp = useSelector(state => state.createOrder.date)
     const baseService = useSelector(state => state.createOrder.baseService)
     const options = useSelector(state => state.createOrder.options)
     const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
@@ -30,7 +31,6 @@ export const OrderCheckoutPage = () => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate()
-    const [selectedTimestamp, setSelectedTimestamp] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string | undefined>();
     const {vibro, userId} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
@@ -43,9 +43,9 @@ export const OrderCheckoutPage = () => {
         let url;
 
         if(baseService){
-            url = `${window.origin}/order/${baseService?.id}`;
+            url = `/order/${baseService?.id}`;
         } else {
-            url = `${window.origin}`;
+            url = `/`;
         }
 
         return url;
@@ -63,6 +63,8 @@ export const OrderCheckoutPage = () => {
     const handleSelectAddress = (address: any) => {
         dispatch(selectFullAddress(address))
     }
+
+    const handleSelectDate = (date) => dispatch(selectDate({date}));
 
     const handleOnSubmit = async () => {
         debugger
@@ -103,7 +105,7 @@ export const OrderCheckoutPage = () => {
                     <List itemClassName="py-2">
 
                         {/* Date and Time */}
-                        <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={setSelectedTimestamp}
+                        <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={handleSelectDate}
                         >
                             <Button
                                 variant="ghost"

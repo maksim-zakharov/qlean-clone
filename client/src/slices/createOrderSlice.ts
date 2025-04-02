@@ -9,6 +9,8 @@ interface CreateOrderState {
 
     fullAddress?: any;
     date?: number;
+
+    services: any[]
 }
 
 const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
@@ -33,12 +35,14 @@ const _clearState = (state) => {
     state.serviceVariant = null;
     state.options = [];
     state.fullAddress = null;
+    state.date = 0;
 
     saveInLocalStorage('id', state.id)
     saveInLocalStorage('baseService', state.baseService)
     saveInLocalStorage('serviceVariant', state.serviceVariant)
-    saveInLocalStorage('options', null)
     saveInLocalStorage('fullAddress', state.fullAddress)
+    saveInLocalStorage('date', state.date)
+    saveInLocalStorage('options', null)
 }
 
 const initialState: CreateOrderState = {
@@ -47,13 +51,25 @@ const initialState: CreateOrderState = {
     options: getLocalStorageItemOrDefault('options', []),
     serviceVariant: getLocalStorageItemOrDefault('serviceVariant', null),
     fullAddress: getLocalStorageItemOrDefault('fullAddress', null),
-    date: 0
+    date: getLocalStorageItemOrDefault('date', 0),
+    services: []
 };
 
 const createOrderSlice = createSlice({
     name: 'createOrder',
     initialState,
     reducers: {
+        startOrderFlow: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant'>>) => {
+            state.baseService = action.payload.baseService;
+            state.serviceVariant = action.payload.serviceVariant;
+
+            saveInLocalStorage('serviceVariant', state.serviceVariant)
+            saveInLocalStorage('baseService', state.baseService)
+        },
+        selectDate: (state, action: PayloadAction<Pick<CreateOrderState, 'date'>>) => {
+            state.date = action.payload.date;
+            saveInLocalStorage('date', state.date)
+        },
         selectVariant: (state, action: PayloadAction<Pick<CreateOrderState, 'serviceVariant'>>) => {
             state.serviceVariant = action.payload.serviceVariant;
             saveInLocalStorage('serviceVariant', state.serviceVariant)
@@ -82,10 +98,15 @@ const createOrderSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addMatcher(api.endpoints.addOrder.matchFulfilled, _clearState)
+            .addMatcher(api.endpoints.getServices.matchFulfilled, (state, action) => {
+                state.services = action.payload;
+            })
     },
 });
 
 export const {
+    selectDate,
+    startOrderFlow,
     selectBaseService,
     selectOptions,
     selectFullAddress,
