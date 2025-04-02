@@ -57,7 +57,7 @@ export function AddAddressSheet({
     }
 
     const handleOnDelete = async () => {
-        await deleteAddress({id}).unwrap();
+        await deleteAddress({id, userId}).unwrap();
         setOpened(false)
         clearAddress();
     }
