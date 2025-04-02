@@ -32,17 +32,17 @@ export const OrderDetailsPage = () => {
 
     const handleSelectAddress = async ({fullAddress}: any) => {
         if (fullAddress !== order.fullAddress)
-            await patchOrder({id: order.id, fullAddress}).unwrap();
+            await patchOrder({id: order.id, fullAddress, userId}).unwrap();
     }
 
     const handleSelectDate = async (date: number) => {
         if (date !== order.date)
-            await patchOrder({id: order.id, date}).unwrap();
+            await patchOrder({id: order.id, date, userId}).unwrap();
     }
 
     const handleChangeComment = async (comment?: string) => {
         if (comment && comment !== order.comment)
-            await patchOrder({id: order.id, comment}).unwrap();
+            await patchOrder({id: order.id, comment, userId}).unwrap();
     }
 
     if (isLoading && !order) {
@@ -74,7 +74,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>{order.status === 'active' ? 'Оформлен' : order.status === 'canceled' ? 'Отменен' : 'Завершен'}</Typography.Title>
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col separator-shadow-bottom">
+                <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>Исполнитель</Typography.Description>
