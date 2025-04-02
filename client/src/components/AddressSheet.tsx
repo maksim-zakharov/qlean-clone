@@ -47,7 +47,7 @@ export function AddressSheet({
             <SheetTrigger asChild onClick={() => setOpened(true)}>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-[90vh]">
+            <SheetContent side="bottom" className="h-[90vh] pb-[env(safe-area-inset-bottom)]">
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
                 </SheetHeader>
@@ -67,7 +67,6 @@ export function AddressSheet({
                 <div className="flex flex-col flex-1">
                     <AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
-                            className="pb-[env(safe-area-inset-bottom)]"
                             wide
                         >
                             Добавить адрес
