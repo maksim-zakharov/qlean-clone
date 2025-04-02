@@ -85,6 +85,17 @@ const createOrderSlice = createSlice({
             state.options = action.payload.options;
             saveInLocalStorage('options', state.options)
         },
+        retryOrder: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant' | 'options' | 'fullAddress'>>) => {
+            state.options = action.payload.options;
+            state.baseService = action.payload.baseService;
+            state.serviceVariant = action.payload.serviceVariant;
+            state.fullAddress = {fullAddress: action.payload.fullAddress};
+
+            saveInLocalStorage('baseService', state.baseService)
+            saveInLocalStorage('serviceVariant', state.serviceVariant)
+            saveInLocalStorage('options', state.options)
+            saveInLocalStorage('fullAddress', state.fullAddress)
+        },
         selectBaseService: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant' | 'options' | 'id'>>) => {
             state.id = action.payload.id;
             state.baseService = action.payload.baseService;
@@ -112,6 +123,7 @@ const createOrderSlice = createSlice({
 });
 
 export const {
+    retryOrder,
     selectDate,
     startOrderFlow,
     selectBaseService,

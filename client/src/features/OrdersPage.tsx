@@ -8,7 +8,7 @@ import {RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {moneyFormat} from "../lib/utils.ts";
 import {useDispatch} from "react-redux";
-import {selectBaseService} from "../slices/createOrderSlice.ts";
+import {retryOrder, selectBaseService} from "../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 
 
@@ -35,6 +35,11 @@ export const OrdersPage = () => {
 
         dispatch(selectBaseService(order))
         navigate(url)
+    }
+
+    const handleRetryClick = (order: any) => {
+        dispatch(retryOrder(order))
+        navigate(`/order/${order.baseService?.id}/checkout`)
     }
 
     return <div className="px-4 mb-2">
@@ -87,7 +92,7 @@ export const OrdersPage = () => {
                         <Typography.Title>Завершен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button variant="default" size="small"><RotateCw className="w-5 h-5 mr-2"/>Повторить</Button>
+                        <Button variant="default" size="small" onClick={() => handleRetryClick(ao)}><RotateCw className="w-5 h-5 mr-2"/ >Повторить</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>
