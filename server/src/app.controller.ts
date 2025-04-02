@@ -1,138 +1,14 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Res} from '@nestjs/common';
-import {AddressesService} from "./address.service";
-import {OrdersService} from "./orders/orders.service";
-import {Address, Order} from "@prisma/client";
-import axios from "axios";
-
-export type ServiceType = 'cleaning' | 'drycleaning'
-
-export type Service = {
-    id: string
-    name: string
-    basePrice: number
-    duration: number // в минутах
-    backgroundColor?: string
-    icon?: string
-    type?: ServiceType
-}
-
-export type ServiceOption = {
-    id: string
-    name: string
-    price: number
-    duration: number // в минутах
-    description?: string
-    isPopular?: boolean
-}
-
-export type ServiceCategory = {
-    id: string
-    name: string
-    services: Service[]
-    options: ServiceOption[]
-}
+import {Controller} from '@nestjs/common';
 
 @Controller()
 export class AppController {
-    constructor(private readonly addressesService: AddressesService, private readonly ordersService: OrdersService) {
-    }
-
-
-    @Get('/')
-    async getStatic(@Res() res) {
-        const response = await axios.get(
-            'https://maksim-zakharov.github.io/qlean-clone/',
-            {
-                responseType: 'stream',
-            },
-        );
-
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
-    }
-
-    // Нужно для локального фронта
-    @Get('/qlean-clone/public/:path')
-    async getPublic(@Param('path') path: string, @Res() res) {
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/public/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
-    }
-
-    // Нужно для локального фронта
-    @Get('/qlean-clone/assets/:path')
-    async getCSS(@Param('path') path: string, @Res() res) {
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/assets/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
+    constructor() {
     }
 
     // @Get('/api/env')
     // getEnv() {
     //     return process.env;
     // }
-
-    @Get('/api/addresses')
-    getAddresses(@Query() {userId}: { userId?: number }) {
-        return this.addressesService.getAll(Number(userId));
-    }
-
-    @Post('/api/addresses')
-    addAddress(@Body() {id, ...body}: Address): any {
-        return this.addressesService.create(body);
-    }
-
-    @Put('/api/addresses/:id')
-    editAddress(@Param('id') id: number, @Body() body: any): any {
-        return this.addressesService.update(body);
-    }
-
-    @Delete('/api/addresses/:id')
-    deleteAddress(@Param('id') id: number): any {
-        return this.addressesService.delete(Number(id));
-    }
-
-    @Get('/api/orders')
-    getOrders(@Query() {userId}: { userId?: number }) {
-        return this.ordersService.getAll(Number(userId));
-    }
-
-    @Get('/api/orders/:id')
-    getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
-        return this.ordersService.getById(Number(id), Number(userId));
-    }
-
-    @Put('/api/orders/:id')
-    editOrder(@Param('id') id: number, @Body() body: Order): any {
-        return this.ordersService.update(body);
-    }
-
-    @Patch('/api/orders/:id')
-    async patchOrder(@Param('id') id: number, @Body() body: Order) {
-        const item = await this.ordersService.getById(Number(id), Number(body.userId));
-
-        Object.assign(item, body);
-
-        return this.ordersService.update(item);
-    }
-
-    @Post('/api/orders')
-    addOrder(@Body() body: Order) {
-        return this.ordersService.create(body);
-    }
 
     // @Get('/api/services')
     // getServices() {
@@ -307,23 +183,4 @@ export class AppController {
     //
     //     return SERVICES_DATA;
     // }
-
-    // Обязательно должно быть в конце
-    @Get('*')
-    async getSPARouting(@Param('0') path: string, @Res() res) {
-        // Фикс для SPA-роутинга
-        if (!path || !path.includes('.')) {
-            path = 'index.html';
-        }
-
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
-    }
 }

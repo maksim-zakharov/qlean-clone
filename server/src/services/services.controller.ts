@@ -1,14 +1,19 @@
-import {Controller, Get} from '@nestjs/common';
+import {Controller, Get, UseInterceptors} from '@nestjs/common';
 import {ServicesService} from "./services.service";
+import {CacheInterceptor, CacheKey, CacheTTL} from "@nestjs/cache-manager";
 
 @Controller('/api/services')
+@UseInterceptors(CacheInterceptor) // Добавляем интерсептор
 export class ServicesController {
     constructor(private readonly servicesService: ServicesService) {
 
     }
 
     @Get('/')
-    getAddresses() {
+    @CacheKey('SERVICES')
+    @CacheTTL(3600 * 24)
+    getAll() {
+        console.log('services')
         return this.servicesService.getAll();
     }
 
