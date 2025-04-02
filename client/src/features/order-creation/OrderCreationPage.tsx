@@ -33,15 +33,14 @@ export const OrderCreationPage = () => {
     // Если создаем - true, если редактируем - false;
     const isDraft = !Boolean(orderId);
 
-    // Находим таб, в котором находится услуга
-    const currentService = useMemo(() => services.find(service => service.id === Number(serviceId)), [serviceId, services]);
-
-    const variantId = serviceVariant?.id || currentService?.variants[0]?.id;
-
     // Находим варианты услуг по базовой услуге
-    const variants = currentService?.variants || [];
+    const variants = useMemo(() => services.find(s => s.id === Number(serviceId))?.variants || [], [services, serviceId])
     // Получаем доступные опции для типа услуги
-    const availableOptions = currentService?.options || [];
+    const availableOptions = useMemo(() => services.find(s => s.id === Number(serviceId))?.options || [], [services, serviceId])
+
+    const variantId = useMemo(() => {
+        return serviceVariant?.id || variants[0]?.id
+    }, [serviceVariant, services, variants]);
 
     const selectedOptionsIdSet = useMemo(() => new Set(options.map(o => o.id)), [options]);
 
@@ -71,7 +70,7 @@ export const OrderCreationPage = () => {
 
     const handleNext = async () => {
         if (isDraft) {
-            dispatch(selectBaseService({baseService: currentService, serviceVariant, options}))
+            dispatch(selectBaseService({baseService, serviceVariant, options}))
 
             navigate(`/order/${serviceId}/checkout`);
         } else {
@@ -86,7 +85,14 @@ export const OrderCreationPage = () => {
 
     const handleBackClick = () => dispatch(clearState());
 
-    if (!currentService) {
+    const backUrl = useMemo(() => {
+        if(isDraft){
+            return '/';
+        }
+        return '/orders'
+    }, [isDraft])
+
+    if (!baseService) {
         return null
     }
 
@@ -94,9 +100,9 @@ export const OrderCreationPage = () => {
         <div className="fixed inset-0 flex flex-col">
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton onClick={handleBackClick}/>
+                    <BackButton url={backUrl} onClick={handleBackClick}/>
                     <Typography.Title
-                        className="items-center flex justify-center">{currentService?.name}</Typography.Title>
+                        className="items-center flex justify-center">{baseService?.name}</Typography.Title>
                 </div>
             </Header>
 

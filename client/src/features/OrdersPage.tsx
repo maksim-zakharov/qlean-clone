@@ -28,13 +28,13 @@ export const OrdersPage = () => {
         let url;
 
         if (baseService) {
-            url = new URL(`${window.origin}/order/${baseService?.id}`);
+            url = `${window.origin}/order/${baseService?.id}`;
         } else {
-            url = new URL(`${window.origin}`);
+            url = '/';
         }
 
         dispatch(selectBaseService(order))
-        navigate(url.toString().replace(window.origin, ''))
+        navigate(url)
     }
 
     return <div className="px-4 mb-2">
