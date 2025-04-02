@@ -1,10 +1,11 @@
 import {Route, Routes} from "react-router-dom"
 import {Layout} from "./components/layout/Layout"
 import MainPage from "./MainPage/MainPage.tsx"
-import {OrderCreationPage} from "./features/order-creation/OrderCreationPage"
-import {OrderCheckoutPage} from "./features/order-checkout/OrderCheckoutPage"
+import {OrderCreationPage} from "./features/OrderCreationPage.tsx"
+import {OrderCheckoutPage} from "./features/OrderCheckoutPage.tsx"
 import {OrdersPage} from "./features/OrdersPage.tsx";
 import {useGetServicesQuery} from "./api.ts";
+import {OrderDetails} from "./features/OrderDetails.tsx";
 
 function App() {
     useGetServicesQuery();
@@ -17,7 +18,8 @@ function App() {
                 <Route path="/bonuses" element={<div className="p-4">Бонусы</div>}/>
                 <Route path="/profile" element={<div className="p-4">Профиль</div>}/>
             </Route>
-            <Route path="/order/:serviceId" element={<OrderCreationPage/>}/>
+            <Route path="/order" element={<OrderCreationPage/>}/>
+            <Route path="/order/:serviceId" element={<OrderDetails/>}/>
             <Route path="/order/:serviceId/checkout" element={<OrderCheckoutPage/>}/>
         </Routes>
     )

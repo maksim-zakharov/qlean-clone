@@ -10,20 +10,21 @@ import {moneyFormat} from "../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
+import {Skeleton} from "../components/ui/skeleton.tsx";
 
 
 export const OrdersPage = () => {
     const {userId} = useTelegram();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {data: orders = []} = useGetOrdersQuery({userId}, {
+    const {data: orders = [], isLoading} = useGetOrdersQuery({userId}, {
         refetchOnMountOrArgChange: true
     });
 
     const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
     const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
 
-    const handleAddOptionClick = (order: any) => {
+    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         const {baseService} = order;
         let url;
 
@@ -37,9 +38,23 @@ export const OrdersPage = () => {
         navigate(url)
     }
 
-    const handleRetryClick = (order: any) => {
+    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+
+    const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
+        e.stopPropagation()
         dispatch(retryOrder(order))
         navigate(`/order/${order.baseService?.id}/checkout`)
+    }
+
+    if (isLoading) {
+        return <div className="px-4 mb-2">
+            <div className="mb-6 mt-4">
+                <Skeleton className="w-[100px] h-[28px] mb-3"/>
+                <Skeleton className="w-full h-[172px] mt-2"/>
+                <Skeleton className="w-full h-[172px] mt-2"/>
+                <Skeleton className="w-full h-[172px] mt-2"/>
+            </div>
+        </div>
     }
 
     return <div className="px-4 mb-2">
@@ -47,7 +62,7 @@ export const OrdersPage = () => {
             <Typography.H2>
                 Активные
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 gap-0 mt-2">
+            {activeOrders.map(ao => <Card className="p-0 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -64,7 +79,7 @@ export const OrdersPage = () => {
                         <Typography.Title>Оформлен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button onClick={() => handleAddOptionClick(ao)} variant="default" size="small">Добавить
+                        <Button onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="small">Добавить
                             услугу</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
@@ -75,7 +90,7 @@ export const OrdersPage = () => {
             <Typography.H2 className="mt-4">
                 Все заявки
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 gap-0 mt-2">
+            {completedOrders.map(ao => <Card className="p-0 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -89,10 +104,11 @@ export const OrdersPage = () => {
                 <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
-                        <Typography.Title>Завершен</Typography.Title>
+                        <Typography.Title>{ao.status === 'completed' ? 'Завершен' : 'Отменен'}</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button variant="default" size="small" onClick={() => handleRetryClick(ao)}><RotateCw className="w-5 h-5 mr-2"/ >Повторить</Button>
+                        <Button variant="default" size="small" onClick={(e) => handleRetryClick(e, ao)}>
+                            <RotateCw className="w-5 h-5 mr-2"/ >Повторить</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>

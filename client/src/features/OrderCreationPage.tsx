@@ -2,19 +2,19 @@ import React, {useMemo} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
-import {List} from "../../components/ui/list.tsx";
-import {BackButton} from "../../components/BackButton.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {List} from "../components/ui/list.tsx";
+import {BackButton} from "../components/BackButton.tsx";
+import {useTelegram} from "../hooks/useTelegram.ts";
 import {Info, Plus, Star} from 'lucide-react'
-import EstimatedTime from "../../components/EstimatedTime.tsx";
-import {Header} from "../../components/ui/Header.tsx";
-import {BottomActions} from "../../components/BottomActions.tsx";
-import {Typography} from "../../components/ui/Typography.tsx";
-import {Badge} from "../../components/ui/badge.tsx";
-import {moneyFormat} from "../../lib/utils.ts";
-import {usePatchOrderMutation} from "../../api.ts";
+import EstimatedTime from "../components/EstimatedTime.tsx";
+import {Header} from "../components/ui/Header.tsx";
+import {BottomActions} from "../components/BottomActions.tsx";
+import {Typography} from "../components/ui/Typography.tsx";
+import {Badge} from "../components/ui/badge.tsx";
+import {moneyFormat} from "../lib/utils.ts";
+import {usePatchOrderMutation} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
+import {clearState, selectBaseService, selectOptions, selectVariant} from "../slices/createOrderSlice.ts";
 
 export const OrderCreationPage = () => {
     const [patchOrder] = usePatchOrderMutation();
