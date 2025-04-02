@@ -3,7 +3,7 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {HealthModule} from './health/health.module';
 import {PrismaService} from "./prisma.service";
-import {AddressesService} from "./address.service";
+import {AddressesService} from "./addresses/address.service";
 import {OrdersService} from './orders/orders.service';
 import {ServicesService} from './services/services.service';
 import {ServicesController} from './services/services.controller';

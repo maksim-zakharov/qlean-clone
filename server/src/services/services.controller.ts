@@ -13,7 +13,6 @@ export class ServicesController {
     @CacheKey('SERVICES')
     @CacheTTL(3600 * 24)
     getAll() {
-        console.log('services')
         return this.servicesService.getAll();
     }
 

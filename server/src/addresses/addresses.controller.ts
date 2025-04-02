@@ -1,6 +1,6 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {Address} from "@prisma/client";
-import {AddressesService} from "../address.service";
+import {AddressesService} from "./address.service";
 
 @Controller('/api/addresses')
 export class AddressesController {
