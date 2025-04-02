@@ -109,7 +109,7 @@ export const OrderCheckoutPage = () => {
                                 <div className="flex items-center gap-3">
                                     <div
                                         className="[background-color:var(--tg-accent-blue)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                        <Calendar className="w-5 h-5 text-tg-theme-text-color"/>
+                                        <Calendar className="w-5 h-5 text-tg-theme-button-text-colorr"/>
                                     </div>
                                     <span className="text-tg-theme-text-color">{dateTitle}</span>
                                 </div>
