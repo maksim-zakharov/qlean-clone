@@ -3,34 +3,46 @@ import {BackButton} from "../components/BackButton.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
 import React, {useMemo} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import {useNavigate, useParams} from "react-router-dom";
-import {useGetOrderByIdQuery} from "../api.ts";
+import {useParams} from "react-router-dom";
+import {useGetAddressesQuery, useGetOrderByIdQuery, usePatchOrderMutation} from "../api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../components/ui/accordion.tsx";
 import {moneyFormat} from "../lib/utils.ts";
 import dayjs from "dayjs";
 import {Button} from "../components/ui/button.tsx";
 import {Card} from "../components/ui/card.tsx";
-import {selectBaseService} from "../slices/createOrderSlice.ts";
-import {useDispatch} from "react-redux";
 import {Pencil, User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {BottomActions} from "../components/BottomActions.tsx";
-import {Alert, AlertDescription, AlertTitle} from "../components/ui/alert.tsx";
+import {AlertDescription} from "../components/ui/alert.tsx";
 import {Skeleton} from "../components/ui/skeleton.tsx";
+import {ScheduleSheet} from "../components/ScheduleSheet.tsx";
+import {CommentsSheet} from "../components/CommentsSheet.tsx";
+import {AddressSheet} from "../components/AddressSheet.tsx";
 
 export const OrderDetailsPage = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const [patchOrder] = usePatchOrderMutation();
     const {userId, vibro} = useTelegram();
+    const {data: addresses = []} = useGetAddressesQuery({userId});
     const {id} = useParams<string>();
     const {data: order, isLoading} = useGetOrderByIdQuery({userId, id: id!});
 
+    const canEdit = Boolean(order?.status) && !['completed', 'canceled'].includes(order?.status);
+
     const totalPrice = useMemo(() => order?.options.reduce((sum, option) => sum + option.price, order?.serviceVariant?.basePrice || 0) || 0, [order]);
 
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(order))
-        navigate('/order')
+    const handleSelectAddress = async ({fullAddress}: any) => {
+        if (fullAddress !== order.fullAddress)
+            await patchOrder({id: order.id, fullAddress}).unwrap();
+    }
+
+    const handleSelectDate = async (date: number) => {
+        if (date !== order.date)
+            await patchOrder({id: order.id, date}).unwrap();
+    }
+
+    const handleChangeComment = async (comment?: string) => {
+        if (comment && comment !== order.comment)
+            await patchOrder({id: order.id, comment}).unwrap();
     }
 
     if (isLoading && !order) {
@@ -38,7 +50,7 @@ export const OrderDetailsPage = () => {
             <div className="mt-4">
                 <Skeleton className="w-full h-[128px] mt-2"/>
                 <Skeleton className="w-full h-[216px] mt-2"/>
-                <Skeleton className="w-full h-[138px] mt-2"/>
+                <Skeleton className="w-full h-[188px] mt-2"/>
             </div>
         </div>
     }
@@ -59,7 +71,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>
                             №{order.id}
                         </Typography.Title>
-                        <Typography.Title>Оформлен</Typography.Title>
+                        <Typography.Title>{order.status === 'active' ? 'Оформлен' : order.status === 'canceled' ? 'Отменен' : 'Завершен'}</Typography.Title>
                     </div>
                 </div>
                 <div className="p-4 flex gap-2 flex-col separator-shadow-bottom">
@@ -82,10 +94,12 @@ export const OrderDetailsPage = () => {
                             <Typography.Description>{dayjs(order.date).format('D MMMM')}</Typography.Description>
                             <Typography.Title>{dayjs(order.date).format('HH:mm')}</Typography.Title>
                         </div>
-                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6"
-                                onClick={(e) => null}>
-                            <Pencil/>
-                        </Button>
+                        {canEdit && <ScheduleSheet selectedTimestamp={new Date(order.date).getTime()}
+                                                   onSelectDate={handleSelectDate}>
+                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
+                                <Pencil/>
+                            </Button>
+                        </ScheduleSheet>}
                     </div>
                 </div>
                 <div className="p-4 flex gap-2 flex-col separator-shadow-bottom">
@@ -94,38 +108,44 @@ export const OrderDetailsPage = () => {
                             <Typography.Description>Адрес</Typography.Description>
                             <Typography.Title>{order.fullAddress}</Typography.Title>
                         </div>
-                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6"
-                                onClick={(e) => null}>
-                            <Pencil/>
-                        </Button>
+                        {canEdit && <AddressSheet
+                            addresses={addresses}
+                            onAddressSelect={handleSelectAddress}
+                        >
+                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
+                                <Pencil/>
+                            </Button>
+                        </AddressSheet>}
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col separator-shadow-bottom">
+                <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>Комментарий</Typography.Description>
-                            <Typography.Title>{order.comments || 'Отсутствует'}</Typography.Title>
+                            <Typography.Title
+                                className="[overflow-wrap:anywhere]">{order.comment || 'Отсутствует'}</Typography.Title>
                         </div>
-                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6"
-                                onClick={(e) => null}>
-                            <Pencil/>
-                        </Button>
+                        {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
+                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
+                                <Pencil/>
+                            </Button>
+                        </CommentsSheet>}
                     </div>
                 </div>
             </Card>
-            <Alert variant="primary" className="mt-2">
-                <AlertTitle>Добавить опции</AlertTitle>
-                <AlertDescription>
-                    Помыть духовку, почистить лоток питомца, что-то еще?
-                </AlertDescription>
-                <AlertDescription className="pt-2">
-                    <Button
-                        size="small"
-                    >
-                        Добавить опций
-                    </Button>
-                </AlertDescription>
-            </Alert>
+            {/*<Alert variant="primary" className="mt-2">*/}
+            {/*    <AlertTitle>Добавить опции</AlertTitle>*/}
+            {/*    <AlertDescription>*/}
+            {/*        Помыть духовку, почистить лоток питомца, что-то еще?*/}
+            {/*    </AlertDescription>*/}
+            {/*    <AlertDescription className="pt-2">*/}
+            {/*        <Button*/}
+            {/*            size="small"*/}
+            {/*        >*/}
+            {/*            Добавить опций*/}
+            {/*        </Button>*/}
+            {/*    </AlertDescription>*/}
+            {/*</Alert>*/}
             <Accordion
                 type="single"
 
@@ -166,18 +186,20 @@ export const OrderDetailsPage = () => {
             {/*    Добавить опции*/}
             {/*</Button>*/}
         </div>
-        <BottomActions className="gap-2 flex-col flex">
-            <Button
-                wide
-            >
-                Перенести
-            </Button>
+        {canEdit && <BottomActions className="gap-2 flex-col flex">
+            <AlertDescription>
+                <Button
+                    wide
+                >
+                    Добавить опций
+                </Button>
+            </AlertDescription>
             <Button
                 wide
                 variant="default"
             >
                 Отменить
             </Button>
-        </BottomActions>
+        </BottomActions>}
     </div>
 }

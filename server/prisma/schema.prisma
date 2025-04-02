@@ -28,12 +28,12 @@ model Order {
   baseServiceId    Int
   serviceVariant   ServiceVariant   @relation(fields: [serviceVariantId], references: [id])
   serviceVariantId Int
-  options          OrderServiceOption[]  @relation("OrderToServiceOption")
-  optionIds        Int[]
+  options          ServiceOption[]
   status  OrderStatus  @default(active)
   fullAddress String
   date DateTime @db.Timestamp(6)
   userId Int?
+  comment String?
 }
 
 model BaseService {
@@ -62,14 +62,5 @@ model ServiceOption {
   isPopular     Boolean      @default(false)
   baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
   baseServiceId Int
-  orders        OrderServiceOption[]  @relation("OrderToServiceOption")
-}
-
-model OrderServiceOption {
-  orderId          Int
-  serviceOptionId  Int
-  order            Order          @relation(fields: [orderId], references: [id], name: "OrderToServiceOption")
-  serviceOption    ServiceOption  @relation(fields: [serviceOptionId], references: [id], name: "OrderToServiceOption")
-
-  @@id([orderId, serviceOptionId])
+  orders        Order[]
 }
