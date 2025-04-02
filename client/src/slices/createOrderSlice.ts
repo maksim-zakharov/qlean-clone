@@ -30,7 +30,7 @@ const saveInLocalStorage = (key: string, value: any) => {
 }
 
 const _clearState = (state) => {
-    state.id = null;
+    state.id = undefined;
     state.baseService = null;
     state.serviceVariant = null;
     state.options = [];
@@ -65,6 +65,13 @@ const createOrderSlice = createSlice({
 
             saveInLocalStorage('serviceVariant', state.serviceVariant)
             saveInLocalStorage('baseService', state.baseService)
+            
+            state.id = undefined;
+            state.options = [];
+            state.date = 0;
+            saveInLocalStorage('id', state.id)
+            saveInLocalStorage('date', state.date)
+            saveInLocalStorage('options', null)
         },
         selectDate: (state, action: PayloadAction<Pick<CreateOrderState, 'date'>>) => {
             state.date = action.payload.date;
