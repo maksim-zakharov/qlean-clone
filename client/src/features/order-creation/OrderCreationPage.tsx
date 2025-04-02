@@ -14,7 +14,7 @@ import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useGetServicesQuery} from "../../api.ts";
 import {useDispatch} from "react-redux";
-import {selectBaseService} from "../../slices/createOrderSlice.ts";
+import {clearState, selectBaseService} from "../../slices/createOrderSlice.ts";
 
 export const OrderCreationPage = () => {
     const {data: services = []} = useGetServicesQuery();
@@ -71,6 +71,8 @@ export const OrderCreationPage = () => {
         navigate(`/order/${serviceId}/checkout`);
     }
 
+    const handleBackClick = () => dispatch(clearState());
+
     if (!currentService) {
         return null
     }
@@ -79,7 +81,7 @@ export const OrderCreationPage = () => {
         <div className="fixed inset-0 flex flex-col">
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton/>
+                    <BackButton onClick={handleBackClick}/>
                     <Typography.Title
                         className="items-center flex justify-center">{currentService?.name}</Typography.Title>
                 </div>
@@ -102,7 +104,7 @@ export const OrderCreationPage = () => {
                     </TabsList>
                 </Tabs>
                 <div className="pt-2">
-                    <List itemClassName="flex-col gap-2">
+                    <List itemClassName="flex-col gap-2" >
                         {availableOptions.map((option) => <>
                             <div className="flex items-center gap-3 ml-3 w-full justify-between">
                                 <div className="flex items-start gap-3 flex-1 min-w-0">

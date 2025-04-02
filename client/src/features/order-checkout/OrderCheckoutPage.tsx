@@ -1,16 +1,14 @@
 import {BackButton} from "@/components/BackButton"
 import {Button} from "@/components/ui/button"
 import {Calendar, ChevronRight, CreditCard, MessageSquare} from "lucide-react"
-import {useLocation, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import {Checkbox} from "@/components/ui/checkbox"
-import {Service, ServiceOption} from "../order-creation/types.ts";
 import React, {useMemo, useState} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
 import {List} from "../../components/ui/list.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../../components/ui/accordion"
-import {Header} from "../../components/ui/Header.tsx";
 import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
@@ -42,8 +40,18 @@ export const OrderCheckoutPage = () => {
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
 
     const backUrl = useMemo(() => {
-        const url = new URL(`${window.origin}/order/${baseService?.id}`);
-        url.searchParams.set('variantId', serviceVariant.id);
+        let url;
+
+        if(baseService){
+            url = new URL(`${window.origin}/order/${baseService?.id}`);
+        } else {
+            url = new URL(`${window.origin}`);
+        }
+
+        if (serviceVariant) {
+            url.searchParams.set('variantId', serviceVariant.id);
+        }
+
         options.forEach((option) => url.searchParams.append('optionId', option.id));
 
         return url.toString().replace(window.origin, '');
@@ -86,7 +94,8 @@ export const OrderCheckoutPage = () => {
                     addresses={addresses}
                     onAddressSelect={handleSelectAddress}
                 >
-                    <Button variant="ghost" className="flex-1 flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                    <Button variant="ghost"
+                            className="flex-1 flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
                         <Typography.Title>Оформление заказа</Typography.Title>
                         <Typography.Description>{fullAddress}</Typography.Description>
                     </Button>
@@ -152,7 +161,7 @@ export const OrderCheckoutPage = () => {
                     </List>
 
                     {/* Order Summary */}
-                    <Accordion
+                    {baseService && <Accordion
                         type="single"
                         collapsible
                         defaultValue="services"
@@ -172,20 +181,22 @@ export const OrderCheckoutPage = () => {
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div className="flex flex-col gap-2">
-                                    <div key={baseService.id} className="flex justify-between">
-                                        <span className="text-tg-theme-text-color">{baseService.name}</span>
-                                        <span className="text-tg-theme-text-color">{moneyFormat(serviceVariant.basePrice)}</span>
+                                    <div key={baseService?.id} className="flex justify-between">
+                                        <span className="text-tg-theme-text-color">{baseService?.name}</span>
+                                        <span
+                                            className="text-tg-theme-text-color">{moneyFormat(serviceVariant?.basePrice)}</span>
                                     </div>
                                     {options.map((service, index) => (
                                         <div key={index} className="flex justify-between">
                                             <span className="text-tg-theme-text-color">{service.name}</span>
-                                            <span className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
+                                            <span
+                                                className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
                                         </div>
                                     ))}
                                 </div>
                             </AccordionContent>
                         </AccordionItem>
-                    </Accordion>
+                    </Accordion>}
 
                     <EstimatedTime totalDuration={totalDuration}/>
 
