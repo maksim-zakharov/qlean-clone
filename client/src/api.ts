@@ -15,6 +15,13 @@ export const api = createApi({
             }),
             providesTags: ['Service'],
         }),
+        getOrderById: builder.query<any, { userId?: number, id: number | string }>({
+            query: (params) => ({
+                url: `/orders/${params.id}`,
+                params
+            }),
+            providesTags: ['Order'],
+        }),
         getOrders: builder.query<any[], { userId?: number }>({
             query: (params) => ({
                 url: "/orders",
@@ -83,6 +90,7 @@ export const {
     useGetServicesQuery,
     useGetOrdersQuery,
     useAddOrderMutation,
+    useGetOrderByIdQuery,
     useEditOrderMutation,
     usePatchOrderMutation,
     useGetAddressesQuery,

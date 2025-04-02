@@ -25,17 +25,9 @@ export const OrdersPage = () => {
     const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
 
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        const {baseService} = order;
-        let url;
-
-        if (baseService) {
-            url = `/order/${baseService?.id}`;
-        } else {
-            url = '/';
-        }
-
+        e.stopPropagation()
         dispatch(selectBaseService(order))
-        navigate(url)
+        navigate('/order')
     }
 
     const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)

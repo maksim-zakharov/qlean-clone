@@ -22,8 +22,8 @@ const ICONS: Record<string, LucideIcon> = {
 
 const MainPage = () => {
     const navigate = useNavigate()
-    const services = useSelector(state => state.createOrder.services);
     const dispatch = useDispatch();
+    const services = useSelector(state => state.createOrder.services);
 
     const {backButton, isLoading, error} = useTelegram();
     useEffect(() => {
@@ -35,7 +35,7 @@ const MainPage = () => {
 
     const handleCardOnClick = (baseService, serviceVariant) => {
         dispatch(startOrderFlow({baseService, serviceVariant}))
-        navigate(`/order/${baseService.id}`)
+        navigate(`/order`)
     }
 
     return (

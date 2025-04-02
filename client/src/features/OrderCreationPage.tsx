@@ -26,17 +26,19 @@ export const OrderCreationPage = () => {
 
     const {vibro} = useTelegram();
     const navigate = useNavigate()
-    const {serviceId = ''} = useParams<{ serviceId: string }>()
 
     const dispatch = useDispatch();
 
     // Если создаем - true, если редактируем - false;
     const isDraft = !Boolean(orderId);
 
+    // Либо мы перешли сюда из других страниц, либо просто откуда то как то - и берем первый сервис из списка
+    const currentService = useMemo(() => services.find(s => baseService ? s.id === baseService.id : s) || services[0], [services, baseService]);
+
     // Находим варианты услуг по базовой услуге
-    const variants = useMemo(() => services.find(s => s.id === Number(serviceId))?.variants || [], [services, serviceId])
+    const variants = currentService?.variants || []
     // Получаем доступные опции для типа услуги
-    const availableOptions = useMemo(() => services.find(s => s.id === Number(serviceId))?.options || [], [services, serviceId])
+    const availableOptions = currentService?.options || []
 
     const variantId = useMemo(() => {
         return serviceVariant?.id || variants[0]?.id
@@ -106,7 +108,6 @@ export const OrderCreationPage = () => {
                 </div>
             </Header>
 
-            {/* Service Options */}
             <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4">
                 <Tabs defaultValue={variantId} value={variantId}
                       className="mt-[calc(56px+env(safe-area-inset-top))]">
