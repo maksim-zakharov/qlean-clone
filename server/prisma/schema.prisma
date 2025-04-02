@@ -30,6 +30,7 @@ model Order {
   serviceVariantId Int
   options          OrderServiceOption[]  @relation("OrderToServiceOption")
   optionIds        Int[]
+  status  OrderStatus  @default(active)
   fullAddress String
   date DateTime @db.Timestamp(6)
   userId Int?

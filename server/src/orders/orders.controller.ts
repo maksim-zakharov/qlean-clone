@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Param, Patch, Post, Put, Query} from '@nestjs/common';
-import {Order} from "@prisma/client";
+import {Order, OrderStatus} from "@prisma/client";
 import {OrdersService} from "./orders.service";
 
 @Controller('/api/orders')
@@ -10,7 +10,10 @@ export class OrdersController {
 
     @Get('')
     getOrders(@Query() {userId}: { userId?: number }) {
-        return this.ordersService.getAll(Number(userId));
+        return this.ordersService.getAll(Number(userId)).then(r => r.map(o => ({
+            ...o,
+            status: o.date > new Date() ? o.status : OrderStatus.completed
+        })));
     }
 
     @Get('/:id')

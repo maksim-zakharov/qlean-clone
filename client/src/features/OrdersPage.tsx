@@ -20,15 +20,15 @@ export const OrdersPage = () => {
         refetchOnMountOrArgChange: true
     });
 
-    const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
-    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
+    const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
+    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
 
     const handleAddOptionClick = (order: any) => {
         const {baseService} = order;
         let url;
 
         if (baseService) {
-            url = `${window.origin}/order/${baseService?.id}`;
+            url = `/order/${baseService?.id}`;
         } else {
             url = '/';
         }
@@ -70,20 +70,20 @@ export const OrdersPage = () => {
             <Typography.H2 className="mt-4">
                 Все заявки
             </Typography.H2>
-            {completedOrders.map(co => <Card className="p-0 gap-0 mt-2">
+            {completedOrders.map(ao => <Card className="p-0 gap-0 mt-2">
                 <div className="p-4 separator-shadow-bottom">
                     <div className="flex justify-between">
-                        <Typography.Title>{co.serviceName}</Typography.Title>
-                        <Typography.Title>{moneyFormat(co.totalPrice)}</Typography.Title>
+                        <Typography.Title>{ao.baseService?.name}</Typography.Title>
+                        <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
                     </div>
                     <div className="flex justify-between">
-                        <Typography.Description>{co.fullAddress}</Typography.Description>
-                        <Typography.Description>{dayjs(co.date).format('D MMMM, HH:mm')}</Typography.Description>
+                        <Typography.Description>{ao.fullAddress}</Typography.Description>
+                        <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
                 <div className="p-4 flex gap-2 flex-col">
                     <div className="flex justify-between">
-                        <Typography.Title>№{co.id}</Typography.Title>
+                        <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>Завершен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
