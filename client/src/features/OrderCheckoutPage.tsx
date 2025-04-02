@@ -141,8 +141,6 @@ export const OrderCheckoutPage = () => {
                     <Button
                         variant="ghost"
                         className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
-                        onClick={() => {/* TODO: Open payment selection */
-                        }}
                     >
                         <div className="flex items-center gap-3">
                             <div
