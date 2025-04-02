@@ -7,16 +7,35 @@ import dayjs from "dayjs";
 import {RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {moneyFormat} from "../lib/utils.ts";
+import {useDispatch} from "react-redux";
+import {selectBaseService} from "../slices/createOrderSlice.ts";
+import {useNavigate} from "react-router-dom";
 
 
 export const OrdersPage = () => {
     const {userId} = useTelegram();
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     const {data: orders = []} = useGetOrdersQuery({userId}, {
         refetchOnMountOrArgChange: true
     });
 
     const activeOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
     const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.date - a.date), [orders]);
+
+    const handleAddOptionClick = (order: any) => {
+        const {baseService} = order;
+        let url;
+
+        if (baseService) {
+            url = new URL(`${window.origin}/order/${baseService?.id}`);
+        } else {
+            url = new URL(`${window.origin}`);
+        }
+
+        dispatch(selectBaseService(order))
+        navigate(url.toString().replace(window.origin, ''))
+    }
 
     return <div className="px-4 mb-2">
         {activeOrders.length > 0 && <div className="mb-6 mt-4">
@@ -40,7 +59,8 @@ export const OrdersPage = () => {
                         <Typography.Title>Оформлен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button variant="default" size="small">Добавить услугу</Button>
+                        <Button onClick={() => handleAddOptionClick(ao)} variant="default" size="small">Добавить
+                            услугу</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>

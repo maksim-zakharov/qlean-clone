@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query, Res} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Res} from '@nestjs/common';
 import {AddressesService} from "./address.service";
 import {OrdersService} from "./orders/orders.service";
 import {Address, Order} from "@prisma/client";
@@ -118,6 +118,15 @@ export class AppController {
     @Put('/api/orders/:id')
     editOrder(@Param('id') id: number, @Body() body: Order): any {
         return this.ordersService.update(body);
+    }
+
+    @Patch('/api/orders/:id')
+    async patchOrder(@Param('id') id: number, @Body() body: Order) {
+        const item = await this.ordersService.getById(Number(id), Number(body.userId));
+
+        Object.assign(item, body);
+
+        return this.ordersService.update(item);
     }
 
     @Post('/api/orders')

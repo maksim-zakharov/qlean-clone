@@ -43,18 +43,12 @@ export const OrderCheckoutPage = () => {
         let url;
 
         if(baseService){
-            url = new URL(`${window.origin}/order/${baseService?.id}`);
+            url = `${window.origin}/order/${baseService?.id}`;
         } else {
-            url = new URL(`${window.origin}`);
+            url = `${window.origin}`;
         }
 
-        if (serviceVariant) {
-            url.searchParams.set('variantId', serviceVariant.id);
-        }
-
-        options.forEach((option) => url.searchParams.append('optionId', option.id));
-
-        return url.toString().replace(window.origin, '');
+        return url;
 
     }, [serviceVariant, options, baseService]);
 

@@ -9,7 +9,12 @@ export class OrdersService {
 
     getById(id: Order['id'], userId: Order['userId']) {
         return this.prisma.order.findUnique({
-            where: {id, userId}
+            where: {id, userId},
+            include: {
+                baseService: true,
+                options: true,
+                serviceVariant: true,
+            }
         })
     }
 
@@ -37,9 +42,16 @@ export class OrdersService {
         });
     }
 
-    async update(data: Order): Promise<Order> {
+    async update(data: any): Promise<Order> {
         return this.prisma.order.update({
-            data,
+            data: {
+                baseServiceId: data.baseService.id,
+                userId: data.userId,
+                date: new Date(data.date),
+                fullAddress: data.fullAddress,
+                serviceVariantId: data.serviceVariant.id,
+                optionIds: data.options.map(o => o.id)
+            },
             where: {id: data.id, userId: data.userId},
         });
     }

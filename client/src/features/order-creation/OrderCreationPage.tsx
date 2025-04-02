@@ -12,12 +12,18 @@ import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useGetServicesQuery} from "../../api.ts";
-import {useDispatch} from "react-redux";
-import {clearState, selectBaseService} from "../../slices/createOrderSlice.ts";
+import {useGetServicesQuery, usePatchOrderMutation} from "../../api.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
 
 export const OrderCreationPage = () => {
     const {data: services = []} = useGetServicesQuery();
+    const [patchOrder] = usePatchOrderMutation();
+    const orderId = useSelector(state => state.createOrder.id)
+    const baseService = useSelector(state => state.createOrder.baseService)
+    const options = useSelector(state => state.createOrder.options)
+    const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
+
     const {vibro} = useTelegram();
     const navigate = useNavigate()
     const {serviceId = ''} = useParams<{ serviceId: string }>()
@@ -26,49 +32,57 @@ export const OrderCreationPage = () => {
     const dispatch = useDispatch();
 
     // Если создаем - true, если редактируем - false;
-    const isDraft = true;
+    const isDraft = !Boolean(orderId);
 
     // Находим таб, в котором находится услуга
     const currentService = useMemo(() => services.find(service => service.id === Number(serviceId)), [serviceId, services]);
 
-    const variantId = Number(searchParams.get('variantId')) || currentService?.variants[0]?.id;
+    const variantId = serviceVariant?.id || currentService?.variants[0]?.id;
 
-    const selectedOptions = searchParams.getAll('optionId') || [];
     // Находим варианты услуг по базовой услуге
     const variants = currentService?.variants || [];
-    const serviceVariant = useMemo(() => currentService?.variants.find(v => v.id === variantId), [variantId, services]);
     // Получаем доступные опции для типа услуги
     const availableOptions = currentService?.options || [];
 
+    const selectedOptionsIdSet = useMemo(() => new Set(options.map(o => o.id)), [options]);
+
     // Считаем общую сумму
-    const totalPrice = useMemo(() => selectedOptions.reduce((sum, optionId) => {
+    const totalPrice = useMemo(() => options.reduce((sum, optionId) => {
         const option = availableOptions.find(opt => opt.id === Number(optionId))
         return sum + (option?.price || 0)
-    }, serviceVariant?.basePrice || 0), [serviceVariant, selectedOptions, availableOptions]);
+    }, serviceVariant?.basePrice || 0), [serviceVariant, options, availableOptions]);
 
     // Считаем общее время
-    const totalDuration = useMemo(() => selectedOptions.reduce((sum, optionId) => {
+    const totalDuration = useMemo(() => options.reduce((sum, optionId) => {
         const option = availableOptions.find(opt => opt.id === Number(optionId))
         return sum + (option?.duration || 0)
-    }, serviceVariant?.duration || 0), [serviceVariant, selectedOptions, availableOptions]);
+    }, serviceVariant?.duration || 0), [serviceVariant, options, availableOptions]);
 
-    const handleOptionToggle = (optionId: number) => {
+    const handleOptionToggle = (option: any) => {
         vibro('light');
-        if (searchParams.has('optionId', optionId?.toString())) {
-            searchParams.delete('optionId', optionId?.toString())
+        const exist = options.find(opt => opt.id === option.id);
+        let newOptions = [...options];
+        if (exist) {
+            newOptions = newOptions.filter(opt => opt.id !== option.id);
         } else {
-            searchParams.append('optionId', optionId?.toString())
+            newOptions.push(option)
         }
-
-        setSearchParams(searchParams)
+        dispatch(selectOptions({options: newOptions}))
     }
 
-    const handleNext = () => {
-        const options = currentService?.options.filter(v => selectedOptions.includes(v.id.toString()));
+    const handleNext = async () => {
+        if (isDraft) {
+            dispatch(selectBaseService({baseService: currentService, serviceVariant, options}))
 
-        dispatch(selectBaseService({baseService: currentService, serviceVariant, options}))
+            navigate(`/order/${serviceId}/checkout`);
+        } else {
+            await patchOrder({id: orderId, serviceVariant, options}).unwrap();
+            navigate(`/orders`);
+        }
+    }
 
-        navigate(`/order/${serviceId}/checkout`);
+    const handleSelectVariant = (serviceVariant: any) => {
+        dispatch(selectVariant({serviceVariant}))
     }
 
     const handleBackClick = () => dispatch(clearState());
@@ -96,7 +110,7 @@ export const OrderCreationPage = () => {
                             <TabsTrigger
                                 key={tab.id}
                                 value={tab.id}
-                                onClick={() => navigate(`/order/${serviceId}?variantId=${tab.id}`)}
+                                onClick={() => handleSelectVariant(tab)}
                             >
                                 {tab.name}
                             </TabsTrigger>
@@ -104,7 +118,7 @@ export const OrderCreationPage = () => {
                     </TabsList>
                 </Tabs>
                 <div className="pt-2">
-                    <List itemClassName="flex-col gap-2" >
+                    <List itemClassName="flex-col gap-2">
                         {availableOptions.map((option) => <>
                             <div className="flex items-center gap-3 ml-3 w-full justify-between">
                                 <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -122,12 +136,12 @@ export const OrderCreationPage = () => {
                                         className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
                                 ) : <div/>}
                                 <Button
-                                    variant={selectedOptions.includes(option.id.toString()) ? 'primary' : 'default'}
+                                    variant={selectedOptionsIdSet.has(option.id) ? 'primary' : 'default'}
                                     className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
-                                    onClick={() => handleOptionToggle(option.id)}
+                                    onClick={() => handleOptionToggle(option)}
                                 >
                                     <Plus
-                                        className={`w-[18px] h-[18px] ${selectedOptions.includes(option.id) ? 'rotate-45' : ''} transition-transform`}/>
+                                        className={`w-[18px] h-[18px] ${selectedOptionsIdSet.has(option.id) ? 'rotate-45' : ''} transition-transform`}/>
                                 </Button>
                             </div>
                         </>)}

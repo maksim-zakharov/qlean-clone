@@ -30,6 +30,22 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
+        editOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/orders/${params.id}`,
+                method: 'PUT',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
+        patchOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/orders/${params.id}`,
+                method: 'PATCH',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
         getAddresses: builder.query<any[], { userId?: number }>({
             query: (params) => ({
                 url: "/addresses",
@@ -67,6 +83,8 @@ export const {
     useGetServicesQuery,
     useGetOrdersQuery,
     useAddOrderMutation,
+    useEditOrderMutation,
+    usePatchOrderMutation,
     useGetAddressesQuery,
     useAddAddressMutation,
     useEditAddressMutation,
