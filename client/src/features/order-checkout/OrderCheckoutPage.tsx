@@ -67,7 +67,6 @@ export const OrderCheckoutPage = () => {
     const handleSelectDate = (date) => dispatch(selectDate({date}));
 
     const handleOnSubmit = async () => {
-        debugger
         await addOrder(
             {
                 baseService,

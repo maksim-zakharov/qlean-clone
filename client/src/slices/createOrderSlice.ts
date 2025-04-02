@@ -34,13 +34,13 @@ const _clearState = (state) => {
     state.baseService = null;
     state.serviceVariant = null;
     state.options = [];
-    state.fullAddress = null;
+    // state.fullAddress = null;
     state.date = 0;
 
     saveInLocalStorage('id', state.id)
     saveInLocalStorage('baseService', state.baseService)
     saveInLocalStorage('serviceVariant', state.serviceVariant)
-    saveInLocalStorage('fullAddress', state.fullAddress)
+    // saveInLocalStorage('fullAddress', state.fullAddress)
     saveInLocalStorage('date', state.date)
     saveInLocalStorage('options', null)
 }

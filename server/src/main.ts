@@ -10,16 +10,16 @@ async function bootstrap() {
         cors: true,
     });
 
-    app.useGlobalFilters(new HttpExceptionFilter());
-    // Глобальная валидация
-    app.useGlobalPipes(
-        new ValidationPipe({
-            transform: true,
-            whitelist: true,
-            forbidNonWhitelisted: true,
-            exceptionFactory: (errors) => new BadRequestException(formatValidationErrors(errors)),
-        }),
-    );
+    // app.useGlobalFilters(new HttpExceptionFilter());
+    // // Глобальная валидация
+    // app.useGlobalPipes(
+    //     new ValidationPipe({
+    //         transform: true,
+    //         whitelist: true,
+    //         forbidNonWhitelisted: true,
+    //         exceptionFactory: (errors) => new BadRequestException(formatValidationErrors(errors)),
+    //     }),
+    // );
 
     // Проверка подключения к Prisma
     const prisma = app.get(PrismaService);
