@@ -182,9 +182,6 @@ export const OrderDetailsPage = () => {
                     </AccordionContent>}
                 </AccordionItem>
             </Accordion>
-            {/*<Button className="mt-4" wide>*/}
-            {/*    Добавить опции*/}
-            {/*</Button>*/}
         </div>
         {canEdit && <BottomActions className="gap-2 flex-col flex">
             <AlertDescription>
