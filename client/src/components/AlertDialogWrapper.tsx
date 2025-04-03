@@ -10,7 +10,7 @@ import {
     AlertDialogTrigger
 } from "./ui/alert-dialog.tsx";
 
-export const AlertDialogWrapper = ({children, open, title,  onOkText, description, onOkClick, onCancelClick}: any) => {
+export const AlertDialogWrapper = ({children, open, title,  onOkText, onCloseText, description, onOkClick, onCancelClick}: any) => {
 
     return <AlertDialog open={open}>
         {children && <AlertDialogTrigger asChild>
@@ -24,8 +24,8 @@ export const AlertDialogWrapper = ({children, open, title,  onOkText, descriptio
                 </AlertDialogDescription>}
             </AlertDialogHeader>
             {(onCancelClick || onOkClick) && <AlertDialogFooter className="items-center">
-                {onCancelClick && <AlertDialogCancel onClick={onCancelClick}>Cancel</AlertDialogCancel>}
-                {onOkClick && <AlertDialogAction className="w-30" onClick={onOkClick}>{onOkText || 'Continue'}</AlertDialogAction>}
+                {onCancelClick && <AlertDialogCancel className="w-full" onClick={onCancelClick}>{onCloseText || 'Cancel'}</AlertDialogCancel>}
+                {onOkClick && <AlertDialogAction className="w-full" onClick={onOkClick}>{onOkText || 'Continue'}</AlertDialogAction>}
             </AlertDialogFooter>}
         </AlertDialogContent>
     </AlertDialog>

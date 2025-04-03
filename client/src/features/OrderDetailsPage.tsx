@@ -1,10 +1,10 @@
 import {Header} from "../components/ui/Header.tsx";
 import {BackButton} from "../components/BackButton.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {useNavigate, useParams} from "react-router-dom";
-import {useGetAddressesQuery, useGetOrderByIdQuery, usePatchOrderMutation} from "../api.ts";
+import {useCancelOrderMutation, useGetAddressesQuery, useGetOrderByIdQuery, usePatchOrderMutation} from "../api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../components/ui/accordion.tsx";
 import {moneyFormat} from "../lib/utils.ts";
 import dayjs from "dayjs";
@@ -13,22 +13,28 @@ import {Card} from "../components/ui/card.tsx";
 import {Pencil, User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {BottomActions} from "../components/BottomActions.tsx";
-import {AlertDescription} from "../components/ui/alert.tsx";
 import {Skeleton} from "../components/ui/skeleton.tsx";
 import {ScheduleSheet} from "../components/ScheduleSheet.tsx";
 import {CommentsSheet} from "../components/CommentsSheet.tsx";
 import {AddressSheet} from "../components/AddressSheet.tsx";
 import {selectBaseService} from "../slices/createOrderSlice.ts";
 import {useDispatch} from "react-redux";
+import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
+    const [cancelOrder] = useCancelOrderMutation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const {userId, vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
     const {id} = useParams<string>();
     const {data: order, isLoading} = useGetOrderByIdQuery({userId, id: id!});
+    const [{title, description, show}, setAlertConfig] = useState({
+        title: '',
+        description: '',
+        show: false
+    })
 
     const canEdit = Boolean(order?.status) && !['completed', 'canceled'].includes(order?.status);
 
@@ -55,6 +61,26 @@ export const OrderDetailsPage = () => {
         navigate('/order')
     }
 
+    const handleOkClick = () => {
+        setAlertConfig(prevState => ({...prevState, show: false}));
+        setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
+    }
+
+    const handleCancelClick = async () => {
+        await cancelOrder({id: order.id, userId}).unwrap();
+        setAlertConfig(prevState => ({...prevState, show: false}));
+        setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
+    }
+
+    const handleCloseClick = () => {
+        setAlertConfig({
+            title: `Отменить уборку ${dayjs(order.date).format('dd, D MMMM HH:mm')}?`,
+            description: 'Вы можете перенести уборку, если дата и время вам не подходят',
+            show: true
+        })
+    }
+
+
     if (isLoading && !order) {
         return <div className="px-4 mt-[56px]">
             <div className="mt-4">
@@ -66,6 +92,11 @@ export const OrderDetailsPage = () => {
     }
 
     return <div className="fixed inset-0 flex flex-col">
+        <AlertDialogWrapper open={show} title={title} description={description}
+                            onOkText="Перенести"
+                            onCloseText="Отменить"
+                            onCancelClick={handleCancelClick}
+                            onOkClick={handleOkClick}/>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
                 <BackButton url="/orders"/>
@@ -194,17 +225,16 @@ export const OrderDetailsPage = () => {
             </Accordion>
         </div>
         {canEdit && <BottomActions className="gap-2 flex-col flex">
-            <AlertDescription>
-                <Button
-                    wide
-                    onClick={handleAddOptionClick}
-                >
-                    Добавить опций
-                </Button>
-            </AlertDescription>
+            <Button
+                wide
+                onClick={handleAddOptionClick}
+            >
+                Добавить опций
+            </Button>
             <Button
                 wide
                 variant="default"
+                onClick={handleCloseClick}
             >
                 Отменить
             </Button>

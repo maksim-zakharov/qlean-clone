@@ -35,6 +35,15 @@ export class OrdersController {
         return this.ordersService.update(item);
     }
 
+    @Post('/:id/cancel')
+    async cancelOrder(@Param('id') id: number, @Body() body: Order) {
+        const item = await this.ordersService.getById(Number(id), Number(body.userId));
+
+        item.status = OrderStatus.canceled;
+
+        return this.ordersService.update(item);
+    }
+
     @Post('')
     addOrder(@Body() body: Order) {
         return this.ordersService.create(body);

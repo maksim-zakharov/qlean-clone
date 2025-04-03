@@ -45,6 +45,14 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
+        cancelOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/orders/${params.id}/cancel`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
         patchOrder: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/orders/${params.id}`,
@@ -91,6 +99,7 @@ export const {
     useGetOrdersQuery,
     useAddOrderMutation,
     useGetOrderByIdQuery,
+    useCancelOrderMutation,
     useEditOrderMutation,
     usePatchOrderMutation,
     useGetAddressesQuery,

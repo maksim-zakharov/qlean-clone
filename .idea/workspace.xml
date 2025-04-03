@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="повторить" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="удаление услуг">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -158,15 +166,7 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-      <workItem from="1743353220794" duration="105960000" />
-    </task>
-    <task id="LOCAL-00216" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743501478779</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1743501478779</updated>
+      <workItem from="1743353220794" duration="107961000" />
     </task>
     <task id="LOCAL-00217" summary="prisma address">
       <option name="closed" value="true" />
@@ -552,7 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743666510625</updated>
     </task>
-    <option name="localTasksCounter" value="265" />
+    <task id="LOCAL-00265" summary="удаление услуг">
+      <option name="closed" value="true" />
+      <created>1743666923452</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1743666923452</updated>
+    </task>
+    <option name="localTasksCounter" value="266" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,6 +592,7 @@
     <MESSAGE value="скелетон заказы" />
     <MESSAGE value="userId" />
     <MESSAGE value="повторить" />
-    <option name="LAST_COMMIT_MESSAGE" value="повторить" />
+    <MESSAGE value="удаление услуг" />
+    <option name="LAST_COMMIT_MESSAGE" value="удаление услуг" />
   </component>
 </project>

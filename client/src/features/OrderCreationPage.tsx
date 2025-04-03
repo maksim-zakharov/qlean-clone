@@ -72,7 +72,7 @@ export const OrderCreationPage = () => {
             navigate(`/order/checkout`);
         } else {
             await patchOrder({id: orderId, serviceVariant, options, userId}).unwrap();
-            navigate(`/orders`);
+            navigate(`/orders/${orderId}`);
         }
     }
 

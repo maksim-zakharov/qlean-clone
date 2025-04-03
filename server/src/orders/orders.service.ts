@@ -63,6 +63,7 @@ export class OrdersService {
                 where: {id: data.id, userId: data.userId},
                 data: {
                     baseServiceId: data.baseService.id,
+                    status: data.status,
                     userId: data.userId,
                     date: new Date(data.date),
                     fullAddress: data.fullAddress,
