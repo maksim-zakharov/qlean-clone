@@ -2,17 +2,36 @@ import {useSelector} from "react-redux";
 import {Header} from "../components/ui/Header.tsx";
 import {BackButton} from "../components/BackButton.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
-import React from "react";
-import {Pencil, User} from "lucide-react";
+import React, {useEffect, useState} from "react";
+import {MapPin, Pencil, User} from "lucide-react";
 import {Card} from "../components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {usePatchPhoneMutation} from "../api.ts";
 
+interface Address {
+    // Дом
+    "house_number": string,
+    // Улица
+    "road": string,
+    "suburb": string,
+    // Город
+    "city": string,
+    // Область
+    "state": string,
+    // Регион/Округ
+    "region": string,
+    "postcode": string,
+    // Страна
+    "country": string,
+    "country_code": string
+}
+
 export const ProfilePage = () => {
 
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const [patchPhone] = usePatchPhoneMutation();
+    const [address, setAddress] = useState<Address | undefined>()
 
     const handleRequestContact = () => {
         Telegram.WebApp?.requestContact(async (isRequested) => {
@@ -24,6 +43,16 @@ export const ProfilePage = () => {
             await patchPhone({phone: Telegram.WebApp.initDataUnsafe?.user?.phone_number}).unwrap();
         });
     }
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ru`
+            );
+            const data = await response.json();
+            setAddress(data.address)
+        });
+    }, []);
 
     return <div className="fixed inset-0 flex flex-col">
         <Header>
@@ -54,6 +83,15 @@ export const ProfilePage = () => {
                     {!userInfo?.phone && <Button size="sm" variant="default" onClick={handleRequestContact}>
                         Обновить
                     </Button>}
+                </div>
+                <div className="p-4 separator-shadow-bottom flex justify-between items-center">
+                    <div className="flex gap-2">
+                        <MapPin/>
+                        <div className="flex flex-col">
+                            <Typography.Description>Адрес</Typography.Description>
+                            <Typography.Title className="flex">{!address ? 'Отсутствует' : `${address.city}, ${address.road}, ${address.house_number}`}</Typography.Title>
+                        </div>
+                    </div>
                 </div>
             </Card>
         </div>
