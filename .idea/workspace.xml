@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="userId">
-      <change afterPath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/button.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="повторить">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,15 +162,7 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-      <workItem from="1743353220794" duration="104685000" />
-    </task>
-    <task id="LOCAL-00214" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743468510844</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1743468510844</updated>
+      <workItem from="1743353220794" duration="105578000" />
     </task>
     <task id="LOCAL-00215" summary="prisma address">
       <option name="closed" value="true" />
@@ -564,7 +548,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743655769873</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL-00263" summary="повторить">
+      <option name="closed" value="true" />
+      <created>1743665741925</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1743665741925</updated>
+    </task>
+    <option name="localTasksCounter" value="264" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,6 +587,7 @@
     <MESSAGE value="повтор заказа" />
     <MESSAGE value="скелетон заказы" />
     <MESSAGE value="userId" />
-    <option name="LAST_COMMIT_MESSAGE" value="userId" />
+    <MESSAGE value="повторить" />
+    <option name="LAST_COMMIT_MESSAGE" value="повторить" />
   </component>
 </project>

@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {List} from "../components/ui/list.tsx";
@@ -47,16 +47,11 @@ export const OrderCreationPage = () => {
     const selectedOptionsIdSet = useMemo(() => new Set(options.map(o => o.id)), [options]);
 
     // Считаем общую сумму
-    const totalPrice = useMemo(() => options.reduce((sum, optionId) => {
-        const option = availableOptions.find(opt => opt.id === Number(optionId))
-        return sum + (option?.price || 0)
-    }, serviceVariant?.basePrice || 0), [serviceVariant, options, availableOptions]);
+    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
 
     // Считаем общее время
-    const totalDuration = useMemo(() => options.reduce((sum, optionId) => {
-        const option = availableOptions.find(opt => opt.id === Number(optionId))
-        return sum + (option?.duration || 0)
-    }, serviceVariant?.duration || 0), [serviceVariant, options, availableOptions]);
+    const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
+
 
     const handleOptionToggle = (option: any) => {
         vibro('light');
@@ -88,7 +83,7 @@ export const OrderCreationPage = () => {
     const handleBackClick = () => dispatch(clearState());
 
     const backUrl = useMemo(() => {
-        if(isDraft){
+        if (isDraft) {
             return '/';
         }
         return '/orders'
@@ -160,9 +155,8 @@ export const OrderCreationPage = () => {
                 <Button
                     wide
                     onClick={handleNext}
-                >
-                    {isDraft ? <><span className="flex-1 text-left">Далее</span>
-                        <span>{moneyFormat(totalPrice)}</span></> : 'Сохранить'}
+                ><span className="flex-1 text-left">{isDraft ? 'Далее' : 'Сохранить'}</span>
+                    <span>{moneyFormat(totalPrice)}</span>
                 </Button>
             </BottomActions>
         </div>

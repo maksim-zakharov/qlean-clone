@@ -3,7 +3,7 @@ import {BackButton} from "../components/BackButton.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
 import React, {useMemo} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useGetAddressesQuery, useGetOrderByIdQuery, usePatchOrderMutation} from "../api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../components/ui/accordion.tsx";
 import {moneyFormat} from "../lib/utils.ts";
@@ -18,9 +18,13 @@ import {Skeleton} from "../components/ui/skeleton.tsx";
 import {ScheduleSheet} from "../components/ScheduleSheet.tsx";
 import {CommentsSheet} from "../components/CommentsSheet.tsx";
 import {AddressSheet} from "../components/AddressSheet.tsx";
+import {selectBaseService} from "../slices/createOrderSlice.ts";
+import {useDispatch} from "react-redux";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     const {userId, vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
     const {id} = useParams<string>();
@@ -43,6 +47,12 @@ export const OrderDetailsPage = () => {
     const handleChangeComment = async (comment?: string) => {
         if (comment && comment !== order.comment)
             await patchOrder({id: order.id, comment, userId}).unwrap();
+    }
+
+    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        dispatch(selectBaseService(order))
+        navigate('/order')
     }
 
     if (isLoading && !order) {
@@ -187,6 +197,7 @@ export const OrderDetailsPage = () => {
             <AlertDescription>
                 <Button
                     wide
+                    onClick={handleAddOptionClick}
                 >
                     Добавить опций
                 </Button>
