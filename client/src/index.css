@@ -233,6 +233,10 @@
         background-color: rgb(from var(--tg-theme-button-color) r g b / 20%);
     }
 
+    .bg-tg-theme-destructive-color {
+        background-color: var(--tg-theme-destructive-text-color);
+    }
+
     .text-tg-theme-button-color {
         color: var(--tg-theme-button-color);
     }

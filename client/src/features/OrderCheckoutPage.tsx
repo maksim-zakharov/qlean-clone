@@ -19,6 +19,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AddressSheet} from "../components/AddressSheet.tsx";
 import {selectDate, selectFullAddress} from "../slices/createOrderSlice.ts";
 import {Header} from "../components/ui/Header.tsx";
+import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -31,6 +32,8 @@ export const OrderCheckoutPage = () => {
     const fullAddress = useSelector(state => state.createOrder.fullAddress?.fullAddress)
     const dispatch = useDispatch();
 
+    const [error, setError] = useState<string | undefined>();
+
     const navigate = useNavigate()
     const [comment, setComment] = useState<string | undefined>();
     const {vibro, userId} = useTelegram();
@@ -39,19 +42,6 @@ export const OrderCheckoutPage = () => {
 
     // Считаем общее время
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
-
-    const backUrl = useMemo(() => {
-        let url;
-
-        if(baseService){
-            url = `/order/${baseService?.id}`;
-        } else {
-            url = `/`;
-        }
-
-        return url;
-
-    }, [serviceVariant, options, baseService]);
 
     const dateTitle = useMemo(() => {
         if (!selectedTimestamp) {
@@ -68,21 +58,35 @@ export const OrderCheckoutPage = () => {
     const handleSelectDate = (date) => dispatch(selectDate({date}));
 
     const handleOnSubmit = async () => {
-        await addOrder(
-            {
-                baseService,
-                serviceVariant,
-                fullAddress,
-                options,
-                date: selectedTimestamp,
-                comment,
-                userId
-            }).unwrap();
-        navigate('/orders')
+        try {
+            await addOrder(
+                {
+                    baseService,
+                    serviceVariant,
+                    fullAddress,
+                    options,
+                    date: selectedTimestamp,
+                    comment,
+                    userId
+                }).unwrap();
+            navigate('/orders')
+        } catch (e) {
+            let description = 'Что-то пошло не так.'
+            if (!selectedTimestamp) {
+                description = 'Необходимо выбрать дату и время'
+            }
+            if (!fullAddress) {
+                description = 'Необходимо выбрать адрес'
+            }
+            setError(description);
+        }
     }
 
     return (
         <div className="fixed inset-0 flex flex-col bg-tg-theme-bg-color">
+            <AlertDialogWrapper open={Boolean(error)} title="Не удалось оформить заказ" description={error}
+                                onOkText="Хорошо"
+                                onOkClick={() => setError(undefined)}/>
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <BackButton url="/orders"/>

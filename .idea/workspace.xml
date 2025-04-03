@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="vite">
-      <change beforePath="$PROJECT_DIR$/server/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.controller.ts" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="userId">
+      <change afterPath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +30,20 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="deploy" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -39,7 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Projects/qlean-clone/client/src",
+    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -57,16 +79,19 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\qlean-clone\client\src" />
-      <recent name="D:\Projects\qlean-clone" />
       <recent name="D:\Projects\qlean-clone\client\src\components" />
+      <recent name="D:\Projects\qlean-clone" />
+      <recent name="D:\Projects\qlean-clone\client\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\qlean-clone\nginx" />
-      <recent name="D:\Projects\qlean-clone\client\src\components" />
+      <recent name="D:\Projects\qlean-clone\client\src\features" />
+      <recent name="D:\Projects\qlean-clone\server\src\addresses" />
+      <recent name="D:\Projects\qlean-clone" />
+      <recent name="D:\Projects\qlean-clone\client" />
+      <recent name="D:\Projects\qlean-clone\server" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev-host">
+  <component name="RunManager" selected="npm.start:dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
@@ -119,11 +144,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev-host" />
         <item itemvalue="npm.start:dev" />
-        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev-host" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:ci" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -145,401 +170,401 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-      <workItem from="1743353220794" duration="791000" />
+      <workItem from="1743353220794" duration="104685000" />
     </task>
-    <task id="LOCAL-00110" summary="vite">
+    <task id="LOCAL-00214" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743261248341</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
+      <created>1743468510844</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
       <option name="project" value="LOCAL" />
-      <updated>1743261248341</updated>
+      <updated>1743468510844</updated>
     </task>
-    <task id="LOCAL-00111" summary="vite">
+    <task id="LOCAL-00215" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743277057457</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
+      <created>1743501299549</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
       <option name="project" value="LOCAL" />
-      <updated>1743277057457</updated>
+      <updated>1743501299549</updated>
     </task>
-    <task id="LOCAL-00112" summary="vite">
+    <task id="LOCAL-00216" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743277651748</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
+      <created>1743501478779</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
       <option name="project" value="LOCAL" />
-      <updated>1743277651748</updated>
+      <updated>1743501478779</updated>
     </task>
-    <task id="LOCAL-00113" summary="vite">
+    <task id="LOCAL-00217" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743277780393</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
+      <created>1743501607316</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
       <option name="project" value="LOCAL" />
-      <updated>1743277780393</updated>
+      <updated>1743501607316</updated>
     </task>
-    <task id="LOCAL-00114" summary="vite">
+    <task id="LOCAL-00218" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743277907007</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
+      <created>1743503439063</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
       <option name="project" value="LOCAL" />
-      <updated>1743277907007</updated>
+      <updated>1743503439063</updated>
     </task>
-    <task id="LOCAL-00115" summary="vite">
+    <task id="LOCAL-00219" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743278392288</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
+      <created>1743504489405</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
       <option name="project" value="LOCAL" />
-      <updated>1743278392288</updated>
+      <updated>1743504489405</updated>
     </task>
-    <task id="LOCAL-00116" summary="vite">
+    <task id="LOCAL-00220" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743278938786</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
+      <created>1743505095425</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
       <option name="project" value="LOCAL" />
-      <updated>1743278938786</updated>
+      <updated>1743505095425</updated>
     </task>
-    <task id="LOCAL-00117" summary="vite">
+    <task id="LOCAL-00221" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743280192058</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
+      <created>1743505669416</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
       <option name="project" value="LOCAL" />
-      <updated>1743280192058</updated>
+      <updated>1743505669416</updated>
     </task>
-    <task id="LOCAL-00118" summary="vite">
+    <task id="LOCAL-00222" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743280426612</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
+      <created>1743506845240</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
       <option name="project" value="LOCAL" />
-      <updated>1743280426612</updated>
+      <updated>1743506845240</updated>
     </task>
-    <task id="LOCAL-00119" summary="vite">
+    <task id="LOCAL-00223" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743281209987</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
+      <created>1743506986933</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
       <option name="project" value="LOCAL" />
-      <updated>1743281209987</updated>
+      <updated>1743506986933</updated>
     </task>
-    <task id="LOCAL-00120" summary="vite">
+    <task id="LOCAL-00224" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743285125492</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
+      <created>1743508268732</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
       <option name="project" value="LOCAL" />
-      <updated>1743285125492</updated>
+      <updated>1743508268732</updated>
     </task>
-    <task id="LOCAL-00121" summary="vite">
+    <task id="LOCAL-00225" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743321813092</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
+      <created>1743508599664</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
       <option name="project" value="LOCAL" />
-      <updated>1743321813092</updated>
+      <updated>1743508599664</updated>
     </task>
-    <task id="LOCAL-00122" summary="vite">
+    <task id="LOCAL-00226" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743321920466</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
+      <created>1743509099625</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
       <option name="project" value="LOCAL" />
-      <updated>1743321920466</updated>
+      <updated>1743509099625</updated>
     </task>
-    <task id="LOCAL-00123" summary="vite">
+    <task id="LOCAL-00227" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743322144665</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
+      <created>1743509371742</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
       <option name="project" value="LOCAL" />
-      <updated>1743322144665</updated>
+      <updated>1743509371742</updated>
     </task>
-    <task id="LOCAL-00124" summary="vite">
+    <task id="LOCAL-00228" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743322370737</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
+      <created>1743509564952</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
       <option name="project" value="LOCAL" />
-      <updated>1743322370737</updated>
+      <updated>1743509564952</updated>
     </task>
-    <task id="LOCAL-00125" summary="vite">
+    <task id="LOCAL-00229" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743322554096</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
+      <created>1743509693809</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
       <option name="project" value="LOCAL" />
-      <updated>1743322554096</updated>
+      <updated>1743509693809</updated>
     </task>
-    <task id="LOCAL-00126" summary="vite">
+    <task id="LOCAL-00230" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743322961025</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
+      <created>1743509813536</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
       <option name="project" value="LOCAL" />
-      <updated>1743322961025</updated>
+      <updated>1743509813536</updated>
     </task>
-    <task id="LOCAL-00127" summary="vite">
+    <task id="LOCAL-00231" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743323201386</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
+      <created>1743509822697</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
       <option name="project" value="LOCAL" />
-      <updated>1743323201386</updated>
+      <updated>1743509822697</updated>
     </task>
-    <task id="LOCAL-00128" summary="vite">
+    <task id="LOCAL-00232" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743323561936</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
+      <created>1743509862839</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
       <option name="project" value="LOCAL" />
-      <updated>1743323561936</updated>
+      <updated>1743509862839</updated>
     </task>
-    <task id="LOCAL-00129" summary="vite">
+    <task id="LOCAL-00233" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743327961906</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
+      <created>1743511193251</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
       <option name="project" value="LOCAL" />
-      <updated>1743327961906</updated>
+      <updated>1743511193251</updated>
     </task>
-    <task id="LOCAL-00130" summary="vite">
+    <task id="LOCAL-00234" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743332695413</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
+      <created>1743513404144</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
       <option name="project" value="LOCAL" />
-      <updated>1743332695413</updated>
+      <updated>1743513404144</updated>
     </task>
-    <task id="LOCAL-00131" summary="vite">
+    <task id="LOCAL-00235" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743334041050</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
+      <created>1743513536194</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
       <option name="project" value="LOCAL" />
-      <updated>1743334041050</updated>
+      <updated>1743513536194</updated>
     </task>
-    <task id="LOCAL-00132" summary="vite">
+    <task id="LOCAL-00236" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743334451196</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
+      <created>1743514094457</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
       <option name="project" value="LOCAL" />
-      <updated>1743334451196</updated>
+      <updated>1743514094457</updated>
     </task>
-    <task id="LOCAL-00133" summary="vite">
+    <task id="LOCAL-00237" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743335238308</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
+      <created>1743514154167</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
       <option name="project" value="LOCAL" />
-      <updated>1743335238308</updated>
+      <updated>1743514154167</updated>
     </task>
-    <task id="LOCAL-00134" summary="vite">
+    <task id="LOCAL-00238" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743336681726</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
+      <created>1743531953852</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
       <option name="project" value="LOCAL" />
-      <updated>1743336681726</updated>
+      <updated>1743531953852</updated>
     </task>
-    <task id="LOCAL-00135" summary="vite">
+    <task id="LOCAL-00239" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743337549358</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
+      <created>1743534699751</created>
+      <option name="number" value="00239" />
+      <option name="presentableId" value="LOCAL-00239" />
       <option name="project" value="LOCAL" />
-      <updated>1743337549358</updated>
+      <updated>1743534699751</updated>
     </task>
-    <task id="LOCAL-00136" summary="vite">
+    <task id="LOCAL-00240" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743337762045</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
+      <created>1743535988840</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
       <option name="project" value="LOCAL" />
-      <updated>1743337762045</updated>
+      <updated>1743535988840</updated>
     </task>
-    <task id="LOCAL-00137" summary="vite">
+    <task id="LOCAL-00241" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743337984569</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
+      <created>1743569029176</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
       <option name="project" value="LOCAL" />
-      <updated>1743337984569</updated>
+      <updated>1743569029176</updated>
     </task>
-    <task id="LOCAL-00138" summary="vite">
+    <task id="LOCAL-00242" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743338151778</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
+      <created>1743577432973</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
       <option name="project" value="LOCAL" />
-      <updated>1743338151778</updated>
+      <updated>1743577432973</updated>
     </task>
-    <task id="LOCAL-00139" summary="vite">
+    <task id="LOCAL-00243" summary="prisma address">
       <option name="closed" value="true" />
-      <created>1743339486869</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
+      <created>1743580606736</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
       <option name="project" value="LOCAL" />
-      <updated>1743339486869</updated>
+      <updated>1743580606736</updated>
     </task>
-    <task id="LOCAL-00140" summary="vite">
+    <task id="LOCAL-00244" summary="разнес контроллер на несколько">
       <option name="closed" value="true" />
-      <created>1743340018318</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
+      <created>1743589043511</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
       <option name="project" value="LOCAL" />
-      <updated>1743340018318</updated>
+      <updated>1743589043511</updated>
     </task>
-    <task id="LOCAL-00141" summary="vite">
+    <task id="LOCAL-00245" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743340167033</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
+      <created>1743589512122</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
       <option name="project" value="LOCAL" />
-      <updated>1743340167033</updated>
+      <updated>1743589512122</updated>
     </task>
-    <task id="LOCAL-00142" summary="vite">
+    <task id="LOCAL-00246" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743340451370</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
+      <created>1743592155335</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
       <option name="project" value="LOCAL" />
-      <updated>1743340451370</updated>
+      <updated>1743592155335</updated>
     </task>
-    <task id="LOCAL-00143" summary="vite">
+    <task id="LOCAL-00247" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743340634636</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
+      <created>1743592376518</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
       <option name="project" value="LOCAL" />
-      <updated>1743340634636</updated>
+      <updated>1743592376518</updated>
     </task>
-    <task id="LOCAL-00144" summary="vite">
+    <task id="LOCAL-00248" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743340945916</created>
-      <option name="number" value="00144" />
-      <option name="presentableId" value="LOCAL-00144" />
+      <created>1743592850727</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
       <option name="project" value="LOCAL" />
-      <updated>1743340945916</updated>
+      <updated>1743592850727</updated>
     </task>
-    <task id="LOCAL-00145" summary="vite">
+    <task id="LOCAL-00249" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743341932748</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
+      <created>1743594566227</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
       <option name="project" value="LOCAL" />
-      <updated>1743341932748</updated>
+      <updated>1743594566227</updated>
     </task>
-    <task id="LOCAL-00146" summary="vite">
+    <task id="LOCAL-00250" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
-      <created>1743342084132</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
+      <created>1743598009619</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
       <option name="project" value="LOCAL" />
-      <updated>1743342084132</updated>
+      <updated>1743598009619</updated>
     </task>
-    <task id="LOCAL-00147" summary="vite">
+    <task id="LOCAL-00251" summary="повтор заказа">
       <option name="closed" value="true" />
-      <created>1743342147652</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
+      <created>1743599435300</created>
+      <option name="number" value="00251" />
+      <option name="presentableId" value="LOCAL-00251" />
       <option name="project" value="LOCAL" />
-      <updated>1743342147652</updated>
+      <updated>1743599435300</updated>
     </task>
-    <task id="LOCAL-00148" summary="vite">
+    <task id="LOCAL-00252" summary="повтор заказа">
       <option name="closed" value="true" />
-      <created>1743342234084</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
+      <created>1743601266691</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
       <option name="project" value="LOCAL" />
-      <updated>1743342234084</updated>
+      <updated>1743601266691</updated>
     </task>
-    <task id="LOCAL-00149" summary="vite">
+    <task id="LOCAL-00253" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743343760181</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
+      <created>1743612079033</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
       <option name="project" value="LOCAL" />
-      <updated>1743343760181</updated>
+      <updated>1743612079033</updated>
     </task>
-    <task id="LOCAL-00150" summary="vite">
+    <task id="LOCAL-00254" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743344256855</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
+      <created>1743616939118</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
       <option name="project" value="LOCAL" />
-      <updated>1743344256855</updated>
+      <updated>1743616939118</updated>
     </task>
-    <task id="LOCAL-00151" summary="vite">
+    <task id="LOCAL-00255" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743345009442</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
+      <created>1743618674298</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
       <option name="project" value="LOCAL" />
-      <updated>1743345009442</updated>
+      <updated>1743618674298</updated>
     </task>
-    <task id="LOCAL-00152" summary="vite">
+    <task id="LOCAL-00256" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743345216799</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
+      <created>1743621053087</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
       <option name="project" value="LOCAL" />
-      <updated>1743345216799</updated>
+      <updated>1743621053087</updated>
     </task>
-    <task id="LOCAL-00153" summary="vite">
+    <task id="LOCAL-00257" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743345554396</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
+      <created>1743621072713</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
       <option name="project" value="LOCAL" />
-      <updated>1743345554396</updated>
+      <updated>1743621072713</updated>
     </task>
-    <task id="LOCAL-00154" summary="vite">
+    <task id="LOCAL-00258" summary="скелетон заказы">
       <option name="closed" value="true" />
-      <created>1743346059865</created>
-      <option name="number" value="00154" />
-      <option name="presentableId" value="LOCAL-00154" />
+      <created>1743625579537</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
       <option name="project" value="LOCAL" />
-      <updated>1743346059865</updated>
+      <updated>1743625579537</updated>
     </task>
-    <task id="LOCAL-00155" summary="vite">
+    <task id="LOCAL-00259" summary="userId">
       <option name="closed" value="true" />
-      <created>1743347116327</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
+      <created>1743625910607</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
       <option name="project" value="LOCAL" />
-      <updated>1743347116327</updated>
+      <updated>1743625910607</updated>
     </task>
-    <task id="LOCAL-00156" summary="vite">
+    <task id="LOCAL-00260" summary="userId">
       <option name="closed" value="true" />
-      <created>1743351845487</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
+      <created>1743626122487</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
       <option name="project" value="LOCAL" />
-      <updated>1743351845487</updated>
+      <updated>1743626122487</updated>
     </task>
-    <task id="LOCAL-00157" summary="vite">
+    <task id="LOCAL-00261" summary="userId">
       <option name="closed" value="true" />
-      <created>1743352173476</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
+      <created>1743626368924</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
       <option name="project" value="LOCAL" />
-      <updated>1743352173476</updated>
+      <updated>1743626368924</updated>
     </task>
-    <task id="LOCAL-00158" summary="vite">
+    <task id="LOCAL-00262" summary="userId">
       <option name="closed" value="true" />
-      <created>1743353380518</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
+      <created>1743655769873</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
       <option name="project" value="LOCAL" />
-      <updated>1743353380518</updated>
+      <updated>1743655769873</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <option name="localTasksCounter" value="263" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,6 +589,12 @@
     </ignored-roots>
     <MESSAGE value="init" />
     <MESSAGE value="vite" />
-    <option name="LAST_COMMIT_MESSAGE" value="vite" />
+    <MESSAGE value="prisma address" />
+    <MESSAGE value="разнес контроллер на несколько" />
+    <MESSAGE value="читабельность призма ошибок" />
+    <MESSAGE value="повтор заказа" />
+    <MESSAGE value="скелетон заказы" />
+    <MESSAGE value="userId" />
+    <option name="LAST_COMMIT_MESSAGE" value="userId" />
   </component>
 </project>

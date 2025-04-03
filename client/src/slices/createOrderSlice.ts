@@ -31,11 +31,11 @@ const saveInLocalStorage = (key: string, value: any) => {
 
 const _clearState = (state) => {
     state.id = undefined;
-    state.baseService = null;
-    state.serviceVariant = null;
+    state.baseService = undefined;
+    state.serviceVariant = undefined;
     state.options = [];
     // state.fullAddress = null;
-    state.date = 0;
+    state.date = undefined;
 
     saveInLocalStorage('id', state.id)
     saveInLocalStorage('baseService', state.baseService)
@@ -68,7 +68,7 @@ const createOrderSlice = createSlice({
             
             state.id = undefined;
             state.options = [];
-            state.date = 0;
+            state.date = undefined;
             saveInLocalStorage('id', state.id)
             saveInLocalStorage('date', state.date)
             saveInLocalStorage('options', null)

@@ -35,7 +35,7 @@ export const OrdersPage = () => {
     const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
         dispatch(retryOrder(order))
-        navigate(`/order/${order.baseService?.id}/checkout`)
+        navigate(`/order/checkout`)
     }
 
     if (isLoading) {
@@ -71,7 +71,7 @@ export const OrdersPage = () => {
                         <Typography.Title>Оформлен</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="small">Добавить
+                        <Button onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="sm">Добавить
                             услугу</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
@@ -99,7 +99,7 @@ export const OrdersPage = () => {
                         <Typography.Title>{ao.status === 'completed' ? 'Завершен' : 'Отменен'}</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-baseline">
-                        <Button variant="default" size="small" onClick={(e) => handleRetryClick(e, ao)}>
+                        <Button variant="default" size="sm" onClick={(e) => handleRetryClick(e, ao)}>
                             <RotateCw className="w-5 h-5 mr-2"/ >Повторить</Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
