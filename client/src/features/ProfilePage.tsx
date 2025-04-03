@@ -28,7 +28,7 @@ export const ProfilePage = () => {
     return <div className="fixed inset-0 flex flex-col">
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
-                <BackButton url="/orders"/>
+                <BackButton url="/"/>
             </div>
         </Header>
         <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4 mt-[56px]">
@@ -36,11 +36,11 @@ export const ProfilePage = () => {
                 <div className="p-4 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
                         <Avatar>
-                            <AvatarImage src={userInfo.photoUrl}/>
+                            <AvatarImage src={userInfo?.photoUrl}/>
                             <AvatarFallback><User/></AvatarFallback>
                         </Avatar>
                         <Typography.Title
-                            className="text-xl">{userInfo.firstName} {userInfo.lastName}</Typography.Title>
+                            className="text-xl">{userInfo?.firstName} {userInfo?.lastName}</Typography.Title>
                     </div>
                     <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
                         <Pencil/>
@@ -49,9 +49,9 @@ export const ProfilePage = () => {
                 <div className="p-4 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Description>Телефон</Typography.Description>
-                        <Typography.Title>{userInfo.phone || 'Отсутствует'}</Typography.Title>
+                        <Typography.Title>{userInfo?.phone || 'Отсутствует'}</Typography.Title>
                     </div>
-                    {!userInfo.phone && <Button size="sm" variant="default" onClick={handleRequestContact}>
+                    {!userInfo?.phone && <Button size="sm" variant="default" onClick={handleRequestContact}>
                         Обновить
                     </Button>}
                 </div>
