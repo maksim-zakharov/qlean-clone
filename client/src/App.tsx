@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom"
 import {Layout} from "./components/layout/Layout"
-import MainPage from "./MainPage/MainPage.tsx"
+import MainPage from "./features/MainPage.tsx"
 import {OrderCreationPage} from "./features/OrderCreationPage.tsx"
 import {OrderCheckoutPage} from "./features/OrderCheckoutPage.tsx"
 import {OrdersPage} from "./features/OrdersPage.tsx";

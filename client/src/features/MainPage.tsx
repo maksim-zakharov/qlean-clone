@@ -1,12 +1,13 @@
 import {Brush, Building2, Footprints, Grid2x2, Hammer, Home, LucideIcon, Shirt, Sofa, Sparkles} from "lucide-react"
 import {useNavigate} from "react-router-dom"
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {CardItem} from "../components/CardItem.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {startOrderFlow} from "../slices/createOrderSlice.ts";
+import {Skeleton} from "../components/ui/skeleton.tsx";
 
 const ICONS: Record<string, LucideIcon> = {
     Shirt,

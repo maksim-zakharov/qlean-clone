@@ -3,13 +3,14 @@ import {Button} from "@/components/ui/button"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
+import {Skeleton} from "../ui/skeleton.tsx";
 
 type MenuItem = {
     icon: LucideIcon
@@ -53,7 +54,32 @@ export const Layout = () => {
     }
 
     if (isLoading) {
-        return null;
+        return <div>
+            <Skeleton className="w-full h-[56px] rounded-none"/>
+            <div className="px-4 mb-6 mt-4 flex flex-col gap-2">
+                <Skeleton className="w-[100px] h-[28px] mb-1"/>
+                <div className="flex gap-2">
+                    <Skeleton className="w-full h-[140px]"/>
+                    <Skeleton className="w-full h-[140px]"/>
+                </div>
+                <div className="flex gap-2">
+                    <Skeleton className="w-full h-[140px]"/>
+                    <Skeleton className="w-full h-[140px]"/>
+                </div>
+                <div className="flex gap-2">
+                    <Skeleton className="w-full h-[140px]"/>
+                    <Skeleton className="w-full h-[140px]"/>
+                </div>
+                <div className="flex gap-2">
+                    <Skeleton className="w-full h-[140px]"/>
+                    <Skeleton className="w-full h-[140px]"/>
+                </div>
+                <div className="flex gap-2">
+                    <Skeleton className="w-full h-[140px]"/>
+                    <Skeleton className="w-full h-[140px]"/>
+                </div>
+            </div>
+        </div>;
     }
 
     return <>
@@ -61,7 +87,7 @@ export const Layout = () => {
             <div className="grid grid-cols-[40px_auto_40px]">
                 <Avatar>
                     <AvatarImage src={photoUrl}/>
-                    <AvatarFallback><User /></AvatarFallback>
+                    <AvatarFallback><User/></AvatarFallback>
                 </Avatar>
                 <div className="flex-1 flex flex-col items-center">
                     <Typography.Description>Адрес</Typography.Description>
