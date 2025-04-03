@@ -1,7 +1,9 @@
-import {Body, Controller, Get, Param, Patch, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Get, Param, Patch, Post, Put, Query, UseGuards} from '@nestjs/common';
 import {Order, OrderStatus} from "@prisma/client";
 import {OrdersService} from "./orders.service";
+import {AuthGuard} from "@nestjs/passport";
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('/api/orders')
 export class OrdersController {
 

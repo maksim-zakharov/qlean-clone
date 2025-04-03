@@ -1,14 +1,71 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {BaseQueryApi, createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {Mutex} from 'async-mutex';
+import {saveToken} from "./slices/createOrderSlice.ts";
+
+const mutex = new Mutex();
+
+const baseQuery = () =>
+    fetchBaseQuery({
+        baseUrl: process.env.NODE_ENV !== 'production' ? "http://localhost:3000/api" : '/api',
+        prepareHeaders: (headers, {getState}: any) => {
+            const token = getState().createOrder.token;
+
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+
+            return headers;
+        },
+    });
+
+const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
+    let result = await baseQuery()(args, api, extraOptions);
+    const token = api.getState().createOrder.token;
+
+    if (result?.error?.status === 401 && !token) {
+        if (!mutex.isLocked()) {
+            const release = await mutex.acquire();
+            try {
+                const refreshResult = await baseQuery()({
+                    url: '/auth/login',
+                    headers: {
+                        'telegram-init-data': Telegram.WebApp?.initData
+                    }
+                }, api, extraOptions);
+
+                api.dispatch(saveToken({token: refreshResult?.data?.access_token}))
+
+                if (refreshResult?.meta?.response?.status === 200) {
+                    result = await baseQuery()(args, api, extraOptions);
+                }
+            } finally {
+                release();
+            }
+        } else {
+            await mutex.waitForUnlock();
+            result = await baseQuery()(args, api, extraOptions);
+        }
+    }
+
+    return result;
+}
 
 export const api = createApi({
     reducerPath: "api",
     tagTypes: [
         "Service", "Order", 'Address'
     ],
-    baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NODE_ENV !== 'production' ? "http://localhost:3000/api" : '/api'
-    }),
+    baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
+        getUserInfo: builder.query<void, void>({
+            query: () => '/auth/userinfo',
+        }),
+        login: builder.mutation<void, void>({
+            query: () => ({
+                url: '/auth/login',
+                method: 'POST'
+            }),
+        }),
         getServices: builder.query<any[], void>({
             query: () => ({
                 url: "/services"
@@ -95,6 +152,8 @@ export const api = createApi({
 });
 
 export const {
+    useLoginMutation,
+    useGetUserInfoQuery,
     useGetServicesQuery,
     useGetOrdersQuery,
     useAddOrderMutation,

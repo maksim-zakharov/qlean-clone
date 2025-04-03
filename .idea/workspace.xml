@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="удаление услуг">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Отмена заказа">
+      <change afterPath="$PROJECT_DIR$/server/src/auth/jwt.strategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/auth/local.strategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/telegram.middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AlertDialogWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/addresses/addresses.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/addresses/addresses.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/health/health.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/health/health.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -57,7 +65,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/components",
+    "last_opened_file_path": "D:/Projects/front-trading-desk",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,14 +88,14 @@
       <recent name="D:\Projects\qlean-clone\client\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\server\src\auth" />
       <recent name="D:\Projects\qlean-clone\client\src\features" />
       <recent name="D:\Projects\qlean-clone\server\src\addresses" />
       <recent name="D:\Projects\qlean-clone" />
       <recent name="D:\Projects\qlean-clone\client" />
-      <recent name="D:\Projects\qlean-clone\server" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start:dev">
+  <component name="RunManager" selected="npm.dev-host">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
@@ -140,8 +148,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start:dev" />
         <item itemvalue="npm.dev-host" />
+        <item itemvalue="npm.start:dev" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:ci" />
         <item itemvalue="npm.build" />
@@ -166,15 +174,7 @@
       <workItem from="1742910417056" duration="1968000" />
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
-      <workItem from="1743353220794" duration="107961000" />
-    </task>
-    <task id="LOCAL-00217" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743501607316</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1743501607316</updated>
+      <workItem from="1743353220794" duration="117129000" />
     </task>
     <task id="LOCAL-00218" summary="prisma address">
       <option name="closed" value="true" />
@@ -560,7 +560,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743666923452</updated>
     </task>
-    <option name="localTasksCounter" value="266" />
+    <task id="LOCAL-00266" summary="Отмена заказа">
+      <option name="closed" value="true" />
+      <created>1743687480135</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1743687480135</updated>
+    </task>
+    <option name="localTasksCounter" value="267" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,6 +601,7 @@
     <MESSAGE value="userId" />
     <MESSAGE value="повторить" />
     <MESSAGE value="удаление услуг" />
-    <option name="LAST_COMMIT_MESSAGE" value="удаление услуг" />
+    <MESSAGE value="Отмена заказа" />
+    <option name="LAST_COMMIT_MESSAGE" value="Отмена заказа" />
   </component>
 </project>

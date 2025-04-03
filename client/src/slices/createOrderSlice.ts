@@ -11,6 +11,10 @@ interface CreateOrderState {
     date?: number;
 
     services: any[]
+
+    userInfo?: any;
+
+    token?: any;
 }
 
 const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
@@ -52,6 +56,7 @@ const initialState: CreateOrderState = {
     serviceVariant: getLocalStorageItemOrDefault('serviceVariant', null),
     fullAddress: getLocalStorageItemOrDefault('fullAddress', null),
     date: getLocalStorageItemOrDefault('date', 0),
+    token: getLocalStorageItemOrDefault('token', null),
     services: []
 };
 
@@ -59,6 +64,10 @@ const createOrderSlice = createSlice({
     name: 'createOrder',
     initialState,
     reducers: {
+        saveToken: (state, action: PayloadAction<{token: string}>) => {
+            state.token = action.payload.token;
+            saveInLocalStorage('token', state.token)
+        },
         startOrderFlow: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant'>>) => {
             state.baseService = action.payload.baseService;
             state.serviceVariant = action.payload.serviceVariant;
@@ -119,10 +128,14 @@ const createOrderSlice = createSlice({
             .addMatcher(api.endpoints.getServices.matchFulfilled, (state, action) => {
                 state.services = action.payload;
             })
+            .addMatcher(api.endpoints.getUserInfo.matchFulfilled, (state, action) => {
+                state.userInfo = action.payload;
+            })
     },
 });
 
 export const {
+    saveToken,
     retryOrder,
     selectDate,
     startOrderFlow,

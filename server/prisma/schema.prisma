@@ -64,3 +64,18 @@ model ServiceOption {
   baseServiceId Int
   orders        Order[]
 }
+
+enum UserRole {
+  client
+  executor
+  admin
+}
+
+model User {
+  id  Int          @id
+  firstName String
+  role  UserRole  @default(client)
+  lastName  String?
+  photoUrl  String?
+  username  String?
+}

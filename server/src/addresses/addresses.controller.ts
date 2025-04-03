@@ -1,7 +1,9 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards} from '@nestjs/common';
 import {Address} from "@prisma/client";
 import {AddressesService} from "./address.service";
+import {AuthGuard} from "@nestjs/passport";
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('/api/addresses')
 export class AddressesController {
 

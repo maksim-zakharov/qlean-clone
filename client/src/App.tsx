@@ -4,11 +4,12 @@ import MainPage from "./features/MainPage.tsx"
 import {OrderCreationPage} from "./features/OrderCreationPage.tsx"
 import {OrderCheckoutPage} from "./features/OrderCheckoutPage.tsx"
 import {OrdersPage} from "./features/OrdersPage.tsx";
-import {useGetServicesQuery} from "./api.ts";
+import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
 
 function App() {
     useGetServicesQuery();
+    useGetUserInfoQuery();
 
     return (
         <Routes>
