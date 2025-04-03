@@ -69,7 +69,7 @@ export class OrdersService {
                     serviceVariantId: data.serviceVariant.id,
                     comment: data.comment,
                     options: {
-                        connect: data.options.map(({id}) => ({id}))
+                        set: data.options.map(({id}) => ({id}))
                     }
                 },
                 include: {
