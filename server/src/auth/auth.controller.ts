@@ -1,11 +1,13 @@
-import {Controller, Get, Req, UseGuards, Headers, UnauthorizedException} from '@nestjs/common';
+import {Body, Controller, Get, Headers, Patch, Req, UnauthorizedException, UseGuards} from '@nestjs/common';
 import {AuthGuard} from "@nestjs/passport";
 import {AuthService, validateInitData} from "./auth.service";
+import {User} from "@prisma/client";
+import {UserService} from "../user/user.service";
 
 @Controller('/api/auth')
 export class AuthController {
 
-    constructor(private readonly authService: AuthService) {
+    constructor(private readonly authService: AuthService, private readonly userService: UserService) {
     }
 
     @Get('/login')
@@ -13,7 +15,7 @@ export class AuthController {
         const initData = headers['telegram-init-data'] as string;
 
         if (!validateInitData(initData)) {
-            throw new UnauthorizedException({ message: 'Invalid Telegram data' });
+            throw new UnauthorizedException({message: 'Invalid Telegram data'});
         }
 
         const params = new URLSearchParams(initData);
@@ -22,6 +24,17 @@ export class AuthController {
         const user = await this.authService.validateUser(userData);
 
         return this.authService.login(user);
+    }
+
+    @Patch('/phone')
+    @UseGuards(AuthGuard('jwt'))
+    async patchPhone(@Req() req, @Body() body: User) {
+        const item = await this.userService.getById(req.user.id);
+
+        if (body.phone)
+            item.phone = body.phone;
+
+        await this.userService.update(item);
     }
 
     @Get('/userinfo')

@@ -78,4 +78,5 @@ model User {
   lastName  String?
   photoUrl  String?
   username  String?
+  phone  String?
 }

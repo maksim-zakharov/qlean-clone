@@ -53,18 +53,27 @@ const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
 export const api = createApi({
     reducerPath: "api",
     tagTypes: [
-        "Service", "Order", 'Address'
+        "Service", "Order", 'Address', 'User'
     ],
     baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
         getUserInfo: builder.query<void, void>({
             query: () => '/auth/userinfo',
+            providesTags: ['User'],
         }),
         login: builder.mutation<void, void>({
             query: () => ({
                 url: '/auth/login',
                 method: 'POST'
             }),
+        }),
+        patchPhone: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/auth/phone`,
+                method: 'PATCH',
+                body: params,
+            }),
+            invalidatesTags: ['User'],
         }),
         getServices: builder.query<any[], void>({
             query: () => ({
@@ -153,6 +162,7 @@ export const api = createApi({
 
 export const {
     useLoginMutation,
+    usePatchPhoneMutation,
     useGetUserInfoQuery,
     useGetServicesQuery,
     useGetOrdersQuery,

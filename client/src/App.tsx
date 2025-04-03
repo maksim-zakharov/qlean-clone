@@ -6,6 +6,7 @@ import {OrderCheckoutPage} from "./features/OrderCheckoutPage.tsx"
 import {OrdersPage} from "./features/OrdersPage.tsx";
 import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
+import {ProfilePage} from "./features/ProfilePage.tsx";
 
 function App() {
     useGetServicesQuery();
@@ -17,11 +18,11 @@ function App() {
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/orders" element={<OrdersPage/>}/>
                 <Route path="/bonuses" element={<div className="p-4">Бонусы</div>}/>
-                <Route path="/profile" element={<div className="p-4">Профиль</div>}/>
             </Route>
             <Route path="/order" element={<OrderCreationPage/>}/>
             <Route path="/order/checkout" element={<OrderCheckoutPage/>}/>
             <Route path="/order/:id" element={<OrderDetailsPage/>}/>
+            <Route path="/profile" element={<ProfilePage/>}/>
         </Routes>
     )
 }
