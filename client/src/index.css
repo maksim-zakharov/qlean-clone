@@ -290,20 +290,20 @@
     }
 
     .root-bg-color {
-        background-color: var(--tg-theme-bg-color);
+        background-color: var(--tg-theme-secondary-bg-color);
     }
 
     .card-bg-color {
-        background-color: var(--tg-theme-bg-color);
+        background-color: var(--tg-theme-section-bg-color);
     }
 
     .dark {
         .root-bg-color {
-            background-color: var(--background);
+            background-color: var(--tg-theme-bg-color);
         }
 
         .card-bg-color {
-            background-color: var(--tg-theme-bg-color);
+            background-color: var(--tg-theme-section-bg-color);
         }
     }
 }
