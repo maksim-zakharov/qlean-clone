@@ -156,6 +156,7 @@ export const OrderCreationPage = () => {
                 <Button
                     wide
                     onClick={handleNext}
+                    size="lg"
                 ><span className="flex-1 text-left">{isDraft ? 'Далее' : 'Сохранить'}</span>
                     <span>{moneyFormat(totalPrice)}</span>
                 </Button>

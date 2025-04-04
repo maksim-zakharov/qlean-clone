@@ -117,11 +117,11 @@ export const OrderCheckoutPage = () => {
                             <div className="flex items-center gap-3">
                                 <div
                                     className="[background-color:var(--tg-accent-blue)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                    <Calendar className="w-5 h-5 text-tg-theme-button-text-colorr"/>
+                                    <Calendar className="w-5 h-5 text-tg-theme-button-text-color"/>
                                 </div>
                                 <span className="text-tg-theme-text-color">{dateTitle}</span>
                             </div>
-                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
+                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
                         </Button>
                     </ScheduleSheet>
 
@@ -134,11 +134,11 @@ export const OrderCheckoutPage = () => {
                             <div className="flex items-center gap-3">
                                 <div
                                     className="[background-color:var(--tg-accent-orange)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                    <MessageSquare className="w-5 h-5 text-tg-theme-text-colo"/>
+                                    <MessageSquare className="w-5 h-5 text-tg-theme-text-color"/>
                                 </div>
                                 <span className="text-tg-theme-text-color">Пожелание к заказу</span>
                             </div>
-                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color"/>
+                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
                         </Button>
                     </CommentsSheet>
 
@@ -150,7 +150,7 @@ export const OrderCheckoutPage = () => {
                         <div className="flex items-center gap-3">
                             <div
                                 className="[background-color:var(--tg-accent-green)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                <CreditCard className="w-5 h-5 text-tg-theme-text-colo"/>
+                                <CreditCard className="w-5 h-5 text-tg-theme-text-color"/>
                             </div>
                             <span className="text-tg-theme-text-color">Мир *5987</span>
                         </div>
@@ -218,6 +218,7 @@ export const OrderCheckoutPage = () => {
             {/* Submit Button */}
             <BottomActions>
                 <Button
+                    size="lg"
                     wide
                     onClick={handleOnSubmit}
                 >

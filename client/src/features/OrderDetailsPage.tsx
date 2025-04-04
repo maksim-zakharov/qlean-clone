@@ -228,12 +228,14 @@ export const OrderDetailsPage = () => {
         {canEdit && <BottomActions className="gap-2 flex-col flex">
             <Button
                 wide
+                size="lg"
                 onClick={handleAddOptionClick}
             >
                 Добавить опций
             </Button>
             <Button
                 wide
+                size="lg"
                 variant="default"
                 onClick={handleCloseClick}
             >
