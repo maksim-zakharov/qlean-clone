@@ -107,8 +107,8 @@ export const OrderDetailsPage = () => {
         </Header>
 
         <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4 mt-[56px]">
-            <Card className="p-0 gap-0 mt-2">
-                <div className="p-4 separator-shadow-bottom">
+            <Card className="p-0 pl-4 gap-0 mt-2">
+                <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>
                             №{order.id}
@@ -116,7 +116,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>{order.status === 'active' ? 'Оформлен' : order.status === 'canceled' ? 'Отменен' : 'Завершен'}</Typography.Title>
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col">
+                <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>Исполнитель</Typography.Description>
@@ -129,8 +129,8 @@ export const OrderDetailsPage = () => {
                     </div>
                 </div>
             </Card>
-            <Card className="p-0 gap-0 mt-2">
-                <div className="p-4 separator-shadow-bottom">
+            <Card className="p-0 gap-0 mt-2 pl-4">
+                <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>{dayjs(order.date).format('D MMMM')}</Typography.Description>
@@ -144,7 +144,7 @@ export const OrderDetailsPage = () => {
                         </ScheduleSheet>}
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col separator-shadow-bottom">
+                <div className="p-3 pl-0 flex gap-2 flex-col separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>Адрес</Typography.Description>
@@ -160,7 +160,7 @@ export const OrderDetailsPage = () => {
                         </AddressSheet>}
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col">
+                <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>Комментарий</Typography.Description>
@@ -192,7 +192,7 @@ export const OrderDetailsPage = () => {
                 type="single"
 
                 defaultValue="services"
-                className="mt-2 mb-2 overflow-hidden rounded-2xl"
+                className="mt-2 mb-2 overflow-hidden rounded-xl"
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services">

@@ -162,7 +162,7 @@ export const OrderCheckoutPage = () => {
                     type="single"
                     collapsible
                     defaultValue="services"
-                    className="mt-4 overflow-hidden rounded-2xl"
+                    className="mt-4 overflow-hidden rounded-xl"
                     onValueChange={() => vibro()}
                 >
                     <AccordionItem value="services">
