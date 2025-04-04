@@ -85,7 +85,7 @@ export const Layout = () => {
     return <>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
-                <Avatar>
+                <Avatar onClick={() => navigate('/profile')}>
                     <AvatarImage src={photoUrl}/>
                     <AvatarFallback><User/></AvatarFallback>
                 </Avatar>
