@@ -16,6 +16,7 @@ import {usePatchOrderMutation} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../slices/createOrderSlice.ts";
 import {RoutePaths} from "../routes.ts";
+import {Checkbox} from "../components/ui/checkbox.tsx";
 
 export const OrderCreationPage = () => {
     const [patchOrder] = usePatchOrderMutation();
@@ -123,28 +124,19 @@ export const OrderCreationPage = () => {
                     <List itemClassName="flex-col gap-2" className="rounded-none">
                         {availableOptions.map((option) => <>
                             <div className="flex items-center gap-3 w-full justify-between">
-                                <div className="flex items-start gap-3 flex-1 min-w-0">
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
                                     <Info
                                         className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
                                     <span
                                         className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
+                                    {option.isPopular ? (
+                                        <Badge className="flex gap-1 items-center"><Star
+                                            className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
+                                    ) : <div/>}
                                 </div>
                                 <span
                                     className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
-                            </div>
-                            <div className="flex items-center gap-3 w-full justify-between">
-                                {option.isPopular ? (
-                                    <Badge className="flex gap-1 items-center"><Star
-                                        className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
-                                ) : <div/>}
-                                <Button
-                                    variant={selectedOptionsIdSet.has(option.id) ? 'primary' : 'default'}
-                                    className={`w-[34px] h-[34px] p-0 rounded-xl hover:bg-transparent`}
-                                    onClick={() => handleOptionToggle(option)}
-                                >
-                                    <Plus
-                                        className={`w-[18px] h-[18px] ${selectedOptionsIdSet.has(option.id) ? 'rotate-45' : ''} transition-transform`}/>
-                                </Button>
+                                <Checkbox checked={selectedOptionsIdSet.has(option.id)} onCheckedChange={() => handleOptionToggle(option)} />
                             </div>
                         </>)}
                     </List>

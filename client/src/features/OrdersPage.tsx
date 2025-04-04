@@ -4,7 +4,7 @@ import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
-import {RotateCw} from "lucide-react";
+import {ListPlus, RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {moneyFormat} from "../lib/utils.ts";
 import {useDispatch} from "react-redux";
@@ -70,9 +70,10 @@ export const OrdersPage = () => {
                         <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>Оформлен</Typography.Title>
                     </div>
-                    <div className="flex justify-between align-bottom items-baseline">
-                        <Button onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="sm">Добавить
-                            услугу</Button>
+                    <div className="flex justify-between align-bottom items-center">
+                        <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="sm">
+                            <ListPlus className="w-5 h-5 mr-2" /> Добавить услугу
+                        </Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>
@@ -98,9 +99,11 @@ export const OrdersPage = () => {
                         <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>{ao.status === 'completed' ? 'Завершен' : 'Отменен'}</Typography.Title>
                     </div>
-                    <div className="flex justify-between align-bottom items-baseline">
-                        <Button variant="default" size="sm" onClick={(e) => handleRetryClick(e, ao)}>
-                            <RotateCw className="w-5 h-5 mr-2"/ >Повторить</Button>
+                    <div className="flex justify-between align-bottom items-center">
+                        <Button className="p-0 border-none h-6" variant="default" size="sm"
+                                onClick={(e) => handleRetryClick(e, ao)}>
+                            <RotateCw className="w-5 h-5 mr-2" /> Повторить
+                            </Button>
                         <Typography.Description>Поддержка</Typography.Description>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import {List} from "./ui/list.tsx";
 import {Typography} from "./ui/Typography.tsx";
 import {AddAddressSheet} from "./AddAddressSheet.tsx";
 import {Pencil} from "lucide-react";
+import {EditButton} from "./EditButton.tsx";
 
 
 interface AddressSheetProps {
@@ -58,10 +59,7 @@ export function AddressSheet({
                             <Typography.Title>{adr.name}</Typography.Title>
                             <Typography.Description>{adr.fullAddress}</Typography.Description>
                         </div>
-                        <Button variant="ghost" className="pr-1 text-tg-theme-hint-color"
-                                onClick={(e) => handleOnEditAddress(e, adr)}>
-                            <Pencil/>
-                        </Button>
+                        <EditButton onClick={(e) => handleOnEditAddress(e, adr)}/>
                     </div>)}
                 </List>
                 <div className="flex flex-col flex-1">

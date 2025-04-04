@@ -21,6 +21,7 @@ import {selectBaseService} from "../slices/createOrderSlice.ts";
 import {useDispatch} from "react-redux";
 import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../routes.ts";
+import {EditButton} from "../components/EditButton.tsx";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
@@ -138,9 +139,7 @@ export const OrderDetailsPage = () => {
                         </div>
                         {canEdit && <ScheduleSheet selectedTimestamp={new Date(order.date).getTime()}
                                                    onSelectDate={handleSelectDate}>
-                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
-                                <Pencil/>
-                            </Button>
+                            <EditButton/>
                         </ScheduleSheet>}
                     </div>
                 </div>
@@ -154,9 +153,7 @@ export const OrderDetailsPage = () => {
                             addresses={addresses}
                             onAddressSelect={handleSelectAddress}
                         >
-                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
-                                <Pencil/>
-                            </Button>
+                            <EditButton />
                         </AddressSheet>}
                     </div>
                 </div>
@@ -168,9 +165,7 @@ export const OrderDetailsPage = () => {
                                 className="[overflow-wrap:anywhere]">{order.comment || 'Отсутствует'}</Typography.Title>
                         </div>
                         {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
-                            <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-6">
-                                <Pencil/>
-                            </Button>
+                            <EditButton />
                         </CommentsSheet>}
                     </div>
                 </div>
@@ -236,6 +231,7 @@ export const OrderDetailsPage = () => {
             <Button
                 wide
                 size="lg"
+                className="border-none"
                 variant="default"
                 onClick={handleCloseClick}
             >
