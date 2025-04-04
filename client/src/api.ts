@@ -66,7 +66,7 @@ export const api = createApi({
         login: builder.mutation<void, void>({
             query: () => ({
                 url: '/auth/login',
-                method: 'POST',
+                method: 'GET',
                 headers: { [TELEGRAM_HEADER]: Telegram.WebApp?.initData }
             }),
         }),
