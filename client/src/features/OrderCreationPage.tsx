@@ -123,8 +123,7 @@ export const OrderCreationPage = () => {
                 <div>
                     <List itemClassName="flex-col gap-2" className="rounded-none">
                         {availableOptions.map((option) => <>
-                            <div className="flex items-center gap-3 w-full justify-between"
-                                 onClick={() => handleOptionToggle(option)}>
+                            <div className="flex items-center gap-3 w-full justify-between">
                                 <div className="flex items-center gap-3 flex-1 min-w-0">
                                     <Info
                                         className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
