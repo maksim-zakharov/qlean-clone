@@ -120,14 +120,14 @@ export const Layout = () => {
                 <Button
                     key={path}
                     variant="ghost"
-                    className="flex flex-col items-center gap-1 h-auto py-2 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
+                    className="flex flex-col items-center gap-0.5 h-auto py-1 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
                     onClick={() => navigate(path)}
                 >
                     <Icon
                         className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
                     />
                     <span
-                        className={`text-[13px] font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                        className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
                     >
                   {label}
                 </span>
