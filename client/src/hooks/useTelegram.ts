@@ -19,12 +19,13 @@ export function useTelegram() {
     const isReady = !isLoading && !Boolean(error);
 
     const onThemeChangedHandler = () => {
-        Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
         // Устанавливаем тему в соответствии с Telegram
         if (colorScheme === 'dark') {
             document.documentElement.classList.add('dark')
+            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-bg-color').trim());
         } else {
             document.documentElement.classList.remove('dark')
+            Telegram.WebApp.setHeaderColor(getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim());
         }
     }
 
