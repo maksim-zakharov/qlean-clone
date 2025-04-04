@@ -113,7 +113,7 @@ export const ProfilePage = () => {
                 </div>
             </Card>
             <Card className="p-0 gap-0 mt-2">
-                <div className="p-4 separator-shadow-bottom flex justify-between items-center">
+                <div className="p-4 flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Title>Уведомления в Telegram</Typography.Title>
                     </div>

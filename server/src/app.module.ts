@@ -24,7 +24,7 @@ import { Context, session, Telegraf } from 'telegraf';
         PassportModule,
         JwtModule.register({
             secret: process.env.JWT_SECRET,
-            signOptions: {expiresIn: '7d'},
+            signOptions: {expiresIn: '1d'},
         }),
         CacheModule.register({
             ttl: 3600 * 24, // 24 часа
