@@ -207,7 +207,7 @@ export const OrderCheckoutPage = () => {
                 {/*</Button>*/}
 
                 {/* Terms Checkbox */}
-                <div className="flex items-start gap-2 py-2">
+                <div className="flex items-center gap-2 py-2">
                     <Checkbox id="terms"/>
                     <label htmlFor="terms" className="text-sm text-tg-theme-text-color">
                         Принимаю <span className="text-tg-theme-link-color">условия оказания услуги</span>
