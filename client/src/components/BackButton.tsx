@@ -28,9 +28,9 @@ export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({ur
 
     return <Button
         variant="ghost"
-        className="p-2 -ml-2 text-tg-theme-button-color hover:bg-transparent"
+        className="p-2 -ml-2 text-tg-theme-text-colorhover:bg-transparent"
         onClick={onBack}
     >
-        <ChevronLeft className="h-5 w-5"/>
+        <ChevronLeft className="h-10 w-10"/>
     </Button>
 }

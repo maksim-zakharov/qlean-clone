@@ -39,22 +39,22 @@ export const OrdersPage = () => {
     }
 
     if (isLoading) {
-        return <div className="px-4 mb-2">
+        return <div className="px-4 mb-4">
             <div className="mb-6 mt-4">
                 <Skeleton className="w-[100px] h-[28px] mb-3"/>
-                <Skeleton className="w-full h-[172px] mt-2"/>
-                <Skeleton className="w-full h-[172px] mt-2"/>
-                <Skeleton className="w-full h-[172px] mt-2"/>
+                <Skeleton className="w-full h-[156px] mt-4"/>
+                <Skeleton className="w-full h-[156px] mt-4"/>
+                <Skeleton className="w-full h-[156px] mt-4"/>
             </div>
         </div>
     }
 
-    return <div className="px-4 mb-2">
+    return <div className="px-4 mb-4">
         {activeOrders.length > 0 && <div className="mb-6 mt-4">
             <Typography.H2>
                 Активные
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
+            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-4" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -82,7 +82,7 @@ export const OrdersPage = () => {
             <Typography.H2 className="mt-4">
                 Все заявки
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-4" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>

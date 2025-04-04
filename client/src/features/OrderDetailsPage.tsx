@@ -106,7 +106,7 @@ export const OrderDetailsPage = () => {
             </div>
         </Header>
 
-        <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4 mt-[56px]">
+        <div className="flex-1 overflow-y-auto overscroll-none bg-inherit px-4 mt-[56px]">
             <Card className="p-0 pl-4 gap-0 mt-2">
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">

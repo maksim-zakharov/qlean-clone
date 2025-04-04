@@ -96,13 +96,13 @@
 .dark {
     /* Telegram WebApp theme variables */
     --tg-color-scheme: dark;
-    --tg-theme-bg-color: #212121;
+    --tg-theme-bg-color: #0f0f0f;
     --tg-theme-text-color: #ffffff;
     --tg-theme-hint-color: #aaaaaa;
     --tg-theme-link-color: #8774e1;
     --tg-theme-button-color: #8774e1;
     --tg-theme-button-text-color: #ffffff;
-    --tg-theme-secondary-bg-color: #0f0f0f;
+    --tg-theme-secondary-bg-color: #212121;
     --tg-theme-header-bg-color: #212121;
     --tg-theme-accent-text-color: #8774e1;
     --tg-theme-section-bg-color: #212121;
@@ -259,7 +259,7 @@
     }
 
     .pb-safe-area-inset-bottom {
-        padding-bottom: calc(62px + env(safe-area-inset-bottom));
+        padding-bottom: calc(48px + env(safe-area-inset-bottom));
     }
 
     .badge-primary {
