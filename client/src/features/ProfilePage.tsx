@@ -71,7 +71,7 @@ export const ProfilePage = () => {
         });
     }, []);
 
-    return <div className="fixed inset-0 flex flex-col">
+    return <div className="fixed inset-0 flex flex-col bg-inherit">
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
                 <BackButton url="/"/>
