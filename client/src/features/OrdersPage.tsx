@@ -54,8 +54,8 @@ export const OrdersPage = () => {
             <Typography.H2>
                 Активные
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
-                <div className="p-4 separator-shadow-bottom">
+            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
+                <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
                         <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
@@ -65,7 +65,7 @@ export const OrdersPage = () => {
                         <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col">
+                <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>Оформлен</Typography.Title>
@@ -82,8 +82,8 @@ export const OrdersPage = () => {
             <Typography.H2 className="mt-4">
                 Все заявки
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
-                <div className="p-4 separator-shadow-bottom">
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-2" onClick={() => handleOrderClick(ao)}>
+                <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
                         <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
@@ -93,7 +93,7 @@ export const OrdersPage = () => {
                         <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
-                <div className="p-4 flex gap-2 flex-col">
+                <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
                         <Typography.Title>{ao.status === 'completed' ? 'Завершен' : 'Отменен'}</Typography.Title>
