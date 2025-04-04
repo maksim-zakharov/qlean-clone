@@ -5,7 +5,7 @@ export const List = ({children, className, itemClassName}: React.ComponentProps<
     <div
         className={cn("card-bg-color rounded-xl overflow-hidden", className)}>
         {Array.isArray(children) ? children.map((option, index) => <div
-            className={cn(`flex items-center px-4 py-3 ${index !== children.length - 1 && 'border-b border-tg-theme-section-separator-color'}`, itemClassName)}>
+            className={cn(`flex items-center px-4 py-3 ${index !== children.length - 1 && 'separator-shadow-bottom'}`, itemClassName)}>
             {option}
         </div>) : <div
             className={`flex items-center px-4 py-3`}>
