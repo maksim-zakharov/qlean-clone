@@ -104,10 +104,10 @@ export const OrderCreationPage = () => {
                 </div>
             </Header>
 
-            <div className="flex-1 overflow-y-auto overscroll-none px-4">
+            <div className="flex-1 overflow-y-auto overscroll-none">
                 <Tabs defaultValue={variantId} value={variantId}
                       className="mt-[calc(56px+env(safe-area-inset-top))]">
-                    <TabsList>
+                    <TabsList className="px-4 separator-shadow-bottom">
                         {variants.map(tab => (
                             <TabsTrigger
                                 key={tab.id}
@@ -119,8 +119,8 @@ export const OrderCreationPage = () => {
                         ))}
                     </TabsList>
                 </Tabs>
-                <div className="pt-2">
-                    <List itemClassName="flex-col gap-2">
+                <div>
+                    <List itemClassName="flex-col gap-2" className="rounded-none">
                         {availableOptions.map((option) => <>
                             <div className="flex items-center gap-3 w-full justify-between">
                                 <div className="flex items-start gap-3 flex-1 min-w-0">
