@@ -24,7 +24,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "p-0 gap-8 bg-transparent flex h-[50px] overflow-x-auto no-scrollbar bg-tg-theme-secondary-bg-color",
+        "p-0 gap-8 bg-transparent flex h-[50px] overflow-x-auto no-scrollbar bg-tg-theme-secondary-bg-color px-4 separator-shadow-bottom",
         className
       )}
       {...props}

@@ -51,7 +51,7 @@ export function AddressSheet({
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
                 </SheetHeader>
-                <List className="mt-2 mb-2 overflow-y-auto no-scrollbar">
+                <List className="mt-4 mb-4 overflow-y-auto no-scrollbar">
                     {addresses.map(adr => <div className="flex w-full justify-between" key={adr.id}
                                                onClick={() => handleSelectAddress(adr)}>
                         <div className="flex flex-col">

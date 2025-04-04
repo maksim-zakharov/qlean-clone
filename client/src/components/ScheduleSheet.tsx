@@ -62,7 +62,7 @@ export function ScheduleSheet({
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">
                         Выбор времени</SheetTitle>
                     <Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">
-                        <TabsList>
+                        <TabsList className="bg-inherit px-0">
                             {result.map(r => <TabsTrigger
                                 key={r.timestamp}
                                 value={r.timestamp.toString()}

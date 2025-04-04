@@ -107,7 +107,7 @@ export const OrderCreationPage = () => {
             <div className="flex-1 overflow-y-auto overscroll-none">
                 <Tabs defaultValue={variantId} value={variantId}
                       className="mt-[calc(56px+env(safe-area-inset-top))]">
-                    <TabsList className="px-4 separator-shadow-bottom">
+                    <TabsList>
                         {variants.map(tab => (
                             <TabsTrigger
                                 key={tab.id}

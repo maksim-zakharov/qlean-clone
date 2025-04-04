@@ -49,12 +49,12 @@ export const OrdersPage = () => {
         </div>
     }
 
-    return <div className="px-4 mb-4">
-        {activeOrders.length > 0 && <div className="mb-6 mt-4">
-            <Typography.H2>
+    return <div className="p-4 flex flex-col gap-4">
+        {activeOrders.length > 0 && <div className="flex flex-col gap-4">
+            <Typography.H2 className="mb-0">
                 Активные
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-4" onClick={() => handleOrderClick(ao)}>
+            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -78,11 +78,11 @@ export const OrdersPage = () => {
                 </div>
             </Card>)}
         </div>}
-        {completedOrders.length > 0 && <>
-            <Typography.H2 className="mt-4">
+        {completedOrders.length > 0 && <div className="flex flex-col gap-4">
+            <Typography.H2 className="mb-0">
                 Все заявки
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 mt-4" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -105,6 +105,6 @@ export const OrdersPage = () => {
                     </div>
                 </div>
             </Card>)}
-        </>}
+        </div>}
     </div>
 }

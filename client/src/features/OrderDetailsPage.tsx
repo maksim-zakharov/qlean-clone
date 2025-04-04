@@ -92,7 +92,7 @@ export const OrderDetailsPage = () => {
         </div>
     }
 
-    return <div className="fixed inset-0 flex flex-col">
+    return <div className="fixed inset-0 flex flex-col bg-inherit">
         <AlertDialogWrapper open={show} title={title} description={description}
                             onOkText="Перенести"
                             onCloseText="Отменить"
@@ -106,8 +106,8 @@ export const OrderDetailsPage = () => {
             </div>
         </Header>
 
-        <div className="flex-1 overflow-y-auto overscroll-none bg-inherit px-4 mt-[56px]">
-            <Card className="p-0 pl-4 gap-0 mt-2">
+        <div className="flex flex-col gap-4 overflow-y-auto overscroll-none bg-inherit p-4 mt-[56px]">
+            <Card className="p-0 pl-4 gap-0">
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>
@@ -129,7 +129,7 @@ export const OrderDetailsPage = () => {
                     </div>
                 </div>
             </Card>
-            <Card className="p-0 gap-0 mt-2 pl-4">
+            <Card className="p-0 gap-0 pl-4">
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
@@ -192,7 +192,7 @@ export const OrderDetailsPage = () => {
                 type="single"
 
                 defaultValue="services"
-                className="mt-2 mb-2 overflow-hidden rounded-xl"
+                className="mb-2 overflow-hidden rounded-xl"
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services">
