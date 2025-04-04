@@ -131,6 +131,10 @@ const createOrderSlice = createSlice({
             .addMatcher(api.endpoints.getUserInfo.matchFulfilled, (state, action) => {
                 state.userInfo = action.payload;
             })
+            .addMatcher(api.endpoints.login.matchFulfilled, (state, action) => {
+                // @ts-ignore
+                state.token = action.payload?.data?.access_token;
+            })
     },
 });
 

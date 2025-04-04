@@ -18,6 +18,8 @@ const baseQuery = () =>
         },
     });
 
+const TELEGRAM_HEADER = 'telegram-init-data';
+
 const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
     let result = await baseQuery()(args, api, extraOptions);
     const token = api.getState().createOrder.token;
@@ -29,7 +31,7 @@ const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
                 const refreshResult = await baseQuery()({
                     url: '/auth/login',
                     headers: {
-                        'telegram-init-data': Telegram.WebApp?.initData
+                        [TELEGRAM_HEADER]: Telegram.WebApp?.initData
                     }
                 }, api, extraOptions);
 
@@ -64,16 +66,9 @@ export const api = createApi({
         login: builder.mutation<void, void>({
             query: () => ({
                 url: '/auth/login',
-                method: 'POST'
+                method: 'POST',
+                headers: { [TELEGRAM_HEADER]: Telegram.WebApp?.initData }
             }),
-        }),
-        patchPhone: builder.mutation<any, any>({
-            query: (params) => ({
-                url: `/auth/phone`,
-                method: 'PATCH',
-                body: params,
-            }),
-            invalidatesTags: ['User'],
         }),
         getServices: builder.query<any[], void>({
             query: () => ({
@@ -162,7 +157,6 @@ export const api = createApi({
 
 export const {
     useLoginMutation,
-    usePatchPhoneMutation,
     useGetUserInfoQuery,
     useGetServicesQuery,
     useGetOrdersQuery,

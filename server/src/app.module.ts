@@ -1,4 +1,4 @@
-import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
+import {Module} from '@nestjs/common';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {HealthModule} from './health/health.module';
@@ -17,6 +17,7 @@ import {UserService} from './user/user.service';
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {JwtStrategy} from "./auth/jwt.strategy";
+import { Context, session, Telegraf } from 'telegraf';
 
 @Module({
     imports: [HealthModule,
@@ -36,7 +37,40 @@ import {JwtStrategy} from "./auth/jwt.strategy";
         })
     ],
     controllers: [ServicesController, OrdersController, AddressesController, AppController, AuthController, SpaController],
-    providers: [AppService, PrismaService, AddressesService, OrdersService, ServicesService, AuthService, UserService, JwtStrategy],
+    providers: [AppService, PrismaService, AddressesService, OrdersService, ServicesService, AuthService, UserService, JwtStrategy,
+        {
+            provide: Telegraf,
+            useFactory: async () => {
+                const bot = new Telegraf<Context>(
+                    process.env.TELEGRAM_BOT_TOKEN,
+                    {
+                        handlerTimeout: Infinity,
+                    },
+                );
+
+                bot.use(session());
+                // bot.use(stage.middleware());
+
+                bot
+                    .launch()
+                    .catch((e) =>
+                        console.error(`Не удалось запустить телеграмм-бота`, e.message),
+                    );
+
+                if (bot)
+                    bot.telegram
+                        .getMe()
+                        .then((res) =>
+                            console.log(`Bot started on https://t.me/${res.username}`),
+                        )
+                        .catch((e) =>
+                            console.log(`Не удалось запустить телеграмм-бота`, e.message),
+                        );
+
+                return bot;
+            },
+        }
+        ],
     exports: [PrismaService]
 })
 export class AppModule {

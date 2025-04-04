@@ -38,11 +38,11 @@ export class UserService {
                 where: {id: data.id},
                 data: {
                     id: data.id,
-                    firstName: data.first_name,
+                    firstName: data.firstName,
                     role: 'client',
-                    lastName: data.last_name,
-                    photoUrl: data.photo_url,
-                    phone: data.phone_number,
+                    lastName: data.lastName,
+                    photoUrl: data.photoUrl,
+                    phone: data.phone,
                     username: data.username,
                 }
             });

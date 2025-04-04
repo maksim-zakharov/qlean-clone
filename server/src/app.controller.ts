@@ -1,10 +1,8 @@
 import {Controller} from '@nestjs/common';
+import {Telegraf} from "telegraf";
 
 @Controller()
 export class AppController {
-    constructor() {
-    }
-
     // @Get('/api/env')
     // getEnv() {
     //     return process.env;

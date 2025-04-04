@@ -7,7 +7,7 @@ import {MapPin, Pencil, User} from "lucide-react";
 import {Card} from "../components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {Button} from "../components/ui/button.tsx";
-import {usePatchPhoneMutation} from "../api.ts";
+import {useLoginMutation} from "../api.ts";
 
 interface Address {
     // Дом
@@ -29,8 +29,8 @@ interface Address {
 
 export const ProfilePage = () => {
 
+    const [login] = useLoginMutation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const [patchPhone] = usePatchPhoneMutation();
     const [address, setAddress] = useState<Address | undefined>()
 
     const handleRequestContact = () => {
@@ -40,7 +40,7 @@ export const ProfilePage = () => {
             }
             // Отправляем данные на сервер
             // @ts-ignore
-            await patchPhone({phone: Telegram.WebApp.initDataUnsafe?.user?.phone_number}).unwrap();
+            await login().unwrap();
         });
     }
 

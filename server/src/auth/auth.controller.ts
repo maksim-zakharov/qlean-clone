@@ -3,11 +3,28 @@ import {AuthGuard} from "@nestjs/passport";
 import {AuthService, validateInitData} from "./auth.service";
 import {User} from "@prisma/client";
 import {UserService} from "../user/user.service";
+import {Telegraf} from "telegraf";
 
 @Controller('/api/auth')
 export class AuthController {
 
-    constructor(private readonly authService: AuthService, private readonly userService: UserService) {
+    constructor(private readonly bot: Telegraf, private readonly authService: AuthService, private readonly userService: UserService) {
+        bot.on('contact', async (ctx) => {
+            const contact = ctx.message.contact;
+
+            // Проверка, что контакт принадлежит отправителю
+            if (contact.user_id === ctx.from.id) {
+                const phone = contact.phone_number;
+                const item = await this.userService.getById(ctx.from.id);
+
+                item.phone = phone;
+
+                // Действия с номером (сохранение в БД и т.д.)
+                await this.userService.update(item);
+            } else {
+                ctx.reply('Это не ваш номер!');
+            }
+        });
     }
 
     @Get('/login')
@@ -26,16 +43,16 @@ export class AuthController {
         return this.authService.login(user);
     }
 
-    @Patch('/phone')
-    @UseGuards(AuthGuard('jwt'))
-    async patchPhone(@Req() req, @Body() body: User) {
-        const item = await this.userService.getById(req.user.id);
-
-        if (body.phone)
-            item.phone = body.phone;
-
-        await this.userService.update(item);
-    }
+    // @Patch('/phone')
+    // @UseGuards(AuthGuard('jwt'))
+    // async patchPhone(@Req() req, @Body() body: User) {
+    //     const item = await this.userService.getById(req.user.id);
+    //
+    //     if (body.phone)
+    //         item.phone = body.phone;
+    //
+    //     await this.userService.update(item);
+    // }
 
     @Get('/userinfo')
     @UseGuards(AuthGuard('jwt'))
