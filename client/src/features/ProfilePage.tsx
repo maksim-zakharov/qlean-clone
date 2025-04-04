@@ -77,9 +77,9 @@ export const ProfilePage = () => {
                 <BackButton url="/"/>
             </div>
         </Header>
-        <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4 mt-[56px]">
+        <div className="flex-1 overflow-y-auto overscroll-none px-4 mt-[56px]">
             <Card className="p-0 gap-0 mt-2">
-                <div className="p-4 separator-shadow-bottom flex justify-between items-center">
+                <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
                         <Avatar>
                             <AvatarImage src={userInfo?.photoUrl}/>
@@ -92,7 +92,7 @@ export const ProfilePage = () => {
                         <Pencil/>
                     </Button>
                 </div>
-                <div className="p-4 separator-shadow-bottom flex justify-between items-center">
+                <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Description>Телефон</Typography.Description>
                         <Typography.Title>{phoneText}</Typography.Title>
@@ -101,7 +101,7 @@ export const ProfilePage = () => {
                         Обновить
                     </Button>}
                 </div>
-                <div className="p-4 flex justify-between items-center">
+                <div className="p-4 py-3 flex justify-between items-center">
                     <div className="flex gap-2">
                         <MapPin/>
                         <div className="flex flex-col">
@@ -113,7 +113,7 @@ export const ProfilePage = () => {
                 </div>
             </Card>
             <Card className="p-0 gap-0 mt-2">
-                <div className="p-4 flex justify-between items-center">
+                <div className="p-4 py-3 flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Title>Уведомления в Telegram</Typography.Title>
                     </div>
