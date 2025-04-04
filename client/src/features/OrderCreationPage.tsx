@@ -5,7 +5,7 @@ import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {List} from "../components/ui/list.tsx";
 import {BackButton} from "../components/BackButton.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import {Info, Plus, Star} from 'lucide-react'
+import {Info, Star} from 'lucide-react'
 import EstimatedTime from "../components/EstimatedTime.tsx";
 import {Header} from "../components/ui/Header.tsx";
 import {BottomActions} from "../components/BottomActions.tsx";
@@ -123,7 +123,8 @@ export const OrderCreationPage = () => {
                 <div>
                     <List itemClassName="flex-col gap-2" className="rounded-none">
                         {availableOptions.map((option) => <>
-                            <div className="flex items-center gap-3 w-full justify-between">
+                            <div className="flex items-center gap-3 w-full justify-between"
+                                 onClick={() => handleOptionToggle(option)}>
                                 <div className="flex items-center gap-3 flex-1 min-w-0">
                                     <Info
                                         className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
@@ -136,7 +137,8 @@ export const OrderCreationPage = () => {
                                 </div>
                                 <span
                                     className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
-                                <Checkbox checked={selectedOptionsIdSet.has(option.id)} onCheckedChange={() => handleOptionToggle(option)} />
+                                <Checkbox checked={selectedOptionsIdSet.has(option.id)}
+                                          onCheckedChange={() => handleOptionToggle(option)}/>
                             </div>
                         </>)}
                     </List>
