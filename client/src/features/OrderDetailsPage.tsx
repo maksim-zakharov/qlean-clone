@@ -20,6 +20,7 @@ import {AddressSheet} from "../components/AddressSheet.tsx";
 import {selectBaseService} from "../slices/createOrderSlice.ts";
 import {useDispatch} from "react-redux";
 import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
+import {RoutePaths} from "../routes.ts";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
@@ -99,7 +100,7 @@ export const OrderDetailsPage = () => {
                             onOkClick={handleOkClick}/>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
-                <BackButton url="/orders"/>
+                <BackButton url={RoutePaths.Orders}/>
                 <Typography.Title
                     className="items-center flex justify-center">{order.baseService?.name}</Typography.Title>
             </div>

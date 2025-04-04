@@ -20,6 +20,7 @@ import {AddressSheet} from "../components/AddressSheet.tsx";
 import {selectDate, selectFullAddress} from "../slices/createOrderSlice.ts";
 import {Header} from "../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
+import {RoutePaths} from "../routes.ts";
 
 
 export const OrderCheckoutPage = () => {
@@ -69,7 +70,7 @@ export const OrderCheckoutPage = () => {
                     comment,
                     userId
                 }).unwrap();
-            navigate('/orders')
+            navigate(RoutePaths.Orders)
         } catch (e) {
             let description = 'Что-то пошло не так.'
             if (!selectedTimestamp) {
@@ -89,7 +90,7 @@ export const OrderCheckoutPage = () => {
                                 onOkClick={() => setError(undefined)}/>
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton url="/orders"/>
+                    <BackButton url={RoutePaths.Orders}/>
                     <AddressSheet
                         addresses={addresses}
                         onAddressSelect={handleSelectAddress}

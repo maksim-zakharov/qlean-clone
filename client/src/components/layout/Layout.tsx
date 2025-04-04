@@ -11,6 +11,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
+import {RoutePaths} from "../../routes.ts";
 
 type MenuItem = {
     icon: LucideIcon
@@ -22,12 +23,12 @@ const menuItems: MenuItem[] = [
     {
         icon: Home,
         label: 'Главная',
-        path: '/'
+        path: RoutePaths.Root
     },
     {
         icon: ClipboardList,
         label: 'Заказы',
-        path: '/orders'
+        path: RoutePaths.Orders
     },
     // {
     //     icon: Gift,

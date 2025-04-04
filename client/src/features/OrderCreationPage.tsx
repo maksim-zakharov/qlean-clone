@@ -15,6 +15,7 @@ import {moneyFormat} from "../lib/utils.ts";
 import {usePatchOrderMutation} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../slices/createOrderSlice.ts";
+import {RoutePaths} from "../routes.ts";
 
 export const OrderCreationPage = () => {
     const [patchOrder] = usePatchOrderMutation();
@@ -72,7 +73,7 @@ export const OrderCreationPage = () => {
             navigate(`/order/checkout`);
         } else {
             await patchOrder({id: orderId, serviceVariant, options, userId}).unwrap();
-            navigate(`/orders/${orderId}`);
+            navigate(RoutePaths.Order.Details(orderId));
         }
     }
 
@@ -84,9 +85,9 @@ export const OrderCreationPage = () => {
 
     const backUrl = useMemo(() => {
         if (isDraft) {
-            return '/';
+            return RoutePaths.Root;
         }
-        return '/orders'
+        return RoutePaths.Orders
     }, [isDraft])
 
     if (!baseService) {
