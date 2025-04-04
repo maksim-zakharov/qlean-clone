@@ -104,7 +104,7 @@ export const OrderCreationPage = () => {
                 </div>
             </Header>
 
-            <div className="flex-1 overflow-y-auto overscroll-none bg-tg-theme-secondary-bg-color px-4">
+            <div className="flex-1 overflow-y-auto overscroll-none px-4">
                 <Tabs defaultValue={variantId} value={variantId}
                       className="mt-[calc(56px+env(safe-area-inset-top))]">
                     <TabsList>
