@@ -303,7 +303,7 @@
         }
 
         .card-bg-color {
-            background-color: var(--tg-theme-section-bg-color);
+            background-color: var(--tg-theme-secondary-bg-color);
         }
     }
 }
