@@ -103,7 +103,7 @@ export const ProfilePage = () => {
             </div>
         </Header>
         <div className="flex-1 text-center overflow-y-auto overscroll-none px-4 mt-[56px]">
-            <Card className="p-0 gap-0 mt-2">
+            <Card className="text-left p-0 gap-0 mt-2">
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
                         <Avatar>
