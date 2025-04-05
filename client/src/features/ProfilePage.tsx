@@ -72,6 +72,19 @@ export const ProfilePage = () => {
         });
     }, []);
 
+    const addressText = useMemo(() => {
+        if(!address){
+            return 'Отсутствует'
+        }
+
+        let text = [];
+        if(address.city) text.push(address.city);
+        if(address.road) text.push(address.road);
+        if(address.house_number) text.push(address.house_number);
+
+        return text.join(', ');
+    }, [address]);
+
     return <div className="fixed inset-0 flex flex-col bg-inherit">
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
@@ -106,7 +119,7 @@ export const ProfilePage = () => {
                         <div className="flex flex-col">
                             <Typography.Description>Адрес</Typography.Description>
                             <Typography.Title
-                                className="flex">{!address ? 'Отсутствует' : `${address.city}, ${address.road}, ${address.house_number}`}</Typography.Title>
+                                className="flex">{addressText}</Typography.Title>
                         </div>
                     </div>
                 </div>
