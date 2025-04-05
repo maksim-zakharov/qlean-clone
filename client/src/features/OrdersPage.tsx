@@ -4,13 +4,16 @@ import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
-import {ListPlus, RotateCw} from "lucide-react";
+import {ClipboardPlus, ListPlus, Map, RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {moneyFormat} from "../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../components/ui/skeleton.tsx";
+import {EmptyState} from "../components/EmptyState.tsx";
+import {AddAddressSheet} from "../components/AddAddressSheet.tsx";
+import {RoutePaths} from "../routes.ts";
 
 
 export const OrdersPage = () => {
@@ -47,6 +50,19 @@ export const OrdersPage = () => {
                 <Skeleton className="w-full h-[156px] mt-4"/>
             </div>
         </div>
+    }
+
+    if(orders.length === 0){
+        return  <EmptyState
+            icon={<ClipboardPlus className="h-10 w-10" />}
+            title="Нет заказов"
+            description="Выберите нужную услугу на главном экране"
+            action={
+                <Button onClick={() => navigate(RoutePaths.Root)}
+                >
+                    Выбрать услугу
+                </Button>}
+        />
     }
 
     return <div className="p-4 flex flex-col gap-4">
