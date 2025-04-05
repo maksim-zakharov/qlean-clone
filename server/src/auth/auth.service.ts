@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {UserService} from "../user/user.service";
-import { createHmac } from 'crypto';
+import {createHmac} from 'crypto';
 import * as process from "node:process";
 import {JwtService} from "@nestjs/jwt";
 
@@ -38,7 +38,9 @@ export function validateInitData(initData: string) {
 @Injectable()
 export class AuthService {
 
-    constructor(private jwtService: JwtService, private userService: UserService) {}
+    constructor(private jwtService: JwtService, private userService: UserService) {
+    }
+
     async validateUser(telegramProfile: any) {
         let user = await this.userService.getById(telegramProfile.id);
 
@@ -51,7 +53,8 @@ export class AuthService {
 
     async login(user: any) {
         return {
-            access_token: this.jwtService.sign(user)
+            // Потому что BigInt
+            access_token: this.jwtService.sign({...user, id: user.id.toString()})
         };
     }
 }
