@@ -6,15 +6,17 @@ import {List} from "./ui/list.tsx";
 import {Typography} from "./ui/Typography.tsx";
 import {AddAddressSheet} from "./AddAddressSheet.tsx";
 import {EditButton} from "./EditButton.tsx";
-import {Map} from "lucide-react";
+import {CircleX, Map} from "lucide-react";
 import {EmptyState} from "./EmptyState.tsx";
 
 interface AddressSheetProps {
     addresses: any[]
     onAddressSelect: (address: any) => void
+    isError?: boolean
 }
 
 export function AddressSheet({
+                                 isError,
                                  addresses,
                                  onAddressSelect,
                                  children
@@ -52,7 +54,17 @@ export function AddressSheet({
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
                 </SheetHeader>
-                {addresses.length === 0 && <EmptyState
+                {isError && <EmptyState
+                    icon={<CircleX className="h-10 w-10" />}
+                    title="Упс, что-то пошло не так..."
+                    description="Обновите страницу или повторите попытку позднее."
+                    action={
+                        <Button onClick={() => window.location.reload()}
+                        >
+                            Обновить страницу
+                        </Button>}
+                />}
+                {!isError && addresses.length === 0 && <EmptyState
                     icon={<Map className="h-10 w-10" />}
                     title="Нет адресов"
                     description="Добавьте адрес для оформления заказов"
@@ -73,7 +85,7 @@ export function AddressSheet({
                         <EditButton onClick={(e) => handleOnEditAddress(e, adr)}/>
                     </div>)}
                 </List>
-                {addresses.length > 0 && <div className="flex flex-col flex-1">
+                {!isError && addresses.length > 0 && <div className="flex flex-col flex-1">
                     <AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
                             wide

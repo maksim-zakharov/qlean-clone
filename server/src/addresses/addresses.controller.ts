@@ -11,8 +11,8 @@ export class AddressesController {
     }
 
     @Get('')
-    getAddresses(@Query() {userId}: { userId?: number }) {
-        return this.addressesService.getAll(Number(userId));
+    getAddresses(@Query() {userId}: { userId?: Address['userId'] }) {
+        return this.addressesService.getAll(userId);
     }
 
     @Post('')

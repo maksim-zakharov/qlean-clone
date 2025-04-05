@@ -11,16 +11,16 @@ export class OrdersController {
     }
 
     @Get('')
-    getOrders(@Query() {userId}: { userId?: number }) {
-        return this.ordersService.getAll(Number(userId)).then(r => r.map(o => ({
+    getOrders(@Query() {userId}: { userId?: Order['userId'] }) {
+        return this.ordersService.getAll(userId).then(r => r.map(o => ({
             ...o,
             status: o.date > new Date() ? o.status : OrderStatus.completed
         })));
     }
 
     @Get('/:id')
-    getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: number }) {
-        return this.ordersService.getById(Number(id), Number(userId));
+    getOrderById(@Param('id') id: number, @Query() {userId}: { userId?: Order['userId'] }) {
+        return this.ordersService.getById(Number(id), userId);
     }
 
     @Put('/:id')
@@ -30,7 +30,7 @@ export class OrdersController {
 
     @Patch('/:id')
     async patchOrder(@Param('id') id: number, @Body() body: Order) {
-        const item = await this.ordersService.getById(Number(id), Number(body.userId));
+        const item = await this.ordersService.getById(Number(id), body.userId);
 
         Object.assign(item, body);
 
@@ -39,7 +39,7 @@ export class OrdersController {
 
     @Post('/:id/cancel')
     async cancelOrder(@Param('id') id: number, @Body() body: Order) {
-        const item = await this.ordersService.getById(Number(id), Number(body.userId));
+        const item = await this.ordersService.getById(Number(id), body.userId);
 
         item.status = OrderStatus.canceled;
 

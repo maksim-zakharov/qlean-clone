@@ -45,7 +45,7 @@ const menuItems: MenuItem[] = [
 
 export const Layout = () => {
     const {isLoading, userId, photoUrl} = useTelegram();
-    const {data: addresses = []} = useGetAddressesQuery({userId});
+    const {data: addresses = [], isError} = useGetAddressesQuery({userId});
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
     const location = useLocation();
@@ -94,6 +94,7 @@ export const Layout = () => {
                 <div className="flex-1 flex flex-col items-center">
                     <Typography.Description>Адрес</Typography.Description>
                     <AddressSheet
+                        isError={isError}
                         addresses={addresses}
                         onAddressSelect={handleSelectAddress}
                     >

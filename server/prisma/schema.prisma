@@ -10,7 +10,7 @@ datasource db {
 
 model Address {
   id    Int     @default(autoincrement()) @id
-  userId  Int?
+  userId BigInt ?
   name  String
   fullAddress  String
   comments  String?
@@ -32,7 +32,7 @@ model Order {
   status  OrderStatus  @default(active)
   fullAddress String
   date DateTime @db.Timestamp(6)
-  userId Int?
+  userId BigInt?
   comment String?
 }
 
@@ -72,7 +72,7 @@ enum UserRole {
 }
 
 model User {
-  id  Int          @id
+  id  BigInt          @id
   firstName String
   role  UserRole  @default(client)
   lastName  String?
