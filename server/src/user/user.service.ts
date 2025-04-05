@@ -18,7 +18,7 @@ export class UserService {
         try {
             return this.prisma.user.create({
                 data: {
-                    id: data.id,
+                    id: data.id.toString(),
                     firstName: data.first_name,
                     role: 'client',
                     lastName: data.last_name,
