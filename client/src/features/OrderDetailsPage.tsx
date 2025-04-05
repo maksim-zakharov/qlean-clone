@@ -187,7 +187,7 @@ export const OrderDetailsPage = () => {
                 type="single"
 
                 defaultValue="services"
-                className="mb-2 overflow-hidden rounded-xl"
+                className="mb-2 rounded-xl"
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services">
