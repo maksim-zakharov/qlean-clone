@@ -44,7 +44,8 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const {isLoading, userId, photoUrl} = useTelegram();
+    const {isLoading, userId} = useTelegram();
+    const userInfo = useSelector(state => state.createOrder.userInfo);
     const {data: addresses = [], isError} = useGetAddressesQuery({userId});
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
@@ -88,7 +89,7 @@ export const Layout = () => {
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
                 <Avatar onClick={() => navigate('/profile')}>
-                    <AvatarImage src={photoUrl}/>
+                    <AvatarImage src={userInfo?.photoUrl}/>
                     <AvatarFallback><User/></AvatarFallback>
                 </Avatar>
                 <div className="flex-1 flex flex-col items-center">

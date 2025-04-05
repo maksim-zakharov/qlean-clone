@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Header} from "../components/ui/Header.tsx";
 import {BackButton} from "../components/BackButton.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
@@ -11,6 +11,9 @@ import {useLoginMutation} from "../api.ts";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import {Switch} from "../components/ui/switch.tsx";
 import {EditButton} from "../components/EditButton.tsx";
+import {logout} from "../slices/createOrderSlice.ts";
+import {RoutePaths} from "../routes.ts";
+import {useNavigate} from "react-router-dom";
 
 interface Address {
     // Дом
@@ -32,6 +35,8 @@ interface Address {
 
 export const ProfilePage = () => {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     const [login] = useLoginMutation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const [address, setAddress] = useState<Address | undefined>()
@@ -85,13 +90,19 @@ export const ProfilePage = () => {
         return text.join(', ');
     }, [address]);
 
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate(RoutePaths.Root)
+        window.location.reload();
+    }
+
     return <div className="fixed inset-0 flex flex-col bg-inherit">
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
                 <BackButton url="/"/>
             </div>
         </Header>
-        <div className="flex-1 overflow-y-auto overscroll-none px-4 mt-[56px]">
+        <div className="flex-1 text-center overflow-y-auto overscroll-none px-4 mt-[56px]">
             <Card className="p-0 gap-0 mt-2">
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
@@ -135,6 +146,7 @@ export const ProfilePage = () => {
                     />
                 </div>
             </Card>
+            <Button className="mt-2 [color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Выйти из аккаунта</Button>
         </div>
     </div>
 }

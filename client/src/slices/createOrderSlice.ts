@@ -54,6 +54,11 @@ const _saveToken = (state, action: PayloadAction<{token: string}>) => {
     saveInLocalStorage('token', state.token)
 }
 
+const _logout = (state, action: PayloadAction) => {
+    state.token = undefined;
+    saveInLocalStorage('token', state.token)
+}
+
 const initialState: CreateOrderState = {
     id: getLocalStorageItemOrDefault('id', null),
     baseService: getLocalStorageItemOrDefault('baseService', null),
@@ -70,6 +75,7 @@ const createOrderSlice = createSlice({
     initialState,
     reducers: {
         saveToken: _saveToken,
+        logout: _logout,
         startOrderFlow: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant'>>) => {
             state.baseService = action.payload.baseService;
             state.serviceVariant = action.payload.serviceVariant;
@@ -141,6 +147,7 @@ const createOrderSlice = createSlice({
 });
 
 export const {
+    logout,
     saveToken,
     retryOrder,
     selectDate,
