@@ -44,9 +44,9 @@ const menuItems: MenuItem[] = [
 ]
 
 export const Layout = () => {
-    const {isLoading, userId} = useTelegram();
+    const {isLoading} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const {data: addresses = [], isError} = useGetAddressesQuery({userId});
+    const {data: addresses = [], isError} = useGetAddressesQuery();
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
     const location = useLocation();

@@ -16,10 +16,9 @@ import {RoutePaths} from "../routes.ts";
 
 
 export const OrdersPage = () => {
-    const {userId} = useTelegram();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {data: orders = [], isLoading, isError} = useGetOrdersQuery({userId}, {
+    const {data: orders = [], isLoading, isError} = useGetOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
 

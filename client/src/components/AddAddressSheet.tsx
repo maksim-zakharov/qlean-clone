@@ -12,7 +12,7 @@ export function AddAddressSheet({
                                     onChangeAddress,
                                     children
                                 }: React.PropsWithChildren<any>) {
-    const {vibro, userId} = useTelegram();
+    const {vibro} = useTelegram();
     const [addAddress] = useAddAddressMutation();
     const [editAddress] = useEditAddressMutation();
     const [deleteAddress] = useDeleteAddressMutation();
@@ -51,13 +51,13 @@ export function AddAddressSheet({
 
     const handleOnSubmit = async () => {
         const func = !address ? addAddress : editAddress;
-        await func({id, name, fullAddress, comments, userId}).unwrap();
+        await func({id, name, fullAddress, comments}).unwrap();
         setOpened(false)
         clearAddress();
     }
 
     const handleOnDelete = async () => {
-        await deleteAddress({id, userId}).unwrap();
+        await deleteAddress({id}).unwrap();
         setOpened(false)
         clearAddress();
     }

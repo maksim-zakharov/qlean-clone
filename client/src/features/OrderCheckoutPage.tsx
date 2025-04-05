@@ -37,8 +37,8 @@ export const OrderCheckoutPage = () => {
 
     const navigate = useNavigate()
     const [comment, setComment] = useState<string | undefined>();
-    const {vibro, userId} = useTelegram();
-    const {data: addresses = []} = useGetAddressesQuery({userId});
+    const {vibro} = useTelegram();
+    const {data: addresses = []} = useGetAddressesQuery();
     const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
 
     // Считаем общее время
@@ -67,8 +67,7 @@ export const OrderCheckoutPage = () => {
                     fullAddress,
                     options,
                     date: selectedTimestamp,
-                    comment,
-                    userId
+                    comment
                 }).unwrap();
             navigate(RoutePaths.Orders)
         } catch (e) {

@@ -26,7 +26,7 @@ export const OrderCreationPage = () => {
     const options = useSelector(state => state.createOrder.options)
     const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
 
-    const {vibro, userId} = useTelegram();
+    const {vibro} = useTelegram();
     const navigate = useNavigate()
 
     const dispatch = useDispatch();
@@ -73,7 +73,7 @@ export const OrderCreationPage = () => {
 
             navigate(`/order/checkout`);
         } else {
-            await patchOrder({id: orderId, serviceVariant, options, userId}).unwrap();
+            await patchOrder({id: orderId, serviceVariant, options}).unwrap();
             navigate(RoutePaths.Order.Details(orderId));
         }
     }

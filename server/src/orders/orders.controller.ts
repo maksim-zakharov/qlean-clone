@@ -25,7 +25,7 @@ export class OrdersController {
 
     @Put('/:id')
     editOrder(@Param('id') id: number, @Body() body: Order, @Req() req): any {
-        return this.ordersService.update(body);
+        return this.ordersService.update({...body, userId: req.user.id});
     }
 
     @Patch('/:id')

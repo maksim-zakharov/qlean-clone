@@ -29,10 +29,10 @@ export const OrderDetailsPage = () => {
     const [cancelOrder] = useCancelOrderMutation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {userId, vibro} = useTelegram();
-    const {data: addresses = []} = useGetAddressesQuery({userId});
+    const {vibro} = useTelegram();
+    const {data: addresses = []} = useGetAddressesQuery();
     const {id} = useParams<string>();
-    const {data: order, isLoading, isError} = useGetOrderByIdQuery({userId, id: id!});
+    const {data: order, isLoading, isError} = useGetOrderByIdQuery({id: id!});
     const [{title, description, show}, setAlertConfig] = useState({
         title: '',
         description: '',
@@ -45,17 +45,17 @@ export const OrderDetailsPage = () => {
 
     const handleSelectAddress = async ({fullAddress}: any) => {
         if (fullAddress !== order.fullAddress)
-            await patchOrder({id: order.id, fullAddress, userId}).unwrap();
+            await patchOrder({id: order.id, fullAddress}).unwrap();
     }
 
     const handleSelectDate = async (date: number) => {
         if (date !== order.date)
-            await patchOrder({id: order.id, date, userId}).unwrap();
+            await patchOrder({id: order.id, date}).unwrap();
     }
 
     const handleChangeComment = async (comment?: string) => {
         if (comment && comment !== order.comment)
-            await patchOrder({id: order.id, comment, userId}).unwrap();
+            await patchOrder({id: order.id, comment}).unwrap();
     }
 
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -70,7 +70,7 @@ export const OrderDetailsPage = () => {
     }
 
     const handleCancelClick = async () => {
-        await cancelOrder({id: order.id, userId}).unwrap();
+        await cancelOrder({id: order.id}).unwrap();
         setAlertConfig(prevState => ({...prevState, show: false}));
         setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
     }

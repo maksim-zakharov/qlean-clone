@@ -76,14 +76,14 @@ export const api = createApi({
             }),
             providesTags: ['Service'],
         }),
-        getOrderById: builder.query<any, { userId?: number, id: number | string }>({
+        getOrderById: builder.query<any, { id: number | string }>({
             query: (params) => ({
                 url: `/orders/${params.id}`,
                 params
             }),
             providesTags: ['Order'],
         }),
-        getOrders: builder.query<any[], { userId?: number }>({
+        getOrders: builder.query<any[], void>({
             query: (params) => ({
                 url: "/orders",
                 params
@@ -122,7 +122,7 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
-        getAddresses: builder.query<any[], { userId?: number }>({
+        getAddresses: builder.query<any[], void>({
             query: (params) => ({
                 url: "/addresses",
                 params
