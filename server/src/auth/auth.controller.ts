@@ -15,7 +15,7 @@ export class AuthController {
             // Проверка, что контакт принадлежит отправителю
             if (contact.user_id === ctx.from.id) {
                 const phone = contact.phone_number;
-                const item = await this.userService.getById(ctx.from.id);
+                const item = await this.userService.getById(ctx.from.id?.toString());
 
                 item.phone = phone;
 
