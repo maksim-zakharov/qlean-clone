@@ -12,9 +12,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         });
     }
 
-    // Получаем значение из AccessToken и прокидываем в Req.user
     async validate(payload: any) {
         const {iat, exp, ...data} = payload;
-        return {...data, id: data.id.toString()};
+        return data;
     }
 }

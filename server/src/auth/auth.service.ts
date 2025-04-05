@@ -53,8 +53,7 @@ export class AuthService {
 
     async login(user: any) {
         return {
-            // Потому что BigInt
-            access_token: this.jwtService.sign({...user, id: user.id.toString()})
+            access_token: this.jwtService.sign(user)
         };
     }
 }
