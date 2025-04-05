@@ -5,9 +5,9 @@ import {useTelegram} from "../hooks/useTelegram.ts";
 import {List} from "./ui/list.tsx";
 import {Typography} from "./ui/Typography.tsx";
 import {AddAddressSheet} from "./AddAddressSheet.tsx";
-import {Pencil} from "lucide-react";
 import {EditButton} from "./EditButton.tsx";
-
+import {Map} from "lucide-react";
+import {EmptyState} from "./EmptyState.tsx";
 
 interface AddressSheetProps {
     addresses: any[]
@@ -52,6 +52,17 @@ export function AddressSheet({
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
                 </SheetHeader>
+                {addresses.length === 0 && <EmptyState
+                    icon={<Map className="h-10 w-10" />}
+                    title="Нет адресов"
+                    description="Добавьте адрес для оформления заказов"
+                    action={<AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
+                        <Button
+                        >
+                            Добавить адрес
+                        </Button>
+                    </AddAddressSheet>}
+                />}
                 <List className="mt-4 mb-4 overflow-y-auto no-scrollbar">
                     {addresses.map(adr => <div className="flex w-full justify-between" key={adr.id}
                                                onClick={() => handleSelectAddress(adr)}>
@@ -62,7 +73,7 @@ export function AddressSheet({
                         <EditButton onClick={(e) => handleOnEditAddress(e, adr)}/>
                     </div>)}
                 </List>
-                <div className="flex flex-col flex-1">
+                {addresses.length > 0 && <div className="flex flex-col flex-1">
                     <AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
                             wide
@@ -71,7 +82,7 @@ export function AddressSheet({
                             Добавить адрес
                         </Button>
                     </AddAddressSheet>
-                </div>
+                </div>}
             </SheetContent>
         </Sheet>
     )

@@ -7,8 +7,8 @@ const TypographyH2 = ({children, className}: React.ComponentProps<'div'>) => <h2
 const TypographyTitle = ({children, className}: React.ComponentProps<'div'>) => <span
     className={cn("text-base font-medium text-tg-theme-text-color", className)}>{children}</span>
 
-const TypographyDescription = ({children}: React.ComponentProps<'div'>) => <span
-    className="text-xs text-tg-theme-hint-color">{children}</span>
+const TypographyDescription = ({children, className}: React.ComponentProps<'div'>) => <span
+    className={cn("text-xs text-tg-theme-hint-color", className)}>{children}</span>
 
 const Typography = () => {
     return <></>
