@@ -10,7 +10,7 @@ import {moneyFormat} from "../lib/utils.ts";
 import dayjs from "dayjs";
 import {Button} from "../components/ui/button.tsx";
 import {Card} from "../components/ui/card.tsx";
-import {Pencil, User} from "lucide-react";
+import {CircleX, Pencil, User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {BottomActions} from "../components/BottomActions.tsx";
 import {Skeleton} from "../components/ui/skeleton.tsx";
@@ -22,6 +22,7 @@ import {useDispatch} from "react-redux";
 import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../routes.ts";
 import {EditButton} from "../components/EditButton.tsx";
+import {EmptyState} from "../components/EmptyState.tsx";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
@@ -31,7 +32,7 @@ export const OrderDetailsPage = () => {
     const {userId, vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery({userId});
     const {id} = useParams<string>();
-    const {data: order, isLoading} = useGetOrderByIdQuery({userId, id: id!});
+    const {data: order, isLoading, isError} = useGetOrderByIdQuery({userId, id: id!});
     const [{title, description, show}, setAlertConfig] = useState({
         title: '',
         description: '',
@@ -90,6 +91,22 @@ export const OrderDetailsPage = () => {
                 <Skeleton className="w-full h-[216px] mt-2"/>
                 <Skeleton className="w-full h-[188px] mt-2"/>
             </div>
+        </div>
+    }
+
+    if(isError){
+        return  <div
+            className="h-screen">
+            <EmptyState
+                icon={<CircleX className="h-10 w-10" />}
+                title="Упс, что-то пошло не так..."
+                description="Обновите страницу или повторите попытку позднее."
+                action={
+                    <Button onClick={() => window.location.reload()}
+                    >
+                        Обновить страницу
+                    </Button>}
+            />
         </div>
     }
 

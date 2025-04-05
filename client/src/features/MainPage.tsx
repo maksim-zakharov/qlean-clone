@@ -1,4 +1,16 @@
-import {Brush, Building2, Footprints, Grid2x2, Hammer, Home, LucideIcon, Shirt, Sofa, Sparkles} from "lucide-react"
+import {
+    Brush,
+    Building2, CircleX,
+    ClipboardPlus,
+    Footprints,
+    Grid2x2,
+    Hammer,
+    Home,
+    LucideIcon,
+    Shirt,
+    Sofa,
+    Sparkles
+} from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import React, {useEffect} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
@@ -8,6 +20,9 @@ import {useGetServicesQuery} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {startOrderFlow} from "../slices/createOrderSlice.ts";
 import {Skeleton} from "../components/ui/skeleton.tsx";
+import {EmptyState} from "../components/EmptyState.tsx";
+import {RoutePaths} from "../routes.ts";
+import {Button} from "../components/ui/button.tsx";
 
 const ICONS: Record<string, LucideIcon> = {
     Shirt,
@@ -24,7 +39,7 @@ const ICONS: Record<string, LucideIcon> = {
 const MainPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const services = useSelector(state => state.createOrder.services);
+    const {data: services = [], isError} = useGetServicesQuery();
 
     const {backButton, isLoading, error} = useTelegram();
     useEffect(() => {
@@ -37,6 +52,19 @@ const MainPage = () => {
     const handleCardOnClick = (baseService, serviceVariant) => {
         dispatch(startOrderFlow({baseService, serviceVariant}))
         navigate(`/order`)
+    }
+
+    if(isError){
+        return  <EmptyState
+            icon={<CircleX className="h-10 w-10" />}
+            title="Упс, что-то пошло не так..."
+            description="Обновите страницу или повторите попытку позднее."
+            action={
+                <Button onClick={() => window.location.reload()}
+                >
+                    Обновить страницу
+                </Button>}
+        />
     }
 
     return (

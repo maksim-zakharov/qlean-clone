@@ -1,21 +1,26 @@
 // Общий компонент для пустых состояний
 import {Typography} from "./ui/Typography.tsx";
+import {cn} from "../lib/utils.ts";
 
 export function EmptyState({
                                icon,
                                title,
                                description,
-                               action
+                               action,
+                               className
                            }: {
     icon: React.ReactNode
     title: string
     description: string
     action?: React.ReactNode
+    className?: string
 }) {
     return (
-        <div className="flex flex-1 flex-col items-center justify-center p-4 text-center h-[100%]">
-            <div className="text-muted-foreground mb-4 rounded-[50%] card-bg-color text-tg-theme-button-text-color p-4">{icon}</div>
-            <Typography.Title className="text-center flex flex-col mb-4">{title}<Typography.Description>{description}</Typography.Description></Typography.Title>
+        <div className="flex flex-1 flex-col items-center justify-center p-4 text-center max-w-[80%] m-auto h-[100%]">
+            <div
+                className={cn("text-muted-foreground mb-4 rounded-[50%] card-bg-color text-tg-theme-button-text-color p-4", className)}>{icon}</div>
+            <Typography.Title
+                className="text-center flex flex-col mb-4">{title}<Typography.Description>{description}</Typography.Description></Typography.Title>
             {action}
         </div>
     )

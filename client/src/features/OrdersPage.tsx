@@ -4,7 +4,7 @@ import {Card} from "../components/ui/card.tsx";
 import {Button} from "../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../api.ts";
 import dayjs from "dayjs";
-import {ClipboardPlus, ListPlus, Map, RotateCw} from "lucide-react";
+import {CircleX, ClipboardPlus, ListPlus, Map, RotateCw} from "lucide-react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {moneyFormat} from "../lib/utils.ts";
 import {useDispatch} from "react-redux";
@@ -12,7 +12,6 @@ import {retryOrder, selectBaseService} from "../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../components/ui/skeleton.tsx";
 import {EmptyState} from "../components/EmptyState.tsx";
-import {AddAddressSheet} from "../components/AddAddressSheet.tsx";
 import {RoutePaths} from "../routes.ts";
 
 
@@ -20,7 +19,7 @@ export const OrdersPage = () => {
     const {userId} = useTelegram();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {data: orders = [], isLoading} = useGetOrdersQuery({userId}, {
+    const {data: orders = [], isLoading, isError} = useGetOrdersQuery({userId}, {
         refetchOnMountOrArgChange: true
     });
 
@@ -50,6 +49,19 @@ export const OrdersPage = () => {
                 <Skeleton className="w-full h-[156px] mt-4"/>
             </div>
         </div>
+    }
+
+    if(isError){
+        return  <EmptyState
+            icon={<CircleX className="h-10 w-10" />}
+            title="Упс, что-то пошло не так..."
+            description="Обновите страницу или повторите попытку позднее."
+            action={
+                <Button onClick={() => window.location.reload()}
+                >
+                    Обновить страницу
+                </Button>}
+        />
     }
 
     if(orders.length === 0){

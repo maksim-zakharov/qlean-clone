@@ -1,4 +1,4 @@
-import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
+import {ClipboardList, ClipboardPlus, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
@@ -12,6 +12,7 @@ import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
+import {EmptyState} from "../EmptyState.tsx";
 
 type MenuItem = {
     icon: LucideIcon

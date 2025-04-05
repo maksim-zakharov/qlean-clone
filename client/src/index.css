@@ -305,5 +305,9 @@
         .card-bg-color {
             background-color: var(--tg-theme-secondary-bg-color);
         }
+
+        .bg-tg-theme-destructive-color{
+            background-color: var(--tg-theme-destructive-text-color);
+        }
     }
 }
