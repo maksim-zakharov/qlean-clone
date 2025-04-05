@@ -42,7 +42,7 @@ export class AuthService {
     }
 
     async validateUser(telegramProfile: any) {
-        let user = await this.userService.getById(telegramProfile.id);
+        let user = await this.userService.getById(telegramProfile.id.toString());
 
         if (!user) {
             user = await this.userService.create(telegramProfile);
