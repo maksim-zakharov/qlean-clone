@@ -67,7 +67,7 @@ export function AddAddressSheet({
             <SheetTrigger asChild onClick={() => setOpened(true)}>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" extra={address ? <Button variant="ghost" className="pr-1 text-tg-theme-hint-color" onClick={handleOnDelete}><Trash2 /></Button> : null}>
+            <SheetContent side="bottom" extra={address ? <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-[28px]" onClick={handleOnDelete}><Trash2 /></Button> : null}>
                 <SheetHeader>
                     <SheetTitle
                         className="text-xl font-bold text-tg-theme-text-color text-left">{address ? 'Редактирование' : 'Добавление'} адреса</SheetTitle>
@@ -89,6 +89,7 @@ export function AddAddressSheet({
                 <div className="flex flex-col flex-1">
                     <Button
                         wide
+                        size="lg"
                         onClick={handleOnSubmit}
                     >
                         Сохранить

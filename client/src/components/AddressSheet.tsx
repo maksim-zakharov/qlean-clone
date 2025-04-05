@@ -66,6 +66,7 @@ export function AddressSheet({
                     <AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
                             wide
+                            size="lg"
                         >
                             Добавить адрес
                         </Button>

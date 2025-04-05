@@ -61,6 +61,7 @@ export function CommentsSheet({
                 <div className="flex flex-col flex-1">
                     <Button
                         wide
+                        size="lg"
                         onClick={handleOnSubmit}
                     >
                         Сохранить
