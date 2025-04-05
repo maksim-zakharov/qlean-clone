@@ -102,14 +102,14 @@ export const ProfilePage = () => {
                         <Typography.Title
                             className="text-xl">{userInfo?.firstName} {userInfo?.lastName}</Typography.Title>
                     </div>
-                    <EditButton />
+                    <EditButton onClick={() => null} />
                 </div>
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Description>Телефон</Typography.Description>
                         <Typography.Title>{phoneText}</Typography.Title>
                     </div>
-                    {!userInfo?.phone && <Button size="sm" variant="default" onClick={handleRequestContact}>
+                    {!userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default" onClick={handleRequestContact}>
                         Обновить
                     </Button>}
                 </div>
