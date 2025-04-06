@@ -118,7 +118,7 @@ export const Layout = () => {
 
         {/* Bottom Navigation */}
         <footer
-            className="separator-shadow-top fixed flex justify-around items-center bottom-0 left-0 right-0 card-bg-color pb-[env(safe-area-inset-bottom)]">
+            className="separator-shadow-top fixed flex justify-around items-center bottom-0 left-0 right-0 card-bg-color pb-[calc(env(safe-area-inset-bottom,0px)/2)]">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
                     key={path}
