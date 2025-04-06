@@ -62,9 +62,8 @@ export const ProfilePage = () => {
         if (!isRequested) {
             return;
         }
-        // Отправляем данные на сервер
-        // @ts-ignore
-        await login().unwrap();
+        dispatch(logout())
+        window.location.reload();
     })
 
     useEffect(() => {
