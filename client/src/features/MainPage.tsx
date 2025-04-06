@@ -19,22 +19,9 @@ import {Typography} from "../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {startOrderFlow} from "../slices/createOrderSlice.ts";
-import {Skeleton} from "../components/ui/skeleton.tsx";
 import {EmptyState} from "../components/EmptyState.tsx";
-import {RoutePaths} from "../routes.ts";
 import {Button} from "../components/ui/button.tsx";
-
-const ICONS: Record<string, LucideIcon> = {
-    Shirt,
-    Grid2x2,
-    Sofa,
-    Footprints,
-    Sparkles,
-    Brush,
-    Hammer,
-    Home,
-    Building2
-}
+import {DynamicIcon} from "lucide-react/dynamic";
 
 const MainPage = () => {
     const navigate = useNavigate()
@@ -81,6 +68,7 @@ const MainPage = () => {
                                 <CardItem
                                     key={service.id}
                                     title={service.name}
+                                    icon={service.icon && <DynamicIcon name={service.icon} className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
                                     // icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
                                     onClick={() => handleCardOnClick(category, service)}
                                 />

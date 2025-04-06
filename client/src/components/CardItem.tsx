@@ -15,7 +15,7 @@ export const CardItem = ({title, icon, onClick, className}: CardItemProps) => <C
     onClick={onClick}
 >
     <div className="flex flex-col h-full">
-        <Typography.Title className="max-w-[60%]">{title}</Typography.Title>
+        <Typography.Title className="max-w-[calc(100%-56px)]">{title}</Typography.Title>
         {icon && <div className="absolute bottom-4 right-4">
             {icon}
         </div>}

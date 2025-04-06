@@ -47,6 +47,7 @@ model BaseService {
 model ServiceVariant {
   id            Int          @id @default(autoincrement())
   name          String
+  icon  String?
   basePrice     Int
   duration      Int
   baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
@@ -58,6 +59,7 @@ model ServiceOption {
   id            Int          @id @default(autoincrement())
   name          String
   price         Int
+  description  String?
   duration      Int
   isPopular     Boolean      @default(false)
   baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
