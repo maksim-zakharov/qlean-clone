@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api.ts";
 import {InputWithLabel} from "./InputWithLabel.tsx";
-import {Trash2} from "lucide-react";
+import {MapPinned, MapPlus, Trash2} from "lucide-react";
 
 
 export function AddAddressSheet({
@@ -62,6 +62,24 @@ export function AddAddressSheet({
         clearAddress();
     }
 
+    const handleMapClick = () => {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ru`
+            );
+            const data = await response.json();
+            let text = [];
+            if(data.address.city) text.push(data.address.city);
+            if(data.address.road) text.push(data.address.road);
+            if(data.address.house_number) text.push(data.address.house_number);
+
+            setAddress(prevState => ({
+                ...prevState,
+                fullAddress:text.join(', ')
+            }))
+        });
+    }
+
     return (
         <Sheet onOpenChange={handleOpenChange} open={_opened}>
             <SheetTrigger asChild onClick={() => setOpened(true)}>
@@ -75,11 +93,14 @@ export function AddAddressSheet({
                 <div className="flex flex-col gap-4 mt-4 mb-4">
                     <InputWithLabel label="Название" value={name}
                                     onChange={e => setAddress(prevState => ({...prevState, name: e.target.value}))}/>
-                    <InputWithLabel label="Адрес" value={fullAddress}
-                                    onChange={e => setAddress(prevState => ({
-                                        ...prevState,
-                                        fullAddress: e.target.value
-                                    }))}/>
+                    <div className="flex gap-2 items-end">
+                        <InputWithLabel label="Адрес" value={fullAddress}
+                                        onChange={e => setAddress(prevState => ({
+                                            ...prevState,
+                                            fullAddress: e.target.value
+                                        }))}/>
+                        <Button size="sm" className="p-0 border-none h-9" variant="default" onClick={handleMapClick}><MapPlus /></Button>
+                    </div>
                     <InputWithLabel label="Комментарий" value={comments}
                                     onChange={e => setAddress(prevState => ({
                                         ...prevState,
