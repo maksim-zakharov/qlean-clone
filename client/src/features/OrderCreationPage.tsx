@@ -19,7 +19,7 @@ import {RoutePaths} from "../routes.ts";
 import {Checkbox} from "../components/ui/checkbox.tsx";
 
 export const OrderCreationPage = () => {
-    const [patchOrder] = usePatchOrderMutation();
+    const [patchOrder, {isLoading: patchOrderLoading}] = usePatchOrderMutation();
     const services = useSelector(state => state.createOrder.services);
     const orderId = useSelector(state => state.createOrder.id)
     const baseService = useSelector(state => state.createOrder.baseService)
@@ -120,28 +120,26 @@ export const OrderCreationPage = () => {
                         ))}
                     </TabsList>
                 </Tabs>
-                <div>
-                    <List itemClassName="flex-col gap-2" className="rounded-none">
-                        {availableOptions.map((option) => <>
-                            <div className="flex items-center gap-3 w-full justify-between">
-                                <div className="flex items-center gap-3 flex-1 min-w-0">
-                                    <Info
-                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
-                                    <span
-                                        className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
-                                    {option.isPopular ? (
-                                        <Badge className="flex gap-1 items-center"><Star
-                                            className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
-                                    ) : <div/>}
-                                </div>
+                <List itemClassName="flex-col gap-2" className="mb-4 rounded-none">
+                    {availableOptions.map((option) => <>
+                        <div className="flex items-center gap-3 w-full justify-between">
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                                <Info
+                                    className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
                                 <span
-                                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
-                                <Checkbox checked={selectedOptionsIdSet.has(option.id)}
-                                          onCheckedChange={() => handleOptionToggle(option)}/>
+                                    className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
+                                {option.isPopular ? (
+                                    <Badge className="flex gap-1 items-center"><Star
+                                        className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
+                                ) : <div/>}
                             </div>
-                        </>)}
-                    </List>
-                </div>
+                            <span
+                                className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
+                            <Checkbox checked={selectedOptionsIdSet.has(option.id)}
+                                      onCheckedChange={() => handleOptionToggle(option)}/>
+                        </div>
+                    </>)}
+                </List>
                 <EstimatedTime totalDuration={totalDuration}/>
             </div>
 
@@ -149,6 +147,7 @@ export const OrderCreationPage = () => {
                 <Button
                     wide
                     onClick={handleNext}
+                    loading={patchOrderLoading}
                     size="lg"
                 ><span className="flex-1 text-left">{isDraft ? 'Далее' : 'Сохранить'}</span>
                     <span>{moneyFormat(totalPrice)}</span>

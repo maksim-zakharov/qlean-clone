@@ -26,7 +26,7 @@ import {EmptyState} from "../components/EmptyState.tsx";
 
 export const OrderDetailsPage = () => {
     const [patchOrder] = usePatchOrderMutation();
-    const [cancelOrder] = useCancelOrderMutation();
+    const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const {vibro} = useTelegram();
@@ -114,6 +114,7 @@ export const OrderDetailsPage = () => {
         <AlertDialogWrapper open={show} title={title} description={description}
                             onOkText="Перенести"
                             onCloseText="Отменить"
+                            cancelLoading={cancelLoading}
                             onCancelClick={handleCancelClick}
                             onOkClick={handleOkClick}/>
         <Header>
@@ -204,7 +205,7 @@ export const OrderDetailsPage = () => {
                 type="single"
 
                 defaultValue="services"
-                className="mb-2 rounded-xl"
+                className="rounded-xl"
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services">

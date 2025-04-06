@@ -13,9 +13,9 @@ export function AddAddressSheet({
                                     children
                                 }: React.PropsWithChildren<any>) {
     const {vibro} = useTelegram();
-    const [addAddress] = useAddAddressMutation();
-    const [editAddress] = useEditAddressMutation();
-    const [deleteAddress] = useDeleteAddressMutation();
+    const [addAddress, {isLoading: addLoading}] = useAddAddressMutation();
+    const [editAddress, {isLoading: editLoading}] = useEditAddressMutation();
+    const [deleteAddress, {isLoading: deleteLoading}] = useDeleteAddressMutation();
 
     const [_opened, setOpened] = React.useState(false);
     const [{id, name, fullAddress, comments}, setAddress] = useState({
@@ -67,7 +67,7 @@ export function AddAddressSheet({
             <SheetTrigger asChild onClick={() => setOpened(true)}>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" extra={address ? <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-[28px]" onClick={handleOnDelete}><Trash2 /></Button> : null}>
+            <SheetContent side="bottom" extra={address ? <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-[28px]" loading={deleteLoading} onClick={handleOnDelete}><Trash2 /></Button> : null}>
                 <SheetHeader>
                     <SheetTitle
                         className="text-xl font-bold text-tg-theme-text-color text-left">{address ? 'Редактирование' : 'Добавление'} адреса</SheetTitle>
@@ -90,6 +90,7 @@ export function AddAddressSheet({
                     <Button
                         wide
                         size="lg"
+                        loading={!address ? addLoading : editLoading}
                         onClick={handleOnSubmit}
                     >
                         Сохранить

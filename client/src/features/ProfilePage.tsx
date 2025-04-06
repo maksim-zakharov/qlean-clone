@@ -37,7 +37,6 @@ export const ProfilePage = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const [login] = useLoginMutation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const [address, setAddress] = useState<Address | undefined>()
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)

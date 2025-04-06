@@ -24,7 +24,7 @@ import {RoutePaths} from "../routes.ts";
 
 
 export const OrderCheckoutPage = () => {
-    const [addOrder] = useAddOrderMutation();
+    const [addOrder, {isLoading}] = useAddOrderMutation();
 
     const selectedTimestamp = useSelector(state => state.createOrder.date)
     const baseService = useSelector(state => state.createOrder.baseService)
@@ -103,7 +103,7 @@ export const OrderCheckoutPage = () => {
                 </div>
             </Header>
 
-            <div className="flex-1 overflow-y-auto overscroll-none p-4 mt-[56px]">
+            <div className="flex-1 flex flex-col gap-4 overflow-y-auto overscroll-none p-4 mt-[56px]">
                 <List itemClassName="py-2">
 
                     {/* Date and Time */}
@@ -161,7 +161,7 @@ export const OrderCheckoutPage = () => {
                     type="single"
                     collapsible
                     defaultValue="services"
-                    className="mt-4 overflow-hidden rounded-xl"
+                    className="overflow-hidden rounded-xl"
                     onValueChange={() => vibro()}
                 >
                     <AccordionItem value="services">
@@ -206,7 +206,7 @@ export const OrderCheckoutPage = () => {
                 {/*</Button>*/}
 
                 {/* Terms Checkbox */}
-                <div className="flex items-center gap-2 py-2">
+                <div className="flex items-center gap-2">
                     <Checkbox id="terms"/>
                     <label htmlFor="terms" className="text-sm text-tg-theme-text-color">
                         Принимаю <span className="text-tg-theme-link-color">условия оказания услуги</span>
@@ -219,6 +219,7 @@ export const OrderCheckoutPage = () => {
                 <Button
                     size="lg"
                     wide
+                    loading={isLoading}
                     onClick={handleOnSubmit}
                 >
                     Оформить заказ
