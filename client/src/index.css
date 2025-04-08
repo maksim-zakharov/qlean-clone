@@ -78,21 +78,6 @@
     --tg-accent-violet: #af53d8;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-
-    a:hover {
-        color: #747bff;
-    }
-
-    button {
-        background-color: #f9f9f9;
-    }
-}
-
 .dark {
     /* Telegram WebApp theme variables */
     --tg-color-scheme: dark;
