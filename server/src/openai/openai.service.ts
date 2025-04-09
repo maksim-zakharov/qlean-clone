@@ -1,6 +1,7 @@
 import {Injectable, Logger} from '@nestjs/common';
 import OpenAI from "openai";
 import {PrismaService} from "../prisma.service";
+import {BaseService, ServiceVariant} from "@prisma/client";
 
 @Injectable()
 export class OpenaiService {
@@ -12,29 +13,41 @@ export class OpenaiService {
     ) {
     }
 
-    async classifyService(text: string): Promise<string | null> {
+
+    async detectBaseService(text: string): Promise<BaseService | null> {
         const services = await this.prisma.baseService.findMany({
-            select: { name: true }
+            include: {executors: true, variants: true}
         });
-        const serviceNames = services.map(s => s.name);
+
+        const prompt = `Определи основную услугу из списка: ${services.map(s => JSON.stringify({id: s.id, name: s.name})).join(', ')}. 
+    Ответ в JSON: {serviceId: number}`;
+
+        const result = await this.chatGptRequest(prompt, text);
+        return services.find(s => s.id === result.serviceId);
+    }
+
+    async detectServiceVariant(text: string, variants: ServiceVariant[]): Promise<ServiceVariant | null> {
+        const prompt = `Определи тип услуги из вариантов: ${variants.map(s => JSON.stringify({id: s.id, name: s.name})).join(', ')}. 
+    Ответ в JSON: {variantId: number}`;
+
+        const result = await this.chatGptRequest(prompt, text);
+        return variants.find(v => v.id === result.variantId);
+    }
+
+    private async chatGptRequest(systemPrompt: string, userText: string): Promise<any> {
         try {
             const completion = await this.openai.chat.completions.create({
-                messages: [{
-                    role: "system",
-                    content: `Определи услугу из списка: ${serviceNames.join(', ')}. Ответ только в JSON: {service: "название"}`
-                }, {
-                    role: "user",
-                    content: text
-                }],
-                model: "gpt-3.5-turbo-0125",
-                response_format: { type: "json_object" },
-                max_tokens: 50
+                messages: [
+                    { role: "system", content: systemPrompt },
+                    { role: "user", content: userText }
+                ],
+                model: "gpt-3.5-turbo",
+                response_format: { type: "json_object" }
             });
 
-            const result = JSON.parse(completion.choices[0].message.content);
-            return serviceNames.includes(result.service) ? result.service : null;
+            return JSON.parse(completion.choices[0].message.content);
         } catch (error) {
-            this.logger.error(`OpenAI API error: ${error.message}`);
+            this.logger.error(`ChatGPT error: ${error.message}`);
             return null;
         }
     }

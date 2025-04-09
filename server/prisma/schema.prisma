@@ -49,6 +49,7 @@ model BaseService {
 model ServiceVariant {
   id            Int          @id @default(autoincrement())
   name          String
+  nameAccusative String @default("")      // "генеральную уборку"
   icon  String?
   basePrice     Int
   duration      Int

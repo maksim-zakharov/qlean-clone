@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom"
+import {Route, Routes, useNavigate, useSearchParams} from "react-router-dom"
 import {Layout} from "./components/layout/Layout"
 import MainPage from "./features/MainPage.tsx"
 import {OrderCreationPage} from "./features/OrderCreationPage.tsx"
@@ -8,10 +8,33 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {startOrderFlow} from "./slices/createOrderSlice.ts";
 
 function App() {
-    useGetServicesQuery();
+    const [searchParams] = useSearchParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const startParam = searchParams.get('startapp') || '';
+
+    const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
+
     useGetUserInfoQuery();
+    const {data: services = []} = useGetServicesQuery();
+
+    useEffect(() => {
+        if (serviceId && variantId && services?.length > 0) {
+            // Загрузка данных
+            const baseService = services.find((service) => service.id?.toString() === serviceId);
+            const serviceVariant = baseService?.variants?.find((variant) => variant.id.toString() === variantId);
+            if (!baseService || !serviceVariant)
+                return;
+
+            dispatch(startOrderFlow({baseService, serviceVariant}))
+            navigate(RoutePaths.Order.Create);
+        }
+    }, [serviceId, variantId, services]);
 
     return (
         <Routes>
