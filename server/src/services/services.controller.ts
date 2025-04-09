@@ -1,14 +1,14 @@
-import {Controller, Get, Logger, OnModuleInit, UseInterceptors} from '@nestjs/common';
+import {Controller, Get, Logger, UseInterceptors} from '@nestjs/common';
 import {ServicesService} from "./services.service";
 import {CacheInterceptor, CacheKey, CacheTTL} from "@nestjs/cache-manager";
 import {Context, Markup, Telegraf} from "telegraf";
 import {PrismaService} from "../prisma.service";
 import {OpenaiService} from "../openai/openai.service";
-import * as process from "node:process";
+import {PorterStemmerRu} from 'natural';
 
 @Controller('/api/services')
-@UseInterceptors(CacheInterceptor) // Добавляем интерсептор
-export class ServicesController implements OnModuleInit {
+@UseInterceptors(CacheInterceptor)
+export class ServicesController {
     private logger = new Logger(ServicesController.name);
     private keywordCache: Map<string, number> = new Map();
 
@@ -18,62 +18,81 @@ export class ServicesController implements OnModuleInit {
         private readonly servicesService: ServicesService,
         private readonly openaiService: OpenaiService
     ) {
+        // Обработчик кнопки "Не нужно, спасибо"
+        bot.action('delete_message', async (ctx) => {
+            try {
+                await ctx.deleteMessage();
+            } catch (error) {
+                this.logger.error('Delete error:', error);
+            }
+        });
         this.bot.on('text', this.handleMessage.bind(this));
     }
 
-    async onModuleInit() {
-        // await this.refreshCache();
-        // setInterval(() => this.refreshCache(), 300_000);
-    }
-
-    private async refreshCache() {
-        const keywords = await this.prisma.keyword.findMany({
-            select: {value: true, serviceId: true}
-        });
-
-        this.keywordCache.clear();
-        keywords.forEach(kw => {
-            this.keywordCache.set(kw.value.toLowerCase(), kw.serviceId);
-        });
+    private normalizeText(text: string): string {
+        return PorterStemmerRu.tokenizeAndStem(text)
+            .join(' ')
+            .replace(/[^а-яё\s]/gi, '');
     }
 
     async handleMessage(ctx: Context) {
         try {
-            const message = (ctx.message as any)?.text;
-            if (!message) return;
-            console.log(message)
+            const text = (ctx.message as any)?.text;
+            if (!text) return;
 
             // Получаем ID сообщения для ответа
-            const replyToId = message.message_id;
+            const replyToId = ctx.message.message_id;
 
             // Проверка ключевых слов
             const keywords: any[] = await this.prisma.keyword.findMany();
             const foundKeyword = keywords.find(kw =>
-                message.toLowerCase().includes(kw.value.toLowerCase())
+                this.normalizeText(text.toLowerCase()).includes(kw.value.toLowerCase())
             );
 
-            let service = foundKeyword?.service;
-            console.log(service?.name)
+            let service;
+            // Если найдено ключевое слово - идем в базу за сервисом
+            if (foundKeyword?.serviceId) {
+                service = await this.prisma.baseService.findUnique({
+                    where: {id: foundKeyword.serviceId},
+                    include: {
+                        variants: true,
+                        executors: true
+                    }
+                })
+                this.logger.log(`Найдена услуга ${service?.name}`)
+            }
 
             if (!service) {
-                service = await this.openaiService.detectBaseService(message);
+                this.logger.log('Не нашли услугу по ключевому слову, идем в GPT')
+                service = await this.openaiService.detectBaseService(text);
             }
-            console.log(service?.name)
 
             // 2. Определяем ServiceVariant через ChatGPT
-            const variant = await this.openaiService.detectServiceVariant(message, service.variants);
-            // if (!variant) {
-            //     await ctx.reply("Не удалось определить конкретный тип услуги, уточните пожалуйста");
-            //     return;
-            // }
+            const {
+                variant,
+                displayName,
+                keyPhrases
+            } = await this.openaiService.detectServiceVariant(text, service.variants);
+
+            this.logger.log(`Вариант: ${variant.name}, отображение: ${displayName}, найдено ${keyPhrases.length} фраз.`)
+            if (keyPhrases.length) {
+                await this.prisma.keyword.createMany({
+                    data: keyPhrases.map(value => ({
+                        value,
+                        serviceId: service.id,
+                        // variantId: detection.variantId
+                    })),
+                    skipDuplicates: true
+                });
+            }
 
             if (!variant) {
-                this.logger.warn(`No variants found for service ${service.id}`);
+                this.logger.warn(`Нет вариантов для сервиса ${service.name}`);
                 return;
             }
 
             await ctx.replyWithMarkdown(
-                `Привет! Мы нашли ${service.executors.length} исполнителей для ${variant.nameAccusative}.`,
+                `Привет! Мы нашли ${service.executors.length} исполнителей для ${displayName}.`,
                 {
                     // Ответ на конкретное сообщение
                     reply_parameters: {
@@ -81,13 +100,19 @@ export class ServicesController implements OnModuleInit {
                     },
                     reply_markup: {
                         inline_keyboard: [
-                            [Markup.button.url('Заказать', `https://t.me/qlean_clone_bot?startapp=service_${service.id}_variant_${variant.id}`)]
+                            [Markup.button.url('🔍 Выбрать исполнителя', `https://t.me/qlean_clone_bot?startapp=service_${service.id}_variant_${variant.id}`)],
+                            [
+                                Markup.button.callback(
+                                    '❌ Не нужно, спасибо',
+                                    'delete_message'
+                                )
+                            ]
                         ]
                     }
                 }
             );
         } catch (error) {
-            console.error('Message handling error:', error);
+            this.logger.error('Message handling error:', error);
         }
     }
 
