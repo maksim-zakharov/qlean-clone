@@ -17,7 +17,11 @@ import {UserService} from './user/user.service';
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {JwtStrategy} from "./auth/jwt.strategy";
-import { Context, session, Telegraf } from 'telegraf';
+import {Context, session, Telegraf} from 'telegraf';
+import { OpenaiService } from './openai/openai.service';
+import { OpenaiProxyController } from './openai-proxy/openai-proxy.controller';
+import OpenAI from "openai";
+import * as process from "node:process";
 
 @Module({
     imports: [HealthModule,
@@ -36,7 +40,7 @@ import { Context, session, Telegraf } from 'telegraf';
             store: 'memory'
         })
     ],
-    controllers: [ServicesController, OrdersController, AddressesController, AppController, AuthController, SpaController],
+    controllers: [ServicesController, OrdersController, AddressesController, AppController, AuthController, SpaController, OpenaiProxyController],
     providers: [AppService, PrismaService, AddressesService, OrdersService, ServicesService, AuthService, UserService, JwtStrategy,
         {
             provide: Telegraf,
@@ -69,14 +73,14 @@ import { Context, session, Telegraf } from 'telegraf';
 
                 return bot;
             },
-        }
-        ],
+        },
+        {
+            provide: OpenAI,
+            useFactory: () => new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+        },
+        OpenaiService,
+    ],
     exports: [PrismaService]
 })
 export class AppModule {
-    // configure(consumer: MiddlewareConsumer) {
-    //     consumer
-    //         .apply(TelegramAuthMiddleware)
-    //         .forRoutes('api/auth/login');
-    // }
 }

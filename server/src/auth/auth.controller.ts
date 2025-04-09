@@ -7,7 +7,6 @@ import {Telegraf} from "telegraf";
 
 @Controller('/api/auth')
 export class AuthController {
-
     constructor(private readonly bot: Telegraf, private readonly authService: AuthService, private readonly userService: UserService) {
         bot.on('contact', async (ctx) => {
             const contact = ctx.message.contact;

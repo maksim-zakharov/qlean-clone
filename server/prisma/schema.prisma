@@ -42,6 +42,8 @@ model BaseService {
   variants    ServiceVariant[]
   options     ServiceOption[]
   orders      Order[]
+  keywords  Keyword[]
+  executors   ServiceExecutors[]  // Добавляем обратное отношение
 }
 
 model ServiceVariant {
@@ -75,10 +77,29 @@ enum UserRole {
 
 model User {
   id  String          @id
+  createdAt  DateTime   @default(now())
   firstName String
   role  UserRole  @default(client)
   lastName  String?
   photoUrl  String?
   username  String?
   phone  String?
+  services   ServiceExecutors[]  // Обратное отношение
+}
+
+model Keyword {
+  id        Int      @id @default(autoincrement())
+  value     String   @unique
+  service   BaseService  @relation(fields: [serviceId], references: [id])
+  serviceId Int
+}
+
+model ServiceExecutors {
+  service    BaseService @relation(fields: [serviceId], references: [id])
+  serviceId  Int
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String
+
+  @@id([serviceId, userId])  // Составной первичный ключ
+  @@index([userId])          // Дополнительный индекс
 }
