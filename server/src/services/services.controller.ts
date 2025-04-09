@@ -40,6 +40,7 @@ export class ServicesController implements OnModuleInit {
         try {
             const message = (ctx.message as any)?.text;
             if (!message) return;
+            console.log(message)
 
             // Проверка ключевых слов
             const keywords: any[] = await this.prisma.keyword.findMany();
@@ -48,10 +49,12 @@ export class ServicesController implements OnModuleInit {
             );
 
             let serviceName = foundKeyword?.service.name;
+            console.log(serviceName)
 
             if (!serviceName) {
                 serviceName = await this.openaiService.classifyService(message);
             }
+            console.log(serviceName)
 
             // Если ключевое слово не найдено - используем ChatGPT
             if (serviceName) {

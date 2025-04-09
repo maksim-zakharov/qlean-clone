@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="openai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/openai-proxy/openai-proxy.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/openai-proxy/openai-proxy.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,15 +163,7 @@
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
-      <workItem from="1744198594823" duration="4093000" />
-    </task>
-    <task id="LOCAL-00219" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743504489405</created>
-      <option name="number" value="00219" />
-      <option name="presentableId" value="LOCAL-00219" />
-      <option name="project" value="LOCAL" />
-      <updated>1743504489405</updated>
+      <workItem from="1744198594823" duration="5327000" />
     </task>
     <task id="LOCAL-00220" summary="prisma address">
       <option name="closed" value="true" />
@@ -555,7 +549,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744202828996</updated>
     </task>
-    <option name="localTasksCounter" value="268" />
+    <task id="LOCAL-00268" summary="openai">
+      <option name="closed" value="true" />
+      <created>1744203420750</created>
+      <option name="number" value="00268" />
+      <option name="presentableId" value="LOCAL-00268" />
+      <option name="project" value="LOCAL" />
+      <updated>1744203420750</updated>
+    </task>
+    <option name="localTasksCounter" value="269" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
