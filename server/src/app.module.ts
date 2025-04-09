@@ -18,13 +18,15 @@ import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {JwtStrategy} from "./auth/jwt.strategy";
 import {Context, session, Telegraf} from 'telegraf';
-import { OpenaiService } from './openai/openai.service';
-import { OpenaiProxyController } from './openai-proxy/openai-proxy.controller';
+import {OpenaiService} from './openai/openai.service';
+import {OpenaiProxyController} from './openai-proxy/openai-proxy.controller';
 import OpenAI from "openai";
 import * as process from "node:process";
+import {HttpModule} from "@nestjs/axios";
 
 @Module({
     imports: [HealthModule,
+        HttpModule,
         PassportModule,
         JwtModule.register({
             secret: process.env.JWT_SECRET,
@@ -76,7 +78,7 @@ import * as process from "node:process";
         },
         {
             provide: OpenAI,
-            useFactory: () => new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+            useFactory: () => new OpenAI({apiKey: process.env.OPENAI_API_KEY})
         },
         OpenaiService,
     ],
