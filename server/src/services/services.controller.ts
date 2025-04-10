@@ -1,4 +1,4 @@
-import {Controller, Get, Logger, UseInterceptors} from '@nestjs/common';
+import {Controller, Get, Logger, OnModuleInit, UseInterceptors} from '@nestjs/common';
 import {ServicesService} from "./services.service";
 import {CacheInterceptor, CacheKey, CacheTTL} from "@nestjs/cache-manager";
 import {Context, Markup, Telegraf} from "telegraf";
@@ -8,7 +8,7 @@ import {PorterStemmerRu} from 'natural';
 
 @Controller('/api/services')
 @UseInterceptors(CacheInterceptor)
-export class ServicesController {
+export class ServicesController implements OnModuleInit {
     private logger = new Logger(ServicesController.name);
     private keywordCache: Map<string, number> = new Map();
 
@@ -29,6 +29,15 @@ export class ServicesController {
         this.bot.on('text', this.handleMessage.bind(this));
     }
 
+    async onModuleInit() {
+        await this.refreshKeywordCache();
+    }
+
+    async refreshKeywordCache(){
+        const keywords = await this.prisma.keyword.findMany();
+        keywords.forEach(keyword => this.keywordCache.set(keyword.value, keyword.serviceId));
+    }
+
     private normalizeText(text: string): string {
         return PorterStemmerRu.tokenizeAndStem(text)
             .join(' ')
@@ -43,52 +52,65 @@ export class ServicesController {
             // Получаем ID сообщения для ответа
             const replyToId = ctx.message.message_id;
 
+            const normalizedText = this.normalizeText(text.toLowerCase())
+
             // Проверка ключевых слов
-            const keywords: any[] = await this.prisma.keyword.findMany();
-            const foundKeyword = keywords.find(kw =>
-                this.normalizeText(text.toLowerCase()).includes(kw.value.toLowerCase())
+            const foundKeyword = Array.from(this.keywordCache.keys()).find(kw =>
+                normalizedText.includes(kw.toLowerCase())
             );
 
-            let service;
             // Если найдено ключевое слово - идем в базу за сервисом
-            if (foundKeyword?.serviceId) {
-                service = await this.prisma.baseService.findUnique({
-                    where: {id: foundKeyword.serviceId},
-                    include: {
-                        variants: true,
-                        executors: true
-                    }
-                })
-                this.logger.log(`Найдена услуга ${service?.name}`)
+            if (!foundKeyword) {
+                this.logger.log(`Ключевых слов не найдено`)
+                return;
             }
+
+            const service = await this.prisma.baseService.findUnique({
+                where: {id: this.keywordCache.get(foundKeyword)},
+                include: {
+                    variants: true,
+                    executors: true
+                }
+            })
 
             if (!service) {
                 this.logger.log('Не нашли услугу по ключевому слову, идем в GPT')
-                service = await this.openaiService.detectBaseService(text);
+                return;
             }
+
+            this.logger.log(`Найдена услуга ${service?.name}`)
+
+            // if (!service) {
+            //     this.logger.log('Не нашли услугу по ключевому слову, идем в GPT')
+            //     service = await this.openaiService.detectBaseService(text);
+            // }
 
             // 2. Определяем ServiceVariant через ChatGPT
             const {
                 variant,
                 displayName,
                 keyPhrases
-            } = await this.openaiService.detectServiceVariant(text, service.variants);
+            } = await this.openaiService.detectServiceWithVariant(text);
 
-            this.logger.log(`Вариант: ${variant.name}, отображение: ${displayName}, найдено ${keyPhrases.length} фраз.`)
-            if (keyPhrases.length) {
+            const newKeyPhrases = keyPhrases.filter(kp => !this.keywordCache.has(kp));
+
+            this.logger.log(`Вариант: ${variant?.name || '-'}, отображение: ${displayName}, найдено новых фраз: ${keyPhrases.length}`)
+            if (newKeyPhrases.length) {
                 await this.prisma.keyword.createMany({
-                    data: keyPhrases.map(value => ({
+                    data: newKeyPhrases.map(value => ({
                         value,
                         serviceId: service.id,
-                        // variantId: detection.variantId
+                        variantId: variant?.id
                     })),
                     skipDuplicates: true
                 });
+
+                newKeyPhrases.forEach(nkp => this.keywordCache.set(nkp, service.id));
             }
 
-            if (!variant) {
-                this.logger.warn(`Нет вариантов для сервиса ${service.name}`);
-                return;
+            let url = `https://t.me/qlean_clone_bot?startapp=service_${service.id}`;
+            if(variant){
+                url += `_variant_${variant.id}`;
             }
 
             await ctx.replyWithMarkdown(
@@ -100,7 +122,7 @@ export class ServicesController {
                     },
                     reply_markup: {
                         inline_keyboard: [
-                            [Markup.button.url('🔍 Выбрать исполнителя', `https://t.me/qlean_clone_bot?startapp=service_${service.id}_variant_${variant.id}`)],
+                            [Markup.button.url('🔍 Выбрать исполнителя', url)],
                             [
                                 Markup.button.callback(
                                     '❌ Не нужно, спасибо',

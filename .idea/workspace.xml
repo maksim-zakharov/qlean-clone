@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="openai">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="работает">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/openai/openai.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/openai/openai.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
     </list>
@@ -52,25 +53,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/front-trading-desk&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.build:ci.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev-host.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start:dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.main.ts.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/Projects/front-trading-desk",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.build:ci.executor": "Run",
+    "npm.dev-host.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.start:dev.executor": "Run",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\qlean-clone\client\src\components" />
@@ -85,7 +87,10 @@
       <recent name="D:\Projects\qlean-clone\client" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start:dev">
+  <component name="RunManager" selected="Node.js.main.ts">
+    <configuration name="main.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
@@ -136,6 +141,14 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Node.js.main.ts" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.build:ci" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.dev-host" />
+      <item itemvalue="npm.start:dev" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.start:dev" />
@@ -165,15 +178,7 @@
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
-      <workItem from="1744198594823" duration="19364000" />
-    </task>
-    <task id="LOCAL-00222" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743506845240</created>
-      <option name="number" value="00222" />
-      <option name="presentableId" value="LOCAL-00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1743506845240</updated>
+      <workItem from="1744198594823" duration="28059000" />
     </task>
     <task id="LOCAL-00223" summary="prisma address">
       <option name="closed" value="true" />
@@ -559,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744213621598</updated>
     </task>
-    <option name="localTasksCounter" value="271" />
+    <task id="LOCAL-00271" summary="работает">
+      <option name="closed" value="true" />
+      <created>1744226531536</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1744226531536</updated>
+    </task>
+    <option name="localTasksCounter" value="272" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,6 +607,7 @@
     <MESSAGE value="удаление услуг" />
     <MESSAGE value="Отмена заказа" />
     <MESSAGE value="openai" />
-    <option name="LAST_COMMIT_MESSAGE" value="openai" />
+    <MESSAGE value="работает" />
+    <option name="LAST_COMMIT_MESSAGE" value="работает" />
   </component>
 </project>

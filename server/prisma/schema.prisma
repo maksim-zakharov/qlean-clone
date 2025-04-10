@@ -56,6 +56,7 @@ model ServiceVariant {
   baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
   baseServiceId Int
   orders        Order[]
+  keywords  Keyword[]
 }
 
 model ServiceOption {
@@ -92,7 +93,9 @@ model Keyword {
   id        Int      @id @default(autoincrement())
   value     String   @unique
   service   BaseService  @relation(fields: [serviceId], references: [id])
-  serviceId Int
+  serviceId      Int
+  variant   ServiceVariant?   @relation(fields: [variantId], references: [id])
+  variantId      Int?
 }
 
 model ServiceExecutors {
