@@ -95,7 +95,7 @@ export class OpenaiService {
             ?.variants?.find(v => v.id === result.variantId);
 
         // Фильтрация и нормализация фраз
-        const processedPhrases = result.keyPhrases
+        const processedPhrases = (result?.keyPhrases || [])
             .map(phrase => this.normalizeText(phrase))
             .filter(phrase =>
                 phrase.length >= 3
