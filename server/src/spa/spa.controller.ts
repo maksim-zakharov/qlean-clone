@@ -1,67 +1,56 @@
-import {Controller, Get, Param, Res} from '@nestjs/common';
+import {Controller, Get, Param, Req, Res} from '@nestjs/common';
 import axios from "axios";
+import { Request } from 'express';
 
 @Controller('')
 export class SpaController {
 
     @Get('/')
-    async getStatic(@Res() res) {
-        const response = await axios.get(
-            'https://maksim-zakharov.github.io/qlean-clone/',
-            {
-                responseType: 'stream',
-            },
-        );
-
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
+    async getStatic(@Req() req: Request, @Res() res) {
+        return this.proxyRequest('', req, res);
     }
 
     // Нужно для локального фронта
     @Get('/qlean-clone/public/:path')
-    async getPublic(@Param('path') path: string, @Res() res) {
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/public/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
+    async getPublic(@Param('path') path: string, @Req() req: Request, @Res() res) {
+        return this.proxyRequest(`public/${path}`, req, res);
     }
 
     // Нужно для локального фронта
     @Get('/qlean-clone/assets/:path')
-    async getCSS(@Param('path') path: string, @Res() res) {
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/assets/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
+    async getCSS(@Param('path') path: string, @Req() req: Request, @Res() res) {
+        return this.proxyRequest(`assets/${path}`, req, res);
     }
 
     // Обязательно должно быть в конце
     @Get('*')
-    async getSPARouting(@Param('0') path: string, @Res() res) {
-        // Фикс для SPA-роутинга
-        if (!path || !path.includes('.')) {
+    async getSPARouting(@Req() req: Request, @Res() res) {
+        let path = req.params[0];
+        if (!path.includes('.') && !path.startsWith('api/')) {
             path = 'index.html';
         }
+        return this.proxyRequest(path, req, res);
+    }
 
-        const response = await axios.get(
-            `https://maksim-zakharov.github.io/qlean-clone/${path}`,
-            {
-                responseType: 'stream',
-            },
-        );
-        res.set('content-type', response.headers['content-type']);
-        res.set('cache-control', response.headers['cache-control']);
-        response.data.pipe(res);
+    private buildProxyUrl(path: string, req: Request) {
+        const baseUrl = 'https://maksim-zakharov.github.io/qlean-clone/';
+        const query = new URLSearchParams(req.query as Record<string, string>).toString();
+        return `${baseUrl}${path}${query ? `?${query}` : ''}`;
+    }
+
+    private async proxyRequest(path: string, req: Request, res) {
+        try {
+            const url = this.buildProxyUrl(path, req);
+            const response = await axios.get(url, { responseType: 'stream' });
+
+            res.set({
+                'content-type': response.headers['content-type'],
+                'cache-control': response.headers['cache-control']
+            });
+
+            response.data.pipe(res);
+        } catch (error) {
+            res.status(500).send('Proxy error');
+        }
     }
 }
