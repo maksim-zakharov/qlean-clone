@@ -89,10 +89,10 @@ export class OpenaiService {
         const result = await this.chatGptRequest(prompt, text);
 
         // Валидация результата
-        const service = services.find(s => s.id === result.serviceId);
+        const service = services.find(s => s.id === result?.serviceId);
         const variant = services
-            .find(s => s.id === result.serviceId)
-            ?.variants.find(v => v.id === result.variantId);
+            .find(s => s.id === result?.serviceId)
+            ?.variants?.find(v => v.id === result.variantId);
 
         // Фильтрация и нормализация фраз
         const processedPhrases = result.keyPhrases
