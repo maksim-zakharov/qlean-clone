@@ -24,11 +24,11 @@ function App() {
     const {data: services = []} = useGetServicesQuery();
 
     useEffect(() => {
-        if (serviceId && variantId && services?.length > 0) {
+        if (serviceId && services?.length > 0) {
             // Загрузка данных
             const baseService = services.find((service) => service.id?.toString() === serviceId);
             const serviceVariant = baseService?.variants?.find((variant) => variant.id.toString() === variantId);
-            if (!baseService || !serviceVariant)
+            if (!baseService)
                 return;
 
             dispatch(startOrderFlow({baseService, serviceVariant}))
