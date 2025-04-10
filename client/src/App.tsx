@@ -16,7 +16,7 @@ function App() {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const startParam = searchParams.get('startapp') || '';
+    const startParam = searchParams.get('tgWebAppStartParam') || '';
 
     const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 
