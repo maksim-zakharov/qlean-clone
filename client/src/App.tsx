@@ -16,7 +16,7 @@ function App() {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const startParam = searchParams.get('tgWebAppStartParam') || '';
+    const startParam = Telegram.WebApp.initDataUnsafe.start_param || searchParams.get('tgWebAppStartParam') || searchParams.get('startapp') || '';
 
     const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 

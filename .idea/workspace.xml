@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="работает">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="tgWebAppStartParam">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/openai/openai.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/openai/openai.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +59,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.build.executor": "Run",
+    "npm.build:ci (1).executor": "Run",
     "npm.build:ci.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
@@ -87,15 +83,15 @@
       <recent name="D:\Projects\qlean-clone\client" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.main.ts">
+  <component name="RunManager" selected="npm.start:dev">
     <configuration name="main.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="build:ci (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
       <scripts>
-        <script value="build" />
+        <script value="build:ci" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -143,7 +139,7 @@
     </configuration>
     <list>
       <item itemvalue="Node.js.main.ts" />
-      <item itemvalue="npm.build" />
+      <item itemvalue="npm.build:ci (1)" />
       <item itemvalue="npm.build:ci" />
       <item itemvalue="npm.dev" />
       <item itemvalue="npm.dev-host" />
@@ -152,10 +148,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start:dev" />
+        <item itemvalue="npm.build:ci (1)" />
         <item itemvalue="npm.dev-host" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:ci" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -178,23 +174,7 @@
       <workItem from="1742912434585" duration="17170000" />
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
-      <workItem from="1744198594823" duration="28059000" />
-    </task>
-    <task id="LOCAL-00223" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743506986933</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1743506986933</updated>
-    </task>
-    <task id="LOCAL-00224" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743508268732</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1743508268732</updated>
+      <workItem from="1744198594823" duration="30988000" />
     </task>
     <task id="LOCAL-00225" summary="prisma address">
       <option name="closed" value="true" />
@@ -572,7 +552,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744226531536</updated>
     </task>
-    <option name="localTasksCounter" value="272" />
+    <task id="LOCAL-00272" summary="работает">
+      <option name="closed" value="true" />
+      <created>1744306491831</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1744306491831</updated>
+    </task>
+    <task id="LOCAL-00273" summary="tgWebAppStartParam">
+      <option name="closed" value="true" />
+      <created>1744309006651</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1744309006651</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,6 +604,7 @@
     <MESSAGE value="Отмена заказа" />
     <MESSAGE value="openai" />
     <MESSAGE value="работает" />
-    <option name="LAST_COMMIT_MESSAGE" value="работает" />
+    <MESSAGE value="tgWebAppStartParam" />
+    <option name="LAST_COMMIT_MESSAGE" value="tgWebAppStartParam" />
   </component>
 </project>
