@@ -27,9 +27,10 @@ function App() {
         if (serviceId && services?.length > 0) {
             // Загрузка данных
             const baseService = services.find((service) => service.id?.toString() === serviceId);
-            const serviceVariant = baseService?.variants?.find((variant) => variant.id.toString() === variantId);
             if (!baseService)
                 return;
+
+            const serviceVariant = baseService?.variants?.find((variant) => variant.id.toString() === variantId) || baseService?.variants[0];
 
             dispatch(startOrderFlow({baseService, serviceVariant}))
             navigate(RoutePaths.Order.Create);
