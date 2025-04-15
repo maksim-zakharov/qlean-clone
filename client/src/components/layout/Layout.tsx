@@ -85,9 +85,9 @@ export const Layout = () => {
         </div>;
     }
 
-    return <>
+    return <div className="flex flex-col">
         {/* Main Content */}
-        <div className="h-full w-full">
+        <div className="min-h-screen w-full">
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <Avatar onClick={() => navigate('/profile')}>
@@ -112,10 +112,10 @@ export const Layout = () => {
             <Outlet/>
         </div>
 
-        <div className="height-safe-area-inset-bottom"/>
+        {/*<div className="height-safe-area-inset-bottom"/>*/}
         {/* Bottom Navigation */}
         <div
-            className="height-safe-area-inset-bottom fixed bottom-0 w-full left-0 right-0 separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
+            className="height-safe-area-inset-bottom sticky bottom-0 w-full left-0 right-0 separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
                     key={path}
@@ -134,5 +134,5 @@ export const Layout = () => {
                 </Button>
             ))}
         </div>
-    </>
+    </div>
 } 
