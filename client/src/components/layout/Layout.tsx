@@ -131,7 +131,7 @@ export const Layout = () => {
                     </div>
                 </div>
             </Header>
-            {JSON.stringify(state)}
+            {/*{JSON.stringify(state)}*/}
             <Outlet/>
         </div>
 

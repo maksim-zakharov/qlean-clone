@@ -57,10 +57,9 @@ function SheetContent({
     return (
         <SheetPortal>
             <SheetOverlay/>
-            <ScrollArea>
             <SheetPrimitive.Content
                 data-slot="sheet-content"
-                style={{paddingBottom: `${16+bottomOffset}px`}}
+                // style={{paddingBottom: `${16+bottomOffset}px`}}
                 className={cn(
                     `p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
                     side === "right" &&
@@ -76,14 +75,12 @@ function SheetContent({
                 {...props}
             >
                 {children}
-                {bottomOffset}
                 {extra && <div className="absolute top-4 right-4">{extra}</div>}
                 {/*<SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">*/}
                 {/*  <XIcon className="size-4" />*/}
                 {/*  <span className="sr-only">Close</span>*/}
                 {/*</SheetPrimitive.Close>*/}
             </SheetPrimitive.Content>
-            </ScrollArea>
         </SheetPortal>
     )
 }
