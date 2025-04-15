@@ -52,11 +52,13 @@ function SheetContent({
                       }: React.ComponentProps<typeof SheetPrimitive.Content> & {
     side?: "top" | "right" | "bottom" | "left"
 } & { extra?: ReactNode }) {
+    const {bottomOffset} = useTelegram();
     return (
         <SheetPortal>
             <SheetOverlay/>
             <SheetPrimitive.Content
                 data-slot="sheet-content"
+                style={{marginBottom: `${bottomOffset}px`}}
                 className={cn(
                     `pb-[calc(16px+env(safe-area-inset-bottom))] p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
                     side === "right" &&

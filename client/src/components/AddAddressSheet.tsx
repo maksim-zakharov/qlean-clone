@@ -12,7 +12,7 @@ export function AddAddressSheet({
                                     onChangeAddress,
                                     children
                                 }: React.PropsWithChildren<any>) {
-    const {vibro} = useTelegram();
+    const {vibro, bottomOffset} = useTelegram();
     const [addAddress, {isLoading: addLoading}] = useAddAddressMutation();
     const [editAddress, {isLoading: editLoading}] = useEditAddressMutation();
     const [deleteAddress, {isLoading: deleteLoading}] = useDeleteAddressMutation();
