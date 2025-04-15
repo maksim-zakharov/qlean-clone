@@ -37,22 +37,20 @@ function App() {
         }
     }, [serviceId, variantId, services]);
 
-    return (<>
-            <div className="wrapper">
-                <Routes>
-                    <Route element={<Layout/>}>
-                        <Route path={RoutePaths.Root} element={<MainPage/>}/>
-                        <Route path={RoutePaths.Orders} element={<OrdersPage/>}/>
-                        <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
-                    </Route>
-                    <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>
-                    <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
-                    <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
-                    <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
-                </Routes>
-            </div>
-            <div className="height-safe-area-inset-bottom"/>
-        </>
+    return (
+        <div className="wrapper">
+            <Routes>
+                <Route element={<Layout/>}>
+                    <Route path={RoutePaths.Root} element={<MainPage/>}/>
+                    <Route path={RoutePaths.Orders} element={<OrdersPage/>}/>
+                    <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
+                </Route>
+                <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>
+                <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
+                <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
+                <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
+            </Routes>
+        </div>
     )
 }
 

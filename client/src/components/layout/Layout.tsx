@@ -110,6 +110,7 @@ export const Layout = () => {
                 </div>
             </Header>
             <Outlet/>
+            <div className="pb-safe-area-inset-bottom"/>
         </div>
 
         <div className="fixed bottom-0 w-full left-0 right-0">
