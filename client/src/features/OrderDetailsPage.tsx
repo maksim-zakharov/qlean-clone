@@ -10,7 +10,7 @@ import {moneyFormat} from "../lib/utils.ts";
 import dayjs from "dayjs";
 import {Button} from "../components/ui/button.tsx";
 import {Card} from "../components/ui/card.tsx";
-import {CircleX, Pencil, User} from "lucide-react";
+import {CircleX, User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
 import {BottomActions} from "../components/BottomActions.tsx";
 import {Skeleton} from "../components/ui/skeleton.tsx";
@@ -94,11 +94,11 @@ export const OrderDetailsPage = () => {
         </div>
     }
 
-    if(isError){
-        return  <div
+    if (isError) {
+        return <div
             className="h-screen">
             <EmptyState
-                icon={<CircleX className="h-10 w-10" />}
+                icon={<CircleX className="h-10 w-10"/>}
                 title="Упс, что-то пошло не так..."
                 description="Обновите страницу или повторите попытку позднее."
                 action={
@@ -125,7 +125,7 @@ export const OrderDetailsPage = () => {
             </div>
         </Header>
 
-        <div className="flex flex-col gap-4 bg-inherit p-4 mt-[56px] mb-[calc(env(safe-area-inset-bottom,0px)+128px)]">
+        <div className="flex flex-col gap-4 bg-inherit p-4 mt-[56px]">
             <Card className="p-0 pl-4 gap-0">
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
@@ -171,7 +171,7 @@ export const OrderDetailsPage = () => {
                             addresses={addresses}
                             onAddressSelect={handleSelectAddress}
                         >
-                            <EditButton />
+                            <EditButton/>
                         </AddressSheet>}
                     </div>
                 </div>
@@ -183,7 +183,7 @@ export const OrderDetailsPage = () => {
                                 className="[overflow-wrap:anywhere]">{order.comment || 'Отсутствует'}</Typography.Title>
                         </div>
                         {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
-                            <EditButton />
+                            <EditButton/>
                         </CommentsSheet>}
                     </div>
                 </div>
@@ -232,23 +232,27 @@ export const OrderDetailsPage = () => {
                 </AccordionItem>
             </Accordion>
         </div>
-        {canEdit && <BottomActions className="gap-2 flex-col flex">
-            <Button
-                wide
-                size="lg"
-                onClick={handleAddOptionClick}
-            >
-                Добавить опций
-            </Button>
-            <Button
-                wide
-                size="lg"
-                className="border-none"
-                variant="default"
-                onClick={handleCloseClick}
-            >
-                Отменить
-            </Button>
-        </BottomActions>}
+        {canEdit && <>
+            <div className="mb-[calc(env(safe-area-inset-bottom,0px)+128px)]"/>
+            <BottomActions className="gap-2 flex-col flex">
+                <Button
+                    wide
+                    size="lg"
+                    onClick={handleAddOptionClick}
+                >
+                    Добавить опций
+                </Button>
+                <Button
+                    wide
+                    size="lg"
+                    className="border-none"
+                    variant="default"
+                    onClick={handleCloseClick}
+                >
+                    Отменить
+                </Button>
+            </BottomActions>
+        </>
+        }
     </div>
 }
