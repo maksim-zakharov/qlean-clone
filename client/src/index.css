@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-padding-top: 56px; /* высота вашей шапки */
+}
+
 :root {
     /*overflow: hidden;*/
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
