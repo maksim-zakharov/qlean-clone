@@ -68,7 +68,9 @@ const MainPage = () => {
                                 <CardItem
                                     key={service.id}
                                     title={service.name}
-                                    icon={service.icon && <DynamicIcon name={service.icon} className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
+                                    icon={service.icon && <DynamicIcon name={service.icon}
+                                                                       className="w-10 h-10 text-tg-theme-button-color"
+                                                                       strokeWidth={1.5}/>}
                                     // icon={<Icon className="w-10 h-10 text-tg-theme-button-color" strokeWidth={1.5}/>}
                                     onClick={() => handleCardOnClick(category, service)}
                                 />
@@ -77,6 +79,7 @@ const MainPage = () => {
                     </div>
                 </section>
             ))}
+            <div className="height-safe-area-inset-bottom"/>
         </div>
     )
 }
