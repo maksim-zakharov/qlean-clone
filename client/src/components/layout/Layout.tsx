@@ -110,9 +110,9 @@ export const Layout = () => {
                 </div>
             </Header>
             <Outlet/>
-        </div>
 
-        <div className="menu-container"/>
+            <div className="height-safe-area-inset-bottom"/>
+        </div>
 
         <div className="fixed bottom-0 w-full left-0 right-0">
             <div
