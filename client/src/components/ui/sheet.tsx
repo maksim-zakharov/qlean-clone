@@ -4,6 +4,7 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 
 import {cn} from "@/lib/utils"
 import {useTelegram} from "../../hooks/useTelegram.ts";
+import {ScrollArea} from "./scroll-area.tsx";
 
 function Sheet({...props}: React.ComponentProps<typeof SheetPrimitive.Root>) {
     return <SheetPrimitive.Root data-slot="sheet" {...props} />
@@ -56,6 +57,7 @@ function SheetContent({
     return (
         <SheetPortal>
             <SheetOverlay/>
+            <ScrollArea>
             <SheetPrimitive.Content
                 data-slot="sheet-content"
                 style={{paddingBottom: `${16+bottomOffset}px`}}
@@ -81,6 +83,7 @@ function SheetContent({
                 {/*  <span className="sr-only">Close</span>*/}
                 {/*</SheetPrimitive.Close>*/}
             </SheetPrimitive.Content>
+            </ScrollArea>
         </SheetPortal>
     )
 }
