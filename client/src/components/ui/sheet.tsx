@@ -52,14 +52,13 @@ function SheetContent({
                       }: React.ComponentProps<typeof SheetPrimitive.Content> & {
     side?: "top" | "right" | "bottom" | "left"
 } & { extra?: ReactNode }) {
-    const {bottomOffset} = useTelegram();
     return (
         <SheetPortal>
             <SheetOverlay/>
             <SheetPrimitive.Content
                 data-slot="sheet-content"
                 className={cn(
-                    `pb-[${bottomOffset}px] pb-[calc(16px+env(safe-area-inset-bottom))] p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
+                    `pb-[calc(16px+env(safe-area-inset-bottom))] p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
                     side === "right" &&
                     "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
                     side === "left" &&
@@ -72,7 +71,6 @@ function SheetContent({
                 )}
                 {...props}
             >
-                {bottomOffset}
                 {children}
                 {extra && <div className="absolute top-4 right-4">{extra}</div>}
                 {/*<SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">*/}
