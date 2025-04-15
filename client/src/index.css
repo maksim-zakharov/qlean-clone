@@ -6,6 +6,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    overflow: hidden;
+    touch-action: none;
+}
+
 :root {
     /*overflow: hidden;*/
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -188,8 +193,10 @@
 
 @layer utilities {
     .wrapper {
-        flex: 1 0 var(--content-safe-area, 0px);
-        width: 100%;
+        height: var(--tg-viewport-height);
+        width: 100vw;
+        /*flex: 1 0 var(--content-safe-area, 0px);*/
+        /*width: 100%;*/
     }
 
     .area-padding {
@@ -200,6 +207,8 @@
     }
 
     .layout-container{
+        overflow: auto;
+        height: 100vh;
         align-items: stretch;
         display: flex;
         flex-direction: column;
