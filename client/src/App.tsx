@@ -8,7 +8,7 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
 
@@ -51,7 +51,7 @@ function App() {
                     <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
                 </Routes>
             </div>
-            <div className="area-padding"/>
+            <div className="height-safe-area-inset-bottom"/>
         </>
     )
 }
