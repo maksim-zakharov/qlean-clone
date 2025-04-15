@@ -83,7 +83,7 @@ html {
     --tg-accent-violet: #af53d8;
 
     --tg-safe-area-inset-bottom: 0px;
-    --tg-viewport-height: 633.3333740234375px;
+    --tg-viewport-height: 698px;
     --tabbar-height: 56px;
     --tabbar-current-height: var(--tabbar-height);
     --min-viewport-height: min(100vh, var(--tg-viewport-height));

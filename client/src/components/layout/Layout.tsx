@@ -1,9 +1,9 @@
-import {ClipboardList, ClipboardPlus, Home, LucideIcon, User} from "lucide-react"
+import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
@@ -12,7 +12,6 @@ import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
-import {EmptyState} from "../EmptyState.tsx";
 
 type MenuItem = {
     icon: LucideIcon
@@ -55,10 +54,23 @@ export const Layout = () => {
     const [state, setState] = useState({});
 
     useEffect(() => {
+
+        const vars = [
+            '--tg-viewport-height',
+            '--tg-viewport-stable-height',
+            '--tg-safe-area-inset-top',
+            '--tg-safe-area-inset-bottom',
+            '--tg-safe-area-inset-left',
+            '--tg-safe-area-inset-right',
+            '--tg-content-safe-area-inset-top',
+            '--tg-content-safe-area-inset-bottom',
+            '--tg-content-safe-area-inset-left',
+            '--tg-content-safe-area-inset-right'
+        ]
+
         setState(prevState => ({
             ...prevState,
-            ['--tg-safe-area-inset-bottom']: getComputedStyle(document.documentElement).getPropertyValue('--tg-safe-area-inset-bottom').trim(),
-            ['--tg-viewport-height']: getComputedStyle(document.documentElement).getPropertyValue('--tg-viewport-height').trim(),
+            ...vars.reduce((acc, v) => ({...acc, [v]: getComputedStyle(document.documentElement).getPropertyValue(v).trim()}), {})
         }))
     }, []);
 
