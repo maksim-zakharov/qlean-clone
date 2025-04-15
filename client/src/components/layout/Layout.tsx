@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
@@ -51,6 +51,16 @@ export const Layout = () => {
     const navigate = useNavigate()
     const location = useLocation();
     const dispatch = useDispatch();
+
+    const [state, setState] = useState({});
+
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            ['--tg-safe-area-inset-bottom']: getComputedStyle(document.documentElement).getPropertyValue('--tg-safe-area-inset-bottom').trim(),
+            ['--tg-viewport-height']: getComputedStyle(document.documentElement).getPropertyValue('--tg-viewport-height').trim(),
+        }))
+    }, []);
 
     const handleSelectAddress = (address: any) => {
         dispatch(selectFullAddress(address))
@@ -109,6 +119,7 @@ export const Layout = () => {
                     </div>
                 </div>
             </Header>
+            {JSON.stringify(state)}
             <Outlet/>
         </div>
 

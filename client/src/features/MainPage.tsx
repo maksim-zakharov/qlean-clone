@@ -17,7 +17,7 @@ import {useTelegram} from "../hooks/useTelegram.ts";
 import {CardItem} from "../components/CardItem.tsx";
 import {Typography} from "../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../api.ts";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {startOrderFlow} from "../slices/createOrderSlice.ts";
 import {EmptyState} from "../components/EmptyState.tsx";
 import {Button} from "../components/ui/button.tsx";
@@ -79,7 +79,6 @@ const MainPage = () => {
                     </div>
                 </section>
             ))}
-            <div className="height-safe-area-inset-bottom"/>
         </div>
     )
 }
