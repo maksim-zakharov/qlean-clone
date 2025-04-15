@@ -3,7 +3,16 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import {ChevronDown} from "lucide-react"
 import {cn} from "@/lib/utils"
 
-const Accordion = AccordionPrimitive.Root
+const Accordion  = React.forwardRef<
+    React.ElementRef<typeof AccordionPrimitive.Root>,
+    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
+>(({className, ...props}, ref) => (
+    <AccordionPrimitive.Root
+        ref={ref}
+        className={cn("overflow-hidden rounded-xl", className)}
+        {...props}
+    />
+))
 
 const AccordionItem = React.forwardRef<
     React.ElementRef<typeof AccordionPrimitive.Item>,
@@ -25,7 +34,7 @@ const AccordionTrigger = React.forwardRef<
         <AccordionPrimitive.Trigger
             ref={ref}
             className={cn(
-                "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180",
+                "px-4 py-3 hover:no-underline flex flex-1 items-center justify-between text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180",
                 className
             )}
             disabled={disabled}

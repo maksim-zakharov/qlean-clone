@@ -161,12 +161,10 @@ export const OrderCheckoutPage = () => {
                     type="single"
                     collapsible
                     defaultValue="services"
-                    className="overflow-hidden rounded-xl"
                     onValueChange={() => vibro()}
                 >
                     <AccordionItem value="services">
-                        <AccordionTrigger disabled={!options.length}
-                                          className="px-4 py-3 hover:no-underline">
+                        <AccordionTrigger disabled={!options.length}>
                             <div className="flex justify-between w-full">
                                 <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
                                 <div className="flex items-center gap-1 pr-2">
@@ -175,21 +173,19 @@ export const OrderCheckoutPage = () => {
                                 </div>
                             </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                            <div className="flex flex-col gap-2">
-                                <div key={baseService?.id} className="flex justify-between">
-                                    <span className="text-tg-theme-text-color">{baseService?.name}</span>
-                                    <span
-                                        className="text-tg-theme-text-color">{moneyFormat(serviceVariant?.basePrice)}</span>
-                                </div>
-                                {options.map((service, index) => (
-                                    <div key={index} className="flex justify-between">
-                                        <span className="text-tg-theme-text-color">{service.name}</span>
-                                        <span
-                                            className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
-                                    </div>
-                                ))}
+                        <AccordionContent className="flex flex-col gap-2">
+                            <div key={baseService?.id} className="flex justify-between">
+                                <span className="text-tg-theme-text-color">{baseService?.name}</span>
+                                <span
+                                    className="text-tg-theme-text-color">{moneyFormat(serviceVariant?.basePrice)}</span>
                             </div>
+                            {options.map((service, index) => (
+                                <div key={index} className="flex justify-between">
+                                    <span className="text-tg-theme-text-color">{service.name}</span>
+                                    <span
+                                        className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
+                                </div>
+                            ))}
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>}
