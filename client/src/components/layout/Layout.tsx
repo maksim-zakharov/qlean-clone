@@ -112,7 +112,7 @@ export const Layout = () => {
             <Outlet/>
         </div>
 
-        {/*<div className="height-safe-area-inset-bottom"/>*/}
+        <div className="height-safe-area-inset-bottom"/>
         <div className="fixed bottom-0 w-full left-0 right-0">
             <div
                 className="menu-container separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
