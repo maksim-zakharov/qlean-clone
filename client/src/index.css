@@ -76,6 +76,15 @@
     --tg-accent-red: #ff463a;
     --tg-accent-orange: #fa9b03;
     --tg-accent-violet: #af53d8;
+
+    --tg-safe-area-inset-bottom: 0px;
+    --tg-viewport-height: 633.3333740234375px;
+    --tabbar-height: 56px;
+    --tabbar-current-height: var(--tabbar-height);
+    --min-viewport-height: min(100vh, var(--tg-viewport-height));
+    --viewport-safe-area-inset-bottom: calc(100vh - var(--min-viewport-height, 100vh));
+    --content-safe-area-inset-bottom: calc(var(--viewport-safe-area-inset-bottom, 0px) + var(--tabbar-current-height, 0px));
+    --content-safe-area: calc(100vh - var(--content-safe-area-inset-bottom, 0px));
 }
 
 .dark {
@@ -178,6 +187,34 @@
 }
 
 @layer utilities {
+    .wrapper {
+        flex: 1 0 var(--content-safe-area, 0px);
+        width: 100%;
+    }
+
+    .area-padding {
+        box-sizing: content-box;
+        flex: 0 0 var(--tabbar-current-height, 0px);
+        padding-bottom: var(--viewport-safe-area-inset-bottom, 0);
+        width: 100%;
+    }
+
+    .layout-container{
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        min-height: var(--content-safe-area, 100vh);
+    }
+
+    .menu-container{
+        align-items: center;
+        box-sizing: content-box;
+        display: flex;
+        justify-content: space-around;
+        padding-bottom: var(--tg-safe-area-inset-bottom, var(--viewport-safe-area-inset-bottom));
+        width: 100%;
+    }
+
     .bg-tg-theme-bg-color {
         background-color: var(--tg-theme-bg-color);
     }

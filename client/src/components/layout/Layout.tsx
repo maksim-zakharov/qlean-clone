@@ -87,7 +87,7 @@ export const Layout = () => {
 
     return <div className="flex flex-col">
         {/* Main Content */}
-        <div className="min-h-screen w-full">
+        <div className="layout-container">
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <Avatar onClick={() => navigate('/profile')}>
@@ -113,25 +113,27 @@ export const Layout = () => {
         </div>
 
         {/*<div className="height-safe-area-inset-bottom"/>*/}
-        <div
-            className="pb-[env(safe-area-inset-bottom)] height-safe-area-inset-bottom sticky bottom-0 w-full left-0 right-0 separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
-            {menuItems.map(({icon: Icon, label, path}) => (
-                <Button
-                    key={path}
-                    variant="ghost"
-                    className="flex flex-col items-center h-auto py-1.5 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
-                    onClick={() => navigate(path)}
-                >
-                    <Icon
-                        className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
-                    />
-                    <span
-                        className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+        <div className="fixed bottom-0 w-full left-0 right-0">
+            <div
+                className="menu-container separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
+                {menuItems.map(({icon: Icon, label, path}) => (
+                    <Button
+                        key={path}
+                        variant="ghost"
+                        className="flex flex-col items-center h-auto py-1.5 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
+                        onClick={() => navigate(path)}
                     >
+                        <Icon
+                            className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                        />
+                        <span
+                            className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                        >
                   {label}
                 </span>
-                </Button>
-            ))}
+                    </Button>
+                ))}
+            </div>
         </div>
     </div>
 } 
