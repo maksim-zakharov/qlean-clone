@@ -115,7 +115,7 @@ export const Layout = () => {
         <div className="height-safe-area-inset-bottom"/>
         {/* Bottom Navigation */}
         <div
-            className="height-safe-area-inset-bottom fixed bottom-0 w-full left-0 right-0separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
+            className="height-safe-area-inset-bottom fixed bottom-0 w-full left-0 right-0 separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
             {menuItems.map(({icon: Icon, label, path}) => (
                 <Button
                     key={path}

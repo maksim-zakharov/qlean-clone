@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 html {
-    scroll-padding-top: 56px; /* высота вашей шапки */
+    scroll-padding-top: calc(56px + env(safe-area-inset-top)); /* высота вашей шапки */
 }
 
 :root {
