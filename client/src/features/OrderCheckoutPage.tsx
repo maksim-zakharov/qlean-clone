@@ -103,7 +103,7 @@ export const OrderCheckoutPage = () => {
                 </div>
             </Header>
 
-            <div className="flex-1 flex flex-col gap-4 overflow-y-auto overscroll-none p-4 mt-[56px]">
+            <div className="flex-1 flex flex-col gap-4 overflow-y-auto overscroll-none p-4">
                 <List itemClassName="py-2">
 
                     {/* Date and Time */}

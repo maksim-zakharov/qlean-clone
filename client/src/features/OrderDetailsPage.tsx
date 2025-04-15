@@ -125,7 +125,7 @@ export const OrderDetailsPage = () => {
             </div>
         </Header>
 
-        <div className="flex flex-col gap-4 bg-inherit p-4 mt-[56px]">
+        <div className="flex flex-col gap-4 bg-inherit p-4">
             <Card className="p-0 pl-4 gap-0">
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
