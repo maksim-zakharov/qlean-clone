@@ -4,7 +4,6 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 
 import {cn} from "@/lib/utils"
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import {ScrollArea} from "./scroll-area.tsx";
 
 function Sheet({...props}: React.ComponentProps<typeof SheetPrimitive.Root>) {
     return <SheetPrimitive.Root data-slot="sheet" {...props} />
@@ -61,7 +60,7 @@ function SheetContent({
                 data-slot="sheet-content"
                 // style={{paddingBottom: `${16+bottomOffset}px`}}
                 className={cn(
-                    `p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
+                    `p-4 rounded-t-2xl root-bg-color data-[state=open]:animate-in data-[state=closed]:animate-out absolute z-50 flex flex-col transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-300`,
                     side === "right" &&
                     "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
                     side === "left" &&
