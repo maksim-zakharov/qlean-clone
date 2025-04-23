@@ -6,7 +6,7 @@ const mutex = new Mutex();
 
 const baseQuery = () =>
     fetchBaseQuery({
-        baseUrl: process.env.NODE_ENV !== 'production' ? "http://localhost:3000/api" : '/api',
+        baseUrl: '/api',
         prepareHeaders: (headers, {getState}: any) => {
             const token = getState().createOrder.token;
 
