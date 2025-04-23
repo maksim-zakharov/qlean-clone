@@ -23,7 +23,7 @@ export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({ur
     }, [backButton, showTgBackButton]);
 
     if (showTgBackButton) {
-        return <div/>;
+        return null;
     }
 
     return <Button
