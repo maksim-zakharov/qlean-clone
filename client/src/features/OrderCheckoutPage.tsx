@@ -83,7 +83,7 @@ export const OrderCheckoutPage = () => {
     }
 
     return (
-        <div className="fixed inset-0 flex flex-col">
+        <>
             <AlertDialogWrapper open={Boolean(error)} title="Не удалось оформить заказ" description={error}
                                 onOkText="Хорошо"
                                 onOkClick={() => setError(undefined)}/>
@@ -103,7 +103,7 @@ export const OrderCheckoutPage = () => {
                 </div>
             </Header>
 
-            <div className="flex-1 flex flex-col gap-4 overflow-y-auto overscroll-none p-4">
+            <div className="content flex flex-col gap-4 p-4">
                 <List itemClassName="py-2">
 
                     {/* Date and Time */}
@@ -221,6 +221,6 @@ export const OrderCheckoutPage = () => {
                     Оформить заказ
                 </Button>
             </BottomActions>
-        </div>
+        </>
     )
 } 

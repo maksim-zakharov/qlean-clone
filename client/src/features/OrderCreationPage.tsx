@@ -96,7 +96,7 @@ export const OrderCreationPage = () => {
     }
 
     return (
-        <div className="fixed inset-0 flex flex-col">
+        <>
             <Header>
                 <div className="grid grid-cols-[40px_auto_40px]">
                     <BackButton url={backUrl} onClick={handleBackClick}/>
@@ -104,44 +104,42 @@ export const OrderCreationPage = () => {
                         className="items-center flex justify-center">{baseService?.name}</Typography.Title>
                 </div>
             </Header>
-
-            <div className="flex-1 overflow-y-auto overscroll-none">
-                <Tabs defaultValue={variantId} value={variantId}
-                      className="mt-[calc(56px+env(safe-area-inset-top))]">
-                    <TabsList>
-                        {variants.map(tab => (
-                            <TabsTrigger
-                                key={tab.id}
-                                value={tab.id}
-                                onClick={() => handleSelectVariant(tab)}
-                            >
-                                {tab.name}
-                            </TabsTrigger>
-                        ))}
-                    </TabsList>
-                </Tabs>
-                <List itemClassName="flex-col gap-2" className="mb-4 rounded-none">
-                    {availableOptions.map((option) => <>
-                        <div className="flex items-center gap-3 w-full justify-between">
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                                <Info
-                                    className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
+            <div className="content">
+                    <Tabs defaultValue={variantId} value={variantId}>
+                        <TabsList>
+                            {variants.map(tab => (
+                                <TabsTrigger
+                                    key={tab.id}
+                                    value={tab.id}
+                                    onClick={() => handleSelectVariant(tab)}
+                                >
+                                    {tab.name}
+                                </TabsTrigger>
+                            ))}
+                        </TabsList>
+                    </Tabs>
+                    <List itemClassName="flex-col gap-2" className="mb-4 rounded-none">
+                        {availableOptions.map((option) => <>
+                            <div className="flex items-center gap-3 w-full justify-between">
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
+                                    <Info
+                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
+                                    <span
+                                        className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
+                                    {option.isPopular ? (
+                                        <Badge className="flex gap-1 items-center"><Star
+                                            className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
+                                    ) : <div/>}
+                                </div>
                                 <span
-                                    className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
-                                {option.isPopular ? (
-                                    <Badge className="flex gap-1 items-center"><Star
-                                        className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
-                                ) : <div/>}
+                                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
+                                <Checkbox checked={selectedOptionsIdSet.has(option.id)}
+                                          onCheckedChange={() => handleOptionToggle(option)}/>
                             </div>
-                            <span
-                                className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
-                            <Checkbox checked={selectedOptionsIdSet.has(option.id)}
-                                      onCheckedChange={() => handleOptionToggle(option)}/>
-                        </div>
-                    </>)}
-                </List>
-                <EstimatedTime totalDuration={totalDuration}/>
-            </div>
+                        </>)}
+                    </List>
+                    <EstimatedTime totalDuration={totalDuration}/>
+                </div>
 
             <BottomActions>
                 <Button
@@ -153,6 +151,6 @@ export const OrderCreationPage = () => {
                     <span>{moneyFormat(totalPrice)}</span>
                 </Button>
             </BottomActions>
-        </div>
+        </>
     )
 }

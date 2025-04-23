@@ -42,12 +42,6 @@ export function useTelegram() {
         Telegram.WebApp.SettingsButton.show();
     }, [isReady]);
 
-    // useEffect(() => {
-    //     setInterval(() => setBottomOffset(prevState => ++prevState), 100);
-    // }, [])
-    //
-    // console.log(bottomOffset)
-
 
     const vibro = (
         style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft' = 'medium'

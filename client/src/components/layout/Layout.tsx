@@ -51,29 +51,6 @@ export const Layout = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const [state, setState] = useState({});
-
-    useEffect(() => {
-
-        const vars = [
-            '--tg-viewport-height',
-            '--tg-viewport-stable-height',
-            '--tg-safe-area-inset-top',
-            '--tg-safe-area-inset-bottom',
-            '--tg-safe-area-inset-left',
-            '--tg-safe-area-inset-right',
-            '--tg-content-safe-area-inset-top',
-            '--tg-content-safe-area-inset-bottom',
-            '--tg-content-safe-area-inset-left',
-            '--tg-content-safe-area-inset-right'
-        ]
-
-        setState(prevState => ({
-            ...prevState,
-            ...vars.reduce((acc, v) => ({...acc, [v]: getComputedStyle(document.documentElement).getPropertyValue(v).trim()}), {})
-        }))
-    }, []);
-
     const handleSelectAddress = (address: any) => {
         dispatch(selectFullAddress(address))
     }
@@ -130,7 +107,7 @@ export const Layout = () => {
             </div>
         </Header>
 
-        <div style={{ height: '100%', overflow: 'auto' }}>
+        <div className="content">
             <Outlet/>
         </div>
 
