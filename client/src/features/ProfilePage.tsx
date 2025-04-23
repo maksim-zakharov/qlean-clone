@@ -14,6 +14,7 @@ import {EditButton} from "../components/EditButton.tsx";
 import {logout} from "../slices/createOrderSlice.ts";
 import {RoutePaths} from "../routes.ts";
 import {useNavigate} from "react-router-dom";
+import {useTelegram} from "../hooks/useTelegram.ts";
 
 interface Address {
     // Дом
@@ -35,6 +36,9 @@ interface Address {
 
 export const ProfilePage = () => {
 
+    const {backButton, isLoading, error} = useTelegram();
+
+    const showTgBackButton = Boolean(backButton && !isLoading && !error);
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.createOrder.userInfo);
@@ -94,13 +98,13 @@ export const ProfilePage = () => {
         window.location.reload();
     }
 
-    return <div className="fixed inset-0 flex flex-col bg-inherit">
-        <Header>
+    return <>
+        {!showTgBackButton && <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
                 <BackButton url="/"/>
             </div>
-        </Header>
-        <div className="flex-1 text-center overflow-y-auto overscroll-none px-4 mt-[56px]">
+        </Header>}
+        <div className="content text-center px-4">
             <Card className="text-left p-0 gap-0 mt-2">
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
@@ -146,5 +150,5 @@ export const ProfilePage = () => {
             </Card>
             <Button className="mt-2 [color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Выйти из аккаунта</Button>
         </div>
-    </div>
+    </>
 }
