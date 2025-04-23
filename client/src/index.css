@@ -192,29 +192,58 @@ html {
 }
 
 @layer utilities {
-    .wrapper {
-        height: var(--tg-viewport-height);
-        width: 100vw;
-        /*flex: 1 0 var(--content-safe-area, 0px);*/
-        /*width: 100%;*/
+    /* Скрываем скроллбар везде */
+    ::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        background: transparent;
     }
 
-    .layout-container{
+    html {
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        height: 100%;
         overflow: auto;
-        height: 100vh;
-        /*align-items: stretch;*/
-        /*display: flex;*/
-        /*flex-direction: column;*/
-        min-height: var(--content-safe-area, 100vh);
+        -webkit-overflow-scrolling: touch;
     }
 
-    .menu-container{
-        align-items: center;
-        box-sizing: content-box;
+    #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        position: relative;
+    }
+
+    .content-wrapper {
+        overflow-y: auto;
+        -ms-overflow-style: none;  /* IE и Edge */
+        scrollbar-width: none;  /* Firefox */
+        /* Фикс для iOS 14+ */
+        scroll-snap-type: y mandatory;
+        overscroll-behavior: contain;
+
+        flex: 1 1 auto;
+        box-sizing: border-box;
+        padding-bottom: calc(60px + var(--tg-safe-area-inset-bottom)); /* Отступ = высота меню + safe area */
+    }
+
+    .menu-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(60px + var(--tg-safe-area-inset-bottom)); /* Учитываем чёлку в высоте */
+        padding-bottom: var(--tg-safe-area-inset-bottom); /* Отступ под иконками */
+        z-index: 1000;
         display: flex;
         justify-content: space-around;
-        padding-bottom: var(--tg-safe-area-inset-bottom, var(--viewport-safe-area-inset-bottom));
-        width: 100%;
+        align-items: center;
     }
 
     .bg-tg-theme-bg-color {

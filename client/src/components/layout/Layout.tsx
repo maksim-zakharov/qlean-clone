@@ -107,55 +107,52 @@ export const Layout = () => {
         </div>;
     }
 
-    return <div className="flex flex-col">
-        {/* Main Content */}
-        <div className="layout-container">
-            <Header>
-                <div className="grid grid-cols-[40px_auto_40px]">
-                    <Avatar onClick={() => navigate('/profile')}>
-                        <AvatarImage src={userInfo?.photoUrl}/>
-                        <AvatarFallback><User/></AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 flex flex-col items-center">
-                        <Typography.Description>Адрес</Typography.Description>
-                        <AddressSheet
-                            isError={isError}
-                            addresses={addresses}
-                            onAddressSelect={handleSelectAddress}
-                        >
-                            <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                                {fullAddress?.fullAddress || 'Выберите адрес'} <span
-                                className="ml-2 text-tg-theme-subtitle-text-color">›</span>
-                            </Button>
-                        </AddressSheet>
-                    </div>
+    return <>
+        <Header>
+            <div className="grid grid-cols-[40px_auto_40px]">
+                <Avatar onClick={() => navigate('/profile')}>
+                    <AvatarImage src={userInfo?.photoUrl}/>
+                    <AvatarFallback><User/></AvatarFallback>
+                </Avatar>
+                <div className="flex-1 flex flex-col items-center">
+                    <Typography.Description>Адрес</Typography.Description>
+                    <AddressSheet
+                        isError={isError}
+                        addresses={addresses}
+                        onAddressSelect={handleSelectAddress}
+                    >
+                        <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
+                            {fullAddress?.fullAddress || 'Выберите адрес'} <span
+                            className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                        </Button>
+                    </AddressSheet>
                 </div>
-            </Header>
-            {/*{JSON.stringify(state)}*/}
+            </div>
+        </Header>
+
+        <div style={{ height: '100%', overflow: 'auto' }}>
             <Outlet/>
         </div>
 
-        <div className="fixed bottom-0 w-full left-0 right-0">
-            <div
-                className="menu-container separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
-                {menuItems.map(({icon: Icon, label, path}) => (
-                    <Button
-                        key={path}
-                        variant="ghost"
-                        className="flex flex-col items-center h-auto py-1.5 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
-                        onClick={() => navigate(path)}
+        <div
+            className="menu-container separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
+            {menuItems.map(({icon: Icon, label, path}) => (
+                <Button
+                    key={path}
+                    variant="ghost"
+                    className="flex flex-col items-center h-auto py-1.5 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
+                    onClick={() => navigate(path)}
+                >
+                    <Icon
+                        className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                    />
+                    <span
+                        className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
                     >
-                        <Icon
-                            className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
-                        />
-                        <span
-                            className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
-                        >
                   {label}
                 </span>
-                    </Button>
-                ))}
-            </div>
+                </Button>
+            ))}
         </div>
-    </div>
+    </>
 } 

@@ -37,8 +37,24 @@ function App() {
         }
     }, [serviceId, variantId, services]);
 
+    useEffect(() => {
+        // Растягиваем на весь экран
+        Telegram.WebApp?.expand();
+
+        // Обработка изменения высоты при клавиатуре
+        const handleResize = () => {
+            document.documentElement.style.setProperty(
+                '--tg-viewport-height',
+                `${window.innerHeight}px`
+            );
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
-        <div className="wrapper">
+        <div className="content-wrapper">
             <Routes>
                 <Route element={<Layout/>}>
                     <Route path={RoutePaths.Root} element={<MainPage/>}/>
