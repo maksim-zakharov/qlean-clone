@@ -123,16 +123,15 @@ export const ExecutorOrdersPage = () => {
             />
             }
             {filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">
-                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none" onClick={() => handleOrderClick(ao)}>
-                    <div className="separator-shadow-bottom">
-                        <div className="flex justify-between">
-                            <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
-                            <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
-                        </div>
-                        <div className="flex justify-between">
-                            <Typography.Description>{ao.fullAddress}</Typography.Description>
-                            <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
-                        </div>
+                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none"
+                                                  onClick={() => handleOrderClick(ao)}>
+                    <div className="flex justify-between">
+                        <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
+                        <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
+                    </div>
+                    <div className="flex justify-between">
+                        <Typography.Description>{ao.fullAddress}</Typography.Description>
+                        <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </Card>)}
             </List>}
