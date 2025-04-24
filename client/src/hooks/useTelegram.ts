@@ -98,6 +98,7 @@ export function useTelegram() {
     }, []);
 
     return {
+        isReady,
         isLoading,
         error,
         tg: Telegram.WebApp,

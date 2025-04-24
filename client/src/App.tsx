@@ -8,19 +8,23 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
+import {useTelegram} from "./hooks/useTelegram.ts";
 
 function App() {
+    const {isReady} = useTelegram();
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const startParam = Telegram.WebApp.initDataUnsafe.start_param || searchParams.get('tgWebAppStartParam') || searchParams.get('startapp') || '';
 
-    const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
+    const [serviceId, variantId ] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 
-    useGetUserInfoQuery();
+    const {data: userinfo} = useGetUserInfoQuery(undefined, {
+        skip: !isReady
+    });
     const {data: services = []} = useGetServicesQuery();
 
     useEffect(() => {
@@ -36,6 +40,19 @@ function App() {
             navigate(RoutePaths.Order.Create);
         }
     }, [serviceId, variantId, services]);
+
+    if(!userinfo) {
+        return 'Loading'
+    }
+
+    if(userinfo.role === 'admin'){
+        return 'admin'
+    }
+
+    if(userinfo.role === 'executor'){
+        return 'executor'
+    }
+
 
     return (
         <div className="content-wrapper">

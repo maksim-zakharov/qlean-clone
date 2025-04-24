@@ -24,7 +24,7 @@ const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
     let result = await baseQuery()(args, api, extraOptions);
     const token = api.getState().createOrder.token;
 
-    if (result?.error?.status === 401 && !token) {
+    if (result?.error?.status === 401) {
         if (!mutex.isLocked()) {
             const release = await mutex.acquire();
             try {

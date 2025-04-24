@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="tgWebAppStartParam">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="почистил лишний фронт">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
   "keyToString": {
     "Node.js.main.ts.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Projects/front-trading-desk",
+    "last_opened_file_path": "D:/Projects/qlean",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,7 +85,7 @@
       <recent name="D:\Projects\qlean-clone\client" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start:dev">
+  <component name="RunManager" selected="npm.dev-host">
     <configuration name="main.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -147,9 +149,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev-host" />
         <item itemvalue="npm.start:dev" />
         <item itemvalue="npm.build:ci (1)" />
-        <item itemvalue="npm.dev-host" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:ci" />
       </list>
@@ -175,14 +177,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00225" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743508599664</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1743508599664</updated>
     </task>
     <task id="LOCAL-00226" summary="prisma address">
       <option name="closed" value="true" />
@@ -568,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744309006651</updated>
     </task>
-    <option name="localTasksCounter" value="274" />
+    <task id="LOCAL-00274" summary="почистил лишний фронт">
+      <option name="closed" value="true" />
+      <created>1745434630150</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1745434630150</updated>
+    </task>
+    <option name="localTasksCounter" value="275" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,6 +607,7 @@
     <MESSAGE value="openai" />
     <MESSAGE value="работает" />
     <MESSAGE value="tgWebAppStartParam" />
-    <option name="LAST_COMMIT_MESSAGE" value="tgWebAppStartParam" />
+    <MESSAGE value="почистил лишний фронт" />
+    <option name="LAST_COMMIT_MESSAGE" value="почистил лишний фронт" />
   </component>
 </project>
