@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {ChevronRight, CircleX, ClipboardPlus, Info, ListPlus, Star} from "lucide-react";
+import {ChevronRight, CircleX, ClipboardPlus, Info, ListPlus, RotateCw, Star} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -17,10 +17,14 @@ import {Header} from "../../components/ui/Header.tsx";
 import {List} from "../../components/ui/list.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
+import {formatDuration} from "../../components/EstimatedTime.tsx";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 
 export const ExecutorOrdersPage = () => {
     const navigate = useNavigate()
+    const {vibro} = useTelegram();
     const dispatch = useDispatch();
     const {data: orders = [], isLoading, isError} = useGetExecutorOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
@@ -32,7 +36,10 @@ export const ExecutorOrdersPage = () => {
         navigate('/order')
     }
 
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+    const handleOrderClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
+        e.stopPropagation()
+        navigate(`/order/${order.id}`)
+    }
 
     const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
@@ -124,7 +131,7 @@ export const ExecutorOrdersPage = () => {
             }
             {filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">
                 {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none justify-between flex-row"
-                                                  onClick={() => handleOrderClick(ao)}>
+                                                  onClick={(e) => handleOrderClick(e, ao)}>
                     <div className="flex flex-col">
                         <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
                         <Typography.Description>{ao.fullAddress}</Typography.Description>
@@ -142,6 +149,38 @@ export const ExecutorOrdersPage = () => {
                     </div>
                 </Card>)}
             </List>}
+            {filteredOrders.map(ao => <Accordion
+                className="p-0 px-4 gap-0"
+                type="single"
+                collapsible
+                defaultValue="services"
+                onClick={(e) => handleOrderClick(e, ao)}
+                onValueChange={() => vibro()}
+            >
+                <AccordionItem value="services" className="rounded-xl">
+                    <AccordionTrigger className="flex justify-normal pb-0" disabled>
+                        <div className="p-3 px-0 separator-shadow-bottom flex flex-col w-full">
+                            <div className="flex justify-between">
+                                <Typography.Title>{ao.baseService?.name}</Typography.Title>
+                                <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
+                            </div>
+                            <div className="flex justify-between">
+                                <Typography.Description>{ao.fullAddress}</Typography.Description>
+                                <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                            </div>
+                        </div>
+                    </AccordionTrigger>
+                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col">
+                        {ao.options.map((service, index) => (
+                            <div key={index} className="flex justify-between">
+                                <span className="text-xs text-tg-theme-hint-color font-medium">{service.name}</span>
+                                <span
+                                    className="text-xs text-tg-theme-hint-color font-medium">{formatDuration(service.duration)}</span>
+                            </div>
+                        ))}
+                    </AccordionContent>}
+                </AccordionItem>
+            </Accordion>)}
         </div>
     </div>
 }

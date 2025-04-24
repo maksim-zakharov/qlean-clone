@@ -6,10 +6,12 @@ import './index.css'  // Импорт Tailwind
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store.ts";
+import duration from 'dayjs/plugin/duration'
 import updateLocale from 'dayjs/plugin/updateLocale' // ES 2015
 import 'dayjs/locale/ru';
 import dayjs from "dayjs";
 
+dayjs.extend(duration)
 dayjs.extend(updateLocale)
 
 dayjs.locale('ru'); // Активируем русскую локаль
