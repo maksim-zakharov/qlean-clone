@@ -19,4 +19,10 @@ export const RoutePaths = {
         Checkout: '/order/checkout',
         Details: (id: string | number) => buildPath('/order/:id', { id }),
     },
+    Executor: {
+        Orders: '/executor/orders',
+        Payments: '/executor/payments',
+        Schedule: '/executor/schedule',
+        Profile: '/executor/profile',
+    }
 } as const;

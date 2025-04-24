@@ -42,7 +42,7 @@ const menuItems: MenuItem[] = [
     // }
 ]
 
-export const Layout = () => {
+export const ClientLayout = () => {
     const {isLoading} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const {data: addresses = [], isError} = useGetAddressesQuery();

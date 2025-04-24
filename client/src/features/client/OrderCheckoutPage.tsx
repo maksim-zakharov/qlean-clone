@@ -4,23 +4,23 @@ import {Calendar, ChevronRight, CreditCard, MessageSquare} from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import {Checkbox} from "@/components/ui/checkbox"
 import React, {useMemo, useState} from "react";
-import EstimatedTime from "../components/EstimatedTime.tsx";
-import {ScheduleSheet} from "../components/ScheduleSheet.tsx";
-import {List} from "../components/ui/list.tsx";
-import {useTelegram} from "../hooks/useTelegram.ts";
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../components/ui/accordion.tsx"
+import EstimatedTime from "../../components/EstimatedTime.tsx";
+import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
+import {List} from "../../components/ui/list.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../../components/ui/accordion.tsx"
 import {BottomActions} from "@/components/BottomActions.tsx"
-import {CommentsSheet} from "../components/CommentsSheet.tsx";
+import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
-import {Typography} from "../components/ui/Typography.tsx";
-import {useAddOrderMutation, useGetAddressesQuery} from "../api.ts";
-import {moneyFormat} from "../lib/utils.ts";
+import {Typography} from "../../components/ui/Typography.tsx";
+import {useAddOrderMutation, useGetAddressesQuery} from "../../api.ts";
+import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {AddressSheet} from "../components/AddressSheet.tsx";
-import {selectDate, selectFullAddress} from "../slices/createOrderSlice.ts";
-import {Header} from "../components/ui/Header.tsx";
-import {AlertDialogWrapper} from "../components/AlertDialogWrapper.tsx";
-import {RoutePaths} from "../routes.ts";
+import {AddressSheet} from "../../components/AddressSheet.tsx";
+import {selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
+import {Header} from "../../components/ui/Header.tsx";
+import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
+import {RoutePaths} from "../../routes.ts";
 
 
 export const OrderCheckoutPage = () => {

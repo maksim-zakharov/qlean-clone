@@ -1,21 +1,21 @@
 import React, {useMemo} from "react";
-import {Typography} from "../components/ui/Typography.tsx";
-import {Card} from "../components/ui/card.tsx";
-import {Button} from "../components/ui/button.tsx";
-import {useGetOrdersQuery} from "../api.ts";
+import {Typography} from "../../components/ui/Typography.tsx";
+import {Card} from "../../components/ui/card.tsx";
+import {Button} from "../../components/ui/button.tsx";
+import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
 import {CircleX, ClipboardPlus, ListPlus, Map, RotateCw} from "lucide-react";
-import {useTelegram} from "../hooks/useTelegram.ts";
-import {moneyFormat} from "../lib/utils.ts";
+import {useTelegram} from "../../hooks/useTelegram.ts";
+import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
-import {retryOrder, selectBaseService} from "../slices/createOrderSlice.ts";
+import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
-import {Skeleton} from "../components/ui/skeleton.tsx";
-import {EmptyState} from "../components/EmptyState.tsx";
-import {RoutePaths} from "../routes.ts";
+import {Skeleton} from "../../components/ui/skeleton.tsx";
+import {EmptyState} from "../../components/EmptyState.tsx";
+import {RoutePaths} from "../../routes.ts";
 
 
-export const OrdersPage = () => {
+export const ClientOrdersPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const {data: orders = [], isLoading, isError} = useGetOrdersQuery(undefined, {
@@ -108,7 +108,7 @@ export const OrdersPage = () => {
         </div>}
         {completedOrders.length > 0 && <div className="flex flex-col gap-4">
             <Typography.H2 className="mb-0">
-                Все заявки
+                Все заказы
             </Typography.H2>
             {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">

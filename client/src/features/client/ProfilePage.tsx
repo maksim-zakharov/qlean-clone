@@ -1,18 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Header} from "../components/ui/Header.tsx";
-import {BackButton} from "../components/BackButton.tsx";
-import {Typography} from "../components/ui/Typography.tsx";
+import {Header} from "../../components/ui/Header.tsx";
+import {BackButton} from "../../components/BackButton.tsx";
+import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
 import {MapPin, Pencil, User} from "lucide-react";
-import {Card} from "../components/ui/card.tsx";
-import {Avatar, AvatarFallback, AvatarImage} from "../components/ui/avatar.tsx";
-import {Button} from "../components/ui/button.tsx";
-import {useLoginMutation} from "../api.ts";
+import {Card} from "../../components/ui/card.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
+import {Button} from "../../components/ui/button.tsx";
+import {useLoginMutation} from "../../api.ts";
 import parsePhoneNumberFromString from "libphonenumber-js";
-import {Switch} from "../components/ui/switch.tsx";
-import {EditButton} from "../components/EditButton.tsx";
-import {logout} from "../slices/createOrderSlice.ts";
-import {RoutePaths} from "../routes.ts";
+import {Switch} from "../../components/ui/switch.tsx";
+import {EditButton} from "../../components/EditButton.tsx";
+import {logout} from "../../slices/createOrderSlice.ts";
+import {RoutePaths} from "../../routes.ts";
 import {useNavigate} from "react-router-dom";
 
 interface Address {

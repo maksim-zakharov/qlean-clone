@@ -34,6 +34,17 @@ export class OrdersService {
         })
     }
 
+    getAllByExecutor(executorId: Order['executorId']) {
+        return this.prisma.order.findMany({
+            // where: {executorId}, // TODO потом вернуть
+            include: {
+                baseService: true,
+                options: true,
+                serviceVariant: true,
+            }
+        })
+    }
+
     async create(data: any): Promise<Order> {
         try {
             return this.prisma.order.create({

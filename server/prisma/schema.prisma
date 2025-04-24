@@ -33,6 +33,8 @@ model Order {
   fullAddress String
   date DateTime @db.Timestamp(6)
   userId String?
+  executor      User?      @relation(fields: [executorId], references: [id])
+  executorId String?
   comment String?
 }
 
@@ -87,6 +89,7 @@ model User {
   username  String?
   phone  String?
   services   ServiceExecutors[]  // Обратное отношение
+  orders   Order[]  // Обратное отношение
 }
 
 model Keyword {

@@ -50,6 +50,7 @@ export class SpaController {
 
             response.data.pipe(res);
         } catch (error) {
+            console.log(error)
             res.status(500).send('Proxy error');
         }
     }

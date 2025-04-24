@@ -1,17 +1,19 @@
 import {Route, Routes, useNavigate, useSearchParams} from "react-router-dom"
-import {Layout} from "./components/layout/Layout"
-import MainPage from "./features/MainPage.tsx"
-import {OrderCreationPage} from "./features/OrderCreationPage.tsx"
-import {OrderCheckoutPage} from "./features/OrderCheckoutPage.tsx"
-import {OrdersPage} from "./features/OrdersPage.tsx";
+import {ClientLayout} from "./components/layout/ClientLayout.tsx"
+import MainPage from "./features/client/MainPage.tsx"
+import {OrderCreationPage} from "./features/client/OrderCreationPage.tsx"
+import {OrderCheckoutPage} from "./features/client/OrderCheckoutPage.tsx"
+import {ClientOrdersPage} from "./features/client/ClientOrdersPage.tsx";
 import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
-import {OrderDetailsPage} from "./features/OrderDetailsPage.tsx";
-import {ProfilePage} from "./features/ProfilePage.tsx";
+import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
+import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.ts";
+import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
+import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -49,17 +51,26 @@ function App() {
         return 'admin'
     }
 
-    if(userinfo.role === 'executor'){
-        return 'executor'
+    if(userinfo.role === 'executor') {
+        return <div className="content-wrapper">
+            <Routes>
+                <Route element={<ExecutorLayout/>}>
+                    <Route path={RoutePaths.Executor.Orders} element={<ExecutorOrdersPage/>}/>
+                    <Route path={RoutePaths.Executor.Payments} element={<ClientOrdersPage/>}/>
+                    <Route path={RoutePaths.Executor.Schedule} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path={RoutePaths.Executor.Profile} element={<div className="p-4">Бонусы</div>}/>
+                </Route>
+            </Routes>
+        </div>
     }
 
 
     return (
         <div className="content-wrapper">
             <Routes>
-                <Route element={<Layout/>}>
+                <Route element={<ClientLayout/>}>
                     <Route path={RoutePaths.Root} element={<MainPage/>}/>
-                    <Route path={RoutePaths.Orders} element={<OrdersPage/>}/>
+                    <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
                     <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
                 </Route>
                 <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>

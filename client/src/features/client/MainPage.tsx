@@ -13,14 +13,14 @@ import {
 } from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import React, {useEffect} from "react";
-import {useTelegram} from "../hooks/useTelegram.ts";
-import {CardItem} from "../components/CardItem.tsx";
-import {Typography} from "../components/ui/Typography.tsx";
-import {useGetServicesQuery} from "../api.ts";
+import {useTelegram} from "../../hooks/useTelegram.ts";
+import {CardItem} from "../../components/CardItem.tsx";
+import {Typography} from "../../components/ui/Typography.tsx";
+import {useGetServicesQuery} from "../../api.ts";
 import {useDispatch} from "react-redux";
-import {startOrderFlow} from "../slices/createOrderSlice.ts";
-import {EmptyState} from "../components/EmptyState.tsx";
-import {Button} from "../components/ui/button.tsx";
+import {startOrderFlow} from "../../slices/createOrderSlice.ts";
+import {EmptyState} from "../../components/EmptyState.tsx";
+import {Button} from "../../components/ui/button.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 
 const MainPage = () => {

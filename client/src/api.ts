@@ -152,6 +152,13 @@ export const api = createApi({
             }),
             invalidatesTags: ['Address'],
         }),
+        getExecutorOrders: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/executor/orders",
+                params
+            }),
+            providesTags: ['Order'],
+        }),
     })
 });
 
@@ -169,4 +176,5 @@ export const {
     useAddAddressMutation,
     useEditAddressMutation,
     useDeleteAddressMutation,
+    useGetExecutorOrdersQuery
 } = api;

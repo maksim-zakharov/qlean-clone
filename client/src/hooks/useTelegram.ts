@@ -6,7 +6,6 @@ export const safeTgHeight =
     Telegram.WebApp?.contentSafeAreaInset.bottom -
     Telegram.WebApp?.contentSafeAreaInset.top;
 
-
 Telegram.WebApp?.ready();
 
 export function useTelegram() {
@@ -16,7 +15,7 @@ export function useTelegram() {
     const [isOpenKeyboard, setOpenKeyboard] = useState(false);
     const [bottomOffset, setBottomOffset] = useState(0);
 
-    const isReady = !isLoading && !Boolean(error);
+    const isReady = process.env.NODE_ENV !== 'production' || (!isLoading && !Boolean(error));
 
     const onThemeChangedHandler = () => {
         // Устанавливаем тему в соответствии с Telegram

@@ -23,6 +23,7 @@ import {OpenaiProxyController} from './openai-proxy/openai-proxy.controller';
 import OpenAI from "openai";
 import * as process from "node:process";
 import {HttpModule} from "@nestjs/axios";
+import { ExecutorController } from './executor/executor.controller';
 
 @Module({
     imports: [HealthModule,
@@ -42,7 +43,7 @@ import {HttpModule} from "@nestjs/axios";
             store: 'memory'
         })
     ],
-    controllers: [ServicesController, OrdersController, AddressesController, AppController, AuthController, SpaController, OpenaiProxyController],
+    controllers: [ServicesController, OrdersController, AddressesController, AppController, AuthController, ExecutorController, SpaController, OpenaiProxyController],
     providers: [AppService, PrismaService, AddressesService, OrdersService, ServicesService, AuthService, UserService, JwtStrategy,
         {
             provide: Telegraf,
