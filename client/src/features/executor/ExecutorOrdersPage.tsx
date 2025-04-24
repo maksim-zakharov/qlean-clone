@@ -96,7 +96,7 @@ export const ExecutorOrdersPage = () => {
 
     return <div className="flex flex-col">
         <Header className="p-0 card-bg-color-transparency">
-            <Tabs defaultValue={tab} onValueChange={setTab} className="card-bg-color-transparency px-4">
+            <Tabs defaultValue={tab} onValueChange={setTab} className="px-4">
                 <TabsList className="bg-inherit px-0">
                     {result.map(r => <TabsTrigger
                         key={r.timestamp}
