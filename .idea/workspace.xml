@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="зачатки ролей и авторизации">
-      <change afterPath="$PROJECT_DIR$/client/src/components/layout/ExecutorLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Зачатки исполнителя: список заказов">
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/OrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/spa/spa.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/spa/spa.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,14 +177,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00227" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743509371742</created>
-      <option name="number" value="00227" />
-      <option name="presentableId" value="LOCAL-00227" />
-      <option name="project" value="LOCAL" />
-      <updated>1743509371742</updated>
     </task>
     <task id="LOCAL-00228" summary="prisma address">
       <option name="closed" value="true" />
@@ -589,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745478215572</updated>
     </task>
-    <option name="localTasksCounter" value="276" />
+    <task id="LOCAL-00276" summary="Зачатки исполнителя: список заказов">
+      <option name="closed" value="true" />
+      <created>1745506917964</created>
+      <option name="number" value="00276" />
+      <option name="presentableId" value="LOCAL-00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1745506917964</updated>
+    </task>
+    <option name="localTasksCounter" value="277" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,6 +609,7 @@
     <MESSAGE value="tgWebAppStartParam" />
     <MESSAGE value="почистил лишний фронт" />
     <MESSAGE value="зачатки ролей и авторизации" />
-    <option name="LAST_COMMIT_MESSAGE" value="зачатки ролей и авторизации" />
+    <MESSAGE value="Зачатки исполнителя: список заказов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Зачатки исполнителя: список заказов" />
   </component>
 </project>

@@ -1,4 +1,4 @@
-import {Route, Routes, useNavigate, useSearchParams} from "react-router-dom"
+import {Navigate, Route, Routes, useNavigate, useSearchParams} from "react-router-dom"
 import {ClientLayout} from "./components/layout/ClientLayout.tsx"
 import MainPage from "./features/client/MainPage.tsx"
 import {OrderCreationPage} from "./features/client/OrderCreationPage.tsx"
@@ -8,7 +8,7 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.ts";
@@ -59,6 +59,7 @@ function App() {
                     <Route path={RoutePaths.Executor.Payments} element={<ClientOrdersPage/>}/>
                     <Route path={RoutePaths.Executor.Schedule} element={<div className="p-4">Бонусы</div>}/>
                     <Route path={RoutePaths.Executor.Profile} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path="*" element={<Navigate to={RoutePaths.Executor.Orders}/>}/>
                 </Route>
             </Routes>
         </div>
@@ -77,6 +78,7 @@ function App() {
                 <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
                 <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
                 <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
+                <Route path="*" element={<Navigate to={RoutePaths.Root}/>}/>
             </Routes>
         </div>
     )
