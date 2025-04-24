@@ -65,7 +65,7 @@ export const ExecutorOrdersPage = () => {
     const result = useMemo(() => Array.from({length: 7}, (_, i) => {
         const date = dayjs().add(i, 'day').startOf('day');
         return {
-            date: date.format('dd, D MMM').toLowerCase(),
+            date: date.locale('en').format('dd, D MMM').toLowerCase(),
             timestamp: date.valueOf(),
             slots: generateTimeSlots(date)
         };
@@ -132,7 +132,7 @@ export const ExecutorOrdersPage = () => {
                     <div className="flex justify-between">
                         <div className="flex flex-col justify-between text-end">
                             <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
-                            <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                            <Typography.Description>{dayjs(ao.date).locale('en').format('D MMMM, HH:mm')}</Typography.Description>
                         </div>
                         <Button
                             className="pr-0 pl-2"

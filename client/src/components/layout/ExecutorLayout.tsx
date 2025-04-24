@@ -22,22 +22,22 @@ type MenuItem = {
 const menuItems: MenuItem[] = [
     {
         icon: ClipboardList,
-        label: 'Заказы',
+        label: 'Orders',
         path: RoutePaths.Executor.Orders
     },
     {
         icon: Wallet,
-        label: 'Выплаты',
+        label: 'Payments',
         path: RoutePaths.Executor.Payments
     },
     {
         icon: CalendarPlus,
-        label: 'Расписание',
+        label: 'Schedule',
         path: RoutePaths.Executor.Schedule
     },
     {
         icon: UserRound,
-        label: 'Профиль',
+        label: 'Profile',
         path: RoutePaths.Executor.Profile
     }
 ]
