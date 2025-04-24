@@ -170,7 +170,7 @@ export const ExecutorOrdersPage = () => {
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col">
+                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col pt-3">
                         {ao.options.map((service, index) => (
                             <div key={index} className="flex justify-between">
                                 <span className="text-xs text-tg-theme-hint-color font-medium">{service.name}</span>
