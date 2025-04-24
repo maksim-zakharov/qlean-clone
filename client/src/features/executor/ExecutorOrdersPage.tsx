@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CircleX, ClipboardPlus, ListPlus} from "lucide-react";
+import {CircleX, ClipboardPlus, Info, ListPlus, Star} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -14,6 +14,9 @@ import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import {Header} from "../../components/ui/Header.tsx";
+import {List} from "../../components/ui/list.tsx";
+import {Badge} from "../../components/ui/badge.tsx";
+import {Checkbox} from "../../components/ui/checkbox.tsx";
 
 
 export const ExecutorOrdersPage = () => {
@@ -95,9 +98,9 @@ export const ExecutorOrdersPage = () => {
     }
 
     return <div className="flex flex-col">
-        <Header className="p-0">
-            <Tabs defaultValue={tab} onValueChange={setTab} className="px-4">
-                <TabsList className="bg-inherit px-0">
+        <Header className="p-0 card-bg-color">
+            <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">
+                <TabsList className="bg-inherit px-0 h-full">
                     {result.map(r => <TabsTrigger
                         key={r.timestamp}
                         value={r.timestamp.toString()}
@@ -107,7 +110,7 @@ export const ExecutorOrdersPage = () => {
                 </TabsList>
             </Tabs>
         </Header>
-        <div className="p-4 flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
             {filteredOrders.length === 0 && <EmptyState
                 icon={<ClipboardPlus className="h-10 w-10"/>}
                 title="Нет заказов"
@@ -119,11 +122,11 @@ export const ExecutorOrdersPage = () => {
                     </Button>}
             />
             }
-            {filteredOrders.length > 0 && <div className="flex flex-col gap-4">
-                {filteredOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
-                    <div className="p-3 pl-0 separator-shadow-bottom">
+            {filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">
+                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none" onClick={() => handleOrderClick(ao)}>
+                    <div className="separator-shadow-bottom">
                         <div className="flex justify-between">
-                            <Typography.Title>{ao.baseService?.name}</Typography.Title>
+                            <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
                             <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
                         </div>
                         <div className="flex justify-between">
@@ -131,21 +134,8 @@ export const ExecutorOrdersPage = () => {
                             <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                         </div>
                     </div>
-                    <div className="p-3 pl-0 flex gap-2 flex-col">
-                        <div className="flex justify-between">
-                            <Typography.Title>№{ao.id}</Typography.Title>
-                            <Typography.Title>Оформлен</Typography.Title>
-                        </div>
-                        <div className="flex justify-between align-bottom items-center">
-                            <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)}
-                                    variant="default" size="sm">
-                                <ListPlus className="w-5 h-5 mr-2"/> Добавить услугу
-                            </Button>
-                            <Typography.Description>Поддержка</Typography.Description>
-                        </div>
-                    </div>
                 </Card>)}
-            </div>}
+            </List>}
         </div>
     </div>
 }

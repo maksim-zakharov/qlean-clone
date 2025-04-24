@@ -6,6 +6,13 @@ import proxy from 'http-proxy-agent';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    optimizeDeps: {
+        include: [
+            'react',
+            'react-dom',
+        ],
+        force: true
+    },
     plugins: [
         tailwindcss(),
         react()
