@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CircleX, ClipboardPlus, Info, ListPlus, Star} from "lucide-react";
+import {ChevronRight, CircleX, ClipboardPlus, Info, ListPlus, Star} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -123,15 +123,22 @@ export const ExecutorOrdersPage = () => {
             />
             }
             {filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">
-                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none"
+                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none justify-between flex-row"
                                                   onClick={() => handleOrderClick(ao)}>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col">
                         <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
-                        <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
+                        <Typography.Description>{ao.fullAddress}</Typography.Description>
                     </div>
                     <div className="flex justify-between">
-                        <Typography.Description>{ao.fullAddress}</Typography.Description>
-                        <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                        <div className="flex flex-col justify-between text-end">
+                            <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
+                            <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                        </div>
+                        <Button
+                            className="pr-0 pl-2"
+                            variant="ghost">
+                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
+                        </Button>
                     </div>
                 </Card>)}
             </List>}
