@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Зачатки исполнителя: список заказов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/EstimatedTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/EstimatedTime.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,22 +178,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00235" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743513536194</created>
-      <option name="number" value="00235" />
-      <option name="presentableId" value="LOCAL-00235" />
-      <option name="project" value="LOCAL" />
-      <updated>1743513536194</updated>
-    </task>
-    <task id="LOCAL-00236" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743514094457</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1743514094457</updated>
     </task>
     <task id="LOCAL-00237" summary="prisma address">
       <option name="closed" value="true" />
@@ -573,7 +555,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745516257937</updated>
     </task>
-    <option name="localTasksCounter" value="284" />
+    <task id="LOCAL-00284" summary="Зачатки исполнителя: список заказов">
+      <option name="closed" value="true" />
+      <created>1745519315200</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1745519315200</updated>
+    </task>
+    <task id="LOCAL-00285" summary="Зачатки исполнителя: список заказов">
+      <option name="closed" value="true" />
+      <created>1745520365808</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1745520365808</updated>
+    </task>
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

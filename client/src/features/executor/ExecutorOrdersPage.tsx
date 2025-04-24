@@ -105,7 +105,7 @@ export const ExecutorOrdersPage = () => {
     }
 
     return <div className="flex flex-col">
-        <Header className="p-0 card-bg-color">
+        <Header className="p-0">
             <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">
                 <TabsList className="bg-inherit px-0 h-full">
                     {result.map(r => <TabsTrigger
@@ -117,7 +117,19 @@ export const ExecutorOrdersPage = () => {
                 </TabsList>
             </Tabs>
         </Header>
-        <div className="flex flex-col gap-4">
+        {/*<Header className="p-0 card-bg-color">*/}
+        {/*    <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">*/}
+        {/*        <TabsList className="bg-inherit px-0 h-full">*/}
+        {/*            {result.map(r => <TabsTrigger*/}
+        {/*                key={r.timestamp}*/}
+        {/*                value={r.timestamp.toString()}*/}
+        {/*            >*/}
+        {/*                {r.date}*/}
+        {/*            </TabsTrigger>)}*/}
+        {/*        </TabsList>*/}
+        {/*    </Tabs>*/}
+        {/*</Header>*/}
+        <div className="flex flex-col gap-4 py-4">
             {filteredOrders.length === 0 && <EmptyState
                 icon={<ClipboardPlus className="h-10 w-10"/>}
                 title="Нет заказов"
@@ -129,26 +141,26 @@ export const ExecutorOrdersPage = () => {
                     </Button>}
             />
             }
-            {filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">
-                {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none justify-between flex-row"
-                                                  onClick={(e) => handleOrderClick(e, ao)}>
-                    <div className="flex flex-col">
-                        <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>
-                        <Typography.Description>{ao.fullAddress}</Typography.Description>
-                    </div>
-                    <div className="flex justify-between">
-                        <div className="flex flex-col justify-between text-end">
-                            <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
-                            <Typography.Description>{dayjs(ao.date).locale('en').format('D MMMM, HH:mm')}</Typography.Description>
-                        </div>
-                        <Button
-                            className="pr-0 pl-2"
-                            variant="ghost">
-                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
-                        </Button>
-                    </div>
-                </Card>)}
-            </List>}
+            {/*{filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">*/}
+            {/*    {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none justify-between flex-row"*/}
+            {/*                                      onClick={(e) => handleOrderClick(e, ao)}>*/}
+            {/*        <div className="flex flex-col">*/}
+            {/*            <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>*/}
+            {/*            <Typography.Description>{ao.fullAddress}</Typography.Description>*/}
+            {/*        </div>*/}
+            {/*        <div className="flex justify-between">*/}
+            {/*            <div className="flex flex-col justify-between text-end">*/}
+            {/*                <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>*/}
+            {/*                <Typography.Description>{dayjs(ao.date).locale('en').format('D MMMM, HH:mm')}</Typography.Description>*/}
+            {/*            </div>*/}
+            {/*            <Button*/}
+            {/*                className="pr-0 pl-2"*/}
+            {/*                variant="ghost">*/}
+            {/*                <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>*/}
+            {/*            </Button>*/}
+            {/*        </div>*/}
+            {/*    </Card>)}*/}
+            {/*</List>}*/}
             {filteredOrders.map(ao => <Accordion
                 className="p-0 px-4 gap-0"
                 type="single"
