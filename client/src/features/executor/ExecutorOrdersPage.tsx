@@ -170,7 +170,7 @@ export const ExecutorOrdersPage = () => {
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services" className="rounded-xl">
-                    <AccordionTrigger className="flex justify-normal pb-0" disabled>
+                    <AccordionTrigger className="flex justify-normal py-0" disabled>
                         <div className="p-3 px-0 separator-shadow-bottom flex flex-col w-full">
                             <div className="flex justify-between">
                                 <Typography.Title>{ao.baseService?.name}</Typography.Title>
