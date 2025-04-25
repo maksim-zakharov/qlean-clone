@@ -12,6 +12,7 @@ import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
+import {Navbar} from "../ui/navbar.tsx";
 
 type MenuItem = {
     icon: LucideIcon
@@ -44,8 +45,6 @@ const menuItems: MenuItem[] = [
 
 export const ExecutorLayout = () => {
     const {isLoading} = useTelegram();
-    const navigate = useNavigate()
-    const location = useLocation();
 
     if (isLoading) {
         return <div>
@@ -80,25 +79,6 @@ export const ExecutorLayout = () => {
             <Outlet/>
         </div>
 
-        <div
-            className="menu-container separator-shadow-top flex justify-around items-center [backdrop-filter:blur(5px)] card-bg-color-transparency">
-            {menuItems.map(({icon: Icon, label, path}) => (
-                <Button
-                    key={path}
-                    variant="ghost"
-                    className="flex flex-col items-center h-auto py-1.5 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 hover:bg-transparent active:bg-transparent"
-                    onClick={() => navigate(path)}
-                >
-                    <Icon
-                        className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
-                    />
-                    <span
-                        className={`text-xs font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
-                    >
-                  {label}
-                </span>
-                </Button>
-            ))}
-        </div>
+        <Navbar menuItems={menuItems}/>
     </>
 } 
