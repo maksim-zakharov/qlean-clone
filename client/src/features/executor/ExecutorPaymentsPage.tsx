@@ -102,7 +102,7 @@ export const ExecutorPaymentsPage = () => {
     }
 
     return <div className="p-4 flex flex-col gap-4">
-        <Card className="px-4 py-3 flex-row justify-between border-0">
+        <Card className="card-bg-color px-4 py-3 flex-row justify-between border-0">
             <div className="flex flex-col">
                 <Button className="p-0 border-none h-6 w-max" variant="default" size="sm" onClick={() => setPaymentsPeriod(prevState => prevState !== 'week' ? 'week' : 'month')}>
                     <CalendarSync className="w-4 h-4 mr-1" /><Typography.Description className="text-tg-theme-button-color">Выплаты за {paymentsPeriod === 'week' ? 'неделю' : 'месяц'}</Typography.Description>
@@ -154,7 +154,7 @@ export const ExecutorPaymentsPage = () => {
             </ChartContainer>
         </Card>
         {completedOrders.length > 0 && <div className="flex flex-col gap-4">
-            {completedOrders.map(ao => <Card className="pl-4 gap-0 p-3 pb-0 border-0" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="card-bg-color pl-4 gap-0 p-3 pb-0 border-0" onClick={() => handleOrderClick(ao)}>
                 <div className="flex justify-between">
                     <Typography.Title>{ao.baseService?.name}</Typography.Title>
                     <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
