@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="уменьшил меню">
-      <change afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="payments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,14 +185,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00241" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743569029176</created>
-      <option name="number" value="00241" />
-      <option name="presentableId" value="LOCAL-00241" />
-      <option name="project" value="LOCAL" />
-      <updated>1743569029176</updated>
     </task>
     <task id="LOCAL-00242" summary="prisma address">
       <option name="closed" value="true" />
@@ -576,7 +570,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745571262832</updated>
     </task>
-    <option name="localTasksCounter" value="290" />
+    <task id="LOCAL-00290" summary="payments">
+      <option name="closed" value="true" />
+      <created>1745575714845</created>
+      <option name="number" value="00290" />
+      <option name="presentableId" value="LOCAL-00290" />
+      <option name="project" value="LOCAL" />
+      <updated>1745575714845</updated>
+    </task>
+    <option name="localTasksCounter" value="291" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,6 +620,7 @@
     <MESSAGE value="Зачатки исполнителя: список заказов" />
     <MESSAGE value="Фикс машинки в табах, уменьшил меню" />
     <MESSAGE value="уменьшил меню" />
-    <option name="LAST_COMMIT_MESSAGE" value="уменьшил меню" />
+    <MESSAGE value="payments" />
+    <option name="LAST_COMMIT_MESSAGE" value="payments" />
   </component>
 </project>
