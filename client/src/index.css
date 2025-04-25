@@ -375,4 +375,21 @@ html {
             background-color: rgb(from var(--tg-theme-secondary-bg-color) r g b / 90%);
         }
     }
+
+    .lucide-star {
+        --fill-color: #FFD700; /* Цвет заливки */
+        --stroke-color: #FFD700; /* Цвет обводки */
+
+        /* Переопределяем fill для всего SVG */
+        fill: var(--fill-color) !important;
+
+        /* Переопределяем stroke */
+        stroke: var(--stroke-color) !important;
+    }
+
+    /* Дополнительно для path внутри SVG */
+    .lucide-star path {
+        fill: inherit !important;
+        stroke: inherit !important;
+    }
 }

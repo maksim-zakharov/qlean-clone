@@ -14,6 +14,7 @@ import {startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.ts";
 import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
 import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
+import {ExecutorPaymentsPage} from "./features/executor/ExecutorPaymentsPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -56,7 +57,7 @@ function App() {
             <Routes>
                 <Route element={<ExecutorLayout/>}>
                     <Route path={RoutePaths.Executor.Orders} element={<ExecutorOrdersPage/>}/>
-                    <Route path={RoutePaths.Executor.Payments} element={<ClientOrdersPage/>}/>
+                    <Route path={RoutePaths.Executor.Payments} element={<ExecutorPaymentsPage/>}/>
                     <Route path={RoutePaths.Executor.Schedule} element={<div className="p-4">Бонусы</div>}/>
                     <Route path={RoutePaths.Executor.Profile} element={<div className="p-4">Бонусы</div>}/>
                     <Route path="*" element={<Navigate to={RoutePaths.Executor.Orders}/>}/>
