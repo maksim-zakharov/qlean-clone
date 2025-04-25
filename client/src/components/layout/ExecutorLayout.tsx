@@ -1,50 +1,51 @@
-import {CalendarPlus, ClipboardList, Home, LucideIcon, User, UserRound, Wallet} from "lucide-react"
-import {Button} from "@/components/ui/button"
-import {Outlet, useLocation, useNavigate} from "react-router-dom"
-import {Header} from "../ui/Header.tsx";
+import {CalendarPlus, ClipboardList, LucideIcon, User, Wallet} from "lucide-react"
+import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import React, {useEffect, useState} from "react";
-import {AddressSheet} from "../AddressSheet";
-import {Typography} from "../ui/Typography.tsx";
-import {useGetAddressesQuery} from "../../api.ts";
+import React from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
-import {selectFullAddress} from "../../slices/createOrderSlice.ts";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
 
 type MenuItem = {
-    icon: LucideIcon
+    icon: LucideIcon | any
     label: string
     path: string
 }
 
-const menuItems: MenuItem[] = [
-    {
-        icon: ClipboardList,
-        label: 'Orders',
-        path: RoutePaths.Executor.Orders
-    },
-    {
-        icon: Wallet,
-        label: 'Payments',
-        path: RoutePaths.Executor.Payments
-    },
-    {
-        icon: CalendarPlus,
-        label: 'Schedule',
-        path: RoutePaths.Executor.Schedule
-    },
-    {
-        icon: UserRound,
-        label: 'Profile',
-        path: RoutePaths.Executor.Profile
-    }
-]
-
 export const ExecutorLayout = () => {
+    const userInfo = useSelector(state => state.createOrder.userInfo);
+    const navigate = useNavigate()
     const {isLoading} = useTelegram();
+
+    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate('/profile')}>
+        <AvatarImage src={userInfo?.photoUrl}/>
+        <AvatarFallback><User/></AvatarFallback>
+    </Avatar>
+
+    const menuItems: MenuItem[] = [
+        {
+            icon: ClipboardList,
+            label: 'Orders',
+            path: RoutePaths.Executor.Orders
+        },
+        {
+            icon: Wallet,
+            label: 'Payments',
+            path: RoutePaths.Executor.Payments
+        },
+        {
+            icon: CalendarPlus,
+            label: 'Schedule',
+            path: RoutePaths.Executor.Schedule
+        },
+        {
+            icon: Profile,
+            label: 'Profile',
+            path: RoutePaths.Executor.Profile
+        }
+    ]
 
     if (isLoading) {
         return <div>

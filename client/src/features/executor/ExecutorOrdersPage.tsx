@@ -1,10 +1,9 @@
 import React, {useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
-import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {ChevronRight, CircleX, ClipboardPlus, Info, ListPlus, RotateCw, Star} from "lucide-react";
+import { CircleX, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -14,9 +13,8 @@ import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import {Header} from "../../components/ui/Header.tsx";
-import {List} from "../../components/ui/list.tsx";
-import {Badge} from "../../components/ui/badge.tsx";
-import {Checkbox} from "../../components/ui/checkbox.tsx";
+
+
 import {formatDuration} from "../../components/EstimatedTime.tsx";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";

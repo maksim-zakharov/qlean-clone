@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Зачатки исполнителя: список заказов">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="уменьшил меню">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ExecutorLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ExecutorLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -52,10 +57,13 @@
   "keyToString": {
     "Node.js.main.ts.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/features/executor",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "D:/Projects/qlean-clone/client",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.build.executor": "Run",
@@ -64,7 +72,7 @@
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
     "npm.start:dev.executor": "Run",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -177,22 +185,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00239" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743534699751</created>
-      <option name="number" value="00239" />
-      <option name="presentableId" value="LOCAL-00239" />
-      <option name="project" value="LOCAL" />
-      <updated>1743534699751</updated>
-    </task>
-    <task id="LOCAL-00240" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743535988840</created>
-      <option name="number" value="00240" />
-      <option name="presentableId" value="LOCAL-00240" />
-      <option name="project" value="LOCAL" />
-      <updated>1743535988840</updated>
     </task>
     <task id="LOCAL-00241" summary="prisma address">
       <option name="closed" value="true" />
@@ -570,7 +562,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745569892785</updated>
     </task>
-    <option name="localTasksCounter" value="288" />
+    <task id="LOCAL-00288" summary="Фикс машинки в табах, уменьшил меню">
+      <option name="closed" value="true" />
+      <created>1745570798617</created>
+      <option name="number" value="00288" />
+      <option name="presentableId" value="LOCAL-00288" />
+      <option name="project" value="LOCAL" />
+      <updated>1745570798617</updated>
+    </task>
+    <task id="LOCAL-00289" summary="уменьшил меню">
+      <option name="closed" value="true" />
+      <created>1745571262832</created>
+      <option name="number" value="00289" />
+      <option name="presentableId" value="LOCAL-00289" />
+      <option name="project" value="LOCAL" />
+      <updated>1745571262832</updated>
+    </task>
+    <option name="localTasksCounter" value="290" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,6 +618,8 @@
     <MESSAGE value="почистил лишний фронт" />
     <MESSAGE value="зачатки ролей и авторизации" />
     <MESSAGE value="Зачатки исполнителя: список заказов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Зачатки исполнителя: список заказов" />
+    <MESSAGE value="Фикс машинки в табах, уменьшил меню" />
+    <MESSAGE value="уменьшил меню" />
+    <option name="LAST_COMMIT_MESSAGE" value="уменьшил меню" />
   </component>
 </project>
