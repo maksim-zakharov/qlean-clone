@@ -109,7 +109,7 @@ export const ExecutorPaymentsPage = () => {
                 </Button>
                 <Typography.H2 className="mb-0 text-[24px]">{moneyFormat(totalSum)}</Typography.H2>
             </div>
-            <ChartContainer config={chartConfig} className="w-[120px] h-[60px]">
+            <ChartContainer config={chartConfig} className="w-[120px] mb-[-8px]">
                 <AreaChart
                     accessibilityLayer
                     data={chartData}
@@ -138,7 +138,7 @@ export const ExecutorPaymentsPage = () => {
                         tickLine={false}
                         axisLine={false}
                         tickMargin={2}
-                        minTickGap={30}
+                        minTickGap={60}
                         tickFormatter={val => dayjs(val).format('D')}
                     />
                     <Area
