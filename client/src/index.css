@@ -365,6 +365,12 @@ html {
         background-color: var(--tg-theme-section-bg-color);
     }
 
+    [data-sonner-toast][data-styled=true]{
+        border: none !important;
+        background-color: var(--tg-theme-section-bg-color) !important;
+        color: var(--tg-theme-text-color) !important;
+    }
+
     .card-bg-color-transparency {
         background-color: rgb(from var(--tg-theme-section-bg-color) r g b / 90%);
     }
@@ -376,6 +382,12 @@ html {
 
         .card-bg-color {
             background-color: var(--tg-theme-secondary-bg-color);
+        }
+
+        [data-sonner-toast][data-styled=true]{
+            border: none !important;
+            background-color: var(--tg-theme-secondary-bg-color) !important;
+            color: var(--tg-theme-text-color) !important;
         }
 
         .card-bg-color-transparency {
@@ -398,5 +410,9 @@ html {
     .lucide-star path {
         fill: inherit !important;
         stroke: inherit !important;
+    }
+
+    [data-sonner-toast][data-y-position=bottom]{
+        bottom: var(--tg-safe-area-inset-bottom) !important;
     }
 }

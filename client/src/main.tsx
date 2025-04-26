@@ -10,6 +10,7 @@ import duration from 'dayjs/plugin/duration'
 import updateLocale from 'dayjs/plugin/updateLocale' // ES 2015
 import 'dayjs/locale/ru';
 import dayjs from "dayjs";
+import {Toaster} from "sonner";
 
 dayjs.extend(duration)
 dayjs.extend(updateLocale)
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <Provider store={store}>
                 <App/>
+                <Toaster duration={150000}/>
             </Provider>
         </BrowserRouter>
     </StrictMode>

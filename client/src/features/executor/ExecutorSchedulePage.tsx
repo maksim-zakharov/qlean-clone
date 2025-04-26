@@ -3,6 +3,8 @@ import React, {useEffect, useMemo, useState} from "react";
 import dayjs from "dayjs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
 import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api.ts";
+import {toast} from "sonner";
+import {CalendarCheck} from "lucide-react";
 
 
 const weekDays = [];
@@ -67,7 +69,7 @@ export const ExecutorSchedulePage = () => {
         return acc;
     },{}), [schedule]);
 
-    const handleOnToggle = (day: any, event: any) => {
+    const handleOnToggle = async (day: any, event: any) => {
         console.log(event.target.dataset.value)
         console.log(event.target.dataset.state)
 
@@ -85,8 +87,15 @@ export const ExecutorSchedulePage = () => {
             scheduleMap[day] = scheduleMap[day].filter(val => val !== event.target.dataset.value)
         }
 
-        updateSchedule({
+        await updateSchedule({
             "days": Object.entries<string[]>(scheduleMap).map(([dayOfWeek, timeSlots]) => ({dayOfWeek, isDayOff: timeSlots?.length <= 0, timeSlots}))
+        }).unwrap()
+
+        toast("Расписание обновлено", {
+            classNames: {
+                icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
+            },
+            icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]" />
         })
     }
 
