@@ -318,18 +318,6 @@ html {
         scrollbar-width: none !important; /* Firefox */
     }
 
-    .height-safe-area-inset-bottom {
-        height: calc(48px + env(safe-area-inset-bottom));
-    }
-
-    .pb-safe-area-inset-bottom {
-        padding-bottom: calc(48px + env(safe-area-inset-bottom));
-    }
-
-    .mb-safe-area-inset-bottom {
-        margin-bottom: calc(48px + env(safe-area-inset-bottom));
-    }
-
     .badge-primary {
         background-color: var(--tg-theme-accent-text-color);
         color: var(--tg-theme-button-text-color);
@@ -413,6 +401,6 @@ html {
     }
 
     [data-sonner-toast][data-y-position=bottom]{
-        bottom: var(--tg-safe-area-inset-bottom) !important;
+        bottom: calc(50px + var(--tg-safe-area-inset-bottom)) !important;
     }
 }

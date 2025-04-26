@@ -7,7 +7,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
-      className="toaster group bottom-[calc(50px + var(--tg-safe-area-inset-bottom))]"
+      className="toaster group"
       style={
         {
           "--normal-bg": "var(--popover)",
