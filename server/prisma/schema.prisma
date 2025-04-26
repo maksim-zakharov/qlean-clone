@@ -90,6 +90,7 @@ model User {
   phone  String?
   services   ServiceExecutors[]  // Обратное отношение
   orders   Order[]  // Обратное отношение
+  scheduleDays ScheduleDay[]
 }
 
 model Keyword {
@@ -109,4 +110,34 @@ model ServiceExecutors {
 
   @@id([serviceId, userId])  // Составной первичный ключ
   @@index([userId])          // Дополнительный индекс
+}
+
+enum DayOfWeek {
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+  SUN
+}
+
+model ScheduleDay {
+  id          Int         @id @default(autoincrement())
+  dayOfWeek   DayOfWeek
+  isDayOff    Boolean     @default(false)
+  timeSlots   TimeSlot[]
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+
+  @@unique([userId, dayOfWeek])
+}
+
+model TimeSlot {
+  id            Int         @id @default(autoincrement())
+  time          DateTime    @db.Time(6) // Храним только время
+  scheduleDay   ScheduleDay @relation(fields: [scheduleDayId], references: [id], onDelete: Cascade)
+  scheduleDayId Int
+
+  @@unique([scheduleDayId, time]) // Уникальная комбинация дня и времени
 }

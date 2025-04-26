@@ -49,7 +49,6 @@ export const ExecutorPaymentsPage = () => {
         return acc;
     }, [])
 
-    console.log(chartData);
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
         dispatch(selectBaseService(order))

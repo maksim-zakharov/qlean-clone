@@ -1,15 +1,4 @@
-import {
-    Brush,
-    Building2, CircleX,
-    ClipboardPlus,
-    Footprints,
-    Grid2x2,
-    Hammer,
-    Home,
-    LucideIcon,
-    Shirt,
-    Sofa,
-    Sparkles
+import { CircleX
 } from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import React, {useEffect} from "react";

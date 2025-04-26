@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="chart">
+      <change afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,30 +193,6 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-    </task>
-    <task id="LOCAL-00243" summary="prisma address">
-      <option name="closed" value="true" />
-      <created>1743580606736</created>
-      <option name="number" value="00243" />
-      <option name="presentableId" value="LOCAL-00243" />
-      <option name="project" value="LOCAL" />
-      <updated>1743580606736</updated>
-    </task>
-    <task id="LOCAL-00244" summary="разнес контроллер на несколько">
-      <option name="closed" value="true" />
-      <created>1743589043511</created>
-      <option name="number" value="00244" />
-      <option name="presentableId" value="LOCAL-00244" />
-      <option name="project" value="LOCAL" />
-      <updated>1743589043511</updated>
-    </task>
-    <task id="LOCAL-00245" summary="читабельность призма ошибок">
-      <option name="closed" value="true" />
-      <created>1743589512122</created>
-      <option name="number" value="00245" />
-      <option name="presentableId" value="LOCAL-00245" />
-      <option name="project" value="LOCAL" />
-      <updated>1743589512122</updated>
     </task>
     <task id="LOCAL-00246" summary="читабельность призма ошибок">
       <option name="closed" value="true" />
@@ -573,7 +562,31 @@
       <option name="project" value="LOCAL" />
       <updated>1745580102064</updated>
     </task>
-    <option name="localTasksCounter" value="292" />
+    <task id="LOCAL-00292" summary="chart">
+      <option name="closed" value="true" />
+      <created>1745580423423</created>
+      <option name="number" value="00292" />
+      <option name="presentableId" value="LOCAL-00292" />
+      <option name="project" value="LOCAL" />
+      <updated>1745580423423</updated>
+    </task>
+    <task id="LOCAL-00293" summary="chart">
+      <option name="closed" value="true" />
+      <created>1745580605234</created>
+      <option name="number" value="00293" />
+      <option name="presentableId" value="LOCAL-00293" />
+      <option name="project" value="LOCAL" />
+      <updated>1745580605234</updated>
+    </task>
+    <task id="LOCAL-00294" summary="chart">
+      <option name="closed" value="true" />
+      <created>1745581724012</created>
+      <option name="number" value="00294" />
+      <option name="presentableId" value="LOCAL-00294" />
+      <option name="project" value="LOCAL" />
+      <updated>1745581724012</updated>
+    </task>
+    <option name="localTasksCounter" value="295" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

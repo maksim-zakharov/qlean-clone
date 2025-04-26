@@ -55,7 +55,7 @@ const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
 export const api = createApi({
     reducerPath: "api",
     tagTypes: [
-        "Service", "Order", 'Address', 'User'
+        "Service", "Order", 'Address', 'User', 'Schedule'
     ],
     baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
@@ -89,6 +89,20 @@ export const api = createApi({
                 params
             }),
             providesTags: ['Order'],
+        }),
+        updateSchedule: builder.mutation<any, any>({
+            query: (params) => ({
+                url: "/schedule",
+                method: 'PUT',
+                body: params,
+            }),
+            invalidatesTags: ['Schedule'],
+        }),
+        getSchedule: builder.query<any, any>({
+            query: () => ({
+                url: "/schedule",
+            }),
+            providesTags: ['Schedule'],
         }),
         addOrder: builder.mutation<any, any>({
             query: (params) => ({
@@ -176,5 +190,7 @@ export const {
     useAddAddressMutation,
     useEditAddressMutation,
     useDeleteAddressMutation,
-    useGetExecutorOrdersQuery
+    useGetExecutorOrdersQuery,
+    useUpdateScheduleMutation,
+    useGetScheduleQuery,
 } = api;

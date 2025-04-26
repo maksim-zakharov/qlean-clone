@@ -4,7 +4,8 @@ import React, {useEffect, useState} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api.ts";
 import {InputWithLabel} from "./InputWithLabel.tsx";
-import {MapPinned, MapPlus, Trash2} from "lucide-react";
+import { MapPlus, Trash2} from "lucide-react";
+
 
 
 export function AddAddressSheet({
@@ -68,7 +69,7 @@ export function AddAddressSheet({
                 `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ru`
             );
             const data = await response.json();
-            let text = [];
+            const text = [];
             if(data.address.city) text.push(data.address.city);
             if(data.address.road) text.push(data.address.road);
             if(data.address.house_number) text.push(data.address.house_number);

@@ -3,7 +3,8 @@ import {Button} from "@/components/ui/button"
 import {Outlet, useLocation, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import React, {useEffect, useState} from "react";
+
+import React from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
