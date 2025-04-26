@@ -1,5 +1,5 @@
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
-import React, { useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import dayjs from "dayjs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
 import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api.ts";
@@ -50,6 +50,11 @@ const slots = generateTimeSlots(dayjs());
 export const ExecutorSchedulePage = () => {
     const {data: schedule = []} = useGetScheduleQuery({})
     const [updateSchedule, {isLoading}] = useUpdateScheduleMutation()
+    const [defaultValue, setdefaultValue] = useState<string>();
+
+    useEffect(() => {
+        setTimeout(() => setdefaultValue(weekDays[0].value), 150)
+    }, []);
 
     const scheduleMap = useMemo(() => schedule.reduce((acc, curr) => {
         const {isDayOff, timeSlots} = curr;
@@ -85,18 +90,46 @@ export const ExecutorSchedulePage = () => {
         })
     }
 
+    const calculateDayStatus = (slots: string[]) => {
+        if(slots?.length > 0){
+            const conf = slots.reduce((acc, curr) => {
+                if(!acc.start){
+                    acc.start = curr;
+                }
+                if(!acc.end){
+                    acc.end = curr;
+                }
+
+                if(acc.start.localeCompare(curr) === 1){
+                    acc.start = curr;
+                }
+
+                if(acc.end.localeCompare(curr) === -1){
+                    acc.end = curr;
+                }
+
+                return acc;
+            }, {start: '', end: ''});
+
+            return `${conf.start} - ${conf.end}`;
+        } else {
+            return 'Выходной';
+        }
+    };
+
     return <div className="p-4">
         <Accordion
             type="single"
             collapsible
-            defaultValue="services"
+            value={defaultValue}
+            onValueChange={v => setdefaultValue(v)}
             className="flex flex-col gap-2"
         >
             {weekDays.map(day => <AccordionItem value={day.value} className="rounded-xl">
                 <AccordionTrigger showChevron={false}>
                     <div className="flex justify-between w-full">
                         <span className="text-lg font-medium text-tg-theme-text-color">{day.label}</span>
-                        <span className="text-lg font-medium text-tg-theme-text-color">Выходной</span>
+                        <span className="text-lg font-medium text-tg-theme-text-color">{calculateDayStatus(scheduleMap[day.value.toUpperCase()])}</span>
                     </div>
                 </AccordionTrigger>
                 <AccordionContent>
