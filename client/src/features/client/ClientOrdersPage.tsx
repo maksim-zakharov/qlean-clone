@@ -80,7 +80,7 @@ export const ClientOrdersPage = () => {
             <Typography.H2 className="mb-0">
                 Active
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none" onClick={() => handleOrderClick(ao)}>
+            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none card-bg-color" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -109,7 +109,7 @@ export const ClientOrdersPage = () => {
             <Typography.H2 className="mb-0">
                 All orders
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none card-bg-color" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
