@@ -99,7 +99,7 @@ export const ProfilePage = () => {
             </div>
         </Header>
         <div className="content text-center px-4">
-            <Card className="text-left p-0 gap-0 mt-2 border-none">
+            <Card className="text-left p-0 gap-0 mt-2 border-none card-bg-color">
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
                         <Avatar>
@@ -131,7 +131,7 @@ export const ProfilePage = () => {
                     </div>
                 </div>
             </Card>
-            <Card className="p-0 gap-0 mt-2 border-none">
+            <Card className="p-0 gap-0 mt-2 border-none card-bg-color">
                 <div className="p-4 py-3 flex justify-between items-center">
                     <div className="flex flex-col">
                         <Typography.Title>Telegram notifications</Typography.Title>
