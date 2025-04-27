@@ -31,7 +31,7 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <Provider store={store}>
                 <App/>
-                <Toaster duration={150000}/>
+                <Toaster duration={1500}/>
             </Provider>
         </BrowserRouter>
     </StrictMode>
