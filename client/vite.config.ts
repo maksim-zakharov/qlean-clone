@@ -2,7 +2,6 @@ import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from "path"
-import proxy from 'http-proxy-agent';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,7 +23,7 @@ export default defineConfig({
                 secure: false, // игнорировать ошибки сертификата
                 changeOrigin: true,
                 // Настройка прокси через Charles
-                agent:  new proxy.HttpProxyAgent('http://localhost:8888') // порт Charles
+                // agent:  new proxy.HttpProxyAgent('http://localhost:8888') // порт Charles
             }
         }
     },

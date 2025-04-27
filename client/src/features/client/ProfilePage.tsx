@@ -3,11 +3,10 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
-import {MapPin, Pencil, User} from "lucide-react";
+import {MapPin, User} from "lucide-react";
 import {Card} from "../../components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {useLoginMutation} from "../../api.ts";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import {Switch} from "../../components/ui/switch.tsx";
 import {EditButton} from "../../components/EditButton.tsx";
@@ -42,7 +41,7 @@ export const ProfilePage = () => {
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
-            return 'Отсутствует';
+            return 'Not available';
         }
 
         const phoneNumber = parsePhoneNumberFromString(userInfo.phone, 'RU');
@@ -67,7 +66,7 @@ export const ProfilePage = () => {
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ru`
+                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=en`
             );
             const data = await response.json();
             setAddress(data.address)
@@ -76,10 +75,10 @@ export const ProfilePage = () => {
 
     const addressText = useMemo(() => {
         if(!address){
-            return 'Отсутствует'
+            return 'Not available'
         }
 
-        let text = [];
+        const text = [];
         if(address.city) text.push(address.city);
         if(address.road) text.push(address.road);
         if(address.house_number) text.push(address.house_number);
@@ -100,7 +99,7 @@ export const ProfilePage = () => {
             </div>
         </Header>
         <div className="content text-center px-4">
-            <Card className="text-left p-0 gap-0 mt-2">
+            <Card className="text-left p-0 gap-0 mt-2 border-none">
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex gap-4 items-center">
                         <Avatar>
@@ -114,28 +113,28 @@ export const ProfilePage = () => {
                 </div>
                 <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
                     <div className="flex flex-col">
-                        <Typography.Description>Телефон</Typography.Description>
+                        <Typography.Description>Phone</Typography.Description>
                         <Typography.Title>{phoneText}</Typography.Title>
                     </div>
                     {!userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default" onClick={handleRequestContact}>
-                        Обновить
+                        Refresh
                     </Button>}
                 </div>
                 <div className="p-4 py-3 flex justify-between items-center">
                     <div className="flex gap-2">
                         <MapPin/>
                         <div className="flex flex-col">
-                            <Typography.Description>Адрес</Typography.Description>
+                            <Typography.Description>Address</Typography.Description>
                             <Typography.Title
                                 className="flex">{addressText}</Typography.Title>
                         </div>
                     </div>
                 </div>
             </Card>
-            <Card className="p-0 gap-0 mt-2">
+            <Card className="p-0 gap-0 mt-2 border-none">
                 <div className="p-4 py-3 flex justify-between items-center">
                     <div className="flex flex-col">
-                        <Typography.Title>Уведомления в Telegram</Typography.Title>
+                        <Typography.Title>Telegram notifications</Typography.Title>
                     </div>
                     <Switch
                         checked={writeAccessReceived}
@@ -143,7 +142,7 @@ export const ProfilePage = () => {
                     />
                 </div>
             </Card>
-            <Button className="mt-2 [color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Выйти из аккаунта</Button>
+            <Button className="mt-2 [color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Log out</Button>
         </div>
     </>
 }

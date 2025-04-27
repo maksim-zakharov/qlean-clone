@@ -13,9 +13,11 @@ interface AddressSheetProps {
     addresses: any[]
     onAddressSelect: (address: any) => void
     isError?: boolean
+    className?: string;
 }
 
 export function AddressSheet({
+                                 className,
                                  isError,
                                  addresses,
                                  onAddressSelect,
@@ -47,12 +49,12 @@ export function AddressSheet({
 
     return (
         <Sheet onOpenChange={handleOpenChange} open={_opened}>
-            <SheetTrigger asChild onClick={() => setOpened(true)}>
+            <SheetTrigger asChild onClick={() => setOpened(true)} className={className}>
                 {children}
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[90vh] pb-[env(safe-area-inset-bottom)]">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Мои адреса</SheetTitle>
+                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Addresses</SheetTitle>
                 </SheetHeader>
                 {isError && <EmptyState
                     icon={<CircleX className="h-10 w-10" />}
@@ -61,7 +63,7 @@ export function AddressSheet({
                     action={
                         <Button onClick={() => window.location.reload()}
                         >
-                            Обновить страницу
+                            Refresh page
                         </Button>}
                 />}
                 {!isError && addresses.length === 0 && <EmptyState
@@ -71,7 +73,7 @@ export function AddressSheet({
                     action={<AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
                         >
-                            Добавить адрес
+                            Add address
                         </Button>
                     </AddAddressSheet>}
                 />}
@@ -91,7 +93,7 @@ export function AddressSheet({
                             wide
                             size="lg"
                         >
-                            Добавить адрес
+                            Add address
                         </Button>
                     </AddAddressSheet>
                 </div>}

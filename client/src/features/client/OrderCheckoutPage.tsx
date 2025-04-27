@@ -1,6 +1,6 @@
 import {BackButton} from "@/components/BackButton"
 import {Button} from "@/components/ui/button"
-import {Calendar, ChevronRight, CreditCard, MessageSquare} from "lucide-react"
+import {Calendar, ChevronRight, MessageSquare} from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import {Checkbox} from "@/components/ui/checkbox"
 import React, {useMemo, useState} from "react";
@@ -46,7 +46,7 @@ export const OrderCheckoutPage = () => {
 
     const dateTitle = useMemo(() => {
         if (!selectedTimestamp) {
-            return 'Дата и время уборки';
+            return 'Select date and time';
         }
 
         return dayjs(selectedTimestamp).format('dddd, D MMMM HH:mm');
@@ -85,22 +85,20 @@ export const OrderCheckoutPage = () => {
     return (
         <>
             <AlertDialogWrapper open={Boolean(error)} title="Не удалось оформить заказ" description={error}
-                                onOkText="Хорошо"
+                                onOkText="Ok"
                                 onOkClick={() => setError(undefined)}/>
             <Header>
-                <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton url={RoutePaths.Orders}/>
-                    <AddressSheet
-                        addresses={addresses}
-                        onAddressSelect={handleSelectAddress}
-                    >
-                        <Button variant="ghost"
-                                className="flex-1 flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
-                            <Typography.Title>Оформление заказа</Typography.Title>
-                            <Typography.Description>{fullAddress}</Typography.Description>
-                        </Button>
-                    </AddressSheet>
-                </div>
+                <BackButton url={RoutePaths.Orders}/>
+                <AddressSheet
+                    addresses={addresses}
+                    onAddressSelect={handleSelectAddress}
+                >
+                    <Button variant="ghost"
+                            className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                        <Typography.Title>Checkout</Typography.Title>
+                        <Typography.Description>{fullAddress}</Typography.Description>
+                    </Button>
+                </AddressSheet>
             </Header>
 
             <div className="content flex flex-col gap-4 p-4">
@@ -135,25 +133,25 @@ export const OrderCheckoutPage = () => {
                                     className="[background-color:var(--tg-accent-orange)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
                                     <MessageSquare className="w-5 h-5 text-tg-theme-text-color"/>
                                 </div>
-                                <span className="text-tg-theme-text-color">Пожелание к заказу</span>
+                                <span className="text-tg-theme-text-color">Comments</span>
                             </div>
                             <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
                         </Button>
                     </CommentsSheet>
 
                     {/* Payment Method */}
-                    <Button
-                        variant="ghost"
-                        className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
-                    >
-                        <div className="flex items-center gap-3">
-                            <div
-                                className="[background-color:var(--tg-accent-green)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                <CreditCard className="w-5 h-5 text-tg-theme-text-color"/>
-                            </div>
-                            <span className="text-tg-theme-text-color">Мир *5987</span>
-                        </div>
-                    </Button>
+                    {/*<Button*/}
+                    {/*    variant="ghost"*/}
+                    {/*    className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"*/}
+                    {/*>*/}
+                    {/*    <div className="flex items-center gap-3">*/}
+                    {/*        <div*/}
+                    {/*            className="[background-color:var(--tg-accent-green)] w-7 h-7 [border-radius:5px] flex items-center justify-center">*/}
+                    {/*            <CreditCard className="w-5 h-5 text-tg-theme-text-color"/>*/}
+                    {/*        </div>*/}
+                    {/*        <span className="text-tg-theme-text-color">Мир *5987</span>*/}
+                    {/*    </div>*/}
+                    {/*</Button>*/}
                 </List>
 
                 {/* Order Summary */}
@@ -166,7 +164,7 @@ export const OrderCheckoutPage = () => {
                     <AccordionItem value="services">
                         <AccordionTrigger disabled={!options.length}>
                             <div className="flex justify-between w-full">
-                                <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
+                                <span className="text-lg font-medium text-tg-theme-text-color">Summary</span>
                                 <div className="flex items-center gap-1 pr-2">
                                         <span
                                             className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
@@ -205,7 +203,7 @@ export const OrderCheckoutPage = () => {
                 <div className="flex items-center gap-2">
                     <Checkbox id="terms"/>
                     <label htmlFor="terms" className="text-sm text-tg-theme-text-color">
-                        Принимаю <span className="text-tg-theme-link-color">условия оказания услуги</span>
+                        I accept <span className="text-tg-theme-link-color">the terms of service</span>
                     </label>
                 </div>
             </div>
@@ -218,7 +216,7 @@ export const OrderCheckoutPage = () => {
                     loading={isLoading}
                     onClick={handleOnSubmit}
                 >
-                    Оформить заказ
+                    Checkout
                 </Button>
             </BottomActions>
         </>

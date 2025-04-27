@@ -46,7 +46,7 @@ const MainPage = () => {
     return (
         <div className="px-4">
             {services.map(category => (
-                <section key={category.id} className="mb-6 mt-4">
+                <section key={category.id} className="mb-4">
                     <Typography.H2>
                         {category.name}
                     </Typography.H2>

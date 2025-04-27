@@ -66,7 +66,7 @@ export function AddAddressSheet({
     const handleMapClick = () => {
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ru`
+                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=en`
             );
             const data = await response.json();
             const text = [];
@@ -89,20 +89,20 @@ export function AddAddressSheet({
             <SheetContent side="bottom" extra={address ? <Button variant="ghost" className="pr-1 text-tg-theme-hint-color h-[28px]" loading={deleteLoading} onClick={handleOnDelete}><Trash2 /></Button> : null}>
                 <SheetHeader>
                     <SheetTitle
-                        className="text-xl font-bold text-tg-theme-text-color text-left">{address ? 'Редактирование' : 'Добавление'} адреса</SheetTitle>
+                        className="text-xl font-bold text-tg-theme-text-color text-left">{address ? 'Editing' : 'Adding'} address</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 mt-4 mb-4">
-                    <InputWithLabel label="Название" value={name}
+                    <InputWithLabel label="Name" value={name}
                                     onChange={e => setAddress(prevState => ({...prevState, name: e.target.value}))}/>
                     <div className="flex gap-2 items-end">
-                        <InputWithLabel label="Адрес" value={fullAddress}
+                        <InputWithLabel label="Address" value={fullAddress}
                                         onChange={e => setAddress(prevState => ({
                                             ...prevState,
                                             fullAddress: e.target.value
                                         }))}/>
                         <Button size="sm" className="p-0 border-none h-9" variant="default" onClick={handleMapClick}><MapPlus /></Button>
                     </div>
-                    <InputWithLabel label="Комментарий" value={comments}
+                    <InputWithLabel label="Comments" value={comments}
                                     onChange={e => setAddress(prevState => ({
                                         ...prevState,
                                         comments: e.target.value
@@ -115,7 +115,7 @@ export function AddAddressSheet({
                         loading={!address ? addLoading : editLoading}
                         onClick={handleOnSubmit}
                     >
-                        Сохранить
+                        Save
                     </Button>
                 </div>
             </SheetContent>

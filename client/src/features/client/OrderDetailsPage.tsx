@@ -132,7 +132,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>
                             №{order.id}
                         </Typography.Title>
-                        <Typography.Title>{order.status === 'active' ? 'Оформлен' : order.status === 'canceled' ? 'Отменен' : 'Завершен'}</Typography.Title>
+                        <Typography.Title>{order.status === 'active' ? 'Placed' : order.status === 'canceled' ? 'Canceled' : 'Completed'}</Typography.Title>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">

@@ -7,14 +7,13 @@ import dayjs from "dayjs";
 import {CalendarSync, CircleX, ClipboardPlus, Star} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
-import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
+import {retryOrder} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Area, AreaChart, CartesianGrid, XAxis} from "recharts"
 import {ChartConfig, ChartContainer} from "../../components/ui/chart.tsx";
-
 
 export const ExecutorPaymentsPage = () => {
     const navigate = useNavigate()
@@ -48,14 +47,6 @@ export const ExecutorPaymentsPage = () => {
         acc.push({date: curr.date, payment: curr.serviceVariant?.basePrice + curr.options.reduce((acc, curr) => acc + curr?.price, 0) + (acc[index - 1]?.payment || 0)});
         return acc;
     }, [])
-
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(order))
-        navigate('/order')
-    }
-
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
 
     const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
@@ -100,11 +91,16 @@ export const ExecutorPaymentsPage = () => {
         />
     }
 
+    const paymentsLabel = {
+        'week': 'week',
+        'month': 'month'
+    }
+
     return <div className="p-4 flex flex-col gap-4">
         <Card className="card-bg-color px-4 py-3 flex-row justify-between border-0">
             <div className="flex flex-col">
                 <Button className="p-0 border-none h-6 w-max" variant="default" size="sm" onClick={() => setPaymentsPeriod(prevState => prevState !== 'week' ? 'week' : 'month')}>
-                    <CalendarSync className="w-4 h-4 mr-1" /><Typography.Description className="text-tg-theme-button-color">Выплаты за {paymentsPeriod === 'week' ? 'неделю' : 'месяц'}</Typography.Description>
+                    <CalendarSync className="w-4 h-4 mr-1" /><Typography.Description className="text-tg-theme-button-color">Payments per {paymentsLabel[paymentsPeriod]}</Typography.Description>
                 </Button>
                 <Typography.H2 className="mb-0 text-[24px]">{moneyFormat(totalSum)}</Typography.H2>
             </div>
@@ -153,7 +149,7 @@ export const ExecutorPaymentsPage = () => {
             </ChartContainer>
         </Card>
         {completedOrders.length > 0 && <div className="flex flex-col gap-4">
-            {completedOrders.map(ao => <Card className="card-bg-color pl-4 gap-0 p-3 pb-0 border-0" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="card-bg-color pl-4 gap-0 p-3 pb-0 border-0">
                 <div className="flex justify-between">
                     <Typography.Title>{ao.baseService?.name}</Typography.Title>
                     <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
@@ -169,8 +165,8 @@ export const ExecutorPaymentsPage = () => {
                     <Star className="w-4 h-4 text-tg-theme-button-color"/>
                     <Star className="w-4 h-4 text-tg-theme-button-color"/>
                 </div>
-                {ao.comment &&<div className="flex flex-col mt-2 separator-shadow-top py-3">
-                    <Typography.Description>Комментарий к оценке</Typography.Description>
+                {ao.comment &&<div className="flex flex-col mt-1 separator-shadow-top py-3">
+                    <Typography.Description>Comment</Typography.Description>
                     <Typography.Title>{ao.comment}</Typography.Title>
                 </div>}
             </Card>)}

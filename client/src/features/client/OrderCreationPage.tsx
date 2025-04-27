@@ -32,7 +32,7 @@ export const OrderCreationPage = () => {
     const dispatch = useDispatch();
 
     // Если создаем - true, если редактируем - false;
-    const isDraft = !Boolean(orderId);
+    const isDraft = !orderId;
 
     // Либо мы перешли сюда из других страниц, либо просто откуда то как то - и берем первый сервис из списка
     const currentService = useMemo(() => services.find(s => baseService ? s.id === baseService.id : s) || services[0], [services, baseService]);
@@ -98,11 +98,9 @@ export const OrderCreationPage = () => {
     return (
         <>
             <Header>
-                <div className="grid grid-cols-[40px_auto_40px]">
-                    <BackButton url={backUrl} onClick={handleBackClick}/>
-                    <Typography.Title
-                        className="items-center flex justify-center">{baseService?.name}</Typography.Title>
-                </div>
+                <BackButton url={backUrl} onClick={handleBackClick}/>
+                <Typography.Title
+                    className="items-center flex justify-center">{baseService?.name}</Typography.Title>
             </Header>
             <div className="content">
                     <Tabs defaultValue={variantId} value={variantId}>
@@ -128,7 +126,7 @@ export const OrderCreationPage = () => {
                                         className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
                                     {option.isPopular ? (
                                         <Badge className="flex gap-1 items-center"><Star
-                                            className="w-3 h-3"/>ПОПУЛЯРНО</Badge>
+                                            className="w-3 h-3"/>POPULAR</Badge>
                                     ) : <div/>}
                                 </div>
                                 <span
@@ -147,7 +145,7 @@ export const OrderCreationPage = () => {
                     onClick={handleNext}
                     loading={patchOrderLoading}
                     size="lg"
-                ><span className="flex-1 text-left">{isDraft ? 'Далее' : 'Сохранить'}</span>
+                ><span className="flex-1 text-left">{isDraft ? 'Continue' : 'Save'}</span>
                     <span>{moneyFormat(totalPrice)}</span>
                 </Button>
             </BottomActions>

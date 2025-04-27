@@ -1,6 +1,6 @@
 import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
-import {Outlet, useLocation, useNavigate} from "react-router-dom"
+import {Outlet, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 
@@ -16,33 +16,10 @@ import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
 
 type MenuItem = {
-    icon: LucideIcon
+    icon: LucideIcon | any
     label: string
     path: string
 }
-
-const menuItems: MenuItem[] = [
-    {
-        icon: Home,
-        label: 'Главная',
-        path: RoutePaths.Root
-    },
-    {
-        icon: ClipboardList,
-        label: 'Заказы',
-        path: RoutePaths.Orders
-    },
-    // {
-    //     icon: Gift,
-    //     label: 'Бонусы',
-    //     path: '/bonuses'
-    // },
-    // {
-    //     icon: User,
-    //     label: 'Профиль',
-    //     path: '/profile'
-    // }
-]
 
 export const ClientLayout = () => {
     const {isLoading} = useTelegram();
@@ -50,7 +27,39 @@ export const ClientLayout = () => {
     const {data: addresses = [], isError} = useGetAddressesQuery();
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
-    const location = useLocation();
+
+    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Profile)}>
+        <AvatarImage src={userInfo?.photoUrl}/>
+        <AvatarFallback><User/></AvatarFallback>
+    </Avatar>
+
+    const menuItems: MenuItem[] = [
+        {
+            icon: Home,
+            label: 'Home',
+            path: RoutePaths.Root
+        },
+        {
+            icon: ClipboardList,
+            label: 'Orders',
+            path: RoutePaths.Orders
+        },
+        {
+            icon: Profile,
+            label: 'Profile',
+            path: RoutePaths.Profile
+        }
+        // {
+        //     icon: Gift,
+        //     label: 'Бонусы',
+        //     path: '/bonuses'
+        // },
+        // {
+        //     icon: User,
+        //     label: 'Профиль',
+        //     path: '/profile'
+        // }
+    ]
     const dispatch = useDispatch();
 
     const handleSelectAddress = (address: any) => {
@@ -88,24 +97,18 @@ export const ClientLayout = () => {
 
     return <>
         <Header>
-            <div className="grid grid-cols-[40px_auto_40px]">
-                <Avatar onClick={() => navigate('/profile')}>
-                    <AvatarImage src={userInfo?.photoUrl}/>
-                    <AvatarFallback><User/></AvatarFallback>
-                </Avatar>
-                <div className="flex-1 flex flex-col items-center">
-                    <Typography.Description>Адрес</Typography.Description>
-                    <AddressSheet
-                        isError={isError}
-                        addresses={addresses}
-                        onAddressSelect={handleSelectAddress}
-                    >
-                        <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                            {fullAddress?.fullAddress || 'Выберите адрес'} <span
-                            className="ml-2 text-tg-theme-subtitle-text-color">›</span>
-                        </Button>
-                    </AddressSheet>
-                </div>
+            <div className="flex-1 flex flex-col items-center">
+                <Typography.Description>Address</Typography.Description>
+                <AddressSheet
+                    isError={isError}
+                    addresses={addresses}
+                    onAddressSelect={handleSelectAddress}
+                >
+                    <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
+                        {fullAddress?.fullAddress || 'Выберите адрес'} <span
+                        className="ml-2 text-tg-theme-subtitle-text-color">›</span>
+                    </Button>
+                </AddressSheet>
             </div>
         </Header>
 

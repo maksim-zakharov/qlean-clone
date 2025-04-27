@@ -10,7 +10,7 @@ import {CalendarCheck} from "lucide-react";
 const weekDays = [];
 
 // Создаем базовую дату (понедельник)
-const baseDate = dayjs().startOf('week').add(1, 'day');
+const baseDate = dayjs().startOf('week');
 
 // Генерируем массив дней недели
 for (let i = 0; i < 7; i++) {
@@ -91,7 +91,7 @@ export const ExecutorSchedulePage = () => {
             "days": Object.entries<string[]>(scheduleMap).map(([dayOfWeek, timeSlots]) => ({dayOfWeek, isDayOff: timeSlots?.length <= 0, timeSlots}))
         }).unwrap()
 
-        toast("Расписание обновлено", {
+        toast("Schedule updated", {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },
@@ -122,7 +122,7 @@ export const ExecutorSchedulePage = () => {
 
             return `${conf.start} - ${conf.end}`;
         } else {
-            return 'Выходной';
+            return 'Day off';
         }
     };
 
@@ -147,7 +147,7 @@ export const ExecutorSchedulePage = () => {
                             {slot.time}
                         </ToggleGroupItem>)}
                         <ToggleGroupItem value="dayoff" onClick={event => handleOnToggle(day.value, event)} className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none col-span-2">
-                            Выходной
+                            Day off
                         </ToggleGroupItem>
                     </ToggleGroup>
                 </AccordionContent>

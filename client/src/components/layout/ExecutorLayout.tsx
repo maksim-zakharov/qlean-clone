@@ -19,7 +19,7 @@ export const ExecutorLayout = () => {
     const navigate = useNavigate()
     const {isLoading} = useTelegram();
 
-    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate('/profile')}>
+    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Executor.Profile)}>
         <AvatarImage src={userInfo?.photoUrl}/>
         <AvatarFallback><User/></AvatarFallback>
     </Avatar>

@@ -4,8 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CircleX, ClipboardPlus, ListPlus, Map, RotateCw} from "lucide-react";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {CircleX, ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -71,7 +70,7 @@ export const ClientOrdersPage = () => {
             action={
                 <Button onClick={() => navigate(RoutePaths.Root)}
                 >
-                    Выбрать услугу
+                    Choose service
                 </Button>}
         />
     }
@@ -79,9 +78,9 @@ export const ClientOrdersPage = () => {
     return <div className="p-4 flex flex-col gap-4">
         {activeOrders.length > 0 && <div className="flex flex-col gap-4">
             <Typography.H2 className="mb-0">
-                Активные
+                Active
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
+            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -99,18 +98,18 @@ export const ClientOrdersPage = () => {
                     </div>
                     <div className="flex justify-between align-bottom items-center">
                         <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="sm">
-                            <ListPlus className="w-5 h-5 mr-2" /> Добавить услугу
+                            <ListPlus className="w-5 h-5 mr-2" /> Add service
                         </Button>
-                        <Typography.Description>Поддержка</Typography.Description>
+                        <Typography.Description>Support</Typography.Description>
                     </div>
                 </div>
             </Card>)}
         </div>}
         {completedOrders.length > 0 && <div className="flex flex-col gap-4">
             <Typography.H2 className="mb-0">
-                Все заказы
+                All orders
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none" onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -124,14 +123,14 @@ export const ClientOrdersPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
-                        <Typography.Title>{ao.status === 'completed' ? 'Завершен' : 'Отменен'}</Typography.Title>
+                        <Typography.Title>{ao.status === 'active' ? 'Placed' : ao.status === 'canceled' ? 'Canceled' : 'Completed'}</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-center">
                         <Button className="p-0 border-none h-6" variant="default" size="sm"
                                 onClick={(e) => handleRetryClick(e, ao)}>
-                            <RotateCw className="w-5 h-5 mr-2" /> Повторить
+                            <RotateCw className="w-5 h-5 mr-2" /> Repeat
                             </Button>
-                        <Typography.Description>Поддержка</Typography.Description>
+                        <Typography.Description>Support</Typography.Description>
                     </div>
                 </div>
             </Card>)}

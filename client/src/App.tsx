@@ -60,7 +60,7 @@ function App() {
                     <Route path={RoutePaths.Executor.Orders} element={<ExecutorOrdersPage/>}/>
                     <Route path={RoutePaths.Executor.Payments} element={<ExecutorPaymentsPage/>}/>
                     <Route path={RoutePaths.Executor.Schedule} element={<ExecutorSchedulePage/>}/>
-                    <Route path={RoutePaths.Executor.Profile} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path={RoutePaths.Executor.Profile} element={<ProfilePage/>}/>
                     <Route path="*" element={<Navigate to={RoutePaths.Executor.Orders}/>}/>
                 </Route>
             </Routes>

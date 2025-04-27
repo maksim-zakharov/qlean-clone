@@ -10,9 +10,9 @@ export const formatDuration = (minutes: number) => {
     if (hours === 0) {
         return `${remainingMinutes} минут`
     } else if (remainingMinutes === 0) {
-        return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'}`
+        return `${hours} hours`
     } else {
-        return `${hours} ${hours === 1 ? 'час' : hours < 5 ? 'часа' : 'часов'} ${remainingMinutes} минут`
+        return `${hours} hours and ${remainingMinutes} minutes`
     }
 }
 
@@ -20,7 +20,7 @@ const EstimatedTime: FC<{ totalDuration: number }> = ({totalDuration}) => {
 
     return <div className="text-[13px] flex items-center justify-center gap-2 text-tg-theme-button-color text-base">
         <Clock className="w-5 h-5"/>
-        <span>Время уборки примерно {formatDuration(totalDuration)}</span>
+        <span>Cleaning time will take about {formatDuration(totalDuration)}</span>
     </div>
 }
 
