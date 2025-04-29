@@ -3,7 +3,7 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
-import {BriefcaseBusiness, CalendarClock, HandCoins, MapPin, Star, User} from "lucide-react";
+import {BriefcaseBusiness, CalendarClock, HandCoins, MapPin, Star, User, X} from "lucide-react";
 import {Card} from "../../components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
@@ -35,6 +35,7 @@ interface Address {
 }
 
 export const ProfilePage = () => {
+    const [show, setShow] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.createOrder.userInfo);
@@ -137,7 +138,9 @@ export const ProfilePage = () => {
             <Card className="p-0 gap-0">
                 <div className="p-4 py-2 flex justify-between items-center">
                     <div className="flex flex-col">
-                        <Typography.Title className="flex"><img src="../telegram.svg" className="mr-3 h-7 bg-[#2AABEE] rounded-md"/>Telegram notifications</Typography.Title>
+                        <Typography.Title className="flex"><img src="../telegram.svg"
+                                                                className="mr-3 h-7 bg-[#2AABEE] rounded-md"/>Telegram
+                            notifications</Typography.Title>
                     </div>
                     <Switch
                         checked={writeAccessReceived}
@@ -146,9 +149,9 @@ export const ProfilePage = () => {
                 </div>
             </Card>
 
-            <Sheet>
+            <Sheet open={show}>
                 <SheetTrigger asChild>
-                    <Card className="p-0 gap-0">
+                    <Card className="p-0 gap-0" onClick={() => setShow(true)}>
                         <div className="p-4 py-2 flex justify-between items-center">
                             <Typography.Title className="flex">
                                 <BriefcaseBusiness className="mr-3 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>
@@ -158,7 +161,11 @@ export const ProfilePage = () => {
                     </Card>
                 </SheetTrigger>
                 <SheetContent side="bottom"
-                              className="p-0 overflow-hidden pb-[calc(50px+var(--tg-safe-area-inset-bottom))] min-h-[calc(640px+var(--tg-safe-area-inset-bottom))] h-[calc(100vh-50px)] card-bg-color">
+                              className="p-0 overflow-hidden pb-[calc(50px+var(--tg-safe-area-inset-bottom))] min-h-[calc(700px+var(--tg-safe-area-inset-bottom))] h-[calc(100vh-50px)]">
+                    <Button
+                        onClick={() => setShow(false)}
+                        className="border-none absolute rounded-3xl p-2 card-bg-color-transparency top-2 left-2"
+                        variant="ghost"><X/></Button>
                     <img src="../img.png" className="h-[240px] object-cover"/>
                     <div className="p-4">
                         <SheetHeader className="mb-2">
@@ -167,23 +174,25 @@ export const ProfilePage = () => {
                                 className="text-3xl">Join Us</Typography.H2></SheetTitle>
                         </SheetHeader>
                         <div className="flex mb-7">
-                            Access local service jobs, manage your schedule, and receive instant payouts. Your effort, your rules.
+                            Access local service jobs, manage your schedule, and receive instant payouts. Your effort,
+                            your rules.
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-3">
-                            <CalendarClock className="h-10 w-10 rounded-3xl bg-[var(--chart-1)] p-2 mr-3" />
+                            <CalendarClock className="h-10 w-10 rounded-3xl bg-[var(--chart-1)] p-2 mr-3"/>
                             Get local service requests in your area – no client hunting required, even for newcomers.
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-3">
-                            <HandCoins className="h-10 w-10 rounded-3xl bg-[var(--chart-2)] p-2 mr-3" />
+                            <HandCoins className="h-10 w-10 rounded-3xl bg-[var(--chart-2)] p-2 mr-3"/>
                             See your earnings upfront. Withdraw funds within 2 hours – zero hidden fees.
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-4">
                             <Star className="h-10 w-10 rounded-3xl bg-[var(--chart-5)] p-2 mr-3"/>
-                            Higher ratings boost your visibility. Earn trust, attract better clients, and grow your income.
+                            Higher ratings boost your visibility. Earn trust, attract better clients, and grow your
+                            income.
                         </div>
                     </div>
-                    <BottomActions>
-                    <Button variant="primary" wide>Submit Application</Button>
+                    <BottomActions className="flex">
+                        <Button variant="primary" wide>Submit Application</Button>
                     </BottomActions>
                 </SheetContent>
             </Sheet>
