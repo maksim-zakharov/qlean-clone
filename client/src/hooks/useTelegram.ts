@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {RoutePaths} from "../routes.ts";
 
 export const safeTgHeight =
     window.innerHeight -
@@ -15,7 +16,7 @@ export function useTelegram() {
     const [isOpenKeyboard, setOpenKeyboard] = useState(false);
     const [bottomOffset, setBottomOffset] = useState(0);
 
-    const isReady = process.env.NODE_ENV !== 'production' || (!isLoading && !Boolean(error));
+    const isReady = process.env.NODE_ENV !== 'production' || (!isLoading && !error);
 
     const onThemeChangedHandler = () => {
         // Устанавливаем тему в соответствии с Telegram
@@ -37,7 +38,7 @@ export function useTelegram() {
 
         onThemeChangedHandler();
 
-        Telegram.WebApp.SettingsButton.onClick(() => navigate('/profile'))
+        Telegram.WebApp.SettingsButton.onClick(() => navigate(RoutePaths.Profile))
         Telegram.WebApp.SettingsButton.show();
     }, [isReady]);
 

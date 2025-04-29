@@ -13,6 +13,8 @@ import {
 import { Order, OrderStatus } from '@prisma/client';
 import { OrdersService } from './orders.service';
 import { AuthGuard } from '@nestjs/passport';
+import { plainToInstance } from 'class-transformer';
+import { OrderDTO } from '../dto/orders.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('/api/orders')
@@ -22,16 +24,20 @@ export class OrdersController {
   @Get('')
   getOrders(@Req() req) {
     return this.ordersService.getAll(req.user.id).then((r) =>
-      r.map((o) => ({
-        ...o,
-        status: o.date > new Date() ? o.status : OrderStatus.completed,
-      })),
+      r.map((o) =>
+        plainToInstance(OrderDTO, {
+          ...o,
+          status: o.date > new Date() ? o.status : OrderStatus.completed,
+        }),
+      ),
     );
   }
 
   @Get('/:id')
   getOrderById(@Param('id') id: number, @Req() req) {
-    return this.ordersService.getById(Number(id), req.user.id);
+    return this.ordersService
+      .getById(Number(id), req.user.id)
+      .then((o) => plainToInstance(OrderDTO, o));
   }
 
   @Put('/:id')

@@ -118,11 +118,9 @@ export const OrderDetailsPage = () => {
                             onCancelClick={handleCancelClick}
                             onOkClick={handleOkClick}/>
         <Header>
-            <div className="grid grid-cols-[40px_auto_40px]">
-                <BackButton url={RoutePaths.Orders}/>
-                <Typography.Title
-                    className="items-center flex justify-center">{order.baseService?.name}</Typography.Title>
-            </div>
+            <BackButton url={RoutePaths.Orders}/>
+            <Typography.Title
+                className="items-center flex justify-center">{order.baseService?.name}</Typography.Title>
         </Header>
 
         <div className="flex flex-col gap-4 bg-inherit p-4">

@@ -8,7 +8,7 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
 import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.ts";
@@ -16,6 +16,7 @@ import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
 import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
 import {ExecutorPaymentsPage} from "./features/executor/ExecutorPaymentsPage.tsx";
 import {ExecutorSchedulePage} from "./features/executor/ExecutorSchedulePage.tsx";
+import {Loader2} from "lucide-react";
 
 function App() {
     const {isReady} = useTelegram();
@@ -29,7 +30,14 @@ function App() {
     const {data: userinfo} = useGetUserInfoQuery(undefined, {
         skip: !isReady
     });
+    const [isLoading, setIsLoading] = useState(true);
     const {data: services = []} = useGetServicesQuery();
+
+    useEffect(() => {
+        if(userinfo){
+            setTimeout(() => setIsLoading(false), 500);
+        }
+    }, [userinfo]);
 
     useEffect(() => {
         if (serviceId && services?.length > 0) {
@@ -45,8 +53,8 @@ function App() {
         }
     }, [serviceId, variantId, services]);
 
-    if(!userinfo) {
-        return 'Loading'
+    if(!userinfo || isLoading) {
+        return <div className="m-auto"><Loader2 className="animate-spin h-16 w-16 mb-16" /></div>
     }
 
     if(userinfo.role === 'admin'){
