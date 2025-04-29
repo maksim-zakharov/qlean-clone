@@ -158,7 +158,7 @@ export const ProfilePage = () => {
                     </Card>
                 </SheetTrigger>
                 <SheetContent side="bottom"
-                              className="p-0 overflow-hidden pb-[calc(50px + var(--tg-safe-area-inset-bottom))] min-h-[640px] h-[calc(100vh-50px)] card-bg-color">
+                              className="p-0 overflow-hidden pb-[calc(50px+var(--tg-safe-area-inset-bottom))] min-h-[calc(640px+var(--tg-safe-area-inset-bottom))] h-[calc(100vh-50px)] card-bg-color">
                     <img src="../img.png" className="h-[240px] object-cover"/>
                     <div className="p-4">
                         <SheetHeader className="mb-2">
