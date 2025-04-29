@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="перевел частично на англ + баги верстки за клиента">
-      <change afterPath="$PROJECT_DIR$/client/public/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/telegram.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/telegram.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/telegram.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/features/client/CareersPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/auth/roles.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/images/promo3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/toggle-group.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/toggle-group.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/vite-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/vite-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/vite.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Страница join us" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,15 +178,7 @@
       <workItem from="1743148522466" duration="613000" />
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
-      <workItem from="1745737178173" duration="18913000" />
-    </task>
-    <task id="LOCAL-00254" summary="скелетон заказы">
-      <option name="closed" value="true" />
-      <created>1743616939118</created>
-      <option name="number" value="00254" />
-      <option name="presentableId" value="LOCAL-00254" />
-      <option name="project" value="LOCAL" />
-      <updated>1743616939118</updated>
+      <workItem from="1745737178173" duration="19299000" />
     </task>
     <task id="LOCAL-00255" summary="скелетон заказы">
       <option name="closed" value="true" />
@@ -593,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745769427328</updated>
     </task>
-    <option name="localTasksCounter" value="303" />
+    <task id="LOCAL-00303" summary="Страница join us">
+      <option name="closed" value="true" />
+      <created>1745945882188</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1745945882188</updated>
+    </task>
+    <option name="localTasksCounter" value="304" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,6 +618,7 @@
     <MESSAGE value="chart" />
     <MESSAGE value="Зачатки календаря" />
     <MESSAGE value="перевел частично на англ + баги верстки за клиента" />
-    <option name="LAST_COMMIT_MESSAGE" value="перевел частично на англ + баги верстки за клиента" />
+    <MESSAGE value="Страница join us" />
+    <option name="LAST_COMMIT_MESSAGE" value="Страница join us" />
   </component>
 </project>
