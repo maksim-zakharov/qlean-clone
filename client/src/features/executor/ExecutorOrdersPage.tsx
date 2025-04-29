@@ -10,7 +10,6 @@ import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
-import {RoutePaths} from "../../routes.ts";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 
@@ -132,11 +131,6 @@ export const ExecutorOrdersPage = () => {
                 icon={<ClipboardPlus className="h-10 w-10"/>}
                 title="Нет заказов"
                 description="Выберите нужную услугу на главном экране"
-                action={
-                    <Button onClick={() => navigate(RoutePaths.Root)}
-                    >
-                        Выбрать услугу
-                    </Button>}
             />
             }
             {/*{filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">*/}

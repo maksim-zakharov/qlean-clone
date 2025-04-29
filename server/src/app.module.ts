@@ -26,6 +26,8 @@ import { HttpModule } from '@nestjs/axios';
 import { ExecutorController } from './executor/executor.controller';
 import { ScheduleController } from './schedule/schedule.controller';
 import { ScheduleService } from './schedule/schedule.service';
+import { RolesGuard } from './auth/roles.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -58,6 +60,10 @@ import { ScheduleService } from './schedule/schedule.service';
     OpenaiProxyController,
   ],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
     AppService,
     PrismaService,
     AddressesService,

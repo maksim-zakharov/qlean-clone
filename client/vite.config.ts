@@ -2,6 +2,7 @@ import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from "path"
+import svgr from '@svgr/rollup'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +14,7 @@ export default defineConfig({
         force: true
     },
     plugins: [
+        svgr(),
         tailwindcss(),
         react()
     ],

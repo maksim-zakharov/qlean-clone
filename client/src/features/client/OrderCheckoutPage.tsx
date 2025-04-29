@@ -211,7 +211,7 @@ export const OrderCheckoutPage = () => {
             {/* Submit Button */}
             <BottomActions>
                 <Button
-                    size="lg"
+                    size="default"
                     wide
                     loading={isLoading}
                     onClick={handleOnSubmit}
