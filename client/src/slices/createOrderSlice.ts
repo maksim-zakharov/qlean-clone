@@ -49,7 +49,7 @@ const _clearState = (state) => {
     saveInLocalStorage('options', null)
 }
 
-const _saveToken = (state, action: PayloadAction<{token: string}>) => {
+const _saveToken = (state, action: PayloadAction<{ token: string }>) => {
     state.token = action.payload.token;
     saveInLocalStorage('token', state.token)
 }
@@ -82,7 +82,7 @@ const createOrderSlice = createSlice({
 
             saveInLocalStorage('serviceVariant', state.serviceVariant)
             saveInLocalStorage('baseService', state.baseService)
-            
+
             state.id = undefined;
             state.options = [];
             state.date = undefined;
@@ -139,10 +139,7 @@ const createOrderSlice = createSlice({
             .addMatcher(api.endpoints.getUserInfo.matchFulfilled, (state, action) => {
                 state.userInfo = action.payload;
             })
-            .addMatcher(api.endpoints.login.matchFulfilled, (state, action) => {
-                // @ts-ignore
-                _saveToken(state, {token: action.payload?.data?.access_token})
-            })
+            .addMatcher(api.endpoints.login.matchFulfilled, (state, action) => _saveToken(state, {payload: {token: action.payload.access_token}} as any))
     },
 });
 

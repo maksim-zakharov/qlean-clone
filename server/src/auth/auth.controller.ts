@@ -4,13 +4,14 @@ import {
   Get,
   Headers,
   Patch,
+  Post,
   Req,
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService, validateInitData } from './auth.service';
-import { User } from '@prisma/client';
+import { ServiceVariant, User, UserRole } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { Telegraf } from 'telegraf';
 import { UserResponseDTO } from '../_dto/user-response.dto';
@@ -41,8 +42,8 @@ export class AuthController {
     });
   }
 
-  @Get('/login')
-  async login(@Headers() headers) {
+  @Post('/login')
+  async login(@Headers() headers, @Body() { role }: { role?: UserRole }) {
     const initData = headers['telegram-init-data'] as string;
 
     if (!validateInitData(initData)) {
@@ -52,7 +53,7 @@ export class AuthController {
     const params = new URLSearchParams(initData);
     const userData = JSON.parse(decodeURIComponent(params.get('user')));
 
-    const user = await this.authService.validateUser(userData);
+    const user = await this.authService.validateUser(userData, role);
 
     return this.authService.login(user);
   }

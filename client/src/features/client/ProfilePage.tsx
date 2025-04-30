@@ -3,7 +3,18 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
-import {BriefcaseBusiness, CalendarClock, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
+import {
+    BriefcaseBusiness,
+    CalendarClock,
+    ChevronRight,
+    HandCoins,
+    Loader2,
+    MapPin,
+    Phone,
+    Star,
+    User,
+    X
+} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import parsePhoneNumberFromString from "libphonenumber-js";
@@ -15,7 +26,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {ListButton} from "@/components/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton.tsx";
-import {useGetApplicationQuery} from "../../api.ts";
+import {useGetApplicationQuery, useLoginMutation} from "../../api.ts";
 
 interface Address {
     // Дом
@@ -36,10 +47,11 @@ interface Address {
 }
 
 export const ProfilePage = () => {
+    const dispatch = useDispatch();
+    const [loginMutation, {isLoading}] = useLoginMutation();
     const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
-    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const [address, setAddress] = useState<Address | undefined>()
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
@@ -105,6 +117,13 @@ export const ProfilePage = () => {
         }
     }
 
+    const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
+
+    if (applicationLoading || isLoading) {
+        return <div className="flex justify-center h-screen items-center m-auto"><Loader2
+            className="animate-spin h-16 w-16 mb-16"/></div>
+    }
+
     return <>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
@@ -141,7 +160,7 @@ export const ProfilePage = () => {
                             onCheckedChange={handleRequestWriteAccess}
                         />}/>
 
-            <Sheet open={show}>
+            {!application || application.status !== 'APPROVED' && <Sheet open={show}>
                 <SheetTrigger asChild>
                     <ListButton onClick={handleWorkClick}
                                 icon={<BriefcaseBusiness className="mr-4 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>}
@@ -182,7 +201,9 @@ export const ProfilePage = () => {
                         <Button variant="primary" wide onClick={() => navigate(RoutePaths.Application)}>Submit Application</Button>
                     </BottomActions>
                 </SheetContent>
-            </Sheet>
+            </Sheet>}
+            {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>} icon={<BriefcaseBusiness
+                                                                          className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>} text={`Login as ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
             <Button className="[color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Log
                 out</Button>
         </div>

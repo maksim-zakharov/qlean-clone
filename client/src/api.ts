@@ -22,7 +22,6 @@ const TELEGRAM_HEADER = 'telegram-init-data';
 
 const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
     let result = await baseQuery()(args, api, extraOptions);
-    const token = api.getState().createOrder.token;
 
     if (result?.error?.status === 401) {
         if (!mutex.isLocked()) {
@@ -32,7 +31,8 @@ const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
                     url: '/auth/login',
                     headers: {
                         [TELEGRAM_HEADER]: Telegram.WebApp?.initData
-                    }
+                    },
+                    method: 'POST'
                 }, api, extraOptions);
 
                 api.dispatch(saveToken({token: refreshResult?.data?.access_token}))
@@ -63,12 +63,14 @@ export const api = createApi({
             query: () => '/auth/userinfo',
             providesTags: ['User'],
         }),
-        login: builder.mutation<void, void>({
-            query: () => ({
+        login: builder.mutation<{ access_token: string }, string | void>({
+            query: (role) => ({
                 url: '/auth/login',
-                method: 'GET',
-                headers: { [TELEGRAM_HEADER]: Telegram.WebApp?.initData }
+                method: 'POST',
+                body: {role},
+                headers: {[TELEGRAM_HEADER]: Telegram.WebApp?.initData}
             }),
+            invalidatesTags: ['User'],
         }),
         getServices: builder.query<any[], void>({
             query: () => ({
