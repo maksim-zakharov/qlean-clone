@@ -89,7 +89,7 @@ export const ApplicationPage = () => {
             <Typography.Title className="mb-4 font-normal text-center">If you have any questions, <br/> please contact a
                 support</Typography.Title>
             <Button onClick={() => navigate(RoutePaths.Profile)}>Back to profile</Button>
-            <Button variant="ghost" onClick={() => navigate(RoutePaths.Profile)}>Contact support</Button>
+            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${Date.now()}`, '_blank')}>Contact support</Button>
         </div>
     }
 

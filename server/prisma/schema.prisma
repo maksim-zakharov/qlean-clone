@@ -146,7 +146,7 @@ model TimeSlot {
 
 model Application {
   id          Int              @id @default(autoincrement())
-  user        User             @relation(fields: [userId], references: [id])
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String           @unique // 1-to-1 связь
   status      ApplicationStatus @default(PENDING)
   rejectionReason String?
@@ -156,9 +156,9 @@ model Application {
 }
 
 model ApplicationVariants {
-  application    Application   @relation(fields: [applicationId], references: [id])
+  application    Application   @relation(fields: [applicationId], references: [id], onDelete: Cascade)
   applicationId  Int
-  variant        ServiceVariant @relation(fields: [variantId], references: [id])
+  variant        ServiceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
   variantId      Int
 
   @@id([applicationId, variantId]) // Составной первичный ключ
