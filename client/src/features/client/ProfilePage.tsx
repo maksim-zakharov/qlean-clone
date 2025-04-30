@@ -160,7 +160,7 @@ export const ProfilePage = () => {
                             onCheckedChange={handleRequestWriteAccess}
                         />}/>
 
-            {!application || application.status !== 'APPROVED' && <Sheet open={show}>
+            {(!application || application.status !== 'APPROVED') && <Sheet open={show}>
                 <SheetTrigger asChild>
                     <ListButton onClick={handleWorkClick}
                                 icon={<BriefcaseBusiness className="mr-4 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>}
