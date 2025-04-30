@@ -106,7 +106,7 @@ export const OrderCheckoutPage = () => {
                     <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={handleSelectDate}
                     >
                         <ListButton icon={<Calendar
-                            className="p-1 bg-[#2AABEE] rounded-md"/>} text={dateTitle}
+                            className="p-1 h-7 w-7 bg-[#2AABEE] rounded-md"/>} text={dateTitle}
                                     extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>}/>
                     </ScheduleSheet>
                     <CommentsSheet onChangeText={setComment} text={comment}>

@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Страница join us">
-      <change afterPath="$PROJECT_DIR$/client/public/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/ListButton.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="немного редизайн">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,14 +181,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00257" summary="скелетон заказы">
-      <option name="closed" value="true" />
-      <created>1743621072713</created>
-      <option name="number" value="00257" />
-      <option name="presentableId" value="LOCAL-00257" />
-      <option name="project" value="LOCAL" />
-      <updated>1743621072713</updated>
     </task>
     <task id="LOCAL-00258" summary="скелетон заказы">
       <option name="closed" value="true" />
@@ -580,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745956263850</updated>
     </task>
-    <option name="localTasksCounter" value="306" />
+    <task id="LOCAL-00306" summary="немного редизайн">
+      <option name="closed" value="true" />
+      <created>1746011378131</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1746011378131</updated>
+    </task>
+    <option name="localTasksCounter" value="307" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -627,6 +621,7 @@
     <MESSAGE value="Зачатки календаря" />
     <MESSAGE value="перевел частично на англ + баги верстки за клиента" />
     <MESSAGE value="Страница join us" />
-    <option name="LAST_COMMIT_MESSAGE" value="Страница join us" />
+    <MESSAGE value="немного редизайн" />
+    <option name="LAST_COMMIT_MESSAGE" value="немного редизайн" />
   </component>
 </project>
