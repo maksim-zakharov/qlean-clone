@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Страница join us">
-      <change afterPath="$PROJECT_DIR$/server/src/dto/orders.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/dto/user-response.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/assets/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/ListButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -188,14 +187,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00256" summary="скелетон заказы">
-      <option name="closed" value="true" />
-      <created>1743621053087</created>
-      <option name="number" value="00256" />
-      <option name="presentableId" value="LOCAL-00256" />
-      <option name="project" value="LOCAL" />
-      <updated>1743621053087</updated>
     </task>
     <task id="LOCAL-00257" summary="скелетон заказы">
       <option name="closed" value="true" />
@@ -581,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745948682293</updated>
     </task>
-    <option name="localTasksCounter" value="305" />
+    <task id="LOCAL-00305" summary="Страница join us">
+      <option name="closed" value="true" />
+      <created>1745956263850</created>
+      <option name="number" value="00305" />
+      <option name="presentableId" value="LOCAL-00305" />
+      <option name="project" value="LOCAL" />
+      <updated>1745956263850</updated>
+    </task>
+    <option name="localTasksCounter" value="306" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

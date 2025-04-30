@@ -3,18 +3,18 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
-import {BriefcaseBusiness, CalendarClock, HandCoins, MapPin, Star, User, X} from "lucide-react";
-import {Card} from "../../components/ui/card.tsx";
+import {BriefcaseBusiness, CalendarClock, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import {Switch} from "../../components/ui/switch.tsx";
-import {EditButton} from "../../components/EditButton.tsx";
 import {logout} from "../../slices/createOrderSlice.ts";
 import {RoutePaths} from "../../routes.ts";
 import {useNavigate} from "react-router-dom";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../components/ui/sheet.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
+import {ListButton} from "@/components/ListButton.tsx";
+import {ListButtonGroup} from "../../components/ListButton.tsx";
 
 interface Address {
     // Дом
@@ -101,64 +101,41 @@ export const ProfilePage = () => {
                 <BackButton url="/"/>
             </div>
         </Header>
-        <div className="flex flex-col content text-center px-4 gap-4">
-            <Card className="text-left p-0 gap-0 mt-2 border-none card-bg-color">
-                <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
-                    <div className="flex gap-4 items-center">
-                        <Avatar>
-                            <AvatarImage src={userInfo?.photoUrl}/>
-                            <AvatarFallback><User/></AvatarFallback>
-                        </Avatar>
-                        <Typography.Title
-                            className="text-xl">{userInfo?.firstName} {userInfo?.lastName}</Typography.Title>
-                    </div>
-                    <EditButton onClick={() => null}/>
-                </div>
-                <div className="p-4 py-3 separator-shadow-bottom flex justify-between items-center">
-                    <div className="flex flex-col">
-                        <Typography.Description>Phone</Typography.Description>
-                        <Typography.Title>{phoneText}</Typography.Title>
-                    </div>
-                    {!userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default"
-                                                 onClick={handleRequestContact}>
+        <div className="flex flex-col content text-center px-4 gap-6">
+            <ListButtonGroup>
+                <ListButton icon={<Avatar className="w-7 h-7">
+                    <AvatarImage src={userInfo?.photoUrl}/>
+                    <AvatarFallback><User/></AvatarFallback>
+                </Avatar>} text={<>{userInfo?.firstName} {userInfo?.lastName}</>}/>
+
+                <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--chart-2)] rounded-md"/>} text={<div className="flex flex-col text-left">
+                    <Typography.Description>Phone</Typography.Description>
+                    <Typography.Title>{phoneText}</Typography.Title>
+                </div>} extra={
+                    !userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default"
+                                                onClick={handleRequestContact}>
                         Refresh
-                    </Button>}
-                </div>
-                <div className="p-4 py-3 flex justify-between items-center">
-                    <div className="flex gap-2">
-                        <MapPin/>
-                        <div className="flex flex-col">
-                            <Typography.Description>Address</Typography.Description>
-                            <Typography.Title
-                                className="flex">{addressText}</Typography.Title>
-                        </div>
-                    </div>
-                </div>
-            </Card>
-            <Card className="p-0 gap-0">
-                <div className="p-4 py-2 flex justify-between items-center">
-                    <div className="flex flex-col">
-                        <Typography.Title className="flex"><img src="../telegram.svg"
-                                                                className="mr-3 h-7 bg-[#2AABEE] rounded-md"/>Telegram
-                            notifications</Typography.Title>
-                    </div>
-                    <Switch
-                        checked={writeAccessReceived}
-                        onCheckedChange={handleRequestWriteAccess}
-                    />
-                </div>
-            </Card>
+                    </Button>}/>
+
+                <ListButton text={<div className="flex flex-col text-left">
+                    <Typography.Description>Address</Typography.Description>
+                    <Typography.Title
+                        className="flex">{addressText}</Typography.Title>
+                </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--chart-4)] rounded-md"/>}/>
+            </ListButtonGroup>
+
+            <ListButton icon={<img src="../telegram.svg"
+                                   className="mr-4 h-7 bg-[#2AABEE] rounded-md"/>} text="Telegram notifications"
+                        extra={<Switch
+                            checked={writeAccessReceived}
+                            onCheckedChange={handleRequestWriteAccess}
+                        />}/>
 
             <Sheet open={show}>
                 <SheetTrigger asChild>
-                    <Card className="p-0 gap-0" onClick={() => setShow(true)}>
-                        <div className="p-4 py-2 flex justify-between items-center">
-                            <Typography.Title className="flex">
-                                <BriefcaseBusiness className="mr-3 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>
-                                Work in Qlean
-                            </Typography.Title>
-                        </div>
-                    </Card>
+                    <ListButton onClick={() => setShow(true)}
+                                icon={<BriefcaseBusiness className="mr-4 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>}
+                                text="Work in Qlean"/>
                 </SheetTrigger>
                 <SheetContent side="bottom"
                               className="p-0 overflow-hidden pb-[calc(50px+var(--tg-safe-area-inset-bottom))] min-h-[calc(700px+var(--tg-safe-area-inset-bottom))] h-[calc(100vh-50px)]">
@@ -166,7 +143,7 @@ export const ProfilePage = () => {
                         onClick={() => setShow(false)}
                         className="border-none absolute rounded-3xl p-2 card-bg-color-transparency top-2 left-2"
                         variant="ghost"><X/></Button>
-                    <img src="../img.png" className="h-[240px] object-cover"/>
+                    <img src="../img_1.png" className="h-[240px] object-cover"/>
                     <div className="p-4">
                         <SheetHeader className="mb-2">
                             <SheetTitle

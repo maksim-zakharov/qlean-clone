@@ -6,7 +6,6 @@ import {Checkbox} from "@/components/ui/checkbox"
 import React, {useMemo, useState} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
-import {List} from "../../components/ui/list.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../../components/ui/accordion.tsx"
 import {BottomActions} from "@/components/BottomActions.tsx"
@@ -21,6 +20,7 @@ import {selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {Header} from "../../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
+import {ListButton, ListButtonGroup} from "../../components/ListButton.tsx";
 
 
 export const OrderCheckoutPage = () => {
@@ -87,7 +87,7 @@ export const OrderCheckoutPage = () => {
             <AlertDialogWrapper open={Boolean(error)} title="Не удалось оформить заказ" description={error}
                                 onOkText="Ok"
                                 onOkClick={() => setError(undefined)}/>
-            <Header>
+            <Header className="flex justify-center">
                 <BackButton url={RoutePaths.Orders}/>
                 <AddressSheet
                     addresses={addresses}
@@ -101,58 +101,21 @@ export const OrderCheckoutPage = () => {
                 </AddressSheet>
             </Header>
 
-            <div className="content flex flex-col gap-4 p-4">
-                <List itemClassName="py-2">
-
-                    {/* Date and Time */}
+            <div className="content flex flex-col gap-6 p-4">
+                <ListButtonGroup>
                     <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={handleSelectDate}
                     >
-                        <Button
-                            variant="ghost"
-                            className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="[background-color:var(--tg-accent-blue)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                    <Calendar className="w-5 h-5 text-tg-theme-button-text-color"/>
-                                </div>
-                                <span className="text-tg-theme-text-color">{dateTitle}</span>
-                            </div>
-                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
-                        </Button>
+                        <ListButton icon={<Calendar
+                            className="p-1 bg-[#2AABEE] rounded-md"/>} text={dateTitle}
+                                    extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>}/>
                     </ScheduleSheet>
-
-                    {/* Comments */}
                     <CommentsSheet onChangeText={setComment} text={comment}>
-                        <Button
-                            variant="ghost"
-                            className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="[background-color:var(--tg-accent-orange)] w-7 h-7 [border-radius:5px] flex items-center justify-center">
-                                    <MessageSquare className="w-5 h-5 text-tg-theme-text-color"/>
-                                </div>
-                                <span className="text-tg-theme-text-color">Comments</span>
-                            </div>
-                            <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>
-                        </Button>
-                    </CommentsSheet>
 
-                    {/* Payment Method */}
-                    {/*<Button*/}
-                    {/*    variant="ghost"*/}
-                    {/*    className="w-full p-0 rounded-2xl h-auto text-sm flex items-center justify-between"*/}
-                    {/*>*/}
-                    {/*    <div className="flex items-center gap-3">*/}
-                    {/*        <div*/}
-                    {/*            className="[background-color:var(--tg-accent-green)] w-7 h-7 [border-radius:5px] flex items-center justify-center">*/}
-                    {/*            <CreditCard className="w-5 h-5 text-tg-theme-text-color"/>*/}
-                    {/*        </div>*/}
-                    {/*        <span className="text-tg-theme-text-color">Мир *5987</span>*/}
-                    {/*    </div>*/}
-                    {/*</Button>*/}
-                </List>
+                        <ListButton icon={<MessageSquare
+                            className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-orange)] rounded-md"/>} text="Comments"
+                                    extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>}/>
+                    </CommentsSheet>
+                </ListButtonGroup>
 
                 {/* Order Summary */}
                 {baseService && <Accordion
