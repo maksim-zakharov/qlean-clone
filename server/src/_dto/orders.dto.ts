@@ -1,4 +1,4 @@
-// option.dto.ts
+// option._dto.ts
 import { Exclude, Type } from 'class-transformer';
 import { OrderStatus } from '@prisma/client';
 
@@ -14,7 +14,7 @@ export class OptionDTO {
   baseServiceId: number;
 }
 
-// service-variant.dto.ts
+// service-variant._dto.ts
 export class ServiceVariantDTO {
   id: number;
   name: string;
@@ -27,7 +27,7 @@ export class ServiceVariantDTO {
   baseServiceId: number;
 }
 
-// base-service.dto.ts
+// base-service._dto.ts
 export class BaseServiceDTO {
   id: number;
   name: string;

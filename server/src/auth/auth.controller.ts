@@ -13,7 +13,7 @@ import { AuthService, validateInitData } from './auth.service';
 import { User } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { Telegraf } from 'telegraf';
-import { UserResponseDTO } from '../dto/user-response.dto';
+import { UserResponseDTO } from '../_dto/user-response.dto';
 import { plainToClass, plainToInstance } from 'class-transformer';
 
 @Controller('/api/auth')

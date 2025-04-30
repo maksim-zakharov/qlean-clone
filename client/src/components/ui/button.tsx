@@ -6,7 +6,7 @@ import {cn} from "@/lib/utils"
 import {Loader2} from "lucide-react";
 
 const buttonVariants = cva(
-    "font-normal inline-flex items-center justify-center transition-colors disabled:pointer-events-none disabled:opacity-50",
+    "font-normal inline-flex items-center justify-center transition-colors transition-opacity disabled:pointer-events-none disabled:opacity-50",
     {
         variants: {
             variant: {

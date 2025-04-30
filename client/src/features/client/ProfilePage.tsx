@@ -15,6 +15,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {ListButton} from "@/components/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton.tsx";
+import {useGetApplicationQuery} from "../../api.ts";
 
 interface Address {
     // Дом
@@ -35,6 +36,7 @@ interface Address {
 }
 
 export const ProfilePage = () => {
+    const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -95,6 +97,14 @@ export const ProfilePage = () => {
         window.location.reload();
     }
 
+    const handleWorkClick = () => {
+        if(application){
+            navigate(RoutePaths.Application);
+        } else {
+            setShow(true)
+        }
+    }
+
     return <>
         <Header>
             <div className="grid grid-cols-[40px_auto_40px]">
@@ -133,7 +143,7 @@ export const ProfilePage = () => {
 
             <Sheet open={show}>
                 <SheetTrigger asChild>
-                    <ListButton onClick={() => setShow(true)}
+                    <ListButton onClick={handleWorkClick}
                                 icon={<BriefcaseBusiness className="mr-4 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>}
                                 text="Work in Qlean"/>
                 </SheetTrigger>
@@ -169,7 +179,7 @@ export const ProfilePage = () => {
                         </div>
                     </div>
                     <BottomActions className="flex">
-                        <Button variant="primary" wide>Submit Application</Button>
+                        <Button variant="primary" wide onClick={() => navigate(RoutePaths.Application)}>Submit Application</Button>
                     </BottomActions>
                 </SheetContent>
             </Sheet>

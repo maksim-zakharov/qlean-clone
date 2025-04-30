@@ -28,6 +28,8 @@ import { ScheduleController } from './schedule/schedule.controller';
 import { ScheduleService } from './schedule/schedule.service';
 import { RolesGuard } from './auth/roles.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { ApplicationController } from './application/application.controller';
+import { ApplicationService } from './application/application.service';
 
 @Module({
   imports: [
@@ -56,6 +58,7 @@ import { APP_GUARD } from '@nestjs/core';
     AuthController,
     ExecutorController,
     ScheduleController,
+    ApplicationController,
     SpaController,
     OpenaiProxyController,
   ],
@@ -107,6 +110,7 @@ import { APP_GUARD } from '@nestjs/core';
     },
     OpenaiService,
     ScheduleService,
+    ApplicationService,
   ],
   exports: [PrismaService],
 })

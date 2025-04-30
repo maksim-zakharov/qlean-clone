@@ -1,4 +1,4 @@
-// user-response.dto.ts
+// user-response._dto.ts
 import { Exclude } from 'class-transformer';
 
 export class UserResponseDTO {

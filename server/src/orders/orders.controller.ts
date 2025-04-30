@@ -14,7 +14,7 @@ import { Order, OrderStatus } from '@prisma/client';
 import { OrdersService } from './orders.service';
 import { AuthGuard } from '@nestjs/passport';
 import { plainToInstance } from 'class-transformer';
-import { OrderDTO } from '../dto/orders.dto';
+import { OrderDTO } from '../_dto/orders.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('/api/orders')

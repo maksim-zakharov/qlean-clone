@@ -14,6 +14,7 @@ export const RoutePaths = {
     Orders: '/orders',
     Bonuses: '/bonuses',
     Profile: '/profile',
+    Application: '/application',
     Order: {
         Create: '/order',
         Checkout: '/order/checkout',

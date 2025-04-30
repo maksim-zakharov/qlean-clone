@@ -54,7 +54,6 @@ export const OrderCreationPage = () => {
     // Считаем общее время
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
 
-
     const handleOptionToggle = (option: any) => {
         vibro('light');
         const exist = options.find(opt => opt.id === option.id);
