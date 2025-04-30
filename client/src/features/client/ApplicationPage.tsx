@@ -1,9 +1,9 @@
 import {Header} from "../../components/ui/Header.tsx";
 import {RoutePaths} from "../../routes.ts";
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "@/components/ui/Typography.tsx";
-import {useGetApplicationQuery, useGetServicesQuery, useSendApplicationMutation} from "../../api.ts";
+import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation, useSendApplicationMutation} from "../../api.ts";
 import {ListButton, ListButtonGroup} from "../../components/ListButton.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
@@ -14,11 +14,17 @@ import {FileClock, FileX, Loader2} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 
 export const ApplicationPage = () => {
+    const [loginMutation] = useLoginMutation();
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
     const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
     const navigate = useNavigate()
     const [sendApplication, {isLoading: sendApplicationLoading}] = useSendApplicationMutation();
     const {vibro} = useTelegram();
+
+    useEffect(() => {
+        if(application?.status ==='APPROVED')
+            loginMutation('executor').unwrap()
+    }, [application]);
 
     const [variantIds, setVariantIds] = useState<any>([]);
     const selectedOptionsIdSet = useMemo(() => new Set(variantIds), [variantIds]);
