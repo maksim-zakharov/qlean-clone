@@ -3,7 +3,7 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import { CircleX, ClipboardPlus} from "lucide-react";
+import {Banknote, CircleX, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -75,7 +75,7 @@ export const ExecutorOrdersPage = () => {
         };
     }).filter(s => s.slots.length > 0), []);
     const [tab, setTab] = useState<string>(result[0]?.timestamp.toString());
-    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs(o.date).startOf('day').unix() === dayjs(Number(tab)).startOf('day').unix() ).sort((a, b) => b.id - a.id), [orders, tab]);
+    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs(o.date).startOf('day').unix() === dayjs(Number(tab)).startOf('day').unix()).sort((a, b) => b.id - a.id), [orders, tab]);
 
     if (isLoading) {
         return <div className="px-4 mb-4">
@@ -101,6 +101,12 @@ export const ExecutorOrdersPage = () => {
         />
     }
 
+    if (orders.length === 0) {
+        return <EmptyState className="flex justify-center h-screen items-center m-auto"
+                           icon={<Banknote className="h-10 w-10"/>} title="No active orders"
+                           description="Your upcoming jobs will appear here once you accept them."/>
+    }
+
     return <div className="flex flex-col">
         <Header className="p-0">
             <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">
@@ -114,45 +120,12 @@ export const ExecutorOrdersPage = () => {
                 </TabsList>
             </Tabs>
         </Header>
-        {/*<Header className="p-0 card-bg-color">*/}
-        {/*    <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">*/}
-        {/*        <TabsList className="bg-inherit px-0 h-full">*/}
-        {/*            {result.map(r => <TabsTrigger*/}
-        {/*                key={r.timestamp}*/}
-        {/*                value={r.timestamp.toString()}*/}
-        {/*            >*/}
-        {/*                {r.date}*/}
-        {/*            </TabsTrigger>)}*/}
-        {/*        </TabsList>*/}
-        {/*    </Tabs>*/}
-        {/*</Header>*/}
         <div className="flex flex-col gap-4 py-4">
-            {filteredOrders.length === 0 && <EmptyState
-                icon={<ClipboardPlus className="h-10 w-10"/>}
-                title="Нет заказов"
-                description="Выберите нужную услугу на главном экране"
-            />
+            {filteredOrders.length === 0 && <EmptyState className="flex justify-center h-screen items-center m-auto"
+                                                        icon={<ClipboardPlus className="h-10 w-10"/>}
+                                                        title="No active orders"
+                                                        description="Your upcoming jobs will appear here once you accept them."/>
             }
-            {/*{filteredOrders.length > 0 && <List itemClassName="gap-2 block" className="rounded-none">*/}
-            {/*    {filteredOrders.map((ao) => <Card className="p-0 gap-0 rounded-none justify-between flex-row"*/}
-            {/*                                      onClick={(e) => handleOrderClick(e, ao)}>*/}
-            {/*        <div className="flex flex-col">*/}
-            {/*            <Typography.Title>{ao.baseService?.name}, {ao.serviceVariant?.name}</Typography.Title>*/}
-            {/*            <Typography.Description>{ao.fullAddress}</Typography.Description>*/}
-            {/*        </div>*/}
-            {/*        <div className="flex justify-between">*/}
-            {/*            <div className="flex flex-col justify-between text-end">*/}
-            {/*                <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>*/}
-            {/*                <Typography.Description>{dayjs(ao.date).locale('en').format('D MMMM, HH:mm')}</Typography.Description>*/}
-            {/*            </div>*/}
-            {/*            <Button*/}
-            {/*                className="pr-0 pl-2"*/}
-            {/*                variant="ghost">*/}
-            {/*                <ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>*/}
-            {/*            </Button>*/}
-            {/*        </div>*/}
-            {/*    </Card>)}*/}
-            {/*</List>}*/}
             {filteredOrders.map(ao => <Accordion
                 className="p-0 px-4 gap-0"
                 type="single"

@@ -32,6 +32,13 @@ export class ApplicationService {
   getApplication(executorId: User['id']) {
     return this.prisma.application.findUnique({
       where: { userId: executorId },
+      include: {
+        variants: {
+          select: {
+            variantId: true,
+          },
+        },
+      },
     });
   }
 }

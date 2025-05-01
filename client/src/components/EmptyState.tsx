@@ -16,9 +16,9 @@ export function EmptyState({
     className?: string
 }) {
     return (
-        <div className="flex flex-1 flex-col items-center justify-center p-4 text-center max-w-[80%] m-auto h-[100%]">
+        <div className={cn("flex flex-1 flex-col items-center justify-center p-4 text-center max-w-[80%] m-auto h-[100%]", className)}>
             <div
-                className={cn("text-muted-foreground mb-4 rounded-[50%] card-bg-color text-tg-theme-button-text-color p-4", className)}>{icon}</div>
+                className="text-muted-foreground mb-4 rounded-[50%] card-bg-color text-tg-theme-button-text-color p-4">{icon}</div>
             <Typography.Title
                 className="text-center flex flex-col mb-4">{title}<Typography.Description>{description}</Typography.Description></Typography.Title>
             {action}

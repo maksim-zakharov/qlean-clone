@@ -26,7 +26,8 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {ListButton} from "@/components/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton.tsx";
-import {useGetApplicationQuery, useLoginMutation} from "../../api.ts";
+import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api.ts";
+import {DynamicIcon} from "lucide-react/dynamic";
 
 interface Address {
     // Дом
@@ -55,6 +56,9 @@ export const ProfilePage = () => {
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const [address, setAddress] = useState<Address | undefined>()
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
+    const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
+    const applicationVariantIdsSet = useMemo(() => new Set(application.variants?.map(v => v.variantId) || []), [application]);
+    const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({...s, variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))})), [applicationVariantIdsSet, services])
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
@@ -204,6 +208,20 @@ export const ProfilePage = () => {
             </Sheet>}
             {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>} icon={<BriefcaseBusiness
                                                                           className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>} text={`Login as ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
+
+            {userInfo?.role === 'executor' && <div>
+                <Typography.Title className="text-left mb-0 block">Your services</Typography.Title>
+                {filteredServices.map(s => <div className="mt-4">
+                    <Typography.Description className="block mb-2 text-left">{s.name}</Typography.Description>
+                    <ListButtonGroup>
+                        {s.variants.map(s => <ListButton text={s.name} icon={<DynamicIcon name={s.icon}
+                                                                                          className="w-7 h-7 p-1 root-bg-color rounded-md"
+                                                                                          strokeWidth={1.5}/>}/>)}
+                    </ListButtonGroup>
+                </div>)}
+
+            </div>}
+
             <Button className="[color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Log
                 out</Button>
         </div>

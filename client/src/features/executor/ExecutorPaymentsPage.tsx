@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CalendarSync, CircleX, ClipboardPlus, Star} from "lucide-react";
+import {CalendarSync, CircleX, ClipboardPlus, Star, Banknote} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder} from "../../slices/createOrderSlice.ts";
@@ -94,6 +94,10 @@ export const ExecutorPaymentsPage = () => {
     const paymentsLabel = {
         'week': 'week',
         'month': 'month'
+    }
+
+    if(orders.length === 0){
+        return <EmptyState className="flex justify-center h-screen items-center m-auto" icon={<Banknote className="h-10 w-10" />} title="No payments yet" description="Once you complete your first order, your earnings will appear here."/>
     }
 
     return <div className="p-4 flex flex-col gap-4">
