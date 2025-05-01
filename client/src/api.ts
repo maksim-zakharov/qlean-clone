@@ -122,6 +122,14 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
+        completeOrder: builder.mutation<any, void>({
+            query: (params) => ({
+                url: `/executor/orders/${params.id}/complete`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
         cancelOrder: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/orders/${params.id}/cancel`,
@@ -211,5 +219,6 @@ export const {
     useUpdateScheduleMutation,
     useGetScheduleQuery,
     useGetApplicationQuery,
-    useSendApplicationMutation
+    useSendApplicationMutation,
+    useCompleteOrderMutation
 } = api;

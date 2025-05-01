@@ -39,7 +39,7 @@ export const OrderDetailsPage = () => {
         show: false
     })
 
-    const canEdit = Boolean(order?.status) && !['completed', 'canceled'].includes(order?.status);
+    const canEdit = Boolean(order?.status) && ['todo'].includes(order?.status);
 
     const totalPrice = useMemo(() => order?.options.reduce((sum, option) => sum + option.price, order?.serviceVariant?.basePrice || 0) || 0, [order]);
 
@@ -130,7 +130,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>
                             №{order.id}
                         </Typography.Title>
-                        <Typography.Title>{order.status === 'active' ? 'Placed' : order.status === 'canceled' ? 'Canceled' : 'Completed'}</Typography.Title>
+                        <Typography.Title>{order.status === 'processed' ? 'Processed': order.status === 'todo' ? 'Ready' : order.status === 'canceled' ? 'Canceled' : 'Completed'}</Typography.Title>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">

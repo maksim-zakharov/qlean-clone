@@ -35,8 +35,8 @@ export const ExecutorPaymentsPage = () => {
 
     const [paymentsPeriod, setPaymentsPeriod] = useState<'week' | 'month'>('week');
 
-    const completedOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
-    const filteredOrders = useMemo(() => orders.filter(o => ['completed', 'canceled'].includes(o.status)).filter(order => {
+    const completedOrders = useMemo(() => orders.filter(o => ['completed'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
+    const filteredOrders = useMemo(() => orders.filter(o => ['completed'].includes(o.status)).filter(order => {
         const orderDate = dayjs(order.date);
         return orderDate.isAfter(dayjs().subtract(1, paymentsPeriod));
     }), [orders, paymentsPeriod])

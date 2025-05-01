@@ -17,8 +17,13 @@ model Address {
 }
 
 enum OrderStatus {
-  active
+  // Готов к работе
+  todo
+  // Выполняется
+  processed
+  // Завершен
   completed
+  // Отменен
   canceled
 }
 
@@ -29,7 +34,7 @@ model Order {
   serviceVariant   ServiceVariant   @relation(fields: [serviceVariantId], references: [id])
   serviceVariantId Int
   options          ServiceOption[]
-  status  OrderStatus  @default(active)
+  status  OrderStatus  @default(todo)
   fullAddress String
   date DateTime @db.Timestamp(6)
   userId String?
