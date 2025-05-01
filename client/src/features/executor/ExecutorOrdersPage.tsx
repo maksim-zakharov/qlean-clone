@@ -19,6 +19,7 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../.
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
+import {RoutePaths} from "../../routes.ts";
 
 
 export const ExecutorOrdersPage = () => {
@@ -153,10 +154,11 @@ export const ExecutorOrdersPage = () => {
                 type="single"
                 collapsible
                 defaultValue="services"
+                onClick={() => navigate(RoutePaths.Executor.Details(ao.id))}
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services" className="rounded-xl">
-                    <AccordionTrigger className="flex justify-normal py-0" disabled>
+                    <AccordionTrigger className="flex justify-normal py-0" disabled onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
                         <div className="p-3 px-0 separator-shadow-bottom flex flex-col w-full">
                             <div className="flex justify-between">
                                 <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -187,6 +189,7 @@ export const ExecutorOrdersPage = () => {
                             description="Are you sure you want to finalize your order?"
                             onOkText="Yes"
                             onCancelText="No"
+                            okLoading={completeOrderLoading}
                             onCancelClick={() => setOrderToDelete(undefined)}
                             onOkClick={() => handleFinishOrder(orderToDelete)}></AlertDialogWrapper>
             </div>

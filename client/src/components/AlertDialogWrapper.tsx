@@ -12,7 +12,7 @@ import {
 import {Loader2} from "lucide-react";
 import * as React from "react";
 
-export const AlertDialogWrapper = ({children, open, title,  onOkText, onCloseText, cancelLoading, description, onOkClick, onCancelClick}: any) => {
+export const AlertDialogWrapper = ({children, open, title,  onOkText, onCloseText, cancelLoading, okLoading, description, onOkClick, onCancelClick}: any) => {
 
     return <AlertDialog open={open}>
         {children && <AlertDialogTrigger asChild>
@@ -27,7 +27,7 @@ export const AlertDialogWrapper = ({children, open, title,  onOkText, onCloseTex
             </AlertDialogHeader>
             {(onCancelClick || onOkClick) && <AlertDialogFooter className="items-center">
                 {onCancelClick && <AlertDialogCancel className="w-full" onClick={onCancelClick}>{cancelLoading ? <Loader2 className="animate-spin" /> : (onCloseText || 'Cancel')}</AlertDialogCancel>}
-                {onOkClick && <AlertDialogAction className="w-full" onClick={onOkClick}>{onOkText || 'Continue'}</AlertDialogAction>}
+                {onOkClick && <AlertDialogAction className="w-full" onClick={onOkClick}>{okLoading ? <Loader2 className="animate-spin" /> : (onOkText || 'Continue')}</AlertDialogAction>}
             </AlertDialogFooter>}
         </AlertDialogContent>
     </AlertDialog>

@@ -122,7 +122,15 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
-        completeOrder: builder.mutation<any, void>({
+        processedOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/executor/orders/${params.id}/processed`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
+        completeOrder: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/executor/orders/${params.id}/complete`,
                 method: 'POST',
@@ -220,5 +228,6 @@ export const {
     useGetScheduleQuery,
     useGetApplicationQuery,
     useSendApplicationMutation,
-    useCompleteOrderMutation
+    useCompleteOrderMutation,
+    useProcessedOrderMutation
 } = api;

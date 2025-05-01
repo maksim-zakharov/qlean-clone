@@ -34,4 +34,13 @@ export class ExecutorController {
 
     return this.ordersService.update(item);
   }
+
+  @Post('/orders/:id/processed')
+  async processedOrder(@Param('id') id: number, @Req() req) {
+    const item = await this.ordersService.getById(Number(id), req.user.id);
+
+    item.status = OrderStatus.processed;
+
+    return this.ordersService.update(item);
+  }
 }

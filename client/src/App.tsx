@@ -18,6 +18,7 @@ import {ExecutorPaymentsPage} from "./features/executor/ExecutorPaymentsPage.tsx
 import {ExecutorSchedulePage} from "./features/executor/ExecutorSchedulePage.tsx";
 import {Loader2} from "lucide-react";
 import {ApplicationPage} from "./features/client/ApplicationPage.tsx";
+import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetailsPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -72,6 +73,7 @@ function App() {
                     <Route path={RoutePaths.Executor.Profile} element={<ProfilePage/>}/>
                     <Route path="*" element={<Navigate to={RoutePaths.Executor.Orders}/>}/>
                 </Route>
+                <Route path={RoutePaths.Executor.Details(':id')} element={<ExecutorOrderDetailsPage/>}/>
             </Routes>
         </div>
     }

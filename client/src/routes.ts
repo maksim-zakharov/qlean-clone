@@ -22,6 +22,7 @@ export const RoutePaths = {
     },
     Executor: {
         Orders: '/executor/orders',
+        Details: (id: string | number) => buildPath('/executor/orders/:id', { id }),
         Payments: '/executor/payments',
         Schedule: '/executor/schedule',
         Profile: '/executor/profile',
