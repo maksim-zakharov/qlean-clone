@@ -57,7 +57,7 @@ export const ProfilePage = () => {
     const [address, setAddress] = useState<Address | undefined>()
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
-    const applicationVariantIdsSet = useMemo(() => new Set(application.variants?.map(v => v.variantId) || []), [application]);
+    const applicationVariantIdsSet = useMemo(() => new Set(application?.variants?.map(v => v.variantId) || []), [application]);
     const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({...s, variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))})), [applicationVariantIdsSet, services])
 
     const phoneText = useMemo(() => {
