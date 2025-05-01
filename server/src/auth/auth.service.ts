@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
 import { createHmac } from 'crypto';
 import * as process from 'node:process';
 import { JwtService } from '@nestjs/jwt';
 import { ApplicationStatus, UserRole } from '@prisma/client';
-import { ApplicationService } from '../application/application.service';
+import { PrismaService } from '../prisma.service';
 
 export function validateInitData(initData: string) {
   // 1. Получаем секретный ключ
@@ -39,35 +38,48 @@ export function validateInitData(initData: string) {
 @Injectable()
 export class AuthService {
   constructor(
+    private prisma: PrismaService,
     private jwtService: JwtService,
-    private userService: UserService,
-    private applicationService: ApplicationService,
   ) {}
 
-  async validateUser(telegramProfile: any, role?: UserRole) {
-    let user = await this.userService.getById(telegramProfile.id.toString());
+  async validateUser(data: any, role?: UserRole) {
+    return this.prisma.$transaction(async (tx) => {
+      let user = await tx.user.findUnique({
+        where: { id: data.id.toString() },
+      });
 
-    if (!user) {
-      user = await this.userService.create(telegramProfile);
-    }
+      if (!user) {
+        user = await tx.user.create({
+          data: {
+            id: data.id.toString(),
+            firstName: data.first_name,
+            role: 'client',
+            lastName: data.last_name,
+            photoUrl: data.photo_url,
+            phone: data.phone_number,
+            username: data.username,
+          },
+        });
+      }
 
-    if (role === UserRole.executor) {
-      const application = await this.applicationService.getApplication(
-        telegramProfile.id.toString(),
-      );
-      if (!application || application.status !== ApplicationStatus.APPROVED) {
+      if (role === UserRole.executor) {
+        const application = await tx.application.findUnique({
+          where: { userId: data.id.toString() },
+        });
+        if (!application || application.status !== ApplicationStatus.APPROVED) {
+          return {
+            ...user,
+            role: UserRole.client,
+          };
+        }
         return {
           ...user,
-          role: UserRole.client,
+          role: UserRole.executor,
         };
       }
-      return {
-        ...user,
-        role: UserRole.executor,
-      };
-    }
 
-    return user;
+      return user;
+    });
   }
 
   async login(user: any) {
