@@ -1,7 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { DayOfWeek, User } from '@prisma/client';
+import { DayOfWeek, ServiceOption, ServiceVariant, User } from '@prisma/client';
 import * as dayjs from 'dayjs';
+
+const calculateOrderDuration = (
+  serviceVariant: ServiceVariant,
+  options: Partial<ServiceOption>[],
+) =>
+  serviceVariant.duration +
+  options.reduce((sum, option) => sum + option.duration, 0);
+
+const minutesToMilliseconds = (minutes: number) => minutes * 60_000;
 
 @Injectable()
 export class ScheduleService {
@@ -77,16 +86,54 @@ export class ScheduleService {
     });
   }
 
-  async getAvailableSlotsSlots(date: number) {
+  async getAvailableSlots(
+    date: number,
+    serviceVariantId: number,
+    optionIds: number[] = [],
+  ) {
     const startOfDay = dayjs(date).startOf('day');
     const endOfDay = dayjs(date).endOf('day');
     const dayOfWeek = startOfDay.format('ddd').toUpperCase() as DayOfWeek;
+
+    // Получаем информацию о длительности услуг
+    const serviceVariant = await this.prisma.serviceVariant.findUnique({
+      where: { id: serviceVariantId },
+      include: {
+        baseService: {
+          include: {
+            options: {
+              where: {
+                id: { in: optionIds },
+              },
+              select: { duration: true },
+            },
+          },
+        },
+      },
+    });
+
+    if (!serviceVariant) {
+      throw new NotFoundException('Service variant not found');
+    }
+
+    // Вычисляем общую длительность заказа в минутах
+    const totalDuration = calculateOrderDuration(
+      serviceVariant,
+      serviceVariant.baseService.options,
+    );
 
     // Получаем всех исполнителей (пользователей с одобренной заявкой)
     const executors = await this.prisma.user.findMany({
       where: {
         application: {
           status: 'APPROVED',
+        },
+        scheduleDays: {
+          some: {
+            dayOfWeek,
+            // Если у исполнителя выходной, пропускаем
+            isDayOff: false,
+          },
         },
       },
       include: {
@@ -101,7 +148,7 @@ export class ScheduleService {
       },
     });
 
-    // Получаем занятые слоты
+    // Получаем занятые слоты с их длительностью
     const busyOrders = await this.prisma.order.findMany({
       where: {
         date: {
@@ -112,38 +159,106 @@ export class ScheduleService {
           notIn: ['completed', 'canceled'],
         },
       },
-      select: {
-        date: true,
+      include: {
+        serviceVariant: {
+          include: {
+            baseService: {
+              include: {
+                options: true,
+              },
+            },
+          },
+        },
+        options: true,
       },
     });
 
-    // Создаем сет занятых слотов
-    const busyTimestamps = new Set(
-      busyOrders.map((order) => order.date.getTime()),
-    );
+    // Создаем массив занятых интервалов
+    const busyIntervals = busyOrders.map((order) => {
+      const orderDuration = calculateOrderDuration(
+        order.serviceVariant,
+        order.options,
+      );
+
+      return {
+        start: order.date.getTime(),
+        end: order.date.getTime() + minutesToMilliseconds(orderDuration), // конвертируем минуты в миллисекунды
+      };
+    });
 
     // Фильтруем слоты, оставляя только те, которые:
     // 1. Есть в графике хотя бы у одного исполнителя
-    // 2. Не заняты заказами
+    // 2. Не пересекаются с занятыми интервалами
     const availableSlots = new Set<number>();
 
     for (const executor of executors) {
       const scheduleDay = executor.scheduleDays[0];
 
-      // Если у исполнителя выходной, пропускаем
-      if (!scheduleDay || scheduleDay.isDayOff) continue;
+      // Сортируем слоты по времени
+      const sortedSlots = scheduleDay.timeSlots.sort(
+        (a, b) => dayjs(a.time).valueOf() - dayjs(b.time).valueOf(),
+      );
 
-      // Добавляем все слоты из графика исполнителя
-      for (const slot of scheduleDay.timeSlots) {
-        const slotTime = dayjs(slot.time);
-        const timestamp = startOfDay
-          .hour(slotTime.hour())
-          .minute(slotTime.minute())
+      // Проверяем каждый слот как потенциальное начало заказа
+      for (let i = 0; i < sortedSlots.length; i++) {
+        const startSlot = sortedSlots[i];
+        const startTime = dayjs(startSlot.time);
+        const startTimestamp = startOfDay
+          .hour(startTime.hour())
+          .minute(startTime.minute())
           .valueOf();
 
-        // Добавляем слот только если он не занят
-        if (!busyTimestamps.has(timestamp)) {
-          availableSlots.add(timestamp);
+        const endTimestamp =
+          startTimestamp + minutesToMilliseconds(totalDuration);
+
+        // Проверяем, что все слоты в интервале доступны
+        let isIntervalAvailable = true;
+        let currentSlotIndex = i;
+
+        while (currentSlotIndex < sortedSlots.length) {
+          const currentSlot = sortedSlots[currentSlotIndex];
+          const currentTime = dayjs(currentSlot.time);
+          const currentTimestamp = startOfDay
+            .hour(currentTime.hour())
+            .minute(currentTime.minute())
+            .valueOf();
+
+          // Если текущий слот выходит за пределы рабочего дня, прерываем
+          if (currentTimestamp >= endOfDay.valueOf()) {
+            isIntervalAvailable = false;
+            break;
+          }
+
+          // Если достигли конца интервала, прерываем
+          if (currentTimestamp >= endTimestamp) {
+            break;
+          }
+
+          // Проверяем, не пересекается ли текущий слот с занятыми интервалами
+          const isSlotBusy = busyIntervals.some(
+            (interval) =>
+              (currentTimestamp >= interval.start &&
+                currentTimestamp < interval.end) || // начало слота попадает в занятый интервал
+              (currentTimestamp + 60 * 60 * 1000 > interval.start &&
+                currentTimestamp + 60 * 60 * 1000 <= interval.end) || // конец слота попадает в занятый интервал
+              (currentTimestamp <= interval.start &&
+                currentTimestamp + 60 * 60 * 1000 >= interval.end), // слот полностью содержит занятый интервал
+          );
+
+          if (isSlotBusy) {
+            isIntervalAvailable = false;
+            break;
+          }
+
+          currentSlotIndex++;
+        }
+
+        // Если нашли непрерывный интервал нужной длительности, добавляем начальный слот
+        if (
+          isIntervalAvailable &&
+          currentSlotIndex - i >= Math.ceil(totalDuration / 60)
+        ) {
+          availableSlots.add(startTimestamp);
         }
       }
     }

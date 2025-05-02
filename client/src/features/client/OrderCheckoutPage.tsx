@@ -103,7 +103,7 @@ export const OrderCheckoutPage = () => {
 
             <div className="content flex flex-col gap-6 p-4">
                 <ListButtonGroup>
-                    <ScheduleSheet selectedTimestamp={selectedTimestamp} onSelectDate={handleSelectDate}
+                    <ScheduleSheet serviceVariantId={serviceVariant?.id} optionIds={options.map(o => o.id)} selectedTimestamp={selectedTimestamp} onSelectDate={handleSelectDate}
                     >
                         <ListButton icon={<Calendar
                             className="p-1 h-7 w-7 bg-[#2AABEE] rounded-md"/>} text={dateTitle}

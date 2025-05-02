@@ -29,7 +29,15 @@ export class ScheduleController {
   }
 
   @Get('available-slots')
-  getAvailableSlotsSlots(@Query('date') date: string) {
-    return this.scheduleService.getAvailableSlotsSlots(Number(date));
+  getAvailableSlots(
+    @Query('date') date: string,
+    @Query('serviceVariantId') serviceVariantId: string,
+    @Query('optionIds') optionIds?: string,
+  ) {
+    return this.scheduleService.getAvailableSlots(
+      Number(date),
+      Number(serviceVariantId),
+      optionIds ? optionIds.split(',').map(Number) : [],
+    );
   }
 }

@@ -11,12 +11,16 @@ import {CalendarX} from "lucide-react";
 interface ScheduleSheetProps {
     selectedTimestamp?: number;
     onSelectDate: (date: number) => void;
+    serviceVariantId: number;
+    optionIds?: number[];
 }
 
 export function ScheduleSheet({
     children,
     selectedTimestamp,
-    onSelectDate
+    onSelectDate,
+    serviceVariantId,
+    optionIds = []
 }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {vibro} = useTelegram();
     const [tab, setTab] = useState<string>();
@@ -53,9 +57,11 @@ export function ScheduleSheet({
     }).filter(s => s.slots.length > 0), []);
 
     const { data: busySlots = [] } = useGetExecutorBusySlotsQuery({ 
-        date: tab ? Number(tab) : result[0]?.timestamp 
+        date: tab ? Number(tab) : result[0]?.timestamp,
+        serviceVariantId,
+        optionIds
     }, {
-        skip: !tab && !result[0]?.timestamp
+        skip: !tab && !result[0]?.timestamp || !serviceVariantId || !optionIds
     });
 
     const filteredSlots = useMemo(() => {
@@ -72,7 +78,7 @@ export function ScheduleSheet({
             <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">
-                        Choose slots</SheetTitle>
+                        Выбор времени</SheetTitle>
                     <Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">
                         <TabsList className="bg-inherit px-0">
                             {result.map(r => <TabsTrigger

@@ -206,11 +206,19 @@ export const api = createApi({
             }),
             providesTags: ['Application'],
         }),
-        getExecutorBusySlots: builder.query<{ timestamp: number }[], { date: number }>({
-            query: ({ date }) => ({
+        getExecutorBusySlots: builder.query<{ timestamp: number }[], { 
+            date: number;
+            serviceVariantId: number;
+            optionIds?: number[];
+        }>({
+            query: ({ date, serviceVariantId, optionIds }) => ({
                 url: `/schedule/available-slots`,
                 method: 'GET',
-                params: { date }
+                params: { 
+                    date,
+                    serviceVariantId,
+                    optionIds: optionIds?.join(',')
+                }
             }),
         }),
     })
