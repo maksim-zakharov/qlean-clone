@@ -1,10 +1,22 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Order, OrderStatus } from '@prisma/client';
+import { Order, OrderStatus, User } from '@prisma/client';
+import { BusinessException } from '../common/exceptions/business.exception';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Injectable()
 export class OrdersService {
   constructor(private prisma: PrismaService) {}
+
+  private validateOrderDate(date: Date) {
+    const now = new Date();
+    if (date < now) {
+      throw new BusinessException(
+        'INVALID_ORDER_DATE',
+        'Дата заказа не может быть в прошлом',
+      );
+    }
+  }
 
   async getById(id: Order['id'], userId: Order['userId']) {
     const order = await this.prisma.order.findUnique({
@@ -44,7 +56,9 @@ export class OrdersService {
     });
   }
 
-  async create(data: any): Promise<Order> {
+  async create(data: CreateOrderDto & { userId: User['id'] }): Promise<Order> {
+    // Проверка что дата заказа позже текущего времени
+    this.validateOrderDate(data.date);
     try {
       return this.prisma.order.create({
         data: {
@@ -53,13 +67,14 @@ export class OrdersService {
           date: new Date(data.date),
           fullAddress: data.fullAddress,
           serviceVariantId: data.serviceVariant.id,
-          comment: data.comment,
           options: {
-            connect: data.options.map(({ id }) => ({ id })),
+            connect: data.options?.map(({ id }) => ({ id })) || [],
           },
         },
         include: {
-          options: true, // Чтобы получить связанные опции в ответе
+          options: true,
+          baseService: true,
+          serviceVariant: true,
         },
       });
     } catch (error) {
@@ -68,6 +83,8 @@ export class OrdersService {
   }
 
   async update(data: any): Promise<Order> {
+    // Проверка что дата заказа позже текущего времени
+    this.validateOrderDate(data.date);
     try {
       return this.prisma.order.update({
         where: { id: data.id, userId: data.userId },

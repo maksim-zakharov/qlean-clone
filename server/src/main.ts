@@ -8,6 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { formatValidationErrors } from './formatValidationErrors';
+import { BusinessExceptionFilter } from './common/filters/business-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -28,6 +29,8 @@ async function bootstrap() {
   //         exceptionFactory: (errors) => new BadRequestException(formatValidationErrors(errors)),
   //     }),
   // );
+
+  app.useGlobalFilters(new BusinessExceptionFilter());
 
   // Проверка подключения к Prisma
   const prisma = app.get(PrismaService);

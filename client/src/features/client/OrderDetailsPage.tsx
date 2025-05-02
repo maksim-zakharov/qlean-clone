@@ -153,7 +153,7 @@ export const OrderDetailsPage = () => {
                             <Typography.Description>{dayjs(order.date).format('D MMMM')}</Typography.Description>
                             <Typography.Title>{dayjs(order.date).format('HH:mm')}</Typography.Title>
                         </div>
-                        {canEdit && <ScheduleSheet selectedTimestamp={new Date(order.date).getTime()}
+                        {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id} optionIds={order?.options.map(o => o.id)} selectedTimestamp={new Date(order.date).getTime()}
                                                    onSelectDate={handleSelectDate}>
                             <EditButton/>
                         </ScheduleSheet>}

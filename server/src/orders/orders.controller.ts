@@ -15,6 +15,7 @@ import { OrdersService } from './orders.service';
 import { AuthGuard } from '@nestjs/passport';
 import { plainToInstance } from 'class-transformer';
 import { OrderDTO } from '../_dto/orders.dto';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('/api/orders')
@@ -64,7 +65,10 @@ export class OrdersController {
   }
 
   @Post('')
-  addOrder(@Body() body: Order, @Req() req) {
-    return this.ordersService.create({ ...body, userId: req.user.id });
+  addOrder(@Body() createOrderDto: CreateOrderDto, @Req() req) {
+    return this.ordersService.create({
+      ...createOrderDto,
+      userId: req.user.id,
+    });
   }
 }
