@@ -10,8 +10,9 @@ import {Checkbox} from "../../components/ui/checkbox.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {FileClock, FileX, Loader2} from "lucide-react";
+import {FileClock, FileX} from "lucide-react";
 import {useNavigate} from "react-router-dom";
+import {PageLoader} from "../../components/PageLoader.tsx";
 
 export const ApplicationPage = () => {
     const [loginMutation] = useLoginMutation();
@@ -46,8 +47,7 @@ export const ApplicationPage = () => {
     const isLoading = servicesLoading || applicationLoading;
 
     if (isLoading) {
-        return <div className="flex justify-center h-screen items-center m-auto"><Loader2
-            className="animate-spin h-16 w-16 mb-16"/></div>
+        return <PageLoader/>
     }
 
     if (!application) {

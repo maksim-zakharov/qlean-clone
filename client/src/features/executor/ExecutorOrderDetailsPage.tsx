@@ -13,6 +13,7 @@ import {useTelegram} from "../../hooks/useTelegram.ts";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
+import {PageLoader} from "../../components/PageLoader.tsx";
 
 export const ExecutorOrderDetailsPage = () => {
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ export const ExecutorOrderDetailsPage = () => {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },
-            icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]" />
+            icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
         })
         navigate(RoutePaths.Executor.Orders)
     }
@@ -51,8 +52,10 @@ export const ExecutorOrderDetailsPage = () => {
 
     const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(op.id)) && selectedOptionsIdSet.has(order?.serviceVariant?.id), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
 
+    const canStart = useMemo(() => order?.status === 'todo', [order]);
+
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <PageLoader/>
     }
 
     return <>
@@ -71,16 +74,19 @@ export const ExecutorOrderDetailsPage = () => {
             <Typography.H2 className="mb-2">What you have to do:</Typography.H2>
             <ListButtonGroup>
                 <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
-                    order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(order?.serviceVariant?.id)}
-                                                               onCheckedChange={() => handleOptionToggle(order?.serviceVariant)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
+                    order?.status === 'processed' &&
+                    <Checkbox checked={selectedOptionsIdSet.has(order?.serviceVariant?.id)}
+                              onCheckedChange={() => handleOptionToggle(order?.serviceVariant)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
                 {order?.options.map(op => <ListButton key={op?.id} text={op?.name} extra={
                     order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(op.id)}
-                              onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}
+                                                               onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}
             </ListButtonGroup>
 
             <BottomActions>
-                {order?.status === 'todo' && <Button wide loading={processedOrderLoading} onClick={() => processedOrder(order).unwrap()}>Start</Button>}
-                {order?.status === 'processed' && <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>Finalize</Button>}
+                {canStart && <Button wide loading={processedOrderLoading}
+                                                     onClick={() => processedOrder(order).unwrap()}>Start</Button>}
+                {order?.status === 'processed' &&
+                    <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>Finalize</Button>}
             </BottomActions>
         </div>
         <AlertDialogWrapper open={Boolean(orderToDelete)} title="Finalize order"

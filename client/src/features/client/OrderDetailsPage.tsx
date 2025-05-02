@@ -136,8 +136,8 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Исполнитель</Typography.Description>
-                            <Typography.Title>В поиске</Typography.Title>
+                            <Typography.Description>Executor</Typography.Description>
+                            <Typography.Title>Searching</Typography.Title>
                         </div>
                         <Avatar className="rounded-3xl bg-tg-theme-secondary-bg-color">
                             <AvatarImage src={''}/>
@@ -162,7 +162,7 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Адрес</Typography.Description>
+                            <Typography.Description>Address</Typography.Description>
                             <Typography.Title>{order.fullAddress}</Typography.Title>
                         </div>
                         {canEdit && <AddressSheet
@@ -176,9 +176,9 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Комментарий</Typography.Description>
+                            <Typography.Description>Comment</Typography.Description>
                             <Typography.Title
-                                className="[overflow-wrap:anywhere]">{order.comment || 'Отсутствует'}</Typography.Title>
+                                className="[overflow-wrap:anywhere]">{order.comment || 'Empty'}</Typography.Title>
                         </div>
                         {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
                             <EditButton/>
@@ -206,7 +206,7 @@ export const OrderDetailsPage = () => {
                 <AccordionItem value="services">
                     <AccordionTrigger disabled>
                         <div className="flex justify-between w-full">
-                            <span className="text-lg font-medium text-tg-theme-text-color">Итого</span>
+                            <span className="text-lg font-medium text-tg-theme-text-color">Summary</span>
                             <div className="flex items-center gap-1">
                                         <span
                                             className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>

@@ -8,7 +8,6 @@ import {
     CalendarClock,
     ChevronRight,
     HandCoins,
-    Loader2,
     MapPin,
     Phone,
     Star,
@@ -28,6 +27,7 @@ import {ListButton} from "@/components/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton.tsx";
 import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api.ts";
 import {DynamicIcon} from "lucide-react/dynamic";
+import {PageLoader} from "../../components/PageLoader.tsx";
 
 interface Address {
     // Дом
@@ -124,8 +124,7 @@ export const ProfilePage = () => {
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
     if (applicationLoading || isLoading) {
-        return <div className="flex justify-center h-screen items-center m-auto"><Loader2
-            className="animate-spin h-16 w-16 mb-16"/></div>
+        return <PageLoader/>
     }
 
     return <>
