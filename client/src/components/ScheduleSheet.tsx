@@ -2,8 +2,11 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/com
 import React, {useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import {Tabs, TabsList, TabsTrigger} from "./ui/tabs.tsx";
+import {useGetExecutorBusySlotsQuery} from "../api.ts";
+import {EmptyState} from "./EmptyState.tsx";
+import {CalendarX} from "lucide-react";
 
 interface ScheduleSheetProps {
     selectedTimestamp?: number;
@@ -11,13 +14,14 @@ interface ScheduleSheetProps {
 }
 
 export function ScheduleSheet({
-                                  children,
-                                  selectedTimestamp,
-                                  onSelectDate
-                              }: React.PropsWithChildren<ScheduleSheetProps>) {
+    children,
+    selectedTimestamp,
+    onSelectDate
+}: React.PropsWithChildren<ScheduleSheetProps>) {
     const {vibro} = useTelegram();
+    const [tab, setTab] = useState<string>();
 
-    function generateTimeSlots(parentDate) {
+    function generateTimeSlots(parentDate: Dayjs) {
         const slots = [];
         const start = parentDate.startOf('day').add(8, 'hour');
         const end = parentDate.startOf('day').add(22, 'hour');
@@ -48,9 +52,17 @@ export function ScheduleSheet({
         };
     }).filter(s => s.slots.length > 0), []);
 
-    const [tab, setTab] = useState<string>();
+    const { data: busySlots = [] } = useGetExecutorBusySlotsQuery({ 
+        date: tab ? Number(tab) : result[0]?.timestamp 
+    }, {
+        skip: !tab && !result[0]?.timestamp
+    });
 
-    const filteredSlots = useMemo(() => result.find(r => r.timestamp.toString() === tab)?.slots || [], [tab]);
+    const filteredSlots = useMemo(() => {
+        const slots = result.find(r => r.timestamp.toString() === tab)?.slots || [];
+        const busyTimestamps = new Set(busySlots.map(slot => slot.timestamp));
+        return slots.filter(slot => busyTimestamps.has(slot.timestamp));
+    }, [tab, result, busySlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
@@ -60,7 +72,7 @@ export function ScheduleSheet({
             <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">
-                        Выбор времени</SheetTitle>
+                        Choose slots</SheetTitle>
                     <Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">
                         <TabsList className="bg-inherit px-0">
                             {result.map(r => <TabsTrigger
@@ -72,7 +84,8 @@ export function ScheduleSheet({
                         </TabsList>
                     </Tabs>
                 </SheetHeader>
-                <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
+                {filteredSlots.length === 0 && <EmptyState icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
+                {filteredSlots.length > 0 && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
                     {filteredSlots.map(service =>
                         <CardItem
                             className={`min-h-[80px] border-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
@@ -80,7 +93,7 @@ export function ScheduleSheet({
                             title={service.time}
                             onClick={() => onSelectDate(service.timestamp)}
                         />)}
-                </div>
+                </div>}
             </SheetContent>
         </Sheet>
     )

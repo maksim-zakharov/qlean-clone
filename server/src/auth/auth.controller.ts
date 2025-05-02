@@ -51,9 +51,9 @@ export class AuthController {
     const params = new URLSearchParams(initData);
     const userData = JSON.parse(decodeURIComponent(params.get('user')));
 
-    const user = await this.authService.validateUser(userData, role);
+    const user = await this.authService.validateUser(userData);
 
-    return this.authService.login(user);
+    return this.authService.login(user, role);
   }
 
   // @Patch('/phone')

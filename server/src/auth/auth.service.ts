@@ -42,7 +42,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(data: any, role?: string) {
+  async validateUser(data: any) {
     return this.prisma.$transaction(async (tx) => {
       let user = await tx.user.findUnique({
         where: { id: data.id.toString() },
@@ -61,27 +61,22 @@ export class AuthService {
         });
       }
 
-      if (role === 'executor') {
-        const application = await tx.application.findUnique({
-          where: { userId: data.id.toString() },
-        });
-        if (!application || application.status !== ApplicationStatus.APPROVED) {
-          return {
-            ...user,
-            role: 'client',
-          };
-        }
-        return {
-          ...user,
-          role,
-        };
-      }
-
       return user;
     });
   }
 
-  async login(user: any) {
+  async login(user: any, role?: string) {
+    const data = user;
+    data.role = 'client';
+    if (role === 'executor') {
+      const application = await this.prisma.application.findUnique({
+        where: { userId: user.id.toString() },
+      });
+      if (!application || application.status !== ApplicationStatus.APPROVED) {
+        data.role = 'client';
+      }
+      data.role = role;
+    }
     return {
       access_token: this.jwtService.sign(user),
     };

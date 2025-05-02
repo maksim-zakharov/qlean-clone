@@ -3,8 +3,8 @@ import {
   Controller,
   Get,
   NotFoundException,
-  Param,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -26,5 +26,10 @@ export class ScheduleController {
   @Put()
   async updateSchedule(@Req() req, @Body() updateScheduleDto: any) {
     return this.scheduleService.updateSchedule(req.user.id, updateScheduleDto);
+  }
+
+  @Get('available-slots')
+  getAvailableSlotsSlots(@Query('date') date: string) {
+    return this.scheduleService.getAvailableSlotsSlots(Number(date));
   }
 }

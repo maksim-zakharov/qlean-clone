@@ -206,6 +206,13 @@ export const api = createApi({
             }),
             providesTags: ['Application'],
         }),
+        getExecutorBusySlots: builder.query<{ timestamp: number }[], { date: number }>({
+            query: ({ date }) => ({
+                url: `/schedule/available-slots`,
+                method: 'GET',
+                params: { date }
+            }),
+        }),
     })
 });
 
@@ -229,5 +236,6 @@ export const {
     useGetApplicationQuery,
     useSendApplicationMutation,
     useCompleteOrderMutation,
-    useProcessedOrderMutation
+    useProcessedOrderMutation,
+    useGetExecutorBusySlotsQuery
 } = api;

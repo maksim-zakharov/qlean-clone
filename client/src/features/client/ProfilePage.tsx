@@ -209,7 +209,7 @@ export const ProfilePage = () => {
             {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px]"/>} icon={<BriefcaseBusiness
                                                                           className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>} text={`Login as ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
 
-            {userInfo?.role === 'executor' && <div>
+            {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
                 <Typography.Title className="text-left mb-0 block">Your services</Typography.Title>
                 {filteredServices.map(s => <div className="mt-4">
                     <Typography.Description className="block mb-2 text-left">{s.name}</Typography.Description>
