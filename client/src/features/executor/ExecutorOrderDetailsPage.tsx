@@ -52,7 +52,15 @@ export const ExecutorOrderDetailsPage = () => {
 
     const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(op.id)) && selectedOptionsIdSet.has(order?.serviceVariant?.id), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
 
-    const canStart = useMemo(() => order?.status === 'todo', [order]);
+    const canStart = useMemo(() => {
+      if (!order) return false;
+      const orderDate = new Date(order.date);
+      const today = new Date();
+      return order?.status === 'todo' && 
+        orderDate.getDate() === today.getDate() &&
+        orderDate.getMonth() === today.getMonth() &&
+        orderDate.getFullYear() === today.getFullYear();
+    }, [order]);
 
     if (isLoading) {
         return <PageLoader/>
@@ -82,12 +90,12 @@ export const ExecutorOrderDetailsPage = () => {
                                                                onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}
             </ListButtonGroup>
 
-            <BottomActions>
+            {(order?.status === 'processed' || canStart) && <BottomActions>
                 {canStart && <Button wide loading={processedOrderLoading}
                                                      onClick={() => processedOrder(order).unwrap()}>Start</Button>}
                 {order?.status === 'processed' &&
                     <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>Finalize</Button>}
-            </BottomActions>
+            </BottomActions>}
         </div>
         <AlertDialogWrapper open={Boolean(orderToDelete)} title="Finalize order"
                             description="Are you sure you want to finalize your order?"
