@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { createHmac } from 'crypto';
 import * as process from 'node:process';
 import { JwtService } from '@nestjs/jwt';
-import { ApplicationStatus, UserRole } from '@prisma/client';
+import { ApplicationStatus } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 
 export function validateInitData(initData: string) {
@@ -42,7 +42,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(data: any, role?: UserRole) {
+  async validateUser(data: any, role?: string) {
     return this.prisma.$transaction(async (tx) => {
       let user = await tx.user.findUnique({
         where: { id: data.id.toString() },
@@ -53,7 +53,6 @@ export class AuthService {
           data: {
             id: data.id.toString(),
             firstName: data.first_name,
-            role: 'client',
             lastName: data.last_name,
             photoUrl: data.photo_url,
             phone: data.phone_number,
@@ -62,19 +61,19 @@ export class AuthService {
         });
       }
 
-      if (role === UserRole.executor) {
+      if (role === 'executor') {
         const application = await tx.application.findUnique({
           where: { userId: data.id.toString() },
         });
         if (!application || application.status !== ApplicationStatus.APPROVED) {
           return {
             ...user,
-            role: UserRole.client,
+            role: 'client',
           };
         }
         return {
           ...user,
-          role: UserRole.executor,
+          role,
         };
       }
 

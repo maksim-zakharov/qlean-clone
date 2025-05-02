@@ -79,17 +79,10 @@ model ServiceOption {
   orders        Order[]
 }
 
-enum UserRole {
-  client
-  executor
-  admin
-}
-
 model User {
   id  String          @id
   createdAt  DateTime   @default(now())
   firstName String
-  role  UserRole  @default(client)
   lastName  String?
   photoUrl  String?
   username  String?

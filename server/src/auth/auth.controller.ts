@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Headers,
-  Patch,
   Post,
   Req,
   UnauthorizedException,
@@ -11,11 +10,10 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService, validateInitData } from './auth.service';
-import { ServiceVariant, User, UserRole } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { Telegraf } from 'telegraf';
 import { UserResponseDTO } from '../_dto/user-response.dto';
-import { plainToClass, plainToInstance } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('/api/auth')
 export class AuthController {
@@ -43,7 +41,7 @@ export class AuthController {
   }
 
   @Post('/login')
-  async login(@Headers() headers, @Body() { role }: { role?: UserRole }) {
+  async login(@Headers() headers, @Body() { role }: { role?: string }) {
     const initData = headers['telegram-init-data'] as string;
 
     if (!validateInitData(initData)) {
