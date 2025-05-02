@@ -44,6 +44,10 @@ export class OrderDTO {
   date: string; // ISO 8601
   @Exclude() // Исключаем это поле из ответа
   userId: string;
+  @Exclude() // Исключаем это поле из ответа
+  completedAt: string;
+  @Exclude() // Исключаем это поле из ответа
+  startedAt: string;
   executorId: string | null;
   comment: string | null;
 

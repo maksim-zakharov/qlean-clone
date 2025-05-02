@@ -10,6 +10,8 @@ import {
 import { OrdersService } from '../orders/orders.service';
 import { Order, OrderStatus } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
+import { plainToInstance } from 'class-transformer';
+import { OrderDTO } from '../_dto/orders.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('/api/executor')
@@ -19,10 +21,12 @@ export class ExecutorController {
   @Get('/orders')
   getOrders(@Req() req) {
     return this.ordersService.getAllByExecutor(req.user.id).then((r) =>
-      r.map((o) => ({
-        ...o,
-        status: o.date > new Date() ? o.status : OrderStatus.completed,
-      })),
+      r.map((o) =>
+        plainToInstance(OrderDTO, {
+          ...o,
+          status: o.date > new Date() ? o.status : OrderStatus.completed,
+        }),
+      ),
     );
   }
 
@@ -31,8 +35,11 @@ export class ExecutorController {
     const item = await this.ordersService.getById(Number(id), req.user.id);
 
     item.status = OrderStatus.completed;
+    item.completedAt = new Date();
 
-    return this.ordersService.update(item);
+    return this.ordersService
+      .update(item)
+      .then((o) => plainToInstance(OrderDTO, o));
   }
 
   @Post('/orders/:id/processed')
@@ -40,7 +47,10 @@ export class ExecutorController {
     const item = await this.ordersService.getById(Number(id), req.user.id);
 
     item.status = OrderStatus.processed;
+    item.startedAt = new Date();
 
-    return this.ordersService.update(item);
+    return this.ordersService
+      .update(item)
+      .then((o) => plainToInstance(OrderDTO, o));
   }
 }

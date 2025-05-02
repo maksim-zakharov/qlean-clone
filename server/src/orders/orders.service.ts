@@ -28,10 +28,10 @@ export class OrdersService {
       },
     });
 
-    return {
-      ...order,
-      status: order.date > new Date() ? order.status : OrderStatus.completed,
-    };
+    order.status =
+      order.date > new Date() ? order.status : OrderStatus.completed;
+
+    return order;
   }
 
   getAll(userId: Order['userId']) {
@@ -89,6 +89,8 @@ export class OrdersService {
       return this.prisma.order.update({
         where: { id: data.id, userId: data.userId },
         data: {
+          startedAt: data.startedAt,
+          completedAt: data.completedAt,
           baseServiceId: data.baseService.id,
           status: data.status,
           userId: data.userId,

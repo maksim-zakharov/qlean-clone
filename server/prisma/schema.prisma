@@ -29,6 +29,8 @@ enum OrderStatus {
 
 model Order {
   id               Int              @id @default(autoincrement())
+  startedAt       DateTime?      // Время начала работы исполнителя
+  completedAt     DateTime?      // Время окончания работы исполнителя
   baseService      BaseService      @relation(fields: [baseServiceId], references: [id])
   baseServiceId    Int
   serviceVariant   ServiceVariant   @relation(fields: [serviceVariantId], references: [id])
