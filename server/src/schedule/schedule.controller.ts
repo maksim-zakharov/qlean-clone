@@ -28,6 +28,7 @@ export class ScheduleController {
     return this.scheduleService.updateSchedule(req.user.id, updateScheduleDto);
   }
 
+  // TODO Потом Перенести в CRON чтоб не нагружать базу для большого количества пользователей
   @Get('available-slots')
   getAvailableSlots(
     @Query('date') date: string,

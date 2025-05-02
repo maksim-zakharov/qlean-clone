@@ -127,6 +127,11 @@ export class ScheduleService {
       where: {
         application: {
           status: 'APPROVED',
+          variants: {
+            some: {
+              variantId: serviceVariantId,
+            },
+          },
         },
         scheduleDays: {
           some: {
