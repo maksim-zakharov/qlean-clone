@@ -7,6 +7,7 @@ import {Tabs, TabsList, TabsTrigger} from "./ui/tabs.tsx";
 import {useGetExecutorBusySlotsQuery} from "../api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
+import {Skeleton} from "./ui/skeleton.tsx";
 
 interface ScheduleSheetProps {
     selectedTimestamp?: number;
@@ -56,7 +57,7 @@ export function ScheduleSheet({
         };
     }).filter(s => s.slots.length > 0), []);
 
-    const { data: busySlots = [] } = useGetExecutorBusySlotsQuery({ 
+    const { data: busySlots = [], isFetching } = useGetExecutorBusySlotsQuery({
         date: tab ? Number(tab) : result[0]?.timestamp,
         serviceVariantId,
         optionIds
@@ -90,8 +91,20 @@ export function ScheduleSheet({
                         </TabsList>
                     </Tabs>
                 </SheetHeader>
-                {filteredSlots.length === 0 && <EmptyState icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
-                {filteredSlots.length > 0 && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
+                {isFetching && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                    <Skeleton className="w-full min-h-[80px]"/>
+                </div>}
+                {!isFetching && filteredSlots.length === 0 && <EmptyState icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
+                {!isFetching && filteredSlots.length > 0 && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
                     {filteredSlots.map(service =>
                         <CardItem
                             className={`min-h-[80px] border-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
