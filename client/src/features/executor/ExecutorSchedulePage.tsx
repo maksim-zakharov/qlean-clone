@@ -135,7 +135,7 @@ export const ExecutorSchedulePage = () => {
             className="flex flex-col gap-2"
         >
             {weekDays.map(day => <AccordionItem value={day.value} className="rounded-xl">
-                <AccordionTrigger showChevron={false}>
+                <AccordionTrigger hideChevron>
                     <div className="flex justify-between w-full">
                         <span className="text-lg font-medium text-tg-theme-text-color">{day.label}</span>
                         <span className="text-lg font-medium text-tg-theme-text-color">{calculateDayStatus(scheduleMap[day.value.toUpperCase()])}</span>

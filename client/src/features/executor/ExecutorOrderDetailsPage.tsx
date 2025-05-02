@@ -49,7 +49,7 @@ export const ExecutorOrderDetailsPage = () => {
         setVariantIds(newOptions);
     }
 
-    const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(op.id)), [selectedOptionsIdSet, order?.options])
+    const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(op.id)) && selectedOptionsIdSet.has(order?.serviceVariant?.id), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -70,6 +70,9 @@ export const ExecutorOrderDetailsPage = () => {
 
             <Typography.H2 className="mb-2">What you have to do:</Typography.H2>
             <ListButtonGroup>
+                <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
+                    order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(order?.serviceVariant?.id)}
+                                                               onCheckedChange={() => handleOptionToggle(order?.serviceVariant)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
                 {order?.options.map(op => <ListButton key={op?.id} text={op?.name} extra={
                     order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(op.id)}
                               onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}

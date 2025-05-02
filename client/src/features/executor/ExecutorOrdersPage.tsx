@@ -158,7 +158,7 @@ export const ExecutorOrdersPage = () => {
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services" className="rounded-xl">
-                    <AccordionTrigger className="flex justify-normal py-0" disabled onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
+                    <AccordionTrigger className="flex justify-normal py-0" hideChevron onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
                         <div className="p-3 px-0 separator-shadow-bottom flex flex-col w-full">
                             <div className="flex justify-between">
                                 <Typography.Title>{ao.baseService?.name}</Typography.Title>
