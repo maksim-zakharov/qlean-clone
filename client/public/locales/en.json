@@ -69,7 +69,21 @@
   "client_orders_add_service_btn": "Add service",
   "client_orders_support_btn": "Support",
   "client_orders_todo_status": "Ordered",
+  "client_orders_processed_status": "Processed",
   "client_orders_canceled_status": "Canceled",
   "client_orders_completed_status": "Completed",
-  "client_orders_repeat_btn": "Repeat"
+  "client_orders_repeat_btn": "Repeat",
+
+  "client_order_details_cancel_title": "Cancel order",
+  "client_order_details_cancel_description": "Вы можете перенести уборку, если дата и время вам не подходят",
+  "client_order_details_reschedule_ok_btn": "Reschedule",
+  "client_order_details_reschedule_cancel_btn": "Cancel",
+
+  "client_order_details_executor_title": "Executor",
+  "client_order_details_executor_status": "Searching",
+  "client_order_details_comments_empty": "Empty",
+
+  "client_order_details_services_summary": "Summary",
+  "client_order_details_add_option_btn": "Add options",
+  "client_order_details_cancel_btn": "Cancel"
 }

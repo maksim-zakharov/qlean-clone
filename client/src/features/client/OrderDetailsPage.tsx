@@ -2,7 +2,6 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useMemo, useState} from "react";
-import {useTelegram} from "../../hooks/useTelegram.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {useCancelOrderMutation, useGetAddressesQuery, useGetOrderByIdQuery, usePatchOrderMutation} from "../../api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
@@ -23,13 +22,14 @@ import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {EditButton} from "../../components/EditButton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
+import {useTranslation} from "react-i18next";
 
 export const OrderDetailsPage = () => {
+    const {t} = useTranslation();
     const [patchOrder] = usePatchOrderMutation();
     const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery();
     const {id} = useParams<string>();
     const {data: order, isLoading, isError} = useGetOrderByIdQuery({id: id!});
@@ -77,8 +77,8 @@ export const OrderDetailsPage = () => {
 
     const handleCloseClick = () => {
         setAlertConfig({
-            title: `Отменить уборку ${dayjs(order.date).format('dd, D MMMM HH:mm')}?`,
-            description: 'Вы можете перенести уборку, если дата и время вам не подходят',
+            title: `${t('client_order_details_cancel_title')} ${dayjs(order.date).format('dd, D MMMM HH:mm')}?`,
+            description: t('client_order_details_cancel_description'),
             show: true
         })
     }
@@ -99,12 +99,12 @@ export const OrderDetailsPage = () => {
             className="h-screen">
             <EmptyState
                 icon={<CircleX className="h-10 w-10"/>}
-                title="Упс, что-то пошло не так..."
-                description="Обновите страницу или повторите попытку позднее."
+                title={t("error_500_title")}
+                description={t('error_500_description')}
                 action={
                     <Button onClick={() => window.location.reload()}
                     >
-                        Обновить страницу
+                        {t('error_refresh_btn')}
                     </Button>}
             />
         </div>
@@ -112,8 +112,8 @@ export const OrderDetailsPage = () => {
 
     return <div className="flex flex-col bg-inherit overflow-y-auto overscroll-none h-screen">
         <AlertDialogWrapper open={show} title={title} description={description}
-                            onOkText="Перенести"
-                            onCloseText="Отменить"
+                            onOkText={t('client_order_details_reschedule_ok_btn')}
+                            onCloseText={t('client_order_details_reschedule_cancel_btn')}
                             cancelLoading={cancelLoading}
                             onCancelClick={handleCancelClick}
                             onOkClick={handleOkClick}/>
@@ -130,14 +130,14 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>
                             №{order.id}
                         </Typography.Title>
-                        <Typography.Title>{order.status === 'processed' ? 'Processed': order.status === 'todo' ? 'Ready' : order.status === 'canceled' ? 'Canceled' : 'Completed'}</Typography.Title>
+                        <Typography.Title>{order.status === 'processed' ? t('client_orders_processed_status') : order.status === 'todo' ? t('client_orders_todo_status') : order.status === 'canceled' ? t('client_orders_canceled_status') : t('client_orders_completed_status')}</Typography.Title>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Executor</Typography.Description>
-                            <Typography.Title>Searching</Typography.Title>
+                            <Typography.Description>{t('client_order_details_executor_title')}</Typography.Description>
+                            <Typography.Title>{t('client_order_details_executor_status')}</Typography.Title>
                         </div>
                         <Avatar className="rounded-3xl bg-tg-theme-secondary-bg-color">
                             <AvatarImage src={''}/>
@@ -153,7 +153,9 @@ export const OrderDetailsPage = () => {
                             <Typography.Description>{dayjs(order.date).format('D MMMM')}</Typography.Description>
                             <Typography.Title>{dayjs(order.date).format('HH:mm')}</Typography.Title>
                         </div>
-                        {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id} optionIds={order?.options.map(o => o.id)} selectedTimestamp={new Date(order.date).getTime()}
+                        {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id}
+                                                   optionIds={order?.options.map(o => o.id)}
+                                                   selectedTimestamp={new Date(order.date).getTime()}
                                                    onSelectDate={handleSelectDate}>
                             <EditButton/>
                         </ScheduleSheet>}
@@ -162,7 +164,7 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Address</Typography.Description>
+                            <Typography.Description>{t('address')}</Typography.Description>
                             <Typography.Title>{order.fullAddress}</Typography.Title>
                         </div>
                         {canEdit && <AddressSheet
@@ -176,9 +178,9 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>Comment</Typography.Description>
+                            <Typography.Description>{t('payments_comments')}</Typography.Description>
                             <Typography.Title
-                                className="[overflow-wrap:anywhere]">{order.comment || 'Empty'}</Typography.Title>
+                                className="[overflow-wrap:anywhere]">{order.comment || t('client_order_details_comments_empty')}</Typography.Title>
                         </div>
                         {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
                             <EditButton/>
@@ -206,7 +208,7 @@ export const OrderDetailsPage = () => {
                 <AccordionItem value="services">
                     <AccordionTrigger disabled>
                         <div className="flex justify-between w-full">
-                            <span className="text-lg font-medium text-tg-theme-text-color">Summary</span>
+                            <span className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
                             <div className="flex items-center gap-1">
                                         <span
                                             className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
@@ -238,7 +240,7 @@ export const OrderDetailsPage = () => {
                     size="lg"
                     onClick={handleAddOptionClick}
                 >
-                    Добавить опций
+                    {t('client_order_details_add_option_btn')}
                 </Button>
                 <Button
                     wide
@@ -247,7 +249,7 @@ export const OrderDetailsPage = () => {
                     variant="default"
                     onClick={handleCloseClick}
                 >
-                    Отменить
+                    {t('client_order_details_cancel_btn')}
                 </Button>
             </BottomActions>
         </>
