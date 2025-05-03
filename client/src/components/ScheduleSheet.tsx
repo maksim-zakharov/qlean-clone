@@ -3,11 +3,12 @@ import React, {useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import dayjs, {Dayjs} from "dayjs";
-import {Tabs, TabsList, TabsTrigger} from "./ui/tabs.tsx";
 import {useGetExecutorBusySlotsQuery} from "../api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
 import {Skeleton} from "./ui/skeleton.tsx";
+import {Calendar} from "./ui/calendar.tsx";
+import {useTranslation} from "react-i18next";
 
 interface ScheduleSheetProps {
     selectedTimestamp?: number;
@@ -23,8 +24,9 @@ export function ScheduleSheet({
     serviceVariantId,
     optionIds = []
 }: React.PropsWithChildren<ScheduleSheetProps>) {
+    const {t} = useTranslation();
     const {vibro} = useTelegram();
-    const [tab, setTab] = useState<string>();
+    const [tab, setTab] = useState<Date>();
 
     function generateTimeSlots(parentDate: Dayjs) {
         const slots = [];
@@ -58,7 +60,7 @@ export function ScheduleSheet({
     }).filter(s => s.slots.length > 0), []);
 
     const { data: busySlots = [], isFetching } = useGetExecutorBusySlotsQuery({
-        date: tab ? Number(tab) : result[0]?.timestamp,
+        date: tab ? dayjs(tab).valueOf() : result[0]?.timestamp,
         serviceVariantId,
         optionIds
     }, {
@@ -66,7 +68,7 @@ export function ScheduleSheet({
     });
 
     const filteredSlots = useMemo(() => {
-        const slots = result.find(r => r.timestamp.toString() === tab)?.slots || [];
+        const slots = result.find(r => r.timestamp === dayjs(tab).valueOf())?.slots || [];
         const busyTimestamps = new Set(busySlots.map(slot => slot.timestamp));
         return slots.filter(slot => busyTimestamps.has(slot.timestamp));
     }, [tab, result, busySlots]);
@@ -78,36 +80,46 @@ export function ScheduleSheet({
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">
-                        Выбор времени</SheetTitle>
-                    <Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">
-                        <TabsList className="bg-inherit px-0">
-                            {result.map(r => <TabsTrigger
-                                key={r.timestamp}
-                                value={r.timestamp.toString()}
-                            >
-                                {r.date}
-                            </TabsTrigger>)}
-                        </TabsList>
-                    </Tabs>
+                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">{t('calendar_title')}</SheetTitle>
+                    {/*<Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">*/}
+                    {/*    <TabsList className="bg-inherit px-0">*/}
+                    {/*        {result.map(r => <TabsTrigger*/}
+                    {/*            key={r.timestamp}*/}
+                    {/*            value={r.timestamp.toString()}*/}
+                    {/*        >*/}
+                    {/*            {r.date}*/}
+                    {/*        </TabsTrigger>)}*/}
+                    {/*    </TabsList>*/}
+                    {/*</Tabs>*/}
                 </SheetHeader>
-                {isFetching && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
-                    <Skeleton className="w-full min-h-[80px]"/>
+                <Calendar className="px-0"
+                          mode="single"
+                          selected={tab}
+                          onSelect={setTab}
+                />
+                {isFetching && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
+                    <Skeleton className="w-full min-h-[40px]"/>
                 </div>}
                 {!isFetching && filteredSlots.length === 0 && <EmptyState icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
-                {!isFetching && filteredSlots.length > 0 && <div className="grid grid-cols-2 gap-2 overflow-x-auto no-scrollbar mt-2">
+                {!isFetching && filteredSlots.length > 0 && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
                     {filteredSlots.map(service =>
                         <CardItem
-                            className={`min-h-[80px] border-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
+                            textClassName="items-center"
+                            className={`min-h-[40px] p-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
                             key={service.timestamp}
                             title={service.time}
                             onClick={() => onSelectDate(service.timestamp)}

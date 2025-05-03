@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ExecutorPaymentsPage skeleton">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Проверил разделители">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CardItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CardItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,14 +187,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00303" summary="Страница join us">
-      <option name="closed" value="true" />
-      <created>1745945882188</created>
-      <option name="number" value="00303" />
-      <option name="presentableId" value="LOCAL-00303" />
-      <option name="project" value="LOCAL" />
-      <updated>1745945882188</updated>
     </task>
     <task id="LOCAL-00304" summary="Страница join us">
       <option name="closed" value="true" />
@@ -577,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746299525729</updated>
     </task>
-    <option name="localTasksCounter" value="352" />
+    <task id="LOCAL-00352" summary="Проверил разделители">
+      <option name="closed" value="true" />
+      <created>1746300409978</created>
+      <option name="number" value="00352" />
+      <option name="presentableId" value="LOCAL-00352" />
+      <option name="project" value="LOCAL" />
+      <updated>1746300409978</updated>
+    </task>
+    <option name="localTasksCounter" value="353" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +603,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Стартануть можно только заказ на сегодня" />
     <MESSAGE value="время начала и завершения заказа" />
     <MESSAGE value="Разобрался с разделителями" />
     <MESSAGE value="logout, отступы your services" />
@@ -625,6 +627,7 @@
     <MESSAGE value="OrderCreationPage padding" />
     <MESSAGE value="Убрал тени у карточек" />
     <MESSAGE value="ExecutorPaymentsPage skeleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="ExecutorPaymentsPage skeleton" />
+    <MESSAGE value="Проверил разделители" />
+    <option name="LAST_COMMIT_MESSAGE" value="Проверил разделители" />
   </component>
 </project>

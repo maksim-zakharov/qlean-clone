@@ -97,5 +97,7 @@
 
   "client_creation_popular_label": "POPULAR",
   "client_creation_continue_btn": "Continue",
-  "client_creation_save_btn": "Save"
+  "client_creation_save_btn": "Save",
+
+  "calendar_title": "Choose slot"
 }
