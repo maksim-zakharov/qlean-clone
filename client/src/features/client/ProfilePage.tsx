@@ -133,7 +133,7 @@ export const ProfilePage = () => {
                 <BackButton url="/"/>
             </div>
         </Header>
-        <div className="flex flex-col content text-center px-4 gap-6">
+        <div className="flex flex-col content text-center px-4 gap-6 pb-6">
             <ListButtonGroup>
                 <ListButton icon={<Avatar className="w-7 h-7">
                     <AvatarImage src={userInfo?.photoUrl}/>
@@ -209,9 +209,9 @@ export const ProfilePage = () => {
                                                                           className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>} text={`Login as ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
 
             {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
-                <Typography.Title className="text-left mb-0 block">Your services</Typography.Title>
+                <Typography.Title className="text-left mb-0 block pl-4">Your services</Typography.Title>
                 {filteredServices.map(s => <div className="mt-4">
-                    <Typography.Description className="block mb-2 text-left">{s.name}</Typography.Description>
+                    <Typography.Description className="block mb-2 text-left pl-4 text-sm uppercase">{s.name}</Typography.Description>
                     <ListButtonGroup>
                         {s.variants.map(s => <ListButton text={s.name} icon={<DynamicIcon name={s.icon}
                                                                                           className="w-7 h-7 p-1 root-bg-color rounded-md"
@@ -221,7 +221,7 @@ export const ProfilePage = () => {
 
             </div>}
 
-            <Button className="[color:var(--tg-theme-destructive-text-color)]" variant="ghost" onClick={handleLogout}>Log
+            <Button className="[color:var(--tg-theme-destructive-text-color)] rounded-xl" variant="list" onClick={handleLogout}>Log
                 out</Button>
         </div>
     </>

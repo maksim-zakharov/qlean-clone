@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="время начала и завершения заказа">
-      <change afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.css" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Разобрался с разделителями">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ListButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,14 +185,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00279" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745510032971</created>
-      <option name="number" value="00279" />
-      <option name="presentableId" value="LOCAL-00279" />
-      <option name="project" value="LOCAL" />
-      <updated>1745510032971</updated>
     </task>
     <task id="LOCAL-00280" summary="Зачатки исполнителя: список заказов">
       <option name="closed" value="true" />
@@ -586,7 +570,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746207660753</updated>
     </task>
-    <option name="localTasksCounter" value="328" />
+    <task id="LOCAL-00328" summary="Разобрался с разделителями">
+      <option name="closed" value="true" />
+      <created>1746264666015</created>
+      <option name="number" value="00328" />
+      <option name="presentableId" value="LOCAL-00328" />
+      <option name="project" value="LOCAL" />
+      <updated>1746264666015</updated>
+    </task>
+    <option name="localTasksCounter" value="329" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,7 +601,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="почистил лишний фронт" />
     <MESSAGE value="зачатки ролей и авторизации" />
     <MESSAGE value="Зачатки исполнителя: список заказов" />
     <MESSAGE value="Фикс машинки в табах, уменьшил меню" />
@@ -634,6 +625,7 @@
     <MESSAGE value="PageLoader.tsx" />
     <MESSAGE value="Стартануть можно только заказ на сегодня" />
     <MESSAGE value="время начала и завершения заказа" />
-    <option name="LAST_COMMIT_MESSAGE" value="время начала и завершения заказа" />
+    <MESSAGE value="Разобрался с разделителями" />
+    <option name="LAST_COMMIT_MESSAGE" value="Разобрался с разделителями" />
   </component>
 </project>

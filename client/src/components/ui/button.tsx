@@ -10,6 +10,8 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
+                list:
+                    "card-bg-color text-tg-theme-button-text-color hover:opacity-90",
                 primary:
                     "bg-tg-theme-button-color text-tg-theme-button-text-color hover:opacity-90",
                 destructive:
