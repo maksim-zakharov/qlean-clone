@@ -109,13 +109,15 @@ export const OrderCheckoutPage = () => {
                     >
                         <ListButton icon={<Calendar
                             className="p-1 h-7 w-7 bg-[#2AABEE] rounded-md"/>} text={dateTitle}
-                                    extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>}/>
+                                    extra={<ChevronRight
+                                        className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>}/>
                     </ScheduleSheet>
                     <CommentsSheet onChangeText={setComment} text={comment}>
 
                         <ListButton icon={<MessageSquare
                             className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-orange)] rounded-md"/>} text={t('payments_comments')}
-                                    extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>}/>
+                                    extra={<ChevronRight
+                                        className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>}/>
                     </CommentsSheet>
                 </ListButtonGroup>
 

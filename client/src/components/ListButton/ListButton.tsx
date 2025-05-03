@@ -12,12 +12,13 @@ interface IProps {
 export const ListButton: FC<IProps & React.ComponentProps<'div'>> = ({text, extra, icon, ...props}) => <Card
     className="p-0 gap-0 ListButton" {...props}>
     <div className="flex justify-between items-center">
-        <div className="flex flex-col w-full">
-            <Typography.Title className="flex font-normal [line-height:28px] w-full">{icon ?
-                <div className="mr-4 h-7 w-7 my-2">{icon}</div> : undefined}<span
-                className="inner-text py-2 w-full text-left">{text}</span></Typography.Title>
+        <div className="flex items-center w-full">
+            {icon ? <div className="mr-4 h-7 w-7 my-2">{icon}</div> : undefined}
+            <Typography.Title className="inner-text flex items-center font-normal [line-height:28px] w-full">
+                <span className="py-2 w-full text-left">{text}</span>
+                {extra}
+            </Typography.Title>
         </div>
-        {extra}
     </div>
 </Card>
 

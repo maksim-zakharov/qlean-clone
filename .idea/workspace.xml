@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderCreationPage padding">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ExecutorPaymentsPage skeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CardItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CardItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,22 +184,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00301" summary="перевел частично на англ + баги верстки за клиента">
-      <option name="closed" value="true" />
-      <created>1745762786078</created>
-      <option name="number" value="00301" />
-      <option name="presentableId" value="LOCAL-00301" />
-      <option name="project" value="LOCAL" />
-      <updated>1745762786078</updated>
-    </task>
-    <task id="LOCAL-00302" summary="перевел частично на англ + баги верстки за клиента">
-      <option name="closed" value="true" />
-      <created>1745769427328</created>
-      <option name="number" value="00302" />
-      <option name="presentableId" value="LOCAL-00302" />
-      <option name="project" value="LOCAL" />
-      <updated>1745769427328</updated>
     </task>
     <task id="LOCAL-00303" summary="Страница join us">
       <option name="closed" value="true" />
@@ -578,7 +561,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746295707452</updated>
     </task>
-    <option name="localTasksCounter" value="350" />
+    <task id="LOCAL-00350" summary="Убрал тени у карточек">
+      <option name="closed" value="true" />
+      <created>1746299339320</created>
+      <option name="number" value="00350" />
+      <option name="presentableId" value="LOCAL-00350" />
+      <option name="project" value="LOCAL" />
+      <updated>1746299339320</updated>
+    </task>
+    <task id="LOCAL-00351" summary="ExecutorPaymentsPage skeleton">
+      <option name="closed" value="true" />
+      <created>1746299525729</created>
+      <option name="number" value="00351" />
+      <option name="presentableId" value="LOCAL-00351" />
+      <option name="project" value="LOCAL" />
+      <updated>1746299525729</updated>
+    </task>
+    <option name="localTasksCounter" value="352" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,8 +600,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="аккордион кликается, можно работать с услугой без доп опций" />
-    <MESSAGE value="PageLoader.tsx" />
     <MESSAGE value="Стартануть можно только заказ на сегодня" />
     <MESSAGE value="время начала и завершения заказа" />
     <MESSAGE value="Разобрался с разделителями" />
@@ -626,6 +623,8 @@
     <MESSAGE value="OrderDetailsPage кнопки пва" />
     <MESSAGE value="ProfilePage skeleton" />
     <MESSAGE value="OrderCreationPage padding" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrderCreationPage padding" />
+    <MESSAGE value="Убрал тени у карточек" />
+    <MESSAGE value="ExecutorPaymentsPage skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="ExecutorPaymentsPage skeleton" />
   </component>
 </project>
