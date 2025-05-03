@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderDetailsPage кнопки пва">
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ProfilePage skeleton">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,14 +184,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00299" summary="перевел частично на англ + баги верстки за клиента">
-      <option name="closed" value="true" />
-      <created>1745750677497</created>
-      <option name="number" value="00299" />
-      <option name="presentableId" value="LOCAL-00299" />
-      <option name="project" value="LOCAL" />
-      <updated>1745750677497</updated>
     </task>
     <task id="LOCAL-00300" summary="перевел частично на англ + баги верстки за клиента">
       <option name="closed" value="true" />
@@ -576,7 +569,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746293537759</updated>
     </task>
-    <option name="localTasksCounter" value="348" />
+    <task id="LOCAL-00348" summary="ProfilePage skeleton">
+      <option name="closed" value="true" />
+      <created>1746293943281</created>
+      <option name="number" value="00348" />
+      <option name="presentableId" value="LOCAL-00348" />
+      <option name="project" value="LOCAL" />
+      <updated>1746293943281</updated>
+    </task>
+    <option name="localTasksCounter" value="349" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +600,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Скелетон для фетча слотов" />
     <MESSAGE value="бизнес ошибки + редактирование даты" />
     <MESSAGE value="аккордион кликается, можно работать с услугой без доп опций" />
     <MESSAGE value="PageLoader.tsx" />
@@ -624,6 +624,7 @@
     <MESSAGE value="ClientOrdersPage skeleton" />
     <MESSAGE value="ExecutorSchedulePage skeleton" />
     <MESSAGE value="OrderDetailsPage кнопки пва" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrderDetailsPage кнопки пва" />
+    <MESSAGE value="ProfilePage skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="ProfilePage skeleton" />
   </component>
 </project>

@@ -140,7 +140,7 @@ export const OrderCreationPage = () => {
                     <EstimatedTime totalDuration={totalDuration}/>
                 </div>
 
-            <BottomActions>
+            <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 <Button
                     wide
                     onClick={handleNext}
