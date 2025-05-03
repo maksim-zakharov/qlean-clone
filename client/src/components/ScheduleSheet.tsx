@@ -114,7 +114,7 @@ export function ScheduleSheet({
                     <Skeleton className="w-full min-h-[40px]"/>
                     <Skeleton className="w-full min-h-[40px]"/>
                 </div>}
-                {!isFetching && filteredSlots.length === 0 && <EmptyState icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
+                {!isFetching && filteredSlots.length === 0 && <EmptyState className="h-50 my-0 flex-none" icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
                 {!isFetching && filteredSlots.length > 0 && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
                     {filteredSlots.map(service =>
                         <CardItem
