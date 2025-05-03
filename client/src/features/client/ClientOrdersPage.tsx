@@ -43,11 +43,12 @@ export const ClientOrdersPage = () => {
 
     if (isLoading) {
         return <div className="px-4 mb-4">
-            <div className="mb-6 mt-4">
-                <Skeleton className="w-[100px] h-[28px] mb-3"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
+            <div className="flex flex-col gap-4 mt-4">
+                <Skeleton className="w-[100px] h-[28px]"/>
+                <Skeleton className="w-full h-[144px]"/>
+                <Skeleton className="w-full h-[144px]"/>
+                <Skeleton className="w-full h-[144px]"/>
+                <Skeleton className="w-full h-[144px]"/>
             </div>
         </div>
     }
