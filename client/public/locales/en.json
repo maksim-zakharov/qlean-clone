@@ -1,5 +1,4 @@
 {
-  "error_refresh_btn": "Refresh",
   "phone": "Phone",
   "address": "Address",
   "telegram_notifications": "Telegram notifications",
@@ -25,5 +24,16 @@
   "menu_item_profile": "Profile",
 
   "schedule_update_success": "Schedule updated",
-  "schedule_update_dayoff": "Day off"
+  "schedule_update_dayoff": "Day off",
+
+  "error_refresh_btn": "Refresh",
+  "error_500_title": "Oops, something went wrong...",
+  "error_500_description": "Refresh the page or try again later.",
+
+  "payments_empty_title": "No payments yet",
+  "payments_empty_description": "Once you complete your first order, your earnings will appear here.",
+  "payments_payments_per": "Payments per",
+  "payments_period_week": "week",
+  "payments_period_month": "month",
+  "payments_comments": "Comments"
 }

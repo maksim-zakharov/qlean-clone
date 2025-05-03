@@ -4,20 +4,16 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CalendarSync, CircleX, ClipboardPlus, Star, Banknote} from "lucide-react";
+import {CalendarSync, CircleX, Star, Banknote} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useDispatch} from "react-redux";
-import {retryOrder} from "../../slices/createOrderSlice.ts";
-import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
-import {RoutePaths} from "../../routes.ts";
 import {Area, AreaChart, CartesianGrid, XAxis} from "recharts"
 import {ChartConfig, ChartContainer} from "../../components/ui/chart.tsx";
+import {useTranslation} from "react-i18next";
 
 export const ExecutorPaymentsPage = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch();
+    const {t} = useTranslation();
     const {data: orders = [], isLoading, isError} = useGetOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
@@ -48,11 +44,10 @@ export const ExecutorPaymentsPage = () => {
         return acc;
     }, [])
 
-    const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(retryOrder(order))
-        navigate(`/order/checkout`)
-    }
+    const paymentsLabel = useMemo(() => ({
+        'week': t('payments_period_week'),
+        'month': t('payments_period_month'),
+    }), [t])
 
     if (isLoading) {
         return <div className="px-4 mb-4">
@@ -68,43 +63,29 @@ export const ExecutorPaymentsPage = () => {
     if (isError) {
         return <EmptyState
             icon={<CircleX className="h-10 w-10"/>}
-            title="Упс, что-то пошло не так..."
-            description="Обновите страницу или повторите попытку позднее."
+            title={t("error_500_title")}
+            description={t('error_500_description')}
             action={
                 <Button onClick={() => window.location.reload()}
                 >
-                    Обновить страницу
+                    {t('error_refresh_btn')}
                 </Button>}
         />
     }
 
     if (orders.length === 0) {
         return <EmptyState
-            icon={<ClipboardPlus className="h-10 w-10"/>}
-            title="Нет заказов"
-            description="Выберите нужную услугу на главном экране"
-            action={
-                <Button onClick={() => navigate(RoutePaths.Root)}
-                >
-                    Выбрать услугу
-                </Button>}
+            icon={<Banknote className="h-10 w-10"/>}
+            title={t('payments_empty_title')}
+            description={t('payments_empty_description')}
         />
-    }
-
-    const paymentsLabel = {
-        'week': 'week',
-        'month': 'month'
-    }
-
-    if(orders.length === 0){
-        return <EmptyState className="flex justify-center h-screen items-center m-auto" icon={<Banknote className="h-10 w-10" />} title="No payments yet" description="Once you complete your first order, your earnings will appear here."/>
     }
 
     return <div className="p-4 flex flex-col gap-4">
         <Card className="card-bg-color px-4 py-3 flex-row justify-between border-0">
             <div className="flex flex-col">
                 <Button className="p-0 border-none h-6 w-max" variant="default" size="sm" onClick={() => setPaymentsPeriod(prevState => prevState !== 'week' ? 'week' : 'month')}>
-                    <CalendarSync className="w-4 h-4 mr-1" /><Typography.Description className="text-tg-theme-button-color">Payments per {paymentsLabel[paymentsPeriod]}</Typography.Description>
+                    <CalendarSync className="w-4 h-4 mr-1" /><Typography.Description className="text-tg-theme-button-color">{t('payments_payments_per')} {paymentsLabel[paymentsPeriod]}</Typography.Description>
                 </Button>
                 <Typography.H2 className="mb-0 text-[24px]">{moneyFormat(totalSum)}</Typography.H2>
             </div>
@@ -170,7 +151,7 @@ export const ExecutorPaymentsPage = () => {
                     <Star className="w-4 h-4 text-tg-theme-button-color"/>
                 </div>
                 {ao.comment &&<div className="flex flex-col mt-1 separator-shadow-top py-3">
-                    <Typography.Description>Comment</Typography.Description>
+                    <Typography.Description>{t('payments_comments')}</Typography.Description>
                     <Typography.Title>{ao.comment}</Typography.Title>
                 </div>}
             </Card>)}
