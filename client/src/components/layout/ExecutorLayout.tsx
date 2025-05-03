@@ -1,12 +1,13 @@
 import {CalendarPlus, ClipboardList, LucideIcon, User, Wallet} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.ts";
-import React from "react";
+import React, {useMemo} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 import { useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
+import {useTranslation} from "react-i18next";
 
 type MenuItem = {
     icon: LucideIcon | any
@@ -15,6 +16,7 @@ type MenuItem = {
 }
 
 export const ExecutorLayout = () => {
+    const {t} = useTranslation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const navigate = useNavigate()
     const {isLoading} = useTelegram();
@@ -24,28 +26,28 @@ export const ExecutorLayout = () => {
         <AvatarFallback><User/></AvatarFallback>
     </Avatar>
 
-    const menuItems: MenuItem[] = [
+    const menuItems: MenuItem[] = useMemo(() => [
         {
             icon: ClipboardList,
-            label: 'Orders',
+            label: t('menu_item_orders'),
             path: RoutePaths.Executor.Orders
         },
         {
             icon: Wallet,
-            label: 'Payments',
+            label: t('menu_item_payments'),
             path: RoutePaths.Executor.Payments
         },
         {
             icon: CalendarPlus,
-            label: 'Schedule',
+            label: t('menu_item_schedule'),
             path: RoutePaths.Executor.Schedule
         },
         {
             icon: Profile,
-            label: 'Profile',
+            label: t('menu_item_profile'),
             path: RoutePaths.Executor.Profile
         }
-    ]
+    ], [Profile, t])
 
     if (isLoading) {
         return <div>

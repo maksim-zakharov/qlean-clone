@@ -8,10 +8,22 @@
   "logout_btn": "Log out",
   "profile_services_title": "Your services",
 
+  "profile_phone_notavailable": "Not available",
+  "profile_address_notavailable": "Not available",
+
   "new_application_title": "Join Us",
   "new_application_description": "Access local service jobs, manage your schedule, and receive instant payouts. Your effort, your rules.",
   "new_application_first": "Get local service requests in your area – no client hunting required, even for newcomers.",
   "new_application_second": "See your earnings upfront. Withdraw funds within 2 hours – zero hidden fees.",
   "new_application_thirst": "Higher ratings boost your visibility. Earn trust, attract better clients, and grow your income.",
-  "submit_application_btn": "Submit Application"
+  "submit_application_btn": "Submit Application",
+
+  "menu_item_home": "Home",
+  "menu_item_orders": "Orders",
+  "menu_item_payments": "Payments",
+  "menu_item_schedule": "Schedule",
+  "menu_item_profile": "Profile",
+
+  "schedule_update_success": "Schedule updated",
+  "schedule_update_dayoff": "Day off"
 }

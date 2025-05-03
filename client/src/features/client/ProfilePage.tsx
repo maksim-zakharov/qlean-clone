@@ -57,12 +57,12 @@ export const ProfilePage = () => {
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
-            return 'Not available';
+            return t('profile_phone_notavailable')
         }
 
         const phoneNumber = parsePhoneNumberFromString(userInfo.phone, 'RU');
         return phoneNumber?.formatInternational() || userInfo.phone;
-    }, [userInfo]);
+    }, [userInfo, t]);
 
     const handleRequestWriteAccess = () => Telegram.WebApp?.requestWriteAccess(async (isRequested) => {
         if (!isRequested) {
@@ -91,7 +91,7 @@ export const ProfilePage = () => {
 
     const addressText = useMemo(() => {
         if (!address) {
-            return 'Not available'
+            return t('profile_address_notavailable')
         }
 
         const text = [];
@@ -100,7 +100,7 @@ export const ProfilePage = () => {
         if (address.house_number) text.push(address.house_number);
 
         return text.join(', ');
-    }, [address]);
+    }, [address, t]);
 
     const handleLogout = () => {
         dispatch(logout())

@@ -22,6 +22,7 @@ import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetails
 import './i18n';
 
 function App() {
+
     const {isReady} = useTelegram();
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();

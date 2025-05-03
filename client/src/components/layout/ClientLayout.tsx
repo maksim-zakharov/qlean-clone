@@ -4,7 +4,7 @@ import {Outlet, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 
-import React from "react";
+import React, {useMemo} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
 import {useGetAddressesQuery} from "../../api.ts";
@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
+import {useTranslation} from "react-i18next";
 
 type MenuItem = {
     icon: LucideIcon | any
@@ -22,6 +23,7 @@ type MenuItem = {
 }
 
 export const ClientLayout = () => {
+    const {t} = useTranslation();
     const {isLoading} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const {data: addresses = [], isError} = useGetAddressesQuery();
@@ -33,20 +35,20 @@ export const ClientLayout = () => {
         <AvatarFallback><User/></AvatarFallback>
     </Avatar>
 
-    const menuItems: MenuItem[] = [
+    const menuItems: MenuItem[] = useMemo(() => [
         {
             icon: Home,
-            label: 'Home',
+            label: t('menu_item_home'),
             path: RoutePaths.Root
         },
         {
             icon: ClipboardList,
-            label: 'Orders',
+            label: t('menu_item_orders'),
             path: RoutePaths.Orders
         },
         {
             icon: Profile,
-            label: 'Profile',
+            label: t('menu_item_profile'),
             path: RoutePaths.Profile
         }
         // {
@@ -59,7 +61,7 @@ export const ClientLayout = () => {
         //     label: 'Профиль',
         //     path: '/profile'
         // }
-    ]
+    ], [Profile, t])
     const dispatch = useDispatch();
 
     const handleSelectAddress = (address: any) => {

@@ -5,6 +5,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
 import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api.ts";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 
 const weekDays = [];
@@ -29,7 +30,7 @@ function generateTimeSlots(parentDate) {
     const end = parentDate.startOf('day').add(24, 'hour');
 
     let current = start;
-    let i = 0;
+    const i = 0;
 
     while (current.isBefore(end)) {
         const slotStart = current;
@@ -39,7 +40,6 @@ function generateTimeSlots(parentDate) {
             timestamp: slotStart.valueOf(),
             time: slotStart.format('HH:mm')
         });
-        console.log(i++);
 
         current = slotEnd;
     }
@@ -50,6 +50,7 @@ function generateTimeSlots(parentDate) {
 const slots = generateTimeSlots(dayjs());
 
 export const ExecutorSchedulePage = () => {
+    const {t} = useTranslation();
     const {data: schedule = []} = useGetScheduleQuery({})
     const [updateSchedule, {isLoading}] = useUpdateScheduleMutation()
     const [defaultValue, setdefaultValue] = useState<string>();
@@ -91,7 +92,7 @@ export const ExecutorSchedulePage = () => {
             "days": Object.entries<string[]>(scheduleMap).map(([dayOfWeek, timeSlots]) => ({dayOfWeek, isDayOff: timeSlots?.length <= 0, timeSlots}))
         }).unwrap()
 
-        toast("Schedule updated", {
+        toast(t('schedule_update_success'), {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },
@@ -122,7 +123,7 @@ export const ExecutorSchedulePage = () => {
 
             return `${conf.start} - ${conf.end}`;
         } else {
-            return 'Day off';
+            return t('schedule_update_dayoff');
         }
     };
 
@@ -147,7 +148,7 @@ export const ExecutorSchedulePage = () => {
                             {slot.time}
                         </ToggleGroupItem>)}
                         <ToggleGroupItem value="dayoff" onClick={event => handleOnToggle(day.value, event)} className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none col-span-2">
-                            Day off
+                            {t('schedule_update_dayoff')}
                         </ToggleGroupItem>
                     </ToggleGroup>
                 </AccordionContent>
