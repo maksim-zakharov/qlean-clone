@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderCreationPage i18n" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ClientOrdersPage skeleton">
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,22 +183,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00295" summary="Зачатки календаря">
-      <option name="closed" value="true" />
-      <created>1745699945260</created>
-      <option name="number" value="00295" />
-      <option name="presentableId" value="LOCAL-00295" />
-      <option name="project" value="LOCAL" />
-      <updated>1745699945260</updated>
-    </task>
-    <task id="LOCAL-00296" summary="Зачатки календаря">
-      <option name="closed" value="true" />
-      <created>1745701613436</created>
-      <option name="number" value="00296" />
-      <option name="presentableId" value="LOCAL-00296" />
-      <option name="project" value="LOCAL" />
-      <updated>1745701613436</updated>
     </task>
     <task id="LOCAL-00297" summary="Зачатки календаря">
       <option name="closed" value="true" />
@@ -574,7 +560,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746289566191</updated>
     </task>
-    <option name="localTasksCounter" value="344" />
+    <task id="LOCAL-00344" summary="OrderDetailsPage skeleton">
+      <option name="closed" value="true" />
+      <created>1746289986912</created>
+      <option name="number" value="00344" />
+      <option name="presentableId" value="LOCAL-00344" />
+      <option name="project" value="LOCAL" />
+      <updated>1746289986912</updated>
+    </task>
+    <task id="LOCAL-00345" summary="ClientOrdersPage skeleton">
+      <option name="closed" value="true" />
+      <created>1746290152354</created>
+      <option name="number" value="00345" />
+      <option name="presentableId" value="LOCAL-00345" />
+      <option name="project" value="LOCAL" />
+      <updated>1746290152354</updated>
+    </task>
+    <option name="localTasksCounter" value="346" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,8 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="убрал user_role" />
-    <MESSAGE value="Фильтрует слоты для записи по расписанию исполнителя" />
     <MESSAGE value="Слоты фильтруются по расписанию исполнителей" />
     <MESSAGE value="Берутся исполнители только если умеют выполнять услугу" />
     <MESSAGE value="Скелетон для фетча слотов" />
@@ -622,6 +622,8 @@
     <MESSAGE value="ErrorState" />
     <MESSAGE value="OrderCheckoutPage i18n" />
     <MESSAGE value="OrderCreationPage i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrderCreationPage i18n" />
+    <MESSAGE value="OrderDetailsPage skeleton" />
+    <MESSAGE value="ClientOrdersPage skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="ClientOrdersPage skeleton" />
   </component>
 </project>

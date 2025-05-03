@@ -1,11 +1,12 @@
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useMemo, useState} from "react";
 import dayjs from "dayjs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
 import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api.ts";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
 import {useTranslation} from "react-i18next";
+import {Skeleton} from "../../components/ui/skeleton.tsx";
 
 
 const weekDays = [];
@@ -51,13 +52,9 @@ const slots = generateTimeSlots(dayjs());
 
 export const ExecutorSchedulePage = () => {
     const {t} = useTranslation();
-    const {data: schedule = []} = useGetScheduleQuery({})
-    const [updateSchedule, {isLoading}] = useUpdateScheduleMutation()
-    const [defaultValue, setdefaultValue] = useState<string>();
-
-    useEffect(() => {
-        setTimeout(() => setdefaultValue(weekDays[0].value), 150)
-    }, []);
+    const {data: schedule = [], isLoading} = useGetScheduleQuery({})
+    const [updateSchedule, {isLoading: updateScheduleLoading}] = useUpdateScheduleMutation()
+    const [defaultValue, setdefaultValue] = useState<string>(weekDays[0].value);
 
     const scheduleMap = useMemo(() => schedule.reduce((acc, curr) => {
         const {isDayOff, timeSlots} = curr;
@@ -71,9 +68,6 @@ export const ExecutorSchedulePage = () => {
     },{}), [schedule]);
 
     const handleOnToggle = async (day: any, event: any) => {
-        console.log(event.target.dataset.value)
-        console.log(event.target.dataset.state)
-
         // включить
         if(event.target.dataset.state === 'off'){
             if(event.target.dataset.value === 'dayoff'){
@@ -127,6 +121,20 @@ export const ExecutorSchedulePage = () => {
         }
     };
 
+    if(isLoading){
+        return <div className="px-4">
+            <div className="flex flex-col gap-2 mt-4">
+                <Skeleton className="w-full h-[180px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+                <Skeleton className="w-full h-[52px]"/>
+            </div>
+        </div>
+    }
+
     return <div className="p-4">
         <Accordion
             type="single"
@@ -143,7 +151,7 @@ export const ExecutorSchedulePage = () => {
                     </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                    <ToggleGroup type="multiple" className="grid grid-cols-6 w-full gap-0.5" disabled={isLoading} value={scheduleMap[day.value.toUpperCase()]?.length > 0 ? scheduleMap[day.value.toUpperCase()] : 'dayoff'}>
+                    <ToggleGroup type="multiple" className="grid grid-cols-6 w-full gap-0.5" disabled={updateScheduleLoading} value={scheduleMap[day.value.toUpperCase()]?.length > 0 ? scheduleMap[day.value.toUpperCase()] : 'dayoff'}>
                         {slots.map(slot => <ToggleGroupItem onClick={event => handleOnToggle(day.value, event)} value={slot.time} className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none">
                             {slot.time}
                         </ToggleGroupItem>)}
