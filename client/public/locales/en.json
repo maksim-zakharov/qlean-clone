@@ -93,5 +93,9 @@
   "client_checkout_title": "Checkout",
   "client_accept_1": "I accept",
   "client_accept_2": "the terms of service",
-  "client_checkout_submit_btn": "Checkout"
+  "client_checkout_submit_btn": "Checkout",
+
+  "client_creation_popular_label": "POPULAR",
+  "client_creation_continue_btn": "Continue",
+  "client_creation_save_btn": "Save"
 }

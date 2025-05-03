@@ -17,8 +17,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
 import {RoutePaths} from "../../routes.ts";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
+import {useTranslation} from "react-i18next";
 
 export const OrderCreationPage = () => {
+    const {t} = useTranslation();
     const [patchOrder, {isLoading: patchOrderLoading}] = usePatchOrderMutation();
     const services = useSelector(state => state.createOrder.services);
     const orderId = useSelector(state => state.createOrder.id)
@@ -125,7 +127,7 @@ export const OrderCreationPage = () => {
                                         className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
                                     {option.isPopular ? (
                                         <Badge className="flex gap-1 items-center"><Star
-                                            className="w-3 h-3"/>POPULAR</Badge>
+                                            className="w-3 h-3"/>{t('client_creation_popular_label')}</Badge>
                                     ) : <div/>}
                                 </div>
                                 <span
@@ -144,7 +146,7 @@ export const OrderCreationPage = () => {
                     onClick={handleNext}
                     loading={patchOrderLoading}
                     size="lg"
-                ><span className="flex-1 text-left">{isDraft ? 'Continue' : 'Save'}</span>
+                ><span className="flex-1 text-left">{isDraft ? t('client_creation_continue_btn') : t('client_creation_save_btn')}</span>
                     <span>{moneyFormat(totalPrice)}</span>
                 </Button>
             </BottomActions>
