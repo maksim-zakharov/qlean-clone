@@ -11,7 +11,7 @@ interface CardItemProps {
 }
 
 export const CardItem = ({title, icon, onClick, className}: CardItemProps) => <Card
-    className={cn(`p-4 cursor-pointer hover:opacity-90 transition-opacity min-h-[140px] relative border-none`, className)}
+    className={cn(`p-4 cursor-pointer transition-transform min-h-[140px] relative border-none active:scale-95 select-none`, className)}
     onClick={onClick}
 >
     <div className="flex flex-col h-full">

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ProfilePage skeleton">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderCreationPage padding">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CardItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CardItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/card.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,14 +185,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00300" summary="перевел частично на англ + баги верстки за клиента">
-      <option name="closed" value="true" />
-      <created>1745762432753</created>
-      <option name="number" value="00300" />
-      <option name="presentableId" value="LOCAL-00300" />
-      <option name="project" value="LOCAL" />
-      <updated>1745762432753</updated>
     </task>
     <task id="LOCAL-00301" summary="перевел частично на англ + баги верстки за клиента">
       <option name="closed" value="true" />
@@ -577,7 +570,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746293943281</updated>
     </task>
-    <option name="localTasksCounter" value="349" />
+    <task id="LOCAL-00349" summary="OrderCreationPage padding">
+      <option name="closed" value="true" />
+      <created>1746295707452</created>
+      <option name="number" value="00349" />
+      <option name="presentableId" value="LOCAL-00349" />
+      <option name="project" value="LOCAL" />
+      <updated>1746295707452</updated>
+    </task>
+    <option name="localTasksCounter" value="350" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +601,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="бизнес ошибки + редактирование даты" />
     <MESSAGE value="аккордион кликается, можно работать с услугой без доп опций" />
     <MESSAGE value="PageLoader.tsx" />
     <MESSAGE value="Стартануть можно только заказ на сегодня" />
@@ -625,6 +625,7 @@
     <MESSAGE value="ExecutorSchedulePage skeleton" />
     <MESSAGE value="OrderDetailsPage кнопки пва" />
     <MESSAGE value="ProfilePage skeleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="ProfilePage skeleton" />
+    <MESSAGE value="OrderCreationPage padding" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrderCreationPage padding" />
   </component>
 </project>
