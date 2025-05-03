@@ -3,17 +3,7 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
-import {
-    BriefcaseBusiness,
-    CalendarClock,
-    ChevronRight,
-    HandCoins,
-    MapPin,
-    Phone,
-    Star,
-    User,
-    X
-} from "lucide-react";
+import {BriefcaseBusiness, CalendarClock, ChevronRight, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import parsePhoneNumberFromString from "libphonenumber-js";
@@ -28,6 +18,7 @@ import {ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api.ts";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {PageLoader} from "../../components/PageLoader.tsx";
+import {useTranslation} from "react-i18next";
 
 interface Address {
     // Дом
@@ -48,6 +39,7 @@ interface Address {
 }
 
 export const ProfilePage = () => {
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const [loginMutation, {isLoading}] = useLoginMutation();
     const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
@@ -58,7 +50,10 @@ export const ProfilePage = () => {
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
     const applicationVariantIdsSet = useMemo(() => new Set(application?.variants?.map(v => v.variantId) || []), [application]);
-    const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({...s, variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))})), [applicationVariantIdsSet, services])
+    const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({
+        ...s,
+        variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))
+    })), [applicationVariantIdsSet, services])
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
@@ -114,7 +109,7 @@ export const ProfilePage = () => {
     }
 
     const handleWorkClick = () => {
-        if(application){
+        if (application) {
             navigate(RoutePaths.Application);
         } else {
             setShow(true)
@@ -140,24 +135,26 @@ export const ProfilePage = () => {
                     <AvatarFallback><User/></AvatarFallback>
                 </Avatar>} text={<>{userInfo?.firstName} {userInfo?.lastName}</>}/>
 
-                <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--chart-2)] rounded-md"/>} text={<div className="flex flex-col text-left">
-                    <Typography.Description>Phone</Typography.Description>
-                    <Typography.Title>{phoneText}</Typography.Title>
-                </div>} extra={
+                <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--chart-2)] rounded-md"/>}
+                            text={<div className="flex flex-col text-left">
+                                <Typography.Description>{t('phone')}</Typography.Description>
+                                <Typography.Title>{phoneText}</Typography.Title>
+                            </div>} extra={
                     !userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default"
                                                 onClick={handleRequestContact}>
-                        Refresh
+                        {t('error_refresh_btn')}
                     </Button>}/>
 
                 <ListButton text={<div className="flex flex-col text-left">
-                    <Typography.Description>Address</Typography.Description>
+                    <Typography.Description>{t('address')}</Typography.Description>
                     <Typography.Title
                         className="flex">{addressText}</Typography.Title>
                 </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--chart-4)] rounded-md"/>}/>
             </ListButtonGroup>
 
             <ListButton icon={<img src="../telegram.svg"
-                                   className="absolute mr-4 h-7 w-7 bg-[#2AABEE] rounded-md"/>} text="Telegram notifications"
+                                   className="absolute mr-4 h-7 w-7 bg-[#2AABEE] rounded-md"/>}
+                        text={t('telegram_notifications')}
                         extra={<Switch
                             checked={writeAccessReceived}
                             onCheckedChange={handleRequestWriteAccess}
@@ -167,7 +164,7 @@ export const ProfilePage = () => {
                 <SheetTrigger asChild>
                     <ListButton onClick={handleWorkClick}
                                 icon={<BriefcaseBusiness className="mr-4 h-7 w-7 rounded-md p-1 bg-[var(--chart-5)]"/>}
-                                text="Work in Qlean"/>
+                                text={t('request_work_btn')}/>
                 </SheetTrigger>
                 <SheetContent side="bottom"
                               className="p-0 overflow-hidden pb-[calc(50px+var(--tg-safe-area-inset-bottom))] min-h-[calc(700px+var(--tg-safe-area-inset-bottom))] h-[calc(100vh-50px)]">
@@ -180,38 +177,40 @@ export const ProfilePage = () => {
                         <SheetHeader className="mb-2">
                             <SheetTitle
                                 className="text-xl font-bold text-tg-theme-text-color text-left"><Typography.H2
-                                className="text-3xl">Join Us</Typography.H2></SheetTitle>
+                                className="text-3xl">{t('new_application_title')}</Typography.H2></SheetTitle>
                         </SheetHeader>
                         <div className="flex mb-7">
-                            Access local service jobs, manage your schedule, and receive instant payouts. Your effort,
-                            your rules.
+                            {t('new_application_description')}
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-3">
                             <CalendarClock className="h-10 w-10 rounded-3xl bg-[var(--chart-1)] p-2 mr-3"/>
-                            Get local service requests in your area – no client hunting required, even for newcomers.
+                            {t('new_application_first')}
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-3">
                             <HandCoins className="h-10 w-10 rounded-3xl bg-[var(--chart-2)] p-2 mr-3"/>
-                            See your earnings upfront. Withdraw funds within 2 hours – zero hidden fees.
+                            {t('new_application_second')}
                         </div>
                         <div className="grid grid-cols-[56px_auto] mb-4">
                             <Star className="h-10 w-10 rounded-3xl bg-[var(--chart-5)] p-2 mr-3"/>
-                            Higher ratings boost your visibility. Earn trust, attract better clients, and grow your
-                            income.
+                            {t('new_application_thirst')}
                         </div>
                     </div>
                     <BottomActions className="flex">
-                        <Button variant="primary" wide onClick={() => navigate(RoutePaths.Application)}>Submit Application</Button>
+                        <Button variant="primary" wide
+                                onClick={() => navigate(RoutePaths.Application)}>{t('submit_application_btn')}</Button>
                     </BottomActions>
                 </SheetContent>
             </Sheet>}
-            {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
-                                                                          className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>} text={`Login as ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
+            {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
+                className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
+                className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>}
+                                                               text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
 
             {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
-                <Typography.Title className="text-left mb-0 block pl-4">Your services</Typography.Title>
+                <Typography.Title className="text-left mb-0 block pl-4">{t('profile_services_title')}</Typography.Title>
                 {filteredServices.map(s => <div className="mt-4">
-                    <Typography.Description className="block mb-2 text-left pl-4 text-sm uppercase">{s.name}</Typography.Description>
+                    <Typography.Description
+                        className="block mb-2 text-left pl-4 text-sm uppercase">{s.name}</Typography.Description>
                     <ListButtonGroup>
                         {s.variants.map(s => <ListButton text={s.name} icon={<DynamicIcon name={s.icon}
                                                                                           className="w-7 h-7 p-1 root-bg-color rounded-md"
@@ -221,8 +220,8 @@ export const ProfilePage = () => {
 
             </div>}
 
-            <Button className="[color:var(--tg-theme-destructive-text-color)] rounded-xl" variant="list" onClick={handleLogout}>Log
-                out</Button>
+            <Button className="[color:var(--tg-theme-destructive-text-color)] rounded-xl" variant="list"
+                    onClick={handleLogout}>{t('logout_btn')}</Button>
         </div>
     </>
 }

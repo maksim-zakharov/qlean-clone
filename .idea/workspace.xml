@@ -5,6 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="дизайн свича">
+      <change afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/i18n.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,11 +90,11 @@
       <recent name="D:\Projects\qlean-clone\client\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\client\public\locales" />
+      <recent name="D:\Projects\qlean-clone\client\public\locales\en" />
       <recent name="D:\Projects\qlean-clone\client\src\components\ListButton" />
       <recent name="D:\Projects\qlean-clone\server\src\dto" />
       <recent name="D:\Projects\qlean-clone\client\src\features\client" />
-      <recent name="D:\Projects\qlean-clone\server\src\auth" />
-      <recent name="D:\Projects\qlean-clone\client\src\features" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev-host">
@@ -183,14 +190,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00283" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745516257937</created>
-      <option name="number" value="00283" />
-      <option name="presentableId" value="LOCAL-00283" />
-      <option name="project" value="LOCAL" />
-      <updated>1745516257937</updated>
     </task>
     <task id="LOCAL-00284" summary="Зачатки исполнителя: список заказов">
       <option name="closed" value="true" />
@@ -576,7 +575,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746269186040</updated>
     </task>
-    <option name="localTasksCounter" value="332" />
+    <task id="LOCAL-00332" summary="дизайн свича">
+      <option name="closed" value="true" />
+      <created>1746269854823</created>
+      <option name="number" value="00332" />
+      <option name="presentableId" value="LOCAL-00332" />
+      <option name="project" value="LOCAL" />
+      <updated>1746269854823</updated>
+    </task>
+    <option name="localTasksCounter" value="333" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,0 +1,17 @@
+{
+  "error_refresh_btn": "Refresh",
+  "phone": "Phone",
+  "address": "Address",
+  "telegram_notifications": "Telegram notifications",
+  "request_work_btn": "Work in Qlean",
+  "login_as_btn": "Login as",
+  "logout_btn": "Log out",
+  "profile_services_title": "Your services",
+
+  "new_application_title": "Join Us",
+  "new_application_description": "Access local service jobs, manage your schedule, and receive instant payouts. Your effort, your rules.",
+  "new_application_first": "Get local service requests in your area – no client hunting required, even for newcomers.",
+  "new_application_second": "See your earnings upfront. Withdraw funds within 2 hours – zero hidden fees.",
+  "new_application_thirst": "Higher ratings boost your visibility. Earn trust, attract better clients, and grow your income.",
+  "submit_application_btn": "Submit Application"
+}

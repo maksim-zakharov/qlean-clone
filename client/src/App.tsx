@@ -19,6 +19,7 @@ import {ExecutorSchedulePage} from "./features/executor/ExecutorSchedulePage.tsx
 import {Loader2} from "lucide-react";
 import {ApplicationPage} from "./features/client/ApplicationPage.tsx";
 import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetailsPage.tsx";
+import './i18n';
 
 function App() {
     const {isReady} = useTelegram();

@@ -58,10 +58,10 @@ export const ApplicationPage = () => {
             <div className="content px-4">
                 <Typography.H2 className="text-3xl mb-6">Job application</Typography.H2>
 
-                <Typography.Title>What are you going to do?</Typography.Title>
+                <Typography.Title className="pl-4">What are you going to do?</Typography.Title>
 
                 {services.map(s => <div className="mt-4">
-                    <Typography.Description className="block mb-2">{s.name}</Typography.Description>
+                    <Typography.Description className="block mb-2 pl-4">{s.name}</Typography.Description>
                     <ListButtonGroup>
                         {s.variants.map(s => <ListButton text={s.name} extra={
                             <Checkbox checked={selectedOptionsIdSet.has(s.id)}
