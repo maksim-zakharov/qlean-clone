@@ -244,10 +244,10 @@ export class ScheduleService {
             (interval) =>
               (currentTimestamp >= interval.start &&
                 currentTimestamp < interval.end) || // начало слота попадает в занятый интервал
-              (currentTimestamp + 60 * 60 * 1000 > interval.start &&
-                currentTimestamp + 60 * 60 * 1000 <= interval.end) || // конец слота попадает в занятый интервал
+              (currentTimestamp + 60 * 60_1000 > interval.start &&
+                currentTimestamp + 60 * 60_1000 <= interval.end) || // конец слота попадает в занятый интервал
               (currentTimestamp <= interval.start &&
-                currentTimestamp + 60 * 60 * 1000 >= interval.end), // слот полностью содержит занятый интервал
+                currentTimestamp + 60 * 60_1000 >= interval.end), // слот полностью содержит занятый интервал
           );
 
           if (isSlotBusy) {
@@ -269,5 +269,330 @@ export class ScheduleService {
     }
 
     return Array.from(availableSlots).map((timestamp) => ({ timestamp }));
+  }
+
+  async getAvailableDates(serviceVariantId: number, optionIds: number[] = []) {
+    // Получаем информацию о длительности услуг
+    const serviceVariant = await this.prisma.serviceVariant.findUnique({
+      where: { id: serviceVariantId },
+      include: {
+        baseService: {
+          include: {
+            options: {
+              where: {
+                id: { in: optionIds },
+              },
+              select: { duration: true },
+            },
+          },
+        },
+      },
+    });
+
+    if (!serviceVariant) {
+      throw new NotFoundException('Service variant not found');
+    }
+
+    // Вычисляем общую длительность заказа в минутах
+    const totalDuration = calculateOrderDuration(
+      serviceVariant,
+      serviceVariant.baseService.options,
+    );
+
+    // Получаем всех исполнителей (пользователей с одобренной заявкой)
+    const executors = await this.prisma.user.findMany({
+      where: {
+        application: {
+          status: 'APPROVED',
+          variants: {
+            some: {
+              variantId: serviceVariantId,
+            },
+          },
+        },
+        scheduleDays: {
+          some: {
+            // Если у исполнителя выходной, пропускаем
+            isDayOff: false,
+          },
+        },
+      },
+      include: {
+        scheduleDays: {
+          include: {
+            timeSlots: true,
+          },
+        },
+      },
+    });
+
+    // Получаем занятые слоты на следующие 30 дней
+    const startDate = dayjs().startOf('day');
+    const endDate = startDate.add(30, 'day');
+
+    // Получаем занятые слоты с их длительностью
+    const busyOrders = await this.prisma.order.findMany({
+      where: {
+        date: {
+          gte: startDate.toDate(),
+          lt: endDate.toDate(),
+        },
+        status: {
+          notIn: ['completed', 'canceled'],
+        },
+      },
+      include: {
+        serviceVariant: {
+          include: {
+            baseService: {
+              include: {
+                options: true,
+              },
+            },
+          },
+        },
+        options: true,
+      },
+    });
+
+    // Создаем массив занятых интервалов
+    const busyIntervals = busyOrders.map((order) => {
+      const orderDuration = calculateOrderDuration(
+        order.serviceVariant,
+        order.options,
+      );
+
+      return {
+        start: order.date.getTime(),
+        end: order.date.getTime() + minutesToMilliseconds(orderDuration), // конвертируем минуты в миллисекунды
+      };
+    });
+
+    // Получаем все дни недели
+    const daysOfWeek = Object.values(DayOfWeek);
+
+    // Формируем массив доступных дат
+    const availableDates = new Set<number>([]);
+
+    for (let i = 0; i < 30; i++) {
+      const currentDate = startDate.add(i, 'day');
+      const startOfDay = dayjs(currentDate).startOf('day');
+      const endOfDay = dayjs(currentDate).endOf('day');
+      const dayOfWeek = daysOfWeek[currentDate.day()];
+
+      // Проверяем, есть ли исполнители с доступными слотами в этот день
+      for (const executor of executors) {
+        const scheduleDay = executor.scheduleDays.find(
+          (sd) => sd.dayOfWeek === dayOfWeek,
+        );
+        if (!scheduleDay || scheduleDay.isDayOff) continue;
+
+        // Получаем занятые интервалы для текущего дня
+        const dayBusyIntervals = busyIntervals.filter((order) =>
+          dayjs(order.start).isSame(currentDate, 'day'),
+        );
+
+        // Сортируем слоты по времени
+        const sortedSlots = scheduleDay.timeSlots.sort(
+          (a, b) => dayjs(a.time).valueOf() - dayjs(b.time).valueOf(),
+        );
+
+        // Проверяем каждый слот как потенциальное начало заказа
+        for (let i = 0; i < sortedSlots.length; i++) {
+          const startSlot = sortedSlots[i];
+          const startTime = dayjs(startSlot.time);
+          const startTimestamp = startOfDay
+            .hour(startTime.hour())
+            .minute(startTime.minute())
+            .valueOf();
+
+          const endTimestamp =
+            startTimestamp + minutesToMilliseconds(totalDuration);
+
+          // Проверяем, что все слоты в интервале доступны
+          let isIntervalAvailable = true;
+          let currentSlotIndex = i;
+
+          while (currentSlotIndex < sortedSlots.length) {
+            const currentSlot = sortedSlots[currentSlotIndex];
+            const currentTime = dayjs(currentSlot.time);
+            const currentTimestamp = startOfDay
+              .hour(currentTime.hour())
+              .minute(currentTime.minute())
+              .valueOf();
+
+            // Если текущий слот выходит за пределы рабочего дня, прерываем
+            if (currentTimestamp >= endOfDay.valueOf()) {
+              isIntervalAvailable = false;
+              break;
+            }
+
+            // Если достигли конца интервала, прерываем
+            if (currentTimestamp >= endTimestamp) {
+              break;
+            }
+
+            // Проверяем, не пересекается ли текущий слот с занятыми интервалами
+            const isSlotBusy = dayBusyIntervals.some(
+              (interval) =>
+                (currentTimestamp >= interval.start &&
+                  currentTimestamp < interval.end) || // начало слота попадает в занятый интервал
+                (currentTimestamp + 60 * 60_1000 > interval.start &&
+                  currentTimestamp + 60 * 60_1000 <= interval.end) || // конец слота попадает в занятый интервал
+                (currentTimestamp <= interval.start &&
+                  currentTimestamp + 60 * 60_1000 >= interval.end), // слот полностью содержит занятый интервал
+            );
+
+            if (isSlotBusy) {
+              isIntervalAvailable = false;
+              break;
+            }
+
+            currentSlotIndex++;
+          }
+
+          // Если нашли непрерывный интервал нужной длительности, добавляем начальный слот
+          if (
+            isIntervalAvailable &&
+            currentSlotIndex - i >= Math.ceil(totalDuration / 60)
+          ) {
+            availableDates.add(dayjs(startTimestamp).startOf('day').valueOf());
+          }
+        }
+      }
+    }
+
+    return Array.from(availableDates);
+  }
+
+  async getAvailableDatesOld(
+    serviceVariantId: number,
+    optionIds: number[] = [],
+  ) {
+    // Получаем информацию о длительности услуг
+    const serviceVariant = await this.prisma.serviceVariant.findUnique({
+      where: { id: serviceVariantId },
+      include: {
+        baseService: {
+          include: {
+            options: {
+              where: {
+                id: { in: optionIds },
+              },
+              select: { duration: true },
+            },
+          },
+        },
+      },
+    });
+
+    // Общая длительность заказа
+    const totalDuration = calculateOrderDuration(
+      serviceVariant,
+      serviceVariant.baseService.options,
+    );
+
+    // Получаем все дни недели
+    const daysOfWeek = Object.values(DayOfWeek);
+
+    // Получаем всех одобренных исполнителей
+    const executors = await this.prisma.user.findMany({
+      where: {
+        application: {
+          status: 'APPROVED',
+        },
+        scheduleDays: {
+          some: {
+            // Если у исполнителя выходной, пропускаем
+            isDayOff: false,
+          },
+        },
+      },
+      include: {
+        scheduleDays: {
+          include: {
+            timeSlots: true,
+          },
+        },
+      },
+    });
+
+    // Получаем занятые слоты на следующие 30 дней
+    const startDate = dayjs().startOf('day');
+    const endDate = startDate.add(30, 'day');
+
+    const busySlots = await this.prisma.order.findMany({
+      where: {
+        date: {
+          gte: startDate.toDate(),
+          lt: endDate.toDate(),
+        },
+        status: {
+          notIn: ['completed', 'canceled'],
+        },
+      },
+      include: {
+        serviceVariant: true,
+        options: true,
+      },
+    });
+
+    // Формируем массив доступных дат
+    const availableDates: number[] = [];
+
+    for (let i = 0; i < 30; i++) {
+      const currentDate = startDate.add(i, 'day');
+      const dayOfWeek = daysOfWeek[currentDate.day()];
+
+      // Проверяем, есть ли исполнители с доступными слотами в этот день
+      const hasAvailableExecutors = executors.some((executor) => {
+        const scheduleDay = executor.scheduleDays.find(
+          (sd) => sd.dayOfWeek === dayOfWeek,
+        );
+        if (!scheduleDay || scheduleDay.isDayOff) return false;
+
+        // Получаем занятые интервалы для текущего дня
+        const busyIntervals = busySlots
+          .filter((order) => {
+            const orderDate = dayjs(order.date);
+            return orderDate.isSame(currentDate, 'day');
+          })
+          .map((order) => {
+            const orderDate = dayjs(order.date);
+            const orderDuration =
+              order.serviceVariant.duration +
+              order.options.reduce((sum, opt) => sum + opt.duration, 0);
+            return {
+              start: orderDate,
+              end: orderDate.add(orderDuration, 'minute'),
+            };
+          });
+
+        // Проверяем, есть ли свободное окно для заказа
+        return scheduleDay.timeSlots.some((slot) => {
+          const slotTime = currentDate
+            .hour(dayjs(slot.time).hour())
+            .minute(dayjs(slot.time).minute());
+          const slotEnd = slotTime.add(totalDuration, 'minute');
+
+          // Проверяем, не пересекается ли слот с занятыми интервалами
+          return !busyIntervals.some(
+            (interval) =>
+              (slotTime.isAfter(interval.start) &&
+                slotTime.isBefore(interval.end)) ||
+              (slotEnd.isAfter(interval.start) &&
+                slotEnd.isBefore(interval.end)) ||
+              (slotTime.isBefore(interval.start) &&
+                slotEnd.isAfter(interval.end)),
+          );
+        });
+      });
+
+      if (hasAvailableExecutors) {
+        availableDates.push(currentDate.valueOf());
+      }
+    }
+
+    return availableDates;
   }
 }

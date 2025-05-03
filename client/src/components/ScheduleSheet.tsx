@@ -1,9 +1,9 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import dayjs, {Dayjs} from "dayjs";
-import {useGetExecutorBusySlotsQuery} from "../api.ts";
+import {useGetAvailableDatesQuery, useGetExecutorBusySlotsQuery} from "../api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
 import {Skeleton} from "./ui/skeleton.tsx";
@@ -18,12 +18,12 @@ interface ScheduleSheetProps {
 }
 
 export function ScheduleSheet({
-    children,
-    selectedTimestamp,
-    onSelectDate,
-    serviceVariantId,
-    optionIds = []
-}: React.PropsWithChildren<ScheduleSheetProps>) {
+                                  children,
+                                  selectedTimestamp,
+                                  onSelectDate,
+                                  serviceVariantId,
+                                  optionIds = []
+                              }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {t} = useTranslation();
     const {vibro} = useTelegram();
     const [tab, setTab] = useState<Date>();
@@ -59,7 +59,29 @@ export function ScheduleSheet({
         };
     }).filter(s => s.slots.length > 0), []);
 
-    const { data: busySlots = [], isFetching } = useGetExecutorBusySlotsQuery({
+    const {data: availableDates = []} = useGetAvailableDatesQuery({
+        optionIds,
+        serviceVariantId
+    }, {
+        skip: !serviceVariantId || !optionIds
+    })
+
+    const availableDatesSet = useMemo(() => new Set(availableDates?.map(date => dayjs(date).valueOf()) || []), [availableDates]);
+
+    const isPastDate = useCallback((date: Date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Обнуляем время
+        if(
+            // Если это было вчера
+            date < today
+            || !availableDatesSet.size){
+            return true;
+        }
+        const value = dayjs(date).valueOf()
+        return !availableDatesSet.has(value);
+    }, [availableDatesSet]);
+
+    const {data: busySlots = [], isFetching} = useGetExecutorBusySlotsQuery({
         date: tab ? dayjs(tab).valueOf() : result[0]?.timestamp,
         serviceVariantId,
         optionIds
@@ -80,7 +102,8 @@ export function ScheduleSheet({
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[90vh]">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">{t('calendar_title')}</SheetTitle>
+                    <SheetTitle
+                        className="text-xl font-bold text-tg-theme-text-color text-left">{t('calendar_title')}</SheetTitle>
                     {/*<Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">*/}
                     {/*    <TabsList className="bg-inherit px-0">*/}
                     {/*        {result.map(r => <TabsTrigger*/}
@@ -96,6 +119,7 @@ export function ScheduleSheet({
                           mode="single"
                           selected={tab}
                           onSelect={setTab}
+                          disabled={isPastDate}
                 />
                 {isFetching && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
                     <Skeleton className="w-full min-h-[40px]"/>
@@ -114,17 +138,20 @@ export function ScheduleSheet({
                     <Skeleton className="w-full min-h-[40px]"/>
                     <Skeleton className="w-full min-h-[40px]"/>
                 </div>}
-                {!isFetching && filteredSlots.length === 0 && <EmptyState className="h-50 my-0 flex-none" icon={<CalendarX />} title="There are no available slots" description="Please choose another day."/>}
-                {!isFetching && filteredSlots.length > 0 && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
-                    {filteredSlots.map(service =>
-                        <CardItem
-                            textClassName="items-center"
-                            className={`min-h-[40px] p-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
-                            key={service.timestamp}
-                            title={service.time}
-                            onClick={() => onSelectDate(service.timestamp)}
-                        />)}
-                </div>}
+                {!isFetching && filteredSlots.length === 0 &&
+                    <EmptyState className="h-50 my-0 flex-none" icon={<CalendarX/>} title="There are no available slots"
+                                description="Please choose another day."/>}
+                {!isFetching && filteredSlots.length > 0 &&
+                    <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
+                        {filteredSlots.map(service =>
+                            <CardItem
+                                textClassName="items-center"
+                                className={`min-h-[40px] p-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
+                                key={service.timestamp}
+                                title={service.time}
+                                onClick={() => onSelectDate(service.timestamp)}
+                            />)}
+                    </div>}
             </SheetContent>
         </Sheet>
     )

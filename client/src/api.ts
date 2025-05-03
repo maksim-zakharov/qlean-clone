@@ -221,6 +221,12 @@ export const api = createApi({
                 }
             }),
         }),
+        getAvailableDates: builder.query<string[], { serviceVariantId: number; optionIds: number[] }>({
+            query: ({ serviceVariantId, optionIds }) => ({
+                url: '/schedule/available-dates',
+                params: { serviceVariantId, optionIds },
+            }),
+        }),
     })
 });
 
@@ -245,5 +251,6 @@ export const {
     useSendApplicationMutation,
     useCompleteOrderMutation,
     useProcessedOrderMutation,
-    useGetExecutorBusySlotsQuery
+    useGetExecutorBusySlotsQuery,
+    useGetAvailableDatesQuery,
 } = api;

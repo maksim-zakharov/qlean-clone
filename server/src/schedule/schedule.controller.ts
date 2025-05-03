@@ -41,4 +41,16 @@ export class ScheduleController {
       optionIds ? optionIds.split(',').map(Number) : [],
     );
   }
+
+  @Get('available-dates')
+  async getAvailableDates(
+    @Query('serviceVariantId') serviceVariantId: number,
+    @Query('optionIds') optionIds?: string,
+  ) {
+    const parsedOptionIds = optionIds ? optionIds.split(',').map(Number) : [];
+    return this.scheduleService.getAvailableDates(
+      serviceVariantId,
+      parsedOptionIds,
+    );
+  }
 }
