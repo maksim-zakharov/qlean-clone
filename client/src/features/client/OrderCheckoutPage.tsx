@@ -21,9 +21,11 @@ import {Header} from "../../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
+import {useTranslation} from "react-i18next";
 
 
 export const OrderCheckoutPage = () => {
+    const {t} = useTranslation();
     const [addOrder, {isLoading}] = useAddOrderMutation();
 
     const selectedTimestamp = useSelector(state => state.createOrder.date)
@@ -46,11 +48,11 @@ export const OrderCheckoutPage = () => {
 
     const dateTitle = useMemo(() => {
         if (!selectedTimestamp) {
-            return 'Select date and time';
+            return t('client_checkout_date_placeholder');
         }
 
         return dayjs(selectedTimestamp).format('dddd, D MMMM HH:mm');
-    }, [selectedTimestamp]);
+    }, [selectedTimestamp, t]);
 
     const handleSelectAddress = (address: any) => {
         dispatch(selectFullAddress(address))
@@ -71,12 +73,12 @@ export const OrderCheckoutPage = () => {
                 }).unwrap();
             navigate(RoutePaths.Orders)
         } catch (e) {
-            let description = 'Что-то пошло не так.'
+            let description = t("error_500_title")
             if (!selectedTimestamp) {
-                description = 'Необходимо выбрать дату и время'
+                description = t('client_checkout_date_error')
             }
             if (!fullAddress) {
-                description = 'Необходимо выбрать адрес'
+                description = t('client_checkout_address_error')
             }
             setError(description);
         }
@@ -84,7 +86,7 @@ export const OrderCheckoutPage = () => {
 
     return (
         <>
-            <AlertDialogWrapper open={Boolean(error)} title="Не удалось оформить заказ" description={error}
+            <AlertDialogWrapper open={Boolean(error)} title={t('client_checkout_dialog_error_title')} description={error}
                                 onOkText="Ok"
                                 onOkClick={() => setError(undefined)}/>
             <Header className="flex justify-center">
@@ -95,7 +97,7 @@ export const OrderCheckoutPage = () => {
                 >
                     <Button variant="ghost"
                             className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
-                        <Typography.Title>Checkout</Typography.Title>
+                        <Typography.Title>{t('client_checkout_title')}</Typography.Title>
                         <Typography.Description>{fullAddress}</Typography.Description>
                     </Button>
                 </AddressSheet>
@@ -112,7 +114,7 @@ export const OrderCheckoutPage = () => {
                     <CommentsSheet onChangeText={setComment} text={comment}>
 
                         <ListButton icon={<MessageSquare
-                            className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-orange)] rounded-md"/>} text="Comments"
+                            className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-orange)] rounded-md"/>} text={t('payments_comments')}
                                     extra={<ChevronRight className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>}/>
                     </CommentsSheet>
                 </ListButtonGroup>
@@ -127,7 +129,7 @@ export const OrderCheckoutPage = () => {
                     <AccordionItem value="services">
                         <AccordionTrigger disabled={!options.length}>
                             <div className="flex justify-between w-full">
-                                <span className="text-lg font-medium text-tg-theme-text-color">Summary</span>
+                                <span className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
                                 <div className="flex items-center gap-1 pr-2">
                                         <span
                                             className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
@@ -166,7 +168,7 @@ export const OrderCheckoutPage = () => {
                 <div className="flex items-center gap-2">
                     <Checkbox id="terms"/>
                     <label htmlFor="terms" className="text-sm text-tg-theme-text-color">
-                        I accept <span className="text-tg-theme-link-color">the terms of service</span>
+                        {t('client_accept_1')} <span className="text-tg-theme-link-color">{t('client_accept_2')}</span>
                     </label>
                 </div>
             </div>
@@ -179,7 +181,7 @@ export const OrderCheckoutPage = () => {
                     loading={isLoading}
                     onClick={handleOnSubmit}
                 >
-                    Checkout
+                    {t('client_checkout_submit_btn')}
                 </Button>
             </BottomActions>
         </>
