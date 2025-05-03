@@ -13,8 +13,10 @@ import {Button} from "../../components/ui/button.tsx";
 import {FileClock, FileX} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {PageLoader} from "../../components/PageLoader.tsx";
+import {useTranslation} from "react-i18next";
 
 export const ApplicationPage = () => {
+    const {t} = useTranslation();
     const [loginMutation] = useLoginMutation();
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
     const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
@@ -56,9 +58,9 @@ export const ApplicationPage = () => {
                 <BackButton url={RoutePaths.Profile}/>
             </Header>
             <div className="content px-4">
-                <Typography.H2 className="text-3xl mb-6">Job application</Typography.H2>
+                <Typography.H2 className="text-3xl mb-6">{t('create_application_title')}</Typography.H2>
 
-                <Typography.Title className="pl-4">What are you going to do?</Typography.Title>
+                <Typography.Title className="pl-4">{t('create_application_question')}</Typography.Title>
 
                 {services.map(s => <div className="mt-4">
                     <Typography.Description className="block mb-2 pl-4">{s.name}</Typography.Description>
@@ -73,7 +75,7 @@ export const ApplicationPage = () => {
 
                 <BottomActions className="bg-inherit">
                     <Button wide disabled={variantIds.length === 0} loading={sendApplicationLoading}
-                            onClick={handleSubmitApplication}>Submit application</Button>
+                            onClick={handleSubmitApplication}>{t('create_application_submit_btn')}</Button>
                 </BottomActions>
             </div>
         </>
@@ -82,20 +84,19 @@ export const ApplicationPage = () => {
     if (application.status === "PENDING") {
         return <div className="flex flex-col justify-center h-screen items-center m-auto">
             <FileClock className="w-20 h-20 p-2 rounded-3xl card-bg-color mb-4"/>
-            <Typography.H2 className="mb-2">Application pending</Typography.H2>
-            <Typography.Title className="mb-4 font-normal">Please await moderator review</Typography.Title>
-            <Button onClick={() => navigate(RoutePaths.Profile)}>Back to profile</Button>
+            <Typography.H2 className="mb-2">{t('create_application_pending_title')}</Typography.H2>
+            <Typography.Title className="mb-4 font-normal">{t('create_application_pending_description')}</Typography.Title>
+            <Button onClick={() => navigate(RoutePaths.Profile)}>{t('create_application_profile_btn')}</Button>
         </div>
     }
 
     if (application.status === "REJECTED") {
         return <div className="flex flex-col justify-center h-screen items-center m-auto">
             <FileX className="w-20 h-20 p-2 rounded-3xl card-bg-color mb-4"/>
-            <Typography.H2 className="mb-2">Application rejected</Typography.H2>
-            <Typography.Title className="mb-4 font-normal text-center">If you have any questions, <br/> please contact a
-                support</Typography.Title>
-            <Button onClick={() => navigate(RoutePaths.Profile)}>Back to profile</Button>
-            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${Date.now()}`, '_blank')}>Contact support</Button>
+            <Typography.H2 className="mb-2">{t('create_application_rejected_title')}</Typography.H2>
+            <Typography.Title className="mb-4 font-normal text-center">{t('create_application_rejected_description_1')} <br/> {t('create_application_rejected_description_2')}</Typography.Title>
+            <Button onClick={() => navigate(RoutePaths.Profile)}>{t('create_application_profile_btn')}</Button>
+            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${Date.now()}`, '_blank')}>{t('create_application_support_btn')}</Button>
         </div>
     }
 

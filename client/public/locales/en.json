@@ -45,5 +45,16 @@
   "finalize_order_modal_title": "Finalize order",
   "finalize_order_modal_description": "Are you sure you want to finalize your order?",
   "finalize_order_modal_ok_btn": "Yes",
-  "finalize_order_modal_cancel_btn": "No"
+  "finalize_order_modal_cancel_btn": "No",
+
+  "create_application_title": "Job application",
+  "create_application_question": "What are you going to do?",
+  "create_application_submit_btn": "Submit application",
+  "create_application_pending_title": "Application pending",
+  "create_application_pending_description": "Please await moderator review",
+  "create_application_profile_btn": "Back to profile",
+  "create_application_support_btn": "Contact support",
+  "create_application_rejected_title": "Application rejected",
+  "create_application_rejected_description_1": "If you have any questions,",
+  "create_application_rejected_description_2": "please contact a support"
 }
