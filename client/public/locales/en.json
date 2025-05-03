@@ -58,5 +58,18 @@
 
   "create_application_rejected_title": "Application Declined",
   "create_application_rejected_description_1": "Got questions?",
-  "create_application_rejected_description_2": "Reach out to Support for help."
+  "create_application_rejected_description_2": "Reach out to Support for help.",
+
+  "client_orders_empty_title": "No orders yet",
+  "client_orders_empty_description": "You can choose service in Home page",
+  "client_orders_empty_btn": "Choose service",
+
+  "client_orders_active_title": "Active",
+  "client_orders_all_title": "All Orders",
+  "client_orders_add_service_btn": "Add service",
+  "client_orders_support_btn": "Support",
+  "client_orders_todo_status": "Ordered",
+  "client_orders_canceled_status": "Canceled",
+  "client_orders_completed_status": "Completed",
+  "client_orders_repeat_btn": "Repeat"
 }
