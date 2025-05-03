@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CircleX, ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
+import { ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -13,6 +13,7 @@ import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 
 export const ClientOrdersPage = () => {
@@ -52,16 +53,7 @@ export const ClientOrdersPage = () => {
     }
 
     if(isError){
-        return  <EmptyState
-            icon={<CircleX className="h-10 w-10" />}
-            title="Упс, что-то пошло не так..."
-            description="Обновите страницу или повторите попытку позднее."
-            action={
-                <Button onClick={() => window.location.reload()}
-                >
-                    Обновить страницу
-                </Button>}
-        />
+        return <ErrorState/>
     }
 
     if(orders.length === 0){

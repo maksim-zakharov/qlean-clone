@@ -5,9 +5,10 @@ import {useTelegram} from "../hooks/useTelegram.ts";
 import {Typography} from "./ui/Typography.tsx";
 import {AddAddressSheet} from "./AddAddressSheet.tsx";
 import {EditButton} from "./EditButton.tsx";
-import {CircleX, Map} from "lucide-react";
+import { Map} from "lucide-react";
 import {EmptyState} from "./EmptyState.tsx";
 import {ListButton, ListButtonGroup} from "./ListButton/ListButton.tsx";
+import {ErrorState} from "./ErrorState.tsx";
 
 interface AddressSheetProps {
     addresses: any[]
@@ -56,16 +57,7 @@ export function AddressSheet({
                 <SheetHeader>
                     <SheetTitle className="text-xl font-bold text-tg-theme-text-color text-left">Addresses</SheetTitle>
                 </SheetHeader>
-                {isError && <EmptyState
-                    icon={<CircleX className="h-10 w-10"/>}
-                    title="Упс, что-то пошло не так..."
-                    description="Обновите страницу или повторите попытку позднее."
-                    action={
-                        <Button onClick={() => window.location.reload()}
-                        >
-                            Refresh page
-                        </Button>}
-                />}
+                {isError && <ErrorState/>}
                 {!isError && addresses.length === 0 && <EmptyState
                     icon={<Map className="h-10 w-10"/>}
                     title="Нет адресов"

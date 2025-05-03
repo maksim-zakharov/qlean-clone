@@ -3,7 +3,7 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import { CalendarCheck, CircleX, ClipboardPlus} from "lucide-react";
+import { CalendarCheck, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
@@ -19,6 +19,7 @@ import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const ExecutorOrdersPage = () => {
     const {t} = useTranslation();
@@ -87,16 +88,7 @@ export const ExecutorOrdersPage = () => {
     }
 
     if (isError) {
-        return <EmptyState
-            icon={<CircleX className="h-10 w-10"/>}
-            title={t("error_500_title")}
-            description={t('error_500_description')}
-            action={
-                <Button onClick={() => window.location.reload()}
-                >
-                    {t('error_refresh_btn')}
-                </Button>}
-        />
+        return <ErrorState/>
     }
 
     if (orders.length === 0) {

@@ -4,13 +4,14 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {CalendarSync, CircleX, Star, Banknote} from "lucide-react";
+import {CalendarSync, Star, Banknote} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
 import {Area, AreaChart, CartesianGrid, XAxis} from "recharts"
 import {ChartConfig, ChartContainer} from "../../components/ui/chart.tsx";
 import {useTranslation} from "react-i18next";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const ExecutorPaymentsPage = () => {
     const {t} = useTranslation();
@@ -61,16 +62,7 @@ export const ExecutorPaymentsPage = () => {
     }
 
     if (isError) {
-        return <EmptyState
-            icon={<CircleX className="h-10 w-10"/>}
-            title={t("error_500_title")}
-            description={t('error_500_description')}
-            action={
-                <Button onClick={() => window.location.reload()}
-                >
-                    {t('error_refresh_btn')}
-                </Button>}
-        />
+        return <ErrorState/>
     }
 
     if (orders.length === 0) {

@@ -9,7 +9,7 @@ import {moneyFormat} from "../../lib/utils.ts";
 import dayjs from "dayjs";
 import {Button} from "../../components/ui/button.tsx";
 import {Card} from "../../components/ui/card.tsx";
-import {CircleX, User} from "lucide-react";
+import { User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
@@ -21,8 +21,8 @@ import {useDispatch} from "react-redux";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {EditButton} from "../../components/EditButton.tsx";
-import {EmptyState} from "../../components/EmptyState.tsx";
 import {useTranslation} from "react-i18next";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const OrderDetailsPage = () => {
     const {t} = useTranslation();
@@ -97,16 +97,7 @@ export const OrderDetailsPage = () => {
     if (isError) {
         return <div
             className="h-screen">
-            <EmptyState
-                icon={<CircleX className="h-10 w-10"/>}
-                title={t("error_500_title")}
-                description={t('error_500_description')}
-                action={
-                    <Button onClick={() => window.location.reload()}
-                    >
-                        {t('error_refresh_btn')}
-                    </Button>}
-            />
+            <ErrorState/>
         </div>
     }
 

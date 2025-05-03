@@ -1,5 +1,4 @@
-import { CircleX
-} from "lucide-react"
+
 import {useNavigate} from "react-router-dom"
 import React, {useEffect} from "react";
 import {useTelegram} from "../../hooks/useTelegram.ts";
@@ -8,9 +7,8 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../../api.ts";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "../../slices/createOrderSlice.ts";
-import {EmptyState} from "../../components/EmptyState.tsx";
-import {Button} from "../../components/ui/button.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 const MainPage = () => {
     const navigate = useNavigate()
@@ -31,16 +29,7 @@ const MainPage = () => {
     }
 
     if(isError){
-        return  <EmptyState
-            icon={<CircleX className="h-10 w-10" />}
-            title="Упс, что-то пошло не так..."
-            description="Обновите страницу или повторите попытку позднее."
-            action={
-                <Button onClick={() => window.location.reload()}
-                >
-                    Обновить страницу
-                </Button>}
-        />
+        return  <ErrorState/>
     }
 
     return (
