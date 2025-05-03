@@ -159,7 +159,7 @@ export const ExecutorOrdersPage = () => {
             >
                 <AccordionItem value="services" className="rounded-xl">
                     <AccordionTrigger className="flex justify-normal py-0" hideChevron onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
-                        <div className="p-3 px-0 separator-shadow-bottom flex flex-col w-full">
+                        <div className="p-3 px-0 flex flex-col w-full">
                             <div className="flex justify-between">
                                 <Typography.Title>{ao.baseService?.name}</Typography.Title>
                                 <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
@@ -170,7 +170,7 @@ export const ExecutorOrdersPage = () => {
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col pt-3">
+                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col pt-3 mt-[1px] separator-shadow-top pr-4" wrapperClassName="pr-0">
                         {ao.options.map((service, index) => (
                             <div key={index} className="flex justify-between">
                                 <span className="text-xs text-tg-theme-hint-color font-medium">{service.name}</span>

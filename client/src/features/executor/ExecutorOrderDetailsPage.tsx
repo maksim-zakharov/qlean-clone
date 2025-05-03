@@ -7,7 +7,7 @@ import {Header} from "../../components/ui/Header.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Typography} from "@/components/ui/Typography.tsx";
-import {ListButton, ListButtonGroup} from "../../components/ListButton.tsx";
+import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";

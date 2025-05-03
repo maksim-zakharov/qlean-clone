@@ -4,7 +4,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "@/components/ui/Typography.tsx";
 import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation, useSendApplicationMutation} from "../../api.ts";
-import {ListButton, ListButtonGroup} from "../../components/ListButton.tsx";
+import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";

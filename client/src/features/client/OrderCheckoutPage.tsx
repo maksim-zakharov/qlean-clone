@@ -20,7 +20,7 @@ import {selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {Header} from "../../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
-import {ListButton, ListButtonGroup} from "../../components/ListButton.tsx";
+import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 
 
 export const OrderCheckoutPage = () => {

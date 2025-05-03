@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="jog application">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="время начала и завершения заказа">
+      <change afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ListButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/accordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +25,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -48,30 +59,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.main.ts.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/nest-alor-client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.build:ci (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.build:ci.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev-host.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start:dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.main.ts.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "D:/Projects/nest-alor-client",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.build:ci (1).executor": "Run",
+    "npm.build:ci.executor": "Run",
+    "npm.dev-host.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.start:dev.executor": "Run",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\qlean-clone\client\public" />
@@ -81,14 +93,14 @@
       <recent name="D:\Projects\qlean-clone\client\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\client\src\components\ListButton" />
       <recent name="D:\Projects\qlean-clone\server\src\dto" />
       <recent name="D:\Projects\qlean-clone\client\src\features\client" />
       <recent name="D:\Projects\qlean-clone\server\src\auth" />
       <recent name="D:\Projects\qlean-clone\client\src\features" />
-      <recent name="D:\Projects\qlean-clone\server\src\addresses" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start:dev">
+  <component name="RunManager" selected="npm.dev-host">
     <configuration name="main.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -152,8 +164,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start:dev" />
         <item itemvalue="npm.dev-host" />
+        <item itemvalue="npm.start:dev" />
         <item itemvalue="npm.build:ci (1)" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:ci" />
@@ -181,126 +193,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00264" summary="повторить">
-      <option name="closed" value="true" />
-      <created>1743666510625</created>
-      <option name="number" value="00264" />
-      <option name="presentableId" value="LOCAL-00264" />
-      <option name="project" value="LOCAL" />
-      <updated>1743666510625</updated>
-    </task>
-    <task id="LOCAL-00265" summary="удаление услуг">
-      <option name="closed" value="true" />
-      <created>1743666923452</created>
-      <option name="number" value="00265" />
-      <option name="presentableId" value="LOCAL-00265" />
-      <option name="project" value="LOCAL" />
-      <updated>1743666923452</updated>
-    </task>
-    <task id="LOCAL-00266" summary="Отмена заказа">
-      <option name="closed" value="true" />
-      <created>1743687480135</created>
-      <option name="number" value="00266" />
-      <option name="presentableId" value="LOCAL-00266" />
-      <option name="project" value="LOCAL" />
-      <updated>1743687480135</updated>
-    </task>
-    <task id="LOCAL-00267" summary="openai">
-      <option name="closed" value="true" />
-      <created>1744202828996</created>
-      <option name="number" value="00267" />
-      <option name="presentableId" value="LOCAL-00267" />
-      <option name="project" value="LOCAL" />
-      <updated>1744202828996</updated>
-    </task>
-    <task id="LOCAL-00268" summary="openai">
-      <option name="closed" value="true" />
-      <created>1744203420750</created>
-      <option name="number" value="00268" />
-      <option name="presentableId" value="LOCAL-00268" />
-      <option name="project" value="LOCAL" />
-      <updated>1744203420750</updated>
-    </task>
-    <task id="LOCAL-00269" summary="openai">
-      <option name="closed" value="true" />
-      <created>1744204692323</created>
-      <option name="number" value="00269" />
-      <option name="presentableId" value="LOCAL-00269" />
-      <option name="project" value="LOCAL" />
-      <updated>1744204692323</updated>
-    </task>
-    <task id="LOCAL-00270" summary="openai">
-      <option name="closed" value="true" />
-      <created>1744213621598</created>
-      <option name="number" value="00270" />
-      <option name="presentableId" value="LOCAL-00270" />
-      <option name="project" value="LOCAL" />
-      <updated>1744213621598</updated>
-    </task>
-    <task id="LOCAL-00271" summary="работает">
-      <option name="closed" value="true" />
-      <created>1744226531536</created>
-      <option name="number" value="00271" />
-      <option name="presentableId" value="LOCAL-00271" />
-      <option name="project" value="LOCAL" />
-      <updated>1744226531536</updated>
-    </task>
-    <task id="LOCAL-00272" summary="работает">
-      <option name="closed" value="true" />
-      <created>1744306491831</created>
-      <option name="number" value="00272" />
-      <option name="presentableId" value="LOCAL-00272" />
-      <option name="project" value="LOCAL" />
-      <updated>1744306491831</updated>
-    </task>
-    <task id="LOCAL-00273" summary="tgWebAppStartParam">
-      <option name="closed" value="true" />
-      <created>1744309006651</created>
-      <option name="number" value="00273" />
-      <option name="presentableId" value="LOCAL-00273" />
-      <option name="project" value="LOCAL" />
-      <updated>1744309006651</updated>
-    </task>
-    <task id="LOCAL-00274" summary="почистил лишний фронт">
-      <option name="closed" value="true" />
-      <created>1745434630150</created>
-      <option name="number" value="00274" />
-      <option name="presentableId" value="LOCAL-00274" />
-      <option name="project" value="LOCAL" />
-      <updated>1745434630150</updated>
-    </task>
-    <task id="LOCAL-00275" summary="зачатки ролей и авторизации">
-      <option name="closed" value="true" />
-      <created>1745478215572</created>
-      <option name="number" value="00275" />
-      <option name="presentableId" value="LOCAL-00275" />
-      <option name="project" value="LOCAL" />
-      <updated>1745478215572</updated>
-    </task>
-    <task id="LOCAL-00276" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745506917964</created>
-      <option name="number" value="00276" />
-      <option name="presentableId" value="LOCAL-00276" />
-      <option name="project" value="LOCAL" />
-      <updated>1745506917964</updated>
-    </task>
-    <task id="LOCAL-00277" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745508942831</created>
-      <option name="number" value="00277" />
-      <option name="presentableId" value="LOCAL-00277" />
-      <option name="project" value="LOCAL" />
-      <updated>1745508942831</updated>
-    </task>
-    <task id="LOCAL-00278" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745509806065</created>
-      <option name="number" value="00278" />
-      <option name="presentableId" value="LOCAL-00278" />
-      <option name="project" value="LOCAL" />
-      <updated>1745509806065</updated>
     </task>
     <task id="LOCAL-00279" summary="Зачатки исполнителя: список заказов">
       <option name="closed" value="true" />
@@ -574,7 +466,127 @@
       <option name="project" value="LOCAL" />
       <updated>1746031968006</updated>
     </task>
-    <option name="localTasksCounter" value="313" />
+    <task id="LOCAL-00313" summary="validateUser transac">
+      <option name="closed" value="true" />
+      <created>1746082310265</created>
+      <option name="number" value="00313" />
+      <option name="presentableId" value="LOCAL-00313" />
+      <option name="project" value="LOCAL" />
+      <updated>1746082310265</updated>
+    </task>
+    <task id="LOCAL-00314" summary="validateUser transac">
+      <option name="closed" value="true" />
+      <created>1746095042739</created>
+      <option name="number" value="00314" />
+      <option name="presentableId" value="LOCAL-00314" />
+      <option name="project" value="LOCAL" />
+      <updated>1746095042739</updated>
+    </task>
+    <task id="LOCAL-00315" summary="validateUser transac">
+      <option name="closed" value="true" />
+      <created>1746106445573</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1746106445573</updated>
+    </task>
+    <task id="LOCAL-00316" summary="complete order">
+      <option name="closed" value="true" />
+      <created>1746115813531</created>
+      <option name="number" value="00316" />
+      <option name="presentableId" value="LOCAL-00316" />
+      <option name="project" value="LOCAL" />
+      <updated>1746115813531</updated>
+    </task>
+    <task id="LOCAL-00317" summary="processed order">
+      <option name="closed" value="true" />
+      <created>1746125779800</created>
+      <option name="number" value="00317" />
+      <option name="presentableId" value="LOCAL-00317" />
+      <option name="project" value="LOCAL" />
+      <updated>1746125779800</updated>
+    </task>
+    <task id="LOCAL-00318" summary="убрал user_role">
+      <option name="closed" value="true" />
+      <created>1746183530686</created>
+      <option name="number" value="00318" />
+      <option name="presentableId" value="LOCAL-00318" />
+      <option name="project" value="LOCAL" />
+      <updated>1746183530686</updated>
+    </task>
+    <task id="LOCAL-00319" summary="Фильтрует слоты для записи по расписанию исполнителя">
+      <option name="closed" value="true" />
+      <created>1746185592681</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1746185592681</updated>
+    </task>
+    <task id="LOCAL-00320" summary="Слоты фильтруются по расписанию исполнителей">
+      <option name="closed" value="true" />
+      <created>1746195621338</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1746195621338</updated>
+    </task>
+    <task id="LOCAL-00321" summary="Берутся исполнители только если умеют выполнять услугу">
+      <option name="closed" value="true" />
+      <created>1746196703690</created>
+      <option name="number" value="00321" />
+      <option name="presentableId" value="LOCAL-00321" />
+      <option name="project" value="LOCAL" />
+      <updated>1746196703690</updated>
+    </task>
+    <task id="LOCAL-00322" summary="Скелетон для фетча слотов">
+      <option name="closed" value="true" />
+      <created>1746199229111</created>
+      <option name="number" value="00322" />
+      <option name="presentableId" value="LOCAL-00322" />
+      <option name="project" value="LOCAL" />
+      <updated>1746199229111</updated>
+    </task>
+    <task id="LOCAL-00323" summary="бизнес ошибки + редактирование даты">
+      <option name="closed" value="true" />
+      <created>1746204373710</created>
+      <option name="number" value="00323" />
+      <option name="presentableId" value="LOCAL-00323" />
+      <option name="project" value="LOCAL" />
+      <updated>1746204373710</updated>
+    </task>
+    <task id="LOCAL-00324" summary="аккордион кликается, можно работать с услугой без доп опций">
+      <option name="closed" value="true" />
+      <created>1746204949710</created>
+      <option name="number" value="00324" />
+      <option name="presentableId" value="LOCAL-00324" />
+      <option name="project" value="LOCAL" />
+      <updated>1746204949710</updated>
+    </task>
+    <task id="LOCAL-00325" summary="PageLoader.tsx">
+      <option name="closed" value="true" />
+      <created>1746206163875</created>
+      <option name="number" value="00325" />
+      <option name="presentableId" value="LOCAL-00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1746206163875</updated>
+    </task>
+    <task id="LOCAL-00326" summary="Стартануть можно только заказ на сегодня">
+      <option name="closed" value="true" />
+      <created>1746206382977</created>
+      <option name="number" value="00326" />
+      <option name="presentableId" value="LOCAL-00326" />
+      <option name="project" value="LOCAL" />
+      <updated>1746206382977</updated>
+    </task>
+    <task id="LOCAL-00327" summary="время начала и завершения заказа">
+      <option name="closed" value="true" />
+      <created>1746207660753</created>
+      <option name="number" value="00327" />
+      <option name="presentableId" value="LOCAL-00327" />
+      <option name="project" value="LOCAL" />
+      <updated>1746207660753</updated>
+    </task>
+    <option name="localTasksCounter" value="328" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,19 +609,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="vite" />
-    <MESSAGE value="prisma address" />
-    <MESSAGE value="разнес контроллер на несколько" />
-    <MESSAGE value="читабельность призма ошибок" />
-    <MESSAGE value="повтор заказа" />
-    <MESSAGE value="скелетон заказы" />
-    <MESSAGE value="userId" />
-    <MESSAGE value="повторить" />
-    <MESSAGE value="удаление услуг" />
-    <MESSAGE value="Отмена заказа" />
-    <MESSAGE value="openai" />
-    <MESSAGE value="работает" />
-    <MESSAGE value="tgWebAppStartParam" />
     <MESSAGE value="почистил лишний фронт" />
     <MESSAGE value="зачатки ролей и авторизации" />
     <MESSAGE value="Зачатки исполнителя: список заказов" />
@@ -622,6 +621,19 @@
     <MESSAGE value="Страница join us" />
     <MESSAGE value="немного редизайн" />
     <MESSAGE value="jog application" />
-    <option name="LAST_COMMIT_MESSAGE" value="jog application" />
+    <MESSAGE value="validateUser transac" />
+    <MESSAGE value="complete order" />
+    <MESSAGE value="processed order" />
+    <MESSAGE value="убрал user_role" />
+    <MESSAGE value="Фильтрует слоты для записи по расписанию исполнителя" />
+    <MESSAGE value="Слоты фильтруются по расписанию исполнителей" />
+    <MESSAGE value="Берутся исполнители только если умеют выполнять услугу" />
+    <MESSAGE value="Скелетон для фетча слотов" />
+    <MESSAGE value="бизнес ошибки + редактирование даты" />
+    <MESSAGE value="аккордион кликается, можно работать с услугой без доп опций" />
+    <MESSAGE value="PageLoader.tsx" />
+    <MESSAGE value="Стартануть можно только заказ на сегодня" />
+    <MESSAGE value="время начала и завершения заказа" />
+    <option name="LAST_COMMIT_MESSAGE" value="время начала и завершения заказа" />
   </component>
 </project>

@@ -7,7 +7,7 @@ import {AddAddressSheet} from "./AddAddressSheet.tsx";
 import {EditButton} from "./EditButton.tsx";
 import {CircleX, Map} from "lucide-react";
 import {EmptyState} from "./EmptyState.tsx";
-import {ListButton, ListButtonGroup} from "./ListButton.tsx";
+import {ListButton, ListButtonGroup} from "./ListButton/ListButton.tsx";
 
 interface AddressSheetProps {
     addresses: any[]
