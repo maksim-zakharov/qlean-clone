@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderCheckoutPage i18n" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderCreationPage i18n" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,14 +181,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00294" summary="chart">
-      <option name="closed" value="true" />
-      <created>1745581724012</created>
-      <option name="number" value="00294" />
-      <option name="presentableId" value="LOCAL-00294" />
-      <option name="project" value="LOCAL" />
-      <updated>1745581724012</updated>
     </task>
     <task id="LOCAL-00295" summary="Зачатки календаря">
       <option name="closed" value="true" />
@@ -574,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746289460709</updated>
     </task>
-    <option name="localTasksCounter" value="343" />
+    <task id="LOCAL-00343" summary="OrderCreationPage i18n">
+      <option name="closed" value="true" />
+      <created>1746289566191</created>
+      <option name="number" value="00343" />
+      <option name="presentableId" value="LOCAL-00343" />
+      <option name="project" value="LOCAL" />
+      <updated>1746289566191</updated>
+    </task>
+    <option name="localTasksCounter" value="344" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +597,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="processed order" />
     <MESSAGE value="убрал user_role" />
     <MESSAGE value="Фильтрует слоты для записи по расписанию исполнителя" />
     <MESSAGE value="Слоты фильтруются по расписанию исполнителей" />
@@ -622,6 +621,7 @@
     <MESSAGE value="OrderDetailsPage i18n" />
     <MESSAGE value="ErrorState" />
     <MESSAGE value="OrderCheckoutPage i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrderCheckoutPage i18n" />
+    <MESSAGE value="OrderCreationPage i18n" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrderCreationPage i18n" />
   </component>
 </project>

@@ -85,12 +85,10 @@ export const OrderDetailsPage = () => {
 
 
     if (isLoading && !order) {
-        return <div className="px-4 mt-[56px]">
-            <div className="mt-4">
-                <Skeleton className="w-full h-[128px] mt-2"/>
-                <Skeleton className="w-full h-[216px] mt-2"/>
-                <Skeleton className="w-full h-[188px] mt-2"/>
-            </div>
+        return <div className="p-4 mt-[56px] flex flex-col gap-4">
+            <Skeleton className="w-full h-[112px]"/>
+            <Skeleton className="w-full h-[192px]"/>
+            <Skeleton className="w-full h-[164px]"/>
         </div>
     }
 
