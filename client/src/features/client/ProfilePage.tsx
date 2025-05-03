@@ -157,7 +157,7 @@ export const ProfilePage = () => {
             </ListButtonGroup>
 
             <ListButton icon={<img src="../telegram.svg"
-                                   className="mr-4 h-7 bg-[#2AABEE] rounded-md"/>} text="Telegram notifications"
+                                   className="absolute mr-4 h-7 w-7 bg-[#2AABEE] rounded-md"/>} text="Telegram notifications"
                         extra={<Switch
                             checked={writeAccessReceived}
                             onCheckedChange={handleRequestWriteAccess}

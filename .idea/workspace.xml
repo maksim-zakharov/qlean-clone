@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Стрелочка темнее">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/switch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/switch.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="дизайн свича">
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,14 +183,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00282" summary="Зачатки исполнителя: список заказов">
-      <option name="closed" value="true" />
-      <created>1745515753945</created>
-      <option name="number" value="00282" />
-      <option name="presentableId" value="LOCAL-00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1745515753945</updated>
     </task>
     <task id="LOCAL-00283" summary="Зачатки исполнителя: список заказов">
       <option name="closed" value="true" />
@@ -577,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746266156873</updated>
     </task>
-    <option name="localTasksCounter" value="331" />
+    <task id="LOCAL-00331" summary="дизайн свича">
+      <option name="closed" value="true" />
+      <created>1746269186040</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1746269186040</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Фикс машинки в табах, уменьшил меню" />
     <MESSAGE value="уменьшил меню" />
     <MESSAGE value="payments" />
     <MESSAGE value="chart" />
@@ -625,6 +623,7 @@
     <MESSAGE value="Разобрался с разделителями" />
     <MESSAGE value="logout, отступы your services" />
     <MESSAGE value="Стрелочка темнее" />
-    <option name="LAST_COMMIT_MESSAGE" value="Стрелочка темнее" />
+    <MESSAGE value="дизайн свича" />
+    <option name="LAST_COMMIT_MESSAGE" value="дизайн свича" />
   </component>
 </project>
