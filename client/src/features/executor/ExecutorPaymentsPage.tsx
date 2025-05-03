@@ -51,12 +51,14 @@ export const ExecutorPaymentsPage = () => {
     }), [t])
 
     if (isLoading) {
-        return <div className="px-4 mb-4">
-            <div className="mb-6 mt-4">
-                <Skeleton className="w-[100px] h-[28px] mb-3"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
-                <Skeleton className="w-full h-[156px] mt-4"/>
+        return <div className="p-4">
+            <div className="flex flex-col gap-4">
+                <Skeleton className="w-full h-[84px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
             </div>
         </div>
     }
