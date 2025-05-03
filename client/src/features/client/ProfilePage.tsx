@@ -17,8 +17,8 @@ import {ListButton} from "@/components/ListButton/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api.ts";
 import {DynamicIcon} from "lucide-react/dynamic";
-import {PageLoader} from "../../components/PageLoader.tsx";
 import {useTranslation} from "react-i18next";
+import {Skeleton} from "../../components/ui/skeleton.tsx";
 
 interface Address {
     // Дом
@@ -119,12 +119,20 @@ export const ProfilePage = () => {
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
     if (applicationLoading || isLoading) {
-        return <PageLoader/>
+        return <div className="px-4">
+            <div className="h-[56px]"/>
+            <div className="flex flex-col gap-6">
+                <Skeleton className="w-full h-[156px]"/>
+                <Skeleton className="w-full h-[44px]"/>
+                <Skeleton className="w-full h-[44px]"/>
+                <Skeleton className="w-full h-[40px]"/>
+            </div>
+        </div>
     }
 
     return <>
         <Header>
-            <div className="grid grid-cols-[40px_auto_40px]">
+        <div className="grid grid-cols-[40px_auto_40px]">
                 <BackButton url="/"/>
             </div>
         </Header>
@@ -148,7 +156,7 @@ export const ProfilePage = () => {
                 <ListButton text={<div className="flex flex-col text-left">
                     <Typography.Description>{t('address')}</Typography.Description>
                     <Typography.Title
-                        className="flex">{addressText}</Typography.Title>
+                        className="flex">{addressText || '-'}</Typography.Title>
                 </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--chart-4)] rounded-md"/>}/>
             </ListButtonGroup>
 
