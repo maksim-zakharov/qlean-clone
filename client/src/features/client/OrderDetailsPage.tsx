@@ -222,8 +222,7 @@ export const OrderDetailsPage = () => {
             </Accordion>
         </div>
         {canEdit && <>
-            <div className="mb-[calc(env(safe-area-inset-bottom,0px)+128px)]"/>
-            <BottomActions className="gap-2 flex-col flex">
+            <BottomActions className="flex flex-col gap-2 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 <Button
                     wide
                     size="lg"
