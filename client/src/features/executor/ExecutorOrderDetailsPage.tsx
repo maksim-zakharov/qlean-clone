@@ -29,7 +29,7 @@ export const ExecutorOrderDetailsPage = () => {
     const handleFinishOrder = async (order) => {
         await completeOrder(order).unwrap();
         setOrderToDelete(undefined);
-        toast("Order completed", {
+        toast(t('orders_notification_complete'), {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },

@@ -3,10 +3,8 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api.ts";
 import dayjs from "dayjs";
-import {Banknote, CalendarCheck, CircleX, ClipboardPlus} from "lucide-react";
+import { CalendarCheck, CircleX, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useDispatch} from "react-redux";
-import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
@@ -20,34 +18,17 @@ import {useTelegram} from "../../hooks/useTelegram.ts";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {RoutePaths} from "../../routes.ts";
-
+import {useTranslation} from "react-i18next";
 
 export const ExecutorOrdersPage = () => {
+    const {t} = useTranslation();
     const [completeOrder, {isLoading: completeOrderLoading}] = useCompleteOrderMutation();
     const navigate = useNavigate()
     const [orderToDelete, setOrderToDelete] = useState<any | null>(null);
     const {vibro} = useTelegram();
-    const dispatch = useDispatch();
     const {data: orders = [], isLoading, isError} = useGetExecutorOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
-
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(order))
-        navigate('/order')
-    }
-
-    const handleOrderClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        navigate(`/order/${order.id}`)
-    }
-
-    const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(retryOrder(order))
-        navigate(`/order/checkout`)
-    }
 
     function generateTimeSlots(parentDate) {
         const slots = [];
@@ -86,7 +67,7 @@ export const ExecutorOrdersPage = () => {
     const handleFinishOrder = async (order) => {
         await completeOrder(order).unwrap();
         setOrderToDelete(undefined);
-        toast("Order completed", {
+        toast(t('orders_notification_complete'), {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },
@@ -108,20 +89,20 @@ export const ExecutorOrdersPage = () => {
     if (isError) {
         return <EmptyState
             icon={<CircleX className="h-10 w-10"/>}
-            title="Упс, что-то пошло не так..."
-            description="Обновите страницу или повторите попытку позднее."
+            title={t("error_500_title")}
+            description={t('error_500_description')}
             action={
                 <Button onClick={() => window.location.reload()}
                 >
-                    Обновить страницу
+                    {t('error_refresh_btn')}
                 </Button>}
         />
     }
 
     if (orders.length === 0) {
         return <EmptyState className="flex justify-center h-screen items-center m-auto"
-                           icon={<Banknote className="h-10 w-10"/>} title="No active orders"
-                           description="Your upcoming jobs will appear here once you accept them."/>
+                           icon={<ClipboardPlus className="h-10 w-10"/>} title={t('orders_empty_title')}
+                           description={t('orders_empty_description')}/>
     }
 
     return <div className="flex flex-col">
@@ -140,12 +121,12 @@ export const ExecutorOrdersPage = () => {
         <div className="flex flex-col gap-4 py-4">
             {filteredOrders.length === 0 && <EmptyState className="flex justify-center h-screen items-center m-auto"
                                                         icon={<ClipboardPlus className="h-10 w-10"/>}
-                                                        title="No active orders"
-                                                        description="Your upcoming jobs will appear here once you accept them."/>
+                                                        title={t('orders_empty_title')}
+                                                        description={t('orders_empty_description')}/>
             }
             {activeOrders.length > 0 && <div className="flex flex-col px-4 gap-4">
                 <Typography.H2 className="mb-0">
-                    In progress
+                    {t('orders_in_progress_title')}
                 </Typography.H2>
             </div>
             }
@@ -179,16 +160,16 @@ export const ExecutorOrdersPage = () => {
                             </div>
                         ))}
                         {ao.status === 'processed' &&
-                            <Button className="mt-3" onClick={() => setOrderToDelete(ao)}>Finalize</Button>
+                            <Button className="mt-3" onClick={() => setOrderToDelete(ao)}>{t('orders_complete_btn')}</Button>
                         }
                             </AccordionContent>}
                     </AccordionItem>
                         </Accordion>)}
                 </div>
-        <AlertDialogWrapper open={Boolean(orderToDelete)} title="Finalize order"
-                            description="Are you sure you want to finalize your order?"
-                            onOkText="Yes"
-                            onCancelText="No"
+        <AlertDialogWrapper open={Boolean(orderToDelete)} title={t('finalize_order_modal_title')}
+                            description={t('finalize_order_modal_description')}
+                            onOkText={t('finalize_order_modal_ok_btn')}
+                            onCancelText={t('finalize_order_modal_cancel_btn')}
                             okLoading={completeOrderLoading}
                             onCancelClick={() => setOrderToDelete(undefined)}
                             onOkClick={() => handleFinishOrder(orderToDelete)}></AlertDialogWrapper>

@@ -35,5 +35,15 @@
   "payments_payments_per": "Payments per",
   "payments_period_week": "week",
   "payments_period_month": "month",
-  "payments_comments": "Comments"
+  "payments_comments": "Comments",
+
+  "orders_notification_complete": "Order completed",
+  "orders_empty_title": "No active orders",
+  "orders_empty_description": "Your upcoming jobs will appear here once you accept them.",
+  "orders_in_progress_title": "In progress",
+  "orders_complete_btn": "Finalize",
+  "finalize_order_modal_title": "Finalize order",
+  "finalize_order_modal_description": "Are you sure you want to finalize your order?",
+  "finalize_order_modal_ok_btn": "Yes",
+  "finalize_order_modal_cancel_btn": "No"
 }
