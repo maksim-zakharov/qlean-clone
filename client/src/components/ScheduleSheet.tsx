@@ -26,7 +26,6 @@ export function ScheduleSheet({
                               }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {t} = useTranslation();
     const {vibro} = useTelegram();
-    const [tab, setTab] = useState<Date>();
 
     function generateTimeSlots(parentDate: Dayjs) {
         const slots = [];
@@ -58,6 +57,8 @@ export function ScheduleSheet({
             slots: generateTimeSlots(date)
         };
     }).filter(s => s.slots.length > 0), []);
+
+    const [tab, setTab] = useState<Date>(new Date(result[0]?.timestamp));
 
     const {data: availableDates = []} = useGetAvailableDatesQuery({
         optionIds,
