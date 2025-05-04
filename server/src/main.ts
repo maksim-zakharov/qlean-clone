@@ -1,11 +1,7 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { PrismaService } from './prisma.service';
-4import {
-  BadRequestException,
-  ClassSerializerInterceptor,
-  ValidationPipe,
-} from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { BusinessExceptionFilter } from './common/filters/business-exception.filter';
 import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
