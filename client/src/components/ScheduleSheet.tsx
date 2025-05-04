@@ -49,7 +49,7 @@ export function ScheduleSheet({
         return slots.filter(s => s.timestamp >= Date.now());
     }
 
-    const [tab, setTab] = useState<Date>(dayjs().startOf('day').toDate());
+    const [tab, setTab] = useState<Date | undefined>(dayjs().startOf('day').toDate());
 
     const {data: availableDates = []} = useGetAvailableDatesQuery({
         optionIds,
@@ -81,7 +81,7 @@ export function ScheduleSheet({
         skip: !tab || !serviceVariantId || !optionIds
     });
 
-    const filteredSlots = useMemo(() => availableSlots.map(sl => ({...sl, time: dayjs(sl.timestamp).format('HH:mm')})), [availableSlots]);
+    const filteredSlots = useMemo(() => availableSlots.filter(sl => sl.timestamp > Date.now()).map(sl => ({...sl, time: dayjs(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
@@ -98,6 +98,7 @@ export function ScheduleSheet({
                           selected={tab}
                           onSelect={setTab}
                           disabled={isPastDate}
+                          required={false}
                 />
                 {isFetching && <div className="grid grid-cols-3 gap-2 overflow-x-auto no-scrollbar">
                     <Skeleton className="w-full min-h-[40px]"/>
