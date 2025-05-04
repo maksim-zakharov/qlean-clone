@@ -84,7 +84,7 @@ export class ScheduleService {
   }
 
   async getAvailableSlots(
-    date: number,
+    date: string,
     serviceVariantId: number,
     optionIds: number[] = [],
   ) {

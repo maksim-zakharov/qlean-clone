@@ -87,7 +87,7 @@ export const api = createApi({
             providesTags: ['Application'],
         }),
         getExecutorAvailableSlots: builder.query<{ timestamp: number }[], {
-            date: number;
+            date: string;
             serviceVariantId: number;
             optionIds?: number[];
         }>({

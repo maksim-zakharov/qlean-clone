@@ -36,7 +36,7 @@ export class ScheduleController {
     @Query('optionIds') optionIds?: string,
   ) {
     return this.scheduleService.getAvailableSlots(
-      Number(date),
+      date,
       Number(serviceVariantId),
       optionIds ? optionIds.split(',').map(Number) : [],
     );

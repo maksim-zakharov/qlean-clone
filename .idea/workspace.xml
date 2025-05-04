@@ -172,22 +172,6 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
     </task>
-    <task id="LOCAL-00348" summary="ProfilePage skeleton">
-      <option name="closed" value="true" />
-      <created>1746293943281</created>
-      <option name="number" value="00348" />
-      <option name="presentableId" value="LOCAL-00348" />
-      <option name="project" value="LOCAL" />
-      <updated>1746293943281</updated>
-    </task>
-    <task id="LOCAL-00349" summary="OrderCreationPage padding">
-      <option name="closed" value="true" />
-      <created>1746295707452</created>
-      <option name="number" value="00349" />
-      <option name="presentableId" value="LOCAL-00349" />
-      <option name="project" value="LOCAL" />
-      <updated>1746295707452</updated>
-    </task>
     <task id="LOCAL-00350" summary="Убрал тени у карточек">
       <option name="closed" value="true" />
       <created>1746299339320</created>
@@ -564,7 +548,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746393169624</updated>
     </task>
-    <option name="localTasksCounter" value="397" />
+    <task id="LOCAL-00397" summary="Разобрался с временем">
+      <option name="closed" value="true" />
+      <created>1746393318221</created>
+      <option name="number" value="00397" />
+      <option name="presentableId" value="LOCAL-00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1746393318221</updated>
+    </task>
+    <task id="LOCAL-00398" summary="Разобрался с временем">
+      <option name="closed" value="true" />
+      <created>1746393323836</created>
+      <option name="number" value="00398" />
+      <option name="presentableId" value="LOCAL-00398" />
+      <option name="project" value="LOCAL" />
+      <updated>1746393323836</updated>
+    </task>
+    <option name="localTasksCounter" value="399" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
