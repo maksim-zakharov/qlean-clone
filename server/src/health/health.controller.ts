@@ -1,7 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { HealthCheckService, HealthCheck } from '@nestjs/terminus';
 import { PrismaHealthIndicator } from './prisma.health';
-import dayjs from 'dayjs';
 
 @Controller('/health')
 export class HealthController {
@@ -9,15 +8,6 @@ export class HealthController {
     private health: HealthCheckService,
     private prismaHealth: PrismaHealthIndicator,
   ) {}
-
-  @Get('healthcheck')
-  async healthCheck() {
-    return {
-      serverTime: new Date().toISOString(),
-      serverTimeDayjs: dayjs().toISOString(),
-      env: process.env.NODE_ENV,
-    };
-  }
 
   @Get()
   @HealthCheck()
