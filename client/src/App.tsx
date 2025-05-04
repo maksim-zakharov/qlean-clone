@@ -23,9 +23,10 @@ import {Skeleton} from "./components/ui/skeleton.tsx";
 import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
 
 function App() {
-    useGeoLocation();
-
     const {isReady} = useTelegram();
+
+    useGeoLocation({enabled: isReady});
+
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()

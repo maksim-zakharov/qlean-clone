@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ExecutorOrderDetailsPage локалайз">
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/useGeoLocation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="useGeoLocation">
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useGeoLocation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useGeoLocation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,14 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00319" summary="Фильтрует слоты для записи по расписанию исполнителя">
-      <option name="closed" value="true" />
-      <created>1746185592681</created>
-      <option name="number" value="00319" />
-      <option name="presentableId" value="LOCAL-00319" />
-      <option name="project" value="LOCAL" />
-      <updated>1746185592681</updated>
     </task>
     <task id="LOCAL-00320" summary="Слоты фильтруются по расписанию исполнителей">
       <option name="closed" value="true" />
@@ -567,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746347476755</updated>
     </task>
-    <option name="localTasksCounter" value="368" />
+    <task id="LOCAL-00368" summary="useGeoLocation">
+      <option name="closed" value="true" />
+      <created>1746348151752</created>
+      <option name="number" value="00368" />
+      <option name="presentableId" value="LOCAL-00368" />
+      <option name="project" value="LOCAL" />
+      <updated>1746348151752</updated>
+    </task>
+    <option name="localTasksCounter" value="369" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="ErrorState" />
     <MESSAGE value="OrderCheckoutPage i18n" />
     <MESSAGE value="OrderCreationPage i18n" />
     <MESSAGE value="OrderDetailsPage skeleton" />
@@ -615,6 +612,7 @@
     <MESSAGE value="ExecutorOrdersPage скелетон" />
     <MESSAGE value="App скелетон" />
     <MESSAGE value="ExecutorOrderDetailsPage локалайз" />
-    <option name="LAST_COMMIT_MESSAGE" value="ExecutorOrderDetailsPage локалайз" />
+    <MESSAGE value="useGeoLocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="useGeoLocation" />
   </component>
 </project>

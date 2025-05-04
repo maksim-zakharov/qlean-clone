@@ -40,7 +40,7 @@ export function useTelegram() {
 
         Telegram.WebApp.SettingsButton.onClick(() => navigate(RoutePaths.Profile))
         Telegram.WebApp.SettingsButton.show();
-    }, [isReady]);
+    }, [isReady, navigate, onThemeChangedHandler]);
 
 
     const vibro = (
@@ -64,8 +64,8 @@ export function useTelegram() {
         setBottomOffset(offset);
     }
 
-    let tryies = 0;
     useEffect(() => {
+        let tryies = 0;
         const check = () => {
             tryies++;
             if (Telegram.WebApp && Telegram.WebApp?.themeParams && Telegram.WebApp?.themeParams.bg_color) {
@@ -82,11 +82,6 @@ export function useTelegram() {
         };
 
         check();
-
-        // Чистка эффекта
-        return () => {
-            tryies = 0; // Сбросить количество попыток при размонтировании
-        };
     }, [Telegram.WebApp]);
 
     useEffect(() => {
