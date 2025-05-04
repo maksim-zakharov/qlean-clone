@@ -62,7 +62,7 @@ export const ExecutorOrdersPage = () => {
         };
     }).filter(s => s.slots.length > 0), []);
     const [tab, setTab] = useState<string>(result[0]?.timestamp.toString());
-    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs(o.date).startOf('day').unix() === dayjs(Number(tab)).startOf('day').unix()).sort((a, b) => b.id - a.id), [orders, tab]);
+    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs(o.date).startOf('day').unix() === dayjs(Number(tab)).startOf('day').unix()).sort((a, b) => a.date.localeCompare(b.date)), [orders, tab]);
     const activeOrders = useMemo(() => filteredOrders.filter(o => o.status === 'processed').sort((a, b) => b.id - a.id), [filteredOrders]);
 
     const handleFinishOrder = async (order) => {
