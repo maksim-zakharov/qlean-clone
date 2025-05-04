@@ -14,8 +14,10 @@ import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
 import {PageLoader} from "../../components/PageLoader.tsx";
+import {useTranslation} from "react-i18next";
 
 export const ExecutorOrderDetailsPage = () => {
+    const {t} = useTranslation();
     const navigate = useNavigate()
     const [completeOrder, {isLoading: completeOrderLoading}] = useCompleteOrderMutation();
     const [processedOrder, {isLoading: processedOrderLoading}] = useProcessedOrderMutation();
@@ -79,7 +81,7 @@ export const ExecutorOrderDetailsPage = () => {
             {/*<div>{order?.date}</div>*/}
             {/*<div>{order?.fullAddress}</div>*/}
 
-            <Typography.H2 className="mb-2">What you have to do:</Typography.H2>
+            <Typography.H2 className="mb-2">{t('executor_order_details_title')}</Typography.H2>
             <ListButtonGroup>
                 <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
                     order?.status === 'processed' &&
@@ -92,15 +94,15 @@ export const ExecutorOrderDetailsPage = () => {
 
             {(order?.status === 'processed' || canStart) && <BottomActions>
                 {canStart && <Button wide loading={processedOrderLoading}
-                                                     onClick={() => processedOrder(order).unwrap()}>Start</Button>}
+                                                     onClick={() => processedOrder(order).unwrap()}>{t('executor_order_apply_btn')}</Button>}
                 {order?.status === 'processed' &&
-                    <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>Finalize</Button>}
+                    <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>{t('executor_order_complete_btn')}</Button>}
             </BottomActions>}
         </div>
-        <AlertDialogWrapper open={Boolean(orderToDelete)} title="Finalize order"
-                            description="Are you sure you want to finalize your order?"
-                            onOkText="Yes"
-                            onCancelText="No"
+        <AlertDialogWrapper open={Boolean(orderToDelete)} title={t('finalize_order_modal_title')}
+                            description={t('finalize_order_modal_description')}
+                            onOkText={t('finalize_order_modal_ok_btn')}
+                            onCancelText={t('finalize_order_modal_cancel_btn')}
                             okLoading={completeOrderLoading}
                             onCancelClick={() => setOrderToDelete(undefined)}
                             onOkClick={() => handleFinishOrder(orderToDelete)}></AlertDialogWrapper>

@@ -99,5 +99,8 @@
   "client_creation_continue_btn": "Continue",
   "client_creation_save_btn": "Save",
 
-  "calendar_title": "Choose slot"
+  "calendar_title": "Choose slot",
+  "executor_order_details_title": "What you have to do:",
+  "executor_order_apply_btn": "Apply",
+  "executor_order_complete_btn": "Complete"
 }
