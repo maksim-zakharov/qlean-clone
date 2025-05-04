@@ -18,6 +18,7 @@ import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useBackButton.ts";
+import {useGetReverseMutation} from "../../api/openstreetmap.api.ts";
 
 interface Address {
     // Дом
@@ -56,6 +57,8 @@ export const ProfilePage = () => {
         variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))
     })), [applicationVariantIdsSet, services])
 
+    const [reverse, {isSuccess}] = useGetReverseMutation();
+
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
             return t('profile_phone_notavailable')
@@ -82,13 +85,10 @@ export const ProfilePage = () => {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(async (pos) => {
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=en`
-            );
-            const data = await response.json();
+            const data = await reverse({lat: pos.coords.latitude, lon: pos.coords.longitude}).unwrap()
             setAddress(data.address)
         });
-    }, []);
+    }, [reverse]);
 
     const addressText = useMemo(() => {
         if (!address) {
@@ -119,7 +119,7 @@ export const ProfilePage = () => {
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
-    if (applicationLoading || isLoading) {
+    if (applicationLoading || isLoading || !isSuccess) {
         return <div className="flex flex-col gap-6 p-4">
             <Skeleton className="w-full h-[156px]"/>
             <Skeleton className="w-full h-[44px]"/>

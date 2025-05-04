@@ -5,6 +5,7 @@ import {useTelegram} from "../hooks/useTelegram.ts";
 import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api/api.ts";
 import {InputWithLabel} from "./InputWithLabel.tsx";
 import { MapPlus, Trash2} from "lucide-react";
+import {useGetReverseMutation} from "../api/openstreetmap.api.ts";
 
 
 
@@ -17,6 +18,8 @@ export function AddAddressSheet({
     const [addAddress, {isLoading: addLoading}] = useAddAddressMutation();
     const [editAddress, {isLoading: editLoading}] = useEditAddressMutation();
     const [deleteAddress, {isLoading: deleteLoading}] = useDeleteAddressMutation();
+
+    const [reverse, {isSuccess}] = useGetReverseMutation();
 
     const [_opened, setOpened] = React.useState(false);
     const [{id, name, fullAddress, comments}, setAddress] = useState({
@@ -65,10 +68,7 @@ export function AddAddressSheet({
 
     const handleMapClick = () => {
         navigator.geolocation.getCurrentPosition(async (pos) => {
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=en`
-            );
-            const data = await response.json();
+            const data = await reverse({lat: pos.coords.latitude, lon: pos.coords.longitude}).unwrap()
             const text = [];
             if(data.address.city) text.push(data.address.city);
             if(data.address.road) text.push(data.address.road);

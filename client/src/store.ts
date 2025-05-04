@@ -3,10 +3,12 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {api} from "./api/api.ts";
 import createOrderSlice from "./slices/createOrderSlice.ts";
 import {ordersApi} from "./api/ordersApi.ts";
+import {openstreetmapApi} from "./api/openstreetmap.api.ts";
 
 export const reducers = {
     [api.reducerPath]: api.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
+    [openstreetmapApi.reducerPath]: openstreetmapApi.reducer,
     [createOrderSlice.reducerPath]: createOrderSlice.reducer,
 };
 
@@ -19,5 +21,6 @@ export const store = configureStore({
         serializableCheck: false,
     })
         .concat(api.middleware)
+        .concat(openstreetmapApi.middleware)
         .concat(ordersApi.middleware),
 });
