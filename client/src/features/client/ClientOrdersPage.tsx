@@ -14,6 +14,7 @@ import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
+import {OrderStatusText} from "../../components/OrderStatusText.tsx";
 
 
 export const ClientOrdersPage = () => {
@@ -40,13 +41,6 @@ export const ClientOrdersPage = () => {
         dispatch(retryOrder(order))
         navigate(`/order/checkout`)
     }
-
-    const orderStatusMap = useMemo(() => ({
-        'todo': t('client_orders_todo_status'),
-        'processed': t('client_orders_processed_status'),
-        'completed': t('client_orders_completed_status'),
-        'canceled': t('client_orders_canceled_status'),
-    }) as {[status: string]: string}, [t]);
 
     if (isLoading) {
         return <div className="px-4 mb-4">
@@ -97,7 +91,7 @@ export const ClientOrdersPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
-                        <Typography.Title>{orderStatusMap[ao.status]}</Typography.Title>
+                        <Typography.Title><OrderStatusText status={ao.status}/></Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-center">
                         <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)}
@@ -128,7 +122,7 @@ export const ClientOrdersPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
-                        <Typography.Title>{ao.status === 'active' ? t('client_orders_todo_status') : ao.status === 'canceled' ? t('client_orders_canceled_status') : t('client_orders_completed_status')}</Typography.Title>
+                        <Typography.Title><OrderStatusText status={ao.status}/></Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-center">
                         <Button className="p-0 border-none h-6" variant="default" size="sm"

@@ -24,6 +24,7 @@ import {RoutePaths} from "../../routes.ts";
 import {EditButton} from "../../components/EditButton.tsx";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
+import {OrderStatusText} from "../../components/OrderStatusText.tsx";
 
 export const OrderDetailsPage = () => {
     const {t} = useTranslation();
@@ -131,7 +132,7 @@ export const OrderDetailsPage = () => {
                         <Typography.Title>
                             №{order.id}
                         </Typography.Title>
-                        <Typography.Title>{order.status === 'processed' ? t('client_orders_processed_status') : order.status === 'todo' ? t('client_orders_todo_status') : order.status === 'canceled' ? t('client_orders_canceled_status') : t('client_orders_completed_status')}</Typography.Title>
+                        <Typography.Title><OrderStatusText status={order.status}/></Typography.Title>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">
