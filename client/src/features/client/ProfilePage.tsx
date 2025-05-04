@@ -120,7 +120,7 @@ export const ProfilePage = () => {
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
     if (applicationLoading || isLoading) {
-        return <div className="flex flex-col gap-6 px-4">
+        return <div className="flex flex-col gap-6 p-4">
             <Skeleton className="w-full h-[156px]"/>
             <Skeleton className="w-full h-[44px]"/>
             <Skeleton className="w-full h-[44px]"/>
@@ -129,7 +129,7 @@ export const ProfilePage = () => {
     }
 
     return <>
-        <div className="flex flex-col content text-center px-4 gap-6 pb-6">
+        <div className="flex flex-col content text-center p-4 gap-6 pb-6">
             <ListButtonGroup>
                 <ListButton icon={<Avatar className="w-7 h-7">
                     <AvatarImage src={userInfo?.photoUrl}/>

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Убрал хедер в профиле">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/db/init-services.sql" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/init-services.sql" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Добавил иконки для сервисов + англ названия" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,14 +168,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00311" summary="jog application">
-      <option name="closed" value="true" />
-      <created>1746031755522</created>
-      <option name="number" value="00311" />
-      <option name="presentableId" value="LOCAL-00311" />
-      <option name="project" value="LOCAL" />
-      <updated>1746031755522</updated>
     </task>
     <task id="LOCAL-00312" summary="jog application">
       <option name="closed" value="true" />
@@ -564,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746343470585</updated>
     </task>
-    <option name="localTasksCounter" value="360" />
+    <task id="LOCAL-00360" summary="Добавил иконки для сервисов + англ названия">
+      <option name="closed" value="true" />
+      <created>1746344770346</created>
+      <option name="number" value="00360" />
+      <option name="presentableId" value="LOCAL-00360" />
+      <option name="project" value="LOCAL" />
+      <updated>1746344770346</updated>
+    </task>
+    <option name="localTasksCounter" value="361" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +584,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="schedule i18n" />
     <MESSAGE value="ExecutorPaymentsPage i18n" />
     <MESSAGE value="ExecutorOrdersPage i18n" />
     <MESSAGE value="ApplicationPage i18n" />
@@ -612,6 +608,7 @@
     <MESSAGE value="создал ordersApi.ts" />
     <MESSAGE value="checkout padding btn" />
     <MESSAGE value="Убрал хедер в профиле" />
-    <option name="LAST_COMMIT_MESSAGE" value="Убрал хедер в профиле" />
+    <MESSAGE value="Добавил иконки для сервисов + англ названия" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил иконки для сервисов + англ названия" />
   </component>
 </project>
