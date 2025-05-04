@@ -13,10 +13,12 @@ import {Toaster} from "sonner";
 import duration from 'dayjs/plugin/duration'
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(duration)
+dayjs.extend(localizedFormat);
 // dayjs.extend(updateLocale)
 //
 // dayjs.locale('ru'); // Активируем русскую локаль

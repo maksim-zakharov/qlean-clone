@@ -57,12 +57,22 @@ export const ExecutorSchedulePage = () => {
     }, []);
     const [defaultValue, setdefaultValue] = useState<string>(weekDays[0].value);
 
+    const convertUTCToLocal = (localTime) => {
+        const [hours, minutes] = localTime.split(':');
+        const date = dayjs.utc()
+            .hour(hours)
+            .minute(minutes)
+            .startOf('minute');
+
+        return date.local().format('HH:mm');
+    }
+
     const scheduleMap = useMemo(() => schedule.reduce((acc, curr) => {
         const {isDayOff, timeSlots} = curr;
         if (isDayOff) {
             acc[curr.dayOfWeek] = [];
         } else {
-            acc[curr.dayOfWeek] = timeSlots.map((curr) => curr.time)
+            acc[curr.dayOfWeek] = timeSlots.map((curr) => convertUTCToLocal(curr.time))
         }
 
         return acc;
@@ -83,11 +93,22 @@ export const ExecutorSchedulePage = () => {
             scheduleMap[day] = scheduleMap[day].filter(val => val !== event.target.dataset.value)
         }
 
+        // Преобразуем локальное время в UTC
+        const convertToUTC = (localTime) => {
+            const [hours, minutes] = localTime.split(':');
+            const date = dayjs()
+                .hour(hours)
+                .minute(minutes)
+                .startOf('minute');
+
+            return date.utc().format('HH:mm');
+        }
+
         await updateSchedule({
-            "days": Object.entries<string[]>(scheduleMap).map(([dayOfWeek, timeSlots]) => ({
+            "days": Object.entries<any[]>(scheduleMap).map(([dayOfWeek, timeSlots]) => ({
                 dayOfWeek,
                 isDayOff: timeSlots?.length <= 0,
-                timeSlots
+                timeSlots: timeSlots?.map(convertToUTC),
             }))
         }).unwrap()
 

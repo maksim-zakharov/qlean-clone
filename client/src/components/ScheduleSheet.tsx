@@ -61,8 +61,8 @@ export function ScheduleSheet({
     }, {
         skip: !tab || !serviceVariantId || !optionIds
     });
-
-    const filteredSlots = useMemo(() => availableSlots.filter(sl => dayjs.utc(sl.timestamp).isAfter(dayjs.utc())).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
+debugger
+    const filteredSlots = useMemo(() => availableSlots.filter(sl => dayjs.utc(sl.timestamp).valueOf() > dayjs().valueOf()).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>

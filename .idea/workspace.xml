@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="utc dayjs">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="пофиксил верстку календаря">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/calendar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,14 +173,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00344" summary="OrderDetailsPage skeleton">
-      <option name="closed" value="true" />
-      <created>1746289986912</created>
-      <option name="number" value="00344" />
-      <option name="presentableId" value="LOCAL-00344" />
-      <option name="project" value="LOCAL" />
-      <updated>1746289986912</updated>
     </task>
     <task id="LOCAL-00345" summary="ClientOrdersPage skeleton">
       <option name="closed" value="true" />
@@ -564,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746387236296</updated>
     </task>
-    <option name="localTasksCounter" value="393" />
+    <task id="LOCAL-00393" summary="пофиксил верстку календаря">
+      <option name="closed" value="true" />
+      <created>1746388024049</created>
+      <option name="number" value="00393" />
+      <option name="presentableId" value="LOCAL-00393" />
+      <option name="project" value="LOCAL" />
+      <updated>1746388024049</updated>
+    </task>
+    <option name="localTasksCounter" value="394" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +589,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="подсветка ListButton" />
     <MESSAGE value="создал ordersApi.ts" />
     <MESSAGE value="checkout padding btn" />
     <MESSAGE value="Убрал хедер в профиле" />
@@ -612,7 +613,8 @@
     <MESSAGE value="обновил findSchedule на utc" />
     <MESSAGE value="utc" />
     <MESSAGE value="utc dayjs" />
-    <option name="LAST_COMMIT_MESSAGE" value="utc dayjs" />
+    <MESSAGE value="пофиксил верстку календаря" />
+    <option name="LAST_COMMIT_MESSAGE" value="пофиксил верстку календаря" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
