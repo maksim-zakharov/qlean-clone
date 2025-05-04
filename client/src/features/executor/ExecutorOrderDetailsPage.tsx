@@ -92,7 +92,7 @@ export const ExecutorOrderDetailsPage = () => {
                                                                onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}
             </ListButtonGroup>
 
-            {(order?.status === 'processed' || canStart) && <BottomActions>
+            {(order?.status === 'processed' || canStart) && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 {canStart && <Button wide loading={processedOrderLoading}
                                                      onClick={() => processedOrder(order).unwrap()}>{t('executor_order_apply_btn')}</Button>}
                 {order?.status === 'processed' &&

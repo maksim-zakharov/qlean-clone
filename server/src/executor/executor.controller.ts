@@ -47,6 +47,7 @@ export class ExecutorController {
     const item = await this.ordersService.getById(Number(id), req.user.id);
 
     item.status = OrderStatus.processed;
+    item.executorId = req.user.id;
     item.startedAt = new Date();
 
     return this.ordersService

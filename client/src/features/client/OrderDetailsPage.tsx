@@ -84,6 +84,17 @@ export const OrderDetailsPage = () => {
         })
     }
 
+    const executorName = useMemo(() => {
+        if(order?.executor){
+            let name = order?.executor?.firstName;
+            if(order?.executor?.lastName){
+                name += ` ${order?.executor?.lastName[0]}.`
+            }
+            return name;
+        }
+        return t('client_order_details_executor_status')
+    }, [order, t])
+
 
     if (isLoading && !order) {
         return <div className="p-4 mt-[56px] flex flex-col gap-4">
@@ -127,10 +138,10 @@ export const OrderDetailsPage = () => {
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>{t('client_order_details_executor_title')}</Typography.Description>
-                            <Typography.Title>{t('client_order_details_executor_status')}</Typography.Title>
+                            <Typography.Title>{executorName}</Typography.Title>
                         </div>
                         <Avatar className="rounded-3xl bg-tg-theme-secondary-bg-color">
-                            <AvatarImage src={''}/>
+                            <AvatarImage src={order?.executor?.photoUrl}/>
                             <AvatarFallback className="bg-tg-theme-secondary-bg-color"><User/></AvatarFallback>
                         </Avatar>
                     </div>

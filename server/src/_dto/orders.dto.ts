@@ -33,6 +33,20 @@ export class BaseServiceDTO {
   name: string;
 }
 
+export class ExecutorDTO {
+  @Exclude() // Исключаем это поле из ответа
+  id: string;
+  firstName: string;
+  lastName: string;
+  photoUrl: string;
+  @Exclude() // Исключаем это поле из ответа
+  username: string;
+  @Exclude() // Исключаем это поле из ответа
+  phone: string;
+  @Exclude() // Исключаем это поле из ответа
+  createdAt: string;
+}
+
 export class OrderDTO {
   id: number;
   @Exclude() // Исключаем это поле из ответа
@@ -59,4 +73,7 @@ export class OrderDTO {
 
   @Type(() => OptionDTO)
   options: OptionDTO[];
+
+  @Type(() => ExecutorDTO)
+  executor?: ExecutorDTO;
 }

@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Выбранная дата выделяется цветом">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Рефакторинг, починил выбор даты для заказа">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/_dto/orders.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/_dto/orders.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +74,7 @@
     "npm.client:dev.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
-    "npm.server:dev.executor": "Debug",
+    "npm.server:dev.executor": "Run",
     "npm.start:dev.executor": "Debug",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
@@ -172,14 +175,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00324" summary="аккордион кликается, можно работать с услугой без доп опций">
-      <option name="closed" value="true" />
-      <created>1746204949710</created>
-      <option name="number" value="00324" />
-      <option name="presentableId" value="LOCAL-00324" />
-      <option name="project" value="LOCAL" />
-      <updated>1746204949710</updated>
     </task>
     <task id="LOCAL-00325" summary="PageLoader.tsx">
       <option name="closed" value="true" />
@@ -565,7 +560,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746362502158</updated>
     </task>
-    <option name="localTasksCounter" value="373" />
+    <task id="LOCAL-00373" summary="Рефакторинг, починил выбор даты для заказа">
+      <option name="closed" value="true" />
+      <created>1746363765295</created>
+      <option name="number" value="00373" />
+      <option name="presentableId" value="LOCAL-00373" />
+      <option name="project" value="LOCAL" />
+      <updated>1746363765295</updated>
+    </task>
+    <option name="localTasksCounter" value="374" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +591,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="ClientOrdersPage skeleton" />
     <MESSAGE value="ExecutorSchedulePage skeleton" />
     <MESSAGE value="OrderDetailsPage кнопки пва" />
     <MESSAGE value="ProfilePage skeleton" />
@@ -613,7 +615,8 @@
     <MESSAGE value="починил available-days" />
     <MESSAGE value="Выбранная дата по умолчанию" />
     <MESSAGE value="Выбранная дата выделяется цветом" />
-    <option name="LAST_COMMIT_MESSAGE" value="Выбранная дата выделяется цветом" />
+    <MESSAGE value="Рефакторинг, починил выбор даты для заказа" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рефакторинг, починил выбор даты для заказа" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

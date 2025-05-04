@@ -4,7 +4,7 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
-import { ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
+import {ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch} from "react-redux";
 import {retryOrder, selectBaseService} from "../../slices/createOrderSlice.ts";
@@ -41,6 +41,13 @@ export const ClientOrdersPage = () => {
         navigate(`/order/checkout`)
     }
 
+    const orderStatusMap = useMemo(() => ({
+        'todo': t('client_orders_todo_status'),
+        'processed': t('client_orders_processed_status'),
+        'completed': t('client_orders_completed_status'),
+        'canceled': t('client_orders_canceled_status'),
+    }) as {[status: string]: string}, [t]);
+
     if (isLoading) {
         return <div className="px-4 mb-4">
             <div className="flex flex-col gap-4 mt-4">
@@ -53,13 +60,13 @@ export const ClientOrdersPage = () => {
         </div>
     }
 
-    if(isError){
+    if (isError) {
         return <ErrorState/>
     }
 
-    if(orders.length === 0){
-        return  <EmptyState
-            icon={<ClipboardPlus className="h-10 w-10" />}
+    if (orders.length === 0) {
+        return <EmptyState
+            icon={<ClipboardPlus className="h-10 w-10"/>}
             title={t('client_orders_empty_title')}
             description={t('client_orders_empty_description')}
             action={
@@ -75,7 +82,8 @@ export const ClientOrdersPage = () => {
             <Typography.H2 className="mb-0">
                 {t('client_orders_active_title')}
             </Typography.H2>
-            {activeOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none card-bg-color" onClick={() => handleOrderClick(ao)}>
+            {activeOrders.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
+                                          onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -89,11 +97,12 @@ export const ClientOrdersPage = () => {
                 <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
                         <Typography.Title>№{ao.id}</Typography.Title>
-                        <Typography.Title>{t('client_orders_todo_status')}</Typography.Title>
+                        <Typography.Title>{orderStatusMap[ao.status]}</Typography.Title>
                     </div>
                     <div className="flex justify-between align-bottom items-center">
-                        <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)} variant="default" size="sm">
-                            <ListPlus className="w-5 h-5 mr-2" /> {t('client_orders_add_service_btn')}
+                        <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)}
+                                variant="default" size="sm">
+                            <ListPlus className="w-5 h-5 mr-2"/> {t('client_orders_add_service_btn')}
                         </Button>
                         <Typography.Description>{t('client_orders_support_btn')}</Typography.Description>
                     </div>
@@ -104,7 +113,8 @@ export const ClientOrdersPage = () => {
             <Typography.H2 className="mb-0">
                 {t('client_orders_all_title')}
             </Typography.H2>
-            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none card-bg-color" onClick={() => handleOrderClick(ao)}>
+            {completedOrders.map(ao => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
+                                             onClick={() => handleOrderClick(ao)}>
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -123,8 +133,8 @@ export const ClientOrdersPage = () => {
                     <div className="flex justify-between align-bottom items-center">
                         <Button className="p-0 border-none h-6" variant="default" size="sm"
                                 onClick={(e) => handleRetryClick(e, ao)}>
-                            <RotateCw className="w-5 h-5 mr-2" /> {t('client_orders_repeat_btn')}
-                            </Button>
+                            <RotateCw className="w-5 h-5 mr-2"/> {t('client_orders_repeat_btn')}
+                        </Button>
                         <Typography.Description>{t('client_orders_support_btn')}</Typography.Description>
                     </div>
                 </div>

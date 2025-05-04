@@ -25,6 +25,7 @@ export class OrdersService {
         baseService: true,
         options: true,
         serviceVariant: true,
+        executor: true,
       },
     });
 
@@ -92,6 +93,7 @@ export class OrdersService {
           startedAt: data.startedAt,
           completedAt: data.completedAt,
           baseServiceId: data.baseService.id,
+          executorId: data.executorId,
           status: data.status,
           userId: data.userId,
           date: new Date(data.date),
