@@ -57,16 +57,6 @@ export const ExecutorSchedulePage = () => {
     }, []);
     const [defaultValue, setdefaultValue] = useState<string>(weekDays[0].value);
 
-    const convertUTCToLocal = (localTime) => {
-        const [hours, minutes] = localTime.split(':');
-        const date = dayjs.utc()
-            .hour(hours)
-            .minute(minutes)
-            .startOf('minute');
-
-        return date.local().format('HH:mm');
-    }
-
     const scheduleMap = useMemo(() => schedule.reduce((acc, curr) => {
         const {isDayOff, timeSlots} = curr;
         if (isDayOff) {

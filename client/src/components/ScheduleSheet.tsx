@@ -57,7 +57,7 @@ export function ScheduleSheet({
     }, [availableDatesSet]);
 
     const {data: availableSlots = [], isFetching} = useGetExecutorAvailableSlotsQuery({
-        date: dayjs.utc(tab).local().valueOf(),
+        date: dayjs.utc(tab).valueOf(),
         serviceVariantId,
         optionIds
     }, {
