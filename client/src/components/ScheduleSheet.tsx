@@ -36,26 +36,28 @@ export function ScheduleSheet({
         skip: !serviceVariantId || !optionIds
     })
 
-    const availableDatesSet = useMemo(() => new Set(availableDates?.map(date => dayjs.utc(date).valueOf()) || []), [availableDates]);
+    const availableDatesSet = useMemo(() => new Set(availableDates.map(formattedDate => dayjs(formattedDate).valueOf()) || []), [availableDates]);
 
     const isPastDate = useCallback((date: Date) => {
         // Получаем текущую дату в UTC и обнуляем время
-        const todayUTC = dayjs.utc().startOf('day');
+        const todayUTC = dayjs().startOf('day');
 
         // Конвертируем входную дату в UTC и обнуляем время
-        const inputDateUTC = dayjs.utc(date).startOf('day');
+        const inputDateUTC = dayjs(date).startOf('day');
 
         // Если дата раньше текущей UTC даты
         if(inputDateUTC.isBefore(todayUTC) || !availableDatesSet.size) {
             return true;
         }
+
+        debugger
         // Сравниваем timestamp начала дня в UTC
         const value = inputDateUTC.valueOf();
         return !availableDatesSet.has(value);
     }, [availableDatesSet]);
 
     const {data: availableSlots = [], isFetching} = useGetExecutorAvailableSlotsQuery({
-        date: dayjs.utc(tab).valueOf(),
+        date: dayjs.utc(tab).local().valueOf(),
         serviceVariantId,
         optionIds
     }, {

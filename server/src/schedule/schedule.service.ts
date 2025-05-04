@@ -37,7 +37,7 @@ export class ScheduleService {
       dayOfWeek: day.dayOfWeek,
       isDayOff: day.isDayOff,
       timeSlots: day.timeSlots.map((slot) => ({
-        time: dayjs.utc(slot.time).format('HH:mm'),
+        time: dayjs(slot.time).format('HH:mm'),
       })),
     }));
   }
@@ -88,8 +88,8 @@ export class ScheduleService {
     serviceVariantId: number,
     optionIds: number[] = [],
   ) {
-    const startOfDay = dayjs.utc(date).startOf('day');
-    const endOfDay = dayjs.utc(date).endOf('day');
+    const startOfDay = dayjs(date).startOf('day');
+    const endOfDay = dayjs(date).endOf('day');
     const dayOfWeek = startOfDay.format('ddd').toUpperCase() as DayOfWeek;
 
     // Получаем информацию о длительности услуг
@@ -198,13 +198,13 @@ export class ScheduleService {
 
       // Сортируем слоты по времени
       const sortedSlots = scheduleDay.timeSlots.sort(
-        (a, b) => dayjs.utc(a.time).valueOf() - dayjs.utc(b.time).valueOf(),
+        (a, b) => dayjs(a.time).valueOf() - dayjs(b.time).valueOf(),
       );
 
       // Проверяем каждый слот как потенциальное начало заказа
       for (let i = 0; i < sortedSlots.length; i++) {
         const startSlot = sortedSlots[i];
-        const startTime = dayjs.utc(startSlot.time);
+        const startTime = dayjs(startSlot.time);
         const startTimestamp = startOfDay
           .hour(startTime.hour())
           .minute(startTime.minute())
@@ -219,7 +219,7 @@ export class ScheduleService {
 
         while (currentSlotIndex < sortedSlots.length) {
           const currentSlot = sortedSlots[currentSlotIndex];
-          const currentTime = dayjs.utc(currentSlot.time);
+          const currentTime = dayjs(currentSlot.time);
           const currentTimestamp = startOfDay
             .hour(currentTime.hour())
             .minute(currentTime.minute())
@@ -324,7 +324,7 @@ export class ScheduleService {
     });
 
     // Получаем занятые слоты на следующие 30 дней
-    const startDate = dayjs.utc().startOf('day');
+    const startDate = dayjs().startOf('day');
     const endDate = startDate.add(30, 'day');
 
     // Получаем занятые слоты с их длительностью
@@ -366,7 +366,7 @@ export class ScheduleService {
     });
 
     // Формируем массив доступных дат
-    const availableDates = new Set<number>([]);
+    const availableDates = new Set<string>([]);
 
     const executorIdDayOfWeekScheduleDayMap = executors.reduce(
       (acc, executor) => {
@@ -383,8 +383,8 @@ export class ScheduleService {
     // Пройдемся по каждому дню и узнаем есть ли время хотя бы у одного исполнителя для данного заказа в этот день
     for (let i = 0; i < 30; i++) {
       const currentDate = startDate.add(i, 'day');
-      const startOfDay = dayjs.utc(currentDate).startOf('day');
-      const endOfDay = dayjs.utc(currentDate).endOf('day');
+      const startOfDay = dayjs(currentDate).startOf('day');
+      const endOfDay = dayjs(currentDate).endOf('day');
       const dayOfWeek = currentDate.format('ddd').toUpperCase() as DayOfWeek;
 
       // Проверяем, есть ли исполнители с доступными слотами в этот день
@@ -395,18 +395,18 @@ export class ScheduleService {
 
         // Получаем занятые интервалы для текущего дня
         const dayBusyIntervals = busyIntervals.filter((order) =>
-          dayjs.utc(order.start).isSame(currentDate, 'day'),
+          dayjs(order.start).isSame(currentDate, 'day'),
         );
 
         // Сортируем слоты по времени
         const sortedSlots = scheduleDay.timeSlots.sort(
-          (a, b) => dayjs.utc(a.time).valueOf() - dayjs.utc(b.time).valueOf(),
+          (a, b) => dayjs(a.time).valueOf() - dayjs(b.time).valueOf(),
         );
 
         // Проверяем каждый слот как потенциальное начало заказа
         for (let i = 0; i < sortedSlots.length; i++) {
           const startSlot = sortedSlots[i];
-          const startTime = dayjs.utc(startSlot.time);
+          const startTime = dayjs(startSlot.time);
           const startTimestamp = startOfDay
             .hour(startTime.hour())
             .minute(startTime.minute())
@@ -421,7 +421,7 @@ export class ScheduleService {
 
           while (currentSlotIndex < sortedSlots.length) {
             const currentSlot = sortedSlots[currentSlotIndex];
-            const currentTime = dayjs.utc(currentSlot.time);
+            const currentTime = dayjs(currentSlot.time);
             const currentTimestamp = startOfDay
               .hour(currentTime.hour())
               .minute(currentTime.minute())
@@ -462,14 +462,12 @@ export class ScheduleService {
             isIntervalAvailable &&
             currentSlotIndex - i >= Math.ceil(totalDuration / 60)
           ) {
-            availableDates.add(
-              dayjs.utc(startTimestamp).startOf('day').valueOf(),
-            );
+            availableDates.add(startOfDay.format('YYYY-MM-DD'));
             // Если хотя бы 1 слот есть - уже можно брейкать цикл
             break;
           }
         }
-        if (availableDates.has(startOfDay.valueOf())) {
+        if (availableDates.has(startOfDay.format('YYYY-MM-DD'))) {
           // И из этого цикла тоже выходим, достаточно
           break;
         }
