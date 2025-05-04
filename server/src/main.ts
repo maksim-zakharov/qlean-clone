@@ -4,8 +4,8 @@ import { PrismaService } from './prisma.service';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { BusinessExceptionFilter } from './common/filters/business-exception.filter';
 import * as dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
