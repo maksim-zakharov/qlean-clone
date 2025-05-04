@@ -44,7 +44,7 @@ function Calendar({
                 range_end:
                     "day-range-end aria-selected:bg-primary aria-selected:text-primary-foreground",
                 selected:
-                    "[background-color:var(--tg-theme-button-color)] [color:var(--tg-theme-button-text-color)] hover:[background-color:var(--tg-theme-button-color)] hover:[color:var(--tg-theme-button-text-color)] focus:[background-color:var(--tg-theme-button-color)] focus:[color:var(--tg-theme-button-text-color)]",
+                    "[background-color:var(--tg-theme-button-color)] [color:var(--tg-theme-button-text-color)] hover:[background-color:var(--tg-theme-button-color)!important] hover:[color:var(--tg-theme-button-text-color)!important] focus:[background-color:var(--tg-theme-button-color)!important] focus:[color:var(--tg-theme-button-text-color)!important]",
                 today: "bg-accent text-accent-foreground",
                 outside:
                     "day-outside text-muted-foreground aria-selected:text-muted-foreground",
