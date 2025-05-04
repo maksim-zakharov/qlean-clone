@@ -126,6 +126,14 @@ export const ProfilePage = () => {
             <Skeleton className="w-full h-[156px]"/>
             <Skeleton className="w-full h-[44px]"/>
             <Skeleton className="w-full h-[44px]"/>
+            {userInfo?.role === 'executor' && <div>
+                <Skeleton className="w-30 h-[24px] pl-2"/>
+                <Skeleton className="w-20 h-[20px] pl-2 mt-4 mb-2"/>
+                <Skeleton className="w-full h-[44px] rounded-bl-none rounded-br-none"/>
+                <Skeleton className="w-full h-[44px] rounded-none"/>
+                <Skeleton className="w-full h-[44px] rounded-none"/>
+                <Skeleton className="w-full h-[44px] rounded-tl-none rounded-tr-none"/>
+            </div>}
             <Skeleton className="w-full h-[40px]"/>
         </div>
     }
