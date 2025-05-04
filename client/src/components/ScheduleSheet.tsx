@@ -147,7 +147,7 @@ export function ScheduleSheet({
                         {filteredSlots.map(service =>
                             <CardItem
                                 textClassName="items-center"
-                                className={`min-h-[40px] p-2 border-transparent ${service.timestamp === selectedTimestamp && `border-tg-theme-button-color bg-tg-theme-button-color-transparent`}`}
+                                className={`min-h-[40px] p-2 border-transparent ${service.timestamp === selectedTimestamp && `[background-color:var(--tg-theme-button-color)!important]`}`}
                                 key={service.timestamp}
                                 title={service.time}
                                 onClick={() => onSelectDate(service.timestamp)}
