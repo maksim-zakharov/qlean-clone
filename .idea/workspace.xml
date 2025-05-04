@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="рефакторинг">
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ProfilePage скелетон для исполнителя" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,14 +168,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00315" summary="validateUser transac">
-      <option name="closed" value="true" />
-      <created>1746106445573</created>
-      <option name="number" value="00315" />
-      <option name="presentableId" value="LOCAL-00315" />
-      <option name="project" value="LOCAL" />
-      <updated>1746106445573</updated>
     </task>
     <task id="LOCAL-00316" summary="complete order">
       <option name="closed" value="true" />
@@ -563,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746346346493</updated>
     </task>
-    <option name="localTasksCounter" value="364" />
+    <task id="LOCAL-00364" summary="ProfilePage скелетон для исполнителя">
+      <option name="closed" value="true" />
+      <created>1746346650848</created>
+      <option name="number" value="00364" />
+      <option name="presentableId" value="LOCAL-00364" />
+      <option name="project" value="LOCAL" />
+      <updated>1746346650848</updated>
+    </task>
+    <option name="localTasksCounter" value="365" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +584,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="ApplicationPage i18n" />
     <MESSAGE value="новый перевод" />
     <MESSAGE value="ClientOrdersPage i18n" />
     <MESSAGE value="OrderDetailsPage i18n" />
@@ -611,6 +608,7 @@
     <MESSAGE value="Добавил иконки для сервисов + англ названия" />
     <MESSAGE value="reverse в RTK" />
     <MESSAGE value="рефакторинг" />
-    <option name="LAST_COMMIT_MESSAGE" value="рефакторинг" />
+    <MESSAGE value="ProfilePage скелетон для исполнителя" />
+    <option name="LAST_COMMIT_MESSAGE" value="ProfilePage скелетон для исполнителя" />
   </component>
 </project>
