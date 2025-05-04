@@ -369,7 +369,7 @@ export class ScheduleService {
     });
 
     // Формируем массив доступных дат
-    const availableDates = new Set<string>([]);
+    const availableDates = new Set<number>([]);
 
     const executorIdDayOfWeekScheduleDayMap = executors.reduce(
       (acc, executor) => {
@@ -465,14 +465,12 @@ export class ScheduleService {
             isIntervalAvailable &&
             currentSlotIndex - i >= Math.ceil(totalDuration / 60)
           ) {
-            availableDates.add(
-              dayjs(startTimestamp).startOf('day').format('YYYY-MM-DD'),
-            );
+            availableDates.add(dayjs(startTimestamp).startOf('day').valueOf());
             // Если хотя бы 1 слот есть - уже можно брейкать цикл
             break;
           }
         }
-        if (availableDates.has(startOfDay.format('YYYY-MM-DD'))) {
+        if (availableDates.has(startOfDay.valueOf())) {
           // И из этого цикла тоже выходим, достаточно
           break;
         }
