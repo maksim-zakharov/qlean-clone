@@ -1,14 +1,18 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { PrismaService } from './prisma.service';
-import { HttpExceptionFilter } from './filters/http-exception.filter';
-import {
+4import {
   BadRequestException,
   ClassSerializerInterceptor,
   ValidationPipe,
 } from '@nestjs/common';
-import { formatValidationErrors } from './formatValidationErrors';
 import { BusinessExceptionFilter } from './common/filters/business-exception.filter';
+import * as dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
