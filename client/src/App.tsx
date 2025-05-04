@@ -20,8 +20,10 @@ import {ApplicationPage} from "./features/client/ApplicationPage.tsx";
 import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetailsPage.tsx";
 import './i18n';
 import {Skeleton} from "./components/ui/skeleton.tsx";
+import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
 
 function App() {
+    useGeoLocation();
 
     const {isReady} = useTelegram();
     const [searchParams] = useSearchParams();

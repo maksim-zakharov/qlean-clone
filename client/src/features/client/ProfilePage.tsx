@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Typography} from "../../components/ui/Typography.tsx";
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useMemo, useState} from "react";
 import {BriefcaseBusiness, CalendarClock, ChevronRight, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
@@ -18,7 +18,6 @@ import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useBackButton.ts";
-import {useGetReverseMutation} from "../../api/openstreetmap.api.ts";
 
 interface Address {
     // Дом
@@ -48,7 +47,7 @@ export const ProfilePage = () => {
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const [address, setAddress] = useState<Address | undefined>()
+    const address = useSelector(state => state.createOrder.geo?.address);
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
     const applicationVariantIdsSet = useMemo(() => new Set(application?.variants?.map(v => v.variantId) || []), [application]);
@@ -56,8 +55,6 @@ export const ProfilePage = () => {
         ...s,
         variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))
     })), [applicationVariantIdsSet, services])
-
-    const [reverse, {isSuccess}] = useGetReverseMutation();
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
@@ -82,15 +79,6 @@ export const ProfilePage = () => {
         dispatch(logout())
         window.location.reload();
     })
-
-    useEffect(() => {
-        console.log(345)
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            console.log(123)
-            const data = await reverse({lat: pos.coords.latitude, lon: pos.coords.longitude}).unwrap()
-            setAddress(data.address)
-        });
-    }, [reverse]);
 
     const addressText = useMemo(() => {
         if (!address) {
@@ -121,7 +109,7 @@ export const ProfilePage = () => {
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
-    if (applicationLoading || isLoading || !isSuccess) {
+    if (applicationLoading || isLoading || !address) {
         return <div className="flex flex-col gap-6 p-4">
             <Skeleton className="w-full h-[156px]"/>
             <Skeleton className="w-full h-[44px]"/>

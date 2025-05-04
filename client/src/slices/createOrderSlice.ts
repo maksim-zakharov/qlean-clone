@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {api} from "../api/api.ts";
 import {ordersApi} from "../api/ordersApi.ts";
+import {Address} from "node:cluster";
 
 interface CreateOrderState {
     baseService?: any;
@@ -16,6 +17,8 @@ interface CreateOrderState {
     userInfo?: any;
 
     token?: any;
+
+    geo?: { address: Address };
 }
 
 const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
@@ -68,6 +71,7 @@ const initialState: CreateOrderState = {
     fullAddress: getLocalStorageItemOrDefault('fullAddress', null),
     date: getLocalStorageItemOrDefault('date', 0),
     token: getLocalStorageItemOrDefault('token', null),
+    geo: getLocalStorageItemOrDefault('geo', null),
     services: []
 };
 
@@ -77,6 +81,10 @@ const createOrderSlice = createSlice({
     reducers: {
         saveToken: _saveToken,
         logout: _logout,
+        updateGeo: (state, action: PayloadAction) => {
+            state.geo = action.payload;
+            saveInLocalStorage('geo', state.geo)
+        },
         startOrderFlow: (state, action: PayloadAction<Pick<CreateOrderState, 'baseService' | 'serviceVariant'>>) => {
             state.baseService = action.payload.baseService;
             state.serviceVariant = action.payload.serviceVariant;
@@ -154,7 +162,8 @@ export const {
     selectOptions,
     selectFullAddress,
     selectVariant,
-    clearState
+    clearState,
+    updateGeo
 } = createOrderSlice.actions;
 
 export default createOrderSlice;
