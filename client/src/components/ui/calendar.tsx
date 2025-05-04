@@ -20,17 +20,17 @@ function Calendar({
                 month: "flex flex-col gap-4",
                 month_caption: "flex justify-center pt-1 relative items-center w-full",
                 caption_label: "text-sm font-medium",
-                nav: "flex items-center gap-1 absolute w-full",
+                nav: "flex items-center gap-1 absolute w-full z-1",
                 nav_button: cn(
                     buttonVariants({variant: "outline"}),
                     "size-7 bg-transparent p-0 opacity-50 hover:opacity-100"
                 ),
-                button_previous: "absolute left-4 border-none outline-none top-0",
-                button_next: "absolute right-4 border-none outline-none top-0",
+                button_previous: "absolute left-2 border-none outline-none top-1 h-6",
+                button_next: "absolute right-2 border-none outline-none top-1 h-6",
                 month_grid: "w-full border-collapse space-x-1",
-                weekdays: "flex",
+                weekdays: "flex w-full justify-between",
                 // head_cell: "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
-                weekday: "text-muted-foreground rounded-md w-[calc(100%/7)] font-normal text-[0.8rem]",
+                weekday: "w-8 text-muted-foreground rounded-md font-normal text-[0.8rem]",
                 week: "flex w-full mt-2 justify-between",
                 day: cn(
                     buttonVariants({variant: "ghost"}),
