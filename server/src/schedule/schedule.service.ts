@@ -374,17 +374,29 @@ export class ScheduleService {
     // Формируем массив доступных дат
     const availableDates = new Set<number>([]);
 
+    const executorIdDayOfWeekScheduleDayMap = executors.reduce(
+      (acc, executor) => {
+        acc[executor.id] = executor.scheduleDays.reduce((acc, scheduleDay) => {
+          acc[scheduleDay.dayOfWeek] = scheduleDay;
+          return acc;
+        }, {});
+
+        return acc;
+      },
+      {},
+    );
+
+    // Пройдемся по каждому дню и узнаем есть ли время хотя бы у одного исполнителя для данного заказа в этот день
     for (let i = 0; i < 30; i++) {
       const currentDate = startDate.add(i, 'day');
       const startOfDay = dayjs(currentDate).startOf('day');
       const endOfDay = dayjs(currentDate).endOf('day');
-      const dayOfWeek = daysOfWeek[currentDate.day()];
+      const dayOfWeek = currentDate.format('ddd').toUpperCase() as DayOfWeek;
 
       // Проверяем, есть ли исполнители с доступными слотами в этот день
       for (const executor of executors) {
-        const scheduleDay = executor.scheduleDays.find(
-          (sd) => sd.dayOfWeek === dayOfWeek,
-        );
+        const scheduleDay =
+          executorIdDayOfWeekScheduleDayMap[executor.id]?.[dayOfWeek];
         if (!scheduleDay || scheduleDay.isDayOff) continue;
 
         // Получаем занятые интервалы для текущего дня
@@ -457,7 +469,13 @@ export class ScheduleService {
             currentSlotIndex - i >= Math.ceil(totalDuration / 60)
           ) {
             availableDates.add(dayjs(startTimestamp).startOf('day').valueOf());
+            // Если хотя бы 1 слот есть - уже можно брейкать цикл
+            break;
           }
+        }
+        if (availableDates.has(startOfDay.valueOf())) {
+          // И из этого цикла тоже выходим, достаточно
+          break;
         }
       }
     }

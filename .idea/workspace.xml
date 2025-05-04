@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="useGeoLocation">
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useGeoLocation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useGeoLocation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/schedule/schedule.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/schedule/schedule.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +70,7 @@
     "npm.client:dev.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
-    "npm.server:dev.executor": "Run",
+    "npm.server:dev.executor": "Debug",
     "npm.start:dev.executor": "Debug",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
@@ -172,14 +171,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00320" summary="Слоты фильтруются по расписанию исполнителей">
-      <option name="closed" value="true" />
-      <created>1746195621338</created>
-      <option name="number" value="00320" />
-      <option name="presentableId" value="LOCAL-00320" />
-      <option name="project" value="LOCAL" />
-      <updated>1746195621338</updated>
     </task>
     <task id="LOCAL-00321" summary="Берутся исполнители только если умеют выполнять услугу">
       <option name="closed" value="true" />
@@ -565,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746348151752</updated>
     </task>
-    <option name="localTasksCounter" value="369" />
+    <task id="LOCAL-00369" summary="useGeoLocation">
+      <option name="closed" value="true" />
+      <created>1746348560803</created>
+      <option name="number" value="00369" />
+      <option name="presentableId" value="LOCAL-00369" />
+      <option name="project" value="LOCAL" />
+      <updated>1746348560803</updated>
+    </task>
+    <option name="localTasksCounter" value="370" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -614,5 +613,30 @@
     <MESSAGE value="ExecutorOrderDetailsPage локалайз" />
     <MESSAGE value="useGeoLocation" />
     <option name="LAST_COMMIT_MESSAGE" value="useGeoLocation" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/src/schedule/schedule.service.ts</url>
+          <line>402</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/src/schedule/schedule.service.ts</url>
+          <line>421</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="js.build_tools.npm">
+        <watch expression="new Date(startTimestamp)" language="TypeScript" />
+        <watch expression="new Date(currentTimestamp)" language="TypeScript" />
+        <watch expression="new Date(endTimestamp)" language="TypeScript" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
