@@ -15,6 +15,7 @@ import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
 import {PageLoader} from "../../components/PageLoader.tsx";
 import {useTranslation} from "react-i18next";
+import dayjs from "dayjs";
 
 export const ExecutorOrderDetailsPage = () => {
     const {t} = useTranslation();
@@ -57,12 +58,11 @@ export const ExecutorOrderDetailsPage = () => {
 
     const canStart = useMemo(() => {
       if (!order) return false;
-      const orderDate = new Date(order.date);
-      const today = new Date();
-      return order?.status === 'todo' && 
-        orderDate.getDate() === today.getDate() &&
-        orderDate.getMonth() === today.getMonth() &&
-        orderDate.getFullYear() === today.getFullYear();
+
+        const orderDate = dayjs.utc(order.date);
+        const today = dayjs.utc();
+      return order?.status === 'todo' &&
+          orderDate.isSame(today, 'day'); // Сравниваем год, месяц и день в UTC
     }, [order]);
 
     if (isLoading) {

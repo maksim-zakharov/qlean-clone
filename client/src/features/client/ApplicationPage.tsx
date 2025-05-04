@@ -14,6 +14,7 @@ import {FileClock, FileX} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {PageLoader} from "../../components/PageLoader.tsx";
 import {useTranslation} from "react-i18next";
+import dayjs from "dayjs";
 
 export const ApplicationPage = () => {
     const {t} = useTranslation();
@@ -96,7 +97,7 @@ export const ApplicationPage = () => {
             <Typography.H2 className="mb-2">{t('create_application_rejected_title')}</Typography.H2>
             <Typography.Title className="mb-4 font-normal text-center">{t('create_application_rejected_description_1')} <br/> {t('create_application_rejected_description_2')}</Typography.Title>
             <Button onClick={() => navigate(RoutePaths.Profile)}>{t('create_application_profile_btn')}</Button>
-            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${Date.now()}`, '_blank')}>{t('create_application_support_btn')}</Button>
+            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${dayjs.utc().valueOf()}`, '_blank')}>{t('create_application_support_btn')}</Button>
         </div>
     }
 

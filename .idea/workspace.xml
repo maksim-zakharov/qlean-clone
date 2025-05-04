@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="utc">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="utc dayjs">
       <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,14 +170,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00342" summary="OrderCheckoutPage i18n">
-      <option name="closed" value="true" />
-      <created>1746289460709</created>
-      <option name="number" value="00342" />
-      <option name="presentableId" value="LOCAL-00342" />
-      <option name="project" value="LOCAL" />
-      <updated>1746289460709</updated>
     </task>
     <task id="LOCAL-00343" summary="OrderCreationPage i18n">
       <option name="closed" value="true" />
@@ -571,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746385964616</updated>
     </task>
-    <option name="localTasksCounter" value="391" />
+    <task id="LOCAL-00391" summary="utc dayjs">
+      <option name="closed" value="true" />
+      <created>1746386713952</created>
+      <option name="number" value="00391" />
+      <option name="presentableId" value="LOCAL-00391" />
+      <option name="project" value="LOCAL" />
+      <updated>1746386713952</updated>
+    </task>
+    <option name="localTasksCounter" value="392" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +586,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Не работает ограничение по дням" />
     <MESSAGE value="подсветка ListButton" />
     <MESSAGE value="создал ordersApi.ts" />
     <MESSAGE value="checkout padding btn" />
@@ -619,7 +610,8 @@
     <MESSAGE value="healthcheck" />
     <MESSAGE value="обновил findSchedule на utc" />
     <MESSAGE value="utc" />
-    <option name="LAST_COMMIT_MESSAGE" value="utc" />
+    <MESSAGE value="utc dayjs" />
+    <option name="LAST_COMMIT_MESSAGE" value="utc dayjs" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

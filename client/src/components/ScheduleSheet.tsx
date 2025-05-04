@@ -2,7 +2,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/com
 import React, {useCallback, useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import dayjs, {Dayjs} from "dayjs";
+import dayjs from "dayjs";
 import {useGetAvailableDatesQuery, useGetExecutorAvailableSlotsQuery} from "../api/api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
@@ -26,28 +26,6 @@ export function ScheduleSheet({
                               }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {t} = useTranslation();
     const {vibro} = useTelegram();
-
-    function generateTimeSlots(parentDate: Dayjs) {
-        const slots = [];
-        const start = parentDate.startOf('day').add(8, 'hour');
-        const end = parentDate.startOf('day').add(22, 'hour');
-
-        let current = start;
-
-        while (current.isBefore(end)) {
-            const slotStart = current;
-            const slotEnd = current.add(30, 'minute');
-
-            slots.push({
-                timestamp: slotStart.valueOf(),
-                time: slotStart.format('HH:mm')
-            });
-
-            current = slotEnd;
-        }
-
-        return slots.filter(s => s.timestamp >= Date.now());
-    }
 
     const [tab, setTab] = useState<Date | undefined>(dayjs.utc().startOf('day').toDate());
 
@@ -84,7 +62,7 @@ export function ScheduleSheet({
         skip: !tab || !serviceVariantId || !optionIds
     });
 
-    const filteredSlots = useMemo(() => availableSlots.filter(sl => sl.timestamp > Date.now()).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
+    const filteredSlots = useMemo(() => availableSlots.filter(sl => dayjs.utc(sl.timestamp).isAfter(dayjs.utc())).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>

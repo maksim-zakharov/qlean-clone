@@ -3,7 +3,7 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
-import { CalendarCheck, ClipboardPlus} from "lucide-react";
+import {CalendarCheck, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
@@ -50,7 +50,7 @@ export const ExecutorOrdersPage = () => {
             current = slotEnd;
         }
 
-        return slots.filter(s => s.timestamp >= Date.now());
+        return slots.filter(s => dayjs.utc(s.timestamp).isAfter(dayjs.utc()) || dayjs.utc(s.timestamp).isSame(dayjs.utc()));
     }
 
     const result = useMemo(() => Array.from({length: 7}, (_, i) => {
@@ -72,7 +72,7 @@ export const ExecutorOrdersPage = () => {
             classNames: {
                 icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
             },
-            icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]" />
+            icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
         })
     }
 
@@ -133,7 +133,8 @@ export const ExecutorOrdersPage = () => {
                 onValueChange={() => vibro()}
             >
                 <AccordionItem value="services" className="rounded-xl">
-                    <AccordionTrigger className="flex justify-normal py-0" hideChevron onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
+                    <AccordionTrigger className="flex justify-normal py-0" hideChevron
+                                      onClick={(e) => navigate(RoutePaths.Executor.Details(ao.id))}>
                         <div className="p-3 px-0 flex flex-col w-full">
                             <div className="flex justify-between">
                                 <Typography.Title>{ao.baseService?.name}</Typography.Title>
@@ -145,21 +146,24 @@ export const ExecutorOrdersPage = () => {
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {ao.options.length > 0 && <AccordionContent className="gap-1 flex flex-col pt-3 mt-[1px] separator-shadow-top pr-4" wrapperClassName="pr-0">
-                        {ao.options.map((service, index) => (
-                            <div key={index} className="flex justify-between">
-                                <span className="text-xs text-tg-theme-hint-color font-medium">{service.name}</span>
-                                <span
-                                    className="text-xs text-tg-theme-hint-color font-medium">{formatDuration(service.duration)}</span>
-                            </div>
-                        ))}
-                        {ao.status === 'processed' &&
-                            <Button className="mt-3" onClick={() => setOrderToDelete(ao)}>{t('orders_complete_btn')}</Button>
-                        }
-                            </AccordionContent>}
-                    </AccordionItem>
-                        </Accordion>)}
-                </div>
+                    {ao.options.length > 0 &&
+                        <AccordionContent className="gap-1 flex flex-col pt-3 mt-[1px] separator-shadow-top pr-4"
+                                          wrapperClassName="pr-0">
+                            {ao.options.map((service, index) => (
+                                <div key={index} className="flex justify-between">
+                                    <span className="text-xs text-tg-theme-hint-color font-medium">{service.name}</span>
+                                    <span
+                                        className="text-xs text-tg-theme-hint-color font-medium">{formatDuration(service.duration)}</span>
+                                </div>
+                            ))}
+                            {ao.status === 'processed' &&
+                                <Button className="mt-3"
+                                        onClick={() => setOrderToDelete(ao)}>{t('orders_complete_btn')}</Button>
+                            }
+                        </AccordionContent>}
+                </AccordionItem>
+            </Accordion>)}
+        </div>
         <AlertDialogWrapper open={Boolean(orderToDelete)} title={t('finalize_order_modal_title')}
                             description={t('finalize_order_modal_description')}
                             onOkText={t('finalize_order_modal_ok_btn')}
@@ -167,5 +171,5 @@ export const ExecutorOrdersPage = () => {
                             okLoading={completeOrderLoading}
                             onCancelClick={() => setOrderToDelete(undefined)}
                             onOkClick={() => handleFinishOrder(orderToDelete)}></AlertDialogWrapper>
-            </div>
-            }
+    </div>
+}

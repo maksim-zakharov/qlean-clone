@@ -157,7 +157,7 @@ export const OrderDetailsPage = () => {
                         </div>
                         {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id}
                                                    optionIds={order?.options.map(o => o.id)}
-                                                   selectedTimestamp={new Date(order.date).getTime()}
+                                                   selectedTimestamp={dayjs.utc(order.date).valueOf()}
                                                    onSelectDate={handleSelectDate}>
                             <EditButton/>
                         </ScheduleSheet>}
