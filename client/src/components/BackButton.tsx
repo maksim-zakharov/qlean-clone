@@ -3,6 +3,7 @@ import {Button} from "./ui/button.tsx";
 import {useNavigate} from "react-router-dom";
 import {FC, useEffect} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
+import {RoutePaths} from "../routes.ts";
 
 export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({url, state, onClick}) => {
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({ur
 
     const onBack = () => {
         onClick?.();
-        navigate(url || '/', state ? {state} : undefined);
+        navigate(url || RoutePaths.Root, state ? {state} : undefined);
     }
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({ur
             Telegram.WebApp.onEvent('backButtonClicked', onBack);
             backButton.show();
         }
-    }, [backButton, showTgBackButton]);
+    }, [backButton, onBack, showTgBackButton]);
 
     if (showTgBackButton) {
         return null;

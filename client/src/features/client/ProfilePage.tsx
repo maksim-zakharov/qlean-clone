@@ -39,7 +39,7 @@ interface Address {
 }
 
 export const ProfilePage = () => {
-    useBackButton('/');
+    useBackButton(RoutePaths.Root);
 
     const {t} = useTranslation();
     const dispatch = useDispatch();

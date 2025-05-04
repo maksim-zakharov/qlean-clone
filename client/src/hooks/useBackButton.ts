@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useTelegram} from "./useTelegram.ts";
+import {RoutePaths} from "../routes.ts";
 
 export const useBackButton = (url: string) => {
     const navigate = useNavigate()
@@ -8,7 +9,7 @@ export const useBackButton = (url: string) => {
 
     const showTgBackButton = Boolean(backButton && !isLoading && !error);
     
-    const onBack = () => navigate(url || '/')
+    const onBack = () => navigate(url || RoutePaths.Root)
 
     useEffect(() => {
         if (backButton && showTgBackButton) {

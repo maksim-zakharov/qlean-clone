@@ -16,10 +16,10 @@ import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
 import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
 import {ExecutorPaymentsPage} from "./features/executor/ExecutorPaymentsPage.tsx";
 import {ExecutorSchedulePage} from "./features/executor/ExecutorSchedulePage.tsx";
-import {Loader2} from "lucide-react";
 import {ApplicationPage} from "./features/client/ApplicationPage.tsx";
 import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetailsPage.tsx";
 import './i18n';
+import {Skeleton} from "./components/ui/skeleton.tsx";
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
     const navigate = useNavigate()
     const startParam = Telegram.WebApp.initDataUnsafe.start_param || searchParams.get('tgWebAppStartParam') || searchParams.get('startapp') || '';
 
-    const [serviceId, variantId ] = startParam.split('_').filter((_, i) => i % 2 !== 0);
+    const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 
     const {data: userinfo} = useGetUserInfoQuery(undefined, {
         skip: !isReady
@@ -51,15 +51,25 @@ function App() {
         }
     }, [serviceId, variantId, services, dispatch, navigate]);
 
-    if(!userinfo || isLoading) {
-        return <div className="m-auto"><Loader2 className="animate-spin h-16 w-16 mb-16" /></div>
+    if (!userinfo || isLoading) {
+        return <div>
+            <Skeleton className="w-full h-[50px] mb-3 rounded-none"/>
+            <div className="mb-6 mt-4 px-4 flex flex-col gap-4">
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+                <Skeleton className="w-full h-[88px]"/>
+            </div>
+            <Skeleton className="w-full rounded-none menu-container"/>
+        </div>
     }
 
-    if(userinfo.role === 'admin'){
+    if (userinfo.role === 'admin') {
         return 'admin'
     }
 
-    if(userinfo.role === 'executor') {
+    if (userinfo.role === 'executor') {
         return <div className="content-wrapper">
             <Routes>
                 <Route element={<ExecutorLayout/>}>
