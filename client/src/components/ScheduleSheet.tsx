@@ -50,7 +50,6 @@ export function ScheduleSheet({
             return true;
         }
 
-        debugger
         // Сравниваем timestamp начала дня в UTC
         const value = inputDateUTC.valueOf();
         return !availableDatesSet.has(value);
