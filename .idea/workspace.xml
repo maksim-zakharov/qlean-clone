@@ -4,31 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="подсветка ListButton">
-      <change afterPath="$PROJECT_DIR$/client/src/api/baseQuery.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="создал ordersApi.ts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/baseQuery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/baseQuery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +71,10 @@
     "npm.build.executor": "Run",
     "npm.build:ci (1).executor": "Run",
     "npm.build:ci.executor": "Run",
+    "npm.client:dev.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
+    "npm.server:dev.executor": "Run",
     "npm.start:dev.executor": "Debug",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
@@ -113,7 +97,7 @@
       <recent name="D:\Projects\qlean-clone\server\src\dto" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.client:dev">
+  <component name="RunManager" selected="npm.server:dev">
     <configuration name="Debug Server" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -191,14 +175,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00308" summary="jog application">
-      <option name="closed" value="true" />
-      <created>1746027315825</created>
-      <option name="number" value="00308" />
-      <option name="presentableId" value="LOCAL-00308" />
-      <option name="project" value="LOCAL" />
-      <updated>1746027315825</updated>
     </task>
     <task id="LOCAL-00309" summary="jog application">
       <option name="closed" value="true" />
@@ -584,7 +560,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746338802728</updated>
     </task>
-    <option name="localTasksCounter" value="357" />
+    <task id="LOCAL-00357" summary="создал ordersApi.ts">
+      <option name="closed" value="true" />
+      <created>1746342759603</created>
+      <option name="number" value="00357" />
+      <option name="presentableId" value="LOCAL-00357" />
+      <option name="project" value="LOCAL" />
+      <updated>1746342759603</updated>
+    </task>
+    <option name="localTasksCounter" value="358" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +591,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Стрелочка темнее" />
     <MESSAGE value="дизайн свича" />
     <MESSAGE value="profilepage i18n" />
     <MESSAGE value="schedule i18n" />
@@ -632,6 +615,7 @@
     <MESSAGE value="Календарь" />
     <MESSAGE value="Не работает ограничение по дням" />
     <MESSAGE value="подсветка ListButton" />
-    <option name="LAST_COMMIT_MESSAGE" value="подсветка ListButton" />
+    <MESSAGE value="создал ordersApi.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="создал ordersApi.ts" />
   </component>
 </project>

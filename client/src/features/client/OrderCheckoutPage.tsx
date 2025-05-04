@@ -177,7 +177,7 @@ export const OrderCheckoutPage = () => {
             </div>
 
             {/* Submit Button */}
-            <BottomActions>
+            <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 <Button
                     size="default"
                     wide

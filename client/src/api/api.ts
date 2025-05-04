@@ -6,7 +6,7 @@ export const api = createApi({
     tagTypes: [
         "Service", 'Address', 'User', 'Schedule', 'Application'
     ],
-    baseQuery: baseQueryWithReauth,
+    baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
         getUserInfo: builder.query<void, void>({
             query: () => '/auth/userinfo',

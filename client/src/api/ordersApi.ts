@@ -6,7 +6,7 @@ export const ordersApi = createApi({
     tagTypes: [
         "Order"
     ],
-    baseQuery: baseQueryWithReauth,
+    baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
         getOrderById: builder.query<any, { id: number | string }>({
             query: (params) => ({

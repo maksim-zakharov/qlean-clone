@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {api} from "../api/api.ts";
+import {ordersApi} from "../api/ordersApi.ts";
 
 interface CreateOrderState {
     baseService?: any;
@@ -132,7 +133,7 @@ const createOrderSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addMatcher(api.endpoints.addOrder.matchFulfilled, _clearState)
+            .addMatcher(ordersApi.endpoints.addOrder.matchFulfilled, _clearState)
             .addMatcher(api.endpoints.getServices.matchFulfilled, (state, action) => {
                 state.services = action.payload;
             })

@@ -1,6 +1,6 @@
 import {Mutex} from "async-mutex";
 import {saveToken} from "../slices/createOrderSlice.ts";
-import {BaseQueryApi, fetchBaseQuery} from "@reduxjs/toolkit/query";
+import {BaseQueryApi, FetchArgs, fetchBaseQuery} from "@reduxjs/toolkit/query";
 
 const mutex = new Mutex();
 
@@ -20,7 +20,7 @@ const baseQuery = () =>
 
 export const TELEGRAM_HEADER = 'telegram-init-data';
 
-export const baseQueryWithReauth = async (args, api: BaseQueryApi, extraOptions) => {
+export const baseQueryWithReauth = async (args: (string | FetchArgs), api: BaseQueryApi, extraOptions) => {
     let result = await baseQuery()(args, api, extraOptions);
 
     if (result?.error?.status === 401) {
