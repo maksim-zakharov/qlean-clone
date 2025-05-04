@@ -40,19 +40,20 @@ export const ExecutorOrderDetailsPage = () => {
         navigate(RoutePaths.Executor.Orders)
     }
 
-    const handleOptionToggle = (option: any) => {
+    const handleOptionToggle = (prefix: string, id: string) => {
         vibro('light');
-        const exist = variantIds.find(opt => opt === option.id);
+        const prefId = `${prefix}_${id}`;
+        const exist = variantIds.find(opt => opt === prefId);
         let newOptions = [...variantIds];
         if (exist) {
-            newOptions = newOptions.filter(opt => opt !== option.id);
+            newOptions = newOptions.filter(opt => opt !== prefId);
         } else {
-            newOptions.push(option.id)
+            newOptions.push(prefId)
         }
         setVariantIds(newOptions);
     }
 
-    const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(op.id)) && selectedOptionsIdSet.has(order?.serviceVariant?.id), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
+    const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(`option_${op.id}`)) && selectedOptionsIdSet.has(`variant_${order?.serviceVariant?.id}`), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
 
     const canStart = useMemo(() => {
       if (!order) return false;
@@ -85,11 +86,11 @@ export const ExecutorOrderDetailsPage = () => {
             <ListButtonGroup>
                 <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
                     order?.status === 'processed' &&
-                    <Checkbox checked={selectedOptionsIdSet.has(order?.serviceVariant?.id)}
-                              onCheckedChange={() => handleOptionToggle(order?.serviceVariant)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
+                    <Checkbox checked={selectedOptionsIdSet.has(`variant_${order?.serviceVariant?.id}`)}
+                              onCheckedChange={() => handleOptionToggle('variant', order?.serviceVariant?.id)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
                 {order?.options.map(op => <ListButton key={op?.id} text={op?.name} extra={
-                    order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(op.id)}
-                                                               onCheckedChange={() => handleOptionToggle(op)}/>}>{op?.name} {op?.duration}</ListButton>)}
+                    order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(`option_${op.id}`)}
+                                                               onCheckedChange={() => handleOptionToggle('option', op?.id)}/>}>{op?.name} {op?.duration}</ListButton>)}
             </ListButtonGroup>
 
             {(order?.status === 'processed' || canStart) && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">

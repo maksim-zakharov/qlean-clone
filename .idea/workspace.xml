@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель показывается в заказе">
-      <change afterPath="$PROJECT_DIR$/client/src/components/OrderStatusText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="OrderStatusText">
+      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,14 +171,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00326" summary="Стартануть можно только заказ на сегодня">
-      <option name="closed" value="true" />
-      <created>1746206382977</created>
-      <option name="number" value="00326" />
-      <option name="presentableId" value="LOCAL-00326" />
-      <option name="project" value="LOCAL" />
-      <updated>1746206382977</updated>
     </task>
     <task id="LOCAL-00327" summary="время начала и завершения заказа">
       <option name="closed" value="true" />
@@ -564,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746364519028</updated>
     </task>
-    <option name="localTasksCounter" value="375" />
+    <task id="LOCAL-00375" summary="OrderStatusText">
+      <option name="closed" value="true" />
+      <created>1746364749770</created>
+      <option name="number" value="00375" />
+      <option name="presentableId" value="LOCAL-00375" />
+      <option name="project" value="LOCAL" />
+      <updated>1746364749770</updated>
+    </task>
+    <option name="localTasksCounter" value="376" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +587,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="OrderDetailsPage кнопки пва" />
     <MESSAGE value="ProfilePage skeleton" />
     <MESSAGE value="OrderCreationPage padding" />
     <MESSAGE value="Убрал тени у карточек" />
@@ -612,7 +611,8 @@
     <MESSAGE value="Выбранная дата выделяется цветом" />
     <MESSAGE value="Рефакторинг, починил выбор даты для заказа" />
     <MESSAGE value="Исполнитель показывается в заказе" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исполнитель показывается в заказе" />
+    <MESSAGE value="OrderStatusText" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrderStatusText" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
