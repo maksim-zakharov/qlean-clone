@@ -54,7 +54,7 @@ export const ExecutorOrdersPage = () => {
     }
 
     const result = useMemo(() => Array.from({length: 7}, (_, i) => {
-        const date = dayjs().add(i, 'day').startOf('day');
+        const date = dayjs.utc().add(i, 'day').startOf('day');
         return {
             date: date.locale('en').format('dd, D MMM').toLowerCase(),
             timestamp: date.valueOf(),
@@ -62,7 +62,7 @@ export const ExecutorOrdersPage = () => {
         };
     }).filter(s => s.slots.length > 0), []);
     const [tab, setTab] = useState<string>(result[0]?.timestamp.toString());
-    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs(o.date).startOf('day').unix() === dayjs(Number(tab)).startOf('day').unix()).sort((a, b) => a.date.localeCompare(b.date)), [orders, tab]);
+    const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs.utc(o.date).startOf('day').unix() === dayjs.utc(Number(tab)).startOf('day').unix()).sort((a, b) => a.date.localeCompare(b.date)), [orders, tab]);
     const activeOrders = useMemo(() => filteredOrders.filter(o => o.status === 'processed').sort((a, b) => b.id - a.id), [filteredOrders]);
 
     const handleFinishOrder = async (order) => {
@@ -141,7 +141,7 @@ export const ExecutorOrdersPage = () => {
                             </div>
                             <div className="flex justify-between">
                                 <Typography.Description>{ao.fullAddress}</Typography.Description>
-                                <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                                <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                             </div>
                         </div>
                     </AccordionTrigger>

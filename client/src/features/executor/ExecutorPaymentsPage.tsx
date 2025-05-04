@@ -34,8 +34,8 @@ export const ExecutorPaymentsPage = () => {
 
     const completedOrders = useMemo(() => orders.filter(o => ['completed'].includes(o.status)).sort((a, b) => b.id - a.id), [orders]);
     const filteredOrders = useMemo(() => orders.filter(o => ['completed'].includes(o.status)).filter(order => {
-        const orderDate = dayjs(order.date);
-        return orderDate.isAfter(dayjs().subtract(1, paymentsPeriod));
+        const orderDate = dayjs.utc(order.date);
+        return orderDate.isAfter(dayjs.utc().subtract(1, paymentsPeriod));
     }), [orders, paymentsPeriod])
 
     const totalSum = useMemo(() => filteredOrders.reduce((acc, curr) => acc + curr.serviceVariant?.basePrice + curr.options.reduce((acc, curr) => acc + curr?.price, 0), 0), [filteredOrders]);
@@ -113,7 +113,7 @@ export const ExecutorPaymentsPage = () => {
                         axisLine={false}
                         tickMargin={2}
                         minTickGap={60}
-                        tickFormatter={val => dayjs(val).format('D')}
+                        tickFormatter={val => dayjs.utc(val).format('D')}
                     />
                     <Area
                         fill="url(#fillDesktop)"
@@ -135,7 +135,7 @@ export const ExecutorPaymentsPage = () => {
                 </div>
                 <div className="flex justify-between">
                     <Typography.Description>{ao.fullAddress}</Typography.Description>
-                    <Typography.Description>{dayjs(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                    <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
                 </div>
                 <div className="flex gap-2 mt-2 pb-3">
                     <Star className="w-4 h-4 text-tg-theme-button-color"/>

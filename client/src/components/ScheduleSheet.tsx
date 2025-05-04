@@ -49,7 +49,7 @@ export function ScheduleSheet({
         return slots.filter(s => s.timestamp >= Date.now());
     }
 
-    const [tab, setTab] = useState<Date | undefined>(dayjs().startOf('day').toDate());
+    const [tab, setTab] = useState<Date | undefined>(dayjs.utc().startOf('day').toDate());
 
     const {data: availableDates = []} = useGetAvailableDatesQuery({
         optionIds,
@@ -58,30 +58,33 @@ export function ScheduleSheet({
         skip: !serviceVariantId || !optionIds
     })
 
-    const availableDatesSet = useMemo(() => new Set(availableDates?.map(date => dayjs(date).valueOf()) || []), [availableDates]);
+    const availableDatesSet = useMemo(() => new Set(availableDates?.map(date => dayjs.utc(date).valueOf()) || []), [availableDates]);
 
     const isPastDate = useCallback((date: Date) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Обнуляем время
-        if(
-            // Если это было вчера
-            date < today
-            || !availableDatesSet.size){
+        // Получаем текущую дату в UTC и обнуляем время
+        const todayUTC = dayjs.utc().startOf('day');
+
+        // Конвертируем входную дату в UTC и обнуляем время
+        const inputDateUTC = dayjs.utc(date).startOf('day');
+
+        // Если дата раньше текущей UTC даты
+        if(inputDateUTC.isBefore(todayUTC) || !availableDatesSet.size) {
             return true;
         }
-        const value = dayjs(date).valueOf()
+        // Сравниваем timestamp начала дня в UTC
+        const value = inputDateUTC.valueOf();
         return !availableDatesSet.has(value);
     }, [availableDatesSet]);
 
     const {data: availableSlots = [], isFetching} = useGetExecutorAvailableSlotsQuery({
-        date: dayjs(tab).valueOf(),
+        date: dayjs.utc(tab).valueOf(),
         serviceVariantId,
         optionIds
     }, {
         skip: !tab || !serviceVariantId || !optionIds
     });
 
-    const filteredSlots = useMemo(() => availableSlots.filter(sl => sl.timestamp > Date.now()).map(sl => ({...sl, time: dayjs(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
+    const filteredSlots = useMemo(() => availableSlots.filter(sl => sl.timestamp > Date.now()).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>

@@ -6,12 +6,16 @@ import './index.css'  // Импорт Tailwind
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store.ts";
-import duration from 'dayjs/plugin/duration'
 // import updateLocale from 'dayjs/plugin/updateLocale' // ES 2015
 // import 'dayjs/locale/ru';
 import dayjs from "dayjs";
 import {Toaster} from "sonner";
+import duration from 'dayjs/plugin/duration'
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
 dayjs.extend(duration)
 // dayjs.extend(updateLocale)
 //

@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="utc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/schedule/schedule.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/schedule/schedule.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,22 +178,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00340" summary="OrderDetailsPage i18n">
-      <option name="closed" value="true" />
-      <created>1746288681320</created>
-      <option name="number" value="00340" />
-      <option name="presentableId" value="LOCAL-00340" />
-      <option name="project" value="LOCAL" />
-      <updated>1746288681320</updated>
-    </task>
-    <task id="LOCAL-00341" summary="ErrorState">
-      <option name="closed" value="true" />
-      <created>1746288908080</created>
-      <option name="number" value="00341" />
-      <option name="presentableId" value="LOCAL-00341" />
-      <option name="project" value="LOCAL" />
-      <updated>1746288908080</updated>
     </task>
     <task id="LOCAL-00342" summary="OrderCheckoutPage i18n">
       <option name="closed" value="true" />
@@ -564,7 +555,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746385139820</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <task id="LOCAL-00389" summary="обновил findSchedule на utc">
+      <option name="closed" value="true" />
+      <created>1746385770320</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1746385770320</updated>
+    </task>
+    <task id="LOCAL-00390" summary="utc">
+      <option name="closed" value="true" />
+      <created>1746385964616</created>
+      <option name="number" value="00390" />
+      <option name="presentableId" value="LOCAL-00390" />
+      <option name="project" value="LOCAL" />
+      <updated>1746385964616</updated>
+    </task>
+    <option name="localTasksCounter" value="391" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +594,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Календарь" />
     <MESSAGE value="Не работает ограничение по дням" />
     <MESSAGE value="подсветка ListButton" />
     <MESSAGE value="создал ordersApi.ts" />
@@ -611,6 +617,7 @@
     <MESSAGE value="обновил версию датапикера" />
     <MESSAGE value="Починил верстку календаря" />
     <MESSAGE value="healthcheck" />
+    <MESSAGE value="обновил findSchedule на utc" />
     <MESSAGE value="utc" />
     <option name="LAST_COMMIT_MESSAGE" value="utc" />
   </component>
