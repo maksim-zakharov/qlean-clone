@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Починил верстку календаря">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="healthcheck" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,22 +168,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00331" summary="дизайн свича">
-      <option name="closed" value="true" />
-      <created>1746269186040</created>
-      <option name="number" value="00331" />
-      <option name="presentableId" value="LOCAL-00331" />
-      <option name="project" value="LOCAL" />
-      <updated>1746269186040</updated>
-    </task>
-    <task id="LOCAL-00332" summary="дизайн свича">
-      <option name="closed" value="true" />
-      <created>1746269854823</created>
-      <option name="number" value="00332" />
-      <option name="presentableId" value="LOCAL-00332" />
-      <option name="project" value="LOCAL" />
-      <updated>1746269854823</updated>
     </task>
     <task id="LOCAL-00333" summary="profilepage i18n">
       <option name="closed" value="true" />
@@ -563,7 +545,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746377950930</updated>
     </task>
-    <option name="localTasksCounter" value="380" />
+    <task id="LOCAL-00380" summary="healthcheck">
+      <option name="closed" value="true" />
+      <created>1746382009912</created>
+      <option name="number" value="00380" />
+      <option name="presentableId" value="LOCAL-00380" />
+      <option name="project" value="LOCAL" />
+      <updated>1746382009912</updated>
+    </task>
+    <task id="LOCAL-00381" summary="healthcheck">
+      <option name="closed" value="true" />
+      <created>1746382171284</created>
+      <option name="number" value="00381" />
+      <option name="presentableId" value="LOCAL-00381" />
+      <option name="project" value="LOCAL" />
+      <updated>1746382171284</updated>
+    </task>
+    <option name="localTasksCounter" value="382" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +584,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="ExecutorPaymentsPage skeleton" />
     <MESSAGE value="Проверил разделители" />
     <MESSAGE value="Календарь" />
     <MESSAGE value="Не работает ограничение по дням" />
@@ -611,7 +608,8 @@
     <MESSAGE value="Сортировка ордеров от самого свежего" />
     <MESSAGE value="обновил версию датапикера" />
     <MESSAGE value="Починил верстку календаря" />
-    <option name="LAST_COMMIT_MESSAGE" value="Починил верстку календаря" />
+    <MESSAGE value="healthcheck" />
+    <option name="LAST_COMMIT_MESSAGE" value="healthcheck" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
