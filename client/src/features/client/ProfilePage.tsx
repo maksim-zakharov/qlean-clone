@@ -1,6 +1,4 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Header} from "../../components/ui/Header.tsx";
-import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useEffect, useMemo, useState} from "react";
 import {BriefcaseBusiness, CalendarClock, ChevronRight, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
@@ -19,6 +17,7 @@ import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../
 import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
+import {useBackButton} from "../../hooks/useBackButton.ts";
 
 interface Address {
     // Дом
@@ -39,6 +38,8 @@ interface Address {
 }
 
 export const ProfilePage = () => {
+    useBackButton('/');
+
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const [loginMutation, {isLoading}] = useLoginMutation();
@@ -119,23 +120,15 @@ export const ProfilePage = () => {
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
     if (applicationLoading || isLoading) {
-        return <div className="px-4">
-            <div className="h-[56px]"/>
-            <div className="flex flex-col gap-6">
-                <Skeleton className="w-full h-[156px]"/>
-                <Skeleton className="w-full h-[44px]"/>
-                <Skeleton className="w-full h-[44px]"/>
-                <Skeleton className="w-full h-[40px]"/>
-            </div>
+        return <div className="flex flex-col gap-6 px-4">
+            <Skeleton className="w-full h-[156px]"/>
+            <Skeleton className="w-full h-[44px]"/>
+            <Skeleton className="w-full h-[44px]"/>
+            <Skeleton className="w-full h-[40px]"/>
         </div>
     }
 
     return <>
-        <Header>
-        <div className="grid grid-cols-[40px_auto_40px]">
-                <BackButton url="/"/>
-            </div>
-        </Header>
         <div className="flex flex-col content text-center px-4 gap-6 pb-6">
             <ListButtonGroup>
                 <ListButton icon={<Avatar className="w-7 h-7">
