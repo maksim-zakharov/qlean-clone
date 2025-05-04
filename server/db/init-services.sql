@@ -4,12 +4,12 @@ INSERT INTO "BaseService" (name) VALUES
 ('Химчистка');
 
 -- Вставка вариантов услуг для Уборки (baseServiceId = 1)
-INSERT INTO "ServiceVariant" (name, "basePrice", duration, "baseServiceId") VALUES
-('Поддерживающая', 3000, 120, 1),
-('Генеральная', 5000, 240, 1),
-('После ремонта', 6000, 300, 1),
-('Уборка коттеджей', 8000, 180, 1),
-('Коммерческие помещения', 10000, 240, 1);
+INSERT INTO "ServiceVariant" ("nameAccusative", "basePrice", duration, "baseServiceId", "icon", "name") VALUES
+('Поддерживающая', 3000, 120, 1, 'shield-check', 'Maintenance'),
+('Генеральная', 5000, 240, 1, 'sparkles', 'Deep'),
+('После ремонта', 6000, 300, 1, 'hammer', 'Post-Renovation'),
+('Уборка коттеджей', 8000, 180, 1, 'home', 'Cottage'),
+('Коммерческие помещения', 10000, 240, 1, 'building', 'Commercial Spaces');
 
 -- Вставка опций для Уборки (baseServiceId = 1)
 INSERT INTO "ServiceOption" (name, price, duration, "isPopular", "baseServiceId") VALUES
@@ -20,11 +20,11 @@ INSERT INTO "ServiceOption" (name, price, duration, "isPopular", "baseServiceId"
 ('Уборка балкона', 800, 45, false, 1);
 
 -- Вставка вариантов услуг для Химчистки (baseServiceId = 2)
-INSERT INTO "ServiceVariant" (name, "basePrice", duration, "baseServiceId") VALUES
-('Химчистка и стирка одежды', 2000, 120, 2),
-('Чистка ковров', 2500, 60, 2),
-('Химчистка мебели', 3500, 90, 2),
-('Чистка и ремонт обуви', 1500, 45, 2);
+INSERT INTO "ServiceVariant" ("nameAccusative", "basePrice", duration, "baseServiceId", "icon", "name") VALUES
+('Химчистка и стирка одежды', 2000, 120, 2, 'shirt', 'Dry Cleaning & Laundry'),
+('Чистка ковров', 2500, 60, 2, 'layers', 'Carpet Cleaning'),
+('Химчистка мебели', 3500, 90, 2, 'armchair', 'Upholstery'),
+('Чистка и ремонт обуви', 1500, 45, 2, 'footprints', 'Shoe Cleaning & Repair');
 
 -- Вставка опций для Химчистки (baseServiceId = 2)
 INSERT INTO "ServiceOption" (name, price, duration, "isPopular", "baseServiceId") VALUES
