@@ -84,7 +84,9 @@ export const ProfilePage = () => {
     })
 
     useEffect(() => {
+        console.log(345)
         navigator.geolocation.getCurrentPosition(async (pos) => {
+            console.log(123)
             const data = await reverse({lat: pos.coords.latitude, lon: pos.coords.longitude}).unwrap()
             setAddress(data.address)
         });

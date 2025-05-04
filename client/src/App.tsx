@@ -8,7 +8,7 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api/api.ts";
 import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.ts";
@@ -34,14 +34,8 @@ function App() {
     const {data: userinfo} = useGetUserInfoQuery(undefined, {
         skip: !isReady
     });
-    const [isLoading, setIsLoading] = useState(true);
+    const isLoading = useMemo(() => Boolean(!userinfo), [userinfo])
     const {data: services = []} = useGetServicesQuery();
-
-    useEffect(() => {
-        if(userinfo){
-            setTimeout(() => setIsLoading(false), 500);
-        }
-    }, [userinfo]);
 
     useEffect(() => {
         if (serviceId && services?.length > 0) {
@@ -55,7 +49,7 @@ function App() {
             dispatch(startOrderFlow({baseService, serviceVariant}))
             navigate(RoutePaths.Order.Create);
         }
-    }, [serviceId, variantId, services]);
+    }, [serviceId, variantId, services, dispatch, navigate]);
 
     if(!userinfo || isLoading) {
         return <div className="m-auto"><Loader2 className="animate-spin h-16 w-16 mb-16" /></div>
