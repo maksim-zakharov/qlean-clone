@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Сортировка ордеров от самого свежего">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="обновил версию датапикера">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/calendar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
       <recent name="D:\Projects\qlean-clone\server\src\dto" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.server:dev">
+  <component name="RunManager" selected="npm.client:dev">
     <configuration name="Debug Server" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -146,8 +144,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.server:dev" />
         <item itemvalue="npm.client:dev" />
+        <item itemvalue="npm.server:dev" />
         <item itemvalue="npm.build:ci" />
       </list>
     </recent_temporary>
@@ -173,14 +171,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00329" summary="logout, отступы your services">
-      <option name="closed" value="true" />
-      <created>1746265165094</created>
-      <option name="number" value="00329" />
-      <option name="presentableId" value="LOCAL-00329" />
-      <option name="project" value="LOCAL" />
-      <updated>1746265165094</updated>
     </task>
     <task id="LOCAL-00330" summary="Стрелочка темнее">
       <option name="closed" value="true" />
@@ -566,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746365213176</updated>
     </task>
-    <option name="localTasksCounter" value="378" />
+    <task id="LOCAL-00378" summary="обновил версию датапикера">
+      <option name="closed" value="true" />
+      <created>1746376341850</created>
+      <option name="number" value="00378" />
+      <option name="presentableId" value="LOCAL-00378" />
+      <option name="project" value="LOCAL" />
+      <updated>1746376341850</updated>
+    </task>
+    <option name="localTasksCounter" value="379" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +587,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="OrderCreationPage padding" />
     <MESSAGE value="Убрал тени у карточек" />
     <MESSAGE value="ExecutorPaymentsPage skeleton" />
     <MESSAGE value="Проверил разделители" />
@@ -614,7 +611,8 @@
     <MESSAGE value="Исполнитель показывается в заказе" />
     <MESSAGE value="OrderStatusText" />
     <MESSAGE value="Сортировка ордеров от самого свежего" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сортировка ордеров от самого свежего" />
+    <MESSAGE value="обновил версию датапикера" />
+    <option name="LAST_COMMIT_MESSAGE" value="обновил версию датапикера" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
