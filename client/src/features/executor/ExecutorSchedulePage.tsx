@@ -2,7 +2,7 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../.
 import React, { useMemo, useState} from "react";
 import dayjs from "dayjs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
-import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api.ts";
+import {useGetScheduleQuery, useUpdateScheduleMutation} from "../../api/api.ts";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
 import {useTranslation} from "react-i18next";

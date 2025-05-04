@@ -15,7 +15,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {ListButton} from "@/components/ListButton/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
-import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api.ts";
+import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api/api.ts";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";

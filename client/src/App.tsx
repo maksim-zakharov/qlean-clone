@@ -4,7 +4,7 @@ import MainPage from "./features/client/MainPage.tsx"
 import {OrderCreationPage} from "./features/client/OrderCreationPage.tsx"
 import {OrderCheckoutPage} from "./features/client/OrderCheckoutPage.tsx"
 import {ClientOrdersPage} from "./features/client/ClientOrdersPage.tsx";
-import {useGetServicesQuery, useGetUserInfoQuery} from "./api.ts";
+import {useGetServicesQuery, useGetUserInfoQuery} from "./api/api.ts";
 import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";

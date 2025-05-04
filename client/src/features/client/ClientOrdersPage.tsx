@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {useGetOrdersQuery} from "../../api.ts";
+import {useGetOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import { ClipboardPlus, ListPlus, RotateCw} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";

@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useCompleteOrderMutation, useGetOrderByIdQuery, useProcessedOrderMutation} from "../../api.ts";
+import {useCompleteOrderMutation, useGetOrderByIdQuery, useProcessedOrderMutation} from "../../api/ordersApi.ts";
 import React, {useMemo, useState} from "react";
 import {Button} from "../../components/ui/button.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";

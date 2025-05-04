@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export const ListButton: FC<IProps & React.ComponentProps<'div'>> = ({text, extra, icon, ...props}) => <Card
-    className={`p-0 gap-0 ListButton transition-colors ${props.onClick && 'active:[background-color:#313035]'}`} {...props}>
+    className={`p-0 gap-0 ListButton transition-colors select-none ${props.onClick && 'active:[background-color:#313035]'}`} {...props}>
     <div className="flex justify-between items-center">
         <div className="flex items-center w-full">
             {icon ? <div className="mr-4 h-7 w-7 my-2">{icon}</div> : undefined}

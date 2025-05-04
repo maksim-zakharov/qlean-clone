@@ -2,7 +2,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/com
 import {Button} from "./ui/button"
 import React, {useEffect, useState} from "react";
 import {useTelegram} from "../hooks/useTelegram.ts";
-import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api.ts";
+import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api/api.ts";
 import {InputWithLabel} from "./InputWithLabel.tsx";
 import { MapPlus, Trash2} from "lucide-react";
 

@@ -3,7 +3,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import dayjs, {Dayjs} from "dayjs";
-import {useGetAvailableDatesQuery, useGetExecutorBusySlotsQuery} from "../api.ts";
+import {useGetAvailableDatesQuery, useGetExecutorBusySlotsQuery} from "../api/api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
 import {Skeleton} from "./ui/skeleton.tsx";

@@ -1,10 +1,12 @@
 
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import {api} from "./api.ts";
+import {api} from "./api/api.ts";
 import createOrderSlice from "./slices/createOrderSlice.ts";
+import {ordersApi} from "./api/ordersApi.ts";
 
 export const reducers = {
     [api.reducerPath]: api.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
     [createOrderSlice.reducerPath]: createOrderSlice.reducer,
 };
 
@@ -16,5 +18,6 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     })
-        .concat(api.middleware) as any,
+        .concat(api.middleware)
+        .concat(ordersApi.middleware),
 });

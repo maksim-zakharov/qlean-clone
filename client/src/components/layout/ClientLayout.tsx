@@ -7,7 +7,7 @@ import {useTelegram} from "../../hooks/useTelegram.ts";
 import React, {useMemo} from "react";
 import {AddressSheet} from "../AddressSheet";
 import {Typography} from "../ui/Typography.tsx";
-import {useGetAddressesQuery} from "../../api.ts";
+import {useGetAddressesQuery} from "../../api/api.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 import {selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {useDispatch, useSelector} from "react-redux";

@@ -4,7 +4,7 @@ import React, {useEffect} from "react";
 import {useTelegram} from "../../hooks/useTelegram.ts";
 import {CardItem} from "../../components/CardItem.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
-import {useGetServicesQuery} from "../../api.ts";
+import {useGetServicesQuery} from "../../api/api.ts";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "../../slices/createOrderSlice.ts";
 import {DynamicIcon} from "lucide-react/dynamic";

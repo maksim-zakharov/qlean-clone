@@ -4,9 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Не работает ограничение по дням">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="подсветка ListButton">
+      <change afterPath="$PROJECT_DIR$/client/src/api/baseQuery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ListButton/ListButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorPaymentsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorSchedulePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/slices/createOrderSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +38,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="CSS File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -84,15 +106,15 @@
       <recent name="D:\Projects\qlean-clone\client\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\client\src\api" />
       <recent name="D:\Projects\qlean-clone\client\public\locales" />
       <recent name="D:\Projects\qlean-clone\client\public\locales\en" />
       <recent name="D:\Projects\qlean-clone\client\src\components\ListButton" />
       <recent name="D:\Projects\qlean-clone\server\src\dto" />
-      <recent name="D:\Projects\qlean-clone\client\src\features\client" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.main.ts">
-    <configuration name="main.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
+  <component name="RunManager" selected="npm.client:dev">
+    <configuration name="Debug Server" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
     <configuration name="build:ci (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -106,7 +128,7 @@
       <method v="2" />
     </configuration>
     <configuration name="build:ci" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
       <scripts>
         <script value="build:ci" />
@@ -115,50 +137,35 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="dev-host" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="client:dev" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
       <scripts>
-        <script value="dev-host" />
+        <script value="client:dev-host" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="start:dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="server:dev" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/server/package.json" />
       <command value="run" />
       <scripts>
-        <script value="start:dev" />
+        <script value="server:dev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.main.ts" />
-      <item itemvalue="npm.build:ci (1)" />
-      <item itemvalue="npm.build:ci" />
-      <item itemvalue="npm.dev" />
-      <item itemvalue="npm.dev-host" />
-      <item itemvalue="npm.start:dev" />
+      <item itemvalue="Node.js.Debug Server" />
+      <item itemvalue="npm.client:dev" />
+      <item itemvalue="npm.server:dev" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start:dev" />
-        <item itemvalue="npm.dev-host" />
-        <item itemvalue="npm.build:ci (1)" />
-        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.server:dev" />
+        <item itemvalue="npm.client:dev" />
         <item itemvalue="npm.build:ci" />
       </list>
     </recent_temporary>
@@ -184,14 +191,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00307" summary="немного редизайн">
-      <option name="closed" value="true" />
-      <created>1746022382768</created>
-      <option name="number" value="00307" />
-      <option name="presentableId" value="LOCAL-00307" />
-      <option name="project" value="LOCAL" />
-      <updated>1746022382768</updated>
     </task>
     <task id="LOCAL-00308" summary="jog application">
       <option name="closed" value="true" />
@@ -577,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746306695562</updated>
     </task>
-    <option name="localTasksCounter" value="356" />
+    <task id="LOCAL-00356" summary="подсветка ListButton">
+      <option name="closed" value="true" />
+      <created>1746338802728</created>
+      <option name="number" value="00356" />
+      <option name="presentableId" value="LOCAL-00356" />
+      <option name="project" value="LOCAL" />
+      <updated>1746338802728</updated>
+    </task>
+    <option name="localTasksCounter" value="357" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +607,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="logout, отступы your services" />
     <MESSAGE value="Стрелочка темнее" />
     <MESSAGE value="дизайн свича" />
     <MESSAGE value="profilepage i18n" />
@@ -625,6 +631,7 @@
     <MESSAGE value="Проверил разделители" />
     <MESSAGE value="Календарь" />
     <MESSAGE value="Не работает ограничение по дням" />
-    <option name="LAST_COMMIT_MESSAGE" value="Не работает ограничение по дням" />
+    <MESSAGE value="подсветка ListButton" />
+    <option name="LAST_COMMIT_MESSAGE" value="подсветка ListButton" />
   </component>
 </project>

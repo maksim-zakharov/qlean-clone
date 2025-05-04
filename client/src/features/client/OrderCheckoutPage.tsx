@@ -12,7 +12,8 @@ import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
-import {useAddOrderMutation, useGetAddressesQuery} from "../../api.ts";
+import {useGetAddressesQuery} from "../../api/api.ts";
+import {useAddOrderMutation} from "../../api/ordersApi.ts";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {AddressSheet} from "../../components/AddressSheet.tsx";

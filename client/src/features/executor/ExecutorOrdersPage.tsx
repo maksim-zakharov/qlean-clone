@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api.ts";
+import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import { CalendarCheck, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";

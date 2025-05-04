@@ -12,7 +12,7 @@ import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
-import {usePatchOrderMutation} from "../../api.ts";
+import {usePatchOrderMutation} from "../../api/ordersApi.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
 import {RoutePaths} from "../../routes.ts";
