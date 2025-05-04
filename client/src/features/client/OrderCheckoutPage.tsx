@@ -52,7 +52,7 @@ export const OrderCheckoutPage = () => {
             return t('client_checkout_date_placeholder');
         }
 
-        return dayjs.utc(selectedTimestamp).format('dddd, D MMMM HH:mm');
+        return dayjs.utc(selectedTimestamp).local().format('dddd, D MMMM HH:mm');
     }, [selectedTimestamp, t]);
 
     const handleSelectAddress = (address: any) => {

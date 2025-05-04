@@ -79,7 +79,7 @@ export const OrderDetailsPage = () => {
 
     const handleCloseClick = () => {
         setAlertConfig({
-            title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).format('dd, D MMMM HH:mm')}?`,
+            title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
             description: t('client_order_details_cancel_description'),
             show: true
         })
@@ -152,8 +152,8 @@ export const OrderDetailsPage = () => {
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>{dayjs.utc(order.date).format('D MMMM')}</Typography.Description>
-                            <Typography.Title>{dayjs.utc(order.date).format('HH:mm')}</Typography.Title>
+                            <Typography.Description>{dayjs.utc(order.date).local().format('D MMMM')}</Typography.Description>
+                            <Typography.Title>{dayjs.utc(order.date).local().format('HH:mm')}</Typography.Title>
                         </div>
                         {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id}
                                                    optionIds={order?.options.map(o => o.id)}

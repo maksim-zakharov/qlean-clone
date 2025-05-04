@@ -85,7 +85,7 @@ export const ClientOrdersPage = () => {
                     </div>
                     <div className="flex justify-between">
                         <Typography.Description>{ao.fullAddress}</Typography.Description>
-                        <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                        <Typography.Description>{dayjs.utc(ao.date).local().format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">
@@ -116,7 +116,7 @@ export const ClientOrdersPage = () => {
                     </div>
                     <div className="flex justify-between">
                         <Typography.Description>{ao.fullAddress}</Typography.Description>
-                        <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                        <Typography.Description>{dayjs.utc(ao.date).local().format('D MMMM, HH:mm')}</Typography.Description>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">

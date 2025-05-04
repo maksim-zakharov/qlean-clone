@@ -135,7 +135,7 @@ export const ExecutorPaymentsPage = () => {
                 </div>
                 <div className="flex justify-between">
                     <Typography.Description>{ao.fullAddress}</Typography.Description>
-                    <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                    <Typography.Description>{dayjs.utc(ao.date).local().format('D MMMM, HH:mm')}</Typography.Description>
                 </div>
                 <div className="flex gap-2 mt-2 pb-3">
                     <Star className="w-4 h-4 text-tg-theme-button-color"/>

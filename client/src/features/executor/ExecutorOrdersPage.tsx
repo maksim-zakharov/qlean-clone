@@ -142,7 +142,7 @@ export const ExecutorOrdersPage = () => {
                             </div>
                             <div className="flex justify-between">
                                 <Typography.Description>{ao.fullAddress}</Typography.Description>
-                                <Typography.Description>{dayjs.utc(ao.date).format('D MMMM, HH:mm')}</Typography.Description>
+                                <Typography.Description>{dayjs.utc(ao.date).local().format('D MMMM, HH:mm')}</Typography.Description>
                             </div>
                         </div>
                     </AccordionTrigger>
