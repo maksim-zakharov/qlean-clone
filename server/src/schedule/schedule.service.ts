@@ -368,11 +368,8 @@ export class ScheduleService {
       };
     });
 
-    // Получаем все дни недели
-    const daysOfWeek = Object.values(DayOfWeek);
-
     // Формируем массив доступных дат
-    const availableDates = new Set<number>([]);
+    const availableDates = new Set<string>([]);
 
     const executorIdDayOfWeekScheduleDayMap = executors.reduce(
       (acc, executor) => {
@@ -468,12 +465,14 @@ export class ScheduleService {
             isIntervalAvailable &&
             currentSlotIndex - i >= Math.ceil(totalDuration / 60)
           ) {
-            availableDates.add(dayjs(startTimestamp).startOf('day').valueOf());
+            availableDates.add(
+              dayjs(startTimestamp).startOf('day').format('YYYY-MM-DD'),
+            );
             // Если хотя бы 1 слот есть - уже можно брейкать цикл
             break;
           }
         }
-        if (availableDates.has(startOfDay.valueOf())) {
+        if (availableDates.has(startOfDay.format('YYYY-MM-DD'))) {
           // И из этого цикла тоже выходим, достаточно
           break;
         }
