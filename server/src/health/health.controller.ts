@@ -1,21 +1,30 @@
-
 import { Controller, Get } from '@nestjs/common';
-import {HealthCheckService, HealthCheck} from '@nestjs/terminus';
-import {PrismaHealthIndicator} from "./prisma.health";
+import { HealthCheckService, HealthCheck } from '@nestjs/terminus';
+import { PrismaHealthIndicator } from './prisma.health';
+import dayjs from 'dayjs';
 
 @Controller('/health')
 export class HealthController {
-    constructor(
-        private health: HealthCheckService,
-        private prismaHealth: PrismaHealthIndicator,
-    ) {}
+  constructor(
+    private health: HealthCheckService,
+    private prismaHealth: PrismaHealthIndicator,
+  ) {}
 
-    @Get()
-    @HealthCheck()
-    check() {
-        return this.health.check([
-            // Проверка подключения к PostgreSQL через Prisma
-            () => this.prismaHealth.isHealthy('database'),
-        ]);
-    }
+  @Get('healthcheck')
+  async healthCheck() {
+    return {
+      serverTime: new Date().toISOString(),
+      serverTimeDayjs: dayjs().toISOString(),
+      env: process.env.NODE_ENV,
+    };
+  }
+
+  @Get()
+  @HealthCheck()
+  check() {
+    return this.health.check([
+      // Проверка подключения к PostgreSQL через Prisma
+      () => this.prismaHealth.isHealthy('database'),
+    ]);
+  }
 }
