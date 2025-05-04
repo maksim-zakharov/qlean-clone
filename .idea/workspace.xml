@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="починил available-days">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Выбранная дата выделяется цветом">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,22 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00322" summary="Скелетон для фетча слотов">
-      <option name="closed" value="true" />
-      <created>1746199229111</created>
-      <option name="number" value="00322" />
-      <option name="presentableId" value="LOCAL-00322" />
-      <option name="project" value="LOCAL" />
-      <updated>1746199229111</updated>
-    </task>
-    <task id="LOCAL-00323" summary="бизнес ошибки + редактирование даты">
-      <option name="closed" value="true" />
-      <created>1746204373710</created>
-      <option name="number" value="00323" />
-      <option name="presentableId" value="LOCAL-00323" />
-      <option name="project" value="LOCAL" />
-      <updated>1746204373710</updated>
     </task>
     <task id="LOCAL-00324" summary="аккордион кликается, можно работать с услугой без доп опций">
       <option name="closed" value="true" />
@@ -563,7 +549,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746362089114</updated>
     </task>
-    <option name="localTasksCounter" value="371" />
+    <task id="LOCAL-00371" summary="Выбранная дата по умолчанию">
+      <option name="closed" value="true" />
+      <created>1746362257759</created>
+      <option name="number" value="00371" />
+      <option name="presentableId" value="LOCAL-00371" />
+      <option name="project" value="LOCAL" />
+      <updated>1746362257759</updated>
+    </task>
+    <task id="LOCAL-00372" summary="Выбранная дата выделяется цветом">
+      <option name="closed" value="true" />
+      <created>1746362502158</created>
+      <option name="number" value="00372" />
+      <option name="presentableId" value="LOCAL-00372" />
+      <option name="project" value="LOCAL" />
+      <updated>1746362502158</updated>
+    </task>
+    <option name="localTasksCounter" value="373" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,8 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="OrderCreationPage i18n" />
-    <MESSAGE value="OrderDetailsPage skeleton" />
     <MESSAGE value="ClientOrdersPage skeleton" />
     <MESSAGE value="ExecutorSchedulePage skeleton" />
     <MESSAGE value="OrderDetailsPage кнопки пва" />
@@ -611,7 +611,9 @@
     <MESSAGE value="ExecutorOrderDetailsPage локалайз" />
     <MESSAGE value="useGeoLocation" />
     <MESSAGE value="починил available-days" />
-    <option name="LAST_COMMIT_MESSAGE" value="починил available-days" />
+    <MESSAGE value="Выбранная дата по умолчанию" />
+    <MESSAGE value="Выбранная дата выделяется цветом" />
+    <option name="LAST_COMMIT_MESSAGE" value="Выбранная дата выделяется цветом" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -3,7 +3,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.ts";
 import dayjs, {Dayjs} from "dayjs";
-import {useGetAvailableDatesQuery, useGetExecutorBusySlotsQuery} from "../api/api.ts";
+import {useGetAvailableDatesQuery, useGetExecutorAvailableSlotsQuery} from "../api/api.ts";
 import {EmptyState} from "./EmptyState.tsx";
 import {CalendarX} from "lucide-react";
 import {Skeleton} from "./ui/skeleton.tsx";
@@ -49,16 +49,7 @@ export function ScheduleSheet({
         return slots.filter(s => s.timestamp >= Date.now());
     }
 
-    const result = useMemo(() => Array.from({length: 7}, (_, i) => {
-        const date = dayjs().add(i, 'day').startOf('day');
-        return {
-            date: date.format('dddd, D MMMM').toLowerCase(),
-            timestamp: date.valueOf(),
-            slots: generateTimeSlots(date)
-        };
-    }).filter(s => s.slots.length > 0), []);
-
-    const [tab, setTab] = useState<Date>(new Date(result[0]?.timestamp));
+    const [tab, setTab] = useState<Date>(dayjs().startOf('day').toDate());
 
     const {data: availableDates = []} = useGetAvailableDatesQuery({
         optionIds,
@@ -82,19 +73,15 @@ export function ScheduleSheet({
         return !availableDatesSet.has(value);
     }, [availableDatesSet]);
 
-    const {data: busySlots = [], isFetching} = useGetExecutorBusySlotsQuery({
-        date: tab ? dayjs(tab).valueOf() : result[0]?.timestamp,
+    const {data: availableSlots = [], isFetching} = useGetExecutorAvailableSlotsQuery({
+        date: dayjs(tab).valueOf(),
         serviceVariantId,
         optionIds
     }, {
-        skip: !tab && !result[0]?.timestamp || !serviceVariantId || !optionIds
+        skip: !tab || !serviceVariantId || !optionIds
     });
 
-    const filteredSlots = useMemo(() => {
-        const slots = result.find(r => r.timestamp === dayjs(tab).valueOf())?.slots || [];
-        const busyTimestamps = new Set(busySlots.map(slot => slot.timestamp));
-        return slots.filter(slot => busyTimestamps.has(slot.timestamp));
-    }, [tab, result, busySlots]);
+    const filteredSlots = useMemo(() => availableSlots.map(sl => ({...sl, time: dayjs(sl.timestamp).format('HH:mm')})), [availableSlots]);
 
     return (
         <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
@@ -105,16 +92,6 @@ export function ScheduleSheet({
                 <SheetHeader>
                     <SheetTitle
                         className="text-xl font-bold text-tg-theme-text-color text-left">{t('calendar_title')}</SheetTitle>
-                    {/*<Tabs defaultValue={tab} onValueChange={setTab} className="mt-[calc(env(safe-area-inset-top))]">*/}
-                    {/*    <TabsList className="bg-inherit px-0">*/}
-                    {/*        {result.map(r => <TabsTrigger*/}
-                    {/*            key={r.timestamp}*/}
-                    {/*            value={r.timestamp.toString()}*/}
-                    {/*        >*/}
-                    {/*            {r.date}*/}
-                    {/*        </TabsTrigger>)}*/}
-                    {/*    </TabsList>*/}
-                    {/*</Tabs>*/}
                 </SheetHeader>
                 <Calendar className="px-0"
                           mode="single"
