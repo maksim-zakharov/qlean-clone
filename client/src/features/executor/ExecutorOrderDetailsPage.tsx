@@ -45,6 +45,14 @@ export const ExecutorOrderDetailsPage = () => {
         navigate(RoutePaths.Executor.Orders)
     }
 
+    const handleApplyJob = async (order) => {
+        try{
+            await processedOrder(order).unwrap()
+        }catch(e){
+            alert(JSON.stringify(e));
+        }
+    }
+
     const handleOptionToggle = (prefix: string, id: string) => {
         vibro('light');
         const prefId = `${prefix}_${id}`;
@@ -103,7 +111,7 @@ export const ExecutorOrderDetailsPage = () => {
             {(order?.status === 'processed' || canStart) &&
                 <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
                     {canStart && <Button wide loading={processedOrderLoading}
-                                         onClick={() => processedOrder(order).unwrap()}>{t('executor_order_apply_btn')}</Button>}
+                                         onClick={() => handleApplyJob(order)}>{t('executor_order_apply_btn')}</Button>}
                     {order?.status === 'processed' &&
                         <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)}
                                 wide>{t('executor_order_complete_btn')}</Button>}
