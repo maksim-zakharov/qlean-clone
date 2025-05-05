@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="getById">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
       <change beforePath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,22 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00356" summary="подсветка ListButton">
-      <option name="closed" value="true" />
-      <created>1746338802728</created>
-      <option name="number" value="00356" />
-      <option name="presentableId" value="LOCAL-00356" />
-      <option name="project" value="LOCAL" />
-      <updated>1746338802728</updated>
-    </task>
-    <task id="LOCAL-00357" summary="создал ordersApi.ts">
-      <option name="closed" value="true" />
-      <created>1746342759603</created>
-      <option name="number" value="00357" />
-      <option name="presentableId" value="LOCAL-00357" />
-      <option name="project" value="LOCAL" />
-      <updated>1746342759603</updated>
     </task>
     <task id="LOCAL-00358" summary="checkout padding btn">
       <option name="closed" value="true" />
@@ -569,7 +549,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746442860426</updated>
     </task>
-    <option name="localTasksCounter" value="405" />
+    <task id="LOCAL-00405" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
+      <option name="closed" value="true" />
+      <created>1746443703962</created>
+      <option name="number" value="00405" />
+      <option name="presentableId" value="LOCAL-00405" />
+      <option name="project" value="LOCAL" />
+      <updated>1746443703962</updated>
+    </task>
+    <task id="LOCAL-00406" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
+      <option name="closed" value="true" />
+      <created>1746444079413</created>
+      <option name="number" value="00406" />
+      <option name="presentableId" value="LOCAL-00406" />
+      <option name="project" value="LOCAL" />
+      <updated>1746444079413</updated>
+    </task>
+    <option name="localTasksCounter" value="407" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="reverse в RTK" />
     <MESSAGE value="рефакторинг" />
     <MESSAGE value="ProfilePage скелетон для исполнителя" />
     <MESSAGE value="ExecutorOrdersPage скелетон" />
@@ -617,19 +612,10 @@
     <MESSAGE value="--tg-theme-bottom_bar_bg_color" />
     <MESSAGE value="todo" />
     <MESSAGE value="getById" />
-    <option name="LAST_COMMIT_MESSAGE" value="getById" />
+    <MESSAGE value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/src/orders/orders.service.ts</url>
-          <line>62</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="js.build_tools.npm">
         <watch expression="new Date(startTimestamp)" language="TypeScript" />

@@ -2,7 +2,7 @@ import React, {useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {useGetOrdersQuery} from "../../api/ordersApi.ts";
+import {useGetExecutorOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import {CalendarSync, Star, Banknote} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
@@ -15,7 +15,7 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const ExecutorPaymentsPage = () => {
     const {t} = useTranslation();
-    const {data: orders = [], isLoading, isError} = useGetOrdersQuery(undefined, {
+    const {data: orders = [], isLoading, isError} = useGetExecutorOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
 
