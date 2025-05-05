@@ -109,7 +109,7 @@ export const ProfilePage = () => {
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
 
-    if (applicationLoading || isLoading || !address) {
+    if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
             <Skeleton className="w-full h-[156px]"/>
             <Skeleton className="w-full h-[44px]"/>

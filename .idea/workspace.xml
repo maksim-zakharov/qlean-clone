@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
-      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,22 +170,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00359" summary="Убрал хедер в профиле">
-      <option name="closed" value="true" />
-      <created>1746343470585</created>
-      <option name="number" value="00359" />
-      <option name="presentableId" value="LOCAL-00359" />
-      <option name="project" value="LOCAL" />
-      <updated>1746343470585</updated>
-    </task>
-    <task id="LOCAL-00360" summary="Добавил иконки для сервисов + англ названия">
-      <option name="closed" value="true" />
-      <created>1746344770346</created>
-      <option name="number" value="00360" />
-      <option name="presentableId" value="LOCAL-00360" />
-      <option name="project" value="LOCAL" />
-      <updated>1746344770346</updated>
     </task>
     <task id="LOCAL-00361" summary="Добавил иконки для сервисов + англ названия">
       <option name="closed" value="true" />
@@ -565,7 +547,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746444370091</updated>
     </task>
-    <option name="localTasksCounter" value="408" />
+    <task id="LOCAL-00408" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
+      <option name="closed" value="true" />
+      <created>1746444586264</created>
+      <option name="number" value="00408" />
+      <option name="presentableId" value="LOCAL-00408" />
+      <option name="project" value="LOCAL" />
+      <updated>1746444586264</updated>
+    </task>
+    <task id="LOCAL-00409" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
+      <option name="closed" value="true" />
+      <created>1746444888206</created>
+      <option name="number" value="00409" />
+      <option name="presentableId" value="LOCAL-00409" />
+      <option name="project" value="LOCAL" />
+      <updated>1746444888206</updated>
+    </task>
+    <option name="localTasksCounter" value="410" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
