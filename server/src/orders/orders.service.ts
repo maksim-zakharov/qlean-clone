@@ -20,7 +20,7 @@ export class OrdersService {
 
   async getById(id: Order['id'], userId: Order['userId']) {
     const order = await this.prisma.order.findUnique({
-      where: { id, userId },
+      where: { id },
       include: {
         baseService: true,
         options: true,
@@ -28,6 +28,8 @@ export class OrdersService {
         executor: true,
       },
     });
+
+    // TODO Фильтровать по userid и кидать ошибку если заказ не найден
 
     order.status =
       order.date > new Date() ? order.status : OrderStatus.completed;

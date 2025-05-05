@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="--tg-theme-bottom_bar_bg_color" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="todo">
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,22 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00351" summary="ExecutorPaymentsPage skeleton">
-      <option name="closed" value="true" />
-      <created>1746299525729</created>
-      <option name="number" value="00351" />
-      <option name="presentableId" value="LOCAL-00351" />
-      <option name="project" value="LOCAL" />
-      <updated>1746299525729</updated>
-    </task>
-    <task id="LOCAL-00352" summary="Проверил разделители">
-      <option name="closed" value="true" />
-      <created>1746300409978</created>
-      <option name="number" value="00352" />
-      <option name="presentableId" value="LOCAL-00352" />
-      <option name="project" value="LOCAL" />
-      <updated>1746300409978</updated>
     </task>
     <task id="LOCAL-00353" summary="Календарь">
       <option name="closed" value="true" />
@@ -563,7 +549,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746435072233</updated>
     </task>
-    <option name="localTasksCounter" value="400" />
+    <task id="LOCAL-00400" summary="todo">
+      <option name="closed" value="true" />
+      <created>1746442215422</created>
+      <option name="number" value="00400" />
+      <option name="presentableId" value="LOCAL-00400" />
+      <option name="project" value="LOCAL" />
+      <updated>1746442215422</updated>
+    </task>
+    <task id="LOCAL-00401" summary="todo">
+      <option name="closed" value="true" />
+      <created>1746442433228</created>
+      <option name="number" value="00401" />
+      <option name="presentableId" value="LOCAL-00401" />
+      <option name="project" value="LOCAL" />
+      <updated>1746442433228</updated>
+    </task>
+    <option name="localTasksCounter" value="402" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Убрал хедер в профиле" />
     <MESSAGE value="Добавил иконки для сервисов + англ названия" />
     <MESSAGE value="reverse в RTK" />
     <MESSAGE value="рефакторинг" />
@@ -611,7 +612,8 @@
     <MESSAGE value="пофиксил верстку календаря" />
     <MESSAGE value="Разобрался с временем" />
     <MESSAGE value="--tg-theme-bottom_bar_bg_color" />
-    <option name="LAST_COMMIT_MESSAGE" value="--tg-theme-bottom_bar_bg_color" />
+    <MESSAGE value="todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
