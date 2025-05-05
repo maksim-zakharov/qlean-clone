@@ -64,18 +64,19 @@ html {
     --tg-color-scheme: light;
     --tg-theme-bg-color: #ffffff;
     --tg-theme-text-color: #000000;
-    --tg-theme-hint-color: #707579;
-    --tg-theme-link-color: #3390ec;
-    --tg-theme-button-color: #3390ec;
+    --tg-theme-hint-color: #8e8e93;
+    --tg-theme-link-color: #007aff;
+    --tg-theme-button-color: #007aff;
     --tg-theme-button-text-color: #ffffff;
-    --tg-theme-secondary-bg-color: #f4f4f5;
-    --tg-theme-header-bg-color: #ffffff;
-    --tg-theme-accent-text-color: #3390ec;
+    --tg-theme-secondary-bg-color: #efeff4;
+    --tg-theme-header-bg-color: #f8f8f8;
+    --tg-theme-accent-text-color: #007aff;
     --tg-theme-section-bg-color: #ffffff;
-    --tg-theme-section-header-text-color: #707579;
-    --tg-theme-subtitle-text-color: #707579;
-    --tg-theme-destructive-text-color: #e53935;
-    --tg-theme-section-separator-color: #EFEFF3;
+    --tg-theme-section-header-text-color: #6d6d72;
+    --tg-theme-subtitle-text-color: #8e8e93;
+    --tg-theme-destructive-text-color: #ff3b30;
+    --tg-theme-section-separator-color: #c8c7cc;
+    --tg-theme-bottom_bar_bg_color: #f2f2f2;
 
     --tg-accent-green: #2ccb54;
     --tg-accent-blue: #0b7def;
@@ -96,20 +97,21 @@ html {
 .dark {
     /* Telegram WebApp theme variables */
     --tg-color-scheme: dark;
-    --tg-theme-bg-color: #0f0f0f;
+    --tg-theme-bg-color: #000000;
     --tg-theme-text-color: #ffffff;
-    --tg-theme-hint-color: #aaaaaa;
-    --tg-theme-link-color: #8774e1;
-    --tg-theme-button-color: #8774e1;
+    --tg-theme-hint-color: #98989e;
+    --tg-theme-link-color: #3e88f7;
+    --tg-theme-button-color: #3e88f7;
     --tg-theme-button-text-color: #ffffff;
-    --tg-theme-secondary-bg-color: #212121;
-    --tg-theme-header-bg-color: #212121;
-    --tg-theme-accent-text-color: #8774e1;
-    --tg-theme-section-bg-color: #212121;
-    --tg-theme-section-header-text-color: #aaaaaa;
-    --tg-theme-subtitle-text-color: #aaaaaa;
-    --tg-theme-destructive-text-color: #e53935;
-    --tg-theme-section-separator-color: #000000;
+    --tg-theme-secondary-bg-color: #1c1c1d;
+    --tg-theme-header-bg-color: #1a1a1a;
+    --tg-theme-accent-text-color: #3e88f7;
+    --tg-theme-section-bg-color: #2c2c2e;
+    --tg-theme-section-header-text-color: #8d8e93;
+    --tg-theme-subtitle-text-color: #98989e;
+    --tg-theme-destructive-text-color: #eb5545;
+    --tg-theme-section-separator-color: #545458;
+    --tg-theme-bottom_bar_bg_color: #1d1d1d;
 
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
@@ -363,7 +365,7 @@ html {
     }
 
     .card-bg-color-transparency {
-        background-color: rgb(from var(--tg-theme-section-bg-color) r g b / 90%);
+        background-color: rgb(from var(--tg-theme-bottom_bar_bg_color) r g b / 90%);
     }
 
     .dark {
@@ -384,7 +386,7 @@ html {
         }
 
         .card-bg-color-transparency {
-            background-color: rgb(from var(--tg-theme-secondary-bg-color) r g b / 90%);
+            background-color: rgb(from var(--tg-theme-bottom_bar_bg_color) r g b / 90%);
         }
     }
 
