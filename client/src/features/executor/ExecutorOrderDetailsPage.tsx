@@ -57,12 +57,12 @@ export const ExecutorOrderDetailsPage = () => {
     const canFinalized = useMemo(() => (order?.options || []).every(op => selectedOptionsIdSet.has(`option_${op.id}`)) && selectedOptionsIdSet.has(`variant_${order?.serviceVariant?.id}`), [selectedOptionsIdSet, order?.options, order?.serviceVariant?.id])
 
     const canStart = useMemo(() => {
-      if (!order) return false;
+        if (!order) return false;
 
         const orderDate = dayjs.utc(order.date);
         const today = dayjs.utc();
-      return order?.status === 'todo' &&
-          orderDate.isSame(today, 'day'); // Сравниваем год, месяц и день в UTC
+        return order?.status === 'todo' &&
+            orderDate.isSame(today, 'day'); // Сравниваем год, месяц и день в UTC
     }, [order]);
 
     if (isLoading) {
@@ -83,22 +83,25 @@ export const ExecutorOrderDetailsPage = () => {
             {/*<div>{order?.fullAddress}</div>*/}
 
             <Typography.H2 className="mb-2">{t('executor_order_details_title')}</Typography.H2>
+            {JSON.stringify(order)}
             <ListButtonGroup>
                 <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
                     order?.status === 'processed' &&
                     <Checkbox checked={selectedOptionsIdSet.has(`variant_${order?.serviceVariant?.id}`)}
-                              onCheckedChange={() => handleOptionToggle('variant', order?.serviceVariant?.id)}/>}>{order?.serviceVariant?.name} {order?.serviceVariant?.duration}</ListButton>
+                              onCheckedChange={() => handleOptionToggle('variant', order?.serviceVariant?.id)}/>}/>
                 {order?.options.map(op => <ListButton key={op?.id} text={op?.name} extra={
                     order?.status === 'processed' && <Checkbox checked={selectedOptionsIdSet.has(`option_${op.id}`)}
                                                                onCheckedChange={() => handleOptionToggle('option', op?.id)}/>}>{op?.name} {op?.duration}</ListButton>)}
             </ListButtonGroup>
 
-            {(order?.status === 'todo' || canStart) && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
-                {canStart && <Button wide loading={processedOrderLoading}
-                                                     onClick={() => processedOrder(order).unwrap()}>{t('executor_order_apply_btn')}</Button>}
-                {order?.status === 'processed' &&
-                    <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)} wide>{t('executor_order_complete_btn')}</Button>}
-            </BottomActions>}
+            {(order?.status === 'todo' || canStart) &&
+                <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
+                    {canStart && <Button wide loading={processedOrderLoading}
+                                         onClick={() => processedOrder(order).unwrap()}>{t('executor_order_apply_btn')}</Button>}
+                    {order?.status === 'processed' &&
+                        <Button disabled={!canFinalized} onClick={() => setOrderToDelete(order)}
+                                wide>{t('executor_order_complete_btn')}</Button>}
+                </BottomActions>}
         </div>
         <AlertDialogWrapper open={Boolean(orderToDelete)} title={t('finalize_order_modal_title')}
                             description={t('finalize_order_modal_description')}
