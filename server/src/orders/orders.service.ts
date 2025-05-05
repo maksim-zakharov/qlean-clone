@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Order, OrderStatus, User } from '@prisma/client';
 import { BusinessException } from '../common/exceptions/business.exception';
@@ -20,7 +24,7 @@ export class OrdersService {
 
   async getById(id: Order['id'], userId: Order['userId']) {
     const order = await this.prisma.order.findUnique({
-      where: { id },
+      where: { id, userId },
       include: {
         baseService: true,
         options: true,
@@ -29,7 +33,34 @@ export class OrdersService {
       },
     });
 
-    // TODO Фильтровать по userid и кидать ошибку если заказ не найден
+    if (!order) throw new NotFoundException('Order not found');
+
+    order.status =
+      order.date > new Date() ? order.status : OrderStatus.completed;
+
+    return order;
+  }
+
+  async getByIdFromExecutor(id: Order['id'], executorId: Order['executorId']) {
+    const order = await this.prisma.order.findUnique({
+      where: {
+        id,
+        OR: [
+          {
+            executorId,
+          },
+          { status: 'todo' },
+        ],
+      },
+      include: {
+        baseService: true,
+        options: true,
+        serviceVariant: true,
+        executor: true,
+      },
+    });
+
+    if (!order) throw new NotFoundException('Order not found');
 
     order.status =
       order.date > new Date() ? order.status : OrderStatus.completed;
@@ -50,7 +81,14 @@ export class OrdersService {
 
   getAllByExecutor(executorId: Order['executorId']) {
     return this.prisma.order.findMany({
-      // where: {executorId}, // TODO потом вернуть
+      where: {
+        OR: [
+          {
+            executorId,
+          },
+          { status: 'todo' },
+        ],
+      },
       include: {
         baseService: true,
         options: true,

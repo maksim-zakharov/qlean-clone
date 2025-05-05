@@ -30,6 +30,13 @@ export class ExecutorController {
     );
   }
 
+  @Get('/orders/:id')
+  getByIdFromExecutor(@Param('id') id: number, @Req() req) {
+    return this.ordersService
+      .getByIdFromExecutor(id, req.user.id)
+      .then((r) => plainToInstance(OrderDTO, r));
+  }
+
   @Post('/orders/:id/complete')
   async completeOrder(@Param('id') id: number, @Req() req) {
     const item = await this.ordersService.getById(Number(id), req.user.id);

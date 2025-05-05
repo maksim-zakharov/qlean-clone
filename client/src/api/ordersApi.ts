@@ -77,6 +77,13 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Order'],
         }),
+        getOrderByIdFromExecutor: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/executor/orders/${params.id}`,
+                params
+            }),
+            providesTags: ['Order'],
+        }),
     })
 });
 
@@ -86,6 +93,7 @@ export const {
     useGetOrderByIdQuery,
     useCancelOrderMutation,
     useEditOrderMutation,
+    useGetOrderByIdFromExecutorQuery,
     usePatchOrderMutation,
     useGetExecutorOrdersQuery,
     useCompleteOrderMutation,

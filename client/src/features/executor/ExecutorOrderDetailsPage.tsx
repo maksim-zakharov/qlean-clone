@@ -1,5 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useCompleteOrderMutation, useGetOrderByIdQuery, useProcessedOrderMutation} from "../../api/ordersApi.ts";
+import {
+    useCompleteOrderMutation,
+    useGetOrderByIdFromExecutorQuery,
+    useProcessedOrderMutation
+} from "../../api/ordersApi.ts";
 import React, {useMemo, useState} from "react";
 import {Button} from "../../components/ui/button.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
@@ -25,7 +29,7 @@ export const ExecutorOrderDetailsPage = () => {
     const [orderToDelete, setOrderToDelete] = useState<any | null>(null);
     const {id} = useParams<string>();
     const {vibro} = useTelegram();
-    const {data: order, isLoading} = useGetOrderByIdQuery({id: id!});
+    const {data: order, isLoading} = useGetOrderByIdFromExecutorQuery({id: id!});
     const [variantIds, setVariantIds] = useState<any>([]);
     const selectedOptionsIdSet = useMemo(() => new Set(variantIds), [variantIds]);
 
