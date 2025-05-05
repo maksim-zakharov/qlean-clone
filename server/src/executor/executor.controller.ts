@@ -51,7 +51,7 @@ export class ExecutorController {
 
   @Post('/orders/:id/processed')
   async processedOrder(@Param('id') id: number, @Req() req) {
-    const item = await this.ordersService.getById(Number(id), req.user.id);
+    const item = await this.ordersService.getByIdFromExecutor(id, req.user.id);
 
     item.status = OrderStatus.processed;
     item.executorId = req.user.id;
