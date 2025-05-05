@@ -66,8 +66,11 @@ export const ExecutorOrderDetailsPage = () => {
     }, [order]);
 
     if (isLoading) {
+        // TODO Переписать на скелетон
         return <PageLoader/>
     }
+
+    // TODO Добавить экран ошибки
 
     return <>
         <Header>
@@ -83,7 +86,6 @@ export const ExecutorOrderDetailsPage = () => {
             {/*<div>{order?.fullAddress}</div>*/}
 
             <Typography.H2 className="mb-2">{t('executor_order_details_title')}</Typography.H2>
-            {JSON.stringify(order)}
             <ListButtonGroup>
                 <ListButton key={order?.serviceVariant?.id} text={order?.serviceVariant?.name} extra={
                     order?.status === 'processed' &&

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="todo">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="getById">
       <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,14 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00353" summary="Календарь">
-      <option name="closed" value="true" />
-      <created>1746302586389</created>
-      <option name="number" value="00353" />
-      <option name="presentableId" value="LOCAL-00353" />
-      <option name="project" value="LOCAL" />
-      <updated>1746302586389</updated>
     </task>
     <task id="LOCAL-00354" summary="Календарь">
       <option name="closed" value="true" />
@@ -565,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746442433228</updated>
     </task>
-    <option name="localTasksCounter" value="402" />
+    <task id="LOCAL-00402" summary="getById">
+      <option name="closed" value="true" />
+      <created>1746442721743</created>
+      <option name="number" value="00402" />
+      <option name="presentableId" value="LOCAL-00402" />
+      <option name="project" value="LOCAL" />
+      <updated>1746442721743</updated>
+    </task>
+    <option name="localTasksCounter" value="403" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Добавил иконки для сервисов + англ названия" />
     <MESSAGE value="reverse в RTK" />
     <MESSAGE value="рефакторинг" />
     <MESSAGE value="ProfilePage скелетон для исполнителя" />
@@ -613,7 +612,8 @@
     <MESSAGE value="Разобрался с временем" />
     <MESSAGE value="--tg-theme-bottom_bar_bg_color" />
     <MESSAGE value="todo" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo" />
+    <MESSAGE value="getById" />
+    <option name="LAST_COMMIT_MESSAGE" value="getById" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
