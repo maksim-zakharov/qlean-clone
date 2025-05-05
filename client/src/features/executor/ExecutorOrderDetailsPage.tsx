@@ -46,10 +46,17 @@ export const ExecutorOrderDetailsPage = () => {
     }
 
     const handleApplyJob = async (order) => {
-        try{
+        try {
             await processedOrder(order).unwrap()
-        }catch(e){
-            alert(JSON.stringify(e));
+        } catch (e: any) {
+            if (e.data.message) {
+                toast(e.data.message, {
+                    // classNames: {
+                    //     icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
+                    // },
+                    // icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
+                })
+            }
         }
     }
 

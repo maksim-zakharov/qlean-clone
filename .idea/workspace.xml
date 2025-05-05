@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
-      <change beforePath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/executor/executor.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,14 +172,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00358" summary="checkout padding btn">
-      <option name="closed" value="true" />
-      <created>1746343210637</created>
-      <option name="number" value="00358" />
-      <option name="presentableId" value="LOCAL-00358" />
-      <option name="project" value="LOCAL" />
-      <updated>1746343210637</updated>
     </task>
     <task id="LOCAL-00359" summary="Убрал хедер в профиле">
       <option name="closed" value="true" />
@@ -565,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746444079413</updated>
     </task>
-    <option name="localTasksCounter" value="407" />
+    <task id="LOCAL-00407" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
+      <option name="closed" value="true" />
+      <created>1746444370091</created>
+      <option name="number" value="00407" />
+      <option name="presentableId" value="LOCAL-00407" />
+      <option name="project" value="LOCAL" />
+      <updated>1746444370091</updated>
+    </task>
+    <option name="localTasksCounter" value="408" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
