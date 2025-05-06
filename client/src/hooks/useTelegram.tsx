@@ -18,8 +18,10 @@ interface TelegramContextType {
     photoUrl?: string;
     vibro: (style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => void;
     colorScheme?: string;
-    onBackButtonClicked: (callback: () => void) => void;
+    onBackButtonClick: (callback: () => void) => void;
     deleteLastBackButtonCallback: () => void
+    clearBackButtonEvents: () => void
+    getLastBackButtonCallback: () => (() => void) | undefined;
     hideBackButton: () => void
     user: TelegramUser | null;
     userId?: number;
@@ -88,22 +90,29 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
         Telegram.WebApp?.BackButton?.show();
     }
 
-    const hideBackButton = () => {
-        if(events.current['backButtonClicked']){
-            events.current['backButtonClicked'].forEach(callback => Telegram.WebApp.offEvent('backButtonClicked', callback))
+    const clearEvent = (eventType: string) => {
+        if(events.current[eventType]){
+            events.current[eventType].forEach(callback => Telegram.WebApp.offEvent(eventType as never, callback))
+            events.current[eventType] = [];
         }
+    }
+
+    const clearBackButtonEvents = () => clearEvent('backButtonClicked');
+
+    const hideBackButton = () => {
+        clearBackButtonEvents()
         Telegram.WebApp?.BackButton?.hide();
     }
 
+    const getLastBackButtonCallback = () => events.current['backButtonClicked']?.slice(-1)[0]
+
     const deleteLastBackButtonCallback = () => {
-        const lastCallback = events.current['backButtonClicked']?.slice(-1)[0];
+        const lastCallback = getLastBackButtonCallback();
         if(!lastCallback){
             return;
         }
         Telegram.WebApp.offEvent('backButtonClicked', lastCallback);
         events.current['backButtonClicked'] = events.current['backButtonClicked'].filter(callback => callback !== lastCallback);
-
-        // alert(events.current['backButtonClicked'].length)
     }
 
     useEffect(() => {
@@ -159,8 +168,10 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
         photoUrl: Telegram.WebApp?.initDataUnsafe?.user?.photo_url,
         vibro,
         colorScheme: Telegram.WebApp?.colorScheme,
-        onBackButtonClicked: onBackButtonClick,
+        onBackButtonClick: onBackButtonClick,
         deleteLastBackButtonCallback,
+        clearBackButtonEvents,
+        getLastBackButtonCallback,
         hideBackButton,
         user: Telegram.WebApp?.initDataUnsafe?.user ?? null,
         userId: Telegram.WebApp?.initDataUnsafe?.user?.id,
@@ -182,10 +193,10 @@ export function useTelegram() {
 }
 
 export const useBackButton = (callback: () => void) => {
-    const {onBackButtonClicked, deleteLastBackButtonCallback} = useTelegram();
+    const {onBackButtonClick, deleteLastBackButtonCallback} = useTelegram();
 
     useEffect(() => {
         deleteLastBackButtonCallback();
-        onBackButtonClicked(callback)
-    }, [onBackButtonClicked, deleteLastBackButtonCallback, callback]);
+        onBackButtonClick(callback)
+    }, []);
 }

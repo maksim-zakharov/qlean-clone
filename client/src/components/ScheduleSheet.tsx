@@ -1,5 +1,5 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useRef, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
 import {useTelegram} from "../hooks/useTelegram.tsx";
 import dayjs from "dayjs";
@@ -27,7 +27,8 @@ export function ScheduleSheet({
                                   optionIds = []
                               }: React.PropsWithChildren<ScheduleSheetProps>) {
     const {t} = useTranslation();
-    const {vibro} = useTelegram();
+    const {vibro, onBackButtonClick, clearBackButtonEvents, getLastBackButtonCallback} = useTelegram();
+    const ref = useRef<(() => void) | undefined >(undefined);
 
     const [tab, setTab] = useState<Date | undefined>(dayjs.utc().startOf('day').toDate());
 
@@ -67,9 +68,31 @@ export function ScheduleSheet({
 
     const filteredSlots = useMemo(() => availableSlots.filter(sl => dayjs.utc(sl.timestamp).valueOf() > dayjs.utc().valueOf()).map(sl => ({...sl, time: dayjs.utc(sl.timestamp).local().format('HH:mm')})).sort((a, b) => a.time.localeCompare(b.time)), [availableSlots]);
 
+    const [opened, setOpened] = useState<boolean>(false);
+
+    const onOpenChange = (opened: boolean) => {
+        if(opened){
+            vibro()
+            // Нужно сохранить прошлый коллбек чтобы потом вернуть его
+            const callback = getLastBackButtonCallback();
+            ref.current = callback;
+            // Удаляем последний коллбек чтобы он не сработал после закрытия шторки
+            clearBackButtonEvents();
+            onBackButtonClick(() => onOpenChange(false));
+        } else {
+            clearBackButtonEvents();
+            // @ts-ignore
+            onBackButtonClick(ref.current);
+            ref.current = undefined;
+            setOpened(false);
+        }
+    }
+
+    const handleOnTriggerClick = () => setOpened(prevState => !prevState)
+
     return (
-        <Sheet onOpenChange={(opened) => opened ? vibro() : null}>
-            <SheetTrigger asChild>
+        <Sheet open={opened} onOpenChange={onOpenChange}>
+            <SheetTrigger asChild onClick={handleOnTriggerClick}>
                 {children}
             </SheetTrigger>
             <SheetContent side="bottom" className="h-screen rounded-none">
