@@ -7,13 +7,11 @@ import {
 import React, {useMemo, useState} from "react";
 import {Button} from "../../components/ui/button.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
-import {Header} from "../../components/ui/Header.tsx";
-import {BackButton} from "../../components/BackButton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Typography} from "@/components/ui/Typography.tsx";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
-import {useTelegram} from "../../hooks/useTelegram.tsx";
+import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
@@ -24,6 +22,15 @@ import dayjs from "dayjs";
 export const ExecutorOrderDetailsPage = () => {
     const {t} = useTranslation();
     const navigate = useNavigate()
+
+    useBackButton(() => {
+        if (window.history.length > 0) {
+            window.history.back()
+        } else {
+            navigate(RoutePaths.Executor.Orders);
+        }
+    });
+
     const [completeOrder, {isLoading: completeOrderLoading}] = useCompleteOrderMutation();
     const [processedOrder, {isLoading: processedOrderLoading}] = useProcessedOrderMutation();
     const [orderToDelete, setOrderToDelete] = useState<any | null>(null);
@@ -92,9 +99,6 @@ export const ExecutorOrderDetailsPage = () => {
     // TODO Добавить экран ошибки
 
     return <>
-        <Header>
-            <BackButton url={RoutePaths.Executor.Orders}/>
-        </Header>
         <div className="content px-4">
             <Typography.H2 className="text-3xl mb-0">{order?.baseService?.name}</Typography.H2>
             <Typography.Description

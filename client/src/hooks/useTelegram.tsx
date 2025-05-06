@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from 'react';
+import {createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../routes.ts";
 
@@ -18,7 +18,9 @@ interface TelegramContextType {
     photoUrl?: string;
     vibro: (style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => void;
     colorScheme?: string;
-    backButton: BackButton | null;
+    onBackButtonClicked: (callback: () => void) => void;
+    deleteLastBackButtonCallback: () => void
+    hideBackButton: () => void
     user: TelegramUser | null;
     userId?: number;
 }
@@ -41,6 +43,7 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
     const [error, setError] = useState<string>();
     const [isOpenKeyboard, setOpenKeyboard] = useState(false);
     const [bottomOffset, setBottomOffset] = useState(0);
+    const events = useRef<{ [eventType: string]: (() => void)[] }>({});
 
     const isReady = (!isLoading && !error);
 
@@ -72,6 +75,36 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
         setOpenKeyboard(offset > 200);
         setBottomOffset(offset);
     }, []);
+
+    const onEvent = (eventType: string, callback: () => void) => {
+        if (!events.current[eventType])
+            events.current[eventType] = [];
+        events.current[eventType].push(callback);
+        Telegram.WebApp.onEvent(eventType as never, callback);
+    }
+
+    const onBackButtonClick = (callback: () => void) => {
+        onEvent('backButtonClicked', callback)
+        Telegram.WebApp?.BackButton?.show();
+    }
+
+    const hideBackButton = () => {
+        if(events.current['backButtonClicked']){
+            events.current['backButtonClicked'].forEach(callback => Telegram.WebApp.offEvent('backButtonClicked', callback))
+        }
+        Telegram.WebApp?.BackButton?.hide();
+    }
+
+    const deleteLastBackButtonCallback = () => {
+        const lastCallback = events.current['backButtonClicked']?.slice(-1)[0];
+        if(!lastCallback){
+            return;
+        }
+        Telegram.WebApp.offEvent('backButtonClicked', lastCallback);
+        events.current['backButtonClicked'] = events.current['backButtonClicked'].filter(callback => callback !== lastCallback);
+
+        // alert(events.current['backButtonClicked'].length)
+    }
 
     useEffect(() => {
         Telegram.WebApp?.ready();
@@ -126,7 +159,9 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
         photoUrl: Telegram.WebApp?.initDataUnsafe?.user?.photo_url,
         vibro,
         colorScheme: Telegram.WebApp?.colorScheme,
-        backButton: Telegram.WebApp?.BackButton as BackButton ?? null,
+        onBackButtonClicked: onBackButtonClick,
+        deleteLastBackButtonCallback,
+        hideBackButton,
         user: Telegram.WebApp?.initDataUnsafe?.user ?? null,
         userId: Telegram.WebApp?.initDataUnsafe?.user?.id,
     };
@@ -146,10 +181,11 @@ export function useTelegram() {
     return context;
 }
 
-interface BackButton {
-    isVisible: boolean;
-    onClick: (callback: () => void) => BackButton;
-    offClick: (callback: () => void) => BackButton;
-    show: () => BackButton;
-    hide: () => BackButton;
+export const useBackButton = (callback: () => void) => {
+    const {onBackButtonClicked, deleteLastBackButtonCallback} = useTelegram();
+
+    useEffect(() => {
+        deleteLastBackButtonCallback();
+        onBackButtonClicked(callback)
+    }, [onBackButtonClicked, deleteLastBackButtonCallback, callback]);
 }

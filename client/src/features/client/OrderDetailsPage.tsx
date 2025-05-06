@@ -1,5 +1,4 @@
 import {Header} from "../../components/ui/Header.tsx";
-import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
@@ -25,12 +24,14 @@ import {EditButton} from "../../components/EditButton.tsx";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
 import {OrderStatusText} from "../../components/OrderStatusText.tsx";
+import {useBackButton} from "../../hooks/useTelegram.tsx";
 
 export const OrderDetailsPage = () => {
     const {t} = useTranslation();
     const [patchOrder] = usePatchOrderMutation();
     const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
+    useBackButton(() => navigate(RoutePaths.Orders));
     const dispatch = useDispatch();
     const {data: addresses = []} = useGetAddressesQuery();
     const {id} = useParams<string>();
@@ -120,7 +121,6 @@ export const OrderDetailsPage = () => {
                             onCancelClick={handleCancelClick}
                             onOkClick={handleOkClick}/>
         <Header>
-            <BackButton url={RoutePaths.Orders}/>
             <Typography.Title
                 className="items-center flex justify-center">{order.baseService?.name}</Typography.Title>
         </Header>

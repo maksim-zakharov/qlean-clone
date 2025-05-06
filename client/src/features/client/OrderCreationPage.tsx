@@ -3,8 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {List} from "../../components/ui/list.tsx";
-import {BackButton} from "../../components/BackButton.tsx";
-import {useTelegram} from "../../hooks/useTelegram.tsx";
+import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
 import {Info, Star} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";
@@ -35,6 +34,14 @@ export const OrderCreationPage = () => {
 
     // Если создаем - true, если редактируем - false;
     const isDraft = !orderId;
+
+    useBackButton(() => {
+        dispatch(clearState())
+        if (isDraft) {
+            navigate(RoutePaths.Root)
+        } else
+        navigate(RoutePaths.Orders)
+    });
 
     // Либо мы перешли сюда из других страниц, либо просто откуда то как то - и берем первый сервис из списка
     const currentService = useMemo(() => services.find(s => baseService ? s.id === baseService.id : s) || services[0], [services, baseService]);
@@ -83,15 +90,6 @@ export const OrderCreationPage = () => {
         dispatch(selectVariant({serviceVariant}))
     }
 
-    const handleBackClick = () => dispatch(clearState());
-
-    const backUrl = useMemo(() => {
-        if (isDraft) {
-            return RoutePaths.Root;
-        }
-        return RoutePaths.Orders
-    }, [isDraft])
-
     if (!baseService) {
         return null
     }
@@ -99,46 +97,45 @@ export const OrderCreationPage = () => {
     return (
         <>
             <Header>
-                <BackButton url={backUrl} onClick={handleBackClick}/>
                 <Typography.Title
                     className="items-center flex justify-center">{baseService?.name}</Typography.Title>
             </Header>
             <div className="content">
-                    <Tabs defaultValue={variantId} value={variantId}>
-                        <TabsList>
-                            {variants.map(tab => (
-                                <TabsTrigger
-                                    key={tab.id}
-                                    value={tab.id}
-                                    onClick={() => handleSelectVariant(tab)}
-                                >
-                                    {tab.name}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-                    </Tabs>
-                    <List itemClassName="flex-col gap-2" className="mb-4 rounded-none">
-                        {availableOptions.map((option) => <>
-                            <div className="flex items-center gap-3 w-full justify-between">
-                                <div className="flex items-center gap-3 flex-1 min-w-0">
-                                    <Info
-                                        className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
-                                    <span
-                                        className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
-                                    {option.isPopular ? (
-                                        <Badge className="flex gap-1 items-center"><Star
-                                            className="w-3 h-3"/>{t('client_creation_popular_label')}</Badge>
-                                    ) : <div/>}
-                                </div>
+                <Tabs defaultValue={variantId} value={variantId}>
+                    <TabsList>
+                        {variants.map(tab => (
+                            <TabsTrigger
+                                key={tab.id}
+                                value={tab.id}
+                                onClick={() => handleSelectVariant(tab)}
+                            >
+                                {tab.name}
+                            </TabsTrigger>
+                        ))}
+                    </TabsList>
+                </Tabs>
+                <List itemClassName="flex-col gap-2" className="mb-4 rounded-none">
+                    {availableOptions.map((option) => <>
+                        <div className="flex items-center gap-3 w-full justify-between">
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                                <Info
+                                    className="flex-none w-[18px] h-[18px] mt-0.5 text-tg-theme-subtitle-text-color"/>
                                 <span
-                                    className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
-                                <Checkbox checked={selectedOptionsIdSet.has(option.id)}
-                                          onCheckedChange={() => handleOptionToggle(option)}/>
+                                    className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-text-color truncate">{option.name}</span>
+                                {option.isPopular ? (
+                                    <Badge className="flex gap-1 items-center"><Star
+                                        className="w-3 h-3"/>{t('client_creation_popular_label')}</Badge>
+                                ) : <div/>}
                             </div>
-                        </>)}
-                    </List>
-                    <EstimatedTime totalDuration={totalDuration}/>
-                </div>
+                            <span
+                                className="text-[15px] font-normal text-tg-theme-text-color whitespace-nowrap">{moneyFormat(option.price)}</span>
+                            <Checkbox checked={selectedOptionsIdSet.has(option.id)}
+                                      onCheckedChange={() => handleOptionToggle(option)}/>
+                        </div>
+                    </>)}
+                </List>
+                <EstimatedTime totalDuration={totalDuration}/>
+            </div>
 
             <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 <Button
@@ -146,7 +143,8 @@ export const OrderCreationPage = () => {
                     onClick={handleNext}
                     loading={patchOrderLoading}
                     size="lg"
-                ><span className="flex-1 text-left">{isDraft ? t('client_creation_continue_btn') : t('client_creation_save_btn')}</span>
+                ><span
+                    className="flex-1 text-left">{isDraft ? t('client_creation_continue_btn') : t('client_creation_save_btn')}</span>
                     <span>{moneyFormat(totalPrice)}</span>
                 </Button>
             </BottomActions>

@@ -17,39 +17,20 @@ import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../
 import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
-import {useBackButton} from "../../hooks/useBackButton.ts";
-
-interface Address {
-    // Дом
-    "house_number": string,
-    // Улица
-    "road": string,
-    "suburb": string,
-    // Город
-    "city": string,
-    // Область
-    "state": string,
-    // Регион/Округ
-    "region": string,
-    "postcode": string,
-    // Страна
-    "country": string,
-    "country_code": string
-}
+import {useBackButton} from "../../hooks/useTelegram.tsx";
 
 export const ProfilePage = () => {
-    useBackButton(RoutePaths.Root);
-
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const [loginMutation, {isLoading}] = useLoginMutation();
     const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
+    useBackButton(() => navigate(RoutePaths.Root));
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const address = useSelector(state => state.createOrder.geo?.address);
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
-    const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
+    const {data: services = []} = useGetServicesQuery();
     const applicationVariantIdsSet = useMemo(() => new Set(application?.variants?.map(v => v.variantId) || []), [application]);
     const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({
         ...s,
@@ -194,7 +175,7 @@ export const ProfilePage = () => {
                             {t('new_application_thirst')}
                         </div>
                     </div>
-                    <BottomActions className="flex">
+                    <BottomActions className="flex [padding-bottom:var(--tg-safe-area-inset-bottom)]">
                         <Button variant="primary" wide
                                 onClick={() => navigate(RoutePaths.Application)}>{t('submit_application_btn')}</Button>
                     </BottomActions>

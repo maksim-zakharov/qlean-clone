@@ -16,13 +16,10 @@ const MainPage = () => {
     const dispatch = useDispatch();
     const {data: services = [], isError} = useGetServicesQuery();
 
-    const {backButton, isReady, error} = useTelegram();
+    const {hideBackButton} = useTelegram();
     useEffect(() => {
-        if (isReady) {
-            backButton?.hide();
-            Telegram.WebApp.MainButton?.hide();
-        }
-    }, [backButton, isReady, error]);
+        hideBackButton()
+    }, [hideBackButton]);
 
     const handleCardOnClick = (baseService, serviceVariant) => {
         dispatch(startOrderFlow({baseService, serviceVariant}))

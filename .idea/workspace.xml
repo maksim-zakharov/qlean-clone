@@ -4,28 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="TelegramProvider">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BackButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BackButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CommentsSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CommentsSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ExecutorLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ExecutorLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/sheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/sheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/switch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/switch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BackButton.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/MainPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCheckoutPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useBackButton.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useBackButton.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useBackButton.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,14 +183,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00362" summary="reverse в RTK">
-      <option name="closed" value="true" />
-      <created>1746346045066</created>
-      <option name="number" value="00362" />
-      <option name="presentableId" value="LOCAL-00362" />
-      <option name="project" value="LOCAL" />
-      <updated>1746346045066</updated>
     </task>
     <task id="LOCAL-00363" summary="рефакторинг">
       <option name="closed" value="true" />
@@ -585,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746471996819</updated>
     </task>
-    <option name="localTasksCounter" value="411" />
+    <task id="LOCAL-00411" summary="TelegramProvider">
+      <option name="closed" value="true" />
+      <created>1746542043324</created>
+      <option name="number" value="00411" />
+      <option name="presentableId" value="LOCAL-00411" />
+      <option name="project" value="LOCAL" />
+      <updated>1746542043324</updated>
+    </task>
+    <option name="localTasksCounter" value="412" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="рефакторинг" />
     <MESSAGE value="ProfilePage скелетон для исполнителя" />
     <MESSAGE value="ExecutorOrdersPage скелетон" />
     <MESSAGE value="App скелетон" />
@@ -633,7 +623,8 @@
     <MESSAGE value="todo" />
     <MESSAGE value="getById" />
     <MESSAGE value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
+    <MESSAGE value="TelegramProvider" />
+    <option name="LAST_COMMIT_MESSAGE" value="TelegramProvider" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

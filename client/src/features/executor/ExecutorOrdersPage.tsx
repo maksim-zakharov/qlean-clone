@@ -1,11 +1,11 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useCompleteOrderMutation, useGetExecutorOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import {CalendarCheck, ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
@@ -26,7 +26,12 @@ export const ExecutorOrdersPage = () => {
     const [completeOrder, {isLoading: completeOrderLoading}] = useCompleteOrderMutation();
     const navigate = useNavigate()
     const [orderToDelete, setOrderToDelete] = useState<any | null>(null);
-    const {vibro} = useTelegram();
+    const {vibro, hideBackButton} = useTelegram();
+
+    useEffect(() => {
+        hideBackButton()
+    }, [hideBackButton]);
+
     const {data: orders = [], isLoading, isError} = useGetExecutorOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
@@ -61,7 +66,9 @@ export const ExecutorOrdersPage = () => {
             slots: generateTimeSlots(date)
         };
     }).filter(s => s.slots.length > 0), []);
-    const [tab, setTab] = useState<string>(result[0]?.timestamp.toString());
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const tab = searchParams.get('tab') || result[0]?.timestamp.toString();
     const filteredOrders = useMemo(() => orders.filter(o => !['completed', 'canceled'].includes(o.status) && dayjs.utc(o.date).startOf('day').unix() === dayjs.utc(Number(tab)).startOf('day').unix()).sort((a, b) => a.date.localeCompare(b.date)), [orders, tab]);
     const activeOrders = useMemo(() => filteredOrders.filter(o => o.status === 'processed').sort((a, b) => b.id - a.id), [filteredOrders]);
 
@@ -74,6 +81,11 @@ export const ExecutorOrdersPage = () => {
             },
             icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
         })
+    }
+
+    const onChangeTab = (tab) => {
+        searchParams.set('tab', tab);
+        setSearchParams(searchParams);
     }
 
     if (isLoading) {
@@ -101,7 +113,7 @@ export const ExecutorOrdersPage = () => {
 
     return <div className="flex flex-col">
         <Header className="p-0">
-            <Tabs defaultValue={tab} onValueChange={setTab} className="px-4 h-full">
+            <Tabs defaultValue={tab} onValueChange={onChangeTab} className="px-4 h-full">
                 <TabsList className="bg-inherit px-0 h-full">
                     {result.map(r => <TabsTrigger
                         key={r.timestamp}

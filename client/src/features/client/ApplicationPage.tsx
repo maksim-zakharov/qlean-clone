@@ -1,13 +1,11 @@
-import {Header} from "../../components/ui/Header.tsx";
 import {RoutePaths} from "../../routes.ts";
 import React, {useEffect, useMemo, useState} from "react";
-import {BackButton} from "../../components/BackButton.tsx";
 import {Typography} from "@/components/ui/Typography.tsx";
 import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation, useSendApplicationMutation} from "../../api/api.ts";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
-import {useTelegram} from "../../hooks/useTelegram.tsx";
+import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {FileClock, FileX} from "lucide-react";
@@ -17,6 +15,7 @@ import {useTranslation} from "react-i18next";
 import dayjs from "dayjs";
 
 export const ApplicationPage = () => {
+
     const {t} = useTranslation();
     const [loginMutation] = useLoginMutation();
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
@@ -25,10 +24,12 @@ export const ApplicationPage = () => {
     const [sendApplication, {isLoading: sendApplicationLoading}] = useSendApplicationMutation();
     const {vibro} = useTelegram();
 
+    useBackButton(() => navigate(RoutePaths.Profile));
+
     useEffect(() => {
         if(application?.status ==='APPROVED')
             loginMutation('executor').unwrap()
-    }, [application]);
+    }, [application, loginMutation]);
 
     const [variantIds, setVariantIds] = useState<any>([]);
     const selectedOptionsIdSet = useMemo(() => new Set(variantIds), [variantIds]);
@@ -55,9 +56,6 @@ export const ApplicationPage = () => {
 
     if (!application) {
         return <>
-            <Header>
-                <BackButton url={RoutePaths.Profile}/>
-            </Header>
             <div className="content px-4">
                 <Typography.H2 className="text-3xl mb-6">{t('create_application_title')}</Typography.H2>
 
@@ -74,7 +72,7 @@ export const ApplicationPage = () => {
                     </ListButtonGroup>
                 </div>)}
 
-                <BottomActions className="bg-inherit">
+                <BottomActions className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)]">
                     <Button wide disabled={variantIds.length === 0} loading={sendApplicationLoading}
                             onClick={handleSubmitApplication}>{t('create_application_submit_btn')}</Button>
                 </BottomActions>

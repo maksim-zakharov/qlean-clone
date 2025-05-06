@@ -1,4 +1,3 @@
-import {BackButton} from "@/components/BackButton"
 import {Button} from "@/components/ui/button"
 import {Calendar, ChevronRight, MessageSquare} from "lucide-react"
 import {useNavigate} from "react-router-dom"
@@ -6,7 +5,7 @@ import {Checkbox} from "@/components/ui/checkbox"
 import React, {useMemo, useState} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
-import {useTelegram} from "../../hooks/useTelegram.tsx";
+import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../../components/ui/accordion.tsx"
 import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
@@ -17,7 +16,7 @@ import {useAddOrderMutation} from "../../api/ordersApi.ts";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {AddressSheet} from "../../components/AddressSheet.tsx";
-import {selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
+import { selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {Header} from "../../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
@@ -34,11 +33,22 @@ export const OrderCheckoutPage = () => {
     const options = useSelector(state => state.createOrder.options)
     const serviceVariant = useSelector(state => state.createOrder.serviceVariant)
     const fullAddress = useSelector(state => state.createOrder.fullAddress?.fullAddress)
+    const orderId = useSelector(state => state.createOrder.id)
     const dispatch = useDispatch();
 
     const [error, setError] = useState<string | undefined>();
 
     const navigate = useNavigate()
+
+    // Если создаем - true, если редактируем - false;
+    const isDraft = !orderId;
+    useBackButton(() => {
+        if (isDraft) {
+            navigate(RoutePaths.Order.Create)
+        } else
+            navigate(RoutePaths.Orders)
+    });
+    
     const [comment, setComment] = useState<string | undefined>();
     const {vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery();
@@ -91,7 +101,6 @@ export const OrderCheckoutPage = () => {
                                 onOkText="Ok"
                                 onOkClick={() => setError(undefined)}/>
             <Header className="flex justify-center">
-                <BackButton url={RoutePaths.Orders}/>
                 <AddressSheet
                     addresses={addresses}
                     onAddressSelect={handleSelectAddress}
