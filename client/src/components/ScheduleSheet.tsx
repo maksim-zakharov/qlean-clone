@@ -9,6 +9,8 @@ import {CalendarX} from "lucide-react";
 import {Skeleton} from "./ui/skeleton.tsx";
 import {Calendar} from "./ui/calendar.tsx";
 import {useTranslation} from "react-i18next";
+import {BottomActions} from "./BottomActions.tsx";
+import {Button} from "./ui/button.tsx";
 
 interface ScheduleSheetProps {
     selectedTimestamp?: number;
@@ -70,7 +72,7 @@ export function ScheduleSheet({
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-[90vh]">
+            <SheetContent side="bottom" className="h-screen rounded-none">
                 <SheetHeader>
                     <SheetTitle
                         className="text-xl font-bold text-tg-theme-text-color text-left">{t('calendar_title')}</SheetTitle>
@@ -113,6 +115,17 @@ export function ScheduleSheet({
                                 onClick={() => onSelectDate(service.timestamp)}
                             />)}
                     </div>}
+                <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
+                    <Button
+                        size="default"
+                        wide
+                        disabled={!selectedTimestamp}
+                        // loading={isLoading}
+                        // onClick={handleOnSubmit}
+                    >
+                        {t('schedule_submit_btn')}
+                    </Button>
+                </BottomActions>
             </SheetContent>
         </Sheet>
     )

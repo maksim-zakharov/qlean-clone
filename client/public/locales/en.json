@@ -94,6 +94,7 @@
   "client_accept_1": "I accept",
   "client_accept_2": "the terms of service",
   "client_checkout_submit_btn": "Checkout",
+  "schedule_submit_btn": "Continue",
 
   "client_creation_popular_label": "POPULAR",
   "client_creation_continue_btn": "Continue",
