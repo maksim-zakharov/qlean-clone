@@ -13,7 +13,7 @@ import {RoutePaths} from "../../routes.ts";
 import {Typography} from "@/components/ui/Typography.tsx";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";

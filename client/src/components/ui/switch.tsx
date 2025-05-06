@@ -2,7 +2,7 @@ import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 
 import {cn} from "@/lib/utils"
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 
 function Switch({
                     className,

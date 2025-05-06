@@ -3,7 +3,6 @@ import {ReactNode} from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 
 import {cn} from "@/lib/utils"
-import {useTelegram} from "../../hooks/useTelegram.ts";
 
 function Sheet({...props}: React.ComponentProps<typeof SheetPrimitive.Root>) {
     return <SheetPrimitive.Root data-slot="sheet" {...props} />
@@ -52,7 +51,6 @@ function SheetContent({
                       }: React.ComponentProps<typeof SheetPrimitive.Content> & {
     side?: "top" | "right" | "bottom" | "left"
 } & { extra?: ReactNode }) {
-    const {bottomOffset} = useTelegram();
     return (
         <SheetPortal>
             <SheetOverlay/>

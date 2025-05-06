@@ -1,7 +1,7 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import React, {useCallback, useMemo, useState} from "react";
 import {CardItem} from "./CardItem.tsx";
-import {useTelegram} from "../hooks/useTelegram.ts";
+import {useTelegram} from "../hooks/useTelegram.tsx";
 import dayjs from "dayjs";
 import {useGetAvailableDatesQuery, useGetExecutorAvailableSlotsQuery} from "../api/api.ts";
 import {EmptyState} from "./EmptyState.tsx";

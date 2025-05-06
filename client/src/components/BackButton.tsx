@@ -2,14 +2,14 @@ import {ChevronLeft} from "lucide-react";
 import {Button} from "./ui/button.tsx";
 import {useNavigate} from "react-router-dom";
 import {FC, useEffect} from "react";
-import {useTelegram} from "../hooks/useTelegram.ts";
+import {useTelegram} from "../hooks/useTelegram.tsx";
 import {RoutePaths} from "../routes.ts";
 
 export const BackButton: FC<{ url?: string, state?: any, onClick?: any }> = ({url, state, onClick}) => {
     const navigate = useNavigate()
-    const {backButton, isLoading, error} = useTelegram();
+    const {backButton, isReady, error} = useTelegram();
 
-    const showTgBackButton = Boolean(backButton && !isLoading && !error);
+    const showTgBackButton = Boolean(backButton && isReady && !error);
 
     const onBack = () => {
         onClick?.();

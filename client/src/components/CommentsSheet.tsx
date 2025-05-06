@@ -1,6 +1,6 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import React, {useEffect} from "react";
-import {useTelegram} from "../hooks/useTelegram.ts";
+import {useTelegram} from "../hooks/useTelegram.tsx";
 import {Textarea} from "./ui/textarea.tsx";
 import {Button} from "./ui/button.tsx";
 

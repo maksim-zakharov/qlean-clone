@@ -7,7 +7,7 @@ import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation, useSendAp
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {FileClock, FileX} from "lucide-react";

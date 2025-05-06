@@ -4,7 +4,7 @@ import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {List} from "../../components/ui/list.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {Info, Star} from 'lucide-react'
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {Header} from "../../components/ui/Header.tsx";

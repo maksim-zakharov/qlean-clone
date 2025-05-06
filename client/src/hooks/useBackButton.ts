@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {useTelegram} from "./useTelegram.ts";
+import {useTelegram} from "./useTelegram.tsx";
 import {RoutePaths} from "../routes.ts";
 
 export const useBackButton = (url: string) => {

@@ -14,7 +14,7 @@ import {Header} from "../../components/ui/Header.tsx";
 
 import {formatDuration} from "../../components/EstimatedTime.tsx";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {toast} from "sonner";
 import {RoutePaths} from "../../routes.ts";

@@ -1,7 +1,7 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import {Button} from "./ui/button"
 import React, {useEffect, useState} from "react";
-import {useTelegram} from "../hooks/useTelegram.ts";
+import {useTelegram} from "../hooks/useTelegram.tsx";
 import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation} from "../api/api.ts";
 import {InputWithLabel} from "./InputWithLabel.tsx";
 import { MapPlus, Trash2} from "lucide-react";
@@ -14,12 +14,12 @@ export function AddAddressSheet({
                                     onChangeAddress,
                                     children
                                 }: React.PropsWithChildren<any>) {
-    const {vibro, bottomOffset} = useTelegram();
+    const {vibro} = useTelegram();
     const [addAddress, {isLoading: addLoading}] = useAddAddressMutation();
     const [editAddress, {isLoading: editLoading}] = useEditAddressMutation();
     const [deleteAddress, {isLoading: deleteLoading}] = useDeleteAddressMutation();
 
-    const [reverse, {isSuccess}] = useGetReverseMutation();
+    const [reverse] = useGetReverseMutation();
 
     const [_opened, setOpened] = React.useState(false);
     const [{id, name, fullAddress, comments}, setAddress] = useState({

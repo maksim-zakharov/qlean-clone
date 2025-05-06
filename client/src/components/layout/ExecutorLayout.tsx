@@ -1,6 +1,6 @@
 import {CalendarPlus, ClipboardList, LucideIcon, User, Wallet} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import React, {useMemo} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
 import { useSelector} from "react-redux";
@@ -19,7 +19,7 @@ export const ExecutorLayout = () => {
     const {t} = useTranslation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const navigate = useNavigate()
-    const {isLoading} = useTelegram();
+    const {isReady} = useTelegram();
 
     const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Executor.Profile)}>
         <AvatarImage src={userInfo?.photoUrl}/>
@@ -49,7 +49,7 @@ export const ExecutorLayout = () => {
         }
     ], [Profile, t])
 
-    if (isLoading) {
+    if (!isReady) {
         return <div>
             <Skeleton className="w-full h-[56px] rounded-none"/>
             <div className="px-4 mb-6 mt-4 flex flex-col gap-2">

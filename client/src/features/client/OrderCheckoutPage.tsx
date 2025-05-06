@@ -6,7 +6,7 @@ import {Checkbox} from "@/components/ui/checkbox"
 import React, {useMemo, useState} from "react";
 import EstimatedTime from "../../components/EstimatedTime.tsx";
 import {ScheduleSheet} from "../../components/ScheduleSheet.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "../../components/ui/accordion.tsx"
 import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";

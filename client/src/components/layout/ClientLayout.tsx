@@ -2,7 +2,7 @@ import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Outlet, useNavigate} from "react-router-dom"
 import {Header} from "../ui/Header.tsx";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 
 import React, {useMemo} from "react";
 import {AddressSheet} from "../AddressSheet";
@@ -24,7 +24,7 @@ type MenuItem = {
 
 export const ClientLayout = () => {
     const {t} = useTranslation();
-    const {isLoading} = useTelegram();
+    const {isReady} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const {data: addresses = [], isError} = useGetAddressesQuery();
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
@@ -68,7 +68,7 @@ export const ClientLayout = () => {
         dispatch(selectFullAddress(address))
     }
 
-    if (isLoading) {
+    if (!isReady) {
         return <div>
             <Skeleton className="w-full h-[56px] rounded-none"/>
             <div className="px-4 mb-6 mt-4 flex flex-col gap-2">

@@ -1,7 +1,7 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
 import {Button} from "./ui/button"
 import React from "react";
-import {useTelegram} from "../hooks/useTelegram.ts";
+import {useTelegram} from "../hooks/useTelegram.tsx";
 import {Typography} from "./ui/Typography.tsx";
 import {AddAddressSheet} from "./AddAddressSheet.tsx";
 import {EditButton} from "./EditButton.tsx";

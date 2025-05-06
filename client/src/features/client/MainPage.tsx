@@ -1,7 +1,7 @@
 
 import {useNavigate} from "react-router-dom"
 import React, {useEffect} from "react";
-import {useTelegram} from "../../hooks/useTelegram.ts";
+import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {CardItem} from "../../components/CardItem.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {useGetServicesQuery} from "../../api/api.ts";
@@ -16,13 +16,13 @@ const MainPage = () => {
     const dispatch = useDispatch();
     const {data: services = [], isError} = useGetServicesQuery();
 
-    const {backButton, isLoading, error} = useTelegram();
+    const {backButton, isReady, error} = useTelegram();
     useEffect(() => {
-        if (!isLoading && !error) {
+        if (isReady) {
             backButton?.hide();
             Telegram.WebApp.MainButton?.hide();
         }
-    }, [backButton, isLoading, error]);
+    }, [backButton, isReady, error]);
 
     const handleCardOnClick = (baseService, serviceVariant) => {
         dispatch(startOrderFlow({baseService, serviceVariant}))

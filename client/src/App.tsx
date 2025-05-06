@@ -11,7 +11,7 @@ import {RoutePaths} from "./routes.ts";
 import React, {useEffect, useMemo} from "react";
 import {useDispatch} from "react-redux";
 import {startOrderFlow} from "./slices/createOrderSlice.ts";
-import {useTelegram} from "./hooks/useTelegram.ts";
+import {useTelegram} from "./hooks/useTelegram.tsx";
 import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
 import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
 import {ExecutorPaymentsPage} from "./features/executor/ExecutorPaymentsPage.tsx";
@@ -54,7 +54,7 @@ function App() {
         }
     }, [serviceId, variantId, services, dispatch, navigate]);
 
-    if (!userinfo || isLoading) {
+    if (!userinfo || isLoading || !isReady) {
         return <div>
             <Skeleton className="w-full h-[50px] mb-3 rounded-none"/>
             <div className="mb-6 mt-4 px-4 flex flex-col gap-4">
