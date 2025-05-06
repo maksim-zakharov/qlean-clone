@@ -116,15 +116,15 @@ export function ScheduleSheet({
                             />)}
                     </div>}
                 <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)]">
-                    <Button
-                        size="default"
-                        wide
-                        disabled={!selectedTimestamp}
-                        // loading={isLoading}
-                        // onClick={handleOnSubmit}
-                    >
-                        {t('schedule_submit_btn')}
-                    </Button>
+                    <SheetTrigger asChild>
+                        <Button
+                            size="default"
+                            wide
+                            disabled={!selectedTimestamp}
+                        >
+                            {t('schedule_submit_btn')}
+                        </Button>
+                    </SheetTrigger>
                 </BottomActions>
             </SheetContent>
         </Sheet>
