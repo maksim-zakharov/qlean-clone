@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {startOrderFlow} from "../../slices/createOrderSlice.ts";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {ErrorState} from "../../components/ErrorState.tsx";
+import {RoutePaths} from "../../routes.ts";
 
 const MainPage = () => {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const MainPage = () => {
 
     const handleCardOnClick = (baseService, serviceVariant) => {
         dispatch(startOrderFlow({baseService, serviceVariant}))
-        navigate(`/order`)
+        navigate(RoutePaths.Order.Create)
     }
 
     if(isError){

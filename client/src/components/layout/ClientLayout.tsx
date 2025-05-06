@@ -107,7 +107,7 @@ export const ClientLayout = () => {
                     onAddressSelect={handleSelectAddress}
                 >
                     <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                        {fullAddress?.fullAddress || 'Выберите адрес'} <span
+                        {fullAddress?.fullAddress || t('client_checkout_address_error')} <span
                         className="ml-2 text-tg-theme-subtitle-text-color">›</span>
                     </Button>
                 </AddressSheet>
