@@ -8,6 +8,9 @@ import {CalendarCheck} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {ErrorState} from "../../components/ErrorState.tsx";
+import {Header} from "../../components/ui/Header.tsx";
+import {Button} from "../../components/ui/button.tsx";
+import {Typography} from "../../components/ui/Typography.tsx";
 
 function generateTimeSlots(parentDate) {
     const slots = [];
@@ -162,42 +165,50 @@ export const ExecutorSchedulePage = () => {
         </div>
     }
 
-    if(isError){
+    if (isError) {
         return <ErrorState/>
     }
 
-    return <div className="p-4">
-        <Accordion
-            type="single"
-            collapsible
-            value={defaultValue}
-            onValueChange={v => setdefaultValue(v)}
-            className="flex flex-col gap-2"
-        >
-            {weekDays.map(day => <AccordionItem value={day.value} className="rounded-xl">
-                <AccordionTrigger hideChevron>
-                    <div className="flex justify-between w-full">
-                        <span className="text-lg font-medium text-tg-theme-text-color">{day.label}</span>
-                        <span
-                            className="text-lg font-medium text-tg-theme-text-color">{calculateDayStatus(scheduleMap[day.value.toUpperCase()])}</span>
-                    </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                    <ToggleGroup type="multiple" className="grid grid-cols-6 w-full gap-0.5"
-                                 disabled={updateScheduleLoading}
-                                 value={scheduleMap[day.value.toUpperCase()]?.length > 0 ? scheduleMap[day.value.toUpperCase()] : 'dayoff'}>
-                        {slots.map(slot => <ToggleGroupItem onClick={event => handleOnToggle(day.value, event)}
-                                                            value={slot.time}
-                                                            className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none">
-                            {slot.time}
-                        </ToggleGroupItem>)}
-                        <ToggleGroupItem value="dayoff" onClick={event => handleOnToggle(day.value, event)}
-                                         className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none col-span-2">
-                            {t('schedule_update_dayoff')}
-                        </ToggleGroupItem>
-                    </ToggleGroup>
-                </AccordionContent>
-            </AccordionItem>)}
-        </Accordion>
-    </div>
+    return <>
+        <Header className="flex justify-center">
+            <Button variant="ghost"
+                    className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                <Typography.Title>{t('menu_item_schedule')}</Typography.Title>
+            </Button>
+        </Header>
+        <div className="p-4">
+            <Accordion
+                type="single"
+                collapsible
+                value={defaultValue}
+                onValueChange={v => setdefaultValue(v)}
+                className="flex flex-col gap-2"
+            >
+                {weekDays.map(day => <AccordionItem value={day.value} className="rounded-xl">
+                    <AccordionTrigger hideChevron>
+                        <div className="flex justify-between w-full">
+                            <span className="text-lg font-medium text-tg-theme-text-color">{day.label}</span>
+                            <span
+                                className="text-lg font-medium text-tg-theme-text-color">{calculateDayStatus(scheduleMap[day.value.toUpperCase()])}</span>
+                        </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <ToggleGroup type="multiple" className="grid grid-cols-6 w-full gap-0.5"
+                                     disabled={updateScheduleLoading}
+                                     value={scheduleMap[day.value.toUpperCase()]?.length > 0 ? scheduleMap[day.value.toUpperCase()] : 'dayoff'}>
+                            {slots.map(slot => <ToggleGroupItem onClick={event => handleOnToggle(day.value, event)}
+                                                                value={slot.time}
+                                                                className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none">
+                                {slot.time}
+                            </ToggleGroupItem>)}
+                            <ToggleGroupItem value="dayoff" onClick={event => handleOnToggle(day.value, event)}
+                                             className="border-[0.5px] border-tg-theme-hint-color first:rounded-none last:rounded-none col-span-2">
+                                {t('schedule_update_dayoff')}
+                            </ToggleGroupItem>
+                        </ToggleGroup>
+                    </AccordionContent>
+                </AccordionItem>)}
+            </Accordion>
+        </div>
+    </>
 }

@@ -1,16 +1,10 @@
 import {ClipboardList, Home, LucideIcon, User} from "lucide-react"
-import {Button} from "@/components/ui/button"
 import {Outlet, useNavigate} from "react-router-dom"
-import {Header} from "../ui/Header.tsx";
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 
 import React, {useMemo} from "react";
-import {AddressSheet} from "../AddressSheet";
-import {Typography} from "../ui/Typography.tsx";
-import {useGetAddressesQuery} from "../../api/api.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
-import {selectFullAddress} from "../../slices/createOrderSlice.ts";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
@@ -26,8 +20,6 @@ export const ClientLayout = () => {
     const {t} = useTranslation();
     const {isReady} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const {data: addresses = [], isError} = useGetAddressesQuery();
-    const fullAddress = useSelector(state => state.createOrder.fullAddress)
     const navigate = useNavigate()
 
     const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Profile)}>
@@ -62,11 +54,6 @@ export const ClientLayout = () => {
         //     path: '/profile'
         // }
     ], [Profile, t])
-    const dispatch = useDispatch();
-
-    const handleSelectAddress = (address: any) => {
-        dispatch(selectFullAddress(address))
-    }
 
     if (!isReady) {
         return <div>
@@ -98,22 +85,6 @@ export const ClientLayout = () => {
     }
 
     return <>
-        <Header>
-            <div className="flex-1 flex flex-col items-center">
-                <Typography.Description>Address</Typography.Description>
-                <AddressSheet
-                    isError={isError}
-                    addresses={addresses}
-                    onAddressSelect={handleSelectAddress}
-                >
-                    <Button variant="ghost" className="h-auto text-tg-theme-text-color text-base font-medium">
-                        {fullAddress?.fullAddress || t('client_checkout_address_error')} <span
-                        className="ml-2 text-tg-theme-subtitle-text-color">›</span>
-                    </Button>
-                </AddressSheet>
-            </div>
-        </Header>
-
         <div className="content w-full">
             <Outlet/>
         </div>

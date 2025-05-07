@@ -12,6 +12,7 @@ import {Area, AreaChart, CartesianGrid, XAxis} from "recharts"
 import {ChartConfig, ChartContainer} from "../../components/ui/chart.tsx";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
+import {Header} from "../../components/ui/Header.tsx";
 
 export const ExecutorPaymentsPage = () => {
     const {t} = useTranslation();
@@ -75,7 +76,14 @@ export const ExecutorPaymentsPage = () => {
         />
     }
 
-    return <div className="p-4 flex flex-col gap-4">
+    return <>
+        <Header className="flex justify-center">
+            <Button variant="ghost"
+                    className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                <Typography.Title>{t('menu_item_payments')}</Typography.Title>
+            </Button>
+        </Header>
+        <div className="p-4 flex flex-col gap-4">
         <Card className="card-bg-color px-4 py-3 flex-row justify-between border-0">
             <div className="flex flex-col">
                 <Button className="p-0 border-none h-6 w-max" variant="default" size="sm" onClick={() => setPaymentsPeriod(prevState => prevState !== 'week' ? 'week' : 'month')}>
@@ -151,4 +159,5 @@ export const ExecutorPaymentsPage = () => {
             </Card>)}
         </div>}
     </div>
+        </>
 }

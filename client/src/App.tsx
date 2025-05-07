@@ -95,11 +95,11 @@ function App() {
                     <Route path={RoutePaths.Root} element={<MainPage/>}/>
                     <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
                     <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>
                 <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
                 <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
-                <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
                 <Route path={RoutePaths.Application} element={<ApplicationPage/>}/>
                 <Route path="*" element={<Navigate to={RoutePaths.Root}/>}/>
             </Routes>

@@ -18,6 +18,7 @@ import {DynamicIcon} from "lucide-react/dynamic";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
+import {Header} from "../../components/ui/Header.tsx";
 
 export const ProfilePage = () => {
     const {t} = useTranslation();
@@ -108,13 +109,20 @@ export const ProfilePage = () => {
     }
 
     return <>
-        <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full">
+        <Header className="flex justify-center">
+            <Button variant="ghost"
+                    className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                <Typography.Title>{t('menu_item_profile')}</Typography.Title>
+            </Button>
+        </Header>
+        <Typography.H2 className="flex gap-4 pl-4 pt-4">
+            <Avatar className="w-7 h-7">
+                <AvatarImage src={userInfo?.photoUrl}/>
+                <AvatarFallback><User/></AvatarFallback>
+            </Avatar>{userInfo?.firstName} {userInfo?.lastName}
+        </Typography.H2>
+        <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0">
             <ListButtonGroup>
-                <ListButton icon={<Avatar className="w-7 h-7">
-                    <AvatarImage src={userInfo?.photoUrl}/>
-                    <AvatarFallback><User/></AvatarFallback>
-                </Avatar>} text={<>{userInfo?.firstName} {userInfo?.lastName}</>}/>
-
                 <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--chart-2)] rounded-md"/>}
                             text={<div className="flex flex-col text-left">
                                 <Typography.Description>{t('phone')}</Typography.Description>
