@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="useBackButton">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="кнопка &quot;Назад&quot; вроде ок работает с календарем">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ScheduleSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ErrorState.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ErrorState.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ApplicationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/executor/ExecutorOrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,14 +178,6 @@
       <workItem from="1743353220794" duration="117129000" />
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
-    </task>
-    <task id="LOCAL-00364" summary="ProfilePage скелетон для исполнителя">
-      <option name="closed" value="true" />
-      <created>1746346650848</created>
-      <option name="number" value="00364" />
-      <option name="presentableId" value="LOCAL-00364" />
-      <option name="project" value="LOCAL" />
-      <updated>1746346650848</updated>
     </task>
     <task id="LOCAL-00365" summary="ExecutorOrdersPage скелетон">
       <option name="closed" value="true" />
@@ -567,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746546359110</updated>
     </task>
-    <option name="localTasksCounter" value="413" />
+    <task id="LOCAL-00413" summary="кнопка &quot;Назад&quot; вроде ок работает с календарем">
+      <option name="closed" value="true" />
+      <created>1746550191643</created>
+      <option name="number" value="00413" />
+      <option name="presentableId" value="LOCAL-00413" />
+      <option name="project" value="LOCAL" />
+      <updated>1746550191643</updated>
+    </task>
+    <option name="localTasksCounter" value="414" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +594,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="ExecutorOrdersPage скелетон" />
     <MESSAGE value="App скелетон" />
     <MESSAGE value="ExecutorOrderDetailsPage локалайз" />
     <MESSAGE value="useGeoLocation" />
@@ -615,7 +618,8 @@
     <MESSAGE value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
     <MESSAGE value="TelegramProvider" />
     <MESSAGE value="useBackButton" />
-    <option name="LAST_COMMIT_MESSAGE" value="useBackButton" />
+    <MESSAGE value="кнопка &quot;Назад&quot; вроде ок работает с календарем" />
+    <option name="LAST_COMMIT_MESSAGE" value="кнопка &quot;Назад&quot; вроде ок работает с календарем" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

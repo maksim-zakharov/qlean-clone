@@ -18,6 +18,8 @@ import {CalendarCheck} from "lucide-react";
 import {PageLoader} from "../../components/PageLoader.tsx";
 import {useTranslation} from "react-i18next";
 import dayjs from "dayjs";
+import {Header} from "../../components/ui/Header.tsx";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const ExecutorOrderDetailsPage = () => {
     const {t} = useTranslation();
@@ -36,7 +38,7 @@ export const ExecutorOrderDetailsPage = () => {
     const [orderToDelete, setOrderToDelete] = useState<any | null>(null);
     const {id} = useParams<string>();
     const {vibro} = useTelegram();
-    const {data: order, isLoading} = useGetOrderByIdFromExecutorQuery({id: id!});
+    const {data: order, isLoading, isError} = useGetOrderByIdFromExecutorQuery({id: id!});
     const [variantIds, setVariantIds] = useState<any>([]);
     const selectedOptionsIdSet = useMemo(() => new Set(variantIds), [variantIds]);
 
@@ -96,13 +98,19 @@ export const ExecutorOrderDetailsPage = () => {
         return <PageLoader/>
     }
 
-    // TODO Добавить экран ошибки
+    if(isError){
+        return <ErrorState/>
+    }
 
     return <>
         <div className="content px-4">
-            <Typography.H2 className="text-3xl mb-0">{order?.baseService?.name}</Typography.H2>
-            <Typography.Description
-                className="text-base block mb-6">{order?.serviceVariant?.name}</Typography.Description>
+            <Header className="flex justify-center">
+                <Button variant="ghost"
+                        className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
+                    <Typography.Title>{order?.baseService?.name}</Typography.Title>
+                    <Typography.Description>{order?.serviceVariant?.name}</Typography.Description>
+                </Button>
+            </Header>
 
             {/*<div>{order?.serviceVariant?.duration}</div>*/}
             {/*<div>{order?.date}</div>*/}

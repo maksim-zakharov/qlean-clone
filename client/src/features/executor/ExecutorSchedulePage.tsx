@@ -7,6 +7,7 @@ import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 function generateTimeSlots(parentDate) {
     const slots = [];
@@ -35,7 +36,7 @@ function generateTimeSlots(parentDate) {
 export const ExecutorSchedulePage = () => {
     const {t} = useTranslation();
     const {data: schedule = [], isLoading} = useGetScheduleQuery({})
-    const [updateSchedule, {isLoading: updateScheduleLoading}] = useUpdateScheduleMutation()
+    const [updateSchedule, {isLoading: updateScheduleLoading, isError}] = useUpdateScheduleMutation()
     const slots = useMemo(() => generateTimeSlots(dayjs.utc()), []);
     const weekDays = useMemo(() => {
 
@@ -159,6 +160,10 @@ export const ExecutorSchedulePage = () => {
                 <Skeleton className="w-full h-[52px]"/>
             </div>
         </div>
+    }
+
+    if(isError){
+        return <ErrorState/>
     }
 
     return <div className="p-4">

@@ -1,7 +1,12 @@
 import {RoutePaths} from "../../routes.ts";
 import React, {useEffect, useMemo, useState} from "react";
 import {Typography} from "@/components/ui/Typography.tsx";
-import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation, useSendApplicationMutation} from "../../api/api.ts";
+import {
+    useGetApplicationQuery,
+    useGetServicesQuery,
+    useLoginMutation,
+    useSendApplicationMutation
+} from "../../api/api.ts";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
@@ -13,13 +18,14 @@ import {useNavigate} from "react-router-dom";
 import {PageLoader} from "../../components/PageLoader.tsx";
 import {useTranslation} from "react-i18next";
 import dayjs from "dayjs";
+import {ErrorState} from "../../components/ErrorState.tsx";
 
 export const ApplicationPage = () => {
 
     const {t} = useTranslation();
     const [loginMutation] = useLoginMutation();
     const {data: services = [], isLoading: servicesLoading} = useGetServicesQuery();
-    const {data: application, isLoading: applicationLoading} = useGetApplicationQuery();
+    const {data: application, isLoading: applicationLoading, isError} = useGetApplicationQuery();
     const navigate = useNavigate()
     const [sendApplication, {isLoading: sendApplicationLoading}] = useSendApplicationMutation();
     const {vibro} = useTelegram();
@@ -27,7 +33,7 @@ export const ApplicationPage = () => {
     useBackButton(() => navigate(RoutePaths.Profile));
 
     useEffect(() => {
-        if(application?.status ==='APPROVED')
+        if (application?.status === 'APPROVED')
             loginMutation('executor').unwrap()
     }, [application, loginMutation]);
 
@@ -54,9 +60,13 @@ export const ApplicationPage = () => {
         return <PageLoader/>
     }
 
+    if (isError) {
+        return <ErrorState/>
+    }
+
     if (!application) {
         return <>
-            <div className="content px-4">
+            <div className="content px-4 w-full">
                 <Typography.H2 className="text-3xl mb-6">{t('create_application_title')}</Typography.H2>
 
                 <Typography.Title className="pl-4">{t('create_application_question')}</Typography.Title>
@@ -84,7 +94,8 @@ export const ApplicationPage = () => {
         return <div className="flex flex-col justify-center h-screen items-center m-auto">
             <FileClock className="w-20 h-20 p-2 rounded-3xl card-bg-color mb-4"/>
             <Typography.H2 className="mb-2">{t('create_application_pending_title')}</Typography.H2>
-            <Typography.Title className="mb-4 font-normal">{t('create_application_pending_description')}</Typography.Title>
+            <Typography.Title
+                className="mb-4 font-normal">{t('create_application_pending_description')}</Typography.Title>
             <Button onClick={() => navigate(RoutePaths.Profile)}>{t('create_application_profile_btn')}</Button>
         </div>
     }
@@ -93,9 +104,11 @@ export const ApplicationPage = () => {
         return <div className="flex flex-col justify-center h-screen items-center m-auto">
             <FileX className="w-20 h-20 p-2 rounded-3xl card-bg-color mb-4"/>
             <Typography.H2 className="mb-2">{t('create_application_rejected_title')}</Typography.H2>
-            <Typography.Title className="mb-4 font-normal text-center">{t('create_application_rejected_description_1')} <br/> {t('create_application_rejected_description_2')}</Typography.Title>
+            <Typography.Title className="mb-4 font-normal text-center">{t('create_application_rejected_description_1')}
+                <br/> {t('create_application_rejected_description_2')}</Typography.Title>
             <Button onClick={() => navigate(RoutePaths.Profile)}>{t('create_application_profile_btn')}</Button>
-            <Button variant="ghost" onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${dayjs.utc().valueOf()}`, '_blank')}>{t('create_application_support_btn')}</Button>
+            <Button variant="ghost"
+                    onClick={() => window.open(`https://t.me/@qlean_clone_bot?start=support_${dayjs.utc().valueOf()}`, '_blank')}>{t('create_application_support_btn')}</Button>
         </div>
     }
 

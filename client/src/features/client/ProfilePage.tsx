@@ -108,7 +108,7 @@ export const ProfilePage = () => {
     }
 
     return <>
-        <div className="flex flex-col content text-center p-4 gap-6 pb-6">
+        <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full">
             <ListButtonGroup>
                 <ListButton icon={<Avatar className="w-7 h-7">
                     <AvatarImage src={userInfo?.photoUrl}/>

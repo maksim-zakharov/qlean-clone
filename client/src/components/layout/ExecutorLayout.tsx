@@ -3,7 +3,7 @@ import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 import React, {useMemo} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
@@ -78,7 +78,8 @@ export const ExecutorLayout = () => {
         </div>;
     }
 
-    return <><div className="content">
+    return <>
+        <div className="content w-full">
             <Outlet/>
         </div>
 

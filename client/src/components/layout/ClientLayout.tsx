@@ -114,7 +114,7 @@ export const ClientLayout = () => {
             </div>
         </Header>
 
-        <div className="content">
+        <div className="content w-full">
             <Outlet/>
         </div>
 
