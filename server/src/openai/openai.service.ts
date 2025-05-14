@@ -1,56 +1,59 @@
-import {Injectable, Logger} from '@nestjs/common';
-import OpenAI from "openai";
-import {PrismaService} from "../prisma.service";
-import {BaseService, ServiceVariant} from "@prisma/client";
-import {PorterStemmerRu} from "natural";
+import { Injectable, Logger } from '@nestjs/common';
+import OpenAI from 'openai';
+import { PrismaService } from '../prisma.service';
+import { BaseService, ServiceExecutors, ServiceVariant } from '@prisma/client';
+import { PorterStemmerRu } from 'natural';
 
 @Injectable()
 export class OpenaiService {
-    private logger = new Logger(OpenaiService.name);
+  private logger = new Logger(OpenaiService.name);
 
-    constructor(
-        private readonly prisma: PrismaService,
-        private readonly openai: OpenAI
-    ) {
-    }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly openai: OpenAI,
+  ) {}
 
-    private normalizeText(text: string): string {
-        return PorterStemmerRu.tokenizeAndStem(text)
-            .join(' ')
-            .replace(/[^а-яё\s]/gi, '');
-    }
+  private normalizeText(text: string): string {
+    return PorterStemmerRu.tokenizeAndStem(text)
+      .join(' ')
+      .replace(/[^а-яё\s]/gi, '');
+  }
 
-    async detectBaseService(text: string): Promise<BaseService | null> {
-        const services = await this.prisma.baseService.findMany({
-            include: {executors: true, variants: true}
-        });
+  async detectBaseService(text: string): Promise<BaseService | null> {
+    const services = await this.prisma.baseService.findMany({
+      include: { executors: true, variants: true },
+    });
 
-        const prompt = `Определи основную услугу из списка: ${services.map(s => JSON.stringify({
-            id: s.id,
-            name: s.name
-        })).join(', ')}. 
+    const prompt = `Определи основную услугу из списка: ${services
+      .map((s) =>
+        JSON.stringify({
+          id: s.id,
+          name: s.name,
+        }),
+      )
+      .join(', ')}. 
     Ответ в JSON: {
         serviceId: number,
         matchedText: string // оригинальное найденное словосочетание из текста
     }`;
 
-        const result = await this.chatGptRequest(prompt, text);
-        return services.find(s => s.id === result?.serviceId);
-    }
+    const result = await this.chatGptRequest(prompt, text);
+    return services.find((s) => s.id === result?.serviceId);
+  }
 
-    async detectServiceWithVariant(text: string): Promise<{
-        service: BaseService | null,
-        variant: ServiceVariant | null,
-        displayName?: string,
-        keyPhrases: string[]
-    }> {
-        const services = await this.prisma.baseService.findMany({
-            include: {
-                variants: true
-            }
-        });
+  async detectServiceWithVariant(text: string): Promise<{
+    service: BaseService | null;
+    variant: ServiceVariant | null;
+    displayName?: string;
+    keyPhrases: string[];
+  }> {
+    const services = await this.prisma.baseService.findMany({
+      include: {
+        variants: true,
+      },
+    });
 
-        const prompt = `Определи услугу и вариант из списка. Ответ в JSON: {
+    const prompt = `Определи услугу и вариант из списка. Ответ в JSON: {
         "serviceId": number,
         "variantId": number?,
         "displayName": string,
@@ -58,9 +61,12 @@ export class OpenaiService {
         }
     
         Доступные услуги:
-        ${services.map(s =>
-            `- ${s.name} [ID:${s.id}]: ${s.variants.map(v => `${v.name} [ID:${v.id}]`).join(', ')}`
-        ).join('\n')}
+        ${services
+          .map(
+            (s) =>
+              `- ${s.name} [ID:${s.id}]: ${s.variants.map((v) => `${v.nameAccusative} [ID:${v.id}]`).join(', ')}`,
+          )
+          .join('\n')}
         
         Правила:
         1. Если вариант не указан явно - оставляй variantId пустым
@@ -86,44 +92,45 @@ export class OpenaiService {
         }
       `;
 
-        const result = await this.chatGptRequest(prompt, text);
+    const result = await this.chatGptRequest(prompt, text);
 
-        // Валидация результата
-        const service = services.find(s => s.id === result?.serviceId);
-        const variant = services
-            .find(s => s.id === result?.serviceId)
-            ?.variants?.find(v => v.id === result.variantId);
+    // Валидация результата
+    const service = services.find((s) => s.id === result?.serviceId);
+    const variant = services
+      .find((s) => s.id === result?.serviceId)
+      ?.variants?.find((v) => v.id === result.variantId);
 
-        // Фильтрация и нормализация фраз
-        const processedPhrases = (result?.keyPhrases || [])
-            .map(phrase => this.normalizeText(phrase))
-            .filter(phrase =>
-                phrase.length >= 3
-            );
+    // Фильтрация и нормализация фраз
+    const processedPhrases = (result?.keyPhrases || [])
+      .map((phrase) => this.normalizeText(phrase))
+      .filter((phrase) => phrase.length >= 3);
 
-        return {
-            service,
-            variant,
-            displayName: result?.displayName,
-            keyPhrases: [...new Set<string>(processedPhrases)] // Удаление дубликатов
-        };
+    return {
+      service,
+      variant,
+      displayName: result?.displayName,
+      keyPhrases: [...new Set<string>(processedPhrases)], // Удаление дубликатов
+    };
+  }
+
+  private async chatGptRequest(
+    systemPrompt: string,
+    userText: string,
+  ): Promise<any> {
+    try {
+      const completion = await this.openai.chat.completions.create({
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userText },
+        ],
+        model: 'gpt-3.5-turbo',
+        response_format: { type: 'json_object' },
+      });
+
+      return JSON.parse(completion.choices[0].message.content);
+    } catch (error) {
+      this.logger.error(`ChatGPT error: ${error.message}`);
+      return null;
     }
-
-    private async chatGptRequest(systemPrompt: string, userText: string): Promise<any> {
-        try {
-            const completion = await this.openai.chat.completions.create({
-                messages: [
-                    {role: "system", content: systemPrompt},
-                    {role: "user", content: userText}
-                ],
-                model: "gpt-3.5-turbo",
-                response_format: {type: "json_object"}
-            });
-
-            return JSON.parse(completion.choices[0].message.content);
-        } catch (error) {
-            this.logger.error(`ChatGPT error: ${error.message}`);
-            return null;
-        }
-    }
+  }
 }

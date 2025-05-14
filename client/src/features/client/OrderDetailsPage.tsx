@@ -79,11 +79,25 @@ export const OrderDetailsPage = () => {
     }
 
     const handleCloseClick = () => {
-        setAlertConfig({
+        // setAlertConfig({
+        //     title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
+        //     description: t('client_order_details_cancel_description'),
+        //     show: true
+        // })
+
+        Telegram.WebApp.showPopup({
             title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
-            description: t('client_order_details_cancel_description'),
-            show: true
-        })
+            message: t('client_order_details_cancel_description'),
+            buttons: [{
+                id: 'ok',
+                text: t('client_order_details_reschedule_ok_btn'),
+                type: 'default'
+            },{
+                id: 'cancel',
+                text: t('client_order_details_reschedule_cancel_btn'),
+                type: 'destructive'
+            }]
+        }, id => id === 'cancel' && handleCancelClick())
     }
 
     const executorName = useMemo(() => {
