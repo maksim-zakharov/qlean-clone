@@ -79,12 +79,6 @@ export const OrderDetailsPage = () => {
     }
 
     const handleCloseClick = () => {
-        // setAlertConfig({
-        //     title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
-        //     description: t('client_order_details_cancel_description'),
-        //     show: true
-        // })
-
         Telegram.WebApp.showPopup({
             title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
             message: t('client_order_details_cancel_description'),
@@ -112,7 +106,7 @@ export const OrderDetailsPage = () => {
     }, [order, t])
 
 
-    if (isLoading && !order) {
+    if ((isLoading || cancelLoading) && !order) {
         return <div className="p-4 mt-[56px] flex flex-col gap-4">
             <Skeleton className="w-full h-[112px]"/>
             <Skeleton className="w-full h-[192px]"/>
