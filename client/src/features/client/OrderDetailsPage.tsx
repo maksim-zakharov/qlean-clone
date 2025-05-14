@@ -106,7 +106,7 @@ export const OrderDetailsPage = () => {
     }, [order, t])
 
 
-    if ((isLoading || cancelLoading) && !order) {
+    if (isLoading || cancelLoading || !order) {
         return <div className="p-4 mt-[56px] flex flex-col gap-4">
             <Skeleton className="w-full h-[112px]"/>
             <Skeleton className="w-full h-[192px]"/>
