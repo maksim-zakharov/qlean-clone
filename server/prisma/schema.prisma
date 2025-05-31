@@ -93,6 +93,7 @@ model User {
   orders   Order[]  // Обратное отношение
   scheduleDays ScheduleDay[]
   application Application? // 1-to-1 связь
+  isAdmin    Boolean     @default(false) // Возможность стать админом
 }
 
 model Keyword {

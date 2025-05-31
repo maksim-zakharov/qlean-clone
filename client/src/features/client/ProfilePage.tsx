@@ -123,7 +123,7 @@ export const ProfilePage = () => {
         </Typography.H2>
         <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0">
             <ListButtonGroup>
-                <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--chart-2)] rounded-md"/>}
+                <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--tg-accent-green)] rounded-md"/>}
                             text={<div className="flex flex-col text-left">
                                 <Typography.Description>{t('phone')}</Typography.Description>
                                 <Typography.Title>{phoneText}</Typography.Title>
@@ -137,7 +137,7 @@ export const ProfilePage = () => {
                     <Typography.Description>{t('address')}</Typography.Description>
                     <Typography.Title
                         className="flex">{addressText || '-'}</Typography.Title>
-                </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--chart-4)] rounded-md"/>}/>
+                </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--tg-accent-blue)] rounded-md"/>}/>
             </ListButtonGroup>
 
             <ListButton icon={<img src="../telegram.svg"
@@ -191,7 +191,7 @@ export const ProfilePage = () => {
             </Sheet>}
             {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
                 className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
-                className="mr-4 h-7 w-7 p-1 bg-[var(--chart-5)] rounded-md"/>}
+                className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
                                                                text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
 
             {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>

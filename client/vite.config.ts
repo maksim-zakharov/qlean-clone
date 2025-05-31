@@ -19,6 +19,7 @@ export default defineConfig({
         react()
     ],
     server: {
+        port: Number(process.env.PORT) || 5174,
         proxy: {
             '/api': {
                 target: 'http://localhost:3000', // ваш бэкенд-сервер
