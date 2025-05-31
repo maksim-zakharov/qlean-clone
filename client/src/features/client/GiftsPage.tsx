@@ -24,6 +24,17 @@ export const GiftsPage = () => {
 
     const [selectedTab, setSelectedTab] = React.useState<string>(tabs[0].id);
 
+    const handleShareButtonClick = () => {
+        const inviteLink = `https://t.me/your_bot?start=ref_${123}`;
+        const text = `Присоединяйтесь! ${inviteLink}`;
+
+        // Формируем ссылку для шаринга
+        const shareUrl = `tg://share?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(text)}`;
+
+        // Открываем шторку через Telegram
+        Telegram.WebApp.openLink(shareUrl);
+    }
+
     return <>
         <Header>
             <Typography.Title
@@ -39,6 +50,7 @@ export const GiftsPage = () => {
                 <Button
                     wide
                     size="lg"
+                    onClick={handleShareButtonClick}
                 >
                     Рекомендовать
                 </Button>
