@@ -75,12 +75,11 @@ export class AuthService {
       if (!application || application.status !== ApplicationStatus.APPROVED) {
         data.role = 'client';
       }
-      data.role = role;
     }
-    const isAdmin = role === 'admin' && user.isAdmin;
-    if (!isAdmin) {
+    if (role === 'admin' && !user.isAdmin) {
       throw new UnauthorizedException({ message: 'User is not authorized' });
     }
+    data.role = role;
     return {
       access_token: this.jwtService.sign(user),
     };
