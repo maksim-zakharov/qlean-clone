@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { createHmac } from 'crypto';
 import * as process from 'node:process';
 import { JwtService } from '@nestjs/jwt';
@@ -76,6 +76,10 @@ export class AuthService {
         data.role = 'client';
       }
       data.role = role;
+    }
+    const isAdmin = role === 'admin' && user.isAdmin;
+    if (!isAdmin) {
+      throw new UnauthorizedException({ message: 'User is not authorized' });
     }
     return {
       access_token: this.jwtService.sign(user),

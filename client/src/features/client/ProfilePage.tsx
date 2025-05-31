@@ -1,7 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, { useMemo, useState} from "react";
-import {BriefcaseBusiness, CalendarClock, ChevronRight, HandCoins, MapPin, Phone, Star, User, X} from "lucide-react";
+import {
+    BriefcaseBusiness,
+    CalendarClock,
+    ChevronRight,
+    HandCoins,
+    MapPin,
+    Phone,
+    ShieldUser,
+    Star,
+    User,
+    X
+} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import parsePhoneNumberFromString from "libphonenumber-js";
@@ -90,6 +101,7 @@ export const ProfilePage = () => {
     }
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
+    const handleAdminLogin = () => userInfo?.isAdmin && loginMutation('admin').unwrap()
 
     if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
@@ -189,11 +201,16 @@ export const ProfilePage = () => {
                     </BottomActions>
                 </SheetContent>
             </Sheet>}
+            <ListButtonGroup>
             {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
                 className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
                 className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
                                                                text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
-
+            {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
+                className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
+                className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
+                                              text={`${t('login_as_btn')} Admin`}/>}
+            </ListButtonGroup>
             {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
                 <Typography.Title className="text-left mb-0 block pl-4">{t('profile_services_title')}</Typography.Title>
                 {filteredServices.map(s => <div className="mt-4">
