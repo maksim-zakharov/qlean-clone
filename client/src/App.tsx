@@ -21,6 +21,8 @@ import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetails
 import './i18n';
 import {Skeleton} from "./components/ui/skeleton.tsx";
 import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
+import {AdminLayout} from "./components/layout/AdminLayout.tsx";
+import {GiftsPage} from "./features/client/GiftsPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -69,7 +71,21 @@ function App() {
     }
 
     if (userinfo.role === 'admin') {
-        return 'admin'
+        return <div className="content-wrapper">
+            <Routes>
+                <Route element={<AdminLayout/>}>
+                    <Route path={RoutePaths.Root} element={<MainPage/>}/>
+                    <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
+                    <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
+                </Route>
+                <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>
+                <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
+                <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
+                <Route path={RoutePaths.Application} element={<ApplicationPage/>}/>
+                <Route path="*" element={<Navigate to={RoutePaths.Root}/>}/>
+            </Routes>
+        </div>
     }
 
     if (userinfo.role === 'executor') {
@@ -94,7 +110,7 @@ function App() {
                 <Route element={<ClientLayout/>}>
                     <Route path={RoutePaths.Root} element={<MainPage/>}/>
                     <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
-                    <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
+                    <Route path={RoutePaths.Bonuses} element={<GiftsPage/>}/>
                     <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>

@@ -1,10 +1,9 @@
-import {ClipboardList, Gift, Home, LucideIcon, User} from "lucide-react"
+import {CalendarPlus, ClipboardList, LucideIcon, User, Wallet} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.tsx";
-
 import React, {useMemo} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar.tsx";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Skeleton} from "../ui/skeleton.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Navbar} from "../ui/navbar.tsx";
@@ -16,38 +15,38 @@ type MenuItem = {
     path: string
 }
 
-export const ClientLayout = () => {
+export const AdminLayout = () => {
     const {t} = useTranslation();
-    const {isReady} = useTelegram();
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const navigate = useNavigate()
+    const {isReady} = useTelegram();
 
-    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Profile)}>
+    const Profile = () => <Avatar className="size-[22px]" onClick={() => navigate(RoutePaths.Executor.Profile)}>
         <AvatarImage src={userInfo?.photoUrl}/>
         <AvatarFallback><User/></AvatarFallback>
     </Avatar>
 
     const menuItems: MenuItem[] = useMemo(() => [
         {
-            icon: Home,
-            label: t('menu_item_home'),
-            path: RoutePaths.Root
-        },
-        {
             icon: ClipboardList,
             label: t('menu_item_orders'),
-            path: RoutePaths.Orders
+            path: RoutePaths.Executor.Orders
+        },
+        {
+            icon: Wallet,
+            label: t('menu_item_payments'),
+            path: RoutePaths.Executor.Payments
+        },
+        {
+            icon: CalendarPlus,
+            label: t('menu_item_schedule'),
+            path: RoutePaths.Executor.Schedule
         },
         {
             icon: Profile,
             label: t('menu_item_profile'),
-            path: RoutePaths.Profile
-        },
-        {
-            icon: Gift,
-            label: t('menu_item_gifts'),
-            path: '/bonuses'
-        },
+            path: RoutePaths.Executor.Profile
+        }
     ], [Profile, t])
 
     if (!isReady) {
