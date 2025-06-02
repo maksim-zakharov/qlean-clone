@@ -36,7 +36,7 @@ function App() {
     const startParam = Telegram.WebApp.initDataUnsafe.start_param || searchParams.get('tgWebAppStartParam') || searchParams.get('startapp') || '';
 
     useEffect(() => {
-        const [key, refId] = startParam.split('ref=');
+        const [key, refId] = startParam.split('ref_');
         if(refId){
             saveInLocalStorage(REF_HEADER, refId);
         }

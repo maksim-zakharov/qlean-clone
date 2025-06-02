@@ -43,7 +43,7 @@ export class AuthController {
   @Post('/login')
   async login(@Headers() headers, @Body() { role }: { role?: string }) {
     const initData = headers['telegram-init-data'] as string;
-    const refId = headers['refId'] as string;
+    const refId = headers['refid'] as string;
 
     if (!validateInitData(initData)) {
       throw new UnauthorizedException({ message: 'Invalid Telegram data' });
