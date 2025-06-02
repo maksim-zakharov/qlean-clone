@@ -21,7 +21,7 @@ interface CreateOrderState {
     geo?: { address: Address };
 }
 
-const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
+export const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
     const result = localStorage.getItem(key)
     if (!result) {
         return defaultValue;
@@ -29,7 +29,7 @@ const getLocalStorageItemOrDefault = (key: string, defaultValue: any) => {
     return JSON.parse(result);
 }
 
-const saveInLocalStorage = (key: string, value: any) => {
+export const saveInLocalStorage = (key: string, value: any) => {
     if (value) {
         localStorage.setItem(key, JSON.stringify(value))
     } else {

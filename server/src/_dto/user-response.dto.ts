@@ -7,7 +7,7 @@ export class UserResponseDTO {
 
   firstName: string;
   lastName: string;
-  @Exclude() // Исключаем это поле из ответа
+  // @Exclude() // Исключаем это поле из ответа
   id: string;
   phone: string;
   photoUrl: string;

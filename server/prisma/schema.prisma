@@ -88,6 +88,7 @@ model User {
   lastName  String?
   photoUrl  String?
   username  String?
+  refId  String?
   phone  String?
   services   ServiceExecutors[]  // Обратное отношение
   orders   Order[]  // Обратное отношение

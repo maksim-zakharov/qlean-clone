@@ -10,7 +10,7 @@ import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
 import React, {useEffect, useMemo} from "react";
 import {useDispatch} from "react-redux";
-import {startOrderFlow} from "./slices/createOrderSlice.ts";
+import {saveInLocalStorage, startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.tsx";
 import {ExecutorLayout} from "./components/layout/ExecutorLayout.tsx";
 import {ExecutorOrdersPage} from "./features/executor/ExecutorOrdersPage.tsx";
@@ -23,6 +23,7 @@ import {Skeleton} from "./components/ui/skeleton.tsx";
 import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
 import {AdminLayout} from "./components/layout/AdminLayout.tsx";
 import {GiftsPage} from "./features/client/GiftsPage.tsx";
+import {REF_HEADER} from "./api/baseQuery.ts";
 
 function App() {
     const {isReady} = useTelegram();
@@ -33,6 +34,13 @@ function App() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const startParam = Telegram.WebApp.initDataUnsafe.start_param || searchParams.get('tgWebAppStartParam') || searchParams.get('startapp') || '';
+
+    useEffect(() => {
+        const [key, refId] = startParam.split('ref=');
+        if(refId){
+            saveInLocalStorage(REF_HEADER, refId);
+        }
+    }, [startParam]);
 
     const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 

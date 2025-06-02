@@ -23,7 +23,7 @@
   "menu_item_payments": "Earnings",
   "menu_item_schedule": "Schedule",
   "menu_item_profile": "Profile",
-  "menu_item_gifts": "Gifts",
+  "menu_item_gifts": "Bonuses",
 
   "schedule_update_success": "Schedule saved!",
   "schedule_update_dayoff": "Day off",
@@ -104,5 +104,15 @@
   "calendar_title": "Choose slot",
   "executor_order_details_title": "What you have to do:",
   "executor_order_apply_btn": "Apply",
-  "executor_order_complete_btn": "Complete"
+  "executor_order_complete_btn": "Complete",
+
+  "bonuses_promocodes_title": "Мои промокоды",
+  "bonuses_invites_title": "Вы пригласили",
+  "bonuses_tabs_active": "Активные",
+  "bonuses_tabs_completed": "Завершенные",
+  "bonuses_title": "Рекомендуйте QLean \n и получайте бонусы",
+  "bonuses_description": "Вам - 3000 рублей, другу - 5000 рублей",
+  "bonuses_recommended_btn": "Рекомендовать",
+  "bonuses_invites_empty_title": "Здесь сейчас пусто",
+  "bonuses_invites_empty_description": "Наверняка кто-нибудь из друзей ждет, когда вы пригласите их в QLean"
 }

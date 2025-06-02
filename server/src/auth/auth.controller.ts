@@ -43,6 +43,7 @@ export class AuthController {
   @Post('/login')
   async login(@Headers() headers, @Body() { role }: { role?: string }) {
     const initData = headers['telegram-init-data'] as string;
+    const refId = headers['refId'] as string;
 
     if (!validateInitData(initData)) {
       throw new UnauthorizedException({ message: 'Invalid Telegram data' });
@@ -51,7 +52,7 @@ export class AuthController {
     const params = new URLSearchParams(initData);
     const userData = JSON.parse(decodeURIComponent(params.get('user')));
 
-    const user = await this.authService.validateUser(userData);
+    const user = await this.authService.validateUser(userData, refId);
 
     return this.authService.login(user, role);
   }

@@ -42,7 +42,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(data: any) {
+  async validateUser(data: any, refId?: any) {
     return this.prisma.$transaction(async (tx) => {
       let user = await tx.user.findUnique({
         where: { id: data.id.toString() },
@@ -57,6 +57,7 @@ export class AuthService {
             photoUrl: data.photo_url,
             phone: data.phone_number,
             username: data.username,
+            refId,
           },
         });
       }

@@ -1,5 +1,5 @@
 import {Mutex} from "async-mutex";
-import {saveToken} from "../slices/createOrderSlice.ts";
+import {getLocalStorageItemOrDefault, saveToken} from "../slices/createOrderSlice.ts";
 import {BaseQueryApi, FetchArgs, fetchBaseQuery} from "@reduxjs/toolkit/query";
 
 const mutex = new Mutex();
@@ -19,6 +19,7 @@ const baseQuery = () =>
     });
 
 export const TELEGRAM_HEADER = 'telegram-init-data';
+export const REF_HEADER = 'refId';
 
 export const baseQueryWithReauth = async (args: (string | FetchArgs), api: BaseQueryApi, extraOptions) => {
     let result = await baseQuery()(args, api, extraOptions);
@@ -27,11 +28,16 @@ export const baseQueryWithReauth = async (args: (string | FetchArgs), api: BaseQ
         if (!mutex.isLocked()) {
             const release = await mutex.acquire();
             try {
+                const headers: {[key: string]: string} = {
+                    [TELEGRAM_HEADER]: Telegram.WebApp?.initData
+                }
+                const refId = getLocalStorageItemOrDefault(REF_HEADER, undefined);
+                if(refId){
+                    headers[REF_HEADER] = refId;
+                }
                 const refreshResult = await baseQuery()({
                     url: '/auth/login',
-                    headers: {
-                        [TELEGRAM_HEADER]: Telegram.WebApp?.initData
-                    },
+                    headers,
                     method: 'POST'
                 }, api, extraOptions);
 
