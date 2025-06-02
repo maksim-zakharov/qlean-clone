@@ -46,4 +46,18 @@ export class UserService {
       throw new InternalServerErrorException('Failed to update user');
     }
   }
+
+  getInvites(refId: User['id']): Promise<Partial<User>[]> {
+    return this.prisma.user.findMany({
+      where: {
+        refId,
+      },
+      select: {
+        createdAt: true,
+        username: true,
+        lastName: true,
+        firstName: true,
+      },
+    });
+  }
 }

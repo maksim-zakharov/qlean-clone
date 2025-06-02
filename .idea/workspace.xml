@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Логин админом">
-      <change afterPath="$PROJECT_DIR$/client/src/components/layout/AdminLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="refId">
+      <change afterPath="$PROJECT_DIR$/client/src/components/QRCodeSheet.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/user/user.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,39 +181,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="4620000" />
-    </task>
-    <task id="LOCAL-00373" summary="Рефакторинг, починил выбор даты для заказа">
-      <option name="closed" value="true" />
-      <created>1746363765295</created>
-      <option name="number" value="00373" />
-      <option name="presentableId" value="LOCAL-00373" />
-      <option name="project" value="LOCAL" />
-      <updated>1746363765295</updated>
-    </task>
-    <task id="LOCAL-00374" summary="Исполнитель показывается в заказе">
-      <option name="closed" value="true" />
-      <created>1746364519028</created>
-      <option name="number" value="00374" />
-      <option name="presentableId" value="LOCAL-00374" />
-      <option name="project" value="LOCAL" />
-      <updated>1746364519028</updated>
-    </task>
-    <task id="LOCAL-00375" summary="OrderStatusText">
-      <option name="closed" value="true" />
-      <created>1746364749770</created>
-      <option name="number" value="00375" />
-      <option name="presentableId" value="LOCAL-00375" />
-      <option name="project" value="LOCAL" />
-      <updated>1746364749770</updated>
-    </task>
-    <task id="LOCAL-00376" summary="OrderStatusText">
-      <option name="closed" value="true" />
-      <created>1746365028130</created>
-      <option name="number" value="00376" />
-      <option name="presentableId" value="LOCAL-00376" />
-      <option name="project" value="LOCAL" />
-      <updated>1746365028130</updated>
+      <workItem from="1748586159111" duration="12741000" />
     </task>
     <task id="LOCAL-00377" summary="Сортировка ордеров от самого свежего">
       <option name="closed" value="true" />
@@ -572,7 +543,39 @@
       <option name="project" value="LOCAL" />
       <updated>1748689293684</updated>
     </task>
-    <option name="localTasksCounter" value="422" />
+    <task id="LOCAL-00422" summary="Логин админом">
+      <option name="closed" value="true" />
+      <created>1748691774864</created>
+      <option name="number" value="00422" />
+      <option name="presentableId" value="LOCAL-00422" />
+      <option name="project" value="LOCAL" />
+      <updated>1748691774864</updated>
+    </task>
+    <task id="LOCAL-00423" summary="handleShareButtonClick">
+      <option name="closed" value="true" />
+      <created>1748692177070</created>
+      <option name="number" value="00423" />
+      <option name="presentableId" value="LOCAL-00423" />
+      <option name="project" value="LOCAL" />
+      <updated>1748692177070</updated>
+    </task>
+    <task id="LOCAL-00424" summary="handleShareButtonClick">
+      <option name="closed" value="true" />
+      <created>1748886144092</created>
+      <option name="number" value="00424" />
+      <option name="presentableId" value="LOCAL-00424" />
+      <option name="project" value="LOCAL" />
+      <updated>1748886144092</updated>
+    </task>
+    <task id="LOCAL-00425" summary="refId">
+      <option name="closed" value="true" />
+      <created>1748887761587</created>
+      <option name="number" value="00425" />
+      <option name="presentableId" value="LOCAL-00425" />
+      <option name="project" value="LOCAL" />
+      <updated>1748887761587</updated>
+    </task>
+    <option name="localTasksCounter" value="426" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,8 +598,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Выбранная дата выделяется цветом" />
-    <MESSAGE value="Рефакторинг, починил выбор даты для заказа" />
     <MESSAGE value="Исполнитель показывается в заказе" />
     <MESSAGE value="OrderStatusText" />
     <MESSAGE value="Сортировка ордеров от самого свежего" />
@@ -620,9 +621,21 @@
     <MESSAGE value="Telegram.WebApp.showPopup" />
     <MESSAGE value="isAdmin true" />
     <MESSAGE value="Логин админом" />
-    <option name="LAST_COMMIT_MESSAGE" value="Логин админом" />
+    <MESSAGE value="handleShareButtonClick" />
+    <MESSAGE value="refId" />
+    <option name="LAST_COMMIT_MESSAGE" value="refId" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/src/auth/auth.controller.ts</url>
+          <line>54</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="js.build_tools.npm">
         <watch expression="new Date(startTimestamp)" language="TypeScript" />

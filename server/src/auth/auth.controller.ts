@@ -73,4 +73,10 @@ export class AuthController {
   async getUserInfo(@Req() req) {
     return plainToInstance(UserResponseDTO, req.user);
   }
+
+  @Get('/invites')
+  @UseGuards(AuthGuard('jwt'))
+  async getInvites(@Req() req) {
+    return this.userService.getInvites(req.user.id);
+  }
 }

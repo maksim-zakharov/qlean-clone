@@ -39,14 +39,14 @@ export const ClientLayout = () => {
             path: RoutePaths.Orders
         },
         {
-            icon: Profile,
-            label: t('menu_item_profile'),
-            path: RoutePaths.Profile
-        },
-        {
             icon: Gift,
             label: t('menu_item_gifts'),
             path: '/bonuses'
+        },
+        {
+            icon: Profile,
+            label: t('menu_item_profile'),
+            path: RoutePaths.Profile
         },
     ], [Profile, t])
 
