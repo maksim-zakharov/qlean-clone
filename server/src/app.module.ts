@@ -30,6 +30,7 @@ import { RolesGuard } from './auth/roles.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { ApplicationController } from './application/application.controller';
 import { ApplicationService } from './application/application.service';
+import { AdminController } from './admin/admin.controller';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { ApplicationService } from './application/application.service';
     ExecutorController,
     ScheduleController,
     ApplicationController,
+    AdminController,
     SpaController,
     OpenaiProxyController,
   ],

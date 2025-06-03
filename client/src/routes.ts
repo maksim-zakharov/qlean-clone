@@ -26,5 +26,20 @@ export const RoutePaths = {
         Payments: '/executor/payments',
         Schedule: '/executor/schedule',
         Profile: '/executor/profile',
+    },
+    Admin: {
+        // Тут и пользователи и заявки на исполнителя
+        Users: '/admin/users',
+        UserDetails: (id: string | number) => buildPath('/admin/users/:id', { id }),
+
+        // Тут управление ассортиментом услуг
+        Services: '/admin/services',
+        // Заявки на услуги и все вокруг этого
+        Orders: '/admin/orders',
+        OrderDetails: (id: string | number) => buildPath('/admin/orders/:id', { id }),
+
+        Bonuses: '/admin/bonuses',
+
+        Profile: '/admin/profile',
     }
 } as const;

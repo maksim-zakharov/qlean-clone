@@ -68,6 +68,17 @@ export class OrdersService {
     return order;
   }
 
+  getOrders() {
+    return this.prisma.order.findMany({
+      include: {
+        baseService: true,
+        options: true,
+        serviceVariant: true,
+        executor: true,
+      },
+    });
+  }
+
   getAll(userId: Order['userId']) {
     return this.prisma.order.findMany({
       where: { userId },

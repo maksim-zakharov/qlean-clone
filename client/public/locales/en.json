@@ -19,9 +19,11 @@
   "submit_application_btn": "Submit Application",
 
   "menu_item_home": "Home",
+  "menu_item_users": "Users",
   "menu_item_orders": "Orders",
   "menu_item_payments": "Earnings",
   "menu_item_schedule": "Schedule",
+  "menu_item_services": "Services",
   "menu_item_profile": "Profile",
   "menu_item_gifts": "Bonuses",
 

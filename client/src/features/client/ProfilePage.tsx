@@ -101,7 +101,7 @@ export const ProfilePage = () => {
     }
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
-    const handleAdminLogin = () => userInfo?.isAdmin && loginMutation('admin').unwrap()
+    const handleAdminLogin = () => loginMutation(userInfo?.role !== 'admin' ? 'admin' : 'executor').unwrap()
 
     if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
@@ -209,7 +209,7 @@ export const ProfilePage = () => {
             {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
                 className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
                 className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                              text={`${t('login_as_btn')} Admin`}/>}
+                                              text={`${t('login_as_btn')}  ${userInfo?.role !== 'admin' ? 'Admin' : 'Executor'}`}/>}
             </ListButtonGroup>
             {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
                 <Typography.Title className="text-left mb-0 block pl-4">{t('profile_services_title')}</Typography.Title>

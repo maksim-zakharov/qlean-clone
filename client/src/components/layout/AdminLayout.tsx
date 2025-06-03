@@ -1,4 +1,4 @@
-import {CalendarPlus, ClipboardList, LucideIcon, User, Wallet} from "lucide-react"
+import { ClipboardList, Gift, ListChecks, LucideIcon, User, Users} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 import React, {useMemo} from "react";
@@ -28,24 +28,29 @@ export const AdminLayout = () => {
 
     const menuItems: MenuItem[] = useMemo(() => [
         {
+            icon: Users,
+            label: t('menu_item_users'),
+            path: RoutePaths.Admin.Users
+        },
+        {
             icon: ClipboardList,
             label: t('menu_item_orders'),
-            path: RoutePaths.Executor.Orders
+            path: RoutePaths.Admin.Orders
         },
         {
-            icon: Wallet,
-            label: t('menu_item_payments'),
-            path: RoutePaths.Executor.Payments
+            icon: ListChecks,
+            label: t('menu_item_services'),
+            path: RoutePaths.Admin.Services
         },
         {
-            icon: CalendarPlus,
-            label: t('menu_item_schedule'),
-            path: RoutePaths.Executor.Schedule
+            icon: Gift,
+            label: t('menu_item_gifts'),
+            path: RoutePaths.Admin.Bonuses
         },
         {
             icon: Profile,
             label: t('menu_item_profile'),
-            path: RoutePaths.Executor.Profile
+            path: RoutePaths.Admin.Profile
         }
     ], [Profile, t])
 

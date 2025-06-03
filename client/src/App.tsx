@@ -24,6 +24,9 @@ import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
 import {AdminLayout} from "./components/layout/AdminLayout.tsx";
 import {GiftsPage} from "./features/client/GiftsPage.tsx";
 import {REF_HEADER} from "./api/baseQuery.ts";
+import {AdminOrdersPage} from "./features/admin/AdminOrdersPage.tsx";
+import {AdminUsersPage} from "./features/admin/AdminUsersPage.tsx";
+import {AdminServicesPage} from "./features/admin/AdminServicesPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -82,16 +85,13 @@ function App() {
         return <div className="content-wrapper">
             <Routes>
                 <Route element={<AdminLayout/>}>
-                    <Route path={RoutePaths.Root} element={<MainPage/>}/>
-                    <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
-                    <Route path={RoutePaths.Bonuses} element={<div className="p-4">Бонусы</div>}/>
-                    <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
+                    <Route path={RoutePaths.Admin.Users} element={<AdminUsersPage/>}/>
+                    <Route path={RoutePaths.Admin.Orders} element={<AdminOrdersPage/>}/>
+                    <Route path={RoutePaths.Admin.Services} element={<AdminServicesPage/>}/>
+                    <Route path={RoutePaths.Admin.Bonuses} element={<ProfilePage/>}/>
+                    <Route path={RoutePaths.Admin.Profile} element={<ProfilePage/>}/>
                 </Route>
-                <Route path={RoutePaths.Order.Create} element={<OrderCreationPage/>}/>
-                <Route path={RoutePaths.Order.Checkout} element={<OrderCheckoutPage/>}/>
-                <Route path={RoutePaths.Order.Details(':id')} element={<OrderDetailsPage/>}/>
-                <Route path={RoutePaths.Application} element={<ApplicationPage/>}/>
-                <Route path="*" element={<Navigate to={RoutePaths.Root}/>}/>
+                <Route path="*" element={<Navigate to={RoutePaths.Admin.Users}/>}/>
             </Routes>
         </div>
     }

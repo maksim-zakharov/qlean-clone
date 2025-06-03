@@ -82,28 +82,4 @@ export class AuthController {
   async getInvites(@Req() req) {
     return this.userService.getInvites(req.user.id);
   }
-
-  @Get('users')
-  @UseGuards(AuthGuard('jwt'))
-  async getUsers() {
-    return this.userService.getUsers();
-  }
-
-  @Get('applications')
-  @UseGuards(AuthGuard('jwt'))
-  async getApplications() {
-    return this.applicationService.getApplications();
-  }
-
-  @Post('applications/:id/approve')
-  @UseGuards(AuthGuard('jwt'))
-  async approveApplication(@Param('id') id: number) {
-    return this.applicationService.approveApplication(id);
-  }
-
-  @Post('applications/:id/reject')
-  @UseGuards(AuthGuard('jwt'))
-  async rejectApplication(@Param('id') id: number) {
-    return this.applicationService.rejectApplication(id);
-  }
 }

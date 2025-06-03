@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="qrCode">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Список заявок, юзеров, одобрение отклонение заявки">
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/application/application.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/application/application.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/AdminLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/user/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +68,7 @@
     "Node.js.main.ts.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/components/layout",
+    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/features/admin",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -81,11 +92,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\client\src\features\admin" />
       <recent name="D:\Projects\qlean-clone\client\src\components\layout" />
       <recent name="D:\Projects\qlean-clone\client\public" />
       <recent name="D:\Projects\qlean-clone\client\src\assets" />
       <recent name="D:\Projects\qlean-clone\client\src\features\executor" />
-      <recent name="D:\Projects\qlean-clone\client\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\qlean-clone\client\src\api" />
@@ -176,15 +187,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="15599000" />
-    </task>
-    <task id="LOCAL-00378" summary="обновил версию датапикера">
-      <option name="closed" value="true" />
-      <created>1746376341850</created>
-      <option name="number" value="00378" />
-      <option name="presentableId" value="LOCAL-00378" />
-      <option name="project" value="LOCAL" />
-      <updated>1746376341850</updated>
+      <workItem from="1748586159111" duration="19802000" />
     </task>
     <task id="LOCAL-00379" summary="Починил верстку календаря">
       <option name="closed" value="true" />
@@ -570,7 +573,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748889965667</updated>
     </task>
-    <option name="localTasksCounter" value="427" />
+    <task id="LOCAL-00427" summary="Список заявок, юзеров, одобрение отклонение заявки">
+      <option name="closed" value="true" />
+      <created>1748943415923</created>
+      <option name="number" value="00427" />
+      <option name="presentableId" value="LOCAL-00427" />
+      <option name="project" value="LOCAL" />
+      <updated>1748943415923</updated>
+    </task>
+    <option name="localTasksCounter" value="428" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +604,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="OrderStatusText" />
     <MESSAGE value="Сортировка ордеров от самого свежего" />
     <MESSAGE value="обновил версию датапикера" />
     <MESSAGE value="Починил верстку календаря" />
@@ -618,7 +628,8 @@
     <MESSAGE value="handleShareButtonClick" />
     <MESSAGE value="refId" />
     <MESSAGE value="qrCode" />
-    <option name="LAST_COMMIT_MESSAGE" value="qrCode" />
+    <MESSAGE value="Список заявок, юзеров, одобрение отклонение заявки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Список заявок, юзеров, одобрение отклонение заявки" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

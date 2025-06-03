@@ -41,7 +41,7 @@ export const ClientLayout = () => {
         {
             icon: Gift,
             label: t('menu_item_gifts'),
-            path: '/bonuses'
+            path: RoutePaths.Bonuses
         },
         {
             icon: Profile,

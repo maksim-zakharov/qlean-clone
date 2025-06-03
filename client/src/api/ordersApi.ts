@@ -4,7 +4,7 @@ import {baseQueryWithReauth} from "./baseQuery.ts";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     tagTypes: [
-        "Order"
+        "Order", 'User', 'Service', 'Variant'
     ],
     baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
@@ -18,6 +18,34 @@ export const ordersApi = createApi({
         getOrders: builder.query<any[], void>({
             query: (params) => ({
                 url: "/orders",
+                params
+            }),
+            providesTags: ['Order'],
+        }),
+        getAdminVariants: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/admin/variants",
+                params
+            }),
+            providesTags: ['Variant'],
+        }),
+        getAdminServices: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/admin/services",
+                params
+            }),
+            providesTags: ['Service'],
+        }),
+        getAdminUsers: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/admin/users",
+                params
+            }),
+            providesTags: ['User'],
+        }),
+        getAdminOrders: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/admin/orders",
                 params
             }),
             providesTags: ['Order'],
@@ -92,10 +120,14 @@ export const {
     useAddOrderMutation,
     useGetOrderByIdQuery,
     useCancelOrderMutation,
+    useGetAdminUsersQuery,
     useEditOrderMutation,
+    useGetAdminVariantsQuery,
+    useGetAdminServicesQuery,
     useGetOrderByIdFromExecutorQuery,
     usePatchOrderMutation,
     useGetExecutorOrdersQuery,
     useCompleteOrderMutation,
     useProcessedOrderMutation,
+    useGetAdminOrdersQuery
 } = ordersApi;
