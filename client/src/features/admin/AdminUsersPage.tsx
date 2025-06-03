@@ -6,7 +6,6 @@ import { useGetAdminUsersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import {ClipboardPlus} from "lucide-react";
 import {useDispatch} from "react-redux";
-import { selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
@@ -24,13 +23,7 @@ export const AdminUsersPage = () => {
         refetchOnMountOrArgChange: true
     });
 
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(order))
-        navigate('/order')
-    }
-
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+    const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Users.Details(order.id))
 
     if (isLoading) {
         return <div className="px-4 mb-4">

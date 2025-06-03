@@ -35,9 +35,6 @@ export class OrdersService {
 
     if (!order) throw new NotFoundException('Order not found');
 
-    order.status =
-      order.date > new Date() ? order.status : OrderStatus.completed;
-
     return order;
   }
 

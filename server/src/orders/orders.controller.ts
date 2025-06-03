@@ -24,14 +24,9 @@ export class OrdersController {
 
   @Get('')
   getOrders(@Req() req) {
-    return this.ordersService.getAll(req.user.id).then((r) =>
-      r.map((o) =>
-        plainToInstance(OrderDTO, {
-          ...o,
-          status: o.date > new Date() ? o.status : OrderStatus.completed,
-        }),
-      ),
-    );
+    return this.ordersService
+      .getAll(req.user.id)
+      .then((r) => r.map((o) => plainToInstance(OrderDTO, o)));
   }
 
   @Get('/:id')

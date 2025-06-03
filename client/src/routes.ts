@@ -11,32 +11,42 @@ const buildPath = (path: string, params?: RouteParams) => {
 
 export const RoutePaths = {
     Root: '/',
-    Orders: '/orders',
     Bonuses: '/bonuses',
     Profile: '/profile',
     Application: '/application',
     Order: {
-        Create: '/order',
-        Checkout: '/order/checkout',
-        Details: (id: string | number) => buildPath('/order/:id', { id }),
+        List: '/orders',
+        Create: '/orders/create',
+        Checkout: '/orders/checkout',
+        Details: (id: string | number) => buildPath('/orders/:id', {id}),
     },
     Executor: {
         Orders: '/executor/orders',
-        Details: (id: string | number) => buildPath('/executor/orders/:id', { id }),
+        Details: (id: string | number) => buildPath('/executor/orders/:id', {id}),
         Payments: '/executor/payments',
         Schedule: '/executor/schedule',
         Profile: '/executor/profile',
     },
     Admin: {
         // Тут и пользователи и заявки на исполнителя
-        Users: '/admin/users',
-        UserDetails: (id: string | number) => buildPath('/admin/users/:id', { id }),
+        Users: {
+            List: '/admin/users',
+            Details: (id: string | number) => buildPath('/admin/users/:id', {id}),
+        },
 
         // Тут управление ассортиментом услуг
-        Services: '/admin/services',
-        // Заявки на услуги и все вокруг этого
-        Orders: '/admin/orders',
-        OrderDetails: (id: string | number) => buildPath('/admin/orders/:id', { id }),
+        Services: {
+            List: '/admin/services',
+            Details: (id: string | number) => buildPath('/admin/services/:id', {id}),
+        },
+
+        Order: {
+            // Заявки на услуги и все вокруг этого
+            List: '/admin/orders',
+            Create: '/admin/orders/create',
+            Checkout: '/admin/orders/checkout',
+            Details: (id: string | number) => buildPath('/admin/orders/:id', {id}),
+        },
 
         Bonuses: '/admin/bonuses',
 

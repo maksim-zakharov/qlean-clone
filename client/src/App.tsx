@@ -85,13 +85,15 @@ function App() {
         return <div className="content-wrapper">
             <Routes>
                 <Route element={<AdminLayout/>}>
-                    <Route path={RoutePaths.Admin.Users} element={<AdminUsersPage/>}/>
-                    <Route path={RoutePaths.Admin.Orders} element={<AdminOrdersPage/>}/>
-                    <Route path={RoutePaths.Admin.Services} element={<AdminServicesPage/>}/>
+                    <Route path={RoutePaths.Admin.Users.List} element={<AdminUsersPage/>}/>
+                    <Route path={RoutePaths.Admin.Order.List} element={<AdminOrdersPage/>}/>
+                    <Route path={RoutePaths.Admin.Services.List} element={<AdminServicesPage/>}/>
                     <Route path={RoutePaths.Admin.Bonuses} element={<ProfilePage/>}/>
                     <Route path={RoutePaths.Admin.Profile} element={<ProfilePage/>}/>
                 </Route>
-                <Route path="*" element={<Navigate to={RoutePaths.Admin.Users}/>}/>
+                <Route path={RoutePaths.Admin.Order.Create} element={<OrderCreationPage isAdmin/>}/>
+                <Route path={RoutePaths.Admin.Order.Details(':id')} element={<OrderDetailsPage isAdmin/>}/>
+                <Route path="*" element={<Navigate to={RoutePaths.Admin.Users.List}/>}/>
             </Routes>
         </div>
     }
@@ -117,7 +119,7 @@ function App() {
             <Routes>
                 <Route element={<ClientLayout/>}>
                     <Route path={RoutePaths.Root} element={<MainPage/>}/>
-                    <Route path={RoutePaths.Orders} element={<ClientOrdersPage/>}/>
+                    <Route path={RoutePaths.Order.List} element={<ClientOrdersPage/>}/>
                     <Route path={RoutePaths.Bonuses} element={<GiftsPage/>}/>
                     <Route path={RoutePaths.Profile} element={<ProfilePage/>}/>
                 </Route>

@@ -5,21 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Список заявок, юзеров, одобрение отклонение заявки">
-      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/AdminLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ClientOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderCreationPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,15 +185,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="19802000" />
-    </task>
-    <task id="LOCAL-00379" summary="Починил верстку календаря">
-      <option name="closed" value="true" />
-      <created>1746377950930</created>
-      <option name="number" value="00379" />
-      <option name="presentableId" value="LOCAL-00379" />
-      <option name="project" value="LOCAL" />
-      <updated>1746377950930</updated>
+      <workItem from="1748586159111" duration="23498000" />
     </task>
     <task id="LOCAL-00380" summary="healthcheck">
       <option name="closed" value="true" />
@@ -581,7 +571,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748943415923</updated>
     </task>
-    <option name="localTasksCounter" value="428" />
+    <task id="LOCAL-00428" summary="Список заявок, юзеров, одобрение отклонение заявки">
+      <option name="closed" value="true" />
+      <created>1748950994957</created>
+      <option name="number" value="00428" />
+      <option name="presentableId" value="LOCAL-00428" />
+      <option name="project" value="LOCAL" />
+      <updated>1748950994957</updated>
+    </task>
+    <option name="localTasksCounter" value="429" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

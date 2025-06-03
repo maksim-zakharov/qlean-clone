@@ -36,7 +36,7 @@ export const ClientLayout = () => {
         {
             icon: ClipboardList,
             label: t('menu_item_orders'),
-            path: RoutePaths.Orders
+            path: RoutePaths.Order.List
         },
         {
             icon: Gift,

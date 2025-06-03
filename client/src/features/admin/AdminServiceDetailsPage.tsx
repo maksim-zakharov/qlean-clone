@@ -26,7 +26,7 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 import {OrderStatusText} from "../../components/OrderStatusText.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 
-export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
+export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const {t} = useTranslation();
     const [patchOrder] = usePatchOrderMutation();
     const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
@@ -64,7 +64,7 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         dispatch(selectBaseService(order))
-        navigate(RoutePaths.Order.Create)
+        navigate(RoutePaths.Admin.Order.Create)
     }
 
     const handleOkClick = () => {

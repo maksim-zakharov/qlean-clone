@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {FC, useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Button} from '@/components/ui/button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
@@ -18,7 +18,7 @@ import {RoutePaths} from "../../routes.ts";
 import {Checkbox} from "../../components/ui/checkbox.tsx";
 import {useTranslation} from "react-i18next";
 
-export const OrderCreationPage = () => {
+export const OrderCreationPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const {t} = useTranslation();
     const [patchOrder, {isLoading: patchOrderLoading}] = usePatchOrderMutation();
     const services = useSelector(state => state.createOrder.services);
@@ -38,9 +38,9 @@ export const OrderCreationPage = () => {
     useBackButton(() => {
         dispatch(clearState())
         if (isDraft) {
-            navigate(RoutePaths.Root)
+            navigate(isAdmin ? RoutePaths.Admin.Order.List : RoutePaths.Root)
         } else
-        navigate(RoutePaths.Orders)
+        navigate(isAdmin ? RoutePaths.Admin.Order.List : RoutePaths.Order.List)
     });
 
     // Либо мы перешли сюда из других страниц, либо просто откуда то как то - и берем первый сервис из списка
@@ -82,7 +82,7 @@ export const OrderCreationPage = () => {
             navigate(RoutePaths.Order.Checkout);
         } else {
             await patchOrder({id: orderId, serviceVariant, options}).unwrap();
-            navigate(RoutePaths.Order.Details(orderId));
+            navigate(isAdmin ? RoutePaths.Admin.Order.Details(orderId) : RoutePaths.Order.Details(orderId));
         }
     }
 

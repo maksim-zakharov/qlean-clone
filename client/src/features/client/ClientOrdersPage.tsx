@@ -32,15 +32,15 @@ export const ClientOrdersPage = () => {
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
         dispatch(selectBaseService(order))
-        navigate('/order')
+        navigate(RoutePaths.Order.Create)
     }
 
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+    const handleOrderClick = (order: any) => navigate(RoutePaths.Order.Details(order.id))
 
     const handleRetryClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
         e.stopPropagation()
         dispatch(retryOrder(order))
-        navigate(`/order/checkout`)
+        navigate(RoutePaths.Order.Checkout)
     }
 
     if (isLoading) {

@@ -4,10 +4,8 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetAdminOrdersQuery} from "../../api/ordersApi.ts";
 import dayjs from "dayjs";
-import {ClipboardPlus, ListPlus} from "lucide-react";
+import {ClipboardPlus} from "lucide-react";
 import {moneyFormat} from "../../lib/utils.ts";
-import {useDispatch} from "react-redux";
-import { selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
@@ -21,18 +19,11 @@ import {Header} from "../../components/ui/Header.tsx";
 export const AdminOrdersPage = () => {
     const {t} = useTranslation();
     const navigate = useNavigate()
-    const dispatch = useDispatch();
     const {data: orders = [], isLoading, isError} = useGetAdminOrdersQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
 
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>, order: any) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(order))
-        navigate('/order')
-    }
-
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+    const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Order.Details(order.id))
 
 
     if (isLoading) {
@@ -93,11 +84,8 @@ export const AdminOrdersPage = () => {
                             <Typography.Title><OrderStatusText status={ao.status}/></Typography.Title>
                         </div>
                         <div className="flex justify-between align-bottom items-center">
-                            <Button className="p-0 border-none h-6" onClick={(e) => handleAddOptionClick(e, ao)}
-                                    variant="default" size="sm">
-                                <ListPlus className="w-5 h-5 mr-2"/> {t('client_orders_add_service_btn')}
-                            </Button>
-                            <Typography.Description>{t('client_orders_support_btn')}</Typography.Description>
+                            <Typography.Description>Executor: {ao.executor ? `${ao.executor?.firstName} ${ao.executor?.lastName}` : '-'}</Typography.Description>
+                            {ao.startedAt && <Typography.Description>{dayjs.utc(ao.startedAt).local().format('D MMMM, HH:mm')}</Typography.Description>}
                         </div>
                     </div>
                 </Card>)}

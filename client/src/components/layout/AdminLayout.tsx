@@ -30,17 +30,17 @@ export const AdminLayout = () => {
         {
             icon: Users,
             label: t('menu_item_users'),
-            path: RoutePaths.Admin.Users
+            path: RoutePaths.Admin.Users.List
         },
         {
             icon: ClipboardList,
             label: t('menu_item_orders'),
-            path: RoutePaths.Admin.Orders
+            path: RoutePaths.Admin.Order.List
         },
         {
             icon: ListChecks,
             label: t('menu_item_services'),
-            path: RoutePaths.Admin.Services
+            path: RoutePaths.Admin.Services.List
         },
         {
             icon: Gift,

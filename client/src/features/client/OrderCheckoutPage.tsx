@@ -46,7 +46,7 @@ export const OrderCheckoutPage = () => {
         if (isDraft) {
             navigate(RoutePaths.Order.Create)
         } else
-            navigate(RoutePaths.Orders)
+            navigate(RoutePaths.Order.List)
     });
     
     const [comment, setComment] = useState<string | undefined>();
@@ -82,7 +82,7 @@ export const OrderCheckoutPage = () => {
                     date: selectedTimestamp,
                     comment
                 }).unwrap();
-            navigate(RoutePaths.Orders)
+            navigate(RoutePaths.Order.List)
         } catch (e) {
             let description = t("error_500_title")
             if (!selectedTimestamp) {
