@@ -60,4 +60,8 @@ export class UserService {
       },
     });
   }
+
+  getUsers(): Promise<User[]> {
+    return this.prisma.user.findMany({});
+  }
 }

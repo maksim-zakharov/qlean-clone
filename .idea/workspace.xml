@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="refId">
-      <change afterPath="$PROJECT_DIR$/client/src/components/QRCodeSheet.tsx" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="qrCode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/ClientLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/application/application.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/application/application.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/user/user.service.ts" afterDir="false" />
     </list>
@@ -181,15 +176,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="12741000" />
-    </task>
-    <task id="LOCAL-00377" summary="Сортировка ордеров от самого свежего">
-      <option name="closed" value="true" />
-      <created>1746365213176</created>
-      <option name="number" value="00377" />
-      <option name="presentableId" value="LOCAL-00377" />
-      <option name="project" value="LOCAL" />
-      <updated>1746365213176</updated>
+      <workItem from="1748586159111" duration="15599000" />
     </task>
     <task id="LOCAL-00378" summary="обновил версию датапикера">
       <option name="closed" value="true" />
@@ -575,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748887761587</updated>
     </task>
-    <option name="localTasksCounter" value="426" />
+    <task id="LOCAL-00426" summary="qrCode">
+      <option name="closed" value="true" />
+      <created>1748889965667</created>
+      <option name="number" value="00426" />
+      <option name="presentableId" value="LOCAL-00426" />
+      <option name="project" value="LOCAL" />
+      <updated>1748889965667</updated>
+    </task>
+    <option name="localTasksCounter" value="427" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,7 +593,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Исполнитель показывается в заказе" />
     <MESSAGE value="OrderStatusText" />
     <MESSAGE value="Сортировка ордеров от самого свежего" />
     <MESSAGE value="обновил версию датапикера" />
@@ -623,14 +617,15 @@
     <MESSAGE value="Логин админом" />
     <MESSAGE value="handleShareButtonClick" />
     <MESSAGE value="refId" />
-    <option name="LAST_COMMIT_MESSAGE" value="refId" />
+    <MESSAGE value="qrCode" />
+    <option name="LAST_COMMIT_MESSAGE" value="qrCode" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/src/auth/auth.controller.ts</url>
-          <line>54</line>
+          <line>57</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

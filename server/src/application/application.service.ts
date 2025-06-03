@@ -1,6 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { ServiceVariant, User } from '@prisma/client';
+import {
+  Application,
+  ApplicationStatus,
+  ServiceVariant,
+  User,
+} from '@prisma/client';
 
 @Injectable()
 export class ApplicationService {
@@ -27,6 +32,41 @@ export class ApplicationService {
         },
       });
     });
+  }
+
+  approveApplication(id: Application['id']) {
+    return this.changeApplicationStatus(id, ApplicationStatus.APPROVED);
+  }
+
+  rejectApplication(id: Application['id']) {
+    return this.changeApplicationStatus(id, ApplicationStatus.REJECTED);
+  }
+
+  changeApplicationStatus(id: Application['id'], status: ApplicationStatus) {
+    return this.prisma.$transaction(async (tx) => {
+      const application = await tx.application.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!application) {
+        throw new NotFoundException({ message: 'Application not found' });
+      }
+
+      application.status = status;
+
+      return tx.application.update({
+        data: application,
+        where: {
+          id,
+        },
+      });
+    });
+  }
+
+  getApplications() {
+    return this.prisma.application.findMany({});
   }
 
   getApplication(executorId: User['id']) {

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Headers,
+  Param,
   Post,
   Req,
   UnauthorizedException,
@@ -14,6 +15,7 @@ import { UserService } from '../user/user.service';
 import { Telegraf } from 'telegraf';
 import { UserResponseDTO } from '../_dto/user-response.dto';
 import { plainToInstance } from 'class-transformer';
+import { ApplicationService } from '../application/application.service';
 
 @Controller('/api/auth')
 export class AuthController {
@@ -21,6 +23,7 @@ export class AuthController {
     private readonly bot: Telegraf,
     private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly applicationService: ApplicationService,
   ) {
     bot.on('contact', async (ctx) => {
       const contact = ctx.message.contact;
@@ -78,5 +81,29 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   async getInvites(@Req() req) {
     return this.userService.getInvites(req.user.id);
+  }
+
+  @Get('users')
+  @UseGuards(AuthGuard('jwt'))
+  async getUsers() {
+    return this.userService.getUsers();
+  }
+
+  @Get('applications')
+  @UseGuards(AuthGuard('jwt'))
+  async getApplications() {
+    return this.applicationService.getApplications();
+  }
+
+  @Post('applications/:id/approve')
+  @UseGuards(AuthGuard('jwt'))
+  async approveApplication(@Param('id') id: number) {
+    return this.applicationService.approveApplication(id);
+  }
+
+  @Post('applications/:id/reject')
+  @UseGuards(AuthGuard('jwt'))
+  async rejectApplication(@Param('id') id: number) {
+    return this.applicationService.rejectApplication(id);
   }
 }
