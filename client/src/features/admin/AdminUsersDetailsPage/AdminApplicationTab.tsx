@@ -4,10 +4,8 @@ import React from "react";
 import {useApproveApplicationMutation, useRejectApplicationMutation} from "../../../api/ordersApi.ts";
 import {toast} from "sonner";
 import {CalendarCheck} from "lucide-react";
-import {useTranslation} from "react-i18next";
 
 export const AdminApplicationTab = ({application}) => {
-    const {t} = useTranslation();
 
     const [approve, {isLoading: isLoadingApprove}] = useApproveApplicationMutation();
     const [reject, {isLoading: isLoadingReject}] = useRejectApplicationMutation();
