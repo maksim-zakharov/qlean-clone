@@ -62,7 +62,7 @@ export const AdminUsersDetailsPage: FC = () => {
     const {data: orders, isLoading: isLoadingOrders} = useGetAdminOrdersByUserIdQuery({id: id!})
 
     if (isLoading) {
-        return <div className="p-4 mt-[56px] flex flex-col gap-2">
+        return <div className="px-4 py-2 mt-[56px] flex flex-col gap-2">
             <Skeleton className="rounded-full size-30 m-auto mb-2"/>
             <Skeleton className="w-full h-[64px]"/>
             <Skeleton className="w-full h-[52px]"/>
@@ -81,7 +81,7 @@ export const AdminUsersDetailsPage: FC = () => {
             <Typography.Title
                 className="items-center flex justify-center">Пользователь</Typography.Title>
         </Header>
-        <div className="flex flex-col gap-2 bg-inherit p-4 pb-2">
+        <div className="flex flex-col gap-2 bg-inherit px-4 py-2">
             <Avatar className="rounded-full bg-tg-theme-secondary-bg-color m-auto mb-2 size-30">
                 <AvatarImage src={user?.photoUrl}/>
                 <AvatarFallback className="bg-tg-theme-secondary-bg-color"><User/></AvatarFallback>

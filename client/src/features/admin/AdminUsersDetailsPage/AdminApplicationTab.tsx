@@ -1,8 +1,68 @@
 import {Button} from "../../../components/ui/button.tsx";
 import {ProfileApplicationCard} from "../../../components/ProfileApplicationCard.tsx";
 import React from "react";
+import {useApproveApplicationMutation, useRejectApplicationMutation} from "../../../api/ordersApi.ts";
+import {toast} from "sonner";
+import {CalendarCheck} from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 export const AdminApplicationTab = ({application}) => {
+    const {t} = useTranslation();
+
+    const [approve, {isLoading: isLoadingApprove}] = useApproveApplicationMutation();
+    const [reject, {isLoading: isLoadingReject}] = useRejectApplicationMutation();
+
+    const handleApproveClick = async () => {
+        Telegram.WebApp.showPopup({
+            title: `Согласование заявки`,
+            message: 'Вы уверены что хотите согласовать заявку?',
+            buttons: [{
+                id: 'ok',
+                text: t('client_order_details_reschedule_ok_btn'),
+                type: 'default'
+            },{
+                id: 'cancel',
+                text: t('client_order_details_reschedule_cancel_btn'),
+                type: 'destructive'
+            }]
+        }, id => id === 'cancel' && (async () => {
+
+            await approve(application).unwrap();
+
+            toast('Application is approved', {
+                classNames: {
+                    icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
+                },
+                icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
+            })
+        })())
+    }
+
+    const handleRejectClick = async () => {
+        Telegram.WebApp.showPopup({
+            title: `Отклонение заявки`,
+            message: 'Вы уверены что хотите отклонить заявку?',
+            buttons: [{
+                id: 'ok',
+                text: t('client_order_details_reschedule_ok_btn'),
+                type: 'default'
+            },{
+                id: 'cancel',
+                text: t('client_order_details_reschedule_cancel_btn'),
+                type: 'destructive'
+            }]
+        }, id => id === 'cancel' && (async () => {
+
+            await reject(application).unwrap();
+
+            toast('Application is rejected', {
+                classNames: {
+                    icon: 'mr-2 h-5 w-5 text-[var(--chart-2)]'
+                },
+                icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
+            })
+        })())
+    }
 
     return <>
         {application?.status !== 'REJECTED' &&
@@ -11,6 +71,8 @@ export const AdminApplicationTab = ({application}) => {
                 <Button
                     wide
                     size="lg"
+                    onClick={handleApproveClick}
+                    loading={isLoadingApprove}
                 >
                     Approve
                 </Button>
@@ -19,6 +81,8 @@ export const AdminApplicationTab = ({application}) => {
                     size="lg"
                     className="border-none"
                     variant="default"
+                    onClick={handleRejectClick}
+                    loading={isLoadingReject}
                 >
                     Reject
                 </Button>
