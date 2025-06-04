@@ -27,6 +27,8 @@ import {REF_HEADER} from "./api/baseQuery.ts";
 import {AdminOrdersPage} from "./features/admin/AdminOrdersPage.tsx";
 import {AdminUsersPage} from "./features/admin/AdminUsersPage.tsx";
 import {AdminServicesPage} from "./features/admin/AdminServicesPage.tsx";
+import {AdminServiceDetailsPage} from "./features/admin/AdminServiceDetailsPage.tsx";
+import {AdminUsersDetailsPage} from "./features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -91,6 +93,8 @@ function App() {
                     <Route path={RoutePaths.Admin.Bonuses} element={<ProfilePage/>}/>
                     <Route path={RoutePaths.Admin.Profile} element={<ProfilePage/>}/>
                 </Route>
+                <Route path={RoutePaths.Admin.Users.Details(':id')} element={<AdminUsersDetailsPage/>}/>
+                <Route path={RoutePaths.Admin.Services.Details(':id')} element={<AdminServiceDetailsPage/>}/>
                 <Route path={RoutePaths.Admin.Order.Create} element={<OrderCreationPage isAdmin/>}/>
                 <Route path={RoutePaths.Admin.Order.Details(':id')} element={<OrderDetailsPage isAdmin/>}/>
                 <Route path="*" element={<Navigate to={RoutePaths.Admin.Users.List}/>}/>

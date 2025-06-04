@@ -116,5 +116,7 @@
   "bonuses_description": "Вам - 3000 рублей, другу - 5000 рублей",
   "bonuses_recommended_btn": "Рекомендовать",
   "bonuses_invites_empty_title": "Здесь сейчас пусто",
-  "bonuses_invites_empty_description": "Наверняка кто-нибудь из друзей ждет, когда вы пригласите их в QLean"
+  "bonuses_invites_empty_description": "Наверняка кто-нибудь из друзей ждет, когда вы пригласите их в QLean",
+
+  "user_application_title": "Application"
 }

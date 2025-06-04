@@ -1,4 +1,11 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from '../user/user.service';
 import { ApplicationService } from '../application/application.service';
@@ -26,6 +33,12 @@ export class AdminController {
     return this.serviceService.getAll();
   }
 
+  @Get('services/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async getServiceById(@Param('id') id: number) {
+    return this.serviceService.getVariantById(id);
+  }
+
   @Get('orders')
   @UseGuards(AuthGuard('jwt'))
   async getOrders() {
@@ -38,10 +51,38 @@ export class AdminController {
     return this.userService.getUsers();
   }
 
+  @Get('users/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async getUserById(@Param('id') id: string) {
+    return this.userService.getById(id);
+  }
+
+  @Get('users/:id/orders')
+  @UseGuards(AuthGuard('jwt'))
+  async getOrdersByUserId(@Param('id') id: string) {
+    return this.orderService.getOrdersByUserId(id);
+  }
+
+  @Get('users/:id/invites')
+  @UseGuards(AuthGuard('jwt'))
+  async getInvitesByUserId(@Param('id') id: string) {
+    return this.userService.getInvites(id);
+  }
+
   @Get('applications')
   @UseGuards(AuthGuard('jwt'))
   async getApplications() {
     return this.applicationService.getApplications();
+  }
+
+  @Get('applications/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async getApplicationByUserId(@Param('id') userId: string) {
+    const application = await this.applicationService.getApplication(userId);
+    if (!application) {
+      throw new NotFoundException({ message: 'Application not found' });
+    }
+    return application;
   }
 
   @Post('applications/:id/approve')

@@ -22,6 +22,28 @@ export class OrdersService {
     }
   }
 
+  async getOrdersByUserId(userId: Order['userId']) {
+    const orders = await this.prisma.order.findMany({
+      where: {
+        OR: [
+          {
+            executorId: userId,
+          },
+          {
+            userId,
+          },
+        ],
+      },
+      include: {
+        baseService: true,
+        options: true,
+        serviceVariant: true,
+      },
+    });
+
+    return orders;
+  }
+
   async getById(id: Order['id'], userId: Order['userId']) {
     const order = await this.prisma.order.findUnique({
       where: { id, userId },

@@ -4,7 +4,6 @@ import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import { useGetAdminVariantsQuery} from "../../api/ordersApi.ts";
 import {ClipboardPlus} from "lucide-react";
-import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
@@ -18,12 +17,11 @@ import {DynamicIcon} from "lucide-react/dynamic";
 export const AdminServicesPage = () => {
     const {t} = useTranslation();
     const navigate = useNavigate()
-    const dispatch = useDispatch();
     const {data: services = [], isLoading, isError} = useGetAdminVariantsQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
 
-    const handleOrderClick = (order: any) => navigate(`/order/${order.id}`)
+    const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Services.Details(order.id))
 
     if (isLoading) {
         return <div className="px-4 mb-4">

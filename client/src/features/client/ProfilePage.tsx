@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Typography} from "../../components/ui/Typography.tsx";
-import React, { useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 import {
     BriefcaseBusiness,
     CalendarClock,
@@ -24,12 +24,12 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../../
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {ListButton} from "@/components/ListButton/ListButton.tsx";
 import {ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
-import {useGetApplicationQuery, useGetServicesQuery, useLoginMutation} from "../../api/api.ts";
-import {DynamicIcon} from "lucide-react/dynamic";
+import {useGetApplicationQuery, useLoginMutation} from "../../api/api.ts";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 import {Header} from "../../components/ui/Header.tsx";
+import {ProfileApplicationCard} from "../../components/ProfileApplicationCard.tsx";
 
 export const ProfilePage = () => {
     const {t} = useTranslation();
@@ -42,12 +42,6 @@ export const ProfilePage = () => {
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const address = useSelector(state => state.createOrder.geo?.address);
     const [writeAccessReceived, setWriteAccessReceived] = useState<boolean>(false)
-    const {data: services = []} = useGetServicesQuery();
-    const applicationVariantIdsSet = useMemo(() => new Set(application?.variants?.map(v => v.variantId) || []), [application]);
-    const filteredServices = useMemo(() => services.filter(s => s.variants.some(v => applicationVariantIdsSet.has(v.id))).map(s => ({
-        ...s,
-        variants: s.variants.filter(v => applicationVariantIdsSet.has(v.id))
-    })), [applicationVariantIdsSet, services])
 
     const phoneText = useMemo(() => {
         if (!userInfo?.phone) {
@@ -202,28 +196,19 @@ export const ProfilePage = () => {
                 </SheetContent>
             </Sheet>}
             <ListButtonGroup>
-            {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
-                className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
-                className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                                               text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
-            {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
-                className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
-                className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                              text={`${t('login_as_btn')}  ${userInfo?.role !== 'admin' ? 'Admin' : 'Executor'}`}/>}
+                {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
+                    className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
+                    className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
+                                                                   text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
+                {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
+                    className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
+                    className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
+                                                  text={`${t('login_as_btn')}  ${userInfo?.role !== 'admin' ? 'Admin' : 'Executor'}`}/>}
             </ListButtonGroup>
-            {userInfo?.role === 'executor' && filteredServices.length > 0 && <div>
+            {userInfo?.role === 'executor' && <>
                 <Typography.Title className="text-left mb-0 block pl-4">{t('profile_services_title')}</Typography.Title>
-                {filteredServices.map(s => <div className="mt-4">
-                    <Typography.Description
-                        className="block mb-2 text-left pl-4 text-sm uppercase">{s.name}</Typography.Description>
-                    <ListButtonGroup>
-                        {s.variants.map(s => <ListButton text={s.name} icon={<DynamicIcon name={s.icon}
-                                                                                          className="w-7 h-7 p-1 root-bg-color rounded-md"
-                                                                                          strokeWidth={1.5}/>}/>)}
-                    </ListButtonGroup>
-                </div>)}
-
-            </div>}
+                <ProfileApplicationCard
+                    application={application}/></>}
 
             <Button className="[color:var(--tg-theme-destructive-text-color)] rounded-xl" variant="list"
                     onClick={handleLogout}>{t('logout_btn')}</Button>

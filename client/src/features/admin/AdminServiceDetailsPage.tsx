@@ -2,7 +2,11 @@ import {Header} from "../../components/ui/Header.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {FC, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {useCancelOrderMutation, useGetOrderByIdQuery, usePatchOrderMutation} from "../../api/ordersApi.ts";
+import {
+    useCancelOrderMutation,
+    useGetAdminServicesByIdQuery,
+    usePatchOrderMutation
+} from "../../api/ordersApi.ts";
 import {useGetAddressesQuery} from "../../api/api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
@@ -26,44 +30,46 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 import {OrderStatusText} from "../../components/OrderStatusText.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 
-export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
+export const AdminServiceDetailsPage: FC = () => {
+    useBackButton(() => navigate(RoutePaths.Admin.Services.List));
+
     const {t} = useTranslation();
     const [patchOrder] = usePatchOrderMutation();
     const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
-    useBackButton(() => navigate(RoutePaths.Order.List));
     const dispatch = useDispatch();
     const {data: addresses = []} = useGetAddressesQuery();
+
     const {id} = useParams<string>();
-    const {data: order, isLoading, isError} = useGetOrderByIdQuery({id: id!});
+    const {data: serviceVariant, isLoading, isError} = useGetAdminServicesByIdQuery({id: id!});
     const [{title, description, show}, setAlertConfig] = useState({
         title: '',
         description: '',
         show: false
     })
 
-    const canEdit = isAdmin || Boolean(order?.status) && ['todo'].includes(order?.status);
+    const canEdit = Boolean(serviceVariant?.status) && ['todo'].includes(serviceVariant?.status);
 
-    const totalPrice = useMemo(() => order?.options.reduce((sum, option) => sum + option.price, order?.serviceVariant?.basePrice || 0) || 0, [order]);
+    const totalPrice = useMemo(() => serviceVariant?.options.reduce((sum, option) => sum + option.price, serviceVariant?.serviceVariant?.basePrice || 0) || 0, [serviceVariant]);
 
     const handleSelectAddress = async ({fullAddress}: any) => {
-        if (fullAddress !== order.fullAddress)
-            await patchOrder({id: order.id, fullAddress}).unwrap();
+        if (fullAddress !== serviceVariant.fullAddress)
+            await patchOrder({id: serviceVariant.id, fullAddress}).unwrap();
     }
 
     const handleSelectDate = async (date: number) => {
-        if (date !== order.date)
-            await patchOrder({id: order.id, date}).unwrap();
+        if (date !== serviceVariant.date)
+            await patchOrder({id: serviceVariant.id, date}).unwrap();
     }
 
     const handleChangeComment = async (comment?: string) => {
-        if (comment && comment !== order.comment)
-            await patchOrder({id: order.id, comment}).unwrap();
+        if (comment && comment !== serviceVariant.comment)
+            await patchOrder({id: serviceVariant.id, comment}).unwrap();
     }
 
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
-        dispatch(selectBaseService(order))
+        dispatch(selectBaseService(serviceVariant))
         navigate(RoutePaths.Admin.Order.Create)
     }
 
@@ -73,14 +79,14 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     }
 
     const handleCancelClick = async () => {
-        await cancelOrder({id: order.id}).unwrap();
+        await cancelOrder({id: serviceVariant.id}).unwrap();
         setAlertConfig(prevState => ({...prevState, show: false}));
         setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
     }
 
     const handleCloseClick = () => {
         Telegram.WebApp.showPopup({
-            title: `${t('client_order_details_cancel_title')} ${dayjs.utc(order.date).local().format('dd, D MMMM HH:mm')}?`,
+            title: `${t('client_order_details_cancel_title')} ${dayjs.utc(serviceVariant.date).local().format('dd, D MMMM HH:mm')}?`,
             message: t('client_order_details_cancel_description'),
             buttons: [{
                 id: 'ok',
@@ -95,18 +101,18 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     }
 
     const executorName = useMemo(() => {
-        if(order?.executor){
-            let name = order?.executor?.firstName;
-            if(order?.executor?.lastName){
-                name += ` ${order?.executor?.lastName[0]}.`
+        if(serviceVariant?.executor){
+            let name = serviceVariant?.executor?.firstName;
+            if(serviceVariant?.executor?.lastName){
+                name += ` ${serviceVariant?.executor?.lastName[0]}.`
             }
             return name;
         }
         return t('client_order_details_executor_status')
-    }, [order, t])
+    }, [serviceVariant, t])
 
 
-    if (isLoading || cancelLoading || !order) {
+    if (isLoading || cancelLoading || !serviceVariant) {
         return <div className="p-4 mt-[56px] flex flex-col gap-4">
             <Skeleton className="w-full h-[112px]"/>
             <Skeleton className="w-full h-[192px]"/>
@@ -130,7 +136,7 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                             onOkClick={handleOkClick}/>
         <Header>
             <Typography.Title
-                className="items-center flex justify-center">{order.baseService?.name}</Typography.Title>
+                className="items-center flex justify-center">{serviceVariant.baseService?.name}</Typography.Title>
         </Header>
 
         <div className="flex flex-col gap-4 bg-inherit p-4">
@@ -138,9 +144,9 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between">
                         <Typography.Title>
-                            №{order.id}
+                            №{serviceVariant.id}
                         </Typography.Title>
-                        <Typography.Title><OrderStatusText status={order.status}/></Typography.Title>
+                        <Typography.Title><OrderStatusText status={serviceVariant.status}/></Typography.Title>
                     </div>
                 </div>
                 <div className="p-3 pl-0 flex gap-2 flex-col">
@@ -150,7 +156,7 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                             <Typography.Title>{executorName}</Typography.Title>
                         </div>
                         <Avatar className="rounded-3xl bg-tg-theme-secondary-bg-color">
-                            <AvatarImage src={order?.executor?.photoUrl}/>
+                            <AvatarImage src={serviceVariant?.executor?.photoUrl}/>
                             <AvatarFallback className="bg-tg-theme-secondary-bg-color"><User/></AvatarFallback>
                         </Avatar>
                     </div>
@@ -160,12 +166,12 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                 <div className="p-3 pl-0 separator-shadow-bottom">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Description>{dayjs.utc(order.date).local().format('D MMMM')}</Typography.Description>
-                            <Typography.Title>{dayjs.utc(order.date).local().format('HH:mm')}</Typography.Title>
+                            <Typography.Description>{dayjs.utc(serviceVariant.date).local().format('D MMMM')}</Typography.Description>
+                            <Typography.Title>{dayjs.utc(serviceVariant.date).local().format('HH:mm')}</Typography.Title>
                         </div>
-                        {canEdit && <ScheduleSheet serviceVariantId={order?.serviceVariant?.id}
-                                                   optionIds={order?.options.map(o => o.id)}
-                                                   selectedTimestamp={dayjs.utc(order.date).valueOf()}
+                        {canEdit && <ScheduleSheet serviceVariantId={serviceVariant?.serviceVariant?.id}
+                                                   optionIds={serviceVariant?.options.map(o => o.id)}
+                                                   selectedTimestamp={dayjs.utc(serviceVariant.date).valueOf()}
                                                    onSelectDate={handleSelectDate}>
                             <EditButton/>
                         </ScheduleSheet>}
@@ -175,7 +181,7 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
                             <Typography.Description>{t('address')}</Typography.Description>
-                            <Typography.Title>{order.fullAddress}</Typography.Title>
+                            <Typography.Title>{serviceVariant.fullAddress}</Typography.Title>
                         </div>
                         {canEdit && <AddressSheet
                             addresses={addresses}
@@ -190,9 +196,9 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                         <div className="flex flex-col">
                             <Typography.Description>{t('payments_comments')}</Typography.Description>
                             <Typography.Title
-                                className="[overflow-wrap:anywhere]">{order.comment || t('client_order_details_comments_empty')}</Typography.Title>
+                                className="[overflow-wrap:anywhere]">{serviceVariant.comment || t('client_order_details_comments_empty')}</Typography.Title>
                         </div>
-                        {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={order.commet}>
+                        {canEdit && <CommentsSheet onChangeText={handleChangeComment} text={serviceVariant.commet}>
                             <EditButton/>
                         </CommentsSheet>}
                     </div>
@@ -225,13 +231,13 @@ export const AdminServiceDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {order.options.length > 0 && <AccordionContent>
-                        <div key={order.baseService?.id} className="flex justify-between">
-                            <span className="text-tg-theme-text-color">{order.baseService?.name}</span>
+                    {serviceVariant.options.length > 0 && <AccordionContent>
+                        <div key={serviceVariant.baseService?.id} className="flex justify-between">
+                            <span className="text-tg-theme-text-color">{serviceVariant.baseService?.name}</span>
                             <span
-                                className="text-tg-theme-text-color">{moneyFormat(order.serviceVariant?.basePrice)}</span>
+                                className="text-tg-theme-text-color">{moneyFormat(serviceVariant.serviceVariant?.basePrice)}</span>
                         </div>
-                        {order.options.map((service, index) => (
+                        {serviceVariant.options.map((service, index) => (
                             <div key={index} className="flex justify-between">
                                 <span className="text-tg-theme-text-color">{service.name}</span>
                                 <span

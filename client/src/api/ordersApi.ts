@@ -4,7 +4,7 @@ import {baseQueryWithReauth} from "./baseQuery.ts";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     tagTypes: [
-        "Order", 'User', 'Service', 'Variant'
+        "Order", 'User', 'Service', 'Variant', 'Application', 'Invite'
     ],
     baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
@@ -36,12 +36,43 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Service'],
         }),
+        getAdminApplicationByUserId: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/applications/${params.id}`,
+            }),
+            providesTags: ['Application'],
+        }),
+        getAdminServicesById: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/services/${params.id}`,
+                params
+            }),
+            providesTags: ['Service'],
+        }),
         getAdminUsers: builder.query<any[], void>({
             query: (params) => ({
                 url: "/admin/users",
                 params
             }),
             providesTags: ['User'],
+        }),
+        getAdminUserById: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/users/${params.id}`
+            }),
+            providesTags: ['User'],
+        }),
+        getAdminOrdersByUserId: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/users/${params.id}/orders`
+            }),
+            providesTags: ['Order'],
+        }),
+        getAdminInvitesByUserId: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/users/${params.id}/invites`
+            }),
+            providesTags: ['Invite'],
         }),
         getAdminOrders: builder.query<any[], void>({
             query: (params) => ({
@@ -124,10 +155,15 @@ export const {
     useEditOrderMutation,
     useGetAdminVariantsQuery,
     useGetAdminServicesQuery,
+    useGetAdminInvitesByUserIdQuery,
+    useGetAdminApplicationByUserIdQuery,
+    useGetAdminUserByIdQuery,
+    useGetAdminServicesByIdQuery,
     useGetOrderByIdFromExecutorQuery,
     usePatchOrderMutation,
     useGetExecutorOrdersQuery,
     useCompleteOrderMutation,
     useProcessedOrderMutation,
+    useGetAdminOrdersByUserIdQuery,
     useGetAdminOrdersQuery
 } = ordersApi;

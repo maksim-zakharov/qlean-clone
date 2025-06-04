@@ -9,6 +9,20 @@ export class ServicesService {
   getById(id: BaseService['id']) {
     return this.prisma.baseService.findUnique({
       where: { id },
+      include: {
+        options: true,
+        variants: true,
+      },
+    });
+  }
+
+  getVariantById(id: BaseService['id']) {
+    return this.prisma.serviceVariant.findUnique({
+      where: { id },
+      include: {
+        baseService: true,
+        variants: true,
+      },
     });
   }
 
