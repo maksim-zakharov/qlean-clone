@@ -1,4 +1,4 @@
-import { ClipboardList, Gift, ListChecks, LucideIcon, User, Users} from "lucide-react"
+import { ClipboardList, ListChecks, LucideIcon, User, Users} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 import React, {useMemo} from "react";
@@ -41,11 +41,6 @@ export const AdminLayout = () => {
             icon: ListChecks,
             label: t('menu_item_services'),
             path: RoutePaths.Admin.Services.List
-        },
-        {
-            icon: Gift,
-            label: t('menu_item_gifts'),
-            path: RoutePaths.Admin.Bonuses
         },
         {
             icon: Profile,

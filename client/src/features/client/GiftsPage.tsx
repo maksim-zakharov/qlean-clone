@@ -6,7 +6,6 @@ import {Button} from "../../components/ui/button.tsx";
 import {Tabs} from "@/components/ui/tabs.tsx";
 import {TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import { QrCode} from "lucide-react";
-import {Card} from "../../components/ui/card.tsx";
 import dayjs from "dayjs";
 import {useSelector} from "react-redux";
 import {useGetInvitesQuery} from "../../api/api.ts";
@@ -80,18 +79,6 @@ export const GiftsPage = () => {
                     {t('bonuses_recommended_btn')}
                 </Button>
             </div>
-        </div>
-
-        <Typography.H2 className="p-4 pb-0 mt-4">
-            {t('bonuses_promocodes_title')}
-        </Typography.H2>
-        <div className="flex flex-col gap-2">
-            {promocodes.map(ao => <Card className="p-0 mx-3 pl-4 gap-0 border-none card-bg-color">
-                <div className="p-3 pl-0 flex justify-between">
-                    <Typography.Title>{ao.name}</Typography.Title>
-                    <Typography.Title>{ao.expiratedDate}</Typography.Title>
-                </div>
-            </Card>)}
         </div>
 
         <Typography.H2 className="p-4 pb-0">

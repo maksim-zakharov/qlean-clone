@@ -19,7 +19,6 @@ import {ExecutorSchedulePage} from "./features/executor/ExecutorSchedulePage.tsx
 import {ApplicationPage} from "./features/client/ApplicationPage.tsx";
 import {ExecutorOrderDetailsPage} from "./features/executor/ExecutorOrderDetailsPage.tsx";
 import './i18n';
-import {Skeleton} from "./components/ui/skeleton.tsx";
 import {useGeoLocation} from "./hooks/useGeoLocation.tsx";
 import {AdminLayout} from "./components/layout/AdminLayout.tsx";
 import {GiftsPage} from "./features/client/GiftsPage.tsx";
@@ -29,6 +28,7 @@ import {AdminUsersPage} from "./features/admin/AdminUsersPage.tsx";
 import {AdminServicesPage} from "./features/admin/AdminServicesPage.tsx";
 import {AdminServiceDetailsPage} from "./features/admin/AdminServiceDetailsPage.tsx";
 import {AdminUsersDetailsPage} from "./features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx";
+import {PageLoader} from "./components/PageLoader.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -70,17 +70,7 @@ function App() {
     }, [serviceId, variantId, services, dispatch, navigate]);
 
     if (!userinfo || isLoading || !isReady) {
-        return <div>
-            <Skeleton className="w-full h-[50px] mb-3 rounded-none"/>
-            <div className="mb-6 mt-4 px-4 flex flex-col gap-4">
-                <Skeleton className="w-full h-[88px]"/>
-                <Skeleton className="w-full h-[88px]"/>
-                <Skeleton className="w-full h-[88px]"/>
-                <Skeleton className="w-full h-[88px]"/>
-                <Skeleton className="w-full h-[88px]"/>
-            </div>
-            <Skeleton className="w-full rounded-none menu-container"/>
-        </div>
+        return <PageLoader/>
     }
 
     if (userinfo.role === 'admin') {

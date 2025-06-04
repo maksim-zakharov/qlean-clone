@@ -1,13 +1,11 @@
 import {Header} from "../../../components/ui/Header.tsx";
 import {Typography} from "../../../components/ui/Typography.tsx";
-import React, {FC, useMemo, useState} from "react";
+import React, {FC, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {
-    useCancelOrderMutation,
     useGetAdminApplicationByUserIdQuery, useGetAdminInvitesByUserIdQuery,
     useGetAdminOrdersByUserIdQuery,
-    useGetAdminUserByIdQuery,
-    usePatchOrderMutation
+    useGetAdminUserByIdQuery
 } from "../../../api/ordersApi.ts";
 import dayjs from "dayjs";
 import {Card} from "../../../components/ui/card.tsx";
@@ -29,8 +27,6 @@ export const AdminUsersDetailsPage: FC = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Users.List));
 
     const {t} = useTranslation();
-    const [patchOrder] = usePatchOrderMutation();
-    const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
 
     const {id} = useParams<string>();
@@ -64,33 +60,12 @@ export const AdminUsersDetailsPage: FC = () => {
 
     const {data: user, isLoading, isError} = useGetAdminUserByIdQuery({id: id!});
     const {data: orders, isLoading: isLoadingOrders} = useGetAdminOrdersByUserIdQuery({id: id!})
-    const [{title, description, show}, setAlertConfig] = useState({
-        title: '',
-        description: '',
-        show: false
-    })
 
-    const handleChangeComment = async (comment?: string) => {
-        if (comment && comment !== user.comment)
-            await patchOrder({id: user.id, comment}).unwrap();
-    }
-
-    const handleOkClick = () => {
-        setAlertConfig(prevState => ({...prevState, show: false}));
-        setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
-    }
-
-    const handleCancelClick = async () => {
-        await cancelOrder({id: user.id}).unwrap();
-        setAlertConfig(prevState => ({...prevState, show: false}));
-        setTimeout(() => setAlertConfig(prevState => ({...prevState, title: '', description: ''})), 300);
-    }
-
-    if (isLoading || cancelLoading || !user) {
-        return <div className="p-4 mt-[56px] flex flex-col gap-4">
-            <Skeleton className="w-full h-[112px]"/>
-            <Skeleton className="w-full h-[192px]"/>
-            <Skeleton className="w-full h-[164px]"/>
+    if (isLoading) {
+        return <div className="p-4 mt-[56px] flex flex-col gap-2">
+            <Skeleton className="rounded-full size-30 m-auto mb-2"/>
+            <Skeleton className="w-full h-[64px]"/>
+            <Skeleton className="w-full h-[52px]"/>
         </div>
     }
 
