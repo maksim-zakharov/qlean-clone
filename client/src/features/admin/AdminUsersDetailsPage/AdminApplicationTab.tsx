@@ -18,7 +18,7 @@ export const AdminApplicationTab = ({application}) => {
             message: 'Вы уверены что хотите согласовать заявку?',
             buttons: [{
                 id: 'ok',
-                text: t('client_order_details_reschedule_ok_btn'),
+                text: 'Согласовать',
                 type: 'default'
             },{
                 id: 'cancel',
@@ -44,12 +44,12 @@ export const AdminApplicationTab = ({application}) => {
             message: 'Вы уверены что хотите отклонить заявку?',
             buttons: [{
                 id: 'ok',
-                text: t('client_order_details_reschedule_ok_btn'),
-                type: 'default'
+                text: 'Отклонить',
+                type: 'destructive'
             },{
                 id: 'cancel',
                 text: t('client_order_details_reschedule_cancel_btn'),
-                type: 'destructive'
+                type: 'default'
             }]
         }, id => id === 'cancel' && (async () => {
 
