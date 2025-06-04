@@ -25,7 +25,7 @@ export const AdminApplicationTab = ({application}) => {
                 text: 'Cancel',
                 type: 'destructive'
             }]
-        }, id => id === 'cancel' && (async () => {
+        }, id => id === 'ok' && (async () => {
 
             await approve(application).unwrap();
 
@@ -51,7 +51,7 @@ export const AdminApplicationTab = ({application}) => {
                 text: 'Cancel',
                 type: 'default'
             }]
-        }, id => id === 'cancel' && (async () => {
+        }, id => id === 'ok' && (async () => {
 
             await reject(application).unwrap();
 
