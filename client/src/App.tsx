@@ -8,7 +8,7 @@ import {useGetServicesQuery, useGetUserInfoQuery} from "./api/api.ts";
 import {OrderDetailsPage} from "./features/client/OrderDetailsPage.tsx";
 import {ProfilePage} from "./features/client/ProfilePage.tsx";
 import {RoutePaths} from "./routes.ts";
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {saveInLocalStorage, startOrderFlow} from "./slices/createOrderSlice.ts";
 import {useTelegram} from "./hooks/useTelegram.tsx";
@@ -49,10 +49,9 @@ function App() {
 
     const [serviceId, variantId] = startParam.split('_').filter((_, i) => i % 2 !== 0);
 
-    const {data: userinfo} = useGetUserInfoQuery(undefined, {
+    const {data: userinfo, isLoading} = useGetUserInfoQuery(undefined, {
         skip: !isReady
     });
-    const isLoading = useMemo(() => Boolean(!userinfo), [userinfo])
     const {data: services = []} = useGetServicesQuery();
 
     useEffect(() => {
