@@ -22,7 +22,7 @@ export const AdminApplicationTab = ({application}) => {
                 type: 'default'
             },{
                 id: 'cancel',
-                text: t('client_order_details_reschedule_cancel_btn'),
+                text: 'Cancel',
                 type: 'destructive'
             }]
         }, id => id === 'cancel' && (async () => {
@@ -48,7 +48,7 @@ export const AdminApplicationTab = ({application}) => {
                 type: 'destructive'
             },{
                 id: 'cancel',
-                text: t('client_order_details_reschedule_cancel_btn'),
+                text: 'Cancel',
                 type: 'default'
             }]
         }, id => id === 'cancel' && (async () => {
