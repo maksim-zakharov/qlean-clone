@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { createHmac } from 'crypto';
 import * as process from 'node:process';
 import { JwtService } from '@nestjs/jwt';
@@ -49,16 +53,6 @@ export class AuthService {
       });
 
       if (!user) {
-        let referrer;
-
-        if (refId) {
-          referrer = await tx.user.findUnique({
-            where: {
-              id: refId,
-            },
-          });
-        }
-
         user = await tx.user.create({
           data: {
             id: userDTO.id.toString(),
@@ -67,16 +61,38 @@ export class AuthService {
             photoUrl: userDTO.photo_url,
             phone: userDTO.phone_number,
             username: userDTO.username,
-            refId: referrer ? refId : undefined,
-            bonusOperations: referrer && {
-              create: {
-                type: BonusOperationType.INVITE,
-                value: 300,
-                description: `${referrer.firstName} ${referrer.lastName}`,
-              },
-            },
+            refId,
           },
         });
+
+        if (refId) {
+          const referrer = await tx.user.findUnique({
+            where: {
+              id: refId,
+            },
+          });
+
+          if (!referrer) throw new NotFoundException('Referrer not found');
+
+          // Начисляем бонус тому кто пригласил
+          await tx.bonusOperation.create({
+            data: {
+              userId: refId,
+              type: BonusOperationType.INVITE,
+              value: 300,
+              description: `${user.firstName} ${user.lastName}`,
+            },
+          });
+
+          // Начисляем бонус приглашенному
+          await tx.bonusOperation.create({
+            data: {
+              userId: user.id,
+              type: BonusOperationType.INVITE,
+              value: 50,
+            },
+          });
+        }
       }
 
       return user;

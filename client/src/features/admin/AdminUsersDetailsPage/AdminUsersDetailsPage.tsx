@@ -41,7 +41,7 @@ export const AdminUsersDetailsPage: FC = () => {
             },
             {
                 id: 'invites',
-                label: 'Invites'
+                label: 'Bonuses'
             },
         ];
 

@@ -3,10 +3,7 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {Button} from "../../components/ui/button.tsx";
-import {Tabs} from "@/components/ui/tabs.tsx";
-import {TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import { QrCode} from "lucide-react";
-import dayjs from "dayjs";
 import {useSelector} from "react-redux";
 import {useGetBonusesQuery} from "../../api/api.ts";
 import {QRCodeSheet} from "../../components/QRCodeSheet.tsx";
@@ -17,18 +14,6 @@ export const GiftsPage = () => {
     const userInfo = useSelector(state => state.createOrder.userInfo);
     const {data: bonuses, isLoading, isSuccess} = useGetBonusesQuery();
 
-    const tabs = [
-        {
-            id: 'active',
-            label: t('bonuses_tabs_active')
-        },
-        {
-            id: 'completed',
-            label: t('bonuses_tabs_completed')
-        }
-    ]
-
-    const [selectedTab, setSelectedTab] = React.useState<string>(tabs[0].id);
     const inviteLink = `https://t.me/qlean_clone_bot?startapp=ref_${userInfo.id}`;
 
     const handleShareButtonClick = async () => {
@@ -44,14 +29,6 @@ export const GiftsPage = () => {
             console.error('Ошибка:', error);
         }
     }
-
-    const promocodes = [{
-        name: 'XFADF123',
-        expiratedDate: dayjs().format('dd, D MMMM')
-    }, {
-        name: 'XFADF123',
-        expiratedDate: dayjs().format('dd, D MMMM')
-    }];
 
     return <>
         <Header className="grid grid-cols-3">
@@ -84,19 +61,6 @@ export const GiftsPage = () => {
         <Typography.H2 className="p-4 pb-0">
             {t('bonuses_invites_title')}
         </Typography.H2>
-        <Tabs value={selectedTab} defaultValue={selectedTab}>
-            <TabsList className="bg-inherit flex justify-around">
-                {tabs.map(tab => (
-                    <TabsTrigger
-                        key={tab.id}
-                        value={tab.id}
-                        onClick={() => setSelectedTab(tab.id)}
-                    >
-                        {tab.label}
-                    </TabsTrigger>
-                ))}
-            </TabsList>
-        </Tabs>
         <InvitesList invites={bonuses} isSuccess={isSuccess} isLoading={isLoading}/>
     </>
 }
