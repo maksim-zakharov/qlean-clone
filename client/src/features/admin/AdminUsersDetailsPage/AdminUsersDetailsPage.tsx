@@ -100,7 +100,7 @@ export const AdminUsersDetailsPage: FC = () => {
                     </div>
                 </div>
             </Card>
-            <BonusTotal bonuses={bonuses}/>
+            <BonusTotal bonuses={bonuses} isAdmin userId={user.id}/>
         </div>
 
         <Tabs value={selectedTab} defaultValue={selectedTab}>

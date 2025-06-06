@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Order, User } from '@prisma/client';
+import { BonusOperation, Order, User } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
@@ -52,6 +52,13 @@ export class UserService {
       where: {
         userId,
       },
+    });
+  }
+
+  addBonus(_data: BonusOperation) {
+    const { id, ...data } = _data;
+    return this.prisma.bonusOperation.create({
+      data,
     });
   }
 

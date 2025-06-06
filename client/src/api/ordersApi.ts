@@ -74,6 +74,14 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Invite'],
         }),
+        addBonus: builder.mutation<void, any>({
+            query: (params) => ({
+                url: `/admin/users/${params.id}/bonuses`,
+                method: 'POST',
+                body: params
+            }),
+            invalidatesTags: ['Invite'],
+        }),
         getAdminOrders: builder.query<any[], void>({
             query: (params) => ({
                 url: "/admin/orders",
@@ -183,5 +191,6 @@ export const {
     useGetAdminOrdersByUserIdQuery,
     useGetAdminOrdersQuery,
     useApproveApplicationMutation,
+    useAddBonusMutation,
     useRejectApplicationMutation
 } = ordersApi;

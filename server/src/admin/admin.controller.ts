@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   NotFoundException,
@@ -11,6 +12,7 @@ import { UserService } from '../user/user.service';
 import { ApplicationService } from '../application/application.service';
 import { OrdersService } from '../orders/orders.service';
 import { ServicesService } from '../services/services.service';
+import { Address, BonusOperation, BonusOperationType } from '@prisma/client';
 
 @Controller('/api/admin')
 export class AdminController {
@@ -67,6 +69,14 @@ export class AdminController {
   @UseGuards(AuthGuard('jwt'))
   async getBonusOperationsByUserId(@Param('id') id: string) {
     return this.userService.getBonusOperations(id);
+  }
+
+  @Post('users/:id/bonuses')
+  @UseGuards(AuthGuard('jwt'))
+  async addBonus(@Param('id') id: string, @Body() bonus: BonusOperation) {
+    bonus.type = BonusOperationType.GIFT;
+    bonus.userId = id;
+    return this.userService.addBonus(bonus);
   }
 
   @Get('applications')
