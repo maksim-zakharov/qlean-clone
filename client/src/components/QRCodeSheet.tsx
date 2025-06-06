@@ -26,8 +26,8 @@ export const QRCodeSheet = ({children, url, onClick}) => {
             <SheetContent side="bottom">
                 <SheetHeader>
                     <SheetTitle
-                        className="text-xl font-bold text-tg-theme-text-color text-left">Покажите QR-код друзьям</SheetTitle>
-                    <Typography.Description>Если кто-то оформит продукт и начнет пользоваться им, получите бонус</Typography.Description>
+                        className="text-xl font-bold text-tg-theme-text-color text-left">Show the QR-code to your friends</SheetTitle>
+                    <Typography.Description>If someone registers through the link, you both get a bonus</Typography.Description>
                 </SheetHeader>
                 <div className="flex gap-4 mt-4 mb-4 justify-center">
                     <QRCodeSVG
@@ -46,7 +46,7 @@ export const QRCodeSheet = ({children, url, onClick}) => {
                         size="lg"
                         onClick={onClick}
                     >
-                        <Share className="w-5 h-5 mr-2" />Поделиться ссылкой
+                        <Share className="w-5 h-5 mr-2" />Share
                     </Button>
                 </BottomActions>
             </SheetContent>

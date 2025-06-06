@@ -8,11 +8,12 @@ import {useSelector} from "react-redux";
 import {useGetBonusesQuery} from "../../api/api.ts";
 import {QRCodeSheet} from "../../components/QRCodeSheet.tsx";
 import {InvitesList} from "../../components/InvitesList.tsx";
+import {BonusTotal} from "../../components/BonusTotal.tsx";
 
 export const GiftsPage = () => {
     const {t} = useTranslation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const {data: bonuses, isLoading, isSuccess} = useGetBonusesQuery();
+    const {data: bonuses = [], isLoading, isSuccess} = useGetBonusesQuery();
 
     const inviteLink = `https://t.me/qlean_clone_bot?startapp=ref_${userInfo.id}`;
 
@@ -42,6 +43,9 @@ export const GiftsPage = () => {
             <Typography.Title
                 className="items-center flex justify-center">{t('menu_item_gifts')}</Typography.Title>
         </Header>
+        <div className="px-4">
+            <BonusTotal bonuses={bonuses}/>
+        </div>
         <img src="../img_1.png" className="h-[240px] object-cover mb-4"/>
         <div className="content px-4 w-full">
             <div className="flex flex-col gap-4">

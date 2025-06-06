@@ -13,15 +13,14 @@ import {User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../../components/ui/avatar.tsx";
 import {Skeleton} from "../../../components/ui/skeleton.tsx";
 import {RoutePaths} from "../../../routes.ts";
-import {EditButton} from "../../../components/EditButton.tsx";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../../components/ErrorState.tsx";
 import {useBackButton} from "../../../hooks/useTelegram.tsx";
 import {Tabs, TabsList, TabsTrigger} from "../../../components/ui/tabs.tsx";
 import {AdminOrdersList} from "../../../components/AdminOrdersList.tsx";
-import {numberFormat} from "../../../lib/utils.ts";
 import {AdminApplicationTab} from "./AdminApplicationTab.tsx";
 import {InvitesList} from "../../../components/InvitesList.tsx";
+import {BonusTotal} from "../../../components/BonusTotal.tsx";
 
 export const AdminUsersDetailsPage: FC = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Users.List));
@@ -101,17 +100,7 @@ export const AdminUsersDetailsPage: FC = () => {
                     </div>
                 </div>
             </Card>
-
-            <Card className="p-0 pl-4 gap-0">
-                <div className="p-3 pl-0">
-                    <div className="flex justify-between">
-                        <Typography.Title>Bonuses</Typography.Title>
-                        <Typography.Title>
-                            {numberFormat(123123)} <EditButton/>
-                        </Typography.Title>
-                    </div>
-                </div>
-            </Card>
+            <BonusTotal bonuses={bonuses}/>
         </div>
 
         <Tabs value={selectedTab} defaultValue={selectedTab}>
