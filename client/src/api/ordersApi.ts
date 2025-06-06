@@ -68,9 +68,9 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Order'],
         }),
-        getAdminInvitesByUserId: builder.query<any, { id: number | string }>({
+        getAdminBonusesByUserId: builder.query<any, { id: number | string }>({
             query: (params) => ({
-                url: `/admin/users/${params.id}/invites`
+                url: `/admin/users/${params.id}/bonuses`
             }),
             providesTags: ['Invite'],
         }),
@@ -171,7 +171,7 @@ export const {
     useEditOrderMutation,
     useGetAdminVariantsQuery,
     useGetAdminServicesQuery,
-    useGetAdminInvitesByUserIdQuery,
+    useGetAdminBonusesByUserIdQuery,
     useGetAdminApplicationByUserIdQuery,
     useGetAdminUserByIdQuery,
     useGetAdminServicesByIdQuery,

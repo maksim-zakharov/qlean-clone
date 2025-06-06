@@ -77,9 +77,9 @@ export class AuthController {
     return plainToInstance(UserResponseDTO, req.user);
   }
 
-  @Get('/invites')
+  @Get('/bonuses')
   @UseGuards(AuthGuard('jwt'))
-  async getInvites(@Req() req) {
-    return this.userService.getInvites(req.user.id);
+  async getBonusOperations(@Req() req) {
+    return this.userService.getBonusOperations(req.user.id);
   }
 }

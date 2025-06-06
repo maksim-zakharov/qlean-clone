@@ -63,10 +63,10 @@ export class AdminController {
     return this.orderService.getOrdersByUserId(id);
   }
 
-  @Get('users/:id/invites')
+  @Get('users/:id/bonuses')
   @UseGuards(AuthGuard('jwt'))
-  async getInvitesByUserId(@Param('id') id: string) {
-    return this.userService.getInvites(id);
+  async getBonusOperationsByUserId(@Param('id') id: string) {
+    return this.userService.getBonusOperations(id);
   }
 
   @Get('applications')

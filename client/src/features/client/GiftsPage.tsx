@@ -8,14 +8,14 @@ import {TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import { QrCode} from "lucide-react";
 import dayjs from "dayjs";
 import {useSelector} from "react-redux";
-import {useGetInvitesQuery} from "../../api/api.ts";
+import {useGetBonusesQuery} from "../../api/api.ts";
 import {QRCodeSheet} from "../../components/QRCodeSheet.tsx";
 import {InvitesList} from "../../components/InvitesList.tsx";
 
 export const GiftsPage = () => {
     const {t} = useTranslation();
     const userInfo = useSelector(state => state.createOrder.userInfo);
-    const {data: invites, isLoading, isSuccess} = useGetInvitesQuery();
+    const {data: bonuses, isLoading, isSuccess} = useGetBonusesQuery();
 
     const tabs = [
         {
@@ -97,6 +97,6 @@ export const GiftsPage = () => {
                 ))}
             </TabsList>
         </Tabs>
-        <InvitesList invites={invites} isSuccess={isSuccess} isLoading={isLoading}/>
+        <InvitesList invites={bonuses} isSuccess={isSuccess} isLoading={isLoading}/>
     </>
 }

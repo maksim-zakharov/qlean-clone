@@ -47,16 +47,10 @@ export class UserService {
     }
   }
 
-  getInvites(refId: User['id']): Promise<Partial<User>[]> {
-    return this.prisma.user.findMany({
+  getBonusOperations(userId: User['id']) {
+    return this.prisma.bonusOperation.findMany({
       where: {
-        refId,
-      },
-      select: {
-        createdAt: true,
-        username: true,
-        lastName: true,
-        firstName: true,
+        userId,
       },
     });
   }

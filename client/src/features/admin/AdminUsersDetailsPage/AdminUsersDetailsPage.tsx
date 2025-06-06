@@ -3,7 +3,7 @@ import {Typography} from "../../../components/ui/Typography.tsx";
 import React, {FC, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {
-    useGetAdminApplicationByUserIdQuery, useGetAdminInvitesByUserIdQuery,
+    useGetAdminApplicationByUserIdQuery, useGetAdminBonusesByUserIdQuery,
     useGetAdminOrdersByUserIdQuery,
     useGetAdminUserByIdQuery
 } from "../../../api/ordersApi.ts";
@@ -31,7 +31,7 @@ export const AdminUsersDetailsPage: FC = () => {
 
     const {id} = useParams<string>();
     const {data: application} = useGetAdminApplicationByUserIdQuery({id: id!});
-    const {data: invites = [], isSuccess: isSuccessInvites, isLoading: isLoadingInvites} = useGetAdminInvitesByUserIdQuery({id: id!});
+    const {data: bonuses = [], isSuccess: isSuccessInvites, isLoading: isLoadingInvites} = useGetAdminBonusesByUserIdQuery({id: id!});
 
     const tabs = useMemo(() => {
         const _tabs = [
@@ -130,6 +130,6 @@ export const AdminUsersDetailsPage: FC = () => {
         {selectedTab === 'orders' && <AdminOrdersList orders={orders} isLoading={isLoadingOrders}/>}
 
         {selectedTab === 'application' && <AdminApplicationTab application={application}/>}
-        {selectedTab === 'invites' && <InvitesList invites={invites} isSuccess={isSuccessInvites} isLoading={isLoadingInvites}/>}
+        {selectedTab === 'invites' && <InvitesList invites={bonuses} isSuccess={isSuccessInvites} isLoading={isLoadingInvites}/>}
     </div>
 }

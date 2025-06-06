@@ -3,17 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Address {
-  id    Int     @default(autoincrement()) @id
-  userId String?
-  name  String
-  fullAddress  String
-  comments  String?
+  id          Int     @id @default(autoincrement())
+  userId      String?
+  name        String
+  fullAddress String
+  comments    String?
 }
 
 enum OrderStatus {
@@ -28,92 +28,93 @@ enum OrderStatus {
 }
 
 model Order {
-  id               Int              @id @default(autoincrement())
-  startedAt       DateTime?      // Время начала работы исполнителя
-  completedAt     DateTime?      // Время окончания работы исполнителя
-  baseService      BaseService      @relation(fields: [baseServiceId], references: [id])
+  id               Int             @id @default(autoincrement())
+  startedAt        DateTime? // Время начала работы исполнителя
+  completedAt      DateTime? // Время окончания работы исполнителя
+  baseService      BaseService     @relation(fields: [baseServiceId], references: [id])
   baseServiceId    Int
-  serviceVariant   ServiceVariant   @relation(fields: [serviceVariantId], references: [id])
+  serviceVariant   ServiceVariant  @relation(fields: [serviceVariantId], references: [id])
   serviceVariantId Int
   options          ServiceOption[]
-  status  OrderStatus  @default(todo)
-  fullAddress String
-  date DateTime @db.Timestamp(6)
-  userId String?
-  executor      User?      @relation(fields: [executorId], references: [id])
-  executorId String?
-  comment String?
+  status           OrderStatus     @default(todo)
+  fullAddress      String
+  date             DateTime        @db.Timestamp(6)
+  userId           String?
+  executor         User?           @relation(fields: [executorId], references: [id])
+  executorId       String?
+  comment          String?
 }
 
 model BaseService {
-  id          Int              @id @default(autoincrement())
-  name        String
-  variants    ServiceVariant[]
-  options     ServiceOption[]
-  orders      Order[]
+  id        Int                @id @default(autoincrement())
+  name      String
+  variants  ServiceVariant[]
+  options   ServiceOption[]
+  orders    Order[]
   keywords  Keyword[]
-  executors   ServiceExecutors[]  // Добавляем обратное отношение
+  executors ServiceExecutors[] // Добавляем обратное отношение
 }
 
 model ServiceVariant {
-  id            Int          @id @default(autoincrement())
-  name          String
-  nameAccusative String @default("")      // "генеральную уборку"
-  icon  String?
-  basePrice     Int
-  duration      Int
-  baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
-  baseServiceId Int
-  orders        Order[]
-  keywords  Keyword[]
-  variants    ApplicationVariants[] // Связь с выбранными вариантами услуг
+  id             Int                   @id @default(autoincrement())
+  name           String
+  nameAccusative String                @default("") // "генеральную уборку"
+  icon           String?
+  basePrice      Int
+  duration       Int
+  baseService    BaseService           @relation(fields: [baseServiceId], references: [id])
+  baseServiceId  Int
+  orders         Order[]
+  keywords       Keyword[]
+  variants       ApplicationVariants[] // Связь с выбранными вариантами услуг
 }
 
 model ServiceOption {
-  id            Int          @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   name          String
   price         Int
-  description  String?
+  description   String?
   duration      Int
-  isPopular     Boolean      @default(false)
-  baseService   BaseService  @relation(fields: [baseServiceId], references: [id])
+  isPopular     Boolean     @default(false)
+  baseService   BaseService @relation(fields: [baseServiceId], references: [id])
   baseServiceId Int
   orders        Order[]
 }
 
 model User {
-  id  String          @id
-  createdAt  DateTime   @default(now())
-  firstName String
-  lastName  String?
-  photoUrl  String?
-  username  String?
-  refId  String?
-  phone  String?
-  services   ServiceExecutors[]  // Обратное отношение
-  orders   Order[]  // Обратное отношение
-  scheduleDays ScheduleDay[]
-  application Application? // 1-to-1 связь
-  isAdmin    Boolean     @default(false) // Возможность стать админом
+  id              String             @id
+  createdAt       DateTime           @default(now())
+  firstName       String
+  lastName        String?
+  photoUrl        String?
+  username        String?
+  refId           String?
+  phone           String?
+  services        ServiceExecutors[] // Обратное отношение
+  orders          Order[] // Обратное отношение
+  bonusOperations BonusOperation[]
+  scheduleDays    ScheduleDay[]
+  application     Application? // 1-to-1 связь
+  isAdmin         Boolean            @default(false) // Возможность стать админом
 }
 
 model Keyword {
-  id        Int      @id @default(autoincrement())
-  value     String   @unique
-  service   BaseService  @relation(fields: [serviceId], references: [id])
-  serviceId      Int
-  variant   ServiceVariant?   @relation(fields: [variantId], references: [id])
-  variantId      Int?
+  id        Int             @id @default(autoincrement())
+  value     String          @unique
+  service   BaseService     @relation(fields: [serviceId], references: [id])
+  serviceId Int
+  variant   ServiceVariant? @relation(fields: [variantId], references: [id])
+  variantId Int?
 }
 
 model ServiceExecutors {
-  service    BaseService @relation(fields: [serviceId], references: [id])
-  serviceId  Int
-  user       User        @relation(fields: [userId], references: [id])
-  userId     String
+  service   BaseService @relation(fields: [serviceId], references: [id])
+  serviceId Int
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
 
-  @@id([serviceId, userId])  // Составной первичный ключ
-  @@index([userId])          // Дополнительный индекс
+  @@id([serviceId, userId]) // Составной первичный ключ
+  @@index([userId]) // Дополнительный индекс
 }
 
 enum DayOfWeek {
@@ -127,12 +128,12 @@ enum DayOfWeek {
 }
 
 model ScheduleDay {
-  id          Int         @id @default(autoincrement())
-  dayOfWeek   DayOfWeek
-  isDayOff    Boolean     @default(false)
-  timeSlots   TimeSlot[]
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
+  id        Int        @id @default(autoincrement())
+  dayOfWeek DayOfWeek
+  isDayOff  Boolean    @default(false)
+  timeSlots TimeSlot[]
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 
   @@unique([userId, dayOfWeek])
 }
@@ -147,27 +148,45 @@ model TimeSlot {
 }
 
 model Application {
-  id          Int              @id @default(autoincrement())
-  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String           @unique // 1-to-1 связь
-  status      ApplicationStatus @default(PENDING)
+  id              Int                   @id @default(autoincrement())
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String                @unique // 1-to-1 связь
+  status          ApplicationStatus     @default(PENDING)
   rejectionReason String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  variants    ApplicationVariants[] // Связь с выбранными вариантами услуг
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  variants        ApplicationVariants[] // Связь с выбранными вариантами услуг
 }
 
 model ApplicationVariants {
-  application    Application   @relation(fields: [applicationId], references: [id], onDelete: Cascade)
-  applicationId  Int
-  variant        ServiceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
-  variantId      Int
+  application   Application    @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  applicationId Int
+  variant       ServiceVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId     Int
 
   @@id([applicationId, variantId]) // Составной первичный ключ
 }
 
 enum ApplicationStatus {
-  PENDING     // На модерации
-  APPROVED    // Одобрено
-  REJECTED    // Отклонено
+  PENDING // На модерации
+  APPROVED // Одобрено
+  REJECTED // Отклонено
+}
+
+model BonusOperation {
+  id          Int                @id @default(autoincrement())
+  createdAt   DateTime           @default(now())
+  value       Int
+  type        BonusOperationType
+  description String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+enum BonusOperationType {
+  GIFT // Подарок
+  INVITE // Приглашение друга
+  ORDER // % за заказ
+  WITHDRAWAL // Списание бонусов
 }

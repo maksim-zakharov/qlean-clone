@@ -4,7 +4,7 @@ import {baseQueryWithReauth, TELEGRAM_HEADER} from "./baseQuery.ts";
 export const api = createApi({
     reducerPath: "api",
     tagTypes: [
-        "Service", 'Address', 'User', 'Schedule', 'Application', 'Invite'
+        "Service", 'Address', 'User', 'Schedule', 'Application', 'Bonus'
     ],
     baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
@@ -12,9 +12,9 @@ export const api = createApi({
             query: () => '/auth/userinfo',
             providesTags: ['User'],
         }),
-        getInvites: builder.query<any[], void>({
-            query: () => '/auth/invites',
-            providesTags: ['Invite'],
+        getBonuses: builder.query<any[], void>({
+            query: () => '/auth/bonuses',
+            providesTags: ['Bonus'],
         }),
         login: builder.mutation<{ access_token: string }, string | void>({
             query: (role) => ({
@@ -115,7 +115,7 @@ export const api = createApi({
 });
 
 export const {
-    useGetInvitesQuery,
+    useGetBonusesQuery,
     useLoginMutation,
     useGetUserInfoQuery,
     useGetServicesQuery,

@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { createHmac } from 'crypto';
 import * as process from 'node:process';
 import { JwtService } from '@nestjs/jwt';
-import { ApplicationStatus } from '@prisma/client';
+import { ApplicationStatus, BonusOperationType } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 
 export function validateInitData(initData: string) {
@@ -42,22 +42,39 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(data: any, refId?: any) {
+  async validateUser(userDTO: any, refId?: any) {
     return this.prisma.$transaction(async (tx) => {
       let user = await tx.user.findUnique({
-        where: { id: data.id.toString() },
+        where: { id: userDTO.id.toString() },
       });
 
       if (!user) {
+        let referrer;
+
+        if (refId) {
+          referrer = await tx.user.findUnique({
+            where: {
+              id: refId,
+            },
+          });
+        }
+
         user = await tx.user.create({
           data: {
-            id: data.id.toString(),
-            firstName: data.first_name,
-            lastName: data.last_name,
-            photoUrl: data.photo_url,
-            phone: data.phone_number,
-            username: data.username,
-            refId,
+            id: userDTO.id.toString(),
+            firstName: userDTO.first_name,
+            lastName: userDTO.last_name,
+            photoUrl: userDTO.photo_url,
+            phone: userDTO.phone_number,
+            username: userDTO.username,
+            refId: referrer ? refId : undefined,
+            bonusOperations: referrer && {
+              create: {
+                type: BonusOperationType.INVITE,
+                value: 300,
+                description: `${referrer.firstName} ${referrer.lastName}`,
+              },
+            },
           },
         });
       }

@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="AdminUserDetails">
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/user/user.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +80,7 @@
     "npm.client:dev.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
-    "npm.server:dev.executor": "Run",
+    "npm.server:dev.executor": "Debug",
     "npm.start:dev.executor": "Debug",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
@@ -93,7 +103,7 @@
       <recent name="D:\Projects\qlean-clone\client\src\components\ListButton" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.server:dev">
+  <component name="RunManager" selected="npm.client:dev">
     <configuration name="Debug Server" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -174,15 +184,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="34569000" />
-    </task>
-    <task id="LOCAL-00388" summary="utc">
-      <option name="closed" value="true" />
-      <created>1746385139820</created>
-      <option name="number" value="00388" />
-      <option name="presentableId" value="LOCAL-00388" />
-      <option name="project" value="LOCAL" />
-      <updated>1746385139820</updated>
+      <workItem from="1748586159111" duration="41039000" />
     </task>
     <task id="LOCAL-00389" summary="обновил findSchedule на utc">
       <option name="closed" value="true" />
@@ -568,7 +570,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749061070074</updated>
     </task>
-    <option name="localTasksCounter" value="437" />
+    <task id="LOCAL-00437" summary="AdminUserDetails">
+      <option name="closed" value="true" />
+      <created>1749061524893</created>
+      <option name="number" value="00437" />
+      <option name="presentableId" value="LOCAL-00437" />
+      <option name="project" value="LOCAL" />
+      <updated>1749061524893</updated>
+    </task>
+    <option name="localTasksCounter" value="438" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,10 +632,10 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/src/auth/auth.controller.ts</url>
-          <line>57</line>
+          <url>file://$PROJECT_DIR$/server/src/auth/auth.service.ts</url>
+          <line>61</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
