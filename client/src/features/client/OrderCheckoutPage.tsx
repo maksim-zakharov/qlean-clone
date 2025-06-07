@@ -147,13 +147,15 @@ export const OrderCheckoutPage = () => {
                     <Typography.Description
                         className="block mb-2 text-left pl-4 text-sm uppercase">Bonuses</Typography.Description>
                     <Card className="p-3 px-4 pb-7">
-                        <div className="flex justify-between">
+                        <div className="grid grid-cols-3">
                             <Typography.Description
                                 className="block mb-2 text-left text-md uppercase">0</Typography.Description>
+                            <span
+                                className="text-tg-theme-text-color text-center">{moneyFormat(bonus)}</span>
                             <Typography.Description
-                                className="block mb-2 text-left text-md uppercase">{moneyFormat(maxBonus)}</Typography.Description>
+                                className="block mb-2 text-md uppercase text-right">{moneyFormat(maxBonus)}</Typography.Description>
                         </div>
-                        <Slider  max={maxBonus} step={50} value={[bonus]} onValueChange={handleOnSelectBonuses} />
+                        <Slider max={maxBonus} step={50} value={[bonus]} onValueChange={handleOnSelectBonuses} />
                     </Card>
                 </div>
 
