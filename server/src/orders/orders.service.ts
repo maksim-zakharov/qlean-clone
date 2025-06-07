@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -131,26 +132,88 @@ export class OrdersService {
     // Проверка что дата заказа позже текущего времени
     this.validateOrderDate(data.date);
     try {
-      return this.prisma.order.create({
-        data: {
-          baseServiceId: data.baseService.id,
-          userId: data.userId,
-          date: new Date(data.date),
-          fullAddress: data.fullAddress,
-          serviceVariantId: data.serviceVariant.id,
-          options: {
-            connect: data.options?.map(({ id }) => ({ id })) || [],
+      return this.prisma.$transaction(async (tx) => {
+        if (data.bonus) {
+          const operations = await tx.bonusOperation.findMany({
+            where: {
+              userId: data.userId,
+            },
+          });
+
+          const total = operations.reduce((acc, curr) => acc + curr.value, 0);
+          if (data.bonus > total) {
+            throw new BadRequestException({ message: 'Not enough bonuses' });
+          }
+        }
+
+        const order = await tx.order.create({
+          data: {
+            baseServiceId: data.baseService.id,
+            userId: data.userId,
+            date: new Date(data.date),
+            fullAddress: data.fullAddress,
+            serviceVariantId: data.serviceVariant.id,
+            bonus: data.bonus,
+            options: {
+              connect: data.options?.map(({ id }) => ({ id })) || [],
+            },
           },
-        },
-        include: {
-          options: true,
-          baseService: true,
-          serviceVariant: true,
-        },
+          include: {
+            options: true,
+            baseService: true,
+            serviceVariant: true,
+          },
+        });
+
+        await tx.bonusOperation.create({
+          data: {
+            userId: data.userId,
+            type: 'ORDER',
+            value: -data.bonus,
+            description: `Order №${order.id}`,
+          },
+        });
+
+        return order;
       });
     } catch (error) {
       throw new InternalServerErrorException('Failed to create order');
     }
+  }
+
+  async cancel(userId: Order['userId'], id: string) {
+    return this.prisma.$transaction(async (tx) => {
+      const order = await tx.order.findUnique({
+        where: {
+          userId,
+          id: Number(id),
+        },
+      });
+
+      if (!order) throw new NotFoundException('Order not found');
+
+      order.status = OrderStatus.canceled;
+
+      const canceled = await this.prisma.order.update({
+        where: { userId, id: Number(id) },
+        data: order,
+        include: {
+          options: true, // Чтобы получить связанные опции в ответе
+        },
+      });
+
+      if (order.bonus) {
+        await tx.bonusOperation.create({
+          data: {
+            userId: userId,
+            type: 'ORDER',
+            value: order.bonus,
+          },
+        });
+      }
+
+      return canceled;
+    });
   }
 
   async update(data: any): Promise<Order> {

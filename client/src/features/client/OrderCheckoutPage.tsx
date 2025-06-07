@@ -11,23 +11,29 @@ import {BottomActions} from "@/components/BottomActions.tsx"
 import {CommentsSheet} from "../../components/CommentsSheet.tsx";
 import dayjs from "dayjs";
 import {Typography} from "../../components/ui/Typography.tsx";
-import {useGetAddressesQuery} from "../../api/api.ts";
+import {useGetAddressesQuery, useGetBonusesQuery} from "../../api/api.ts";
 import {useAddOrderMutation} from "../../api/ordersApi.ts";
 import {moneyFormat} from "../../lib/utils.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {AddressSheet} from "../../components/AddressSheet.tsx";
-import { selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
+import {selectBonus, selectDate, selectFullAddress} from "../../slices/createOrderSlice.ts";
 import {Header} from "../../components/ui/Header.tsx";
 import {AlertDialogWrapper} from "../../components/AlertDialogWrapper.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {ListButton, ListButtonGroup} from "../../components/ListButton/ListButton.tsx";
 import {useTranslation} from "react-i18next";
+import {Slider} from "../../components/ui/slider.tsx";
+import {Card} from "../../components/ui/card.tsx";
 
 
 export const OrderCheckoutPage = () => {
     const {t} = useTranslation();
     const [addOrder, {isLoading}] = useAddOrderMutation();
+    const {data: bonuses = []} = useGetBonusesQuery();
 
+    const total = useMemo(() => bonuses.reduce((acc, curr) => acc + curr.value, 0), [bonuses]);
+
+    const bonus = useSelector(state => state.createOrder.bonuses || 0)
     const selectedTimestamp = useSelector(state => state.createOrder.date)
     const baseService = useSelector(state => state.createOrder.baseService)
     const options = useSelector(state => state.createOrder.options)
@@ -52,7 +58,7 @@ export const OrderCheckoutPage = () => {
     const [comment, setComment] = useState<string | undefined>();
     const {vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery();
-    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
+    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0) - bonus, [serviceVariant, options, bonus]);
 
     // Считаем общее время
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
@@ -80,7 +86,8 @@ export const OrderCheckoutPage = () => {
                     fullAddress,
                     options,
                     date: selectedTimestamp,
-                    comment
+                    comment,
+                    bonus
                 }).unwrap();
             navigate(RoutePaths.Order.List)
         } catch (e) {
@@ -94,6 +101,8 @@ export const OrderCheckoutPage = () => {
             setError(description);
         }
     }
+
+    const handleOnSelectBonuses = (values: number[]) => dispatch(selectBonus({bonuses: values[0]}));
 
     return (
         <>
@@ -131,6 +140,20 @@ export const OrderCheckoutPage = () => {
                     </CommentsSheet>
                 </ListButtonGroup>
 
+                <div>
+                    <Typography.Description
+                        className="block mb-2 text-left pl-4 text-sm uppercase">Bonuses</Typography.Description>
+                    <Card className="p-3 px-4 pb-7">
+                        <div className="flex justify-between">
+                            <Typography.Description
+                                className="block mb-2 text-left text-md uppercase">0</Typography.Description>
+                            <Typography.Description
+                                className="block mb-2 text-left text-md uppercase">{moneyFormat(total)}</Typography.Description>
+                        </div>
+                        <Slider  max={total} step={50} value={[bonus]} onValueChange={handleOnSelectBonuses} />
+                    </Card>
+                </div>
+
                 {/* Order Summary */}
                 {baseService && <Accordion
                     type="single"
@@ -161,6 +184,11 @@ export const OrderCheckoutPage = () => {
                                         className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
                                 </div>
                             ))}
+                            {Boolean(bonus) && <div key="bonus" className="flex justify-between">
+                                <span className="text-tg-theme-text-color">Bonus</span>
+                                <span
+                                    className="text-tg-theme-text-color">{moneyFormat(-bonus)}</span>
+                            </div>}
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>}

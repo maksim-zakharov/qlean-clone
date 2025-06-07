@@ -1,4 +1,13 @@
-import { IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString, Min, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Min,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 class BaseServiceDto {
@@ -87,4 +96,8 @@ export class CreateOrderDto {
   @IsDate()
   @IsNotEmpty()
   date: Date;
-} 
+
+  @IsInt()
+  @IsOptional()
+  bonus?: number;
+}

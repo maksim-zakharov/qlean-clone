@@ -11,6 +11,7 @@ interface CreateOrderState {
 
     fullAddress?: any;
     date?: number;
+    bonuses?: number;
 
     services: any[]
 
@@ -99,6 +100,10 @@ const createOrderSlice = createSlice({
             saveInLocalStorage('date', state.date)
             saveInLocalStorage('options', null)
         },
+        selectBonus: (state, action: PayloadAction<Pick<CreateOrderState, 'bonuses'>>) => {
+            state.bonuses = action.payload.bonuses;
+            saveInLocalStorage('bonuses', state.bonuses)
+        },
         selectDate: (state, action: PayloadAction<Pick<CreateOrderState, 'date'>>) => {
             state.date = action.payload.date;
             saveInLocalStorage('date', state.date)
@@ -163,7 +168,8 @@ export const {
     selectFullAddress,
     selectVariant,
     clearState,
-    updateGeo
+    updateGeo,
+    selectBonus
 } = createOrderSlice.actions;
 
 export default createOrderSlice;

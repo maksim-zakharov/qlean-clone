@@ -20,13 +20,19 @@ export const InvitesList = ({invites, isSuccess, isLoading}) => {
                            description={t("bonuses_invites_empty_description")}/>;
     }
 
+    const typeLabel:  {[key: string]: string} = {
+        'INVITE': 'Bring a friend',
+        "GIFT": 'Gift',
+        "ORDER": 'Order'
+    }
+
     return <div className="flex flex-col gap-2 pb-3 pt-2 px-3">
         {invites.map(ao =>
             <Card className="p-0 gap-0 pl-4">
                 <div className="p-3 pl-0">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col">
-                            <Typography.Title>{ao.type === 'INVITE' ? 'Bring a friend' : 'Gift'}</Typography.Title>
+                            <Typography.Title>{typeLabel[ao.type] || 'Gift'}</Typography.Title>
                             <Typography.Description>{ao.description}</Typography.Description>
                         </div>
                         <div className="flex flex-col text-right">
