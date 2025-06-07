@@ -225,6 +225,13 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                             </div>
                         </div>
                     </AccordionTrigger>
+                    {Boolean(order.bonus) && <AccordionContent>
+                        <div key="bonus" className="flex justify-between">
+                            <span className="text-tg-theme-text-color">Bonus</span>
+                            <span
+                                className="text-tg-theme-text-color">{moneyFormat(-order.bonus)}</span>
+                        </div>
+                    </AccordionContent>}
                     {order.options.length > 0 && <AccordionContent>
                         <div key={order.baseService?.id} className="flex justify-between">
                             <span className="text-tg-theme-text-color">{order.baseService?.name}</span>

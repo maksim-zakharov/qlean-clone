@@ -58,7 +58,8 @@ export const OrderCheckoutPage = () => {
     const [comment, setComment] = useState<string | undefined>();
     const {vibro} = useTelegram();
     const {data: addresses = []} = useGetAddressesQuery();
-    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0) - bonus, [serviceVariant, options, bonus]);
+    const totalPrice = useMemo(() => options.reduce((sum, option) => sum + option.price, serviceVariant?.basePrice || 0), [serviceVariant, options]);
+    const totalWithBonus = useMemo(() => totalPrice - bonus, [totalPrice, bonus]);
 
     // Считаем общее время
     const totalDuration = useMemo(() => options.reduce((sum, option) => sum + (option?.duration || 0), serviceVariant?.duration || 0), [serviceVariant, options]);
@@ -104,6 +105,8 @@ export const OrderCheckoutPage = () => {
 
     const handleOnSelectBonuses = (values: number[]) => dispatch(selectBonus({bonuses: values[0]}));
 
+    const maxBonus = useMemo(() => Math.min(total,totalPrice ), [total, totalPrice]);
+
     return (
         <>
             <AlertDialogWrapper open={Boolean(error)} title={t('client_checkout_dialog_error_title')} description={error}
@@ -148,9 +151,9 @@ export const OrderCheckoutPage = () => {
                             <Typography.Description
                                 className="block mb-2 text-left text-md uppercase">0</Typography.Description>
                             <Typography.Description
-                                className="block mb-2 text-left text-md uppercase">{moneyFormat(total)}</Typography.Description>
+                                className="block mb-2 text-left text-md uppercase">{moneyFormat(maxBonus)}</Typography.Description>
                         </div>
-                        <Slider  max={total} step={50} value={[bonus]} onValueChange={handleOnSelectBonuses} />
+                        <Slider  max={maxBonus} step={50} value={[bonus]} onValueChange={handleOnSelectBonuses} />
                     </Card>
                 </div>
 
@@ -167,7 +170,7 @@ export const OrderCheckoutPage = () => {
                                 <span className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
                                 <div className="flex items-center gap-1 pr-2">
                                         <span
-                                            className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
+                                            className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalWithBonus)}</span>
                                 </div>
                             </div>
                         </AccordionTrigger>
