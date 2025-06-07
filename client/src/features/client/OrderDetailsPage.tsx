@@ -45,6 +45,7 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const canEdit = isAdmin || Boolean(order?.status) && ['todo'].includes(order?.status);
 
     const totalPrice = useMemo(() => order?.options.reduce((sum, option) => sum + option.price, order?.serviceVariant?.basePrice || 0) || 0, [order]);
+    const totalWithBonus = useMemo(() => totalPrice - (order?.bonus || 0), [totalPrice, order?.bonus]);
 
     const handleSelectAddress = async ({fullAddress}: any) => {
         if (fullAddress !== order.fullAddress)
@@ -221,18 +222,11 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                             <span className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
                             <div className="flex items-center gap-1">
                                         <span
-                                            className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalPrice)}</span>
+                                            className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalWithBonus)}</span>
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {Boolean(order.bonus) && <AccordionContent>
-                        <div key="bonus" className="flex justify-between">
-                            <span className="text-tg-theme-text-color">Bonus</span>
-                            <span
-                                className="text-tg-theme-text-color">{moneyFormat(-order.bonus)}</span>
-                        </div>
-                    </AccordionContent>}
-                    {order.options.length > 0 && <AccordionContent>
+                    <AccordionContent>
                         <div key={order.baseService?.id} className="flex justify-between">
                             <span className="text-tg-theme-text-color">{order.baseService?.name}</span>
                             <span
@@ -245,12 +239,18 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                                     className="text-tg-theme-text-color">{moneyFormat(service.price)}</span>
                             </div>
                         ))}
-                    </AccordionContent>}
+                        {Boolean(order.bonus) && <div key="bonus" className="flex justify-between">
+                            <span className="text-tg-theme-text-color">Bonus</span>
+                            <span
+                                className="text-tg-theme-text-color">{moneyFormat(-order.bonus)}</span>
+                        </div>}
+                    </AccordionContent>
                 </AccordionItem>
             </Accordion>
         </div>
         {canEdit && <>
-            <BottomActions className="flex flex-col gap-2 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
+            <BottomActions
+                className="flex flex-col gap-2 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
                 <Button
                     wide
                     size="lg"

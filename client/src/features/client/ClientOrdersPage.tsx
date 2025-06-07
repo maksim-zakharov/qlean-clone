@@ -89,7 +89,7 @@ export const ClientOrdersPage = () => {
                     <div className="p-3 pl-0 separator-shadow-bottom">
                         <div className="flex justify-between">
                             <Typography.Title>{ao.baseService?.name}</Typography.Title>
-                            <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, 0))}</Typography.Title>
+                            <Typography.Title>{moneyFormat(ao.serviceVariant?.basePrice + ao.options.reduce((acc, curr) => acc + curr?.price, -ao.bonus || 0))}</Typography.Title>
                         </div>
                         <div className="flex justify-between">
                             <Typography.Description>{ao.fullAddress}</Typography.Description>
