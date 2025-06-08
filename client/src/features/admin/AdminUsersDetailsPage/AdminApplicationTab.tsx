@@ -18,7 +18,7 @@ export const AdminApplicationTab = ({application}) => {
                 id: 'ok',
                 text: 'Согласовать',
                 type: 'default'
-            },{
+            }, {
                 id: 'cancel',
                 text: 'Cancel',
                 type: 'destructive'
@@ -44,7 +44,7 @@ export const AdminApplicationTab = ({application}) => {
                 id: 'ok',
                 text: 'Отклонить',
                 type: 'destructive'
-            },{
+            }, {
                 id: 'cancel',
                 text: 'Cancel',
                 type: 'default'
@@ -63,31 +63,29 @@ export const AdminApplicationTab = ({application}) => {
     }
 
     return <>
-        {application?.status !== 'REJECTED' &&
-            <div
-                className="flex gap-2 p-4 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
-                <Button
-                    wide
-                    size="lg"
-                    onClick={handleApproveClick}
-                    loading={isLoadingApprove}
-                >
-                    Approve
-                </Button>
-                <Button
-                    wide
-                    size="lg"
-                    className="border-none"
-                    variant="default"
-                    onClick={handleRejectClick}
-                    loading={isLoadingReject}
-                >
-                    Reject
-                </Button>
-            </div>
-        }
+        <div
+            className="flex gap-2 p-4 pb-1">
+            {application?.status !== 'APPROVED' && <Button
+                wide
+                size="lg"
+                onClick={handleApproveClick}
+                loading={isLoadingApprove}
+            >
+                Approve
+            </Button>}
+            {application?.status !== 'REJECTED' && <Button
+                wide
+                size="lg"
+                className="border-none"
+                variant="default"
+                onClick={handleRejectClick}
+                loading={isLoadingReject}
+            >
+                Reject
+            </Button>}
+        </div>
 
-        <div className="px-4">
+        <div className="px-4 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))]] [padding-bottom:var(--tg-safe-area-inset-bottom)">
             <ProfileApplicationCard application={application}/>
         </div>
     </>
