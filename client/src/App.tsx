@@ -24,7 +24,7 @@ import {AdminLayout} from "./components/layout/AdminLayout.tsx";
 import {GiftsPage} from "./features/client/GiftsPage.tsx";
 import {REF_HEADER} from "./api/baseQuery.ts";
 import {AdminOrdersPage} from "./features/admin/AdminOrdersPage.tsx";
-import {AdminUsersPage} from "./features/admin/AdminUsersPage.tsx";
+import {AdminUsersPage} from "./features/admin/AdminUsersPage/AdminUsersPage.tsx";
 import {AdminServicesPage} from "./features/admin/AdminServicesPage.tsx";
 import {AdminServiceDetailsPage} from "./features/admin/AdminServiceDetailsPage.tsx";
 import {AdminUsersDetailsPage} from "./features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx";

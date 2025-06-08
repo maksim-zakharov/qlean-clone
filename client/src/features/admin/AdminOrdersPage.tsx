@@ -1,10 +1,7 @@
 import React, {useMemo} from "react";
-import {Typography} from "../../components/ui/Typography.tsx";
-import {Button} from "../../components/ui/button.tsx";
 import {useGetAdminOrdersQuery} from "../../api/ordersApi.ts";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
-import {Header} from "../../components/ui/Header.tsx";
 import {AdminOrdersList} from "../../components/AdminOrdersList.tsx";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 
@@ -36,12 +33,6 @@ export const AdminOrdersPage = () => {
     }
 
     return <>
-        <Header className="flex justify-center">
-            <Button variant="ghost"
-                    className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
-                <Typography.Title>{t('menu_item_orders')}</Typography.Title>
-            </Button>
-        </Header>
         <Tabs value={selectedTab} defaultValue={selectedTab}>
             <TabsList className="bg-inherit flex pl-8 justify-around">
                 {tabs.map(tab => (

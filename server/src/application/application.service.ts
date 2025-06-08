@@ -66,7 +66,11 @@ export class ApplicationService {
   }
 
   getApplications() {
-    return this.prisma.application.findMany({});
+    return this.prisma.application.findMany({
+      include: {
+        user: true,
+      },
+    });
   }
 
   getApplication(executorId: User['id']) {

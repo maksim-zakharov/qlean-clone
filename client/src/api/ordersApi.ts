@@ -36,6 +36,12 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Service'],
         }),
+        getAdminApplications: builder.query<any, void>({
+            query: (params) => ({
+                url: `/admin/applications`,
+            }),
+            providesTags: ['Application'],
+        }),
         getAdminApplicationByUserId: builder.query<any, { id: number | string }>({
             query: (params) => ({
                 url: `/admin/applications/${params.id}`,
@@ -192,5 +198,6 @@ export const {
     useGetAdminOrdersQuery,
     useApproveApplicationMutation,
     useAddBonusMutation,
-    useRejectApplicationMutation
+    useRejectApplicationMutation,
+    useGetAdminApplicationsQuery
 } = ordersApi;

@@ -60,7 +60,7 @@ export const AdminUsersDetailsPage: FC = () => {
     const {data: user, isLoading, isError} = useGetAdminUserByIdQuery({id: id!});
     const {data: orders, isLoading: isLoadingOrders} = useGetAdminOrdersByUserIdQuery({id: id!})
 
-    if (isLoading) {
+    if (isLoading || !user) {
         return <div className="px-4 py-2 mt-[56px] flex flex-col gap-2">
             <Skeleton className="rounded-full size-20 m-auto mb-2"/>
             <Skeleton className="w-full h-[64px]"/>

@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Применение бонуса к заказу">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Профиль">
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage/AdminApplicationsTab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage/AdminUsersTab.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminOrdersPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersPage/AdminUsersPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,11 +92,11 @@
       <recent name="D:\Projects\qlean-clone\client\src\features\executor" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\qlean-clone\client\src\features\admin\AdminUsersPage" />
       <recent name="D:\Projects\qlean-clone\client\src\features\admin\AdminUsersDetailsPage" />
       <recent name="D:\Projects\qlean-clone\client\src\api" />
       <recent name="D:\Projects\qlean-clone\client\public\locales" />
       <recent name="D:\Projects\qlean-clone\client\public\locales\en" />
-      <recent name="D:\Projects\qlean-clone\client\src\components\ListButton" />
     </key>
   </component>
   <component name="RunManager" selected="npm.server:dev">
@@ -175,15 +180,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="59531000" />
-    </task>
-    <task id="LOCAL-00397" summary="Разобрался с временем">
-      <option name="closed" value="true" />
-      <created>1746393318221</created>
-      <option name="number" value="00397" />
-      <option name="presentableId" value="LOCAL-00397" />
-      <option name="project" value="LOCAL" />
-      <updated>1746393318221</updated>
+      <workItem from="1748586159111" duration="60367000" />
     </task>
     <task id="LOCAL-00398" summary="Разобрался с временем">
       <option name="closed" value="true" />
@@ -569,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749328036136</updated>
     </task>
-    <option name="localTasksCounter" value="446" />
+    <task id="LOCAL-00446" summary="Профиль">
+      <option name="closed" value="true" />
+      <created>1749367383831</created>
+      <option name="number" value="00446" />
+      <option name="presentableId" value="LOCAL-00446" />
+      <option name="project" value="LOCAL" />
+      <updated>1749367383831</updated>
+    </task>
+    <option name="localTasksCounter" value="447" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +597,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="healthcheck" />
     <MESSAGE value="обновил findSchedule на utc" />
     <MESSAGE value="utc" />
     <MESSAGE value="utc dayjs" />
@@ -617,7 +621,8 @@
     <MESSAGE value="AdminUserDetails" />
     <MESSAGE value="бонусы" />
     <MESSAGE value="Применение бонуса к заказу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Применение бонуса к заказу" />
+    <MESSAGE value="Профиль" />
+    <option name="LAST_COMMIT_MESSAGE" value="Профиль" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
