@@ -3,7 +3,7 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {useGetAdminServicesQuery, useGetAdminVariantsQuery} from "../../api/ordersApi.ts";
-import {ClipboardPlus} from "lucide-react";
+import {ClipboardPlus, Plus} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {EmptyState} from "../../components/EmptyState.tsx";
@@ -13,6 +13,7 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
 import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
+import {Input} from "../../components/ui/input.tsx";
 
 
 export const AdminServicesPage = () => {
@@ -72,6 +73,15 @@ export const AdminServicesPage = () => {
     }
 
     return <>
+        <div className="px-4 pt-4 flex gap-2">
+            <Input
+                   className="border-none card-bg-color rounded-lg text-tg-theme-hint-color h-10 placeholder-[var(--tg-theme-hint-color)] text-center"
+                   placeholder="Search by name"/>
+            <Button
+            >
+                <Plus className="w-5 h-5 mr-2" />Add
+            </Button>
+        </div>
         <Tabs value={selectedTab} defaultValue={selectedTab}>
             <TabsList className="bg-inherit flex pl-8 justify-around">
                 {tabs.map(tab => (
