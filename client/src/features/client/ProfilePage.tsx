@@ -10,10 +10,8 @@ import {
     Phone,
     ShieldUser,
     Star,
-    User,
     X
 } from "lucide-react";
-import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import {Switch} from "../../components/ui/switch.tsx";
@@ -29,6 +27,7 @@ import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 import {ProfileApplicationCard} from "../../components/ProfileApplicationCard.tsx";
+import {ProfileSection} from "../../components/ProfileSection.tsx";
 
 export const ProfilePage = () => {
     const {t} = useTranslation();
@@ -127,18 +126,7 @@ export const ProfilePage = () => {
         {/*        <Typography.Title>{t('menu_item_profile')}</Typography.Title>*/}
         {/*    </Button>*/}
         {/*</Header>*/}
-        <Typography.H2 className="flex flex-col gap-4 pt-4 text-center text-3xl font-medium mb-4">
-            <Avatar className="size-24 m-auto">
-                <AvatarImage src={userInfo?.photoUrl}/>
-                <AvatarFallback><User/></AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-                <div>
-                    {userInfo?.firstName} {userInfo?.lastName}
-                </div>
-                <Typography.Description className="text-xl font-normal">@{userInfo?.username}</Typography.Description>
-            </div>
-        </Typography.H2>
+        <ProfileSection user={userInfo}/>
         <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0">
             <ListButtonGroup>
                 <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--tg-accent-green)] rounded-md"/>}

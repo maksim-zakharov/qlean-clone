@@ -1,5 +1,3 @@
-import {Header} from "../../../components/ui/Header.tsx";
-import {Typography} from "../../../components/ui/Typography.tsx";
 import React, {FC, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {
@@ -7,10 +5,6 @@ import {
     useGetAdminOrdersByUserIdQuery,
     useGetAdminUserByIdQuery
 } from "../../../api/ordersApi.ts";
-import dayjs from "dayjs";
-import {Card} from "../../../components/ui/card.tsx";
-import {User} from "lucide-react";
-import {Avatar, AvatarFallback, AvatarImage} from "../../../components/ui/avatar.tsx";
 import {Skeleton} from "../../../components/ui/skeleton.tsx";
 import {RoutePaths} from "../../../routes.ts";
 import {useTranslation} from "react-i18next";
@@ -21,6 +15,7 @@ import {AdminOrdersList} from "../../../components/AdminOrdersList.tsx";
 import {AdminApplicationTab} from "./AdminApplicationTab.tsx";
 import {InvitesList} from "../../../components/InvitesList.tsx";
 import {BonusTotal} from "../../../components/BonusTotal.tsx";
+import {ProfileSection} from "../../../components/ProfileSection.tsx";
 
 export const AdminUsersDetailsPage: FC = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Users.List));
@@ -76,30 +71,8 @@ export const AdminUsersDetailsPage: FC = () => {
     }
 
     return <div className="flex flex-col bg-inherit overflow-y-auto overscroll-none h-screen pb-4">
-        <Header>
-            <Typography.Title
-                className="items-center flex justify-center">Пользователь</Typography.Title>
-        </Header>
-        <div className="flex flex-col gap-2 bg-inherit px-4 py-2">
-            <Avatar className="rounded-full bg-tg-theme-secondary-bg-color m-auto mb-2 size-20">
-                <AvatarImage src={user?.photoUrl}/>
-                <AvatarFallback className="bg-tg-theme-secondary-bg-color"><User/></AvatarFallback>
-            </Avatar>
-
-            <Card className="p-0 pl-4 gap-0">
-                <div className="p-3 pl-0">
-                    <div className="flex justify-between">
-                        <Typography.Title>
-                            {user.firstName} {user.lastName}
-                        </Typography.Title>
-                        <Typography.Title>{dayjs.utc(user.createdAt).local().format('YYYY-MM-DD')}</Typography.Title>
-                    </div>
-                    <div className="flex justify-between">
-                        <Typography.Description>@{user.username}</Typography.Description>
-                        <Typography.Description>id: {user.id}</Typography.Description>
-                    </div>
-                </div>
-            </Card>
+        <div className="flex flex-col gap-1 bg-inherit px-4 py-2">
+            <ProfileSection user={user}/>
             <BonusTotal bonuses={bonuses} isAdmin userId={user.id}/>
         </div>
 
