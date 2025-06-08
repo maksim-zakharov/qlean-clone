@@ -59,7 +59,10 @@ export const AdminUsersTab = ({users, isError, query}) => {
                 </div>
                 {ao.phone && <div className="p-3 pl-0 flex gap-2 flex-col">
                     <div className="flex justify-between">
-                        <Typography.Title>{ao.phone}</Typography.Title>
+                        <div className="flex flex-col">
+                            <Typography.Description>Phone</Typography.Description>
+                            <Typography.Title>{ao.phone}</Typography.Title>
+                        </div>
                     </div>
                 </div>}
             </Card>)}
