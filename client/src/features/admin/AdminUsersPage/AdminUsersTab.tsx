@@ -1,7 +1,7 @@
 import {Card} from "../../../components/ui/card.tsx";
 import {Typography} from "../../../components/ui/Typography.tsx";
 import dayjs from "dayjs";
-import React from "react";
+import React, {useMemo} from "react";
 import {ErrorState} from "../../../components/ErrorState.tsx";
 import {EmptyState} from "../../../components/EmptyState.tsx";
 import {ClipboardPlus} from "lucide-react";
@@ -10,17 +10,26 @@ import {RoutePaths} from "../../../routes.ts";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
-export const AdminUsersTab = ({users, isError}) => {
+export const AdminUsersTab = ({users, isError, query}) => {
     const navigate = useNavigate()
     const {t} = useTranslation();
 
     const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Users.Details(order.id))
 
+    const filteredUsers = useMemo(() => users.filter(user =>
+        !query
+        || user.id.toLowerCase().includes(query.toLowerCase())
+        || user.firstName.toLowerCase().includes(query.toLowerCase())
+        || user?.lastName?.toLowerCase().includes(query.toLowerCase())
+        || user?.phone?.toLowerCase().includes(query.toLowerCase())
+        || user?.username?.toLowerCase().includes(query.toLowerCase())
+    ), [users, query]);
+
     if (isError) {
         return <ErrorState/>
     }
 
-    if (users.length === 0) {
+    if (filteredUsers.length === 0) {
         return <EmptyState
             icon={<ClipboardPlus className="h-10 w-10"/>}
             title={t('client_orders_empty_title')}
@@ -34,8 +43,8 @@ export const AdminUsersTab = ({users, isError}) => {
     }
 
     return <div className="p-4 flex flex-col gap-4">
-        {users.length > 0 && <div className="flex flex-col gap-4">
-            {users.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
+        {filteredUsers.length > 0 && <div className="flex flex-col gap-4">
+            {filteredUsers.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
                                           onClick={() => handleOrderClick(ao)}>
                 <div className={`p-3 pl-0 ${ao.phone && 'separator-shadow-bottom'}`}>
                     <div className="flex justify-between">

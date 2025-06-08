@@ -8,10 +8,17 @@ import {ErrorState} from "../../../components/ErrorState.tsx";
 import {EmptyState} from "../../../components/EmptyState.tsx";
 import {ClipboardPlus} from "lucide-react";
 
-export const AdminApplicationsTab = ({applications, isError}) => {
+export const AdminApplicationsTab = ({applications, isError, query}) => {
     const navigate = useNavigate()
 
-    const pendingApplications = useMemo(() => applications.filter(a => a.status === 'PENDING'), [applications]);
+    const pendingApplications = useMemo(() => applications.filter(a => a.status === 'PENDING').filter(a =>
+        !query
+        || a?.user.id.toLowerCase().includes(query.toLowerCase())
+        || a?.user.firstName.toLowerCase().includes(query.toLowerCase())
+        || a?.user?.lastName?.toLowerCase().includes(query.toLowerCase())
+        || a?.user?.phone?.toLowerCase().includes(query.toLowerCase())
+        || a?.user?.username?.toLowerCase().includes(query.toLowerCase())
+    ), [applications, query]);
 
     const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Users.Details(order.userId))
 
