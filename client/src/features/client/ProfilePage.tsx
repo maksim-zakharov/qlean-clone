@@ -28,7 +28,6 @@ import {useGetApplicationQuery, useLoginMutation} from "../../api/api.ts";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
-import {Header} from "../../components/ui/Header.tsx";
 import {ProfileApplicationCard} from "../../components/ProfileApplicationCard.tsx";
 
 export const ProfilePage = () => {
@@ -99,7 +98,14 @@ export const ProfilePage = () => {
 
     if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
-            <Skeleton className="w-full h-[156px]"/>
+            <div className="flex flex-col gap-4">
+                <Skeleton className="size-24 m-auto rounded-full"/>
+                <div className="text-center m-auto gap-2 flex flex-col">
+                    <Skeleton className="w-[200px] h-[28px]"/>
+                    <Skeleton className="w-[120px] m-auto h-[20px] py-2"/>
+                </div>
+            </div>
+            <Skeleton className="w-full h-[112px]"/>
             <Skeleton className="w-full h-[44px]"/>
             <Skeleton className="w-full h-[44px]"/>
             {userInfo?.role === 'executor' && <div>
@@ -115,17 +121,23 @@ export const ProfilePage = () => {
     }
 
     return <>
-        <Header className="flex justify-center">
-            <Button variant="ghost"
-                    className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">
-                <Typography.Title>{t('menu_item_profile')}</Typography.Title>
-            </Button>
-        </Header>
-        <Typography.H2 className="flex gap-4 pl-4 pt-4">
-            <Avatar className="w-7 h-7">
+        {/*<Header className="flex justify-center">*/}
+        {/*    <Button variant="ghost"*/}
+        {/*            className="flex flex-col items-center h-auto text-tg-theme-text-color text-base font-medium">*/}
+        {/*        <Typography.Title>{t('menu_item_profile')}</Typography.Title>*/}
+        {/*    </Button>*/}
+        {/*</Header>*/}
+        <Typography.H2 className="flex flex-col gap-4 pt-4 text-center text-3xl font-medium mb-4">
+            <Avatar className="size-24 m-auto">
                 <AvatarImage src={userInfo?.photoUrl}/>
                 <AvatarFallback><User/></AvatarFallback>
-            </Avatar>{userInfo?.firstName} {userInfo?.lastName}
+            </Avatar>
+            <div className="flex flex-col">
+                <div>
+                    {userInfo?.firstName} {userInfo?.lastName}
+                </div>
+                <Typography.Description className="text-xl font-normal">@{userInfo?.username}</Typography.Description>
+            </div>
         </Typography.H2>
         <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0">
             <ListButtonGroup>
