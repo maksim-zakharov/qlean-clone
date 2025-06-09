@@ -39,7 +39,7 @@ export class AdminController {
   @Get('services')
   @UseGuards(AuthGuard('jwt'))
   async getServices() {
-    return this.serviceService.getAll();
+    return this.serviceService.getAll(true);
   }
 
   @Get('services/:id')
@@ -51,6 +51,11 @@ export class AdminController {
   @Delete('services/:id')
   softDeleteService(@Param('id') id: number): any {
     return this.serviceService.delete(Number(id));
+  }
+
+  @Post('services/:id')
+  restoreService(@Param('id') id: number): any {
+    return this.serviceService.restore(Number(id));
   }
 
   @Post('services')

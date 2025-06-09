@@ -34,8 +34,9 @@ export class ServicesService {
     });
   }
 
-  getAll() {
+  getAll(includeDeleted = false) {
     return this.prisma.baseService.findMany({
+      where: includeDeleted ? {} : { deletedAt: null },
       include: {
         options: true,
         variants: true,
@@ -63,6 +64,15 @@ export class ServicesService {
     return this.prisma.baseService.update({
       data,
       where: { id: data.id },
+    });
+  }
+
+  async restore(id: BaseService['id']): Promise<BaseService> {
+    return this.prisma.baseService.update({
+      data: {
+        deletedAt: null,
+      },
+      where: { id },
     });
   }
 
