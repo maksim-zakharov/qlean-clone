@@ -5,7 +5,7 @@ import {InputWithLabel} from "../../components/InputWithLabel.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {Card} from "../../components/ui/card.tsx";
-import {CalendarCheck, Plus} from "lucide-react";
+import {CalendarCheck, Plus, Trash2} from "lucide-react";
 import {useFieldArray, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -86,12 +86,12 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
         }
     }, [service, reset]);
 
-    const { fields: options, prepend: prependOption } = useFieldArray({
+    const { fields: options, prepend: prependOption, remove: removeOption } = useFieldArray({
         control, // control props comes from useForm (optional: if you are using FormProvider)
         name: "options", // unique name for your Field Array
     });
 
-    const { fields: variants, prepend: prependVariant } = useFieldArray({
+    const { fields: variants, prepend: prependVariant, remove: removeVariant } = useFieldArray({
         control, // control props comes from useForm (optional: if you are using FormProvider)
         name: "variants", // unique name for your Field Array
     });
@@ -130,7 +130,8 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
 
             <div className="flex flex-col gap-2 [margin-bottom:calc(52px+var(--tg-safe-area-inset-bottom))]">
                 <Typography.Title>Options</Typography.Title>
-                {options.map((o, index) => <Card className="gap-2 p-4" key={o.id}>
+                {options.map((o, index) => <Card className="gap-2 p-4 relative" key={o.id}>
+                    <Button variant="ghost" className="absolute right-0 text-tg-theme-hint-color h-[16px]" onClick={() => removeOption(index)}><Trash2 className="h-4 w-4" /></Button>
                     <div className="flex flex-col" key={o.id}>
                         <InputWithLabel label="Name" {...register(`options.${index}.name`)}/>
                     </div>
@@ -143,7 +144,8 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
                 </Card>)}
                 <Button onClick={handleAddNewOption} type="button"><Plus className="w-5 h-5 mr-2" /> Add option</Button>
                 <Typography.Title>Variants</Typography.Title>
-                {variants.map((o, index) => <Card className="gap-2 p-4" key={o.id}>
+                {variants.map((o, index) => <Card className="gap-2 p-4 relative" key={o.id}>
+                    <Button variant="ghost" className="absolute right-0 text-tg-theme-hint-color h-[16px]" onClick={() => removeVariant(index)}><Trash2 className="h-4 w-4" /></Button>
                     <div className="flex flex-col" key={o.id}>
                         <InputWithLabel label="Name" {...register(`variants.${index}.name`)}/>
                     </div>
