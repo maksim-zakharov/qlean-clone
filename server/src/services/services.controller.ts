@@ -173,8 +173,8 @@ export class ServicesController implements OnModuleInit {
   }
 
   @Get('/')
-  @CacheKey('SERVICES')
-  @CacheTTL(3600 * 24)
+  // @CacheKey('SERVICES')
+  // @CacheTTL(3600 * 24)
   getAll() {
     return this.servicesService.getAll();
   }

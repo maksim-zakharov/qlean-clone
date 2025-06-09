@@ -9,7 +9,6 @@ import {Button} from "../../components/ui/button.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
-import {useDispatch} from "react-redux";
 import {RoutePaths} from "../../routes.ts";
 import {ErrorState} from "../../components/ErrorState.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
@@ -23,7 +22,6 @@ export const AdminServiceDetailsPage: FC = () => {
     const [deleteService, {isLoading: deleteLoading}] = useDeleteAdminServiceByIdMutation();
     const [restoreService, {isLoading: restoreLoading}] = useRestoreAdminServiceByIdMutation();
     const navigate = useNavigate()
-    const dispatch = useDispatch();
 
     const {id} = useParams<string>();
     const {data: baseService, isLoading, isError} = useGetAdminServicesByIdQuery({id: id!});
@@ -31,7 +29,7 @@ export const AdminServiceDetailsPage: FC = () => {
     const handleRestoreClick = () => {
         Telegram.WebApp.showPopup({
             title: `Are you sure you want to restore ${baseService?.name}?`,
-            message: '',
+            message: 'The service will be visible to customers',
             buttons: [{
                 id: 'ok',
                 text: 'Restore',

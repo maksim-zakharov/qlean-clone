@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="restore service">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,15 +175,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="79770000" />
-    </task>
-    <task id="LOCAL-00410" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
-      <option name="closed" value="true" />
-      <created>1746471996819</created>
-      <option name="number" value="00410" />
-      <option name="presentableId" value="LOCAL-00410" />
-      <option name="project" value="LOCAL" />
-      <updated>1746471996819</updated>
+      <workItem from="1748586159111" duration="80103000" />
     </task>
     <task id="LOCAL-00411" summary="TelegramProvider">
       <option name="closed" value="true" />
@@ -572,7 +561,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749472567958</updated>
     </task>
-    <option name="localTasksCounter" value="459" />
+    <task id="LOCAL-00459" summary="restore service">
+      <option name="closed" value="true" />
+      <created>1749475741433</created>
+      <option name="number" value="00459" />
+      <option name="presentableId" value="LOCAL-00459" />
+      <option name="project" value="LOCAL" />
+      <updated>1749475741433</updated>
+    </task>
+    <option name="localTasksCounter" value="460" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
