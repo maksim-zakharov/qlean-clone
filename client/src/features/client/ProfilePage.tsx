@@ -93,7 +93,7 @@ export const ProfilePage = () => {
     }
 
     const handleLogin = () => loginMutation(userInfo?.role === 'client' ? 'executor' : 'client').unwrap()
-    const handleAdminLogin = () => loginMutation(userInfo?.role !== 'admin' ? 'admin' : 'executor').unwrap()
+    const handleAdminLogin = () => loginMutation(userInfo?.role !== 'admin' ? 'admin' : 'client').unwrap()
 
     if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
@@ -196,14 +196,18 @@ export const ProfilePage = () => {
                 </SheetContent>
             </Sheet>}
             <ListButtonGroup>
-                {application?.status === 'APPROVED' && <ListButton onClick={handleLogin} extra={<ChevronRight
+                {application?.status === 'APPROVED' && userInfo?.role !== 'executor' && <ListButton onClick={handleLogin} extra={<ChevronRight
                     className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
                     className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                                                   text={`${t('login_as_btn')} ${userInfo?.role === 'client' ? 'Executor' : 'Client'}`}/>}
+                                                                   text={`${t('login_as_btn')} Executor`}/>}
+                {application?.status === 'APPROVED' && userInfo?.role == 'executor' && <ListButton onClick={handleLogin} extra={<ChevronRight
+                    className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
+                    className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
+                                                                   text={`${t('login_as_btn')} Client'}`}/>}
                 {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
                     className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
                     className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                                  text={`${t('login_as_btn')}  ${userInfo?.role !== 'admin' ? 'Admin' : 'Executor'}`}/>}
+                                                  text={`${t('login_as_btn')}  ${userInfo?.role !== 'admin' ? 'Admin' : 'Client'}`}/>}
             </ListButtonGroup>
             {userInfo?.role === 'executor' && <>
                 <Typography.Title className="text-left mb-0 block pl-4">{t('profile_services_title')}</Typography.Title>
