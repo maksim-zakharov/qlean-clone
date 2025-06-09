@@ -50,7 +50,7 @@ export const AdminServiceDetailsPage: FC = () => {
 
     const canEdit = Boolean(serviceVariant?.status) && ['todo'].includes(serviceVariant?.status);
 
-    const totalPrice = useMemo(() => serviceVariant?.options.reduce((sum, option) => sum + option.price, serviceVariant?.serviceVariant?.basePrice || 0) || 0, [serviceVariant]);
+    const totalPrice = useMemo(() => serviceVariant?.options?.reduce((sum, option) => sum + option.price, serviceVariant?.serviceVariant?.basePrice || 0) || 0, [serviceVariant]);
 
     const handleSelectAddress = async ({fullAddress}: any) => {
         if (fullAddress !== serviceVariant.fullAddress)
@@ -231,7 +231,7 @@ export const AdminServiceDetailsPage: FC = () => {
                             </div>
                         </div>
                     </AccordionTrigger>
-                    {serviceVariant.options.length > 0 && <AccordionContent>
+                    {serviceVariant?.options?.length > 0 && <AccordionContent>
                         <div key={serviceVariant.baseService?.id} className="flex justify-between">
                             <span className="text-tg-theme-text-color">{serviceVariant.baseService?.name}</span>
                             <span

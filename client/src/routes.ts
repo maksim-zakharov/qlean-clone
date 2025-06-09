@@ -37,6 +37,8 @@ export const RoutePaths = {
         // Тут управление ассортиментом услуг
         Services: {
             List: '/admin/services',
+            Create: '/admin/services/create',
+            Edit: (id: string | number) => buildPath('/admin/services/:id/edit', {id}),
             Details: (id: string | number) => buildPath('/admin/services/:id', {id}),
         },
 

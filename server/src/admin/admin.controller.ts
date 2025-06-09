@@ -12,7 +12,13 @@ import { UserService } from '../user/user.service';
 import { ApplicationService } from '../application/application.service';
 import { OrdersService } from '../orders/orders.service';
 import { ServicesService } from '../services/services.service';
-import { Address, BonusOperation, BonusOperationType } from '@prisma/client';
+import {
+  Address,
+  BaseService,
+  BonusOperation,
+  BonusOperationType,
+  ServiceOption,
+} from '@prisma/client';
 
 @Controller('/api/admin')
 export class AdminController {
@@ -39,6 +45,14 @@ export class AdminController {
   @UseGuards(AuthGuard('jwt'))
   async getServiceById(@Param('id') id: number) {
     return this.serviceService.getVariantById(id);
+  }
+
+  @Post('services')
+  @UseGuards(AuthGuard('jwt'))
+  async addService(
+    @Body() service: BaseService & { options: ServiceOption[] },
+  ) {
+    return this.serviceService.create(service);
   }
 
   @Get('orders')

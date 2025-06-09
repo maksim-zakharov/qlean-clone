@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { BaseService } from '@prisma/client';
+import { BaseService, ServiceOption } from '@prisma/client';
 
 @Injectable()
 export class ServicesService {
@@ -44,9 +44,19 @@ export class ServicesService {
     });
   }
 
-  async create(data: Omit<BaseService, 'id'>): Promise<BaseService> {
+  async create(
+    data: BaseService & { options: ServiceOption[] },
+  ): Promise<BaseService> {
     return this.prisma.baseService.create({
-      data,
+      data: {
+        name: data.name,
+        options: {
+          create: data.options.map(({ id, ...o }) => o),
+        },
+      },
+      include: {
+        options: true,
+      },
     });
   }
 

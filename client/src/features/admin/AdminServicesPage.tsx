@@ -78,6 +78,7 @@ export const AdminServicesPage = () => {
                    className="border-none card-bg-color rounded-lg text-tg-theme-hint-color h-10 placeholder-[var(--tg-theme-hint-color)] text-center"
                    placeholder="Search by name"/>
             <Button
+                onClick={() => navigate(RoutePaths.Admin.Services.Create)}
             >
                 <Plus className="w-5 h-5 mr-2" />Add
             </Button>

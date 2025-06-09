@@ -55,6 +55,14 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Service'],
         }),
+        addAdminService: builder.mutation<any, any>({
+            query: (params) => ({
+                url: "/admin/services",
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Service'],
+        }),
         getAdminUsers: builder.query<any[], void>({
             query: (params) => ({
                 url: "/admin/users",
@@ -199,5 +207,6 @@ export const {
     useApproveApplicationMutation,
     useAddBonusMutation,
     useRejectApplicationMutation,
-    useGetAdminApplicationsQuery
+    useGetAdminApplicationsQuery,
+    useAddAdminServiceMutation
 } = ordersApi;
