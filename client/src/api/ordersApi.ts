@@ -55,6 +55,13 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Service'],
         }),
+        deleteAdminServiceById: builder.mutation<void, { id: number | string }>({
+            query: (params) => ({
+                url:`/admin/services/${params.id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Service'],
+        }),
         addAdminService: builder.mutation<any, any>({
             query: (params) => ({
                 url: "/admin/services",
@@ -208,5 +215,6 @@ export const {
     useAddBonusMutation,
     useRejectApplicationMutation,
     useGetAdminApplicationsQuery,
-    useAddAdminServiceMutation
+    useAddAdminServiceMutation,
+    useDeleteAdminServiceByIdMutation
 } = ordersApi;

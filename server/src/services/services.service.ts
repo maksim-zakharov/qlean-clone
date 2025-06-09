@@ -30,7 +30,6 @@ export class ServicesService {
     return this.prisma.serviceVariant.findMany({
       include: {
         baseService: true,
-        variants: true,
       },
     });
   }

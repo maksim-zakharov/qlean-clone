@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
@@ -12,19 +12,22 @@ import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
 import {Header} from "../../components/ui/Header.tsx";
 import {DynamicIcon} from "lucide-react/dynamic";
-import {Tabs, TabsList, TabsTrigger} from "../../components/ui/tabs.tsx";
 import {Input} from "../../components/ui/input.tsx";
 
 
 export const AdminServicesPage = () => {
     const {t} = useTranslation();
     const navigate = useNavigate()
+
+    const [query, setQuery] = useState<string>('');
     const {data: services = []} = useGetAdminServicesQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
     const {data: variants = [], isLoading, isError} = useGetAdminVariantsQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
+
+    const filteredService = useMemo(() => services.filter(s => s.name.includes(query)), [services, query]);
 
     const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Services.Details(order.id))
 
@@ -76,42 +79,27 @@ export const AdminServicesPage = () => {
         <div className="px-4 pt-4 flex gap-2">
             <Input
                    className="border-none card-bg-color rounded-lg text-tg-theme-hint-color h-10 placeholder-[var(--tg-theme-hint-color)] text-center"
-                   placeholder="Search by name"/>
+                   placeholder="Search by name" value={query} onChange={e => setQuery(e.target.value)}/>
             <Button
                 onClick={() => navigate(RoutePaths.Admin.Services.Create)}
             >
                 <Plus className="w-5 h-5 mr-2" />Add
             </Button>
         </div>
-        <Tabs value={selectedTab} defaultValue={selectedTab}>
-            <TabsList className="bg-inherit flex pl-8 justify-around">
-                {tabs.map(tab => (
-                    <TabsTrigger
-                        key={tab.id}
-                        value={tab.id}
-                        onClick={() => setSelectedTab(tab.id)}
-                    >
-                        {tab.label}
-                    </TabsTrigger>
-                ))}
-            </TabsList>
-        </Tabs>
-        {selectedTab === 'services' && <div className="p-4 flex flex-col gap-4">
-            {services.length > 0 && <div className="flex flex-col gap-4">
-                {services.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
+        <div className="p-4 flex flex-col gap-4">
+            {filteredService.length > 0 && <div className="flex flex-col gap-4">
+                {filteredService.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
                                                  onClick={() => handleOrderClick(ao)}>
                     <div className={`p-3 pl-0`}>
                         <div className="flex justify-between">
                             <Typography.Title className="flex gap-2">{ao.name}
                             </Typography.Title>
-                        </div>
-                        <div className="flex justify-between">
-                            <Typography.Description>id: {ao.id}</Typography.Description>
+                            <Typography.Title>id: {ao.id}</Typography.Title>
                         </div>
                     </div>
                 </Card>)}
             </div>}
-        </div>}
+        </div>
         {selectedTab === 'variants' && <div className="p-4 flex flex-col gap-4">
             {variants.length > 0 && <div className="flex flex-col gap-4">
                 {variants.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"

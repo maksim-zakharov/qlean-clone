@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -44,7 +45,12 @@ export class AdminController {
   @Get('services/:id')
   @UseGuards(AuthGuard('jwt'))
   async getServiceById(@Param('id') id: number) {
-    return this.serviceService.getVariantById(id);
+    return this.serviceService.getById(id);
+  }
+
+  @Delete('services/:id')
+  softDeleteService(@Param('id') id: number): any {
+    return this.serviceService.delete(Number(id));
   }
 
   @Post('services')

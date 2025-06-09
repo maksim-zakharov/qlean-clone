@@ -1,6 +1,6 @@
 import {Header} from "../../components/ui/Header.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
-import React from "react";
+import React, {FC} from "react";
 import {InputWithLabel} from "../../components/InputWithLabel.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
@@ -38,7 +38,7 @@ const schema = yup.object({
     })),
 }).required();
 
-export const AdminEditServicePage = ({isEdit}) => {
+export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
     const navigate = useNavigate()
     const { handleSubmit, control, getValues, reset, register, formState: {errors} } = useForm({
         resolver: yupResolver(schema),

@@ -86,7 +86,7 @@ function App() {
                 <Route path={RoutePaths.Admin.Users.Details(':id')} element={<AdminUsersDetailsPage/>}/>
 
                 <Route path={RoutePaths.Admin.Services.Create} element={<AdminEditServicePage/>}/>
-                <Route path={RoutePaths.Admin.Services.Edit(':id')} element={<AdminEditServicePage/>}/>
+                <Route path={RoutePaths.Admin.Services.Edit(':id')} element={<AdminEditServicePage isEdit/>}/>
                 <Route path={RoutePaths.Admin.Services.Details(':id')} element={<AdminServiceDetailsPage/>}/>
 
                 <Route path={RoutePaths.Admin.Order.Create} element={<OrderCreationPage isAdmin/>}/>
