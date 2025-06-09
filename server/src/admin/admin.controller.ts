@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -19,6 +20,7 @@ import {
   BonusOperation,
   BonusOperationType,
   ServiceOption,
+  ServiceVariant,
 } from '@prisma/client';
 
 @Controller('/api/admin')
@@ -64,6 +66,18 @@ export class AdminController {
     @Body() service: BaseService & { options: ServiceOption[] },
   ) {
     return this.serviceService.create(service);
+  }
+
+  @Put('services/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async editService(
+    @Body()
+    service: BaseService & {
+      options: any[];
+      variants: any[];
+    },
+  ) {
+    return this.serviceService.update(service);
   }
 
   @Get('orders')

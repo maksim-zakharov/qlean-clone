@@ -9,7 +9,6 @@ import {Button} from "../../components/ui/button.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
-import {selectBaseService} from "../../slices/createOrderSlice.ts";
 import {useDispatch} from "react-redux";
 import {RoutePaths} from "../../routes.ts";
 import {ErrorState} from "../../components/ErrorState.tsx";
@@ -28,12 +27,6 @@ export const AdminServiceDetailsPage: FC = () => {
 
     const {id} = useParams<string>();
     const {data: baseService, isLoading, isError} = useGetAdminServicesByIdQuery({id: id!});
-
-    const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation()
-        dispatch(selectBaseService(baseService))
-        navigate(RoutePaths.Admin.Order.Create)
-    }
 
     const handleRestoreClick = () => {
         Telegram.WebApp.showPopup({
@@ -145,7 +138,7 @@ export const AdminServiceDetailsPage: FC = () => {
                 <Button
                     wide
                     size="lg"
-                    onClick={handleAddOptionClick}
+                    onClick={() => navigate(RoutePaths.Admin.Services.Edit(baseService?.id))}
                 >
                     Edit
                 </Button>

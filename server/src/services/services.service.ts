@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { BaseService, ServiceOption } from '@prisma/client';
 
@@ -60,10 +60,120 @@ export class ServicesService {
     });
   }
 
-  async update(data: BaseService): Promise<BaseService> {
-    return this.prisma.baseService.update({
-      data,
-      where: { id: data.id },
+  async update(
+    data: BaseService & {
+      options: any[];
+      variants: any[];
+    },
+  ) {
+    return this.prisma.$transaction(async (tx) => {
+      const service = await tx.baseService.findUnique({
+        where: { id: data.id },
+        include: {
+          variants: true,
+          options: true,
+        },
+      });
+      if (!service) throw new NotFoundException('Service not found');
+
+      const dataOptionsSet = new Set(data.options?.map((o) => o.id) || []);
+      const dataVariantsSet = new Set(data.variants?.map((o) => o.id) || []);
+
+      // Опции которые надо удалить
+      const optionsToDelete = service.options.filter(
+        (o) => !dataOptionsSet.has(o.id),
+      );
+      if (optionsToDelete.length > 0) {
+        await tx.serviceOption.deleteMany({
+          where: { id: { in: optionsToDelete.map((o) => o.id) } },
+        });
+      }
+
+      // Варианты которые надо удалить
+      const variantsToDelete = service.variants.filter(
+        (o) => !dataVariantsSet.has(o.id),
+      );
+      if (variantsToDelete.length > 0) {
+        await tx.serviceVariant.deleteMany({
+          where: { id: { in: variantsToDelete.map((o) => o.id) } },
+        });
+      }
+
+      // Опции которые надо обновить
+      const optionsToUpdate = service.options.filter((o) =>
+        dataOptionsSet.has(o.id),
+      );
+      if (optionsToUpdate.length > 0) {
+        await Promise.all(
+          optionsToUpdate.map((option) =>
+            tx.serviceOption.update({
+              where: { id: option.id },
+              data: option,
+            }),
+          ),
+        );
+      }
+
+      // Варианты которые надо обновить
+      const variantsToUpdate = service.variants.filter((o) =>
+        dataVariantsSet.has(o.id),
+      );
+      if (variantsToUpdate.length > 0) {
+        await Promise.all(
+          variantsToUpdate.map((option) =>
+            tx.serviceVariant.update({
+              where: { id: option.id },
+              data: option,
+            }),
+          ),
+        );
+      }
+
+      const existOptionsSet = new Set(service.options.map((v) => v.id) || []);
+      const existVariantsSet = new Set(service.variants.map((v) => v.id) || []);
+
+      // Опции которые надо добавить
+      const optionsToCreate = data.options.filter(
+        (o) => !existOptionsSet.has(o.id),
+      );
+      if (optionsToCreate.length > 0) {
+        await Promise.all(
+          optionsToCreate.map(({ id, ...option }) =>
+            tx.serviceVariant.create({
+              data: {
+                ...option,
+                baseServiceId: service.id,
+              },
+            }),
+          ),
+        );
+      }
+
+      // Варианты которые надо добавить
+      const variantsToCreate = data.variants.filter(
+        (o) => !existVariantsSet.has(o.id),
+      );
+      if (variantsToCreate.length > 0) {
+        await Promise.all(
+          variantsToCreate.map(({ id, ...option }) =>
+            tx.serviceVariant.create({
+              data: {
+                ...option,
+                baseServiceId: service.id,
+              },
+            }),
+          ),
+        );
+      }
+
+      const { id, options, variants, ...onlyData } = data;
+
+      return tx.baseService.update({
+        where: {
+          id: data.id,
+        },
+        data: onlyData,
+      });
     });
   }
 
