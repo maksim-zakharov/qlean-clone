@@ -16,6 +16,7 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
 import {formatDuration} from "../../components/EstimatedTime.tsx";
+import {DynamicIcon} from "lucide-react/dynamic";
 
 export const AdminServiceDetailsPage: FC = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Services.List));
@@ -100,11 +101,30 @@ export const AdminServiceDetailsPage: FC = () => {
                     </div>
                     <div className="p-3 pl-0 separator-shadow-bottom flex justify-between items-center">
                         <Typography.Title>Duration</Typography.Title>
-                        <Typography.Description className="text-base">{formatDuration(o.duration)}</Typography.Description>
+                        <Typography.Description
+                            className="text-base">{formatDuration(o.duration)}</Typography.Description>
                     </div>
                     <div className="p-3 pl-0 flex justify-between items-center">
                         <Typography.Title>Price</Typography.Title>
                         <Typography.Description className="text-base">{moneyFormat(o.price)}</Typography.Description>
+                    </div>
+                </Card>)}
+            </div>
+            <div className="flex flex-col gap-2">
+                <Typography.Title>Variants</Typography.Title>
+                {baseService?.variants?.map((ao: any) => <Card key={ao.id} className="p-0 pl-4 gap-0 border-none card-bg-color">
+                    <div className={`p-3 pl-0`}>
+                        <div className="flex justify-between">
+                            <Typography.Title className="flex gap-2"><DynamicIcon name={ao.icon}
+                                                                                  className="w-5 h-5 text-tg-theme-button-color"
+                                                                                  strokeWidth={1.5}/>{ao.name}
+                            </Typography.Title>
+                            <Typography.Title>{moneyFormat(ao.basePrice)}</Typography.Title>
+                        </div>
+                        <div className="flex justify-between">
+                            <Typography.Description>{ao.nameAccusative}</Typography.Description>
+                            <Typography.Description>{formatDuration(ao.duration)}</Typography.Description>
+                        </div>
                     </div>
                 </Card>)}
             </div>

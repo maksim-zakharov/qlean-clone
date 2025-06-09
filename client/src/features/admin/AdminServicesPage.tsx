@@ -11,7 +11,6 @@ import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
 import {Header} from "../../components/ui/Header.tsx";
-import {DynamicIcon} from "lucide-react/dynamic";
 import {Input} from "../../components/ui/input.tsx";
 
 
@@ -30,19 +29,6 @@ export const AdminServicesPage = () => {
     const filteredService = useMemo(() => services.filter(s => s.name.includes(query)), [services, query]);
 
     const handleOrderClick = (order: any) => navigate(RoutePaths.Admin.Services.Details(order.id))
-
-    const tabs = [
-        {
-            id: 'services',
-            label: 'Services'
-        },
-        {
-            id: 'variants',
-            label: 'Variants'
-        },
-    ]
-
-    const [selectedTab, setSelectedTab] = React.useState<string>(tabs[0].id);
 
     if (isLoading) {
         return <div className="px-4 mb-4">
@@ -100,30 +86,5 @@ export const AdminServicesPage = () => {
                 </Card>)}
             </div>}
         </div>
-        {selectedTab === 'variants' && <div className="p-4 flex flex-col gap-4">
-            {variants.length > 0 && <div className="flex flex-col gap-4">
-                {variants.map((ao: any) => <Card className="p-0 pl-4 gap-0 border-none card-bg-color"
-                                                 onClick={() => handleOrderClick(ao)}>
-                    <div className={`p-3 pl-0`}>
-                        <div className="flex justify-between">
-                            <Typography.Title className="flex gap-2"><DynamicIcon name={ao.icon}
-                                                                                  className="w-5 h-5 text-tg-theme-button-color"
-                                                                                  strokeWidth={1.5}/>{ao.name}
-                            </Typography.Title>
-                            <Typography.Title>{ao.baseService?.name}</Typography.Title>
-                        </div>
-                        <div className="flex justify-between">
-                            <Typography.Description>{ao.nameAccusative}</Typography.Description>
-                            <Typography.Description>id: {ao.id}</Typography.Description>
-                        </div>
-                    </div>
-                    {ao.phone && <div className="p-3 pl-0 flex gap-2 flex-col">
-                        <div className="flex justify-between">
-                            <Typography.Title>{ao.phone}</Typography.Title>
-                        </div>
-                    </div>}
-                </Card>)}
-            </div>}
-        </div>}
     </>
 }

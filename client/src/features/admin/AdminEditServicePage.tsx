@@ -1,6 +1,6 @@
 import {Header} from "../../components/ui/Header.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import {InputWithLabel} from "../../components/InputWithLabel.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
@@ -9,10 +9,10 @@ import {CalendarCheck, Plus} from "lucide-react";
 import {useFieldArray, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useAddAdminServiceMutation} from "../../api/ordersApi.ts";
+import {useAddAdminServiceMutation, useGetAdminServicesByIdQuery} from "../../api/ordersApi.ts";
 import {toast} from "sonner";
 import {RoutePaths} from "../../routes.ts";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 interface Option {
     id: number,
@@ -39,6 +39,10 @@ const schema = yup.object({
 }).required();
 
 export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
+    const {id} = useParams<string>();
+    const {data: service} = useGetAdminServicesByIdQuery({id: Number(id)}, {
+        skip: !isEdit
+    })
     const navigate = useNavigate()
     const { handleSubmit, control, getValues, reset, register, formState: {errors} } = useForm({
         resolver: yupResolver(schema),
@@ -47,6 +51,13 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
             options: [createEmptyOption()],
         }
     });
+
+    useEffect(() => {
+        if (service) {
+            reset(service);
+        }
+    }, [service, reset]);
+
     const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
         control, // control props comes from useForm (optional: if you are using FormProvider)
         name: "options", // unique name for your Field Array
