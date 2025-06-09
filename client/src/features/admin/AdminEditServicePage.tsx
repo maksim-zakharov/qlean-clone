@@ -17,6 +17,7 @@ import {
 import {toast} from "sonner";
 import {RoutePaths} from "../../routes.ts";
 import {useNavigate, useParams} from "react-router-dom";
+import {useBackButton} from "../../hooks/useTelegram.tsx";
 
 interface Option {
     id: number,
@@ -64,6 +65,8 @@ const schema = yup.object({
 
 export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
     const {id} = useParams<string>();
+    const backTo = () => navigate(isEdit ? RoutePaths.Admin.Services.Details(id) : RoutePaths.Admin.Services.List)
+    useBackButton(backTo);
     const {data: service} = useGetAdminServicesByIdQuery({id: Number(id)}, {
         skip: !isEdit
     })
@@ -107,8 +110,7 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
             icon: <CalendarCheck className="h-5 w-5 text-[var(--chart-2)]"/>
         })
 
-        if(!isEdit)
-        navigate(RoutePaths.Admin.Services.Details(newService.id))
+        backTo()
     };
     
     const handleAddNewOption = () => prependOption(createEmptyOption())
@@ -126,7 +128,7 @@ export const AdminEditServicePage: FC<{isEdit?: boolean}> = ({isEdit}) => {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <InputWithLabel label="Name"  {...register("name")}/>
 
-            <div className="flex flex-col gap-2 mb-15">
+            <div className="flex flex-col gap-2 [margin-bottom:calc(52px+var(--tg-safe-area-inset-bottom))]">
                 <Typography.Title>Options</Typography.Title>
                 {options.map((o, index) => <Card className="gap-2 p-4" key={o.id}>
                     <div className="flex flex-col" key={o.id}>

@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="restore service">
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,15 +174,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="80103000" />
-    </task>
-    <task id="LOCAL-00411" summary="TelegramProvider">
-      <option name="closed" value="true" />
-      <created>1746542043324</created>
-      <option name="number" value="00411" />
-      <option name="presentableId" value="LOCAL-00411" />
-      <option name="project" value="LOCAL" />
-      <updated>1746542043324</updated>
+      <workItem from="1748586159111" duration="80228000" />
     </task>
     <task id="LOCAL-00412" summary="useBackButton">
       <option name="closed" value="true" />
@@ -569,7 +560,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749475741433</updated>
     </task>
-    <option name="localTasksCounter" value="460" />
+    <task id="LOCAL-00460" summary="restore service">
+      <option name="closed" value="true" />
+      <created>1749476096641</created>
+      <option name="number" value="00460" />
+      <option name="presentableId" value="LOCAL-00460" />
+      <option name="project" value="LOCAL" />
+      <updated>1749476096641</updated>
+    </task>
+    <option name="localTasksCounter" value="461" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
