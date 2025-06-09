@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Создание сервиса">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServiceDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminServicesPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="baseService deletedAt">
       <change beforePath="$PROJECT_DIR$/server/src/prisma.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/prisma.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,15 +173,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="74367000" />
-    </task>
-    <task id="LOCAL-00406" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
-      <option name="closed" value="true" />
-      <created>1746444079413</created>
-      <option name="number" value="00406" />
-      <option name="presentableId" value="LOCAL-00406" />
-      <option name="project" value="LOCAL" />
-      <updated>1746444079413</updated>
+      <workItem from="1748586159111" duration="74658000" />
     </task>
     <task id="LOCAL-00407" summary="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся">
       <option name="closed" value="true" />
@@ -576,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749463695113</updated>
     </task>
-    <option name="localTasksCounter" value="455" />
+    <task id="LOCAL-00455" summary="baseService deletedAt">
+      <option name="closed" value="true" />
+      <created>1749470119664</created>
+      <option name="number" value="00455" />
+      <option name="presentableId" value="LOCAL-00455" />
+      <option name="project" value="LOCAL" />
+      <updated>1749470119664</updated>
+    </task>
+    <option name="localTasksCounter" value="456" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +590,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="utc dayjs" />
     <MESSAGE value="пофиксил верстку календаря" />
     <MESSAGE value="Разобрался с временем" />
     <MESSAGE value="--tg-theme-bottom_bar_bg_color" />
@@ -624,7 +614,8 @@
     <MESSAGE value="Профиль" />
     <MESSAGE value="Поиск по пользователям" />
     <MESSAGE value="Создание сервиса" />
-    <option name="LAST_COMMIT_MESSAGE" value="Создание сервиса" />
+    <MESSAGE value="baseService deletedAt" />
+    <option name="LAST_COMMIT_MESSAGE" value="baseService deletedAt" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
