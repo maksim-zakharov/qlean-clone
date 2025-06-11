@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="restore service">
-      <change beforePath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Отступ профиль" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,15 +171,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="85322000" />
-    </task>
-    <task id="LOCAL-00415" summary="Заголовки">
-      <option name="closed" value="true" />
-      <created>1746611731132</created>
-      <option name="number" value="00415" />
-      <option name="presentableId" value="LOCAL-00415" />
-      <option name="project" value="LOCAL" />
-      <updated>1746611731132</updated>
+      <workItem from="1748586159111" duration="85613000" />
     </task>
     <task id="LOCAL-00416" summary="Telegram.WebApp.showPopup">
       <option name="closed" value="true" />
@@ -567,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749477111860</updated>
     </task>
-    <option name="localTasksCounter" value="464" />
+    <task id="LOCAL-00464" summary="Отступ профиль">
+      <option name="closed" value="true" />
+      <created>1749633266157</created>
+      <option name="number" value="00464" />
+      <option name="presentableId" value="LOCAL-00464" />
+      <option name="project" value="LOCAL" />
+      <updated>1749633266157</updated>
+    </task>
+    <option name="localTasksCounter" value="465" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +588,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Разобрался с временем" />
     <MESSAGE value="--tg-theme-bottom_bar_bg_color" />
     <MESSAGE value="todo" />
     <MESSAGE value="getById" />
@@ -615,7 +612,8 @@
     <MESSAGE value="Создание сервиса" />
     <MESSAGE value="baseService deletedAt" />
     <MESSAGE value="restore service" />
-    <option name="LAST_COMMIT_MESSAGE" value="restore service" />
+    <MESSAGE value="Отступ профиль" />
+    <option name="LAST_COMMIT_MESSAGE" value="Отступ профиль" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

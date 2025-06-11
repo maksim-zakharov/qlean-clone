@@ -132,7 +132,7 @@ export const ProfilePage = () => {
                 <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--tg-accent-green)] rounded-md"/>}
                             text={<div className="flex flex-col text-left">
                                 <Typography.Description>{t('phone')}</Typography.Description>
-                                <Typography.Title>{phoneText}</Typography.Title>
+                                {phoneText}
                             </div>} extra={
                     !userInfo?.phone && <Button className="p-0 border-none h-6" size="sm" variant="default"
                                                 onClick={handleRequestContact}>
@@ -141,8 +141,7 @@ export const ProfilePage = () => {
 
                 <ListButton text={<div className="flex flex-col text-left">
                     <Typography.Description>{t('address')}</Typography.Description>
-                    <Typography.Title
-                        className="flex">{addressText || '-'}</Typography.Title>
+                    {addressText || '-'}
                 </div>} icon={<MapPin className="p-1 w-7 h-7 bg-[var(--tg-accent-blue)] rounded-md"/>}/>
             </ListButtonGroup>
 
