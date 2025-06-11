@@ -2,7 +2,12 @@ import {Header} from "../../components/ui/Header.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import React, {FC, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {useCancelOrderMutation, useGetOrderByIdQuery, usePatchOrderMutation} from "../../api/ordersApi.ts";
+import {
+    useCancelOrderMutation,
+    useGetAdminOrderByIdQuery,
+    useGetOrderByIdQuery,
+    usePatchOrderMutation
+} from "../../api/ordersApi.ts";
 import {useGetAddressesQuery} from "../../api/api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
@@ -35,7 +40,8 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const dispatch = useDispatch();
     const {data: addresses = []} = useGetAddressesQuery();
     const {id} = useParams<string>();
-    const {data: order, isLoading, isError} = useGetOrderByIdQuery({id: id!});
+    const func = isAdmin ? useGetAdminOrderByIdQuery : useGetOrderByIdQuery;
+    const {data: order, isLoading, isError} = func({id: id!});
     const [{title, description, show}, setAlertConfig] = useState({
         title: '',
         description: '',

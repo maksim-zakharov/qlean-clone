@@ -125,6 +125,13 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Order'],
         }),
+        getAdminOrderById: builder.query<any, { id: number | string }>({
+            query: (params) => ({
+                url: `/admin/orders/${params.id}`,
+                params
+            }),
+            providesTags: ['Order'],
+        }),
         addOrder: builder.mutation<any, any>({
             query: (params) => ({
                 url: "/orders",
@@ -233,5 +240,6 @@ export const {
     useAddAdminServiceMutation,
     useDeleteAdminServiceByIdMutation,
     useRestoreAdminServiceByIdMutation,
-    useEditAdminServiceByIdMutation
+    useEditAdminServiceByIdMutation,
+    useGetAdminOrderByIdQuery
 } = ordersApi;

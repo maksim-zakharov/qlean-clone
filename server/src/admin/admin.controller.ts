@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -22,6 +23,8 @@ import {
   ServiceOption,
   ServiceVariant,
 } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
+import { OrderDTO } from '../_dto/orders.dto';
 
 @Controller('/api/admin')
 export class AdminController {
@@ -84,6 +87,13 @@ export class AdminController {
   @UseGuards(AuthGuard('jwt'))
   async getOrders() {
     return this.orderService.getOrders();
+  }
+
+  @Get('orders/:id')
+  getOrderById(@Param('id') id: number) {
+    return this.orderService
+      .getAdminById(Number(id))
+      .then((o) => plainToInstance(OrderDTO, o));
   }
 
   @Get('users')

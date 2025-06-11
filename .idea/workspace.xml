@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="закругление полоски в табах">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/orders/orders.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,15 +176,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="87325000" />
-    </task>
-    <task id="LOCAL-00419" summary="isAdmin true">
-      <option name="closed" value="true" />
-      <created>1748686996422</created>
-      <option name="number" value="00419" />
-      <option name="presentableId" value="LOCAL-00419" />
-      <option name="project" value="LOCAL" />
-      <updated>1748686996422</updated>
+      <workItem from="1748586159111" duration="87641000" />
     </task>
     <task id="LOCAL-00420" summary="Логин админом">
       <option name="closed" value="true" />
@@ -569,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749633812469</updated>
     </task>
-    <option name="localTasksCounter" value="468" />
+    <task id="LOCAL-00468" summary="закругление полоски в табах">
+      <option name="closed" value="true" />
+      <created>1749639492589</created>
+      <option name="number" value="00468" />
+      <option name="presentableId" value="LOCAL-00468" />
+      <option name="project" value="LOCAL" />
+      <updated>1749639492589</updated>
+    </task>
+    <option name="localTasksCounter" value="469" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
