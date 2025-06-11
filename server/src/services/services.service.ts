@@ -56,6 +56,7 @@ export class ServicesService {
       },
       include: {
         options: true,
+        variants: true,
       },
     });
   }
@@ -139,7 +140,7 @@ export class ServicesService {
       if (optionsToCreate.length > 0) {
         await Promise.all(
           optionsToCreate.map(({ id, ...option }) =>
-            tx.serviceVariant.create({
+            tx.serviceOption.create({
               data: {
                 ...option,
                 baseServiceId: service.id,
@@ -173,6 +174,10 @@ export class ServicesService {
           id: data.id,
         },
         data: onlyData,
+        include: {
+          options: true,
+          variants: true,
+        },
       });
     });
   }
