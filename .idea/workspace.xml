@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="цвет меню">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="закругление полоски в табах">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/tabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminApplicationTab.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,15 +175,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="86060000" />
-    </task>
-    <task id="LOCAL-00418" summary="Telegram.WebApp.showPopup">
-      <option name="closed" value="true" />
-      <created>1747215551706</created>
-      <option name="number" value="00418" />
-      <option name="presentableId" value="LOCAL-00418" />
-      <option name="project" value="LOCAL" />
-      <updated>1747215551706</updated>
+      <workItem from="1748586159111" duration="87325000" />
     </task>
     <task id="LOCAL-00419" summary="isAdmin true">
       <option name="closed" value="true" />
@@ -568,7 +561,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749633600901</updated>
     </task>
-    <option name="localTasksCounter" value="467" />
+    <task id="LOCAL-00467" summary="закругление полоски в табах">
+      <option name="closed" value="true" />
+      <created>1749633812469</created>
+      <option name="number" value="00467" />
+      <option name="presentableId" value="LOCAL-00467" />
+      <option name="project" value="LOCAL" />
+      <updated>1749633812469</updated>
+    </task>
+    <option name="localTasksCounter" value="468" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +592,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="getById" />
     <MESSAGE value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
     <MESSAGE value="TelegramProvider" />
     <MESSAGE value="useBackButton" />
@@ -616,7 +616,8 @@
     <MESSAGE value="Отступ профиль" />
     <MESSAGE value="убрал жирный текст" />
     <MESSAGE value="цвет меню" />
-    <option name="LAST_COMMIT_MESSAGE" value="цвет меню" />
+    <MESSAGE value="закругление полоски в табах" />
+    <option name="LAST_COMMIT_MESSAGE" value="закругление полоски в табах" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

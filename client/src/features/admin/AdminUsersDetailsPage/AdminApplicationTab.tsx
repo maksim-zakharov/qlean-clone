@@ -85,7 +85,7 @@ export const AdminApplicationTab = ({application}) => {
             </Button>}
         </div>
 
-        <div className="px-4 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))]] [padding-bottom:var(--tg-safe-area-inset-bottom)">
+        <div className="px-4 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))]] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
             <ProfileApplicationCard application={application}/>
         </div>
     </>
