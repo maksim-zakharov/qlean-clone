@@ -16,10 +16,10 @@ export const Navbar = ({menuItems}) => {
                 onClick={() => navigate(path)}
             >
                 <Icon
-                    className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                    className={`h-[22px] w-[22px] ${location.pathname === path ? 'text-tg-theme-button-color' : 'text-tg-theme-subtitle-text-color'}`}
                 />
                 <span
-                    className={`text-[10px] font-medium ${location.pathname === path ? 'text-tg-theme-text-color' : 'text-tg-theme-subtitle-text-color'}`}
+                    className={`text-[10px] font-medium ${location.pathname === path ? 'text-tg-theme-button-color' : 'text-tg-theme-subtitle-text-color'}`}
                 >
                   {label}
                 </span>
