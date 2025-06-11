@@ -46,7 +46,7 @@ function TabsTrigger({
       {...props}
     >
       {props.children}
-      <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-tg-theme-button-color transition-opacity opacity-0 group-data-[state=active]:opacity-100" />
+      <span className="absolute left-0 right-0 bottom-0 rounded-t-sm h-[3px] bg-tg-theme-button-color transition-opacity opacity-0 group-data-[state=active]:opacity-100" />
     </TabsPrimitive.Trigger>
   )
 }
