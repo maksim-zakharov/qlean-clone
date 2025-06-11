@@ -5,7 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {
     useCancelOrderMutation,
     useGetAdminOrderByIdQuery,
-    useGetOrderByIdQuery,
+    useGetOrderByIdQuery, usePatchAdminOrderMutation,
     usePatchOrderMutation
 } from "../../api/ordersApi.ts";
 import {useGetAddressesQuery} from "../../api/api.ts";
@@ -33,7 +33,7 @@ import {useBackButton} from "../../hooks/useTelegram.tsx";
 
 export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const {t} = useTranslation();
-    const [patchOrder] = usePatchOrderMutation();
+    const [patchOrder] = (isAdmin ? usePatchAdminOrderMutation : usePatchOrderMutation)();
     const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
     const navigate = useNavigate()
     useBackButton(() => navigate(RoutePaths.Order.List));

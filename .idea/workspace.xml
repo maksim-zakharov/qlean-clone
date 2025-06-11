@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="закругление полоски в табах">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Просмотр заявки админом">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
@@ -176,15 +177,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="87641000" />
-    </task>
-    <task id="LOCAL-00420" summary="Логин админом">
-      <option name="closed" value="true" />
-      <created>1748687476490</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1748687476490</updated>
+      <workItem from="1748586159111" duration="88241000" />
     </task>
     <task id="LOCAL-00421" summary="Логин админом">
       <option name="closed" value="true" />
@@ -570,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749639492589</updated>
     </task>
-    <option name="localTasksCounter" value="469" />
+    <task id="LOCAL-00469" summary="Просмотр заявки админом">
+      <option name="closed" value="true" />
+      <created>1749639833861</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1749639833861</updated>
+    </task>
+    <option name="localTasksCounter" value="470" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +594,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Исполнитель видит заявки либо в статусе todo либо там где он откликнулся" />
     <MESSAGE value="TelegramProvider" />
     <MESSAGE value="useBackButton" />
     <MESSAGE value="кнопка &quot;Назад&quot; вроде ок работает с календарем" />
@@ -618,7 +618,8 @@
     <MESSAGE value="убрал жирный текст" />
     <MESSAGE value="цвет меню" />
     <MESSAGE value="закругление полоски в табах" />
-    <option name="LAST_COMMIT_MESSAGE" value="закругление полоски в табах" />
+    <MESSAGE value="Просмотр заявки админом" />
+    <option name="LAST_COMMIT_MESSAGE" value="Просмотр заявки админом" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

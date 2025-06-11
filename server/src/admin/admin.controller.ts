@@ -5,6 +5,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -20,6 +21,7 @@ import {
   BaseService,
   BonusOperation,
   BonusOperationType,
+  Order,
   ServiceOption,
   ServiceVariant,
 } from '@prisma/client';
@@ -94,6 +96,20 @@ export class AdminController {
     return this.orderService
       .getAdminById(Number(id))
       .then((o) => plainToInstance(OrderDTO, o));
+  }
+
+  @Put('orders/:id')
+  editOrder(@Param('id') id: number, @Body() body: Order): any {
+    return this.orderService.updateAdmin(body);
+  }
+
+  @Patch('orders/:id')
+  async patchOrder(@Param('id') id: number, @Body() body: Order) {
+    const item = await this.orderService.getAdminById(Number(id));
+
+    Object.assign(item, body);
+
+    return this.orderService.updateAdmin(item);
   }
 
   @Get('users')

@@ -232,6 +232,36 @@ export class OrdersService {
     });
   }
 
+  async updateAdmin(data: any): Promise<Order> {
+    // Проверка что дата заказа позже текущего времени
+    // this.validateOrderDate(data.date);
+    try {
+      return this.prisma.order.update({
+        where: { id: data.id },
+        data: {
+          startedAt: data.startedAt,
+          completedAt: data.completedAt,
+          baseServiceId: data.baseService.id,
+          executorId: data.executorId,
+          status: data.status,
+          userId: data.userId,
+          date: new Date(data.date),
+          fullAddress: data.fullAddress,
+          serviceVariantId: data.serviceVariant.id,
+          comment: data.comment,
+          options: {
+            set: data.options.map(({ id }) => ({ id })),
+          },
+        },
+        include: {
+          options: true, // Чтобы получить связанные опции в ответе
+        },
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to update order');
+    }
+  }
+
   async update(data: any): Promise<Order> {
     // Проверка что дата заказа позже текущего времени
     this.validateOrderDate(data.date);
