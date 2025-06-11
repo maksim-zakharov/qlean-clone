@@ -45,13 +45,16 @@ export class ServicesService {
   }
 
   async create(
-    data: BaseService & { options: ServiceOption[] },
+    data: BaseService & { options: ServiceOption[]; variants: any[] },
   ): Promise<BaseService> {
     return this.prisma.baseService.create({
       data: {
         name: data.name,
         options: {
           create: data.options.map(({ id, ...o }) => o),
+        },
+        variants: {
+          create: data.variants.map(({ id, ...o }) => o),
         },
       },
       include: {

@@ -68,7 +68,8 @@ export class AdminController {
   @Post('services')
   @UseGuards(AuthGuard('jwt'))
   async addService(
-    @Body() service: BaseService & { options: ServiceOption[] },
+    @Body()
+    service: BaseService & { options: ServiceOption[]; variants: any[] },
   ) {
     return this.serviceService.create(service);
   }
