@@ -71,7 +71,7 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const handleAddOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         dispatch(selectBaseService(order))
-        navigate(RoutePaths.Order.Create)
+        navigate(isAdmin ? RoutePaths.Admin.Order.Create : RoutePaths.Order.Create)
     }
 
     const handleOkClick = () => {

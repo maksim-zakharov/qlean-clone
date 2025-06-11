@@ -11,7 +11,7 @@ import {BottomActions} from "../../components/BottomActions.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Badge} from "../../components/ui/badge.tsx";
 import {moneyFormat} from "../../lib/utils.ts";
-import {usePatchOrderMutation} from "../../api/ordersApi.ts";
+import {usePatchAdminOrderMutation, usePatchOrderMutation} from "../../api/ordersApi.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {clearState, selectBaseService, selectOptions, selectVariant} from "../../slices/createOrderSlice.ts";
 import {RoutePaths} from "../../routes.ts";
@@ -20,7 +20,7 @@ import {useTranslation} from "react-i18next";
 
 export const OrderCreationPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     const {t} = useTranslation();
-    const [patchOrder, {isLoading: patchOrderLoading}] = usePatchOrderMutation();
+    const [patchOrder, {isLoading: patchOrderLoading}] = (isAdmin ? usePatchAdminOrderMutation : usePatchOrderMutation)();
     const services = useSelector(state => state.createOrder.services);
     const orderId = useSelector(state => state.createOrder.id)
     const baseService = useSelector(state => state.createOrder.baseService)
