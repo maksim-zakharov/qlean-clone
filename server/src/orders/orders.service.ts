@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Order, OrderStatus, User } from '@prisma/client';
+import { BaseService, Order, OrderStatus, User } from '@prisma/client';
 import { BusinessException } from '../common/exceptions/business.exception';
 import { CreateOrderDto } from './dto/create-order.dto';
 
@@ -195,6 +195,49 @@ export class OrdersService {
     } catch (error) {
       throw new InternalServerErrorException('Failed to create order');
     }
+  }
+
+  async restore(id: Order['id']) {
+    return this.prisma.order.update({
+      data: {
+        status: OrderStatus.todo,
+      },
+      where: { id },
+    });
+  }
+
+  async cancelAdmin(id: string) {
+    return this.prisma.$transaction(async (tx) => {
+      const order = await tx.order.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      if (!order) throw new NotFoundException('Order not found');
+
+      order.status = OrderStatus.canceled;
+
+      const canceled = await this.prisma.order.update({
+        where: { id: Number(id) },
+        data: order,
+        include: {
+          options: true, // Чтобы получить связанные опции в ответе
+        },
+      });
+
+      if (order.bonus) {
+        await tx.bonusOperation.create({
+          data: {
+            userId: order.userId,
+            type: 'ORDER',
+            value: order.bonus,
+          },
+        });
+      }
+
+      return canceled;
+    });
   }
 
   async cancel(userId: Order['userId'], id: string) {

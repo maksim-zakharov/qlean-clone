@@ -148,6 +148,22 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: ['Order'],
         }),
+        cancelAdminOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `admin/orders/${params.id}/cancel`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
+        restoreAdminOrder: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `admin/orders/${params.id}`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Order'],
+        }),
         addOrder: builder.mutation<any, any>({
             query: (params) => ({
                 url: "/orders",
@@ -259,5 +275,7 @@ export const {
     useEditAdminServiceByIdMutation,
     useGetAdminOrderByIdQuery,
     useEditAdminOrderMutation,
-    usePatchAdminOrderMutation
+    usePatchAdminOrderMutation,
+    useCancelAdminOrderMutation,
+    useRestoreAdminOrderMutation
 } = ordersApi;

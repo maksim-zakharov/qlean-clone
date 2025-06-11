@@ -3,10 +3,13 @@ import {Typography} from "../../components/ui/Typography.tsx";
 import React, {FC, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {
+    useCancelAdminOrderMutation,
     useCancelOrderMutation,
     useGetAdminOrderByIdQuery,
-    useGetOrderByIdQuery, usePatchAdminOrderMutation,
-    usePatchOrderMutation
+    useGetOrderByIdQuery,
+    usePatchAdminOrderMutation,
+    usePatchOrderMutation,
+    useRestoreAdminOrderMutation
 } from "../../api/ordersApi.ts";
 import {useGetAddressesQuery} from "../../api/api.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../../components/ui/accordion.tsx";
@@ -14,7 +17,7 @@ import {moneyFormat} from "../../lib/utils.ts";
 import dayjs from "dayjs";
 import {Button} from "../../components/ui/button.tsx";
 import {Card} from "../../components/ui/card.tsx";
-import { User} from "lucide-react";
+import {User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
@@ -31,22 +34,39 @@ import {ErrorState} from "../../components/ErrorState.tsx";
 import {OrderStatusText} from "../../components/OrderStatusText.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 
-export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
+export const OrderDetailsPage: FC<{ isAdmin?: boolean }> = ({isAdmin}) => {
     const {t} = useTranslation();
+    const [restore, {isLoading: restoreLoading}] = useRestoreAdminOrderMutation();
     const [patchOrder] = (isAdmin ? usePatchAdminOrderMutation : usePatchOrderMutation)();
-    const [cancelOrder, {isLoading: cancelLoading}] = useCancelOrderMutation();
+    const [cancelOrder, {isLoading: cancelLoading}] = (isAdmin ? useCancelAdminOrderMutation : useCancelOrderMutation)();
     const navigate = useNavigate()
     useBackButton(() => navigate(RoutePaths.Order.List));
     const dispatch = useDispatch();
     const {data: addresses = []} = useGetAddressesQuery();
     const {id} = useParams<string>();
-    const func = isAdmin ? useGetAdminOrderByIdQuery : useGetOrderByIdQuery;
-    const {data: order, isLoading, isError} = func({id: id!});
+    const {data: order, isLoading, isError} = (isAdmin ? useGetAdminOrderByIdQuery : useGetOrderByIdQuery)({id: id!});
     const [{title, description, show}, setAlertConfig] = useState({
         title: '',
         description: '',
         show: false
     })
+
+
+    const handleRestoreClick = () => {
+        Telegram.WebApp.showPopup({
+            title: `Are you sure you want to restore order?`,
+            message: 'The order will be visible to user',
+            buttons: [{
+                id: 'ok',
+                text: 'Restore',
+                type: 'destructive'
+            }, {
+                id: 'cancel',
+                text: 'Cancel',
+                type: 'default'
+            }]
+        }, id => id === 'ok' && restore({id: order?.id}).unwrap())
+    }
 
     const canEdit = isAdmin || Boolean(order?.status) && ['todo'].includes(order?.status);
 
@@ -93,7 +113,7 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                 id: 'ok',
                 text: t('client_order_details_reschedule_ok_btn'),
                 type: 'default'
-            },{
+            }, {
                 id: 'cancel',
                 text: t('client_order_details_reschedule_cancel_btn'),
                 type: 'destructive'
@@ -102,9 +122,9 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
     }
 
     const executorName = useMemo(() => {
-        if(order?.executor){
+        if (order?.executor) {
             let name = order?.executor?.firstName;
-            if(order?.executor?.lastName){
+            if (order?.executor?.lastName) {
                 name += ` ${order?.executor?.lastName[0]}.`
             }
             return name;
@@ -225,7 +245,8 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
                 <AccordionItem value="services">
                     <AccordionTrigger disabled>
                         <div className="flex justify-between w-full">
-                            <span className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
+                            <span
+                                className="text-lg font-medium text-tg-theme-text-color">{t('client_order_details_services_summary')}</span>
                             <div className="flex items-center gap-1">
                                         <span
                                             className="text-lg font-medium text-tg-theme-text-color">{moneyFormat(totalWithBonus)}</span>
@@ -257,22 +278,32 @@ export const OrderDetailsPage: FC<{isAdmin?: boolean}> = ({isAdmin}) => {
         {canEdit && <>
             <BottomActions
                 className="flex flex-col gap-2 [min-height:calc(58px+var(--tg-safe-area-inset-bottom))] [padding-bottom:var(--tg-safe-area-inset-bottom)]">
-                <Button
+                {order.status !== 'canceled' && <>
+                    <Button
+                        wide
+                        size="lg"
+                        onClick={handleAddOptionClick}
+                    >
+                        {t('client_order_details_add_option_btn')}
+                    </Button>
+                    <Button
+                        wide
+                        size="lg"
+                        className="border-none"
+                        variant="default"
+                        onClick={handleCloseClick}
+                    >
+                        {t('client_order_details_cancel_btn')}
+                    </Button>
+                </>}
+                {order.status === 'canceled' && <Button
                     wide
                     size="lg"
-                    onClick={handleAddOptionClick}
+                    loading={restoreLoading}
+                    onClick={handleRestoreClick}
                 >
-                    {t('client_order_details_add_option_btn')}
-                </Button>
-                <Button
-                    wide
-                    size="lg"
-                    className="border-none"
-                    variant="default"
-                    onClick={handleCloseClick}
-                >
-                    {t('client_order_details_cancel_btn')}
-                </Button>
+                    Restore
+                </Button>}
             </BottomActions>
         </>
         }

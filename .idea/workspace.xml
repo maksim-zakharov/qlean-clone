@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Просмотр заявки админом">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Опции редактируются админом в заказе">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/OrderDetailsPage.tsx" afterDir="false" />
@@ -177,23 +177,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="88241000" />
-    </task>
-    <task id="LOCAL-00421" summary="Логин админом">
-      <option name="closed" value="true" />
-      <created>1748689293684</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1748689293684</updated>
-    </task>
-    <task id="LOCAL-00422" summary="Логин админом">
-      <option name="closed" value="true" />
-      <created>1748691774864</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1748691774864</updated>
+      <workItem from="1748586159111" duration="89306000" />
     </task>
     <task id="LOCAL-00423" summary="handleShareButtonClick">
       <option name="closed" value="true" />
@@ -571,7 +555,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749639833861</updated>
     </task>
-    <option name="localTasksCounter" value="470" />
+    <task id="LOCAL-00470" summary="Редактирование заказа админом">
+      <option name="closed" value="true" />
+      <created>1749640367869</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1749640367869</updated>
+    </task>
+    <task id="LOCAL-00471" summary="Опции редактируются админом в заказе">
+      <option name="closed" value="true" />
+      <created>1749640542186</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1749640542186</updated>
+    </task>
+    <option name="localTasksCounter" value="472" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,8 +594,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="TelegramProvider" />
-    <MESSAGE value="useBackButton" />
     <MESSAGE value="кнопка &quot;Назад&quot; вроде ок работает с календарем" />
     <MESSAGE value="Добавил экраны ошибок" />
     <MESSAGE value="Заголовки" />
@@ -619,7 +617,9 @@
     <MESSAGE value="цвет меню" />
     <MESSAGE value="закругление полоски в табах" />
     <MESSAGE value="Просмотр заявки админом" />
-    <option name="LAST_COMMIT_MESSAGE" value="Просмотр заявки админом" />
+    <MESSAGE value="Редактирование заказа админом" />
+    <MESSAGE value="Опции редактируются админом в заказе" />
+    <option name="LAST_COMMIT_MESSAGE" value="Опции редактируются админом в заказе" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

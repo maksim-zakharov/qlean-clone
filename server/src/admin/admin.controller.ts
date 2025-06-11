@@ -112,6 +112,16 @@ export class AdminController {
     return this.orderService.updateAdmin(item);
   }
 
+  @Post('orders/:id/cancel')
+  async cancelOrder(@Param('id') id: string) {
+    return this.orderService.cancelAdmin(id);
+  }
+
+  @Post('orders/:id')
+  restoreOrder(@Param('id') id: number): any {
+    return this.orderService.restore(Number(id));
+  }
+
   @Get('users')
   @UseGuards(AuthGuard('jwt'))
   async getUsers() {
