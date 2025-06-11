@@ -14,7 +14,7 @@ export const ProfileSection = ({user}) => {
             <div>
                 {user?.firstName} {user?.lastName}
             </div>
-            <Typography.Description className="text-xl font-normal">id: {user?.id} • @{user?.username}</Typography.Description>
+            <Typography.Description className="text-lg font-normal">id: {user?.id} • @{user?.username}</Typography.Description>
         </div>
     </Typography.H2>
 }

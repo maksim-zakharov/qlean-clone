@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="restore service">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminEditServicePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,15 +173,7 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="81113000" />
-    </task>
-    <task id="LOCAL-00414" summary="Добавил экраны ошибок">
-      <option name="closed" value="true" />
-      <created>1746610374195</created>
-      <option name="number" value="00414" />
-      <option name="presentableId" value="LOCAL-00414" />
-      <option name="project" value="LOCAL" />
-      <updated>1746610374195</updated>
+      <workItem from="1748586159111" duration="85322000" />
     </task>
     <task id="LOCAL-00415" summary="Заголовки">
       <option name="closed" value="true" />
@@ -568,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749476508674</updated>
     </task>
-    <option name="localTasksCounter" value="463" />
+    <task id="LOCAL-00463" summary="restore service">
+      <option name="closed" value="true" />
+      <created>1749477111860</created>
+      <option name="number" value="00463" />
+      <option name="presentableId" value="LOCAL-00463" />
+      <option name="project" value="LOCAL" />
+      <updated>1749477111860</updated>
+    </task>
+    <option name="localTasksCounter" value="464" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

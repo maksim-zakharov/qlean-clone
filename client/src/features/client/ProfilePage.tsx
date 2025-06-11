@@ -127,7 +127,7 @@ export const ProfilePage = () => {
         {/*    </Button>*/}
         {/*</Header>*/}
         <ProfileSection user={userInfo}/>
-        <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0">
+        <div className="flex flex-col content text-center p-4 gap-6 pb-6 w-full pt-0 mt-6">
             <ListButtonGroup>
                 <ListButton icon={<Phone className="p-1 w-7 h-7 bg-[var(--tg-accent-green)] rounded-md"/>}
                             text={<div className="flex flex-col text-left">
