@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Восстановление заявки админом">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Варианты создаются">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,33 +50,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.main.ts.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "D:/Projects/qlean-clone/client/src/features/admin",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.build:ci (1).executor": "Run",
-    "npm.build:ci.executor": "Run",
-    "npm.client:dev.executor": "Run",
-    "npm.dev-host.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.server:dev.executor": "Run",
-    "npm.start:dev.executor": "Debug",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.main.ts.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/qlean-clone/client/src/features/admin&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:ci (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:ci.executor&quot;: &quot;Run&quot;,
+    &quot;npm.client:dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev-host.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.server:dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start:dev.executor&quot;: &quot;Debug&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\qlean-clone\client\src\features\admin" />
@@ -93,7 +93,7 @@
       <recent name="D:\Projects\qlean-clone\client\public\locales\en" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.server:dev">
+  <component name="RunManager" selected="npm.client:dev">
     <configuration name="Debug Server" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="src/main.ts" working-dir="$PROJECT_DIR$/server">
       <method v="2" />
     </configuration>
@@ -146,8 +146,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.server:dev" />
         <item itemvalue="npm.client:dev" />
+        <item itemvalue="npm.server:dev" />
         <item itemvalue="npm.build:ci" />
       </list>
     </recent_temporary>
@@ -174,23 +174,9 @@
       <workItem from="1744198594823" duration="30988000" />
       <workItem from="1745737178173" duration="19299000" />
       <workItem from="1747195805942" duration="12318000" />
-      <workItem from="1748586159111" duration="90039000" />
-    </task>
-    <task id="LOCAL-00424" summary="handleShareButtonClick">
-      <option name="closed" value="true" />
-      <created>1748886144092</created>
-      <option name="number" value="00424" />
-      <option name="presentableId" value="LOCAL-00424" />
-      <option name="project" value="LOCAL" />
-      <updated>1748886144092</updated>
-    </task>
-    <task id="LOCAL-00425" summary="refId">
-      <option name="closed" value="true" />
-      <created>1748887761587</created>
-      <option name="number" value="00425" />
-      <option name="presentableId" value="LOCAL-00425" />
-      <option name="project" value="LOCAL" />
-      <updated>1748887761587</updated>
+      <workItem from="1748586159111" duration="91987000" />
+      <workItem from="1749718083720" duration="594000" />
+      <workItem from="1749830169106" duration="2423000" />
     </task>
     <task id="LOCAL-00426" summary="qrCode">
       <option name="closed" value="true" />
@@ -568,7 +554,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749641485935</updated>
     </task>
-    <option name="localTasksCounter" value="473" />
+    <task id="LOCAL-00473" summary="Создание и редактирование сервиса">
+      <option name="closed" value="true" />
+      <created>1749642255533</created>
+      <option name="number" value="00473" />
+      <option name="presentableId" value="LOCAL-00473" />
+      <option name="project" value="LOCAL" />
+      <updated>1749642255533</updated>
+    </task>
+    <task id="LOCAL-00474" summary="Варианты создаются">
+      <option name="closed" value="true" />
+      <created>1749642458633</created>
+      <option name="number" value="00474" />
+      <option name="presentableId" value="LOCAL-00474" />
+      <option name="project" value="LOCAL" />
+      <updated>1749642458633</updated>
+    </task>
+    <option name="localTasksCounter" value="475" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,8 +593,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Добавил экраны ошибок" />
-    <MESSAGE value="Заголовки" />
     <MESSAGE value="Telegram.WebApp.showPopup" />
     <MESSAGE value="isAdmin true" />
     <MESSAGE value="Логин админом" />
@@ -616,7 +616,9 @@
     <MESSAGE value="Редактирование заказа админом" />
     <MESSAGE value="Опции редактируются админом в заказе" />
     <MESSAGE value="Восстановление заявки админом" />
-    <option name="LAST_COMMIT_MESSAGE" value="Восстановление заявки админом" />
+    <MESSAGE value="Создание и редактирование сервиса" />
+    <MESSAGE value="Варианты создаются" />
+    <option name="LAST_COMMIT_MESSAGE" value="Варианты создаются" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

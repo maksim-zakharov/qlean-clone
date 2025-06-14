@@ -1,8 +1,8 @@
 import {Typography} from "./ui/Typography.tsx";
 import {moneyFormat} from "../lib/utils.ts";
-import React, {FC, useMemo} from "react";
+import React, {FC, useMemo, useState} from "react";
 import {Card} from "./ui/card.tsx";
-import {CalendarCheck, Plus} from "lucide-react";
+import {CalendarCheck, Minus, Plus} from "lucide-react";
 import {Button} from "./ui/button.tsx";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "./ui/sheet.tsx";
 import {BottomActions} from "./BottomActions.tsx";
@@ -15,6 +15,7 @@ export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string
     const total = useMemo(() => bonuses.reduce((acc, curr) => acc + curr.value, 0), [bonuses]);
 
     const [addBonus, {isLoading}] = useAddBonusMutation();
+    const [bonusCount, setBonusCount] = useState(50);
 
     const {vibro} = useTelegram();
 
@@ -28,7 +29,7 @@ export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string
     const handleOnClick = async () => {
         await addBonus({
             id: userId,
-            value: 300
+            value: bonusCount
         }).unwrap();
         setOpened(false)
         toast('Bonuses was added', {
@@ -53,11 +54,17 @@ export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string
                     <SheetTitle
                         className="text-xl font-bold text-tg-theme-text-color text-left">Add bonuses</SheetTitle>
                 </SheetHeader>
+                <div className="flex justify-between my-20">
+                    <Button variant="ghost" className="text-tg-theme-hint-color h-[16px]" onClick={() => setBonusCount(prevState => prevState >= 50 ? prevState-=50 : prevState)}><Minus className="h-4 w-4" /></Button>
+                    <Typography.H2 className="text-5xl text-center">{bonusCount}</Typography.H2>
+                    <Button variant="ghost" className="text-tg-theme-hint-color h-[16px]" onClick={() => setBonusCount(prevState => prevState+=50)}><Plus className="h-4 w-4" /></Button>
+                </div>
                 <BottomActions className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)] relative">
                     <Button
                         wide
                         size="lg"
                         loading={isLoading}
+                        disabled={!bonusCount}
                         onClick={handleOnClick}
                     >
                         <Plus className="w-5 h-5 mr-2" />Add
