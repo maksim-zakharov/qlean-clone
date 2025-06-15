@@ -27,7 +27,7 @@ import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
 import {ProfileApplicationCard} from "../../components/ProfileApplicationCard.tsx";
-import {ProfileSection} from "../../components/ProfileSection.tsx";
+import {ProfileSection, ProfileSkeleton} from "../../components/ProfileSection.tsx";
 
 export const ProfilePage = () => {
     const {t} = useTranslation();
@@ -97,13 +97,7 @@ export const ProfilePage = () => {
 
     if (applicationLoading || isLoading) {
         return <div className="flex flex-col gap-6 p-4">
-            <div className="flex flex-col gap-4">
-                <Skeleton className="size-24 m-auto rounded-full"/>
-                <div className="text-center m-auto gap-2 flex flex-col">
-                    <Skeleton className="w-[200px] h-[28px]"/>
-                    <Skeleton className="w-[120px] m-auto h-[20px] py-2"/>
-                </div>
-            </div>
+            <ProfileSkeleton/>
             <Skeleton className="w-full h-[112px]"/>
             <Skeleton className="w-full h-[44px]"/>
             <Skeleton className="w-full h-[44px]"/>

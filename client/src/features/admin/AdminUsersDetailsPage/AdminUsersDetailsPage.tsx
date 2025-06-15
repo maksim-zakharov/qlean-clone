@@ -15,7 +15,7 @@ import {AdminOrdersList} from "../../../components/AdminOrdersList.tsx";
 import {AdminApplicationTab} from "./AdminApplicationTab.tsx";
 import {InvitesList} from "../../../components/InvitesList.tsx";
 import {BonusTotal} from "../../../components/BonusTotal.tsx";
-import {ProfileSection} from "../../../components/ProfileSection.tsx";
+import {ProfileSection, ProfileSkeleton} from "../../../components/ProfileSection.tsx";
 
 export const AdminUsersDetailsPage: FC = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Users.List));
@@ -56,8 +56,8 @@ export const AdminUsersDetailsPage: FC = () => {
     const {data: orders, isLoading: isLoadingOrders} = useGetAdminOrdersByUserIdQuery({id: id!})
 
     if (isLoading || !user) {
-        return <div className="px-4 py-2 mt-[56px] flex flex-col gap-2">
-            <Skeleton className="rounded-full size-20 m-auto mb-2"/>
+        return <div className="flex flex-col gap-1 bg-inherit p-4 mt-2">
+            <ProfileSkeleton/>
             <Skeleton className="w-full h-[64px]"/>
             <Skeleton className="w-full h-[52px]"/>
         </div>

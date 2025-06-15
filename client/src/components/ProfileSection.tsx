@@ -2,6 +2,16 @@ import {Avatar, AvatarFallback, AvatarImage} from "./ui/avatar.tsx";
 import {User} from "lucide-react";
 import {Typography} from "./ui/Typography.tsx";
 import React from "react";
+import {Skeleton} from "./ui/skeleton.tsx";
+
+
+export const ProfileSkeleton = () => <div className="flex flex-col gap-4">
+    <Skeleton className="size-24 m-auto rounded-full"/>
+    <div className="text-center m-auto gap-2 flex flex-col">
+        <Skeleton className="w-[200px] h-[28px]"/>
+        <Skeleton className="w-[120px] m-auto h-[20px] py-2"/>
+    </div>
+</div>
 
 export const ProfileSection = ({user}) => {
 
@@ -14,7 +24,8 @@ export const ProfileSection = ({user}) => {
             <div>
                 {user?.firstName} {user?.lastName}
             </div>
-            <Typography.Description className="text-lg font-normal">id: {user?.id} • @{user?.username}</Typography.Description>
+            <Typography.Description className="text-lg font-normal">id: {user?.id} •
+                @{user?.username}</Typography.Description>
         </div>
     </Typography.H2>
 }
