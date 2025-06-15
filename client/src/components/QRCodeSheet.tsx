@@ -5,6 +5,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../com
 import {QRCodeSVG} from "qrcode.react";
 import {Share} from "lucide-react";
 import {Typography} from "./ui/Typography.tsx";
+import {SafeAreaBottom} from "./SafeAreaBottom.tsx";
 
 export const QRCodeSheet = ({children, url, onClick}) => {
 
@@ -39,7 +40,7 @@ export const QRCodeSheet = ({children, url, onClick}) => {
                         includeMargin={true}
                     />
                 </div>
-                <div className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)] relative">
+                <SafeAreaBottom>
                     <Button
                         wide
                         size="lg"
@@ -47,7 +48,7 @@ export const QRCodeSheet = ({children, url, onClick}) => {
                     >
                         <Share className="w-5 h-5 mr-2" />Share
                     </Button>
-                </div>
+                </SafeAreaBottom>
             </SheetContent>
         </Sheet>
     )

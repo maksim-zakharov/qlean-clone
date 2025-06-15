@@ -6,6 +6,7 @@ import {useAddAddressMutation, useDeleteAddressMutation, useEditAddressMutation}
 import {InputWithLabel} from "./InputWithLabel.tsx";
 import { MapPlus, Trash2} from "lucide-react";
 import {useGetReverseMutation} from "../api/openstreetmap.api.ts";
+import {SafeAreaBottom} from "./SafeAreaBottom.tsx";
 
 
 
@@ -108,7 +109,7 @@ export function AddAddressSheet({
                                         comments: e.target.value
                                     }))}/>
                 </div>
-                <div className="flex flex-col flex-1">
+                <SafeAreaBottom>
                     <Button
                         wide
                         size="lg"
@@ -117,7 +118,7 @@ export function AddAddressSheet({
                     >
                         Save
                     </Button>
-                </div>
+                </SafeAreaBottom>
             </SheetContent>
         </Sheet>
     )

@@ -60,8 +60,8 @@ export function AddressSheet({
                 {isError && <ErrorState/>}
                 {!isError && addresses.length === 0 && <EmptyState
                     icon={<Map className="h-10 w-10"/>}
-                    title="Нет адресов"
-                    description="Добавьте адрес для оформления заказов"
+                    title="No addresses"
+                    description="Add an address to place orders"
                     action={<AddAddressSheet address={editedAddress} onChangeAddress={setEditedAddress}>
                         <Button
                         >
