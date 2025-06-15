@@ -5,10 +5,10 @@ import {Card} from "./ui/card.tsx";
 import {CalendarCheck, Minus, Plus} from "lucide-react";
 import {Button} from "./ui/button.tsx";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "./ui/sheet.tsx";
-import {BottomActions} from "./BottomActions.tsx";
 import {useTelegram} from "../hooks/useTelegram.tsx";
 import {useAddBonusMutation} from "../api/ordersApi.ts";
 import {toast} from "sonner";
+import {SafeAreaBottom} from "./SafeAreaBottom.tsx";
 
 export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string }> = ({bonuses, isAdmin, userId}) => {
 
@@ -63,7 +63,7 @@ export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string
                             onClick={() => setBonusCount(prevState => prevState += 50)}><Plus
                         className="h-4 w-4"/></Button>
                 </div>
-                <BottomActions className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)] relative">
+                <SafeAreaBottom>
                     <Button
                         wide
                         size="lg"
@@ -73,7 +73,7 @@ export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string
                     >
                         <Plus className="w-5 h-5 mr-2"/>Add
                     </Button>
-                </BottomActions>
+                </SafeAreaBottom>
             </SheetContent>
         </Sheet>}
     </Card>

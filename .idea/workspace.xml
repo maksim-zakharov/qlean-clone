@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Варианты создаются">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="SafeAreaBottom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddAddressSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AddressSheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SafeAreaBottom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SafeAreaBottom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,15 +178,7 @@
       <workItem from="1747195805942" duration="12318000" />
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
-      <workItem from="1749830169106" duration="11860000" />
-    </task>
-    <task id="LOCAL-00431" summary="AdminUserDetails">
-      <option name="closed" value="true" />
-      <created>1749057732565</created>
-      <option name="number" value="00431" />
-      <option name="presentableId" value="LOCAL-00431" />
-      <option name="project" value="LOCAL" />
-      <updated>1749057732565</updated>
+      <workItem from="1749830169106" duration="13851000" />
     </task>
     <task id="LOCAL-00432" summary="AdminUserDetails">
       <option name="closed" value="true" />
@@ -571,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749988150442</updated>
     </task>
-    <option name="localTasksCounter" value="480" />
+    <task id="LOCAL-00480" summary="SafeAreaBottom">
+      <option name="closed" value="true" />
+      <created>1749991292934</created>
+      <option name="number" value="00480" />
+      <option name="presentableId" value="LOCAL-00480" />
+      <option name="project" value="LOCAL" />
+      <updated>1749991292934</updated>
+    </task>
+    <option name="localTasksCounter" value="481" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +595,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Telegram.WebApp.showPopup" />
     <MESSAGE value="isAdmin true" />
     <MESSAGE value="Логин админом" />
     <MESSAGE value="handleShareButtonClick" />
@@ -619,7 +619,8 @@
     <MESSAGE value="Восстановление заявки админом" />
     <MESSAGE value="Создание и редактирование сервиса" />
     <MESSAGE value="Варианты создаются" />
-    <option name="LAST_COMMIT_MESSAGE" value="Варианты создаются" />
+    <MESSAGE value="SafeAreaBottom" />
+    <option name="LAST_COMMIT_MESSAGE" value="SafeAreaBottom" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

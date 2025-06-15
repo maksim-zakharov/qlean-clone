@@ -202,7 +202,7 @@ export const ProfilePage = () => {
                 {application?.status === 'APPROVED' && userInfo?.role == 'executor' && <ListButton onClick={handleLogin} extra={<ChevronRight
                     className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<BriefcaseBusiness
                     className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
-                                                                   text={`${t('login_as_btn')} Client'}`}/>}
+                                                                   text={`${t('login_as_btn')} Client`}/>}
                 {userInfo?.isAdmin && <ListButton onClick={handleAdminLogin} extra={<ChevronRight
                     className="w-5 h-5 text-tg-theme-hint-color mr-[-8px] opacity-50"/>} icon={<ShieldUser
                     className="mr-4 h-7 w-7 p-1 bg-[var(--tg-accent-red)] rounded-md"/>}
