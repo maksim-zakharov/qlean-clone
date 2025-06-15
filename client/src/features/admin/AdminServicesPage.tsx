@@ -2,7 +2,7 @@ import React, {useMemo, useState} from "react";
 import {Typography} from "../../components/ui/Typography.tsx";
 import {Card} from "../../components/ui/card.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {useGetAdminServicesQuery, useGetAdminVariantsQuery} from "../../api/ordersApi.ts";
+import {useGetAdminServicesQuery} from "../../api/ordersApi.ts";
 import {ClipboardPlus, Plus} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {Skeleton} from "../../components/ui/skeleton.tsx";
@@ -10,7 +10,6 @@ import {EmptyState} from "../../components/EmptyState.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
-import {Header} from "../../components/ui/Header.tsx";
 import {Input} from "../../components/ui/input.tsx";
 
 
@@ -19,10 +18,7 @@ export const AdminServicesPage = () => {
     const navigate = useNavigate()
 
     const [query, setQuery] = useState<string>('');
-    const {data: services = []} = useGetAdminServicesQuery(undefined, {
-        refetchOnMountOrArgChange: true
-    });
-    const {data: variants = [], isLoading, isError} = useGetAdminVariantsQuery(undefined, {
+    const {data: services = [], isLoading, isError} = useGetAdminServicesQuery(undefined, {
         refetchOnMountOrArgChange: true
     });
 
@@ -32,14 +28,20 @@ export const AdminServicesPage = () => {
 
     if (isLoading) {
         return <div className="px-4 mb-4">
-            <Header className="flex justify-center">
-                <Skeleton className="w-[100px] h-[28px]"/>
-            </Header>
             <div className="flex flex-col gap-4 mt-4">
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
+                <Skeleton className="w-full h-[40px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
+                <Skeleton className="w-full h-[48px]"/>
             </div>
         </div>
     }
@@ -48,7 +50,7 @@ export const AdminServicesPage = () => {
         return <ErrorState/>
     }
 
-    if (variants.length === 0) {
+    if (services.length === 0) {
         return <EmptyState
             icon={<ClipboardPlus className="h-10 w-10"/>}
             title={t('client_orders_empty_title')}
