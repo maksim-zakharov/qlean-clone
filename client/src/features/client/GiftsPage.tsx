@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import {useGetBonusesQuery} from "../../api/api.ts";
 import {QRCodeSheet} from "../../components/QRCodeSheet.tsx";
 import {InvitesList} from "../../components/InvitesList.tsx";
-import {BonusTotal} from "../../components/BonusTotal.tsx";
+import {BonusTotal, BonusTotalSkeleton} from "../../components/BonusTotal.tsx";
 
 export const GiftsPage = () => {
     const {t} = useTranslation();
@@ -29,6 +29,12 @@ export const GiftsPage = () => {
         } catch (error) {
             console.error('Ошибка:', error);
         }
+    }
+
+    if(isLoading){
+        return <div className="pt-[56px] px-4">
+            <BonusTotalSkeleton/>
+        </div>
     }
 
     return <>

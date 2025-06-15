@@ -9,6 +9,9 @@ import {useTelegram} from "../hooks/useTelegram.tsx";
 import {useAddBonusMutation} from "../api/ordersApi.ts";
 import {toast} from "sonner";
 import {SafeAreaBottom} from "./SafeAreaBottom.tsx";
+import {Skeleton} from "./ui/skeleton.tsx";
+
+export const BonusTotalSkeleton = () => <Skeleton className="rounded-xl w-full h-[84px]"/>
 
 export const BonusTotal: FC<{ bonuses: any[], isAdmin?: boolean, userId?: string }> = ({bonuses, isAdmin, userId}) => {
 

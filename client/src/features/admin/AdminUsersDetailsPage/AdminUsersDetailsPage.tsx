@@ -14,7 +14,7 @@ import {Tabs, TabsList, TabsTrigger} from "../../../components/ui/tabs.tsx";
 import {AdminOrdersList} from "../../../components/AdminOrdersList.tsx";
 import {AdminApplicationTab} from "./AdminApplicationTab.tsx";
 import {InvitesList} from "../../../components/InvitesList.tsx";
-import {BonusTotal} from "../../../components/BonusTotal.tsx";
+import {BonusTotal, BonusTotalSkeleton} from "../../../components/BonusTotal.tsx";
 import {ProfileSection, ProfileSkeleton} from "../../../components/ProfileSection.tsx";
 
 export const AdminUsersDetailsPage: FC = () => {
@@ -56,8 +56,11 @@ export const AdminUsersDetailsPage: FC = () => {
     const {data: orders, isLoading: isLoadingOrders} = useGetAdminOrdersByUserIdQuery({id: id!})
 
     if (isLoading || !user) {
-        return <div className="flex flex-col gap-1 bg-inherit p-4 mt-2">
-            <ProfileSkeleton/>
+        return <div className="flex flex-col bg-inherit overflow-y-auto overscroll-none h-screen pb-4 mt-4">
+            <div className="flex flex-col gap-5 bg-inherit px-4 py-2">
+                <ProfileSkeleton/>
+                <BonusTotalSkeleton/>
+            </div>
             <Skeleton className="w-full h-[64px]"/>
             <Skeleton className="w-full h-[52px]"/>
         </div>

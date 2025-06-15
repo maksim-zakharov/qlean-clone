@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Скелетон сервисов в админке">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="ProfileSkeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ProfileSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BonusTotal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/client/GiftsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +178,7 @@
       <workItem from="1747195805942" duration="12318000" />
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
-      <workItem from="1749830169106" duration="17056000" />
-    </task>
-    <task id="LOCAL-00434" summary="AdminUserDetails">
-      <option name="closed" value="true" />
-      <created>1749060879810</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1749060879810</updated>
+      <workItem from="1749830169106" duration="18659000" />
     </task>
     <task id="LOCAL-00435" summary="AdminUserDetails">
       <option name="closed" value="true" />
@@ -572,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750000948307</updated>
     </task>
-    <option name="localTasksCounter" value="483" />
+    <task id="LOCAL-00483" summary="ProfileSkeleton">
+      <option name="closed" value="true" />
+      <created>1750004559638</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1750004559638</updated>
+    </task>
+    <option name="localTasksCounter" value="484" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,7 +595,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Логин админом" />
     <MESSAGE value="handleShareButtonClick" />
     <MESSAGE value="refId" />
     <MESSAGE value="qrCode" />
@@ -620,7 +619,8 @@
     <MESSAGE value="Варианты создаются" />
     <MESSAGE value="SafeAreaBottom" />
     <MESSAGE value="Скелетон сервисов в админке" />
-    <option name="LAST_COMMIT_MESSAGE" value="Скелетон сервисов в админке" />
+    <MESSAGE value="ProfileSkeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="ProfileSkeleton" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
