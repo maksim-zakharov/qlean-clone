@@ -3,7 +3,6 @@ import React from "react";
 import {Button} from "./ui/button.tsx";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "../components/ui/sheet.tsx";
 import {QRCodeSVG} from "qrcode.react";
-import {BottomActions} from "./BottomActions.tsx";
 import {Share} from "lucide-react";
 import {Typography} from "./ui/Typography.tsx";
 
@@ -40,7 +39,7 @@ export const QRCodeSheet = ({children, url, onClick}) => {
                         includeMargin={true}
                     />
                 </div>
-                <BottomActions className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)] relative">
+                <div className="bg-inherit [padding-bottom:var(--tg-safe-area-inset-bottom)] relative">
                     <Button
                         wide
                         size="lg"
@@ -48,7 +47,7 @@ export const QRCodeSheet = ({children, url, onClick}) => {
                     >
                         <Share className="w-5 h-5 mr-2" />Share
                     </Button>
-                </BottomActions>
+                </div>
             </SheetContent>
         </Sheet>
     )

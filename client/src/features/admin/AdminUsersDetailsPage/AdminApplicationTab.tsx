@@ -12,11 +12,11 @@ export const AdminApplicationTab = ({application}) => {
 
     const handleApproveClick = async () => {
         Telegram.WebApp.showPopup({
-            title: `Согласование заявки`,
-            message: 'Вы уверены что хотите согласовать заявку?',
+            title: `Application approve`,
+            message: 'Are you sure you want to approve the application?',
             buttons: [{
                 id: 'ok',
-                text: 'Согласовать',
+                text: 'Approve',
                 type: 'default'
             }, {
                 id: 'cancel',
@@ -38,11 +38,11 @@ export const AdminApplicationTab = ({application}) => {
 
     const handleRejectClick = async () => {
         Telegram.WebApp.showPopup({
-            title: `Отклонение заявки`,
-            message: 'Вы уверены что хотите отклонить заявку?',
+            title: `Application reject`,
+            message: 'Are you sure you want to reject the application?',
             buttons: [{
                 id: 'ok',
-                text: 'Отклонить',
+                text: 'Reject',
                 type: 'destructive'
             }, {
                 id: 'cancel',

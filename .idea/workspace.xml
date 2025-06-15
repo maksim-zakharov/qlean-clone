@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Варианты создаются">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/QRCodeSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/QRCodeSheet.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,15 +176,7 @@
       <workItem from="1747195805942" duration="12318000" />
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
-      <workItem from="1749830169106" duration="8566000" />
-    </task>
-    <task id="LOCAL-00429" summary="Список заявок, юзеров, одобрение отклонение заявки">
-      <option name="closed" value="true" />
-      <created>1748973016137</created>
-      <option name="number" value="00429" />
-      <option name="presentableId" value="LOCAL-00429" />
-      <option name="project" value="LOCAL" />
-      <updated>1748973016137</updated>
+      <workItem from="1749830169106" duration="10231000" />
     </task>
     <task id="LOCAL-00430" summary="AdminUserDetails">
       <option name="closed" value="true" />
@@ -569,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749980696478</updated>
     </task>
-    <option name="localTasksCounter" value="478" />
+    <task id="LOCAL-00478" summary="Варианты создаются">
+      <option name="closed" value="true" />
+      <created>1749983278169</created>
+      <option name="number" value="00478" />
+      <option name="presentableId" value="LOCAL-00478" />
+      <option name="project" value="LOCAL" />
+      <updated>1749983278169</updated>
+    </task>
+    <option name="localTasksCounter" value="479" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
