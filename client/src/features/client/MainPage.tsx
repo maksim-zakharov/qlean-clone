@@ -1,6 +1,6 @@
 
 import {useNavigate} from "react-router-dom"
-import React, {useEffect} from "react";
+import React, {useEffect, useMemo} from "react";
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 import {CardItem} from "../../components/CardItem.tsx";
 import {Typography} from "../../components/ui/Typography.tsx";
@@ -22,6 +22,8 @@ const MainPage = () => {
     const {data: services = [], isError} = useGetServicesQuery();
     const {data: addresses = []} = useGetAddressesQuery();
     const fullAddress = useSelector(state => state.createOrder.fullAddress)
+
+    const nonEmptyServices = useMemo(() => services.filter(service => service.variants.length > 0), [services]);
 
     const {hideBackButton} = useTelegram();
     useEffect(() => {
@@ -59,7 +61,7 @@ const MainPage = () => {
                 </div>
             </Header>
             <div className="px-4 pt-4">
-                {services.map(category => (
+                {nonEmptyServices.map(category => (
                     <section key={category.id} className="mb-4">
                         <Typography.H2>
                             {category.name}
