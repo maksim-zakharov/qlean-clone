@@ -23,6 +23,6 @@ export const ListButton: FC<IProps & React.ComponentProps<'div'>> = ({text, extr
 </Card>
 
 export const ListButtonGroup: FC = ({children}: React.ComponentProps<'div'>) => <div
-    className="[&>*:first-child]:rounded-b-none [&>*:not(:first-child):not(:last-child)]:rounded-none [&>*:last-child]:rounded-t-none ListButtonGroup">
+    className="[&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none ListButtonGroup">
     {children}
 </div>

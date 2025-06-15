@@ -70,7 +70,7 @@ export function AddressSheet({
                     </AddAddressSheet>}
                 />}
                 <ListButtonGroup>
-                    {addresses.map(adr => <ListButton className="flex w-full justify-between p-0"
+                    {addresses.map(adr => <ListButton className="flex w-full justify-between p-0 px-3"
                                                       extra={<EditButton onClick={(e) => handleOnEditAddress(e, adr)}/>}
                                                       text={<div className="flex flex-col">
                                                           <Typography.Title>{adr.name}</Typography.Title>
