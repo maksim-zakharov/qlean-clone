@@ -19,10 +19,11 @@ export const AdminOrdersList = ({orders, isLoading}) => {
     if (isLoading) {
         return <div className="px-4 mb-4">
             <div className="flex flex-col gap-4 mt-4">
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
-                <Skeleton className="w-full h-[144px]"/>
+                <Skeleton className="w-full h-[136px]"/>
+                <Skeleton className="w-full h-[136px]"/>
+                <Skeleton className="w-full h-[136px]"/>
+                <Skeleton className="w-full h-[136px]"/>
+                <Skeleton className="w-full h-[136px]"/>
             </div>
         </div>
     }
