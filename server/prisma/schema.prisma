@@ -204,21 +204,20 @@ enum MessageFrom {
 }
 
 model Chat {
-  id   Int  @id
+  id   String @id
   name String
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
 
   messages Message[]
 }
 
 model Message {
-  text   String
-  from   MessageFrom
-  id     Int  @id
-  date   Int
+  text String
+  from MessageFrom
+  id   Int         @id
+  date Int
 
   chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId Int
+  chatId String
 }

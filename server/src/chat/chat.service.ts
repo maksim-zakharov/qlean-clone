@@ -33,10 +33,10 @@ export class ChatService {
     });
   }
 
-  async deleteMessage(chatId: number, id: number) {
+  async deleteMessage(chatId: string, id: number) {
     const existChat = await this.prisma.chat.findUnique({
       where: {
-        id: Number(chatId),
+        id: chatId,
       },
       include: {
         messages: true,
@@ -68,7 +68,7 @@ export class ChatService {
   async sendMessage(message: Message.TextMessage) {
     const existChat = await this.prisma.chat.findUnique({
       where: {
-        id: message.chat.id,
+        id: message.chat.id.toString(),
       },
       include: {
         messages: true,
@@ -98,25 +98,45 @@ export class ChatService {
     const message = ctx.message;
     let existChat = await this.prisma.chat.findUnique({
       where: {
-        id: message.chat.id,
-        userId: message.chat.id.toString(),
+        id: message.chat.id.toString(),
       },
       include: {
         messages: true,
       },
     });
-    console.log(existChat);
+
     if (!existChat) {
-      existChat = await this.prisma.chat.create({
-        data: {
-          id: message.chat.id,
-          userId: message.chat.id.toString(),
-          name:
-            (message as any).chat.first_name + (message as any).chat.last_name,
-        },
-        include: {
-          messages: true,
-        },
+      await this.prisma.$transaction(async (tx) => {
+        let user = await tx.user.findUnique({
+          where: {
+            id: message.chat.id.toString(),
+          },
+        });
+
+        if (!user) {
+          user = await tx.user.create({
+            data: {
+              id: message.chat.id.toString(),
+              firstName: (message.chat as any).first_name,
+              lastName: (message.chat as any).last_name,
+              photoUrl: (message.chat as any).photo_url,
+              phone: (message.chat as any).phone_number,
+              username: (message.chat as any).username,
+            },
+          });
+        }
+
+        existChat = await tx.chat.create({
+          data: {
+            id: message.chat.id.toString(),
+            name:
+              (message as any).chat.first_name +
+              (message as any).chat.last_name,
+          },
+          include: {
+            messages: true,
+          },
+        });
       });
 
       await ctx.reply(

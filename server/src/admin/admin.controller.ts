@@ -193,7 +193,7 @@ export class AdminController {
   }
 
   @Get('chat/:id')
-  async getDialogById(@Param('id') id: number) {
-    return this.chatService.getChatById(Number(id));
+  async getDialogById(@Param('id') id: string) {
+    return this.chatService.getChatById(id);
   }
 }
