@@ -50,6 +50,7 @@ export const AdminChatDetailsPage = () => {
 
         newSocket.on('message', (data) => {
             const message = JSON.parse(data) as any;
+            console.log(data)
             setMessages(prevState => [...prevState, message]);
         });
 
@@ -74,7 +75,7 @@ export const AdminChatDetailsPage = () => {
         // await sendMessage({message});
         socket?.emit('message', {
             chatId: id,
-            from: 'support', text: message
+            text: message
         });
         // dialog.messages.push({from: 'support', text: message});
         setMessage('');

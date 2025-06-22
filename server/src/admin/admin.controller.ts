@@ -28,10 +28,12 @@ import {
 import { plainToInstance } from 'class-transformer';
 import { OrderDTO } from '../_dto/orders.dto';
 import { ChatService } from '../chat/chat.service';
+import { Telegraf } from 'telegraf';
 
 @Controller('/api/admin')
 export class AdminController {
   constructor(
+    private readonly bot: Telegraf,
     private readonly serviceService: ServicesService,
     private readonly orderService: OrdersService,
     private readonly userService: UserService,
@@ -192,11 +194,7 @@ export class AdminController {
 
   @Get('chat/:id')
   async getDialogById(@Param('id') id: string) {
-    const chat = this.chatService.chats.find((c) => c.id.toString() === id);
-    return {
-      ...chat,
-      messages: this.chatService.messages,
-    };
+    return this.chatService.chats.find((c) => c.id.toString() === id);
   }
 
   @Post('chat/:id')
@@ -204,6 +202,6 @@ export class AdminController {
     @Param('id') id: string,
     @Body() { message }: { message: string },
   ) {
-    return this.chatService.sendMessage(message);
+    return this.chatService.sendMessage(id, message);
   }
 }

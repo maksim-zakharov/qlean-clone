@@ -9,6 +9,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { ChatService } from './chat/chat.service';
+import { Telegraf } from 'telegraf';
 
 @WebSocketGateway({
   namespace: '/chat',
@@ -26,7 +27,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private clients: Map<Socket, { symbols: string[]; minAmount: number }> =
     new Map();
 
-  constructor(private readonly chatService: ChatService) {}
+  constructor(
+    private readonly bot: Telegraf,
+    private readonly chatService: ChatService,
+  ) {}
 
   handleConnection(client: Socket) {
     this.chatService.addClient(client);
@@ -40,18 +44,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('message')
-  handleOrderbookSubscribe(client: Socket, payload: any) {
+  async handleOrderbookSubscribe(client: Socket, payload: any) {
     this.chatService.addClient(client);
 
-    console.log(client.id, payload);
-    const newMessage = {
-      ...payload,
-      createdAt: new Date(),
-    };
-
-    this.chatService.messages.push(newMessage);
-    this.chatService.clients.forEach(
-      (client) => client?.connected && client.send(JSON.stringify(newMessage)),
-    );
+    await this.bot.telegram.sendMessage(payload.chatId, payload.text);
+    this.chatService.sendMessage(payload.chatId, payload.text);
   }
 }
