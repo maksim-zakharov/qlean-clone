@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import {List} from "../../components/ui/list.tsx";
 import {User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
@@ -6,15 +6,25 @@ import dayjs from "dayjs";
 import {useGetAdminChatsQuery} from "../../api/ordersApi.ts";
 import {RoutePaths} from "../../routes.ts";
 import {useNavigate} from "react-router-dom";
+import {Input} from "../../components/ui/input.tsx";
 
 export const AdminChatPage = () => {
     const navigate = useNavigate()
 
     const {data: dialogs = []} = useGetAdminChatsQuery();
 
+    const [search, setSearch] = useState<string>('');
+
+    const filteredChats = useMemo(() => dialogs.filter(d => !search || d.user.firstName.toLowerCase().includes(search.toLowerCase()) || (d.user.lastName && d.user.lastName.toLowerCase().includes(search.toLowerCase()))), [dialogs, search])
+
     return <>
+        <div className="p-4 px-2">
+            <Input value={search} onChange={e => setSearch(e.target.value)} className="border-none card-bg-color rounded-lg text-tg-theme-hint-color h-10 placeholder-[var(--tg-theme-hint-color)] text-center"
+                   placeholder="Search by name"/>
+        </div>
         <List itemClassName="flex gap-2 p-2 root-bg-color" className="rounded-none">
-            {dialogs.map((option) => <div className="flex gap-3 w-full" onClick={() => navigate(RoutePaths.Admin.Chat.Details(option.id))}>
+            {filteredChats.map((option) => <div className="flex gap-3 w-full"
+                                          onClick={() => navigate(RoutePaths.Admin.Chat.Details(option.id))}>
                 <Avatar className="size-[28px] h-[54px] w-[54px]">
                     <AvatarImage src={option?.user?.photoUrl}/>
                     <AvatarFallback><User/></AvatarFallback>
