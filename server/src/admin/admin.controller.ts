@@ -182,4 +182,150 @@ export class AdminController {
   async rejectApplication(@Param('id') id: number) {
     return this.applicationService.rejectApplication(id);
   }
+
+  chats = [
+    {
+      id: 1,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 2,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 3,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 4,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 5,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 6,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 7,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 8,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 9,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 10,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 11,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+    {
+      id: 12,
+      name: 'Максим',
+      message: 'Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу Пупупу',
+      date: new Date(),
+    },
+  ];
+
+  @Get('chat')
+  async getDialogs() {
+    return this.chats;
+  }
+
+  @Get('chat/:id')
+  async getDialogById(@Param('id') id: string) {
+    const chat = this.chats.find((c) => c.id.toString() === id);
+    return {
+      ...chat,
+      messages: [
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'support', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+        {
+          // id: number;
+          // chatId: number;
+          from: 'client', // | 'support';
+          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+          createdAt: new Date(),
+        },
+      ],
+    };
+  }
 }

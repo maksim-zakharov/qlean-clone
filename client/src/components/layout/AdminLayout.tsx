@@ -1,4 +1,4 @@
-import { ClipboardList, ListChecks, LucideIcon, User, Users} from "lucide-react"
+import {ClipboardList, ListChecks, LucideIcon, MessageCircle, User, Users} from "lucide-react"
 import {Outlet, useNavigate} from "react-router-dom"
 import {useTelegram} from "../../hooks/useTelegram.tsx";
 import React, {useMemo} from "react";
@@ -41,6 +41,11 @@ export const AdminLayout = () => {
             icon: ListChecks,
             label: t('menu_item_services'),
             path: RoutePaths.Admin.Services.List
+        },
+        {
+            icon: MessageCircle,
+            label: t('menu_item_chat'),
+            path: RoutePaths.Admin.Chat.List
         },
         {
             icon: Profile,

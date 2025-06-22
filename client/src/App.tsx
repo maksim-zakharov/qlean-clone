@@ -30,6 +30,7 @@ import {AdminServiceDetailsPage} from "./features/admin/AdminServiceDetailsPage.
 import {AdminUsersDetailsPage} from "./features/admin/AdminUsersDetailsPage/AdminUsersDetailsPage.tsx";
 import {PageLoader} from "./components/PageLoader.tsx";
 import {AdminEditServicePage} from "./features/admin/AdminEditServicePage.tsx";
+import {AdminChatPage} from "./features/admin/AdminChatPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -80,6 +81,7 @@ function App() {
                     <Route path={RoutePaths.Admin.Users.List} element={<AdminUsersPage/>}/>
                     <Route path={RoutePaths.Admin.Order.List} element={<AdminOrdersPage/>}/>
                     <Route path={RoutePaths.Admin.Services.List} element={<AdminServicesPage/>}/>
+                    <Route path={RoutePaths.Admin.Chat.List} element={<AdminChatPage/>}/>
                     <Route path={RoutePaths.Admin.Bonuses} element={<ProfilePage/>}/>
                     <Route path={RoutePaths.Admin.Profile} element={<ProfilePage/>}/>
                 </Route>
@@ -91,6 +93,7 @@ function App() {
 
                 <Route path={RoutePaths.Admin.Order.Create} element={<OrderCreationPage isAdmin/>}/>
                 <Route path={RoutePaths.Admin.Order.Details(':id')} element={<OrderDetailsPage isAdmin/>}/>
+
                 <Route path="*" element={<Navigate to={RoutePaths.Admin.Users.List}/>}/>
             </Routes>
         </div>

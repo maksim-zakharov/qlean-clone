@@ -28,6 +28,11 @@ export const RoutePaths = {
         Profile: '/executor/profile',
     },
     Admin: {
+        Chat: {
+            List: '/admin/chat',
+            Details: (id: string | number) => buildPath('/admin/chat/:id', {id}),
+        },
+
         // Тут и пользователи и заявки на исполнителя
         Users: {
             List: '/admin/users',

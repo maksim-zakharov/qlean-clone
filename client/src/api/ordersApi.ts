@@ -4,7 +4,7 @@ import {baseQueryWithReauth} from "./baseQuery.ts";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     tagTypes: [
-        "Order", 'User', 'Service', 'Variant', 'Application', 'Invite'
+        "Order", 'User', 'Service', 'Variant', 'Application', 'Invite', 'Chat'
     ],
     baseQuery: (...args) => baseQueryWithReauth(...args),
     endpoints: (builder) => ({
@@ -124,6 +124,13 @@ export const ordersApi = createApi({
                 params
             }),
             providesTags: ['Order'],
+        }),
+        getAdminChats: builder.query<any[], void>({
+            query: (params) => ({
+                url: "/admin/chat",
+                params
+            }),
+            providesTags: ['Chat'],
         }),
         getAdminOrderById: builder.query<any, { id: number | string }>({
             query: (params) => ({
@@ -277,5 +284,6 @@ export const {
     useEditAdminOrderMutation,
     usePatchAdminOrderMutation,
     useCancelAdminOrderMutation,
-    useRestoreAdminOrderMutation
+    useRestoreAdminOrderMutation,
+    useGetAdminChatsQuery
 } = ordersApi;
