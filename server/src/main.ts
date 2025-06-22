@@ -6,6 +6,7 @@ import { BusinessExceptionFilter } from './common/filters/business-exception.fil
 import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -18,6 +19,8 @@ async function bootstrap() {
   // Включаем трансформацию
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  app.useWebSocketAdapter(new IoAdapter(app));
 
   // app.useGlobalFilters(new HttpExceptionFilter());
   // // Глобальная валидация

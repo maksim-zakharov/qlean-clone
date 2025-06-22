@@ -27,7 +27,14 @@ export default defineConfig({
                 changeOrigin: true,
                 // Настройка прокси через Charles
                 // agent:  new proxy.HttpProxyAgent('http://localhost:8888') // порт Charles
-            }
+            },
+            // Прокси для WebSocket
+            '/socket.io': {
+                target: 'ws://localhost:3000', // или 'http://localhost:3000' (Vite автоматически преобразует в WS)
+                ws: true, // Ключевая опция для WebSocket
+                changeOrigin: true,
+                secure: false,
+            },
         }
     },
     build: {

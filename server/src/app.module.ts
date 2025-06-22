@@ -31,6 +31,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { ApplicationController } from './application/application.controller';
 import { ApplicationService } from './application/application.service';
 import { AdminController } from './admin/admin.controller';
+import { ChatGateway } from './chat.gateway';
+import { ChatService } from './chat/chat.service';
 
 @Module({
   imports: [
@@ -113,6 +115,8 @@ import { AdminController } from './admin/admin.controller';
     OpenaiService,
     ScheduleService,
     ApplicationService,
+    ChatGateway,
+    ChatService,
   ],
   exports: [PrismaService],
 })

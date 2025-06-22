@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useGetAdminChatDetailsQuery, useSendAdminChatMessageMutation} from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
@@ -8,20 +8,68 @@ import {Input} from "../../components/ui/input.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
 import {SendHorizontal} from "lucide-react";
+import {io, Socket} from "socket.io-client";
 
 export const AdminChatDetailsPage = () => {
+    const [socket, setSocket] = useState<Socket | null>(null);
     const navigate = useNavigate();
     useBackButton(() => navigate(RoutePaths.Admin.Chat.List));
     const {id} = useParams<string>();
     const {data: dialog} = useGetAdminChatDetailsQuery({id});
 
+    const [messages, setMessages] = useState<any[]>([])
     const [sendMessage, {isLoading}] = useSendAdminChatMessageMutation();
+
+    useEffect(() => {
+        setMessages(dialog?.messages || []);
+    }, [dialog]);
+
+    useEffect(() => {
+        if (socket?.connected) {
+            socket.emit('messages', {
+                chatId: id
+            });
+        }
+    }, [socket?.connected, id, socket]);
+
+    // Инициализация Socket.IO
+    useEffect(() => {
+        const newSocket = io('/chat', {
+            transports: ['websocket'],
+            reconnectionAttempts: 5,
+            reconnectionDelay: 1000,
+        });
+        setSocket(newSocket);
+
+        newSocket.on('connect', () => {
+            // setIsConnected(true);
+            console.log('Connected to server');
+        });
+
+        newSocket.on('message', (data) => {
+            const message = JSON.parse(data) as any;
+            setMessages(prevState => [...prevState, message]);
+        });
+
+        newSocket.on('disconnect', () => {
+            // setIsConnected(false);
+            console.log('Disconnected from server');
+        });
+
+        return () => {
+            newSocket.disconnect();
+        };
+    }, []);
 
     const [message, setMessage] = useState('');
 
     const handleOnSubmit = async () => {
-        await sendMessage({message});
-        dialog.messages.push({from: 'support', text: message});
+        // await sendMessage({message});
+        socket?.emit('message', {
+            chatId: id,
+            from: 'support', text: message
+        });
+        // dialog.messages.push({from: 'support', text: message});
         setMessage('');
     }
 
@@ -31,7 +79,7 @@ export const AdminChatDetailsPage = () => {
 
     return <div className="relative">
         <div className="p-3 flex-1">
-            {dialog.messages.map(m => <div className={cn("p-1.5 rounded-xl mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color' : 'mr-auto card-bg-color')}>{m.text}</div>)}
+            {messages.map(m => <div className={cn("p-1.5 rounded-xl mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color' : 'mr-auto card-bg-color')}>{m.text}</div>)}
         </div>
         <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex gap-2">
             <Input
