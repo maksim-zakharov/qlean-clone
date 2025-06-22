@@ -129,7 +129,7 @@ export const AdminChatDetailsPage = () => {
     }
 
     return <div className="relative root-bg-color">
-        <div className="px-1 py-2 flex gap-2 pl-3 separator-shadow-bottom">
+        <div className="px-1 py-2 flex gap-2 pl-3 separator-shadow-bottom fixed [backdrop-filter:blur(5px)] top-0 z-1 root-bg-color-transparency w-full">
             <Avatar className="size-[28px] h-[40px] w-[40px]">
                 <AvatarImage src={dialog?.user?.photoUrl}/>
                 <AvatarFallback><User/></AvatarFallback>
@@ -137,11 +137,11 @@ export const AdminChatDetailsPage = () => {
             <div className="flex flex-col gap-2 w-full justify-center">
                     <span
                         className="text-[18px] [line-height:20px] [font-weight:500] text-tg-theme-text-color truncate">
-                        {dialog?.user?.firstName} {dialog?.user?.lastName}
+                            {dialog?.user?.firstName} {dialog?.user?.lastName}
                     </span>
             </div>
         </div>
-        <div className="p-3 flex-1">
+        <div className="p-3 flex-1 mt-[50px]">
             {messages.map(m => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
                 <div
                     className={cn("select-none p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate relative", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}

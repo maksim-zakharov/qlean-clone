@@ -13,17 +13,17 @@ export const AdminChatPage = () => {
     const {data: dialogs = []} = useGetAdminChatsQuery();
 
     return <>
-        <List itemClassName="flex gap-2 p-2" className="rounded-none">
+        <List itemClassName="flex gap-2 p-2 root-bg-color" className="rounded-none">
             {dialogs.map((option) => <div className="flex gap-3 w-full" onClick={() => navigate(RoutePaths.Admin.Chat.Details(option.id))}>
                 <Avatar className="size-[28px] h-[54px] w-[54px]">
-                    <AvatarImage/>
+                    <AvatarImage src={option?.user?.photoUrl}/>
                     <AvatarFallback><User/></AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col gap-2 w-full">
                     <div className="flex items-center gap-3 w-full justify-between">
                     <span
                         className="text-[16px] [line-height:20px] [font-weight:500] text-tg-theme-text-color truncate">
-                        {option.name}
+                        {option?.user?.firstName} {option?.user?.lastName}
                     </span>
                         <span
                             className="text-[12px] [line-height:20px] [font-weight:400] text-tg-theme-subtitle-text-color truncate">

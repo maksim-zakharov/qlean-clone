@@ -194,6 +194,15 @@ html {
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@layer components {
+    .tg-sticky {
+        position: sticky;
+        top: 0;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
+
 @layer base {
     * {
         @apply border-border outline-ring/50;
@@ -356,6 +365,10 @@ html {
 
     .root-bg-color {
         background-color: var(--tg-theme-secondary-bg-color);
+    }
+
+    .root-bg-color-transparency {
+        background-color: rgb(from var(--tg-theme-bg-color) r g b / 90%);
     }
 
     .card-bg-color {
