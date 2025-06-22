@@ -47,7 +47,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   async handleOrderbookSubscribe(client: Socket, payload: any) {
     this.chatService.addClient(client);
 
-    await this.bot.telegram.sendMessage(payload.chatId, payload.text);
-    this.chatService.sendMessage(payload.chatId, payload.text);
+    if (payload?.type === 'deleteMessage') {
+      return this.chatService.deleteMessage(payload.chatId, payload.id);
+    }
+
+    const tgMessage = await this.bot.telegram.sendMessage(
+      payload.chatId,
+      payload.text,
+    );
+    this.chatService.sendMessage(tgMessage);
   }
 }

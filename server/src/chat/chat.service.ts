@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Socket } from 'socket.io';
-import { Context } from 'telegraf';
+import { Context, Telegraf } from 'telegraf';
+import { Message } from 'telegraf/typings/core/types/typegram';
 
 @Injectable()
 export class ChatService {
@@ -8,19 +9,47 @@ export class ChatService {
 
   chats = [];
 
+  constructor(private readonly bot: Telegraf) {}
+
   addClient(client: Socket) {
     this.clients.set(client.id, client);
   }
 
-  sendMessage(chatId: string, message: string) {
+  async deleteMessage(chatId: string, id: number) {
+    const existChat = this.chats.find((chat) => chat.id.toString() === chatId);
+    if (!existChat) {
+      return;
+    }
+    if (!id) {
+      return;
+    }
+
+    await this.bot.telegram.deleteMessage(chatId, id);
+
+    existChat.messages = existChat.messages.filter(
+      (message) => message.id !== id,
+    );
+    console.log(existChat.messages.length);
+
+    this.clients.forEach(
+      (client) =>
+        client?.connected &&
+        client.send(JSON.stringify({ type: 'deleteMessage', chatId, id })),
+    );
+  }
+
+  sendMessage(message: Message.TextMessage) {
     const newMessage = {
       from: 'support',
-      text: message,
-      createdAt: new Date(),
+      text: message.text,
+      date: message.date,
+      id: message.message_id,
     };
-    const existChat = this.chats.find((chat) => chat.id.toString() === chatId);
-    console.log(existChat);
+    const existChat = this.chats.find(
+      (chat) => chat.id.toString() === message.chat.id.toString(),
+    );
     if (existChat) {
+      existChat.lastMessage = newMessage.text;
       existChat.messages.push(newMessage);
       this.clients.forEach(
         (client) =>
@@ -50,22 +79,17 @@ export class ChatService {
       );
     }
     existChat.lastMessage = (message as any)?.text;
-    existChat.messages.push({
+    const newMessage = {
       text: (message as any)?.text,
       from: message.chat.id === message.from.id ? 'client' : 'support',
+      id: (message as any)?.message_id,
       date: message.date,
-    });
+    };
+    console.log('messageFromTGToAdmin', message);
+    existChat.messages.push(newMessage);
 
     this.clients.forEach(
-      (client) =>
-        client?.connected &&
-        client.send(
-          JSON.stringify({
-            text: (message as any)?.text,
-            from: 'client',
-            createdAt: new Date(),
-          }),
-        ),
+      (client) => client?.connected && client.send(JSON.stringify(newMessage)),
     );
   }
 }

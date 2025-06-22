@@ -196,12 +196,4 @@ export class AdminController {
   async getDialogById(@Param('id') id: string) {
     return this.chatService.chats.find((c) => c.id.toString() === id);
   }
-
-  @Post('chat/:id')
-  async sendMessage(
-    @Param('id') id: string,
-    @Body() { message }: { message: string },
-  ) {
-    return this.chatService.sendMessage(id, message);
-  }
 }

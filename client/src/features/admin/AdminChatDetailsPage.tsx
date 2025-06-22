@@ -1,5 +1,9 @@
-import React, { useEffect, useRef, useState} from "react";
-import {useGetAdminChatDetailsQuery, useSendAdminChatMessageMutation} from "../../api/ordersApi.ts";
+import React, {FC, PropsWithChildren, useEffect, useRef, useState} from "react";
+import {
+    useDeleteAdminChatMessageMutation,
+    useGetAdminChatDetailsQuery,
+    useSendAdminChatMessageMutation
+} from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
 import {useBackButton} from "../../hooks/useTelegram.tsx";
@@ -7,8 +11,37 @@ import {RoutePaths} from "../../routes.ts";
 import {Input} from "../../components/ui/input.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {SendHorizontal} from "lucide-react";
+import {SendHorizontal, Trash2} from "lucide-react";
 import {io, Socket} from "socket.io-client";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu.tsx";
+
+const Message: FC<PropsWithChildren & {chatId: string, id: string, onDeleteMessage: any}> = ({children, chatId, id, onDeleteMessage}) => {
+
+    const [deleteMessage] = useDeleteAdminChatMessageMutation();
+
+    const handleDeleteClick = () => {
+        Telegram.WebApp.showPopup({
+            title: `Are you sure you want to delete message?`,
+            message: 'Message cannot be restore',
+            buttons: [{
+                id: 'ok',
+                text: 'Delete',
+                type: 'destructive'
+            },{
+                id: 'cancel',
+                text: 'Cancel',
+                type: 'default'
+            }]
+        }, buttonId => buttonId === 'ok' && onDeleteMessage(id))
+    }
+
+    return <ContextMenu>
+        <ContextMenuTrigger>{children}</ContextMenuTrigger>
+        <ContextMenuContent>
+            <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4" />Удалить</ContextMenuItem>
+        </ContextMenuContent>
+    </ContextMenu>
+}
 
 export const AdminChatDetailsPage = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -50,8 +83,11 @@ export const AdminChatDetailsPage = () => {
 
         newSocket.on('message', (data) => {
             const message = JSON.parse(data) as any;
-            console.log(data)
-            setMessages(prevState => [...prevState, message]);
+            if(message.type === 'deleteMessage'){
+                setMessages(prevState => prevState.filter(m => m.id !== message.id));
+            } else {
+                setMessages(prevState => [...prevState, message]);
+            }
         });
 
         newSocket.on('disconnect', () => {
@@ -71,6 +107,14 @@ export const AdminChatDetailsPage = () => {
 
     const [message, setMessage] = useState('');
 
+    const onDeleteMessage = (messageId: number) => {
+        socket?.emit('message', {
+            type: 'deleteMessage',
+            id: messageId,
+            chatId: id,
+        });
+    }
+
     const handleOnSubmit = async () => {
         // await sendMessage({message});
         socket?.emit('message', {
@@ -87,10 +131,13 @@ export const AdminChatDetailsPage = () => {
 
     return <div className="relative root-bg-color">
         <div className="p-3 flex-1">
-            {messages.map(m => <div
-                className={cn("p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>)}
+            {messages.map(m => <Message chatId={id!} id={m.id} onDeleteMessage={onDeleteMessage}>
+                <div
+                    className={cn("p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>
+            </Message>)}
 
-            <div ref={messagesEndRef} /> {/* Невидимый якорь для скролла */}
+            <div ref={messagesEndRef}/>
+            {/* Невидимый якорь для скролла */}
         </div>
         <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex gap-2">
             <Input
