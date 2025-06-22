@@ -31,6 +31,7 @@ import {AdminUsersDetailsPage} from "./features/admin/AdminUsersDetailsPage/Admi
 import {PageLoader} from "./components/PageLoader.tsx";
 import {AdminEditServicePage} from "./features/admin/AdminEditServicePage.tsx";
 import {AdminChatPage} from "./features/admin/AdminChatPage.tsx";
+import {AdminChatDetailsPage} from "./features/admin/AdminChatDetailsPage.tsx";
 
 function App() {
     const {isReady} = useTelegram();
@@ -86,6 +87,8 @@ function App() {
                     <Route path={RoutePaths.Admin.Profile} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={RoutePaths.Admin.Users.Details(':id')} element={<AdminUsersDetailsPage/>}/>
+
+                <Route path={RoutePaths.Admin.Chat.Details(':id')} element={<AdminChatDetailsPage/>}/>
 
                 <Route path={RoutePaths.Admin.Services.Create} element={<AdminEditServicePage/>}/>
                 <Route path={RoutePaths.Admin.Services.Edit(':id')} element={<AdminEditServicePage isEdit/>}/>

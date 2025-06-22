@@ -4,14 +4,17 @@ import {User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
 import dayjs from "dayjs";
 import {useGetAdminChatsQuery} from "../../api/ordersApi.ts";
+import {RoutePaths} from "../../routes.ts";
+import {useNavigate} from "react-router-dom";
 
 export const AdminChatPage = () => {
+    const navigate = useNavigate()
 
     const {data: dialogs = []} = useGetAdminChatsQuery();
 
     return <>
         <List itemClassName="flex gap-2 p-2" className="rounded-none">
-            {dialogs.map((option) => <div className="flex gap-3">
+            {dialogs.map((option) => <div className="flex gap-3" onClick={() => navigate(RoutePaths.Admin.Chat.Details(option.id))}>
                 <Avatar className="size-[28px] h-[54px] w-[54px]">
                     <AvatarImage/>
                     <AvatarFallback><User/></AvatarFallback>

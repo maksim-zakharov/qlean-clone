@@ -307,7 +307,7 @@ export class AdminController {
         {
           // id: number;
           // chatId: number;
-          from: 'client', // | 'support';
+          from: 'support', // | 'support';
           text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
           createdAt: new Date(),
         },
