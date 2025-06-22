@@ -33,7 +33,7 @@ export const AdminChatPage = () => {
                     <div className="flex items-center gap-3 w-full justify-between">
                     <span
                         className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-subtitle-text-color truncate">
-                        {option.lastMessage}
+                        {option.messages[0]?.text}
                     </span>
                     </div>
                 </div>

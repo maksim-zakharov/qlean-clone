@@ -1,8 +1,5 @@
 import React, {FC, PropsWithChildren, useEffect, useRef, useState} from "react";
-import {
-    useGetAdminChatDetailsQuery,
-    useSendAdminChatMessageMutation
-} from "../../api/ordersApi.ts";
+import {useGetAdminChatDetailsQuery, useSendAdminChatMessageMutation} from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
 import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
@@ -10,11 +7,13 @@ import {RoutePaths} from "../../routes.ts";
 import {Input} from "../../components/ui/input.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {SendHorizontal, Trash2} from "lucide-react";
+import {SendHorizontal, Trash2, User} from "lucide-react";
 import {io, Socket} from "socket.io-client";
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu.tsx";
+import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "@/components/ui/context-menu.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
+import dayjs from "dayjs";
 
-const Message: FC<PropsWithChildren & {id: string, onDeleteMessage: any}> = ({children, id, onDeleteMessage}) => {
+const Message: FC<PropsWithChildren & { id: string, onDeleteMessage: any }> = ({children, id, onDeleteMessage}) => {
     const {vibro} = useTelegram();
 
     const handleOpenChange = (opened: boolean) => {
@@ -29,7 +28,7 @@ const Message: FC<PropsWithChildren & {id: string, onDeleteMessage: any}> = ({ch
                 id: 'ok',
                 text: 'Delete',
                 type: 'destructive'
-            },{
+            }, {
                 id: 'cancel',
                 text: 'Cancel',
                 type: 'default'
@@ -38,9 +37,9 @@ const Message: FC<PropsWithChildren & {id: string, onDeleteMessage: any}> = ({ch
     }
 
     return <ContextMenu onOpenChange={handleOpenChange}>
-        <ContextMenuTrigger>{children}</ContextMenuTrigger>
+        <ContextMenuTrigger >{children}</ContextMenuTrigger>
         <ContextMenuContent>
-            <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4 text-tg-theme-button-text-color" />Удалить</ContextMenuItem>
+            <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4 text-tg-theme-button-text-color"/>Удалить</ContextMenuItem>
         </ContextMenuContent>
     </ContextMenu>
 }
@@ -85,7 +84,7 @@ export const AdminChatDetailsPage = () => {
 
         newSocket.on('message', (data) => {
             const message = JSON.parse(data) as any;
-            if(message.type === 'deleteMessage'){
+            if (message.type === 'deleteMessage') {
                 setMessages(prevState => prevState.filter(m => m.id !== message.id));
             } else {
                 setMessages(prevState => [...prevState, message]);
@@ -104,7 +103,7 @@ export const AdminChatDetailsPage = () => {
 
     // Скролл вниз при изменении messages
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        messagesEndRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
 
     const [message, setMessage] = useState('');
@@ -130,10 +129,25 @@ export const AdminChatDetailsPage = () => {
     }
 
     return <div className="relative root-bg-color">
+        <div className="px-1 py-2 flex gap-2 pl-3 separator-shadow-bottom">
+            <Avatar className="size-[28px] h-[40px] w-[40px]">
+                <AvatarImage src={dialog?.user?.photoUrl}/>
+                <AvatarFallback><User/></AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col gap-2 w-full justify-center">
+                    <span
+                        className="text-[18px] [line-height:20px] [font-weight:500] text-tg-theme-text-color truncate">
+                        {dialog?.user?.firstName} {dialog?.user?.lastName}
+                    </span>
+            </div>
+        </div>
         <div className="p-3 flex-1">
             {messages.map(m => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
                 <div
-                    className={cn("select-none p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>
+                    className={cn("select-none p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate relative", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}
+                    <span
+                        className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>{dayjs.utc(m.date * 1000).local().format('HH:mm')}</span>
+                </div>
             </Message>)}
 
             <div ref={messagesEndRef}/>

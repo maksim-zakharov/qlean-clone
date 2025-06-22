@@ -19,7 +19,9 @@ export class ChatService {
   }
 
   getChats() {
-    return this.prisma.chat.findMany({ include: { messages: true } });
+    return this.prisma.chat.findMany({
+      include: { messages: true, user: true },
+    });
   }
 
   getChatById(id: Chat['id']) {
@@ -29,6 +31,7 @@ export class ChatService {
       },
       include: {
         messages: true,
+        user: true,
       },
     });
   }
