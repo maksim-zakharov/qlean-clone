@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Зачатки чата в админке">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Удаление сообщения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminChatPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminChatPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/chat.gateway.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/chat.gateway.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/chat/chat.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/chat/chat.service.ts" afterDir="false" />
@@ -154,8 +150,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.client:dev" />
         <item itemvalue="npm.server:dev" />
+        <item itemvalue="npm.client:dev" />
         <item itemvalue="npm.build:ci" />
       </list>
     </recent_temporary>
@@ -184,23 +180,7 @@
       <workItem from="1747195805942" duration="12318000" />
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
-      <workItem from="1749830169106" duration="46520000" />
-    </task>
-    <task id="LOCAL-00443" summary="Применение бонуса к заказу">
-      <option name="closed" value="true" />
-      <created>1749325525803</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1749325525803</updated>
-    </task>
-    <task id="LOCAL-00444" summary="Применение бонуса к заказу">
-      <option name="closed" value="true" />
-      <created>1749327628869</created>
-      <option name="number" value="00444" />
-      <option name="presentableId" value="LOCAL-00444" />
-      <option name="project" value="LOCAL" />
-      <updated>1749327628869</updated>
+      <workItem from="1749830169106" duration="50585000" />
     </task>
     <task id="LOCAL-00445" summary="Применение бонуса к заказу">
       <option name="closed" value="true" />
@@ -578,7 +558,23 @@
       <option name="project" value="LOCAL" />
       <updated>1750607186316</updated>
     </task>
-    <option name="localTasksCounter" value="492" />
+    <task id="LOCAL-00492" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750610250079</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1750610250079</updated>
+    </task>
+    <task id="LOCAL-00493" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750610749822</created>
+      <option name="number" value="00493" />
+      <option name="presentableId" value="LOCAL-00493" />
+      <option name="project" value="LOCAL" />
+      <updated>1750610749822</updated>
+    </task>
+    <option name="localTasksCounter" value="494" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +597,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="qrCode" />
     <MESSAGE value="Список заявок, юзеров, одобрение отклонение заявки" />
     <MESSAGE value="AdminUserDetails" />
     <MESSAGE value="бонусы" />
@@ -626,7 +621,8 @@
     <MESSAGE value="ProfileSkeleton" />
     <MESSAGE value="BonusTotalSkeleton" />
     <MESSAGE value="Зачатки чата в админке" />
-    <option name="LAST_COMMIT_MESSAGE" value="Зачатки чата в админке" />
+    <MESSAGE value="Удаление сообщения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Удаление сообщения" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

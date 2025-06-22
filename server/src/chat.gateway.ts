@@ -55,6 +55,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       payload.chatId,
       payload.text,
     );
-    this.chatService.sendMessage(tgMessage);
+    await this.chatService.sendMessage(tgMessage);
   }
 }

@@ -47,11 +47,11 @@ model Order {
 }
 
 model BaseService {
-  id        Int                @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  createdAt       DateTime?              @default(now())
-  updatedAt       DateTime?               @updatedAt
-  deletedAt       DateTime?
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
 
   name      String
   variants  ServiceVariant[]
@@ -102,6 +102,7 @@ model User {
   scheduleDays    ScheduleDay[]
   application     Application? // 1-to-1 связь
   isAdmin         Boolean            @default(false) // Возможность стать админом
+  chat            Chat?
 }
 
 model Keyword {
@@ -195,4 +196,29 @@ enum BonusOperationType {
   INVITE // Приглашение друга
   ORDER // % за заказ
   WITHDRAWAL // Списание бонусов
+}
+
+enum MessageFrom {
+  client
+  support
+}
+
+model Chat {
+  id   Int  @id
+  name String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  messages Message[]
+}
+
+model Message {
+  text   String
+  from   MessageFrom
+  id     Int  @id
+  date   Int
+
+  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId Int
 }
