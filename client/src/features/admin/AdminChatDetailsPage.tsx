@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import {useGetAdminChatDetailsQuery, useSendAdminChatMessageMutation} from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
@@ -16,6 +16,8 @@ export const AdminChatDetailsPage = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Chat.List));
     const {id} = useParams<string>();
     const {data: dialog} = useGetAdminChatDetailsQuery({id});
+
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const [messages, setMessages] = useState<any[]>([])
     const [sendMessage, {isLoading}] = useSendAdminChatMessageMutation();
@@ -61,6 +63,11 @@ export const AdminChatDetailsPage = () => {
         };
     }, []);
 
+    // Скролл вниз при изменении messages
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
     const [message, setMessage] = useState('');
 
     const handleOnSubmit = async () => {
@@ -77,9 +84,12 @@ export const AdminChatDetailsPage = () => {
         return null;
     }
 
-    return <div className="relative">
+    return <div className="relative root-bg-color">
         <div className="p-3 flex-1">
-            {messages.map(m => <div className={cn("p-1.5 rounded-xl mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color' : 'mr-auto card-bg-color')}>{m.text}</div>)}
+            {messages.map(m => <div
+                className={cn("p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>)}
+
+            <div ref={messagesEndRef} /> {/* Невидимый якорь для скролла */}
         </div>
         <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex gap-2">
             <Input
@@ -87,7 +97,8 @@ export const AdminChatDetailsPage = () => {
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Message"/>
-            <Button size="sm" className="border-none h-9 p-2 rounded-lg" variant="primary" disabled={!message} loading={isLoading} onClick={handleOnSubmit}><SendHorizontal /></Button>
+            <Button size="sm" className="border-none h-9 p-2 rounded-lg" variant="primary" disabled={!message}
+                    loading={isLoading} onClick={handleOnSubmit}><SendHorizontal/></Button>
         </BottomActions>
     </div>
 }
