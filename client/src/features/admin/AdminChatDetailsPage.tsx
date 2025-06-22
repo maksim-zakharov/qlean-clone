@@ -7,7 +7,7 @@ import {RoutePaths} from "../../routes.ts";
 import {Input} from "../../components/ui/input.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
 import {Button} from "../../components/ui/button.tsx";
-import {SendHorizontal, Trash2, User} from "lucide-react";
+import {ArrowUp, Trash2, User} from "lucide-react";
 import {io, Socket} from "socket.io-client";
 import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "@/components/ui/context-menu.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar.tsx";
@@ -158,12 +158,12 @@ export const AdminChatDetailsPage = () => {
         </div>
         <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex gap-2">
             <Input
-                className="border-none rounded-lg text-tg-theme-hint-color h-10 placeholder-[var(--tg-theme-hint-color)] text-center"
+                className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Message"/>
-            <Button size="sm" className="border-none h-9 p-2 rounded-lg" variant="primary" disabled={!message}
-                    loading={isLoading} onClick={handleOnSubmit}><SendHorizontal/></Button>
+            <Button size="sm" className="border-none h-8 w-8 p-1.5 rounded-full" variant="primary" disabled={!message}
+                    loading={isLoading} onClick={handleOnSubmit}><ArrowUp /></Button>
         </BottomActions>
     </div>
 }
