@@ -61,6 +61,7 @@ export class ChatService {
   async messageFromTGToAdmin(ctx: Context) {
     const message = ctx.message;
     let existChat = this.chats.find((chat) => chat.id === message.chat.id);
+    console.log(message);
     if (!existChat) {
       existChat = {
         id: message.chat.id,

@@ -1,12 +1,11 @@
 import React, {FC, PropsWithChildren, useEffect, useRef, useState} from "react";
 import {
-    useDeleteAdminChatMessageMutation,
     useGetAdminChatDetailsQuery,
     useSendAdminChatMessageMutation
 } from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
-import {useBackButton} from "../../hooks/useTelegram.tsx";
+import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
 import {RoutePaths} from "../../routes.ts";
 import {Input} from "../../components/ui/input.tsx";
 import {BottomActions} from "../../components/BottomActions.tsx";
@@ -15,9 +14,12 @@ import {SendHorizontal, Trash2} from "lucide-react";
 import {io, Socket} from "socket.io-client";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu.tsx";
 
-const Message: FC<PropsWithChildren & {chatId: string, id: string, onDeleteMessage: any}> = ({children, chatId, id, onDeleteMessage}) => {
+const Message: FC<PropsWithChildren & {id: string, onDeleteMessage: any}> = ({children, id, onDeleteMessage}) => {
+    const {vibro} = useTelegram();
 
-    const [deleteMessage] = useDeleteAdminChatMessageMutation();
+    const handleOpenChange = (opened: boolean) => {
+        opened ? vibro() : null;
+    }
 
     const handleDeleteClick = () => {
         Telegram.WebApp.showPopup({
@@ -35,10 +37,10 @@ const Message: FC<PropsWithChildren & {chatId: string, id: string, onDeleteMessa
         }, buttonId => buttonId === 'ok' && onDeleteMessage(id))
     }
 
-    return <ContextMenu>
+    return <ContextMenu onOpenChange={handleOpenChange}>
         <ContextMenuTrigger>{children}</ContextMenuTrigger>
         <ContextMenuContent>
-            <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4" />Удалить</ContextMenuItem>
+            <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4 text-tg-theme-button-text-color" />Удалить</ContextMenuItem>
         </ContextMenuContent>
     </ContextMenu>
 }
@@ -116,12 +118,10 @@ export const AdminChatDetailsPage = () => {
     }
 
     const handleOnSubmit = async () => {
-        // await sendMessage({message});
         socket?.emit('message', {
             chatId: id,
             text: message
         });
-        // dialog.messages.push({from: 'support', text: message});
         setMessage('');
     }
 
@@ -131,9 +131,9 @@ export const AdminChatDetailsPage = () => {
 
     return <div className="relative root-bg-color">
         <div className="p-3 flex-1">
-            {messages.map(m => <Message chatId={id!} id={m.id} onDeleteMessage={onDeleteMessage}>
+            {messages.map(m => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
                 <div
-                    className={cn("p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>
+                    className={cn("select-none p-1.5 rounded-lg mb-1 text-wrap break-all w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl')}>{m.text}</div>
             </Message>)}
 
             <div ref={messagesEndRef}/>
