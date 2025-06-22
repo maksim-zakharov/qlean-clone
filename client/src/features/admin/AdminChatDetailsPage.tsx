@@ -144,9 +144,12 @@ export const AdminChatDetailsPage = () => {
         <div className="p-3 flex-1 mt-[50px]">
             {messages.map((m, index) => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
                 <div
-                    className={cn("animate-fade-in select-none p-1.5 rounded-lg mb-0.5 text-wrap break-all w-max pr-12 max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate relative", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl pl-3' : 'mr-auto card-bg-color rounded-r-2xl', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>{m.text}
+                    className={cn("relative animate-fade-in select-none p-1.5 rounded-lg mb-0.5 text-wrap break-all w-max pr-12 max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl pl-3' : 'mr-auto card-bg-color rounded-r-2xl', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
+                    {m.text}
                     <span
-                        className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>{dayjs.utc(m.date * 1000).local().format('HH:mm')}</span>
+                        className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>
+                        {dayjs.utc(m.date * 1000).local().format('HH:mm')}
+                    </span>
                 </div>
             </Message>)}
 
