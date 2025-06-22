@@ -258,6 +258,65 @@ export class AdminController {
     },
   ];
 
+  messages = [
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'support', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'support', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+    {
+      // id: number;
+      // chatId: number;
+      from: 'client', // | 'support';
+      text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
+      createdAt: new Date(),
+    },
+  ];
+
   @Get('chat')
   async getDialogs() {
     return this.chats;
@@ -268,64 +327,19 @@ export class AdminController {
     const chat = this.chats.find((c) => c.id.toString() === id);
     return {
       ...chat,
-      messages: [
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'support', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'support', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-        {
-          // id: number;
-          // chatId: number;
-          from: 'client', // | 'support';
-          text: 'ПупупупупупуПупупупупупуПупупупупупуПупупупупупуПупупупупупу',
-          createdAt: new Date(),
-        },
-      ],
+      messages: this.messages,
     };
+  }
+
+  @Post('chat/:id')
+  async sendMessage(
+    @Param('id') id: string,
+    @Body() { message }: { message: string },
+  ) {
+    return this.messages.push({
+      from: 'support',
+      text: message,
+      createdAt: new Date(),
+    });
   }
 }

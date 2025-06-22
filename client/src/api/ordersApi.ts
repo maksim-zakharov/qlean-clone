@@ -139,6 +139,14 @@ export const ordersApi = createApi({
             }),
             providesTags: ['Chat'],
         }),
+        sendAdminChatMessage: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `admin/chat/${params.id}`,
+                method: 'POST',
+                body: params,
+            }),
+            invalidatesTags: ['Chat'],
+        }),
         getAdminOrderById: builder.query<any, { id: number | string }>({
             query: (params) => ({
                 url: `/admin/orders/${params.id}`,
@@ -293,5 +301,6 @@ export const {
     useCancelAdminOrderMutation,
     useRestoreAdminOrderMutation,
     useGetAdminChatsQuery,
-    useGetAdminChatDetailsQuery
+    useGetAdminChatDetailsQuery,
+    useSendAdminChatMessageMutation
 } = ordersApi;
