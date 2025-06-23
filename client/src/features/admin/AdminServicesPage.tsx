@@ -11,6 +11,7 @@ import {RoutePaths} from "../../routes.ts";
 import {useTranslation} from "react-i18next";
 import {ErrorState} from "../../components/ErrorState.tsx";
 import {Input} from "../../components/ui/input.tsx";
+import {Badge} from "../../components/ui/badge.tsx";
 
 
 export const AdminServicesPage = () => {
@@ -80,7 +81,13 @@ export const AdminServicesPage = () => {
                                                  onClick={() => handleOrderClick(ao)}>
                     <div className={`p-3 pl-0`}>
                         <div className="flex justify-between">
-                            <Typography.Title className="flex gap-2">{ao.name}
+                            <Typography.Title className="flex gap-2">
+                                {ao.name}
+                                {ao.deletedAt && (
+                                    <Badge className="flex gap-1 items-center" variant="destructive">
+                                        DELETED
+                                    </Badge>
+                                )}
                             </Typography.Title>
                             <Typography.Title>id: {ao.id}</Typography.Title>
                         </div>
