@@ -81,7 +81,13 @@ export const ProfilePage = () => {
     const handleLogout = () => {
         dispatch(logout())
         navigate(RoutePaths.Root)
-        window.location.reload();
+        Telegram.WebApp?.close()
+        // Проверяем, является ли окно PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            window.close();
+        }
+        // Fallback если не в ТГ
+        window.location.href = 'about:blank';
     }
 
     const handleWorkClick = () => {

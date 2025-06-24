@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {api} from "../api/api.ts";
 import {ordersApi} from "../api/ordersApi.ts";
 import {Address} from "node:cluster";
+import {REF_HEADER} from "../api/baseQuery.ts";
 
 interface CreateOrderState {
     baseService?: any;
@@ -61,6 +62,8 @@ const _saveToken = (state, action: PayloadAction<{ token: string }>) => {
 
 const _logout = (state, action: PayloadAction) => {
     state.token = undefined;
+    saveInLocalStorage(REF_HEADER, undefined)
+    _clearState(state)
     saveInLocalStorage('token', state.token)
 }
 
