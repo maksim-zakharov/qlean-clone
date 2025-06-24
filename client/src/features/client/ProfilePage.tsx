@@ -78,7 +78,7 @@ export const ProfilePage = () => {
         return text.join(', ');
     }, [address, t]);
 
-    const handleLogout = () => {
+    const confirmLogout = () => {
         dispatch(logout())
         navigate(RoutePaths.Root)
         Telegram.WebApp?.close()
@@ -88,6 +88,22 @@ export const ProfilePage = () => {
         }
         // Fallback если не в ТГ
         window.location.href = 'about:blank';
+    }
+
+    const handleLogout = () => {
+        Telegram.WebApp.showPopup({
+            title: `Are you sure you want to log out?`,
+            message: 'The app will close automatically.',
+            buttons: [{
+                id: 'ok',
+                text: 'Log out',
+                type: 'destructive'
+            }, {
+                id: 'cancel',
+                text: 'Cancel',
+                type: 'default'
+            }]
+        }, buttonId => buttonId === 'ok' && confirmLogout())
     }
 
     const handleWorkClick = () => {
