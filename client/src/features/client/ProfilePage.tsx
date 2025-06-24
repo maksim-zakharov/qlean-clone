@@ -92,8 +92,8 @@ export const ProfilePage = () => {
 
     const handleLogout = () => {
         Telegram.WebApp.showPopup({
-            title: `Are you sure you want to log out?`,
-            message: 'The app will close automatically.',
+            title: `Confirm log out`,
+            message: 'Are you sure you want to log out?',
             buttons: [{
                 id: 'ok',
                 text: 'Log out',
