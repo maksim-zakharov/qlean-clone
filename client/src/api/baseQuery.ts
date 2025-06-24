@@ -43,7 +43,7 @@ export const baseQueryWithReauth = async (args: (string | FetchArgs), api: BaseQ
 
                 api.dispatch(saveToken({token: refreshResult?.data?.access_token}))
 
-                if (refreshResult?.meta?.response?.status === 200) {
+                if (refreshResult?.meta?.response?.status && refreshResult?.meta?.response?.status < 400) {
                     result = await baseQuery()(args, api, extraOptions);
                 }
             } finally {
