@@ -196,4 +196,17 @@ export class AdminController {
   async getDialogById(@Param('id') id: string) {
     return this.chatService.getChatById(id);
   }
+
+  @Post('chat/:id/start')
+  @UseGuards(AuthGuard('jwt'))
+  async startChat(@Param('id') id: string, @Req() req) {
+    return this.chatService.startChat(id, req.user.id);
+  }
+
+  @Post('chat/:id/close')
+  @UseGuards(AuthGuard('jwt'))
+  async closeChat(@Param('id') id: string, @Req() req) {
+    // The operator left the chat
+    return this.chatService.closeChat(id, req.user.id);
+  }
 }

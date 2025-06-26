@@ -210,6 +210,8 @@ model Chat {
   user User @relation(fields: [id], references: [id], onDelete: Cascade)
 
   messages Message[]
+
+  isStarted Boolean @default(false)
 }
 
 model Message {

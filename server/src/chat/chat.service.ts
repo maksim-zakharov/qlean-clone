@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Socket } from 'socket.io';
 import { Context, Telegraf } from 'telegraf';
 import { Message } from 'telegraf/typings/core/types/typegram';
 import { PrismaService } from '../prisma.service';
-import { Chat, MessageFrom } from '@prisma/client';
+import { Chat, MessageFrom, User } from '@prisma/client';
 
 @Injectable()
 export class ChatService {
@@ -22,6 +22,84 @@ export class ChatService {
     return this.prisma.chat.findMany({
       include: { messages: true, user: true },
     });
+  }
+
+  startChat(id: Chat['id'], userId: User['id']) {
+    return this.prisma
+      .$transaction(async (tx) => {
+        const chat = await tx.chat.findUnique({
+          where: {
+            id: id,
+          },
+        });
+        if (!chat) {
+          throw new NotFoundException({ message: `Chat ${id} not found` });
+        }
+        chat.isStarted = true;
+
+        return tx.chat.update({
+          where: {
+            id,
+          },
+          data: chat,
+        });
+      })
+      .then(async () => {
+        const user = await this.prisma.user.findUnique({
+          where: {
+            id: userId,
+          },
+          select: {
+            firstName: true,
+          },
+        });
+        if (user) {
+          const tgMessage = await this.bot.telegram.sendMessage(
+            id,
+            `${user.firstName} is working on your question.`,
+          );
+          await this.sendMessage(tgMessage);
+        }
+      });
+  }
+
+  closeChat(id: Chat['id'], userId: User['id']) {
+    return this.prisma
+      .$transaction(async (tx) => {
+        const chat = await tx.chat.findUnique({
+          where: {
+            id: id,
+          },
+        });
+        if (!chat) {
+          throw new NotFoundException({ message: `Chat ${id} not found` });
+        }
+        chat.isStarted = false;
+
+        return tx.chat.update({
+          where: {
+            id,
+          },
+          data: chat,
+        });
+      })
+      .then(async () => {
+        const user = await this.prisma.user.findUnique({
+          where: {
+            id: userId,
+          },
+          select: {
+            firstName: true,
+          },
+        });
+        if (user) {
+          const tgMessage = await this.bot.telegram.sendMessage(
+            id,
+            `${user.firstName} left the chat.`,
+          );
+          await this.sendMessage(tgMessage);
+        }
+      });
   }
 
   getChatById(id: Chat['id']) {

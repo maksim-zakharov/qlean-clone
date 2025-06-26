@@ -34,6 +34,7 @@ export class ServicesController implements OnModuleInit {
         this.logger.error('Delete error:', error);
       }
     });
+    // this.bot.on('message', this.handleMessage.bind(this));
     this.bot.on('text', this.handleMessage.bind(this));
   }
 

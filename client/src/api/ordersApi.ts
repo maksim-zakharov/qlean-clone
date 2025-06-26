@@ -147,6 +147,20 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: ['Chat'],
         }),
+        startAdminChatMessage: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `admin/chat/${params.id}/start`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Chat'],
+        }),
+        closeAdminChatMessage: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `admin/chat/${params.id}/close`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Chat'],
+        }),
         deleteAdminChatMessage: builder.mutation<any, { chatId: number | string, id: number | string }>({
             query: (params) => ({
                 url: `admin/chat/${params.chatId}/messages/${params.id}`,
@@ -311,5 +325,7 @@ export const {
     useGetAdminChatsQuery,
     useGetAdminChatDetailsQuery,
     useSendAdminChatMessageMutation,
-    useDeleteAdminChatMessageMutation
+    useDeleteAdminChatMessageMutation,
+    useStartAdminChatMessageMutation,
+    useCloseAdminChatMessageMutation
 } = ordersApi;

@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="Удаление сообщения">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="confirmLogout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/chat/chat.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/chat/chat.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,103 +182,8 @@
       <workItem from="1747195805942" duration="12318000" />
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
-      <workItem from="1749830169106" duration="51538000" />
-    </task>
-    <task id="LOCAL-00446" summary="Профиль">
-      <option name="closed" value="true" />
-      <created>1749367383831</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1749367383831</updated>
-    </task>
-    <task id="LOCAL-00447" summary="Профиль">
-      <option name="closed" value="true" />
-      <created>1749368485351</created>
-      <option name="number" value="00447" />
-      <option name="presentableId" value="LOCAL-00447" />
-      <option name="project" value="LOCAL" />
-      <updated>1749368485351</updated>
-    </task>
-    <task id="LOCAL-00448" summary="Профиль">
-      <option name="closed" value="true" />
-      <created>1749368802634</created>
-      <option name="number" value="00448" />
-      <option name="presentableId" value="LOCAL-00448" />
-      <option name="project" value="LOCAL" />
-      <updated>1749368802634</updated>
-    </task>
-    <task id="LOCAL-00449" summary="Поиск по пользователям">
-      <option name="closed" value="true" />
-      <created>1749369717314</created>
-      <option name="number" value="00449" />
-      <option name="presentableId" value="LOCAL-00449" />
-      <option name="project" value="LOCAL" />
-      <updated>1749369717314</updated>
-    </task>
-    <task id="LOCAL-00450" summary="Поиск по пользователям">
-      <option name="closed" value="true" />
-      <created>1749369969936</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1749369969936</updated>
-    </task>
-    <task id="LOCAL-00451" summary="Поиск по пользователям">
-      <option name="closed" value="true" />
-      <created>1749370236570</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1749370236570</updated>
-    </task>
-    <task id="LOCAL-00452" summary="Поиск по пользователям">
-      <option name="closed" value="true" />
-      <created>1749370950917</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1749370950917</updated>
-    </task>
-    <task id="LOCAL-00453" summary="Поиск по пользователям">
-      <option name="closed" value="true" />
-      <created>1749415758056</created>
-      <option name="number" value="00453" />
-      <option name="presentableId" value="LOCAL-00453" />
-      <option name="project" value="LOCAL" />
-      <updated>1749415758056</updated>
-    </task>
-    <task id="LOCAL-00454" summary="Создание сервиса">
-      <option name="closed" value="true" />
-      <created>1749463695113</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1749463695113</updated>
-    </task>
-    <task id="LOCAL-00455" summary="baseService deletedAt">
-      <option name="closed" value="true" />
-      <created>1749470119664</created>
-      <option name="number" value="00455" />
-      <option name="presentableId" value="LOCAL-00455" />
-      <option name="project" value="LOCAL" />
-      <updated>1749470119664</updated>
-    </task>
-    <task id="LOCAL-00456" summary="baseService deletedAt">
-      <option name="closed" value="true" />
-      <created>1749470340460</created>
-      <option name="number" value="00456" />
-      <option name="presentableId" value="LOCAL-00456" />
-      <option name="project" value="LOCAL" />
-      <updated>1749470340460</updated>
-    </task>
-    <task id="LOCAL-00457" summary="restore service">
-      <option name="closed" value="true" />
-      <created>1749471789332</created>
-      <option name="number" value="00457" />
-      <option name="presentableId" value="LOCAL-00457" />
-      <option name="project" value="LOCAL" />
-      <updated>1749471789332</updated>
+      <workItem from="1749830169106" duration="64440000" />
+      <workItem from="1750862980747" duration="6745000" />
     </task>
     <task id="LOCAL-00458" summary="restore service">
       <option name="closed" value="true" />
@@ -573,7 +481,103 @@
       <option name="project" value="LOCAL" />
       <updated>1750614176877</updated>
     </task>
-    <option name="localTasksCounter" value="495" />
+    <task id="LOCAL-00495" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750615278085</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1750615278085</updated>
+    </task>
+    <task id="LOCAL-00496" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750619032404</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1750619032405</updated>
+    </task>
+    <task id="LOCAL-00497" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750619901164</created>
+      <option name="number" value="00497" />
+      <option name="presentableId" value="LOCAL-00497" />
+      <option name="project" value="LOCAL" />
+      <updated>1750619901164</updated>
+    </task>
+    <task id="LOCAL-00498" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750620767522</created>
+      <option name="number" value="00498" />
+      <option name="presentableId" value="LOCAL-00498" />
+      <option name="project" value="LOCAL" />
+      <updated>1750620767522</updated>
+    </task>
+    <task id="LOCAL-00499" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750622102964</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1750622102964</updated>
+    </task>
+    <task id="LOCAL-00500" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750622536444</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1750622536444</updated>
+    </task>
+    <task id="LOCAL-00501" summary="Удаление сообщения">
+      <option name="closed" value="true" />
+      <created>1750626231455</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1750626231455</updated>
+    </task>
+    <task id="LOCAL-00502" summary="Badge className=&quot;flex gap-1 items-center&quot; variant=&quot;destructive&quot;">
+      <option name="closed" value="true" />
+      <created>1750670812110</created>
+      <option name="number" value="00502" />
+      <option name="presentableId" value="LOCAL-00502" />
+      <option name="project" value="LOCAL" />
+      <updated>1750670812110</updated>
+    </task>
+    <task id="LOCAL-00503" summary="handleLogout">
+      <option name="closed" value="true" />
+      <created>1750793785981</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1750793785981</updated>
+    </task>
+    <task id="LOCAL-00504" summary="handleLogout">
+      <option name="closed" value="true" />
+      <created>1750794611938</created>
+      <option name="number" value="00504" />
+      <option name="presentableId" value="LOCAL-00504" />
+      <option name="project" value="LOCAL" />
+      <updated>1750794611938</updated>
+    </task>
+    <task id="LOCAL-00505" summary="confirmLogout">
+      <option name="closed" value="true" />
+      <created>1750795229053</created>
+      <option name="number" value="00505" />
+      <option name="presentableId" value="LOCAL-00505" />
+      <option name="project" value="LOCAL" />
+      <updated>1750795229053</updated>
+    </task>
+    <task id="LOCAL-00506" summary="confirmLogout">
+      <option name="closed" value="true" />
+      <created>1750795394460</created>
+      <option name="number" value="00506" />
+      <option name="presentableId" value="LOCAL-00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1750795394460</updated>
+    </task>
+    <option name="localTasksCounter" value="507" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -596,9 +600,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Список заявок, юзеров, одобрение отклонение заявки" />
-    <MESSAGE value="AdminUserDetails" />
-    <MESSAGE value="бонусы" />
     <MESSAGE value="Применение бонуса к заказу" />
     <MESSAGE value="Профиль" />
     <MESSAGE value="Поиск по пользователям" />
@@ -621,7 +622,10 @@
     <MESSAGE value="BonusTotalSkeleton" />
     <MESSAGE value="Зачатки чата в админке" />
     <MESSAGE value="Удаление сообщения" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удаление сообщения" />
+    <MESSAGE value="Badge className=&quot;flex gap-1 items-center&quot; variant=&quot;destructive&quot;" />
+    <MESSAGE value="handleLogout" />
+    <MESSAGE value="confirmLogout" />
+    <option name="LAST_COMMIT_MESSAGE" value="confirmLogout" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

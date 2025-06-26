@@ -1,5 +1,10 @@
 import React, {FC, PropsWithChildren, useEffect, useRef, useState} from "react";
-import {useGetAdminChatDetailsQuery, useSendAdminChatMessageMutation} from "../../api/ordersApi.ts";
+import {
+    useCloseAdminChatMessageMutation,
+    useGetAdminChatDetailsQuery,
+    useSendAdminChatMessageMutation,
+    useStartAdminChatMessageMutation
+} from "../../api/ordersApi.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {cn} from "../../lib/utils.ts";
 import {useBackButton, useTelegram} from "../../hooks/useTelegram.tsx";
@@ -37,7 +42,7 @@ const Message: FC<PropsWithChildren & { id: string, onDeleteMessage: any }> = ({
     }
 
     return <ContextMenu onOpenChange={handleOpenChange}>
-        <ContextMenuTrigger >{children}</ContextMenuTrigger>
+        <ContextMenuTrigger>{children}</ContextMenuTrigger>
         <ContextMenuContent>
             <ContextMenuItem onClick={handleDeleteClick}><Trash2 className="h-4 w-4 text-tg-theme-button-text-color"/>Удалить</ContextMenuItem>
         </ContextMenuContent>
@@ -50,6 +55,8 @@ export const AdminChatDetailsPage = () => {
     useBackButton(() => navigate(RoutePaths.Admin.Chat.List));
     const {id} = useParams<string>();
     const {data: dialog} = useGetAdminChatDetailsQuery({id});
+    const [startChat] = useStartAdminChatMessageMutation();
+    const [closeChat] = useCloseAdminChatMessageMutation();
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -124,12 +131,31 @@ export const AdminChatDetailsPage = () => {
         setMessage('');
     }
 
+    const confirmCloseChat = () => closeChat({id}).unwrap();
+
+    const handleCloseChat = () => {
+        Telegram.WebApp.showPopup({
+            title: `Are you sure you want to close chat?`,
+            message: 'Chat will be closed',
+            buttons: [{
+                id: 'ok',
+                text: 'Close',
+                type: 'destructive'
+            },{
+                id: 'cancel',
+                text: 'Cancel',
+                type: 'default'
+            }]
+        }, id => id === 'ok' && confirmCloseChat())
+    }
+
     if (!dialog) {
         return null;
     }
 
     return <div className="relative root-bg-color">
-        <div className="px-1 py-2 flex gap-2 pl-3 separator-shadow-bottom fixed [backdrop-filter:blur(5px)] top-0 z-1 root-bg-color-transparency w-full">
+        <div
+            className="px-1 py-2 flex gap-2 pl-3 separator-shadow-bottom fixed [backdrop-filter:blur(5px)] top-0 z-1 root-bg-color-transparency w-full">
             <Avatar className="size-[28px] h-[40px] w-[40px]">
                 <AvatarImage src={dialog?.user?.photoUrl}/>
                 <AvatarFallback><User/></AvatarFallback>
@@ -153,17 +179,24 @@ export const AdminChatDetailsPage = () => {
                 </div>
             </Message>)}
 
-            <div ref={messagesEndRef}/>
+            <div ref={messagesEndRef} className="h-[32px]"/>
             {/* Невидимый якорь для скролла */}
         </div>
-        <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex gap-2">
-            <Input
-                className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                placeholder="Message"/>
-            <Button size="sm" className="border-none h-8 w-8 p-1.5 rounded-full" variant="primary" disabled={!message}
-                    loading={isLoading} onClick={handleOnSubmit}><ArrowUp /></Button>
-        </BottomActions>
+        {!dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] [min-height:calc(84px + var(--tg-safe-area-inset-bottom))]">
+            <Button wide onClick={() => startChat({id}).unwrap()}>Start a dialogue</Button>
+        </BottomActions>}
+        {dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex-col">
+            <div className="flex gap-2 w-full">
+                <Input
+                    className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder="Message"/>
+                <Button size="sm" className="border-none h-8 w-8 p-1.5 rounded-full" variant="primary" disabled={!message}
+                        loading={isLoading} onClick={handleOnSubmit}><ArrowUp/></Button>
+            </div>
+            <Button wide variant="default" size="lg"
+                    className="border-none" onClick={handleCloseChat}>Close a dialogue</Button>
+        </BottomActions>}
     </div>
 }
