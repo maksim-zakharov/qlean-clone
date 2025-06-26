@@ -169,28 +169,41 @@ export const AdminChatDetailsPage = () => {
         </div>
         <div className="p-3 flex-1 mt-[50px]">
             {messages.map((m, index) => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
-                <div
-                    className={cn("relative animate-fade-in select-none p-1.5 rounded-lg mb-0.5 text-wrap break-all w-max pr-12 max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl pl-3' : 'mr-auto card-bg-color rounded-r-2xl', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
+                {m.type === 'TEXT' && <div
+                    className={cn("relative animate-fade-in select-none p-1.5 rounded-lg mb-0.5 text-wrap break-all w-max pr-12 max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl pl-3' : 'mr-auto card-bg-color rounded-r-2xl pl-2', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
                     {m.text}
                     <span
                         className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>
                         {dayjs.utc(m.date * 1000).local().format('HH:mm')}
                     </span>
-                </div>
-            </Message>)}
+                </div>}
+                {m.type === 'PHOTO' && <div
+                    className={cn("relative animate-fade-in select-none rounded-lg mb-0.5 text-wrap break-all w-max max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
+                    <img src={`/api/admin/chat-assets/${m.text}`}/>
+                    <span
+                        className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>
+                        {dayjs.utc(m.date * 1000).local().format('HH:mm')}
+                    </span>
+                </div>}
+                </Message>
+            )}
 
             <div ref={messagesEndRef} className="h-[32px]"/>
-            {/* Невидимый якорь для скролла */}
-        </div>
-        {!dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] [min-height:calc(84px + var(--tg-safe-area-inset-bottom))]">
-            <Button wide onClick={() => startChat({id}).unwrap()}>Start a dialogue</Button>
-        </BottomActions>}
-        {dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex-col">
-            <div className="flex gap-2 w-full">
-                <Input
-                    className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
-                    value={message}
-                    onChange={e => setMessage(e.target.value)}
+        {/* Невидимый якорь для скролла */}
+    </div>
+{
+    !dialog.isStarted && <BottomActions
+        className="[padding-bottom:var(--tg-safe-area-inset-bottom)] [min-height:calc(84px + var(--tg-safe-area-inset-bottom))]">
+        <Button wide onClick={() => startChat({id}).unwrap()}>Start a dialogue</Button>
+    </BottomActions>
+}
+{
+    dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex-col">
+        <div className="flex gap-2 w-full">
+            <Input
+                className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
                     placeholder="Message"/>
                 <Button size="sm" className="border-none h-8 w-8 p-1.5 rounded-full" variant="primary" disabled={!message}
                         loading={isLoading} onClick={handleOnSubmit}><ArrowUp/></Button>

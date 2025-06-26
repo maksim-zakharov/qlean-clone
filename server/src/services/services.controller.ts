@@ -35,6 +35,8 @@ export class ServicesController implements OnModuleInit {
       }
     });
     // this.bot.on('message', this.handleMessage.bind(this));
+    this.bot.on('photo', (ctx) => this.chatService.photoFromTGToAdmin(ctx));
+
     this.bot.on('text', this.handleMessage.bind(this));
   }
 

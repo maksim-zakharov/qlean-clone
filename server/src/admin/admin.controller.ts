@@ -9,6 +9,7 @@ import {
   Post,
   Put,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -29,6 +30,8 @@ import { plainToInstance } from 'class-transformer';
 import { OrderDTO } from '../_dto/orders.dto';
 import { ChatService } from '../chat/chat.service';
 import { Telegraf } from 'telegraf';
+import { Request } from 'express';
+import axios from 'axios';
 
 @Controller('/api/admin')
 export class AdminController {
@@ -208,5 +211,40 @@ export class AdminController {
   async closeChat(@Param('id') id: string, @Req() req) {
     // The operator left the chat
     return this.chatService.closeChat(id, req.user.id);
+  }
+
+  // Нужно для локального фронта
+  @Get('chat-assets/photos/:path')
+  async getPublic(
+    @Param('path') path: string,
+    @Req() req: Request,
+    @Res() res,
+  ) {
+    return this.proxyRequest(`photos/${path}`, req, res);
+  }
+
+  private buildProxyUrl(path: string, req: Request) {
+    const baseUrl = `https://api.telegram.org/file/bot${process.env.TELEGRAM_BOT_TOKEN}/`;
+    const query = new URLSearchParams(
+      req.query as Record<string, string>,
+    ).toString();
+    return `${baseUrl}${path}${query ? `?${query}` : ''}`;
+  }
+
+  private async proxyRequest(path: string, req: Request, res) {
+    try {
+      const url = this.buildProxyUrl(path, req);
+      const response = await axios.get(url, { responseType: 'stream' });
+
+      res.set({
+        'content-type': response.headers['content-type'],
+        'cache-control': response.headers['cache-control'],
+      });
+
+      response.data.pipe(res);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Proxy error');
+    }
   }
 }
