@@ -7,12 +7,14 @@ import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import { IoAdapter } from '@nestjs/platform-socket.io';
+import logger from './logger';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
+    logger,
     cors: true,
   });
 
