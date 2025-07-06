@@ -36,6 +36,7 @@ export class ChatService {
           throw new NotFoundException({ message: `Chat ${id} not found` });
         }
         chat.isStarted = true;
+        chat.isUnread = false;
 
         return tx.chat.update({
           where: {
@@ -269,9 +270,6 @@ export class ChatService {
       where: {
         id: message.chat.id.toString(),
       },
-      include: {
-        messages: true,
-      },
     });
 
     if (!existChat) {
@@ -307,12 +305,6 @@ export class ChatService {
           },
         });
       });
-
-      await ctx.reply(
-        `👋 Добрый день, ${(message as any).chat.first_name} ${(message as any).chat.last_name}! В ближайшее время вам ответит наш оператор и поможет разобраться с любым вопросом.\n` +
-          '\n' +
-          'Ожидайте, пожалуйста. 💙',
-      );
     }
 
     let newMessage = {
@@ -333,5 +325,22 @@ export class ChatService {
     this.clients.forEach(
       (client) => client?.connected && client.send(JSON.stringify(newMessage)),
     );
+
+    // Слать если: новые сообщения не прочитаны, переписка закрыта.
+    if (!existChat.isUnread && !existChat.isStarted) {
+      await ctx.reply(
+        `👋 Добрый день, ${(message as any).chat.first_name} ${(message as any).chat.last_name}! В ближайшее время вам ответит наш оператор и поможет разобраться с любым вопросом.\n` +
+          '\n' +
+          'Ожидайте, пожалуйста. 💙',
+      );
+      existChat.isUnread = true;
+
+      return this.prisma.chat.update({
+        where: {
+          id: existChat.id,
+        },
+        data: existChat,
+      });
+    }
   }
 }

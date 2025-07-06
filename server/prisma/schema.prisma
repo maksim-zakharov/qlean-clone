@@ -211,7 +211,11 @@ model Chat {
 
   messages Message[]
 
+  // Начать диалог или нет
   isStarted Boolean @default(false)
+
+  // False - Диалог прочитан, true - есть новые сообщения
+  isUnread Boolean @default(false)
 }
 
 
