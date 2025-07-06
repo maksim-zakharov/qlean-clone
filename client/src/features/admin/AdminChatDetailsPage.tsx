@@ -63,6 +63,8 @@ export const AdminChatDetailsPage = () => {
     const [messages, setMessages] = useState<any[]>([])
     const [sendMessage, {isLoading}] = useSendAdminChatMessageMutation();
 
+    const inputRef = useRef(null);
+
     useEffect(() => {
         setMessages(dialog?.messages || []);
     }, [dialog]);
@@ -89,12 +91,12 @@ export const AdminChatDetailsPage = () => {
             console.log('Connected to server');
         });
 
-        newSocket.on('message', (data) => {
-            const message = JSON.parse(data) as any;
-            if (message.type === 'deleteMessage') {
-                setMessages(prevState => prevState.filter(m => m.id !== message.id));
+        newSocket.on('message', (data: string) => {
+            const messageData = JSON.parse(data);
+            if (messageData.type === 'deleteMessage') {
+                setMessages(prevState => prevState.filter(m => m.id !== messageData.id));
             } else {
-                setMessages(prevState => [...prevState, message]);
+                setMessages(prevState => [...prevState, messageData]);
             }
         });
 
@@ -129,7 +131,14 @@ export const AdminChatDetailsPage = () => {
             text: message
         });
         setMessage('');
+
+        // ... логика отправки ...
+        inputRef.current?.focus();  // Возвращаем фокус
     }
+    // Фокус при монтировании
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     const confirmCloseChat = () => closeChat({id}).unwrap();
 
@@ -168,7 +177,7 @@ export const AdminChatDetailsPage = () => {
             </div>
         </div>
         <div className="p-3 flex-1 mt-[50px]">
-            {messages.map((m, index) => <Message id={m.id} onDeleteMessage={onDeleteMessage}>
+            {messages.map((m, index) => <Message key={m.id} id={m.id} onDeleteMessage={onDeleteMessage}>
                 {m.type === 'TEXT' && <div
                     className={cn("relative animate-fade-in select-none p-1.5 rounded-lg mb-0.5 text-wrap break-all w-max pr-12 max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto bg-tg-theme-button-color rounded-l-2xl pl-3' : 'mr-auto card-bg-color rounded-r-2xl pl-2', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
                     {m.text}
@@ -176,6 +185,10 @@ export const AdminChatDetailsPage = () => {
                         className={cn(" text-xs text-[10px] absolute right-2 bottom-1", m.from !== 'client' ? 'text-tg-theme-hint-color' : '')}>
                         {dayjs.utc(m.date * 1000).local().format('HH:mm')}
                     </span>
+                </div>}
+                {m.type === 'SYSTEM' && <div
+                    className={cn("relative animate-fade-in select-none p-1 px-3 text-sm rounded-lg text-wrap break-all w-max max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate m-auto my-2 card-bg-color rounded-2xl text-center font-bold")}>
+                    {m.text}
                 </div>}
                 {m.type === 'PHOTO' && <div
                     className={cn("relative animate-fade-in select-none rounded-lg mb-0.5 text-wrap break-all w-max max-w-[calc(100vw-60px)] text-tg-theme-text-color truncate", m.from === 'client' ? 'ml-auto rounded-l-2xl' : 'mr-auto card-bg-color rounded-r-2xl', m.from !== messages[index + 1]?.from && 'mb-1.5', m.from !== messages[index - 1]?.from && (m.from === 'support' ? 'rounded-tl-2xl' : 'rounded-tr-2xl'))}>
@@ -201,6 +214,7 @@ export const AdminChatDetailsPage = () => {
     dialog.isStarted && <BottomActions className="[padding-bottom:var(--tg-safe-area-inset-bottom)] flex-col">
         <div className="flex gap-2 w-full">
             <Input
+                ref={inputRef}
                 className="border-none rounded-3xl text-tg-theme-hint-color h-8 placeholder-[var(--tg-theme-hint-color)]"
                 value={message}
                 onChange={e => setMessage(e.target.value)}

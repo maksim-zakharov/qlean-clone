@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="confirmLogout">
+    <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="logger.ts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/api/ordersApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/ordersApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminChatDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/features/admin/AdminChatPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/features/admin/AdminChatPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/chat/chat.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/chat/chat.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/services.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/services.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +74,7 @@
     "npm.client:dev.executor": "Run",
     "npm.dev-host.executor": "Run",
     "npm.dev.executor": "Run",
-    "npm.server:dev.executor": "Run",
+    "npm.server:dev.executor": "Debug",
     "npm.start:dev.executor": "Debug",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\Projects\\qlean-clone\\client\\node_modules\\typescript\\lib",
@@ -183,31 +181,8 @@
       <workItem from="1748586159111" duration="91987000" />
       <workItem from="1749718083720" duration="594000" />
       <workItem from="1749830169106" duration="64440000" />
-      <workItem from="1750862980747" duration="6745000" />
-    </task>
-    <task id="LOCAL-00458" summary="restore service">
-      <option name="closed" value="true" />
-      <created>1749472567958</created>
-      <option name="number" value="00458" />
-      <option name="presentableId" value="LOCAL-00458" />
-      <option name="project" value="LOCAL" />
-      <updated>1749472567958</updated>
-    </task>
-    <task id="LOCAL-00459" summary="restore service">
-      <option name="closed" value="true" />
-      <created>1749475741433</created>
-      <option name="number" value="00459" />
-      <option name="presentableId" value="LOCAL-00459" />
-      <option name="project" value="LOCAL" />
-      <updated>1749475741433</updated>
-    </task>
-    <task id="LOCAL-00460" summary="restore service">
-      <option name="closed" value="true" />
-      <created>1749476096641</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1749476096641</updated>
+      <workItem from="1750862980747" duration="18231000" />
+      <workItem from="1751119564979" duration="9434000" />
     </task>
     <task id="LOCAL-00461" summary="restore service">
       <option name="closed" value="true" />
@@ -577,7 +552,31 @@
       <option name="project" value="LOCAL" />
       <updated>1750795394460</updated>
     </task>
-    <option name="localTasksCounter" value="507" />
+    <task id="LOCAL-00507" summary="start close chat">
+      <option name="closed" value="true" />
+      <created>1750944478422</created>
+      <option name="number" value="00507" />
+      <option name="presentableId" value="LOCAL-00507" />
+      <option name="project" value="LOCAL" />
+      <updated>1750944478422</updated>
+    </task>
+    <task id="LOCAL-00508" summary="поддержка фоток в чате">
+      <option name="closed" value="true" />
+      <created>1750947467656</created>
+      <option name="number" value="00508" />
+      <option name="presentableId" value="LOCAL-00508" />
+      <option name="project" value="LOCAL" />
+      <updated>1750947467656</updated>
+    </task>
+    <task id="LOCAL-00509" summary="logger.ts">
+      <option name="closed" value="true" />
+      <created>1750962279837</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1750962279837</updated>
+    </task>
+    <option name="localTasksCounter" value="510" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,9 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/server" />
     </ignored-roots>
-    <MESSAGE value="Применение бонуса к заказу" />
-    <MESSAGE value="Профиль" />
-    <MESSAGE value="Поиск по пользователям" />
     <MESSAGE value="Создание сервиса" />
     <MESSAGE value="baseService deletedAt" />
     <MESSAGE value="restore service" />
@@ -625,7 +621,10 @@
     <MESSAGE value="Badge className=&quot;flex gap-1 items-center&quot; variant=&quot;destructive&quot;" />
     <MESSAGE value="handleLogout" />
     <MESSAGE value="confirmLogout" />
-    <option name="LAST_COMMIT_MESSAGE" value="confirmLogout" />
+    <MESSAGE value="start close chat" />
+    <MESSAGE value="поддержка фоток в чате" />
+    <MESSAGE value="logger.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="logger.ts" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

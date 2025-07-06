@@ -43,7 +43,10 @@ export const AdminChatPage = () => {
                     <div className="flex items-center gap-3 w-full justify-between">
                     <span
                         className="text-[16px] [line-height:20px] [font-weight:400] text-tg-theme-subtitle-text-color truncate">
-                        {option.messages[0]?.text}
+                        {option.messages[option.messages.length - 1]?.type === "PHOTO" && <div className="flex gap-1.5 h-5">
+                            <img src={`/api/admin/chat-assets/${option.messages[option.messages.length - 1]?.text}`}/> Изображение
+                        </div>}
+                        {option.messages[option.messages.length - 1]?.type === "TEXT" && option.messages[option.messages.length - 1]?.text}
                     </span>
                     </div>
                 </div>

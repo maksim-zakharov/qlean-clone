@@ -56,9 +56,9 @@ export class ChatService {
         if (user) {
           const tgMessage = await this.bot.telegram.sendMessage(
             id,
-            `${user.firstName} is working on your question.`,
+            `${user.firstName} is working on your question`,
           );
-          await this.sendMessage(tgMessage);
+          await this.sendMessage(tgMessage, MessageType.SYSTEM);
         }
       });
   }
@@ -95,9 +95,9 @@ export class ChatService {
         if (user) {
           const tgMessage = await this.bot.telegram.sendMessage(
             id,
-            `${user.firstName} left the chat.`,
+            `${user.firstName} left the chat`,
           );
-          await this.sendMessage(tgMessage);
+          await this.sendMessage(tgMessage, MessageType.SYSTEM);
         }
       });
   }
@@ -146,7 +146,10 @@ export class ChatService {
     );
   }
 
-  async sendMessage(message: Message.TextMessage) {
+  async sendMessage(
+    message: Message.TextMessage,
+    type: MessageType = MessageType.TEXT,
+  ) {
     const existChat = await this.prisma.chat.findUnique({
       where: {
         id: message.chat.id.toString(),
@@ -156,15 +159,16 @@ export class ChatService {
       },
     });
     if (existChat) {
-      const newMessage = {
+      let newMessage: any = {
         from: MessageFrom.support,
         text: message.text,
         date: message.date,
         id: message.message_id,
         chatId: existChat.id,
+        type,
       };
 
-      await this.prisma.message.create({
+      newMessage = await this.prisma.message.create({
         data: newMessage,
       });
 
@@ -238,7 +242,7 @@ export class ChatService {
       );
     }
 
-    const newMessage = {
+    let newMessage: any = {
       text: fileUrl,
       from:
         message.chat.id === message.from.id
@@ -250,7 +254,7 @@ export class ChatService {
       type: MessageType.PHOTO,
     };
 
-    await this.prisma.message.create({
+    newMessage = await this.prisma.message.create({
       data: newMessage,
     });
 
@@ -311,7 +315,7 @@ export class ChatService {
       );
     }
 
-    const newMessage = {
+    let newMessage = {
       text: (message as any)?.text,
       from:
         message.chat.id === message.from.id
@@ -322,7 +326,7 @@ export class ChatService {
       chatId: existChat.id,
     };
 
-    await this.prisma.message.create({
+    newMessage = await this.prisma.message.create({
       data: newMessage,
     });
 

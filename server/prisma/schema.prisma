@@ -218,6 +218,7 @@ model Chat {
 enum MessageType {
   TEXT
   PHOTO
+  SYSTEM
 }
 model Message {
   text String
