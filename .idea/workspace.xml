@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a37b141-7c0e-4170-a371-baa7dde86e89" name="Changes" comment="logger.ts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTelegram.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/chat/chat.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/chat/chat.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,15 +180,7 @@
       <workItem from="1749718083720" duration="594000" />
       <workItem from="1749830169106" duration="64440000" />
       <workItem from="1750862980747" duration="18231000" />
-      <workItem from="1751119564979" duration="10494000" />
-    </task>
-    <task id="LOCAL-00462" summary="restore service">
-      <option name="closed" value="true" />
-      <created>1749476508674</created>
-      <option name="number" value="00462" />
-      <option name="presentableId" value="LOCAL-00462" />
-      <option name="project" value="LOCAL" />
-      <updated>1749476508674</updated>
+      <workItem from="1751119564979" duration="13224000" />
     </task>
     <task id="LOCAL-00463" summary="restore service">
       <option name="closed" value="true" />
@@ -574,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751815935459</updated>
     </task>
-    <option name="localTasksCounter" value="511" />
+    <task id="LOCAL-00511" summary="logger.ts">
+      <option name="closed" value="true" />
+      <created>1751817099662</created>
+      <option name="number" value="00511" />
+      <option name="presentableId" value="LOCAL-00511" />
+      <option name="project" value="LOCAL" />
+      <updated>1751817099662</updated>
+    </task>
+    <option name="localTasksCounter" value="512" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

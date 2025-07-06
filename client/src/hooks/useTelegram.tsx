@@ -117,6 +117,8 @@ export const TelegramProvider = ({children}: TelegramProviderProps) => {
 
     useEffect(() => {
         Telegram.WebApp?.ready();
+        Telegram.WebApp?.expand(); // Развернуть на весь экран
+        Telegram.WebApp?.enableClosingConfirmation(); // Опционально: подтверждение перед закрытием
     }, []);
 
     useEffect(() => {

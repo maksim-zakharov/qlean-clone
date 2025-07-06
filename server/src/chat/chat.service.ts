@@ -335,12 +335,40 @@ export class ChatService {
       );
       existChat.isUnread = true;
 
-      return this.prisma.chat.update({
+      await this.prisma.chat.update({
         where: {
           id: existChat.id,
         },
         data: existChat,
       });
+
+      const admins = await this.prisma.user.findMany({
+        where: {
+          isAdmin: true,
+        },
+      });
+
+      // Отправляем уведомление админу
+      admins.forEach((admin) =>
+        this.bot.telegram.sendMessage(
+          admin.id, // ID чата админа
+          `Пользователь ${message.from.first_name} (ID: ${message.chat.id}) начал диалог`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: 'Открыть чат',
+                    web_app: {
+                      url: `https://maksim-zakharov-qlean-clone-4e5c.twc1.net/admin/chat/${message.chat.id}`,
+                    },
+                  },
+                ],
+              ],
+            },
+          },
+        ),
+      );
     }
   }
 }
