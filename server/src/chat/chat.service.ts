@@ -1,12 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Socket } from 'socket.io';
 import { Context, Telegraf } from 'telegraf';
-import { Message } from 'telegraf/typings/core/types/typegram';
+import { Message, Update } from 'telegraf/typings/core/types/typegram';
 import { PrismaService } from '../prisma.service';
 import { Chat, MessageFrom, MessageType, User } from '@prisma/client';
 
 @Injectable()
 export class ChatService {
+  private readonly logger = new Logger(ChatService.name);
   readonly clients = new Map<string, Socket>();
 
   constructor(
@@ -177,6 +178,8 @@ export class ChatService {
         (client) =>
           client?.connected && client.send(JSON.stringify(newMessage)),
       );
+    } else {
+      this.logger.error(`Чат ${message.chat.id.toString()} не найден`);
     }
   }
 
@@ -264,11 +267,10 @@ export class ChatService {
     );
   }
 
-  async messageFromTGToAdmin(ctx: Context) {
-    const message = ctx.message;
+  async getOrExistChat(chat: any) {
     let existChat = await this.prisma.chat.findUnique({
       where: {
-        id: message.chat.id.toString(),
+        id: chat.id.toString(),
       },
     });
 
@@ -276,29 +278,27 @@ export class ChatService {
       await this.prisma.$transaction(async (tx) => {
         let user = await tx.user.findUnique({
           where: {
-            id: message.chat.id.toString(),
+            id: chat.id.toString(),
           },
         });
 
         if (!user) {
           user = await tx.user.create({
             data: {
-              id: message.chat.id.toString(),
-              firstName: (message.chat as any).first_name,
-              lastName: (message.chat as any).last_name,
-              photoUrl: (message.chat as any).photo_url,
-              phone: (message.chat as any).phone_number,
-              username: (message.chat as any).username,
+              id: chat.id.toString(),
+              firstName: (chat as any).first_name,
+              lastName: (chat as any).last_name,
+              photoUrl: (chat as any).photo_url,
+              phone: (chat as any).phone_number,
+              username: (chat as any).username,
             },
           });
         }
 
         existChat = await tx.chat.create({
           data: {
-            id: message.chat.id.toString(),
-            name:
-              (message as any).chat.first_name +
-              (message as any).chat.last_name,
+            id: chat.id.toString(),
+            name: (chat as any).first_name + (chat as any).last_name,
           },
           include: {
             messages: true,
@@ -306,6 +306,13 @@ export class ChatService {
         });
       });
     }
+
+    return existChat;
+  }
+
+  async messageFromTGToAdmin(ctx: Context) {
+    const message = ctx.message;
+    const existChat = await this.getOrExistChat(message.chat);
 
     let newMessage = {
       text: (message as any)?.text,
