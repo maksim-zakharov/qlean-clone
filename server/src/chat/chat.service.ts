@@ -311,71 +311,76 @@ export class ChatService {
   }
 
   async messageFromTGToAdmin(ctx: Context) {
-    const message = ctx.message;
-    const existChat = await this.getOrExistChat(message.chat);
+    try {
+      const message = ctx.message;
+      const existChat = await this.getOrExistChat(message.chat);
 
-    let newMessage = {
-      text: (message as any)?.text,
-      from:
-        message.chat.id === message.from.id
-          ? MessageFrom.client
-          : MessageFrom.support,
-      id: (message as any)?.message_id,
-      date: message.date,
-      chatId: existChat.id,
-    };
+      let newMessage = {
+        text: (message as any)?.text,
+        from:
+          message.chat.id === message.from.id
+            ? MessageFrom.client
+            : MessageFrom.support,
+        id: (message as any)?.message_id,
+        date: message.date,
+        chatId: existChat.id,
+      };
 
-    newMessage = await this.prisma.message.create({
-      data: newMessage,
-    });
+      newMessage = await this.prisma.message.create({
+        data: newMessage,
+      });
 
-    this.clients.forEach(
-      (client) => client?.connected && client.send(JSON.stringify(newMessage)),
-    );
-
-    // Слать если: новые сообщения не прочитаны, переписка закрыта.
-    if (!existChat.isUnread && !existChat.isStarted) {
-      await ctx.reply(
-        `👋 Добрый день, ${(message as any).chat.first_name} ${(message as any).chat.last_name}! В ближайшее время вам ответит наш оператор и поможет разобраться с любым вопросом.\n` +
-          '\n' +
-          'Ожидайте, пожалуйста. 💙',
+      this.clients.forEach(
+        (client) =>
+          client?.connected && client.send(JSON.stringify(newMessage)),
       );
-      existChat.isUnread = true;
 
-      await this.prisma.chat.update({
-        where: {
-          id: existChat.id,
-        },
-        data: existChat,
-      });
+      // Слать если: новые сообщения не прочитаны, переписка закрыта.
+      if (!existChat.isUnread && !existChat.isStarted) {
+        await ctx.reply(
+          `👋 Добрый день, ${(message as any).chat.first_name} ${(message as any).chat.last_name}! В ближайшее время вам ответит наш оператор и поможет разобраться с любым вопросом.\n` +
+            '\n' +
+            'Ожидайте, пожалуйста. 💙',
+        );
+        existChat.isUnread = true;
 
-      const admins = await this.prisma.user.findMany({
-        where: {
-          isAdmin: true,
-        },
-      });
-
-      // Отправляем уведомление админу
-      admins.forEach((admin) =>
-        this.bot.telegram.sendMessage(
-          admin.id, // ID чата админа
-          `Пользователь ${message.from.first_name} (ID: ${message.chat.id}) начал диалог`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: 'Открыть чат',
-                    web_app: {
-                      url: `https://maksim-zakharov-qlean-clone-4e5c.twc1.net/admin/chat/${message.chat.id}`,
-                    },
-                  },
-                ],
-              ],
-            },
+        await this.prisma.chat.update({
+          where: {
+            id: existChat.id,
           },
-        ),
-      );
+          data: existChat,
+        });
+
+        const admins = await this.prisma.user.findMany({
+          where: {
+            isAdmin: true,
+          },
+        });
+
+        // Отправляем уведомление админу
+        admins.forEach((admin) =>
+          this.bot.telegram.sendMessage(
+            admin.id, // ID чата админа
+            `Пользователь ${message.from.first_name} (ID: ${message.chat.id}) начал диалог`,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: 'Открыть чат',
+                      web_app: {
+                        url: `https://maksim-zakharov-qlean-clone-4e5c.twc1.net/admin/chat/${message.chat.id}`,
+                      },
+                    },
+                  ],
+                ],
+              },
+            },
+          ),
+        );
+      }
+    } catch (e) {
+      this.logger.error(e);
     }
   }
 }
