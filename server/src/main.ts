@@ -8,6 +8,7 @@ import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import { IoAdapter } from '@nestjs/platform-socket.io';
 import logger from './logger';
+import * as process from 'node:process';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -49,6 +50,8 @@ async function bootstrap() {
 
   const PORT = process.env.PORT || 3000;
   await app.listen(PORT, '0.0.0.0');
+
+  console.log(process.env);
 }
 
 bootstrap();
